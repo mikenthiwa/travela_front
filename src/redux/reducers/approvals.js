@@ -4,11 +4,15 @@ import {
   FETCH_USER_APPROVALS_FAILURE,
   UPDATE_REQUEST_STATUS,
   UPDATE_REQUEST_STATUS_SUCCESS,
-  UPDATE_REQUEST_STATUS_FAILURE
+  UPDATE_REQUEST_STATUS_FAILURE,
+  UPDATE_BUDGET_STATUS,
+  UPDATE_BUDGET_STATUS_SUCCESS,
+  UPDATE_BUDGET_STATUS_FAILURE
 } from '../constants/actionTypes';
 
 const initState = {
   approvals: [],
+  budgetapprovals: [],
   isLoading: false,
   message: '',
   openApprovalsCount: 0,
@@ -66,6 +70,31 @@ const approvals = (state = initState, action) => {
       error: ''
     };
   case UPDATE_REQUEST_STATUS_FAILURE:
+    return {
+      ...state,
+      updatingStatus: false,
+      error: action.error
+    };
+  case UPDATE_BUDGET_STATUS:
+    return {
+      ...state,
+      updatingStatus: true,
+      budgetapprovals: action.updatedBudgetRequest,
+      error: ''
+    };
+  case UPDATE_BUDGET_STATUS_SUCCESS:
+    return {
+      ...state,
+      updatingStatus: false,
+      budgetapprovals: state.budgetapprovals.map((budgetapproval) => {
+        if (budgetapproval.id === action.updatedBudgetRequest.id) {
+          budgetapproval.budgetStatus = action.updatedBudgetRequest.budgetStatus;
+        }
+
+        return budgetapproval;
+      })
+    };
+  case UPDATE_BUDGET_STATUS_FAILURE:
     return {
       ...state,
       updatingStatus: false,

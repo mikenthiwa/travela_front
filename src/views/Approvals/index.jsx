@@ -129,4 +129,4 @@ const actionCreators = {
   closeModal
 };
 
-export default (type = 'manager') => connect(mapStateToProps, actionCreators)( Approvals(type) );
+export default (type = 'manager') => connect(mapStateToProps, actionCreators)(Approvals(type) );

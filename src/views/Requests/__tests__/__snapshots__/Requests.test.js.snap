@@ -166,6 +166,7 @@ exports[`<Requests> renders as expected 1`] = `
       closeModal={[Function]}
       creatingRequest={false}
       errors={Array []}
+      fetchAllTravelStipends={[Function]}
       fetchAvailableRooms={[Function]}
       fetchAvailableRoomsSuccess={[Function]}
       fetchTravelChecklist={[Function]}
@@ -207,6 +208,12 @@ exports[`<Requests> renders as expected 1`] = `
         }
       }
       travelChecklists={Object {}}
+      travelStipends={
+        Object {
+          "isLoading": false,
+          "stipends": Array [],
+        }
+      }
       updateUserProfile={[Function]}
       user={
         Object {
@@ -232,6 +239,7 @@ exports[`<Requests> renders as expected 1`] = `
         }
       }
       userDataUpdate={Array []}
+      validateTrips={[Function]}
     />
   </Modal>
   <div

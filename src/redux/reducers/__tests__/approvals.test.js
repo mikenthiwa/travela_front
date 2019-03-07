@@ -6,6 +6,9 @@ import {
   UPDATE_REQUEST_STATUS,
   UPDATE_REQUEST_STATUS_SUCCESS,
   UPDATE_REQUEST_STATUS_FAILURE,
+  UPDATE_BUDGET_STATUS,
+  UPDATE_BUDGET_STATUS_SUCCESS,
+  UPDATE_BUDGET_STATUS_FAILURE
 } from '../../constants/actionTypes';
 
 const initState = {
@@ -64,6 +67,7 @@ describe('Approvals Reducer', () => {
   describe('Update Requests Status reducer', () => {
     let initialState = {
       approvals: [],
+      budgetapprovals: [],
       isLoading: false,
       message: '',
       openApprovalsCount: 0,
@@ -152,6 +156,72 @@ describe('Approvals Reducer', () => {
         ...initialState,
         updatingStatus: false,
         error: 'permission denied, you are not requesters manager'
+      };
+      expect(newState).toEqual(receivedState);
+    });
+
+    it('should handle UPDATE_BUDGET_STATUS', () => {
+      action = {
+        type: UPDATE_BUDGET_STATUS,
+        updatedBudgetRequest: {
+          budgetStatus: 'Approved'
+        }
+      };
+
+      initialState.budgetapprovals = [
+        {
+          id: 1,
+          status: 'Approved',
+          budgetStatus: 'Open'
+        }
+      ];
+
+      newState = approvals(initialState, action);
+      receivedState = {
+        ...initialState,
+        updatingStatus: true,
+        budgetapprovals: action.updatedBudgetRequest,
+        error: ''
+      };
+
+      expect(newState).toEqual(receivedState);
+    });
+
+    it('should handle UPDATE_BUDGET_STATUS_SUCCESS', () => {
+      action = {
+        type: UPDATE_BUDGET_STATUS_SUCCESS,
+        updatedBudgetRequest: {
+          id : 1,
+          budgetStatus: 'Approved'
+        }
+      };
+
+      newState = approvals(initialState, action);
+      receivedState = {
+        ...initialState,
+        updatingStatus: false,
+        budgetapprovals: [{
+          id:1,
+          status:'Approved',
+          budgetStatus:'Approved'
+        }]
+      };
+
+      expect(newState).toEqual(receivedState);
+    });
+
+    it('should handle UPDATE_BUDGET_STATUS_FAILURE', () => {
+      error = 'Only budget checker approves the budget';
+      action = {
+        type: UPDATE_BUDGET_STATUS_FAILURE,
+        error
+      };
+
+      newState = approvals(initialState, action);
+      receivedState = {
+        ...initialState,
+        updatingStatus: false,
+        error: 'Only budget checker approves the budget'
       };
       expect(newState).toEqual(receivedState);
     });

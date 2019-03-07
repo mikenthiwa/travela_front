@@ -4,7 +4,10 @@ import {
   FETCH_USER_APPROVALS_FAILURE,
   UPDATE_REQUEST_STATUS,
   UPDATE_REQUEST_STATUS_SUCCESS,
-  UPDATE_REQUEST_STATUS_FAILURE
+  UPDATE_REQUEST_STATUS_FAILURE,
+  UPDATE_BUDGET_STATUS,
+  UPDATE_BUDGET_STATUS_SUCCESS,
+  UPDATE_BUDGET_STATUS_FAILURE
 } from '../constants/actionTypes';
 
 export const fetchUserApprovals = (url, budgetChecker = false) => ({ //eslint-disable-line
@@ -38,5 +41,21 @@ export const updateRequestStatusSuccess = (updatedRequest) => ({
 
 export const updateRequestStatusFailure = (error) => ({
   type: UPDATE_REQUEST_STATUS_FAILURE,
+  error,
+});
+
+export const updateBudgetStatus = (requestId, budgetStatusData) => ({
+  type: UPDATE_BUDGET_STATUS,
+  budgetStatusData,
+  requestId
+});
+
+export const updateBudgetStatusSuccess = (updatedBudgetRequest) => ({
+  type: UPDATE_BUDGET_STATUS_SUCCESS,
+  updatedBudgetRequest,
+});
+
+export const updateBudgetStatusFailure = (error) => ({
+  type: UPDATE_BUDGET_STATUS_FAILURE,
   error,
 });

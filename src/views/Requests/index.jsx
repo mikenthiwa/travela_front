@@ -41,7 +41,7 @@ export class Requests extends Base {
   componentDidMount() {
     const {
       fetchUserRequests, fetchRoleUsers, fetchCenters,
-      page, openModal,
+      page, openModal, requests, getCurrentUserRole,
       match: {
         params: { requestId },
         path

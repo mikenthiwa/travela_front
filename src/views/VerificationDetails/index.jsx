@@ -177,7 +177,7 @@ class VerificationDetails extends Component {
     const { 
       request, email, currentUser,
       isLoading,
-      match: { params: { requestId } },
+      match: { params: { requestId } }, location: { pathname },
     } = this.props;
     const headerTags = ['Manager\'s Approval', 'Budget Check', 'Travel Verification'];
     const { displayComments } = this.state;
@@ -187,7 +187,7 @@ class VerificationDetails extends Component {
           <RequestDetails
             request={request} requestId={requestId} renderButtons={this.renderButtons} 
             renderRightPaneQuestion={this.renderRightPaneQuestion} isLoading={isLoading}
-            headerTags={headerTags} approvalPage={false}
+            headerTags={headerTags} pathname={pathname}
           />
           {this.renderBottomPane()}
           {this.renderCommentsToggle()}
@@ -220,7 +220,8 @@ VerificationDetails.propTypes = {
   downloadAttachments: PropTypes.func.isRequired,
   updateRequestStatus: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
-  attachments: PropTypes.array.isRequired
+  attachments: PropTypes.array.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => {

@@ -73,6 +73,7 @@ describe('ApprovalAPI', () => {
       status: 'Approved'
     });
   });
+
   it('should send a PUT request to update a request status to verified', async () => {
     const statusUpdateData = {
       requestId: 1,
@@ -95,4 +96,25 @@ describe('ApprovalAPI', () => {
     });
   });
 
+  it('should send a PUT request to update the budget status', async () => {
+    const budgetUpdateData = {
+      requestId: 1,
+      budgetStatus: 'Approved'
+    };
+
+    moxios.stubRequest(`${baseUrl}/approvals/budgetStatus/1`, {
+      status: 200,
+      response: {
+        budgetStatus: 'Approved'
+      }
+    });
+
+    const response = await ApprovalAPI.updateBudgetStatus(budgetUpdateData);
+    const request = moxios.requests.mostRecent();
+    expect(request.url).toEqual(`${baseUrl}/approvals/budgetStatus/1`);
+    expect(request.config.method).toEqual('put');
+    expect(response.data).toEqual({
+      budgetStatus: 'Approved'
+    });
+  });
 });

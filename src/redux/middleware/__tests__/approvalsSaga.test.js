@@ -7,7 +7,10 @@ import {
   fetchUserApprovalsFailure,
 } from '../../actionCreator';
 import ApprovalsAPI from '../../../services/approvalsAPI';
-import { watchUpdateRequestStatus, watchFetchApprovals } from '../approvalsSaga';
+import { 
+  watchUpdateRequestStatus, watchFetchApprovals, 
+  watchUpdateBudgetStatus 
+} from '../approvalsSaga';
 
 
 const action = {
@@ -130,12 +133,20 @@ describe('Approvals saga', () => {
     const action = {
       statusUpdateData: {
         status: 'Rejected'
-      }
+      },
+      requestId: 1,
+      budgetStatusData:  'Approved'
     };
 
     const response = {
       data: { updatedRequest: { name: 'Alien Smith', status: 'Rejected' } }
     };
+
+    const budgetResponse = {
+      data: {updatedRequest: { budgetStatus: 'Approved' } }
+    };
+
+    const budgetError = 'Possible network error, please reload the page';
 
     const error = {
       response: {
@@ -174,6 +185,42 @@ describe('Approvals saga', () => {
         .dispatch({
           type: 'UPDATE_REQUEST_STATUS',
           statusUpdateData: action.statusUpdateData
+        })
+        .silentRun();
+    });
+
+    it('throws error while updating the budget status', () => {
+      return expectSaga(watchUpdateBudgetStatus, ApprovalsAPI)
+        .provide([
+          [call(ApprovalsAPI.updateBudgetStatus, 
+            { requestId:action.requestId, budgetStatus:action.budgetStatusData }), 
+          throwError(budgetError)]
+        ])
+        .put({
+          type: 'UPDATE_BUDGET_STATUS_FAILURE',
+          error: budgetError
+        })
+        .dispatch({
+          type: 'UPDATE_BUDGET_STATUS',
+          requestId:action.requestId, budgetStatusData:action.budgetStatusData 
+        })
+        .silentRun();
+    });
+
+    it('updates the budget status', () => {
+      return expectSaga(watchUpdateBudgetStatus, ApprovalsAPI)
+        .provide([
+          [call(ApprovalsAPI.updateBudgetStatus,  
+            { requestId:action.requestId, budgetStatus:action.budgetStatusData }), 
+          budgetResponse]
+        ])
+        .put({
+          type: 'UPDATE_BUDGET_STATUS_SUCCESS',
+          updatedBudgetRequest: budgetResponse.data.updatedRequest
+        })
+        .dispatch({
+          type: 'UPDATE_BUDGET_STATUS',
+          requestId:action.requestId, budgetStatusData:action.budgetStatusData 
         })
         .silentRun();
     });

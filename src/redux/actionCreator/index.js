@@ -10,7 +10,10 @@ import {
   fetchUserApprovalsFailure,
   updateRequestStatus,
   updateRequestStatusSuccess,
-  updateRequestStatusFailure
+  updateRequestStatusFailure,
+  updateBudgetStatus,
+  updateBudgetStatusSuccess,
+  updateBudgetStatusFailure
 } from './approvalActions';
 
 import {
@@ -84,4 +87,8 @@ export {
   downloadAttachmentsFailure,
   //Get template details
   fetchTemplate,
+  //budget status actions
+  updateBudgetStatus,
+  updateBudgetStatusSuccess,
+  updateBudgetStatusFailure
 };

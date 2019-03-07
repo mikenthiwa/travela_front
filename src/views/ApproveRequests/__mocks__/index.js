@@ -149,5 +149,8 @@ export const props = {
     params: {
       requestId: 'nXCj4U57J'
     }
+  },
+  location: {
+    pathname: '/requests/my-approvals/requestId'
   }
 };

@@ -50,6 +50,15 @@ Array [
                                 className="table__menu-list"
                             >
                                 <li
+                                    className="edit"
+                                    onClick={[Function]}
+                                    role="presentation"
+                                >
+                                    <span>
+                                        Edit
+                                    </span>
+                                </li>
+                                <li
                                     className="delete"
                                     onClick={[Function]}
                                     role="presentation"
@@ -99,6 +108,15 @@ Array [
                             <ul
                                 className="table__menu-list"
                             >
+                                <li
+                                    className="edit"
+                                    onClick={[Function]}
+                                    role="presentation"
+                                >
+                                    <span>
+                                        Edit
+                                    </span>
+                                </li>
                                 <li
                                     className="delete"
                                     onClick={[Function]}

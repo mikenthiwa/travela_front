@@ -7,6 +7,7 @@ import backButton from '../../images/back-icon.svg';
 import LeftPane from './LeftPane';
 import RightPane from './RightPane';
 import Preloader from '../Preloader/Preloader';
+import Utils from '../../helper/Utils';
 
 class RequestDetails extends Component {
 
@@ -32,14 +33,13 @@ class RequestDetails extends Component {
   render() {
     const {
       request, requestId,
-      isLoading, approvalPage, headerTags
+      isLoading, pathname, headerTags, 
     } = this.props;
     const body = isLoading
       ? this.renderLoader() : (isEmpty(request)
         ? this.returnEmptyError()
         : this.renderRequest(request));
-    const url = approvalPage
-      ? '/requests/my-approvals' : '/requests/my-verifications';
+    const url = Utils.renderLink(pathname);
     return (
       <div className="approval">
         <h1 className="header text--black">
@@ -61,7 +61,7 @@ RequestDetails.propTypes = {
   renderButtons: PropTypes.func.isRequired,
   requestId: PropTypes.string.isRequired,
   renderRightPaneQuestion: PropTypes.func.isRequired,
-  approvalPage: PropTypes.bool.isRequired,
+  pathname: PropTypes.string.isRequired,
   headerTags: PropTypes.array.isRequired,
 };
 

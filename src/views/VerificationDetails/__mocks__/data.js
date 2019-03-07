@@ -205,5 +205,8 @@ export const props = {
       requestId: 'nXCj4U57J'
     }
   },
+  location: {
+    pathname: '/requests/my-approvals/requestId'
+  }
 };
 

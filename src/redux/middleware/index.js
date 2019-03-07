@@ -25,7 +25,7 @@ import {
   watchEditComment,
   watchDeleteComment
 } from './commentsSaga';
-import { watchFetchApprovals, watchUpdateRequestStatus } from './approvalsSaga';
+import {watchFetchApprovals, watchUpdateBudgetStatus, watchUpdateRequestStatus} from './approvalsSaga';
 import {
   watchFetchNotifications,
   watchAddNotification,
@@ -231,6 +231,7 @@ function* rootSaga() {
     watchDeleteTravelReason(),
     watchUpdateTravelStipend(),
     watchValidateTrips(),
+    watchUpdateBudgetStatus(),
   ]);
 }
 

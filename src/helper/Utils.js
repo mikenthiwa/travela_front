@@ -170,6 +170,12 @@ class Utils {
     const page = pathParams.get('page') || 1;
     return page;
   }
+
+  static renderLink = (link) => {
+    const pathArr = link.split('/');
+    pathArr.pop();
+    return pathArr.join('/');
+  }
 }
 
 export default Utils;

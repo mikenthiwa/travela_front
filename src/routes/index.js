@@ -4,7 +4,6 @@ import ConnectedLogin from '../views/Login';
 import RequireAuth from '../hoc/authHoc';
 import LayoutShell from '../hoc/Layout';
 import NotFound from '../views/ErrorPages';
-
 import TravelaRoutes from './routes';
 
 const Routes = () => (

@@ -48,5 +48,6 @@ export const props = {
   approvalPage: true,
   headerTags: ['Managers Approval'],
   requestId: 'nXCj4U57J',
-  request
+  request,
+  pathname: '/requests/my-approvals/requestId'
 };

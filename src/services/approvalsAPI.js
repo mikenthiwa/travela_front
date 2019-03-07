@@ -14,6 +14,11 @@ class ApprovalsApi {
       url = `${baseUrl}/requests/${data.requestId}/verify`;
     }
     return axios.put(url, data);
+
+  }
+  static updateBudgetStatus(data) {
+    const url = `${baseUrl}/approvals/budgetStatus/${data.requestId}`;
+    return axios.put(url, data.budgetStatus);
   }
 }
 

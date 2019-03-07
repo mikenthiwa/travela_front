@@ -7,10 +7,13 @@ import {
   fetchUserApprovalsFailure,
   updateRequestStatus,
   updateRequestStatusSuccess,
-  updateRequestStatusFailure
+  updateRequestStatusFailure,
+  updateBudgetStatus,
+  updateBudgetStatusSuccess,
+  updateBudgetStatusFailure,
 } from '../actionCreator';
 
-import { fetchUserRequestDetailsSuccess } from '../actionCreator/requestActions';
+import { fetchUserRequestDetailsSuccess, fetchUserRequestDetails } from '../actionCreator/requestActions';
 import apiErrorHandler from '../../services/apiErrorHandler';
 
 export function* fetchUserApprovalsSaga(action) {
@@ -46,4 +49,23 @@ export function* updateRequestStatusSaga(action) {
 
 export function* watchUpdateRequestStatus() {
   yield takeLatest(updateRequestStatus().type, updateRequestStatusSaga);
+}
+
+export function* updateBudgetStatusSaga(action) {
+  try {
+    const response = yield call(
+      ApprovalsApi.updateBudgetStatus, { requestId:action.requestId, budgetStatus:action.budgetStatusData }
+    );
+    const { updatedRequest } = response.data;
+    yield put(updateBudgetStatusSuccess(updatedRequest));
+    yield put(fetchUserRequestDetails(action.requestId));
+  } catch (error) {
+    const errorMessage = apiErrorHandler(error);
+    yield put(updateBudgetStatusFailure(errorMessage));
+    toast.error(errorMessage);
+  }
+}
+
+export function* watchUpdateBudgetStatus() {
+  yield takeLatest(updateBudgetStatus().type, updateBudgetStatusSaga);
 }

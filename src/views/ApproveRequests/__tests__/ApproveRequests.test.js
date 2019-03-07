@@ -4,9 +4,10 @@ import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MutationObserver from 'mutation-observer';
-import ConnectedApproveRequests from '..';
+import ApproveRequests from '..';
 import { initialState, props } from '../__mocks__';
 
+const ConnectedApproveRequests = ApproveRequests();
 global.MutationObserver = MutationObserver;
 window.document.getSelection = () => {};
 
