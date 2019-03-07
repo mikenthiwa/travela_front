@@ -99,9 +99,9 @@ export class Table extends Component {
     uploadFile(file.files[0], { checklistItemId, tripId}, checkId, requestId);
   };
 
-  getApprovalStatus = (type) => (status, budgetStatus) => {
-    if (type === 'verifications'){
-      return status === 'Verified' ? status : budgetStatus;
+  getApprovalStatus = (status, budgetStatus) => {
+    if (status === 'Verified'){
+      return status;
     }
     return budgetStatus === 'Checked' || budgetStatus === 'Rejected' ?
       budgetStatus :
@@ -109,7 +109,7 @@ export class Table extends Component {
   };
 
   computeRequestStatus({status, budgetStatus}) {
-    const { type, approvalsType } = this.props;
+    const { approvalsType } = this.props;
 
     if(approvalsType === 'budget') {
       return budgetStatus;
@@ -117,7 +117,7 @@ export class Table extends Component {
 
     budgetStatus = budgetStatus === 'Approved' ? 'Checked' : budgetStatus;
 
-    return this.getApprovalStatus(type)(status, budgetStatus);
+    return this.getApprovalStatus(status, budgetStatus);
 
   }
 

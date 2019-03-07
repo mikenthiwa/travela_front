@@ -3,32 +3,35 @@ import { shallow } from 'enzyme';
 import { Table } from '../index';
 import { submissionInfo } from '../../../mockData/checklistSubmissionMockData';
 
+const request = (status ='Open', budgetStatus='Open') => ({
+  id: 'xDh20btGz',
+  name: 'Amarachukwo Agbo',
+  tripType: 'multi',
+  status,
+  budgetStatus,
+  manager: 'Ezrqn Kiptanui',
+  gender: 'Female',
+  trips: [
+    {
+      returnDate: '2018-10-21',
+      departureDate: '2018-10-20',
+      origin: 'Lagos',
+      destination: 'Angola'
+    },
+    {
+      returnDate: '2018-10-22',
+      departureDate: '2018-10-21',
+      origin: 'Angola',
+      destination: 'Nairobi'
+    }
+  ],
+  department: 'TDD',
+  role: 'Learning Facilitator'
+});
+
 const props = {
   requests: [
-    {
-      id: 'xDh20btGz',
-      name: 'Amarachukwo Agbo',
-      tripType: 'multi',
-      status: 'Open',
-      manager: 'Ezrqn Kiptanui',
-      gender: 'Female',
-      trips: [
-        {
-          returnDate: '2018-10-21',
-          departureDate: '2018-10-20',
-          origin: 'Lagos',
-          destination: 'Angola'
-        },
-        {
-          returnDate: '2018-10-22',
-          departureDate: '2018-10-21',
-          origin: 'Angola',
-          destination: 'Nairobi'
-        }
-      ],
-      department: 'TDD',
-      role: 'Learning Facilitator'
-    },
+    request(),
     {
       id: 'xDh20btGy',
       name: 'Amarachukwo Agbo',
@@ -160,5 +163,49 @@ describe('<Requests />', () => {
     wrapper.setProps({ ...props, openChecklist: true, requestId: 'xDh20btGx' });
     const { id } = wrapper.state('menuOpen');
     expect(id).toBe('xDh20btGx');
+  });
+
+
+  describe('Request Status', () => {
+    let wrapper;
+    let statusView;
+    beforeEach(() => {
+      wrapper = mount(<Table {...props} />);
+      statusView = wrapper.find('#status-xDh20btGz');
+    });
+
+    const test = (expected, requestStatus, budgetStatus) => {
+      wrapper.setProps({ requests: [ request(requestStatus, budgetStatus)]});
+      expect(statusView.text()).toEqual(expected);
+    };
+
+    it('should display the correct request status on My Requests and My Approvals', () => {
+      [{ type: 'requests'}, {type: 'approvals', approvalsType:'manager'}]
+        .forEach((role) => {
+          wrapper.setProps(role);
+          test('Open');
+          test('Approved', 'Approved');
+          test('Checked', 'Approved', 'Approved');
+          test('Rejected','Rejected');
+          test('Rejected', 'Approved', 'Rejected');
+          test('Verified', 'Verified', 'Approved');
+        });
+    });
+
+    it('should display the correct request status on Budget Checks', () => {
+      wrapper.setProps({ type: 'approvals', approvalsType: 'budget'});
+
+      test('Open', 'Approved', 'Open');
+      test('Rejected', 'Approved', 'Rejected');
+      test('Approved', 'Approved', 'Approved');
+      test('Approved', 'Verified', 'Approved');
+    });
+
+    it('should display the correct status on My Verifications', () => {
+      wrapper.setProps({ type: 'verifications'});
+
+      test('Checked', 'Approved', 'Approved');
+      test('Verified', 'Verified', 'Approved');
+    });
   });
 });
