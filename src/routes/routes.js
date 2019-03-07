@@ -24,6 +24,7 @@ import ConnectedCreateReminder from '../views/Reminders/CreateReminder';
 import ConnectedTravelReasons from '../views/TravelReasons';
 import ConnectedTravelStipend from '../views/TravelStipends';
 import ConnectedApproveRequests from '../views/ApproveRequests';
+import ConnectedVerificationDetails from '../views/VerificationDetails';
 
 
 import {
@@ -41,7 +42,7 @@ const routes = {
   '/requests/budgets/': [ConnectedApprovals('budget'), [SUPER_ADMINISTRATOR, BUDGET_CHECKER]],
   '/requests/budgets/:requestId': [ConnectedApprovals('budget')],
   '/requests/my-verifications': [ConnectedVerifications, TRAVEL_MANAGERS],
-  '/requests/my-verifications/:requestId': [ConnectedVerifications, TRAVEL_MANAGERS],
+  '/requests/my-verifications/:requestId': [ConnectedVerificationDetails, TRAVEL_MANAGERS],
   '/requests': [ConnectedRequests],
   '/requests/new-request': [ConnectedNewRequests],
   '/travel_readiness': [ConnectedReadiness],

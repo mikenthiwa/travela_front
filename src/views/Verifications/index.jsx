@@ -23,10 +23,8 @@ export class Verifications extends Base {
     const { searchQuery } = this.state;
     const prefix = (searchQuery.indexOf('?') < 0) ? '?' : '&';
     fetchUserApprovals(`${searchQuery}${prefix}verified=true`);
-
     if(requestId){
       this.storeRequestIdApproval(requestId);
-      openModal(true, 'request details', page);
     }
   }
 

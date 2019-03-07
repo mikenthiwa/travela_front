@@ -1,0 +1,245 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TEST ConnectedVerificationDetails COMPONENT TEST COMPONENT WITH AND WITHOUT REQUESTS tests component if request is fetching 1`] = `
+<div
+  className="verification-page-container"
+>
+  <div
+    className="approval"
+  >
+    <h1
+      className="header text--black"
+    >
+      <a
+        href="/requests/my-verifications"
+        onClick={[Function]}
+      >
+        <img
+          alt="back icon"
+          className="header__link"
+          src="back-icon.svg"
+        />
+      </a>
+      REQUEST #nXCj4U57J
+      <span
+        className="stage"
+        key="Manager's Approval"
+      >
+        Manager's Approval
+      </span>
+      <span
+        className="stage"
+        key="Budget Check"
+      >
+        Budget Check
+      </span>
+      <span
+        className="stage"
+        key="Travel Verification"
+      >
+        Travel Verification
+      </span>
+    </h1>
+    <div
+      className="preloader"
+    >
+      <div
+        className="spinner "
+      />
+    </div>
+  </div>
+  <div
+    className=""
+  >
+    <div
+      className="bottom-container"
+    >
+      <div
+        className="rectangle left"
+      >
+        <div
+          className="attachments"
+        >
+          <p
+            className="heading"
+          >
+            Travel Checklist For This Trip
+          </p>
+          <div
+            className="attachment-items"
+          >
+            <div
+              className="attachment-item"
+              key="Yellow Fever Certificate"
+            >
+              <p
+                className="attachment-header"
+              >
+                Yellow Fever Certificate
+              </p>
+              <div
+                className="split"
+              >
+                <div
+                  className="attachment-image"
+                >
+                  <img
+                    alt="Yellow Fever Certificate"
+                    src="some.url.com"
+                  />
+                </div>
+                <div
+                  className="attachment-value"
+                >
+                  <p
+                    className="bold"
+                  >
+                    <span>
+                      <strong>
+                        somefile.jpg
+                      </strong>
+                    </span>
+                  </p>
+                  <p>
+                    <span>
+                      Uploaded 
+                    </span>
+                    <span>
+                      4-3-2019
+                    </span>
+                  </p>
+                  <button
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <img
+                      alt="save"
+                      src="save-icon.svg"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="checklist-items"
+            key="Checklist Item"
+          >
+            <div
+              className="checklist-item-name"
+            >
+              <strong>
+                Checklist Item
+              </strong>
+            </div>
+            <div
+              className="checklist-item-value"
+            >
+              Some Value
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="rectangle right"
+      >
+        <div
+          className="flightDetails"
+        >
+          <p
+            className="flight-heading"
+          >
+            Flight Details
+          </p>
+          <div
+            className="flight-detail clearfix"
+            key="Kampala, Uganda"
+          >
+            <div
+              className="destination"
+            >
+              <span>
+                Destination: 
+              </span>
+              <span>
+                <strong>
+                  Kampala, Uganda
+                </strong>
+              </span>
+            </div>
+            <div
+              className="detail-left"
+            >
+              <p>
+                Departure Time
+              </p>
+              <p>
+                <strong>
+                  11/3/2019, 15:00
+                </strong>
+              </p>
+            </div>
+            <div
+              className="detail-right"
+            >
+              <p>
+                Arrival Time
+              </p>
+              <p>
+                <strong>
+                  12/3/2019, 0:00
+                </strong>
+              </p>
+            </div>
+            <div
+              className="detail-left"
+              data-test="ticketNumber"
+            >
+              <p>
+                Ticket Number
+              </p>
+              <p>
+                <strong>
+                  112233445
+                </strong>
+              </p>
+            </div>
+            <div
+              className="detail-right"
+            >
+              <p>
+                <strong
+                  key="Nai Air"
+                >
+                  Nai Air
+                </strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button
+      className="comment-toggle-button"
+      onClick={[Function]}
+      type="button"
+    >
+      <img
+        alt="chat-icon"
+        className="chat image"
+        src="Chat.svg"
+      />
+      <p
+        className="comment-button-text"
+      >
+        Hide Comments
+      </p>
+    </button>
+  </div>
+  <div
+    className="comments-section--true"
+  />
+</div>
+`;

@@ -47,7 +47,7 @@ export class ApproveRequests extends Component {
     const { modalInvisible, buttonSelected } = this.state;
     const { status } = request; 
     const disabled = status !== 'Open' ? true : false;
-    const approvedStatus = status === 'Approved'
+    const approvedStatus = status === 'Approved' || status === 'Verified'
       ? 'approved' : (status === 'Open' ? 'approve' : 'disabled');
     const rejectedStatus = status === 'Rejected'
       ? 'rejected' : (status === 'Open' ? 'reject' : 'disabled');
@@ -85,10 +85,11 @@ export class ApproveRequests extends Component {
   renderRightPaneQuestion = (name) => {
     const { request: { status } } = this.props;
     const pluralizedName = name && name[name.length - 1] === 's' ?
-      `${name}'` : `${name}'s`;
+      `${name}'` : `${name}'s`;    
+    const statusText = status && status === 'Rejected' ? 'rejected' : 'approved'; 
     return status === 'Open'
       ? `Do you want to approve ${pluralizedName} travel request?`
-      : `You have ${status && status.toLowerCase()} ${pluralizedName} travel request`;
+      : `You have ${statusText} ${pluralizedName} travel request`;
   }
 
   render() {

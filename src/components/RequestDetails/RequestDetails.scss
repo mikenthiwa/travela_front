@@ -136,11 +136,26 @@
 
           .action-button {
 
-            &--approve {
+            &--verify {
               border: 1px solid #3359DB;
               color: #3359DB;
             }
 
+            &--verified {
+              background-color: #49aaaf;
+              border: 1px solid #49aaaf;
+              color: #FFF;
+              
+              &:hover {
+                cursor: not-allowed;
+              }
+            }            
+
+            &--approve {
+              border: 1px solid #3359DB;
+              color: #3359DB;
+            }  
+                    
             &--approved {
               background-color: #49aaaf;
               border: 1px solid #49aaaf;
