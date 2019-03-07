@@ -3,7 +3,7 @@
   width: 91.5%;
   .request-details-container {
     display: flex;
-    width: 100%;
+    width: 985px;
     justify-content: space-around;
     margin: 13px 0;
 
@@ -111,17 +111,20 @@
     width: 100%;
   }
 
+  .request-details__tab{
+    width: 985px;
+  }
+
   .request-details__comments{
     width: 66%;
     margin-top: 22px;
     .ql-snow {
       background-color: #FFF;
     }
-
   }
 
   .requestDetails__comment{
-    width: 100%;
+    width: 985px;
     display: flex;
     margin: 32px 0 22px 0;
     .requestDetails__add-comment {
