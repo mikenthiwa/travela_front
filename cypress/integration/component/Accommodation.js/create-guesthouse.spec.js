@@ -18,7 +18,7 @@ describe('Accommodation page(create a new guest house)', () => {
         .as('new-guesthouse-modal')
         .should('be.visible');
       cy.get('@new-guesthouse-modal')
-        .find('form.new-request')
+        .find('form.new-guesthouse')
         .as('new-guesthouse-form')
         .should('be.visible');
       cy.get('@new-guesthouse-modal').contains('Add Guest House');
