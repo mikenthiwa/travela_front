@@ -7,15 +7,15 @@ class RequestUtils {
       return  { location, amount };
     });
   }
-  
+
   static calculateDuration (trip, tripType) {
-    /* 
-    
+    /*
+
     condition to be applied for a one way
     request has not been decided, so we use 1 day as default
 
      */
-    if(tripType === 'oneWay') { 
+    if(tripType === 'oneWay') {
       return 1;
     }
     const { departureDate, returnDate, } = trip;
@@ -24,7 +24,7 @@ class RequestUtils {
     const days = end.diff(start, 'days');
     return days === 0 ? 1 : days;
   }
-  
+
   static calculateSingleStipend (trip, stipends, tripType) {
     const stipend = [];
     const days = RequestUtils.calculateDuration(trip, tripType);
@@ -89,7 +89,7 @@ class RequestUtils {
         return Math.abs(previousStipend) + Math.abs(nextStipend);
       },0);
     const total =totalStipend;
-    
+
     return {
       totalStipend:  total > 0 ? `$ ${total}`: 'N/A',
       stipendSubTotals,

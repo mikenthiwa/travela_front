@@ -1,3 +1,5 @@
+import RequestUtils from '../../../../src/helper/request/RequestUtils';
+
 const baseAPI = Cypress.env('REACT_APP_API_URL');
 
 describe('Requests page(create return trip request)', () => {
@@ -47,8 +49,10 @@ describe('Requests page(create return trip request)', () => {
   });
 
   describe('Create return request', () => {
+    let allStipends, returnDate, departureDate, destination, calculatedSipend;
     it('creates a return request', () => {
       cy.server();
+      cy.route('GET', `${baseAPI}/travelStipend`).as('getStipends');
       cy.route('POST', `${baseAPI}/requests`).as(
         'createRequest'
       ); // Used to check when request is POST completed
@@ -58,14 +62,23 @@ describe('Requests page(create return trip request)', () => {
         .type('Nairobi')
         .wait(2000)
         .type('{downarrow}{enter}');
-      cy.get('input[name=destination-0]')
+      cy.get('input[name=destination-0]').as('destination')
         .type('Lagos')
         .wait(2000)
         .type('{downarrow}{enter}');
-      cy.get('input[name=departureDate-0]').click();
+      cy.get('@destination')
+        .invoke('val')
+        .then(val => { destination = val; });
+      cy.get('input[name=departureDate-0]').as('departureDate').click();
       cy.get('.react-datepicker__day--today').click();
-      cy.get('input[name=arrivalDate-0]').click();
+      cy.get('@departureDate')
+        .invoke('val')
+        .then(val => { departureDate = val; });
+      cy.get('input[name=arrivalDate-0]').as('returnDate').click();
       cy.get('.react-datepicker__day--today + div:first').wait(2000).click();
+      cy.get('@returnDate')
+        .invoke('val')
+        .then(val => { returnDate = val; });
       cy.get('div[name=reasons-0]')
         .click()
         .wait(2000)
@@ -89,9 +102,40 @@ describe('Requests page(create return trip request)', () => {
         .children('div')
         .should('have.class', 'mark');
 
-      // Okay the travel sipend
+      // Assertions for travel stipends
+      cy.get('.personal-rectangle').as('stipend-card')
+        .contains('Destination').should('be.visible');
+      cy.get('@stipend-card').contains('SubTotal')
+        .as('SubTotal').should('be.visible');
+      cy.get('@stipend-card').contains('Duration')
+        .as('Duration').should('be.visible');
+      cy.get('@stipend-card').contains('Daily Rate')
+        .as('DailyRate').should('be.visible');
+      cy.get('.total-title').contains('Total')
+        .as('Total').should('be.visible');
+
+      cy.wait('@getStipends').then(stipends => {
+        allStipends = stipends.response.body.stipends;
+        calculatedSipend = RequestUtils.calculateSingleStipend(
+          { destination, departureDate, returnDate },
+          allStipends,
+          'return'
+        );
+        cy.get('.single-trip > :nth-child(4)')
+          .contains(calculatedSipend[0].subTotal).should('be.visible');
+        cy.get('.single-trip > :nth-child(3)')
+          .contains(calculatedSipend[0].duration).should('be.visible');
+        cy.get('.single-trip > :nth-child(2)')
+          .contains(calculatedSipend[0].dailyRate).should('be.visible');
+        cy.get('.single-trip > :nth-child(1)')
+          .contains(calculatedSipend[0].location).should('be.visible');
+        cy.get('.total-stipend')
+          .contains(calculatedSipend[0].duration * calculatedSipend[0].dailyRate).should('be.visible');
+      });
+
+      // move to checklist page
       cy.get('#stipend-next').click().wait(2000);
-      
+
       //View travel checklist and pending approvals
       cy.get('.travel-checklist-rectangle').as('travel-checklist').should('be.visible');
       cy.get('@travel-checklist').contains('Travel Checklist Required For This Trip').should('be.visible');
@@ -101,7 +145,13 @@ describe('Requests page(create return trip request)', () => {
       cy.get('@pending-approvals').contains('Line Manager Approval').should('be.visible');
       cy.get('@pending-approvals').contains('Budget Checker Approval').should('be.visible');
       cy.get('@pending-approvals').contains('Travel readiness Verification').should('be.visible');
-      
+
+
+      // check if the stipend card has a mark
+      cy.get('.request__tab > :nth-child(3)').first()
+        .children('div')
+        .should('have.class', 'mark');
+
       // Submit request
       cy.get('button#submit')
         .as('submit')

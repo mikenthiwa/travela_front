@@ -1,3 +1,5 @@
+import RequestUtils from '../../../../src/helper/request/RequestUtils';
+
 const baseAPI = Cypress.env('REACT_APP_API_URL');
 const userDataURL = /api\/v1\/user\/\W+/;
 
@@ -19,7 +21,7 @@ describe('Requests page(create new request)', () => {
   });
 
   describe('Request form after personal details have been populated', () => {
-    let request;
+    let allStipends, destination, calculatedSipend;
     before(() => {
       //check that populated personal details match those from the api
       cy.get('input[name=name]').should('have.value', data.fullName);
@@ -57,6 +59,8 @@ describe('Requests page(create new request)', () => {
     it('creates one way trip request', ()=>{
       cy.server();
       cy.route('POST', `${baseAPI}/requests`).as('createRequest');
+      cy.route('GET', `${baseAPI}/travelStipend`).as('getStipends');
+
       // populate the fields
       cy.get('label').contains('One Way').click();
       cy.get('input[type=radio]#oneWay').should('be.checked');
@@ -64,21 +68,24 @@ describe('Requests page(create new request)', () => {
         .type('Lagos')
         .wait(2000)
         .type('{downarrow}{enter}');
-      cy.get('input[name=destination-0]')
+      cy.get('input[name=destination-0]').as('destination')
         .type('Nairobi')
         .wait(2000)
         .type('{downarrow}{enter}');
-      cy.get('input[name=departureDate-0]').click();
+      cy.get('input[name=departureDate-0]').as('destination-1').click();
       cy.get('.react-datepicker__day--today').next().click();
+      cy .get('@destination')
+        .invoke('val')
+        .then(val => { destination = val; });
       cy.get('div[name=reasons-0]').wait(3000).click();
       cy.get('div[name=reasons-0] > ul > li#choice:first')
         .wait(3000)
         .click();
+      cy.get('textarea').first().type('This is some text to explain the travel reason');
       cy.get('div[name=bed-0]').wait(3000).click();
       cy.get('div[name=bed-0] > ul > li#choice:first')
         .wait(3000)
         .click();
-      cy.get('textarea').first().type('This is some text to explain the travel reason');
 
       // submit the form
       cy.get('button#submit')
@@ -91,6 +98,37 @@ describe('Requests page(create new request)', () => {
         .children('div')
         .should('have.class', 'mark');
 
+      // Assertions for travel stipends
+      cy.get('.personal-rectangle').as('stipend-card')
+        .contains('Destination').should('be.visible');
+      cy.get('@stipend-card').contains('SubTotal')
+        .as('SubTotal').should('be.visible');
+      cy.get('@stipend-card').contains('Duration')
+        .as('Duration').should('be.visible');
+      cy.get('@stipend-card').contains('Daily Rate')
+        .as('DailyRate').should('be.visible');
+      cy.get('.total-title').contains('Total')
+        .as('Total').should('be.visible');
+
+      cy.wait('@getStipends').then(stipends => {
+        allStipends = stipends.response.body.stipends;
+        calculatedSipend = RequestUtils.calculateSingleStipend(
+          { destination },
+          allStipends,
+          'oneWay'
+        );
+        cy.get('.single-trip > :nth-child(4)')
+          .contains(calculatedSipend[0].subTotal).should('be.visible');
+        cy.get('.single-trip > :nth-child(3)')
+          .contains(calculatedSipend[0].duration).should('be.visible');
+        cy.get('.single-trip > :nth-child(2)')
+          .contains(calculatedSipend[0].dailyRate).should('be.visible');
+        cy.get('.single-trip > :nth-child(1)')
+          .contains(calculatedSipend[0].location).should('be.visible');
+        cy.get('.total-stipend')
+          .contains(calculatedSipend[0].duration * calculatedSipend[0].dailyRate).should('be.visible');
+      });
+
       //send the request
       cy.get('button#stipend-next').click();
 
@@ -99,7 +137,7 @@ describe('Requests page(create new request)', () => {
       cy.get('@travel-checklist').contains('Travel Checklist Required For This Trip').should('be.visible');
       cy.get('@travel-checklist').contains('Travel Ticket Details').should('be.visible');
 
-      /*Passport is one of the travel chcklist items required for 
+      /*Passport is one of the travel chcklist items required for
       Nairobi but it is not visble since the requester's location is Nairobi*/
       cy.get('@travel-checklist').contains('Passport').should('not.be.visible');
       cy.get('.pending-approvals-rectangle').as('pending-approvals').should('be.visible');
@@ -107,7 +145,12 @@ describe('Requests page(create new request)', () => {
       cy.get('@pending-approvals').contains('Line Manager Approval').should('be.visible');
       cy.get('@pending-approvals').contains('Budget Checker Approval').should('be.visible');
       cy.get('@pending-approvals').contains('Travel readiness Verification').should('be.visible');
-      
+
+      // check if the stipend card has a mark
+      cy.get('.request__tab > :nth-child(3)').first()
+        .children('div')
+        .should('have.class', 'mark');
+
       cy.get('button#submit').click();
       cy.wait('@createRequest').then(createdRequest => {
         cy.get('.toast-message')
