@@ -1,0 +1,22 @@
+{
+    "success": true,
+    "message": "Request approved successfully",
+    "updatedRequest": {
+        "request": {
+            "id": "CVEgPxX1q",
+            "name": "Christopher Akanmu",
+            "tripType": "oneWay",
+            "manager": "Christopher Akanmu",
+            "gender": "Male",
+            "department": "Fellowship-Programs",
+            "role": "Technical Team Lead",
+            "status": "Approved",
+            "userId": "-LVoI8g-LZGO0W4S2xRt",
+            "picture": "https://lh3.googleusercontent.com/-0IiIxTNUkIY/AAAAAAAAAAI/AAAAAAAAAAc/bjqhX-Jagqc/photo.jpg?sz=50",
+            "stipend": 0,
+            "createdAt": "2019-02-26T12:53:28.621Z",
+            "updatedAt": "2019-03-07T21:11:05.057Z",
+            "deletedAt": null
+        }
+    }
+}
