@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Cookies from 'cookies-js';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import jwtDecode from 'jwt-decode';
 import Utils from '../helper/Utils';
 import API from '../services/AccommodationAPI';
 import { logoutUser } from '../helper/userDetails';
@@ -20,6 +21,15 @@ export default function(ComposedComponent, ...allowedRoles) {
       if(token) {
         API.setToken();
         this.verifyToken(token);
+
+        // This decodes the user object saved in the cookie and
+        // uses this information to verify the user's
+        // identity on fullstory.
+        const decodedUser = jwtDecode(token);
+        window.FS.identify(decodedUser.UserInfo.id, {
+          displayName: decodedUser.UserInfo.name,
+          email: decodedUser.UserInfo.email,
+        });
       } else {
         return logoutUser(history, 'Session Expired. Login to continue');
       }
