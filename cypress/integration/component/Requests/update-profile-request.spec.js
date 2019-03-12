@@ -49,7 +49,10 @@ describe('Requests page(create new request)', () => {
         .wait(2000)
         .type('{downarrow}{enter}');
       cy.get('input[name=departureDate-0]').click();
-      cy.get('.react-datepicker__day--today').next().click();
+      cy.get('button.react-datepicker__navigation--next').contains('Next month').click();
+      cy.get('div.react-datepicker__day--mon')
+        .not('.react-datepicker__day--disabled')
+        .first().click();
       cy.get('div[name=reasons-0]').wait(3000).click();
       cy.get('div[name=reasons-0] > ul > li#choice:first')
         .wait(3000)
@@ -75,10 +78,13 @@ describe('Requests page(create new request)', () => {
           .contains('Travel request created successfully. Please follow up with your line manager for approval');
         expect(createRequest.response.body.request).to.have.property('manager', 'Travela Test');
       });
-      cy.get('.request__status--open + .menu__container:first').click();
-      cy.get('#deleteRequest').click();
-      cy.get(':nth-child(1) > .table__requests__status > :nth-child(1) > .table__menu > .menu__container > :nth-child(1) > .table__menu-container > .table__menu-list > #deleteRequest > .overlay > .modal > .modal-content > .delete-checklist-item__footer > .bg-btn')
-        .click();
+
+      //delete the request from the list of created requests
+      cy.authenticateUser();
+      cy.visit('/requests').wait(3000);
+      cy.get('i.fa.fa-ellipsis-v').first().click();
+      cy.get('li#deleteRequest').first().click();
+      cy.get('button.bg-btn.bg-btn--active').contains('Delete').click({force:true});
     });
   });
 });

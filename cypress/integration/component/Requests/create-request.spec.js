@@ -65,15 +65,18 @@ describe('Requests page(create new request)', () => {
       cy.get('label').contains('One Way').click();
       cy.get('input[type=radio]#oneWay').should('be.checked');
       cy.get('input[name=origin-0]')
-        .type('Lagos')
-        .wait(2000)
-        .type('{downarrow}{enter}');
-      cy.get('input[name=destination-0]').as('destination')
         .type('Nairobi')
         .wait(2000)
         .type('{downarrow}{enter}');
+      cy.get('input[name=destination-0]').as('destination')
+        .type('Lagos')
+        .wait(2000)
+        .type('{downarrow}{enter}');
       cy.get('input[name=departureDate-0]').as('destination-1').click();
-      cy.get('.react-datepicker__day--today').next().click();
+      cy.get('button.react-datepicker__navigation--next').contains('Next month').click();
+      cy.get('div.react-datepicker__day--mon')
+        .not('.react-datepicker__day--disabled')
+        .first().click();
       cy .get('@destination')
         .invoke('val')
         .then(val => { destination = val; });
