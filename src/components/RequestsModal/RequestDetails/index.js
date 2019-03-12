@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import _ from 'lodash';
 import ConnectedCommentBox from '../CommentBox/CommentBox';
 import ConnectedUserComments from '../UserComments/UserComments';
 import RequestTabHeader from './RequestDetailsTab';
+import RequestUtils from '../../../helper/request/RequestUtils';
 import './RequestDetails.scss';
 import tabIcons from '../../../images/icons/new-request-icons';
 import commentIcon from '../../../images/icons/new-request-icons/Chat.svg';
@@ -92,8 +92,7 @@ export class RequestDetails extends Component {
     return(
       <tr>
         <td>
-          { requestData.travelReasons ?  _.capitalize(requestData.reasons.title)
-            :_.capitalize(requestData.otherTravelReasons)}
+          {RequestUtils.getTravelReason(requestData)}
         </td>
       </tr>);
   }

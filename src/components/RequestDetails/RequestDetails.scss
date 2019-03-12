@@ -145,22 +145,21 @@
               background-color: #49aaaf;
               border: 1px solid #49aaaf;
               color: #FFF;
-              
+
               &:hover {
                 cursor: not-allowed;
               }
-            }            
+            }
 
             &--approve {
               border: 1px solid #3359DB;
               color: #3359DB;
-            }  
-                    
+            }
             &--approved {
               background-color: #49aaaf;
               border: 1px solid #49aaaf;
               color: #FFF;
-              
+
               &:hover {
                 cursor: not-allowed;
               }
@@ -175,7 +174,7 @@
               background-color: #FF5359;
               border: 1px solid #FF5359;
               color: #FFF;
-              
+
               &:hover {
                 cursor: not-allowed;
               }
@@ -196,9 +195,7 @@
 
             .modal-title-bar {
               text-transform: capitalize;
-
               a {
-
                 button {
                   margin: 0 0.5em 0 0;
                 }
@@ -207,7 +204,6 @@
 
             .modal-content {
               text-align: right;
-              
               p {
                 height: auto;
                 margin-left: 1.9em;
@@ -251,7 +247,6 @@
           text-align: center;
 
           .text {
-    
             &--grey {
               padding: 2em 2em 0;
             }
@@ -271,7 +266,6 @@
 
           &--black {
             padding-left: 1.6em;
-            text-transform: capitalize;
           }
         }
       }

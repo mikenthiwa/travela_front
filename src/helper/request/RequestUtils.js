@@ -1,4 +1,5 @@
 import moment from 'moment';
+import _ from 'lodash';
 
 class RequestUtils {
   static stipendData (stipends){
@@ -124,6 +125,11 @@ class RequestUtils {
       });
     }
     return finalCheckLists;
+  }
+
+  static getTravelReason(trip) {
+    const reason = trip.otherTravelReasons || (trip.reasons || {}).title;
+    return _.capitalize(reason) || 'N/A';
   }
 }
 

@@ -14,7 +14,7 @@ const setupConnectedComponent = (props, store) => {
 };
 
 describe('TEST REQUEST DETAILS COMPONENT', () => {
-  
+
   describe('TEST COMPONENT WHEN REQUEST IS LOADING', () => {
     const wrapper = setupConnectedComponent(props);
     it('should return loader when request is still fetching', () => {
@@ -22,9 +22,9 @@ describe('TEST REQUEST DETAILS COMPONENT', () => {
       const loader = wrapper.find('.spinner');
       expect(loader).toHaveLength(1);
     });
-    
+
   });
-  
+
   describe('TEST COMPONENT WHEN REQUEST DOES NOT EXIST', () => {
     it('should render "no request found" when request does not exist', () => {
       const wrapper = setupConnectedComponent({ ...props, request: {}, isLoading: false });
@@ -54,7 +54,7 @@ describe('TEST REQUEST DETAILS COMPONENT', () => {
         trips: [trips]
       };
       const wrapper = setupConnectedComponent({ ...props, request, isLoading: false });
-      expect(wrapper.find('.text--grey').at(8).text()).toBe('for holiday');
+      expect(wrapper.find('.text--black').at(4).text()).toBe('For holiday');
     });
 
     it('should render N/A when travelReason and otherTravelReason does not exist', () => {
