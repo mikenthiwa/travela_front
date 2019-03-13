@@ -4,6 +4,7 @@ export const TRAVEL_TEAM_MEMBER = 'Travel Team Member';
 export const REQUESTER= 'Requester';
 export const MANAGER = 'Manager';
 export const BUDGET_CHECKER = 'Budget Checker';
+export const FINANCE_TEAM_MEMBER = 'Finance Team Member';
 
 export const TRAVEL_MANAGERS = [
   SUPER_ADMINISTRATOR,
@@ -17,5 +18,6 @@ export const ALL = [
   TRAVEL_ADMINISTRATOR,
   REQUESTER,
   MANAGER,
-  BUDGET_CHECKER
+  BUDGET_CHECKER,
+  FINANCE_TEAM_MEMBER
 ];
