@@ -32,7 +32,7 @@ const Teammates = ({teammates: { payload, isLoading }}) => {
             <div className="centered-flex">Loading...</div> :
             !renderTeammates() ? (
               <div className="centered-flex">
-                <div className="message">No travelling members in your team</div>
+                <div className="message">At the moment, no member of your team has a scheduled trip</div>
               </div>
             ) : renderTeammates()
         }

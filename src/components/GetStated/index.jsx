@@ -11,7 +11,7 @@ export default function GetStarted() {
         <div className="details">
           <p className="ready">Get Travel Ready</p>
           <p className="confirm">
-            Confirm you have all the required travel documents today and avoid last minute hassle.
+          Upload details of your travel documents today and avoid last minute hassle.
           </p>
           <Link to="/travel_readiness">Get Started</Link>
         </div>
