@@ -26,4 +26,12 @@ describe('Login Page', () => {
       .find('a')
       .click( { multiple: true } );
   });
+
+  it('Successfully logs in after 20 second delay', () => {
+    cy.get('button')
+      .click();
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(21000);
+    cy.contains('Get Started');    
+  });
 });

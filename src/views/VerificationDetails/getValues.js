@@ -23,8 +23,8 @@ export default function (attachments) {
           departureTime: formatDateString(new Date(checklistItem.submissions[0].value.departureTime)),
           arrivalTime: formatDateString(new Date (checklistItem.submissions[0].value.arrivalTime)),
           ticketNumber: checklistItem.submissions[0].value.ticketNumber,
-          returnTime: checklistItem.submissions[0].value.returnTime,
-          returnDepartureTime:checklistItem.submissions[0].value.returnDepartureTime,
+          returnTime: formatDateString(new Date(checklistItem.submissions[0].value.returnTime)),
+          returnDepartureTime:formatDateString(new Date(checklistItem.submissions[0].value.returnDepartureTime)),
           returnTicketNumber: checklistItem.submissions[0].value.returnTicketNumber,
           returnAirline: checklistItem.submissions[0].value.returnAirline,
         };

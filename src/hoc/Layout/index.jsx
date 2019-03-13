@@ -19,11 +19,18 @@ export class Layout extends Component {
     hideSideBar: false,
     openSearch: false,
     hideOverlay: true,
+    delay: false,
   };
 
   componentDidMount = () => {
-    const { user, getUserData } = this.props;
+    const { user, getUserData, isLoaded, location: { pathname } } = this.props;
     user && getUserData(user.UserInfo.id);
+    if(!isLoaded && pathname === '/home') {
+      this.setState({ delay: true});
+      setTimeout(() => {
+        this.setState({ delay: false});
+      }, 20000);  
+    }
   };
 
   onNotificationToggle = () => {
@@ -141,7 +148,8 @@ export class Layout extends Component {
   render () {
     const { isLoaded, location: { pathname } } = this.props;
     const token = Cookies.get('jwt-token');
-    if(!isLoaded && token && pathname === '/home'){
+    const { delay } = this.state;
+    if(delay || !isLoaded && token && pathname === '/home'){
       return <LoaderPage />;
     }
    
