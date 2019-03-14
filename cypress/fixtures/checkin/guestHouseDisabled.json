@@ -1,0 +1,75 @@
+{
+  "success": true,
+  "trips": [
+    {
+        "id": "AQ1NKnICCk",
+        "origin": "Nairobi, Kenya",
+        "destination": "Lagos, Nigeria",
+        "departureDate": "2099-02-28",
+        "returnDate": "2099-03-01",
+        "checkStatus": "Not Checked In",
+        "checkInDate": null,
+        "checkOutDate": null,
+        "accommodationType": "Residence",
+        "lastNotifyDate": null,
+        "notificationCount": 0,
+        "travelCompletion": "false",
+        "otherTravelReasons": "adf",
+        "createdAt": "2019-02-28T19:36:11.092Z",
+        "updatedAt": "2019-02-28T19:36:11.092Z",
+        "deletedAt": null,
+        "travelReasons": null,
+        "bedId": 6001,
+        "requestId": "L3G8trcWE-",
+        "request": {
+            "id": "L3G8trcWE-",
+            "name": "Travela Test",
+            "tripType": "multi",
+            "manager": "Travela Test",
+            "gender": "Female",
+            "department": "Talent & Development",
+            "role": "Software developer",
+            "status": "Verified",
+            "userId": "-LSsFyueC086niFc9rrz",
+            "picture": "https://lh5.googleusercontent.com/-PbuF53uxx4U/AAAAAAAAAAI/AAAAAAAAAAA/AGDgw-i0-XeoeYYk7TpfNBvulhV0oFM6eg/mo/photo.jpg?sz=50",
+            "stipend": 0,
+            "budgetStatus": "Open",
+            "createdAt": "2018-08-16T11:11:52.181Z",
+            "updatedAt": "2018-08-16T11:11:52.181Z",
+            "deletedAt": null
+        },
+        "beds": {
+            "id": 6001,
+            "bedName": "bed 3",
+            "booked": false,
+            "createdAt": "2018-08-16T00:00:00.000Z",
+            "updatedAt": "2018-08-16T00:00:00.000Z",
+            "roomId": "room-id-3",
+            "rooms": {
+                "id": "room-id-3",
+                "roomName": "Sasa",
+                "roomType": "ensuite",
+                "bedCount": 2,
+                "isDeleted": false,
+                "faulty": false,
+                "createdAt": "2018-08-16T00:00:00.000Z",
+                "updatedAt": "2018-08-16T00:00:00.000Z",
+                "guestHouseId": "guest-house-1",
+                "guestHouses": {
+                    "id": "guest-house-1",
+                    "houseName": "Mini flat-B",
+                    "location": "Lagos, Nigeria",
+                    "bathRooms": 3,
+                    "imageUrl": "guest.com",
+                    "disabled": false,
+                    "createdAt": "2018-08-16T00:00:00.000Z",
+                    "updatedAt": "2018-08-16T00:00:00.000Z",
+                    "userId": "-LMgZQKq6MXAj_41iRWi"
+                }
+            }
+        },
+        "reasons": null
+    }
+  ],
+  "message": "Retrieved Successfully"
+}

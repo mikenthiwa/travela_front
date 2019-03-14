@@ -78,7 +78,7 @@ export class CheckInTable extends Component {
             </table>
           )}
           {!trips.length &&
-            this.renderNoCheckIn('You have no check-in record')}
+            this.renderNoCheckIn('You have no check-in record yet, because you haven\'t booked a room in any of the Andela Guest Houses')}
         </div>
       </Fragment>
     );

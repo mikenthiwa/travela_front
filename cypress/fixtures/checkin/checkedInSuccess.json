@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "trip": {
+      "id": "XLT9S-3Xef",
+      "origin": "Kigali, Rwanda",
+      "destination": "San, Fransisco",
+      "departureDate": "2018-09-16",
+      "returnDate": "2018-10-16",
+      "checkStatus": "Checked In",
+      "checkInDate": "2019-03-12T12:22:55.747Z",
+      "checkOutDate": null,
+      "accommodationType": "Residence",
+      "lastNotifyDate": null,
+      "notificationCount": 0,
+      "travelCompletion": "false",
+      "otherTravelReasons": "adf",
+      "createdAt": "2018-07-28T19:43:07.937Z",
+      "updatedAt": "2019-03-12T12:22:55.747Z",
+      "deletedAt": null,
+      "travelReasons": null,
+      "bedId": 6000,
+      "requestId": "3mzyo5PeA",
+      "request": {
+          "id": "3mzyo5PeA",
+          "name": "Travela Test",
+          "tripType": "multi",
+          "manager": "Travela Test",
+          "gender": "Female",
+          "department": "Talent & Development",
+          "role": "Software developer",
+          "status": "Verified",
+          "userId": "-LSsFyueC086niFc9rrz",
+          "picture": "https://lh5.googleusercontent.com/-PbuF53uxx4U/AAAAAAAAAAI/AAAAAAAAAAA/AGDgw-i0-XeoeYYk7TpfNBvulhV0oFM6eg/mo/photo.jpg?sz=50",
+          "stipend": 0,
+          "budgetStatus": "Open",
+          "createdAt": "2018-08-16T11:11:52.181Z",
+          "updatedAt": "2018-08-16T11:11:52.181Z",
+          "deletedAt": null
+      }
+  },
+  "message": "Updated Successfully"
+}
