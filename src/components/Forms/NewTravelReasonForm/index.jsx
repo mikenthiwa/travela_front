@@ -13,7 +13,8 @@ export default class NewTravelReasonForm extends Component {
         description: '',
       },
       errors: {},
-      hasBlankFields: true
+      hasBlankFields: true,
+      ofMinLength: true,
     };
     this.state = { ...this.defaultState };
   }
@@ -62,9 +63,10 @@ export default class NewTravelReasonForm extends Component {
       this.validLengthHelper(values[field], 0)?
         (tempErrorsObject.description = 'This field is required')
         : null;
-      this.validLengthHelper(values[field], 140) ?
-        (tempErrorsObject.description = 'Descriptions can only be 140 characters long')
+      values[field].trim().length > 140 || values[field].trim().length < 10 ?
+        (tempErrorsObject.description = 'Descriptions can only be between 10 and 140 characters')
         : null;
+      this.setState({ofMinLength: values[field].trim().length < 10});
       values.description = values.description.slice(0, 140);
       break;
     default:
@@ -103,7 +105,7 @@ export default class NewTravelReasonForm extends Component {
   };
 
   render() {
-    const { values, errors, hasBlankFields } = this.state;
+    const { values, errors, hasBlankFields, ofMinLength } = this.state;
     const { closeModal, travelReason, send } = this.props;
     return (
       <FormContext values={values} errors={errors} targetForm={this} validatorName="validateLength">
@@ -114,7 +116,7 @@ export default class NewTravelReasonForm extends Component {
           <SubmitArea
             travelReason={travelReason}
             onCancel={closeModal}
-            hasBlankFields={hasBlankFields}
+            hasBlankFields={ofMinLength || hasBlankFields}
             send={send}
           />
         </form>
