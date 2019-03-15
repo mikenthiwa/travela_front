@@ -30,13 +30,16 @@ class FileUploadField extends Component{
     return  ( 
       <div className="document-input__input-container">
         <label className="document-input__input-container__prompts" htmlFor="select-file">
-          <img
-            src={documentUpload}
-            alt="Document Upload" className="document-input__input-container__prompts__img" />
+          <div className="document-input__input-container__prompts__img">
+            <img
+              src={documentUpload}
+              alt="Document Upload"  />
+          </div>
           <div className="document-input__input-container__prompts__text">
             <p>
               { this.getUrlLink(name)}
             </p>
+            <p className="maximum-file-size">Maximum file size - 20MB</p>
           </div>
           <input type="file" onChange={handleUpload} id="select-file"  />
         </label>

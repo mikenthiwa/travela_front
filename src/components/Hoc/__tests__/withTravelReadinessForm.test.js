@@ -98,8 +98,12 @@ const wrapperWithVisaDocumentField = mount(
 const textFile = new Blob(['This is a text file'], {type : 'text/plain'});
 textFile.name = 'textFile.txt';
 
-const validFile = new Blob(['This is a valid png file'], {type : 'image/png', size: 1092});
+const validFile =new Blob(['x'.repeat(20000000)], {type : 'image/jpeg'});
 validFile.name = 'file.png';
+
+const invalidFileSize = new Blob(['x'.repeat(20000001)], {type : 'image/jpeg'});
+invalidFileSize.name = 'invalidFileSize.jpeg';
+
 
 toast.error = jest.fn();
 const event = {
@@ -582,4 +586,11 @@ describe('<OtherDocumentForm />', () => {
 
     expect(wrapper.state('image')).toEqual(expected[0]);
   });
+
+  it('shows a toaster if file size is invalid', () => {
+    event.target.files = [invalidFileSize];
+    wrapper.find('#select-file').simulate('change', event);
+    expect(toast.error).toHaveBeenCalledWith('File is too large');
+  });
+
 });

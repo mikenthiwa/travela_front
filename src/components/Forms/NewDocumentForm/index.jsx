@@ -62,7 +62,7 @@ class NewDocumentForm extends PureComponent {
     if (!documents.includes(file.type)) {
       return toast.error('Incorrect file type uploaded');
     }
-    if (file.size>Math.pow(10,7)) {
+    if (file.size> 10**7*2){
       return toast.error('Incorrect file size uploaded');
     }
 

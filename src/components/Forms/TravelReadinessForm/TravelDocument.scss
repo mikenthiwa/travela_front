@@ -41,7 +41,7 @@
      display: none;
   }
 
-  .document-input__input-container__prompts__text p{
+  .document-input__input-container__prompts__text > p{
     color: #3359DB;
   }
 
@@ -53,5 +53,6 @@
     outline: none;
     margin-bottom: 20px;
   }
+
 }
 

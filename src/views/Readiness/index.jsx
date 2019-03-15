@@ -133,7 +133,7 @@ export class TravelReadinessDocuments extends Component {
         closeModal={closeModal} width="680px"
         visibility={(shouldOpen && (modalType === 'add passport' || modalType === 'edit passport'))
           ? 'visible' : 'invisible'}
-        title={modalType === 'add passport' ? 'Add Passport' : 'Edit Passport'}
+        title={modalType === 'add passport' ? 'Add Passport Details' : 'Edit Passport Details'}
       >
         <PassportForm
           createTravelReadinessDocument={createTravelReadinessDocument}

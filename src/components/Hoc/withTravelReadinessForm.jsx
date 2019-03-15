@@ -118,7 +118,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
       if (!['image/jpeg', 'image/png'].includes(image.type)) {
         return toast.error('Invalid file type. Please upload an image');
       }
-      if (image.size > Math.pow(10, 7)) {
+      if (image.size > 10**7*2) {
         return toast.error('File is too large');
       }
       const {name} = image;
@@ -145,7 +145,13 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
               <form className="travel-document-form" onSubmit={this.handleSubmit}>
                 {<FormFieldSet />}
                 <div className="travel-document-select-file">
-                  <p>Attach File</p>
+                  <p>
+                    {
+                      modalType === 'add passport'
+                        ? `Attach image of your ${modalType.split(' ').splice(-1)} page`
+                        : 'Attach File'
+                    }
+                  </p>
                   <FileUploadField
                     name={name}
                     documentUpload={documentUpload}

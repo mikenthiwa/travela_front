@@ -28,7 +28,7 @@ describe('<NewDocumentForm />', () => {
   const invalidFileType = new Blob(['This is an invalid file type'], {type : 'text/plain'});
   invalidFileType.name = 'invalidFileType.txt';
 
-  const invalidFileSize = new Blob(['x'.repeat(10000001)], {type : 'application/pdf'});
+  const invalidFileSize = new Blob(['x'.repeat(20000001)], {type : 'application/pdf'});
   invalidFileSize.name = 'invalidFileSize.pdf';
 
   const event = {
@@ -137,7 +137,7 @@ describe('<NewDocumentForm />', () => {
     expect(toast.error).toHaveBeenCalledWith('Incorrect file type uploaded');
   });
 
-  it('shows a toast error if file size is greater than 10mb', () => {
+  it('shows a toast error if file size is greater than 20mb', () => {
     event.target.files = [invalidFileSize];
     wrapper.find('#select-file').simulate('change', event);
     expect(toast.error).toHaveBeenCalledWith('Incorrect file size uploaded');
