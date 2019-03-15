@@ -13,8 +13,7 @@ export default class NewTravelReasonForm extends Component {
         description: '',
       },
       errors: {},
-      hasBlankFields: true,
-      optionalFields: ['description']
+      hasBlankFields: true
     };
     this.state = { ...this.defaultState };
   }
@@ -33,8 +32,13 @@ export default class NewTravelReasonForm extends Component {
     }
   };
 
+  validLengthHelper = (field, fieldLength) => {
+    return fieldLength ? field.trim().length >= fieldLength :
+      field.trim().length === fieldLength;
+  }
+
   validateLength = field => {
-    let { values, optionalFields } = this.state;
+    let { values } = this.state;
     const { editing, travelReason: { editReason } } = this.props;
 
     let tempErrorsObject = {
@@ -46,16 +50,19 @@ export default class NewTravelReasonForm extends Component {
 
     switch (field) {
     case 'title':
-      values[field].length === 0 ?
+      this.validLengthHelper(values[field], 0) ?
         (tempErrorsObject.title = 'This field is required')
         : null;
-      values[field].length >= 18 ? (
+      this.validLengthHelper(values[field], 18)? (
         tempErrorsObject.title = 'Titles can only be 18 characters long')
         : null;
       values.title = values.title.slice(0,18);
       break;
     case 'description':
-      values[field].length >= 140 ?
+      this.validLengthHelper(values[field], 0)?
+        (tempErrorsObject.description = 'This field is required')
+        : null;
+      this.validLengthHelper(values[field], 140) ?
         (tempErrorsObject.description = 'Descriptions can only be 140 characters long')
         : null;
       values.description = values.description.slice(0, 140);
@@ -65,7 +72,7 @@ export default class NewTravelReasonForm extends Component {
     }
 
     hasBlankFields = Object.keys(values).some(
-      key => !values[key] && !optionalFields.includes(key)
+      key => !values[key].trim()
     );
 
     this.setState(prevState => {

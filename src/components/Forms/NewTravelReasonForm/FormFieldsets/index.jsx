@@ -14,12 +14,7 @@ export default class TravelReasonFieldSet extends Component {
       <fieldset className="add-checklist">
         <div className="input-group">
           {renderInput('title', 'text')}
-          {renderInput('description', 'textarea',
-            {
-              labelNote: '(Optional)',
-              required: false
-            }
-          )}
+          {renderInput('description', 'textarea')}
         </div>
       </fieldset>
     );
