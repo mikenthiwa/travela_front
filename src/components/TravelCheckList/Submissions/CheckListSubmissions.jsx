@@ -1,30 +1,25 @@
 import React, {Component, Fragment} from 'react';
 import {PropTypes} from 'prop-types';
 import { Link } from 'react-router-dom';
-import countryUtils from '../../helper/countryUtils';
+import countryUtils from '../../../helper/countryUtils';
 import SubmissionItem from './SubmissionItem';
-import Preloader from '../Preloader/Preloader';
-import './travelSubmission.scss';
+import Preloader from '../../Preloader/Preloader';
+import '../travelSubmission.scss';
 
 
 class CheckListSubmissions extends Component {
+
   renderCheckList = (list, keyIndex) => {
     const {
       fileUploads, handleFileUpload, postSuccess, tripType,
       postSubmission, itemsToCheck, isUploadingStage2, requestId,
-      request
+      request, handleUserDocumentUpload, closeModal, shouldOpen, 
+      modalType, userReadinessDocument, history
     } = this.props;
     const {checklist, destinationName, tripId} = list;
     const countryFlagUrl = countryUtils.getCountryFlagUrl(destinationName);
     return (
       <div key={keyIndex} className="travelCheckList__destination">
-        <div className="travelCheckList__destination-name">
-          <div
-            className="travelCheckList__destination-flag" alt="country flag"
-            style={{backgroundImage: `url(${countryFlagUrl})`}}
-          />
-          {destinationName}
-        </div>
         {
           checklist.length &&
           checklist.map((item) => (
@@ -41,6 +36,11 @@ class CheckListSubmissions extends Component {
               tripType={tripType}
               itemsToCheck={itemsToCheck}
               isUploadingStage2={isUploadingStage2}
+              handleUserDocumentUpload={handleUserDocumentUpload}
+              closeModal={closeModal}
+              shouldOpen={shouldOpen}
+              modalType={modalType} history={history}
+              userReadinessDocument={userReadinessDocument} 
             />
           ))
         }
@@ -50,14 +50,10 @@ class CheckListSubmissions extends Component {
 
   renderSubmissions = () => {
     const {submissions, closeModal} = this.props;
-    let url = location.pathname;
-    if (/requests\/\w+\/checklist/.test(url)) {
-      url = '/requests';
-    }
     return (
       <Fragment>
         <div className="travelCheckList">
-          {
+          { 
             submissions.length
               ? submissions.map((list, i) => this.renderCheckList(list, i))
               : (
@@ -68,27 +64,16 @@ class CheckListSubmissions extends Component {
               )
           }
         </div>
-        <div className="travelCheckList__submit-area">
-          <Link to={url}>
-            <button
-              type="button"
-              className="bg-btn bg-btn--active"
-              onClick={() => {closeModal();}}
-              disabled={false}
-            >
-              Close
-            </button>
-          </Link>
-        </div>
+        
       </Fragment>
     );
   };
 
   render() {
-    const {isLoading} = this.props;
+    const {isLoading, submissions} = this.props;
     return (
       <Fragment>
-        {isLoading
+        {(isLoading && submissions.length)
           ? <Preloader spinnerClass="loader" />
           : this.renderSubmissions()
         }
@@ -98,22 +83,33 @@ class CheckListSubmissions extends Component {
 }
 
 CheckListSubmissions.defaultProps = {
-  request: {}
+  request: {},
+  closeModal: () => {},
+  isLoading: false,
+  shouldOpen: false,
+  userReadinessDocument: {},
+  modalType: ''
 };
 
 CheckListSubmissions.propTypes = {
   postSubmission: PropTypes.func.isRequired,
   submissions: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   handleFileUpload: PropTypes.func.isRequired,
   itemsToCheck: PropTypes.array.isRequired,
-  closeModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func,
   tripType: PropTypes.string.isRequired,
   request: PropTypes.object,
   requestId: PropTypes.string.isRequired,
   postSuccess: PropTypes.array.isRequired,
   fileUploads: PropTypes.object.isRequired,
-  isUploadingStage2: PropTypes.array.isRequired
+  isUploadingStage2: PropTypes.array.isRequired,
+  handleUserDocumentUpload: PropTypes.func.isRequired,
+  shouldOpen: PropTypes.bool,
+  userReadinessDocument: PropTypes.object,
+  modalType: PropTypes.string,
+  history: PropTypes.object.isRequired
+  
 };
 
 export default CheckListSubmissions;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import CheckListSubmissions from '../CheckListSubmissions';
+import CheckListSubmissions from '../Submissions/CheckListSubmissions';
 import {
   checklistSubmission, fileUploadStore,
   itemsToCheck, requestId,
@@ -17,6 +17,7 @@ describe('ChecklistSubmission Component', () => {
     handleFileUpload: jest.fn(),
     fetchUserRequests: jest.fn(),
     closeModal: jest.fn(),
+    openModal: jest.fn(),
     itemsToCheck,
     tripType: 'return',
     requestId,
@@ -24,6 +25,14 @@ describe('ChecklistSubmission Component', () => {
     fileUploads: fileUploadStore,
     isUploadingStage2: [],
     request: {...tripRequest},
+    handleUserDocumentUpload: jest.fn(),
+    shouldOpen: false,
+    modalType: '',
+    userReadinessDocument: {},
+    showTravelChecklist: jest.fn(),
+    history: {
+      push: jest.fn()
+    }
   };
 
   const setup = (props) => mount(<BrowserRouter><CheckListSubmissions {...props} /></BrowserRouter>);
@@ -66,10 +75,4 @@ describe('ChecklistSubmission Component', () => {
     expect(spinner.length).toBe(1);
   });
 
-  it('should close the modal when the done button is clicked', () => {
-    const wrapper = setup(props);
-    wrapper.find('button.bg-btn').simulate('click');
-
-    expect(props.closeModal).toHaveBeenCalled();
-  });
 });

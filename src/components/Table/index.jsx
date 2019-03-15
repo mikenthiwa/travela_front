@@ -5,12 +5,10 @@ import axios from 'axios';
 import toast from 'toastr';
 import { isEqual } from 'lodash';
 import RequestsModal from '../RequestsModal/RequestsModal';
-import  CheckListSubmissions  from '../TravelCheckList/CheckListSubmissions';
 import Modal from '../modal/Modal';
 import './Table.scss';
 import withLoading from '../Hoc/withLoading';
 import TableMenu from '../TableMenu/TableMenu';
-import TravelChecklist from '../TravelCheckList';
 import RequestPlaceholder from '../Placeholders/RequestsPlaceholder';
 import getTripDuration from '../../helper/getTripDuration';
 import formatTripType from '../../helper/formatTripType';
@@ -93,12 +91,6 @@ export class Table extends Component {
     history.push(`${pathname}${/\/$/.test(pathname) ? '': '/'}${requestId}`);
   };
 
-  handleFileUpload = async (file, checklistItemId, tripId, checkId, requestId) => {
-    const { uploadFile } = this.props;
-    delete axios.defaults.headers.common['Authorization'];
-    uploadFile(file.files[0], { checklistItemId, tripId}, checkId, requestId);
-  };
-
   getApprovalStatus = (status, budgetStatus) => {
     if (status === 'Verified'){
       return status;
@@ -136,7 +128,7 @@ export class Table extends Component {
   }
   renderRequestStatus(request){
     const {
-      editRequest, type, showTravelChecklist, uploadTripSubmissions, deleteRequest,
+      editRequest, type, uploadTripSubmissions, deleteRequest,
       openModal, closeModal, shouldOpen, modalType
     } = this.props;
     const { menuOpen } = this.state;
@@ -153,7 +145,7 @@ export class Table extends Component {
             type !== 'approvals' && (
               <TableMenu
                 deleteRequest={deleteRequest} editRequest={editRequest}
-                showTravelChecklist={showTravelChecklist} closeModal={closeModal}
+                closeModal={closeModal}
                 uploadTripSubmissions={uploadTripSubmissions}
                 requestStatus={request.status} type={type} modalType={modalType}
                 menuOpen={menuOpen} request={request} openModal={openModal}
@@ -301,75 +293,6 @@ export class Table extends Component {
     );
   }
 
-  renderTravelCheckListModal() {
-    const {
-      closeModal,
-      shouldOpen,
-      modalType,
-      travelChecklists ,
-      requestId,
-      handleCloseChecklistModal} = this.props;
-    const { menuOpen: { id } } = this.state;
-    return (
-      <Modal
-        closeDeleteModal={handleCloseChecklistModal || closeModal}
-        width="600px"
-        modalId="travel-checkList-modal"
-        modalContentId="travel-checkList-modal-content"
-        visibility={
-          shouldOpen && modalType === 'travel checklist'
-            ? 'visible'
-            : 'invisible'
-        }
-        title="Travel Checklist"
-        modalBar={(<div className="table__modal-bar-text">{id || requestId}</div>)}
-      >
-        <TravelChecklist
-          travelChecklists={travelChecklists}
-          handleCloseChecklistModal={handleCloseChecklistModal}
-        />
-      </Modal>
-    );
-  }
-
-  renderSubmissionsModal() {
-    const {
-      closeModal, shouldOpen, modalType, fileUploads, handleCloseSubmissionModal,
-      submissionInfo, fetchSubmission, postSubmission, fetchUserRequests
-    } = this.props;
-    const {
-      submissions, isFetching, isUploading, percentageCompleted,
-      itemsToCheck, postSuccess, tripType,
-    } = submissionInfo;
-    const { menuOpen: { id, request } } = this.state;
-    return (
-      <Modal
-        closeModal={handleCloseSubmissionModal}
-        width="900px"
-        customModalStyles="custom-overlay"
-        modalId="checklist-submission-modal"
-        modalContentId="checklist-submission-modal-content"
-        visibility={shouldOpen && modalType === 'upload submissions'
-          ?'visible'
-          :'invisible'
-        }
-        title="Travel Checklist"
-        modalBar={<div className="table__modal-bar-text">{id}</div>}
-      >
-        <CheckListSubmissions
-          requestId={id || ''} request={request} shouldOpen={shouldOpen} closeModal={closeModal}
-          modalType={modalType} postSubmission={postSubmission} tripType={tripType}
-          fetchSubmission={fetchSubmission} fetchUserRequests={fetchUserRequests}
-          percentageCompleted={percentageCompleted} submissions={submissions}
-          itemsToCheck={itemsToCheck} isLoading={isFetching} fileUploads={fileUploads}
-          handleFileUpload={this.handleFileUpload} postSuccess={postSuccess}
-          isUploadingStage2={isUploading}
-          handleCloseSubmissionModal={handleCloseSubmissionModal}
-        />
-      </Modal>
-    );
-  }
-
   render() {
     const { requests, type, fetchRequestsError, message, requestId } = this.props;
     return (
@@ -389,8 +312,6 @@ export class Table extends Component {
             !requests.length &&
             this.renderNoRequests(message)}
           {requestId && this.renderDetailsModal()}
-          {this.renderTravelCheckListModal()}
-          {this.renderSubmissionsModal()}
         </div>
       </Fragment>
     );
@@ -409,23 +330,13 @@ Table.propTypes = {
   message: PropTypes.string,
   page: PropTypes.string,
   editRequest: PropTypes.func,
-  travelChecklists: PropTypes.object,
-  showTravelChecklist: PropTypes.func,
-  fetchUserRequests: PropTypes.func,
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   openChecklist: PropTypes.bool,
   uploadTripSubmissions: PropTypes.func,
-  fetchSubmission: PropTypes.func,
-  postSubmission: PropTypes.func,
-  submissionInfo: PropTypes.object.isRequired,
-  uploadFile: PropTypes.func,
-  fileUploads: PropTypes.object,
   deleteRequest: PropTypes.func,
   approvalsType: PropTypes.string,
   openModal: PropTypes.func.isRequired,
-  handleCloseSubmissionModal: PropTypes.func,
-  handleCloseChecklistModal: PropTypes.func,
   setOpenChecklist: PropTypes.func,
 };
 
@@ -441,18 +352,9 @@ Table.defaultProps = {
   page: '',
   requestId: '',
   requestData: {},
-  travelChecklists: {},
   deleteRequest: () => {},
   editRequest: () => {},
-  showTravelChecklist: () => {},
   uploadTripSubmissions: () => {},
-  uploadFile: () => {},
-  postSubmission: () => {},
-  fetchSubmission: () => {},
-  fetchUserRequests: () => {},
-  fileUploads: {},
-  handleCloseSubmissionModal: () => {},
-  handleCloseChecklistModal: null,
   openChecklist: false,
   setOpenChecklist: () => {},
 };

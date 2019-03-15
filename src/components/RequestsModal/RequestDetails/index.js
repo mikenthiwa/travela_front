@@ -1,31 +1,43 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import _ from 'lodash';
 import ConnectedCommentBox from '../CommentBox/CommentBox';
 import ConnectedUserComments from '../UserComments/UserComments';
 import RequestTabHeader from './RequestDetailsTab';
 import RequestUtils from '../../../helper/request/RequestUtils';
 import './RequestDetails.scss';
-import tabIcons from '../../../images/icons/new-request-icons';
+import tabIcons from '../../../images/icons/new-request-icons/requestProgress';
 import commentIcon from '../../../images/icons/new-request-icons/Chat.svg';
 import addCommentIcon from '../../../images/icons/new-request-icons/AddComment.svg';
+import TravelCheckList from '../../TravelCheckList';
 
 export class RequestDetails extends Component {
   state = {
     steps: [
-      { id: 1, name: 'Manager Approval', status: '', statusDate: 'You are currently here', icon: tabIcons.personal },
-      { id: 2, name: 'Budget Check', status: '', statusDate: '', icon: tabIcons.tripDetails },
-      { id: 3, name: 'Travel Checklist', status: '', statusDate: '', icon: tabIcons.stipend },
-      { id: 4, name: 'Travel Verification', status: '', statusDate: '', icon: tabIcons.checkList }
+      { id: 1, name: 'Manager Approval', status: '', statusDate: 'You are currently here', icon: tabIcons.ManagerApproval },
+      { id: 2, name: 'Budget Check', status: '', statusDate: '', icon: tabIcons.Budget },
+      { id: 3, name: 'Travel Checklist', status: '', statusDate: '', icon: tabIcons.TravelChecklist },
+      { id: 4, name: 'Travel Verification', status: '', statusDate: '', icon: tabIcons.Verify }
     ],
-    currentTab: 1, showCommentBox: false
+    currentTab: 1, showCommentBox: false,
   }
 
   componentDidMount() {
     this.setSteps();
   }
 
-  setSteps() {
+  componentWillReceiveProps(nextProp){
+    const { submissionInfo: {percentageCompleted: prevPercent} } = this.props;
+    const { submissionInfo: {percentageCompleted: nextPercent}, submissionInfo } = nextProp;
+ 
+    if( prevPercent !== nextPercent ){
+      this.setSteps(nextPercent, submissionInfo.submissions);
+    } 
+  }
+
+  setSteps(percent, submission) {
+    
     const { requestData } = this.props;
     const { steps, currentTab } = this.state;
     const newSteps = steps;
@@ -35,7 +47,18 @@ export class RequestDetails extends Component {
         steps: newSteps,
         currentTab: 5
       });
-    } else if (requestData.budgetStatus === 'Approved') {
+    } 
+    else if (percent === 100) {
+      const completionTime = this.checklistCompletionDate(submission);
+      this.loadStatus(3);
+      newSteps[2].status = '';
+      newSteps[2].statusDate = `Completed on ${completionTime}`;
+      this.setState({
+        steps: newSteps,
+        currentTab: 4
+      });
+    } 
+    else if (requestData.budgetStatus === 'Approved') {
       this.loadStatus(2);
       this.setState({
         steps: newSteps,
@@ -48,6 +71,17 @@ export class RequestDetails extends Component {
         steps: newSteps,
         currentTab: 2});
     }
+  }
+
+  checklistCompletionDate = (submissions) => {
+    const datesArray = [];
+    submissions.map(submission => 
+      submission.checklist.map(checklist => 
+        checklist.submissions.map(updated => 
+          datesArray.push(updated.updatedAt))));
+    const latestDate = _.sortBy(datesArray, recent => recent).reverse()[0];
+    return moment(latestDate).format('DD/MM/YY');
+    
   }
 
   loadStatus(tab) {
@@ -216,36 +250,86 @@ export class RequestDetails extends Component {
   }
 
   renderComments() {
-    const{ requestData, user, currentUser } = this.props;
+    const{ requestData, currentUser } = this.props;
     return(
       <ConnectedUserComments
         comments={requestData.comments ? requestData.comments.slice(0).reverse() : []}
-        email={user.UserInfo.email}
+        email={currentUser.email}
         currentUser={currentUser}
       />
     );
   }
 
+  renderCheckListSubmission(hideButton) {
+    const { requestData, travelChecklists, closeModal, openModal, showTravelChecklist, modalType,
+      fileUploads, fetchSubmission, postSubmission, submissionInfo, uploadFile, shouldOpen, 
+      userReadinessDocument, history } = this.props;
+    return (
+      <Fragment>
+        {
+          requestData.id && (
+            <TravelCheckList 
+              request={requestData} requestId={requestData.id} 
+              travelChecklists={travelChecklists}
+              submissionInfo={submissionInfo}
+              uploadFile={uploadFile} 
+              postSubmission={postSubmission}
+              fetchSubmission={fetchSubmission}
+              closeModal={closeModal}
+              openModal={openModal} modalType={modalType}
+              shouldOpen={shouldOpen} hideSubmit={hideButton}
+              showTravelChecklist={showTravelChecklist}
+              fileUploads={fileUploads} history={history}
+              userReadinessDocument={userReadinessDocument} />
+          )}
+      </Fragment>
+      
+    );
+  }
+
+  renderComment = (requestData) => {
+    const { comments } = requestData; 
+    return (
+      <Fragment>
+        {comments.length < 1 ? (
+          <div className="requestDetails__comment">
+            {this.renderAddCommentText()}
+          </div>)
+          : (
+            <div className="requestDetails__comment">
+              {this.renderHideCommentText()}
+            </div>)}
+      </Fragment>
+
+    );
+  }
+
+  
+
   render() {
-    const { requestData } = this.props;
+    const { requestData, travelChecklists, user } = this.props;
     const { steps, currentTab } = this.state;
+
     return (
       <Fragment>
         <div className="width-91">
           <RequestTabHeader steps={steps} currentTab={currentTab} />
           {currentTab === 1 && this.renderRequestDetails(requestData)}
           {currentTab === 2 && this.renderRequestDetails(requestData)}
-          {currentTab === 3 && null}
-          {currentTab === 4 && this.renderRequestDetails(requestData)}
+          {currentTab === 3 && (
+            <div>
+              {this.renderRequestDetails(requestData)}
+              { this.renderCheckListSubmission()}
+            </div>
+          )}
+          {currentTab === 4 && (
+            <div>
+              {this.renderRequestDetails(requestData)}
+              { this.renderCheckListSubmission('hideButton')}
+            </div>
+          )}
           {currentTab === 5 && this.renderRequestDetails(requestData)}
-          {requestData.comments.length < 1 ? (
-            <div className="requestDetails__comment">
-              {this.renderAddCommentText()}
-            </div>)
-            : (
-              <div className="requestDetails__comment">
-                {this.renderHideCommentText()}
-              </div>)}
+          {currentTab !== 3 && this.renderComment(requestData)}   
         </div>
       </Fragment>
     );
@@ -257,13 +341,30 @@ RequestDetails.propTypes = {
   user: PropTypes.object,
   currentUser: PropTypes.object,
   requestId: PropTypes.string,
+  userReadinessDocument: PropTypes.object,
+  history: PropTypes.object.isRequired,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  postSubmission: PropTypes.func.isRequired,
+  showTravelChecklist: PropTypes.func.isRequired,
+  modalType: PropTypes.string,
+  submissionInfo: PropTypes.object.isRequired,
+  fetchSubmission: PropTypes.func.isRequired,
+  travelChecklists: PropTypes.object.isRequired,
+  fileUploads: PropTypes.object.isRequired,
+  uploadFile: PropTypes.func.isRequired,
+  shouldOpen: PropTypes.bool
+
 };
 
 RequestDetails.defaultProps = {
   requestData: {},
   user: {},
   currentUser: {},
-  requestId: null
+  requestId: null,
+  userReadinessDocument: {},
+  modalType: '',
+  shouldOpen: false
 };
 
 export default RequestDetails;

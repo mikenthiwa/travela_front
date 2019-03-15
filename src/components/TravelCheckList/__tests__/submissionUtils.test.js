@@ -1,5 +1,5 @@
 import React from 'react';
-import SubmissionUtils from '../SubmissionsUtils';
+import SubmissionUtils from '../Submissions/SubmissionsUtils';
 import tripRequest from '../../../mockData/checklistSubmissionMocks';
 
 describe('SubmissionUtils Component', () => {
@@ -76,7 +76,28 @@ describe('SubmissionUtils Component', () => {
     uploadedFileName: '',
     uploadProcess: 'success',
     trip: tripRequest.trips[0],
-    utilsType: 'ticketFieldset'
+    utilsType: 'ticketFieldset',
+    uploadedFileDate: '2019-07-08T12:00',
+    submitAttachedDocument: jest.fn(),
+    hasSelectedDocument: false,
+    uploadedFileUrl: '',
+    userReadinessDocument: {passport: 
+      [{createdAt: '2019-03-11T19:02:34.433Z',
+        data: {name: 'Hope Uwa', 
+          imageName: 'Passport.jpeg', expiryDate: '01/03/2020', 
+          dateOfBirth: '03/28/2001', dateOfIssue: '03/06/2019',
+          cloudinaryUrl: 'clodinaryfile.jpg'},
+        deletedAt: null,
+        id: 'zu6sKphUj',
+        isVerified: true,
+        type: 'passport',
+        updatedAt: '2019-03-11T19:02:34.433Z',
+        userId: '-LSZHlCYZHY6-9lHqmCY'}]},
+    handleUserDocumentUpload: jest.fn(),
+    shouldOpen: false,
+    modalType: '',
+    setUploadedFile: jest.fn()
+
   };
   const setup = (props) => mount(<SubmissionUtils {...props} />);
 
@@ -92,8 +113,8 @@ describe('SubmissionUtils Component', () => {
   it('should initialize the dates based on the props', () => {
     const wrapper = setup(props);
 
-    wrapper.setProps({returnTime: '2019-07-08T12:00'});
-    expect(wrapper.state().returnTime).toEqual('2019-07-08T12:00');
+    wrapper.setProps({returnTime: '2019-07-11T00:00'});
+    expect(wrapper.state().returnTime).toEqual('2019-07-11T00:00');
   });
 
   it('should call the handleInputChange', () => {
@@ -126,5 +147,185 @@ describe('SubmissionUtils Component', () => {
     input.simulate('change', event);
     input.simulate('blur');
     expect(handleTicketSubmitSpy).toHaveBeenCalled();
+  });
+
+  it('should render select document dropdown', () => {
+    props.utilsType = 'uploadField';
+    props.checklistItem.submissions= [];
+    
+    const wrapper = mount(<SubmissionUtils {...props} />);
+    const event = {
+      target: {
+        preventDefault: jest.fn(),
+        value: 'picture.jpg, cloudinaryfile.xyz, 1',
+      }
+    };
+    wrapper.setState({
+      showUploadedField: false
+    });
+    const instance = wrapper.instance();
+    jest.spyOn(instance, 'toggleDropdownDisplay');
+    const selectButton = wrapper.find('.travelSubmission--select__button');
+    selectButton.simulate('click', event);
+    expect(instance.toggleDropdownDisplay).toBeCalled;
+  });
+
+  it('should display modal on click from uploads', () => {
+    props.utilsType = 'uploadField';
+    props.checklistItem.submissions= [];
+    const wrapper = mount(<SubmissionUtils {...props} />);
+    const event = {
+      target: {
+        preventDefault: jest.fn(),
+        value: 'picture.jpg, cloudinaryfile.xyz, 1',
+      }
+    };
+    wrapper.setState({
+      showUploadedField: false
+    });
+    const instance = wrapper.instance().props;
+    jest.spyOn(instance, 'handleUserDocumentUpload');
+    const uploadButton = wrapper.find('.from-uploads');
+    uploadButton.simulate('click', event);
+    expect(instance.handleUserDocumentUpload).toBeCalled;
+    
+  });
+
+  it('should display window on click upload from computer', () => {
+    props.utilsType = 'uploadField';
+    props.checklistItem.submissions= [];
+    const wrapper = mount(<SubmissionUtils {...props} />);
+    const event = {
+      target: {
+        preventDefault: jest.fn(),
+        value: 'picture.jpg, cloudinaryfile.xyz, 1',
+      }
+    };
+    wrapper.setState({
+      showUploadedField: false
+    });
+    const instance = wrapper.instance();
+    jest.spyOn(instance, 'selectFromComputer');
+    const uploadButton = wrapper.find('.from-computer');
+    uploadButton.simulate('click', event);
+    expect(instance.selectFromComputer).toBeCalled;
+  });
+
+  it('render radio buttons for document in Modal', () => {
+    props.utilsType = 'uploadField';
+    props.checklistItem.submissions= [];
+    props.shouldOpen = true;
+    props.modalType = 'modal-QbSyCm5XIF-1';
+    const wrapper = mount(<SubmissionUtils {...props} />);
+    const event = {
+      target: {
+        preventDefault: jest.fn(),
+        value: 'picture.jpg, cloudinaryfile.xyz, 1',
+      }
+    };
+    const modalHead = wrapper.find('.modal-title');
+    expect(wrapper.instance().renderUserDocumentModalUpload).toBeCalled;
+  
+    expect(modalHead.text()).toEqual('Select Document');
+  });
+
+  it('render radio buttons for document in Modal', () => {
+    props.utilsType = 'uploadField';
+    props.checklistItem.submissions= [];
+    props.shouldOpen = true;
+    props.modalType = 'modal-QbSyCm5XIF-1';
+    const wrapper = mount(<SubmissionUtils {...props} />);
+    const event = {
+      target: {
+        preventDefault: jest.fn(),
+        value: 'picture.jpg, cloudinaryfile.xyz, 1',
+      }
+    };
+    const modalHead = wrapper.find('.modal-title');
+    expect(wrapper.instance().renderUserDocumentModalUpload).toBeCalled;
+    expect(modalHead.text()).toEqual('Select Document');
+  });
+
+  it('render trigger handleRadioSubmit on clicking Attach button', () => {
+    props.utilsType = 'uploadField';
+    props.checklistItem.submissions= [];
+    props.shouldOpen = true;
+    props.modalType = 'modal-QbSyCm5XIF-1';
+    const wrapper = mount(<SubmissionUtils {...props} />);
+    const event = {
+      target: {
+        preventDefault: jest.fn(),
+        value: 'picture.jpg, cloudinaryfile.xyz, 1',
+      }
+    };
+    const radioButton = wrapper.find('.travelSubmission--radio');
+    const attachButton = wrapper.find('#attach-button');
+    radioButton.simulate('change', event);
+    attachButton.simulate('click', event);
+    expect(wrapper.instance().selectRadioButton).toBeCalled;
+    expect(wrapper.instance().state.selectDocumentInfo).toEqual(event.value);
+    expect(wrapper.instance().handleRadioSubmit).toBeCalled;
+   
+  });
+
+
+  it('render no document in Modal', () => {
+    props.utilsType = 'uploadField';
+    props.checklistItem.submissions= [];
+    props.userReadinessDocument = {};
+    props.shouldOpen = true;
+    props.modalType = 'modal-QbSyCm5XIF-1';
+    const wrapper = mount(<SubmissionUtils {...props} />);
+    const event = {
+      target: {
+        preventDefault: jest.fn(),
+        value: 'picture.jpg, cloudinaryfile.xyz, 1',
+      }
+    };
+    const modalContent = wrapper.find('.travelSubmission--select__no-document');
+    const modalHead = wrapper.find('.modal-title');
+    expect(wrapper.instance().renderUserDocumentModalUpload).toBeCalled;
+    expect(modalContent.text()).toEqual('You have no verified travel document');
+    expect(modalHead.text()).toEqual('Select Document');
+  });
+  it('should render uploadedField when shouploadeField is true', () => {
+    props.utilsType = 'uploadField';
+    const wrapper = mount(<SubmissionUtils {...props} />);
+    wrapper.setState({
+      showUploadedField: true
+    });
+    const radioButton = wrapper.find('.travelSubmission--radio');
+
+    const uploadDate = wrapper.find('.travelSubmission--input__btn--uploadedFileDate');
+    expect(uploadDate.text()).toEqual('Uploaded 08-07-19');
+  });
+  it('should render textarea', () => {
+    props.utilsType = 'textarea';
+    const wrapper = mount(<SubmissionUtils {...props} />);
+    const submitArea =  wrapper.find('textarea[name="submissionText"]');
+    let onChangeFn = jest.spyOn(wrapper.instance(), 'handleInputChange');
+    const event = { preventDefault: jest.fn(),
+      target: {
+        name: 'submissionText',
+        value: jest.fn(),
+        type: 'submit'
+      }};
+    submitArea.simulate('change', { target: { value: 'Yes'}});
+    submitArea.simulate('blur');
+    expect(onChangeFn).toBeCalled;
+  });
+
+  it('should getItemValue when item changes', ()=>{
+    props.checklistItem.submissions=[];
+    const wrapper = mount(<SubmissionUtils {...props} />);
+    wrapper.setProps={
+      checklistItem: {
+        submissions: [
+          
+        ],
+      },
+    };
+    
+    expect(wrapper.instance().getItemValue()).toBeCalled;
   });
 });

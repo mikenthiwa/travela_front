@@ -46,7 +46,7 @@ const routes = {
   '/travel_readiness': [ConnectedReadiness],
   '/settings/roles': [ConnectedRole, [SUPER_ADMINISTRATOR]],
   '/requests/:requestId': [ConnectedRequestDetailsPage],
-  '/requests/:requestId/checklist': [ConnectedRequests],
+  '/requests/:requestId/checklist': [ConnectedRequestDetailsPage],
   '/settings/profile': [ConnectedUserProfile],
   '/residence/manage': [ConnectedAccommodation, TRAVEL_MANAGERS],
   '/residence/manage/guest-houses/:guestHouseId': [ConnectedGuestHouseDetails],

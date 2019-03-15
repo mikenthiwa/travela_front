@@ -52,40 +52,6 @@ class TableMenu extends PureComponent {
     );
   };
 
-  renderTravelCheckListBtn = () => {
-    const { showTravelChecklist, request, toggleMenu } = this.props;
-    return (
-      <li
-        className="table__menu-list-item" id="travelChecklistBtn"
-        onClick={() => {
-          showTravelChecklist(request, 'travel checklist');
-          toggleMenu(request.id, request);
-        }} role="presentation"
-      >
-        <img src={checkListIcon} alt="cancel-icon" className="menu-icon" />
-        Travel Checklist
-      </li>
-    );
-  }
-
-  renderCheckListSubmissionBtn = () => {
-    const { requestStatus, showTravelChecklist, request, toggleMenu } = this.props;
-    return (
-      requestStatus === 'Approved' && (
-        <li
-          className="table__menu-list-item" id="checklistSubmission"
-          onClick={() => {
-            showTravelChecklist(request, 'upload submissions');
-            toggleMenu(request.id, request);
-          }} role="presentation"
-        >
-          <img src={checkListIcon} alt="list-icon" className="menu-icon" />
-          Travel Checklist
-        </li>
-      )
-    );
-  }
-
   renderDeleteModalDocumentName = (data) => {
     if (data.type === 'passport') {
       return `this ${data.data.nationality} ${data.type}`;
@@ -147,8 +113,6 @@ class TableMenu extends PureComponent {
                   <img src={editIcon} alt="edit-icon" className="menu-icon" />
                   Edit
                 </li>)}
-              {type === 'requests' && requestStatus === 'Open' && this.renderTravelCheckListBtn() }
-              {this.renderCheckListSubmissionBtn()}
               {requestStatus === 'Open' && this.renderDelete()}
               {this.handleIconClosetoggle(toggleMenu, request, 'toggleButton')}
             </ul>
@@ -215,7 +179,6 @@ TableMenu.defaultProps = {
 
 TableMenu.propTypes = {
   editRequest: PropTypes.func,
-  showTravelChecklist: PropTypes.func,
   request: PropTypes.object,
   requestStatus: PropTypes.string,
   type: PropTypes.string,
@@ -239,7 +202,6 @@ TableMenu.defaultProps = {
   documentData: {},
   editDocument: () => {},
   editRequest: () => {},
-  showTravelChecklist: () => {},
   request: {},
   requestStatus: '',
   type: '',

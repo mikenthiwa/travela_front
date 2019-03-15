@@ -52,4 +52,77 @@
     background-position: center center;
     margin-right: 12px;
   }
+  &__row {
+    padding: 0;
+    margin: 10px 0px 20px 0px;
+    list-style: none;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -ms-flex-pack: start;
+  }
+  &__row:last-child {
+    justify-content: flex-end;
+  }
+  &__col {
+    width: 50%;
+  }
+  &__col-7 {
+    width: 58.3%;
+  }
+  &__col-5 {
+    width: 41.6%;
+  }
+  &--card {
+    margin: 5px;
+    border: 1px solid #E4E4E4;	
+    border-radius: 6px;	
+    background-color: #FFFFFF;
+  }
+  &--card__head {
+    border-bottom: 1px solid #E4E4E4;
+    text-align: center;
+    padding: 22px 0px 20px 0px;
+  }
 }
+.progressBar {
+  position: relative;
+  display : flex;
+  justify-content: center;
+  margin: 30px 0px 20px 0px;
+  &__text {
+    position: absolute;
+    height: 100%;
+    width: 30%;
+    font-size: 14px;	
+    color: #4A4A4A;	
+    font-weight: lighter;
+    &-head {
+      position: absolute;
+      top: 37.5px;
+      width: 100%;
+      text-align: center;
+    }
+    &-foot {
+      height: 18px;			
+      line-height: 18px;
+      position: absolute;
+      bottom: 43.5px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+  &__message {
+    text-align: center;
+    margin: 0px 15px 35px 15px;
+    color: #4A4A4A;
+    justify-content: center;
+    display: flex;
+    p {
+      width: 60%;
+    }
+  }
+}
+
+

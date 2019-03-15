@@ -405,29 +405,6 @@ describe('<Requests>', () => {
     });
   });
 
-  it('should handle fetch travel checklist submission', () => {
-    const wrapper = mount(
-      <Provider store={store}>
-        <Requests {...props} />
-      </Provider>
-    );
-    const mountWrapper = wrapper.find('li#checklistSubmission');
-    mountWrapper.simulate('click');
-    expect(props.fetchSubmission).toHaveBeenCalled();
-  });
-
-  it('should handle show travel checklist', () => {
-    const wrapper = mount(
-      <Provider store={store}>
-        <Requests {...props} />
-      </Provider>
-    );
-    const mountWrapper = wrapper.find('li#travelChecklistBtn');
-    mountWrapper.simulate('click');
-    expect(props.fetchTravelChecklist.called).toBe(true);
-    expect(props.fetchTravelChecklist.calledWith('xDh20btGz')).toBe(true);
-    expect(props.openModal.called).toBe(true);
-  });
 
   it('should handle edit request', () => {
     const wrapper = mount(
@@ -479,30 +456,6 @@ describe('<Requests>', () => {
     const wrapper = mount(<Requests {...prevProps} />);
     wrapper.setProps({...props});
     expect(wrapper.state('openChecklist')).toBe(true);
-  });
-
-  it('should redirect to the requests page when the checklist modal is closed', () => {
-    const closeModal = jest.fn();
-    const history = {
-      push: jest.fn()
-    };
-    const wrapper = mount(<Requests
-      {...props}
-      shouldOpen
-      history={history}
-      modalType="travel checklist"
-      travelChecklists={{
-        checklistItems: []
-      }}
-      closeModal={closeModal}
-
-    /> );
-
-    wrapper.find('Modal').find('.modal-close').simulate('click');
-
-    expect(closeModal).toHaveBeenCalled();
-    expect(history.push).toHaveBeenCalledWith('/requests');
-
   });
 
 });

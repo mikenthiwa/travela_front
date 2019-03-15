@@ -9,21 +9,22 @@ class SubmissionItem extends Component {
     info: '', type: '', fileName: '', submissionText: '',
     departureTime: '', arrivalTime: '', ticketNumber: '', airline: '',
     returnDepartureTime: '', returnTime: '', returnTicketNumber: '',
-    returnAirline: '', validTicket: true, uploadedFileName: '', validInput: true
+    returnAirline: '', validTicket: true, uploadedFileName: '', validInput: true,
+    uploadedFileDate: '', uploadedFileUrl: '', hasSelectedDocument: false,
   };
-
+  
   componentWillReceiveProps(nextProps) {
     const {
-      fileUploadData: {isUploading, uploadSuccess}, checkId
+      fileUploadData: {isUploading, uploadSuccess}, checkId, 
     } = nextProps;
 
     if (isUploading.match(checkId)) {
       return this.setState({info: 'Uploading file...', type: 'uploading'});
     }
-
-    uploadSuccess.match(checkId) && this.setState({
-      info: 'Done', type: 'success', uploadedFileName: ''
+    uploadSuccess.match(checkId) && this.setState({	
+      info: 'Done', type: 'success', uploadedFileName: ''	
     });
+    
   }
 
   getEmptyFieldsMessage = () => {
@@ -66,9 +67,10 @@ class SubmissionItem extends Component {
     fill && this.setState({...ticketDetails});
   }
 
-  setUploadedFileName = (fileName, id) => {
+  setUploadedFileName = (uploadedFileName, date, id, url) => {
     const {checkId} = this.props;
-    checkId.match(id) && this.setState({uploadedFileName: fileName});
+    if(checkId.match(id)) this.setState({uploadedFileName, 
+      uploadedFileDate: date, uploadedFileUrl : url });
   }
 
   handleUpload = (e) => {
@@ -93,6 +95,7 @@ class SubmissionItem extends Component {
 
   submitTextArea = () => {
     const {submissionText} = this.state;
+
     const {
       tripId, checklistItem: {id}, postSubmission, checkId, requestId
     } = this.props;
@@ -100,6 +103,18 @@ class SubmissionItem extends Component {
     submissionText && postSubmission(
       {formData, checklistItemId: id}, checkId, requestId);
   };
+
+  submitAttachedDocument = (url, fileName, documentId) => {
+
+    const file = { url, fileName, documentId };
+    const {
+      tripId, checklistItem: {id}, postSubmission, checkId, requestId, history
+    } = this.props;
+    const formData = { tripId, file };
+    file && postSubmission(
+      {formData, checklistItemId: id}, checkId, requestId);
+  };
+
 
   handleTextAreaSubmit = () => {
     const valid = this.validateInputFields();
@@ -215,15 +230,26 @@ class SubmissionItem extends Component {
     );
   }
 
+  setUploadedFile = (fileName, url, updatedAt) => {
+    const { fileName: prevFileName } = this.state;
+    if (!prevFileName && (prevFileName !== fileName)) this.setState({ fileName, 
+      type: 'success', 
+      uploadedFileUrl: url,
+      uploadedFileDate: updatedAt 
+    });
+  }
+
   renderField = () => {
     const {
       type, submissionText, validTicket, fileName,
       departureTime, arrivalTime, returnTime, ticketNumber, uploadedFileName,
       returnDepartureTime, returnTicketNumber, airline, returnAirline,
+      uploadedFileDate, hasSelectedDocument, uploadedFileUrl
     } = this.state;
     const {
       checklistItem, fileUploadData, itemsToCheck, tripType, checkId, tripId,
-      postSuccess, request
+      postSuccess, request, handleUserDocumentUpload, closeModal, shouldOpen,
+      modalType, userReadinessDocument
     } = this.props;
     const {requiresFiles, name, submissions: [item]} = checklistItem;
     let utilsType = requiresFiles ? 'uploadField' : 'textarea';
@@ -237,6 +263,7 @@ class SubmissionItem extends Component {
           checklistItem={checklistItem} utilsType={utilsType} checkId={checkId}
           handleUpload={this.handleUpload} fileUploadData={fileUploadData}
           request={request} trip={trip || {}}
+          setUploadedFile={this.setUploadedFile}
           setTextArea={this.setTextArea} postSuccess={postSuccess}
           setTicketFields={this.setTicketFields} arrivalTime={arrivalTime}
           uploadedFileName={uploadedFileName || fileName} uploadProcess={type}
@@ -247,6 +274,12 @@ class SubmissionItem extends Component {
           returnDepartureTime={returnDepartureTime} returnTime={returnTime}
           ticketNumber={ticketNumber} returnTicketNumber={returnTicketNumber}
           airline={airline} returnAirline={returnAirline} validTicket={validTicket}
+          uploadedFileDate={uploadedFileDate} closeModal={closeModal} 
+          handleUserDocumentUpload={handleUserDocumentUpload} shouldOpen={shouldOpen}
+          userReadinessDocument={userReadinessDocument} modalType={modalType}
+          hasSelectedDocument={hasSelectedDocument}
+          uploadedFileUrl={uploadedFileUrl}
+          submitAttachedDocument={this.submitAttachedDocument}
         />
         {type === 'error' && this.renderUploadError()}
         {type === 'uploading' && this.renderIsUploading()}
@@ -263,13 +296,7 @@ class SubmissionItem extends Component {
     return (
       <div className="travelSubmission--item">
         <span className="travelSubmission--item__name">{name}</span>
-        {resources.length > 0 && resources.map(resource => (
-          <a
-            key={id} href={resource.link} target="blank"
-            className="travelSubmission--item__resource-link">
-            [{resource.label}]
-          </a>
-        ))}
+        { name==='Travel Ticket Details' && <span className="travelSubmission--item__name-two">Upload Ticket</span>}
         {this.renderField()}
       </div>
     );
@@ -284,10 +311,15 @@ SubmissionItem.propTypes = {
   checklistItem: PropTypes.object.isRequired, handleFileUpload: PropTypes.func.isRequired,
   postSubmission: PropTypes.func.isRequired, fileUploadData: PropTypes.object.isRequired,
   tripId: PropTypes.string.isRequired, itemsToCheck: PropTypes.array.isRequired,
-  request: PropTypes.object.isRequired,
+  request: PropTypes.object.isRequired, modalType: PropTypes.string,
   postSuccess: PropTypes.array.isRequired, isUploadingStage2: PropTypes.array.isRequired,
   requestId: PropTypes.string.isRequired, tripType: PropTypes.string.isRequired,
-  checkId: PropTypes.string.isRequired
+  checkId: PropTypes.string.isRequired, handleUserDocumentUpload: PropTypes.func.isRequired,
+  closeModal: PropTypes.func, shouldOpen: PropTypes.bool, userReadinessDocument: PropTypes.object,
+  history: PropTypes.object.isRequired
+};
+SubmissionItem.defaultProps = {
+  closeModal: () => {}, userReadinessDocument: {}, shouldOpen: false, modalType: ''
 };
 
 export default SubmissionItem;

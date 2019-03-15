@@ -1,0 +1,505 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RequestDetails /> should render properly 1`] = `
+<div
+  className="width-91"
+>
+  <div
+    className="request-details__tab"
+  >
+    <div
+      className="request__tab"
+    >
+      <div
+        className="request__tab-card  complete"
+        key="1"
+      >
+        <div
+          className="mark"
+        >
+          <img
+            alt=""
+            src="mark.svg"
+          />
+        </div>
+        <div
+          className="tab-logo"
+        >
+          <svg
+            className="request__tab-icon"
+            height="14"
+            viewBox="0 0 13 14"
+            width="13"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              fill="none"
+              fillRule="evenodd"
+              id="Web-App"
+            >
+              <g
+                fill="#10A36D"
+                fillRule="nonzero"
+                id="Create-Request->-1-Personal-Info"
+                transform="translate(-392 -224)"
+              >
+                <g
+                  id="top"
+                  transform="translate(300 185)"
+                >
+                  <g
+                    id="Group-3"
+                  >
+                    <g
+                      id="Icon"
+                      transform="translate(92 39)"
+                    >
+                      <path
+                        d="M13,14 C13,10.3090909 10.9473684,7.21212121 8.125,6.36363636 C9.19407895,5.76969697 9.92105263,4.70909091 9.92105263,3.39393939 C9.92105263,1.52727273 8.38157895,0 6.5,0 C4.61842105,0 3.07894737,1.52727273 3.07894737,3.39393939 C3.07894737,4.66666667 3.80592105,5.76969697 4.875,6.36363636 C2.05263158,7.25454545 0,10.3090909 0,14 L13,14 Z"
+                        id="Path"
+                      />
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div
+          className="tab-title"
+        >
+          Manager Approval
+        </div>
+        <div
+          className="foot-text"
+        >
+          Approved by Hope Uwa
+        </div>
+        <div
+          className="foot-text"
+        >
+          Completed on 12/03/19
+        </div>
+      </div>
+      <div
+        className="request__tab-card  complete"
+        key="2"
+      >
+        <div
+          className="mark"
+        >
+          <img
+            alt=""
+            src="mark.svg"
+          />
+        </div>
+        <div
+          className="tab-logo"
+        >
+          <svg
+            height="16px"
+            viewBox="0 0 20 16"
+            width="20px"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              fill="none"
+              fillRule="evenodd"
+              id="Web-App"
+              stroke="none"
+              strokeWidth="1"
+            >
+              <g
+                fill="#10A36D"
+                fillRule="nonzero"
+                id="Create-Request->-4-Checklist-Copy-3"
+                transform="translate(-654.000000, -220.000000)"
+              >
+                <g
+                  id="top"
+                  transform="translate(300.000000, 185.000000)"
+                >
+                  <g
+                    id="Group-3-Copy"
+                    transform="translate(264.666667, 0.000000)"
+                  >
+                    <g
+                      id="Group-6"
+                      transform="translate(76.000000, 20.000000)"
+                    >
+                      <g
+                        id="budget-Icon"
+                        transform="translate(13.666667, 15.000000)"
+                      >
+                        <path
+                          d="M13.0625,8 C13.0625,6.64615385 14.13125,5.53846154 15.4375,5.53846154 L17.21875,5.53846154 L17.21875,2.7 C17.21875,1.20883118 16.0099188,-2.73923269e-16 14.51875,0 L2.7,0 C1.20883118,2.73923269e-16 -1.07079393e-15,1.20883118 -8.8817842e-16,2.7 L0,13.3 C1.82615513e-16,14.7911688 1.20883118,16 2.7,16 L14.51875,16 C16.0099188,16 17.21875,14.7911688 17.21875,13.3 L17.21875,10.4615385 L15.4375,10.4615385 C14.13125,10.4615385 13.0625,9.35384615 13.0625,8 Z M2.375,1.23076923 L14.84375,1.23076923 C15.1703125,1.23076923 15.4375,1.50769231 15.4375,1.84615385 C15.4375,2.18461538 15.1703125,2.46153846 14.84375,2.46153846 L2.375,2.46153846 C2.0484375,2.46153846 1.78125,2.18461538 1.78125,1.84615385 C1.78125,1.50769231 2.0484375,1.23076923 2.375,1.23076923 Z M9.5,7.38461538 C10.153125,7.38461538 10.6875,7.93846154 10.6875,8.61538462 L10.6875,9.84615385 C10.6875,10.5230769 10.153125,11.0769231 9.5,11.0769231 L9.203125,11.0769231 L9.203125,11.6923077 C9.203125,12.0307692 8.9359375,12.3076923 8.609375,12.3076923 C8.2828125,12.3076923 8.015625,12.0307692 8.015625,11.6923077 L8.015625,11.0769231 L7.71875,11.0769231 C7.065625,11.0769231 6.53125,10.5230769 6.53125,9.84615385 C6.53125,9.50769231 6.7984375,9.23076923 7.125,9.23076923 C7.4515625,9.23076923 7.71875,9.50769231 7.71875,9.84615385 L9.5,9.84615385 L9.5,8.61538462 L7.71875,8.61538462 C7.065625,8.61538462 6.53125,8.06153846 6.53125,7.38461538 L6.53125,6.15384615 C6.53125,5.47692308 7.065625,4.92307692 7.71875,4.92307692 L8.015625,4.92307692 L8.015625,4.30769231 C8.015625,3.96923077 8.2828125,3.69230769 8.609375,3.69230769 C8.9359375,3.69230769 9.203125,3.96923077 9.203125,4.30769231 L9.203125,4.92307692 L9.5,4.92307692 C10.153125,4.92307692 10.6875,5.47692308 10.6875,6.15384615 C10.6875,6.49230769 10.4203125,6.76923077 10.09375,6.76923077 C9.7671875,6.76923077 9.5,6.49230769 9.5,6.15384615 L7.71875,6.15384615 L7.71875,7.38461538 L9.5,7.38461538 Z M14.84375,14.7692308 L2.375,14.7692308 C2.0484375,14.7692308 1.78125,14.4923077 1.78125,14.1538462 C1.78125,13.8153846 2.0484375,13.5384615 2.375,13.5384615 L14.84375,13.5384615 C15.1703125,13.5384615 15.4375,13.8153846 15.4375,14.1538462 C15.4375,14.4923077 15.1703125,14.7692308 14.84375,14.7692308 Z M15.4375,6.76923077 L18.4,6.76923077 C18.7313708,6.76923077 19,7.03785992 19,7.36923077 L19,8.63076923 C19,8.96214008 18.7313708,9.23076923 18.4,9.23076923 L15.4375,9.23076923 C14.784375,9.23076923 14.25,8.67692308 14.25,8 C14.25,7.32307692 14.784375,6.76923077 15.4375,6.76923077 Z"
+                          id="Shape"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div
+          className="tab-title"
+        >
+          Budget Check
+        </div>
+        <div
+          className="foot-text"
+        >
+          Approved by null
+        </div>
+        <div
+          className="foot-text"
+        >
+          Completed on Invalid date
+        </div>
+      </div>
+      <div
+        className="request__tab-card current incomplete"
+        key="3"
+      >
+        <div
+          className="mark"
+        >
+          <img
+            alt=""
+            src="mark.svg"
+          />
+        </div>
+        <div
+          className="tab-logo"
+        >
+          <svg
+            className="request__tab-icon"
+            height="21"
+            viewBox="0 0 24 21"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              fill="none"
+              fillRule="evenodd"
+              id="Web-App"
+              opacity="0.405"
+            >
+              <g
+                fill="#3359DB"
+                id="Create-Request->-4-Checklist-Copy"
+                transform="translate(-1180 -217)"
+              >
+                <g
+                  id="top"
+                  transform="translate(300 185)"
+                >
+                  <g
+                    id="Group-3-Copy-3"
+                    transform="translate(794)"
+                  >
+                    <g
+                      id="Group-7"
+                      transform="translate(76 20)"
+                    >
+                      <g
+                        id="Group-Copy-2"
+                        transform="translate(10.446 12.054)"
+                      >
+                        <path
+                          d="M15.7056362,12.796875 C15.7056362,12.179586 15.1958705,11.6572646 14.5404576,11.6572646 L10.8992746,11.6572646 C10.6808036,11.6572646 10.5351562,11.4910714 10.5594308,11.2773945 C10.8021763,9.73417208 11.1420201,9.18810877 11.2876674,7.57366071 C11.4333147,6.03043831 9.2000558,5.74553571 8.86021205,7.19379058 C8.25334821,9.87662338 5.99581473,11.6572646 5.24330357,12.2033279 C5.09765625,12.3220373 5.00055804,12.4882305 5.00055804,12.6781656 L5.00055804,19.088474 C5.00055804,19.3258929 5.14620536,19.5158279 5.36467634,19.6107955 C6.16573661,19.9431818 7.08816964,20.6791802 9.78264509,20.6791802 C11.4333147,20.6791802 14.0064174,20.6791802 14.0064174,20.6791802 C14.6375558,20.6791802 15.171596,20.1806006 15.171596,19.5395698 C15.171596,18.9222808 14.6618304,18.3999594 14.0064174,18.3999594 L14.1520647,18.3999594 C14.734654,18.3999594 15.2686942,17.9963474 15.3415179,17.4265422 C15.4386161,16.7380276 14.8803013,16.1444805 14.2006138,16.1444805 L14.3462612,16.1444805 C14.9288504,16.1444805 15.4628906,15.7408685 15.5357143,15.1710633 C15.6328125,14.4825487 15.0744978,13.8890016 14.3948103,13.8890016 L14.5647321,13.8890016 C15.1958705,13.9127435 15.7056362,13.414164 15.7056362,12.796875 Z"
+                          id="Path"
+                        />
+                        <path
+                          d="M3.54408482,12.3457792 L0.703962054,12.3457792 C0.388392857,12.3457792 0.121372768,12.6069399 0.121372768,12.9155844 L0.121372768,18.8747971 C0.121372768,19.1834416 0.388392857,19.4446023 0.703962054,19.4446023 L3.54408482,19.4446023 C3.85965402,19.4446023 4.12667411,19.1834416 4.12667411,18.8747971 L4.12667411,12.9393263 C4.12667411,12.6069399 3.85965402,12.3457792 3.54408482,12.3457792 Z M2.13616071,18.1862825 C1.79631696,18.1862825 1.50502232,17.9251218 1.50502232,17.5689935 C1.50502232,17.2128653 1.77204241,16.9517045 2.13616071,16.9517045 C2.47600446,16.9517045 2.76729911,17.2128653 2.76729911,17.5689935 C2.76729911,17.9251218 2.47600446,18.1862825 2.13616071,18.1862825 Z"
+                          fillRule="nonzero"
+                          id="Shape"
+                        />
+                        <path
+                          d="M18.4486607,0.213676948 C15.8270089,0.213676948 13.7151228,2.30296266 13.7151228,4.84334416 C13.7151228,5.55560065 13.8850446,6.22037338 14.1763393,6.83766234 L13.3267299,9.11688312 C13.2053571,9.4255276 13.4966518,9.73417208 13.812221,9.66294643 L16.5795201,9.11688312 C17.1621094,9.35430195 17.7932478,9.49675325 18.4486607,9.49675325 C21.0703125,9.49675325 23.1821987,7.40746753 23.1821987,4.86708604 C23.1821987,2.27922078 21.0460379,0.213676948 18.4486607,0.213676948 Z M20.5119978,4.05986201 L18.2544643,6.48153409 C18.0359933,6.69521104 17.6961496,6.71895292 17.4776786,6.50527597 L16.2639509,5.31818182 C16.0454799,5.10450487 16.0454799,4.77211851 16.2639509,4.55844156 C16.4824219,4.34476461 16.8222656,4.34476461 17.0407366,4.55844156 L17.8417969,5.3419237 L19.7109375,3.32386364 C19.9051339,3.11018669 20.2449777,3.08644481 20.4877232,3.27637987 C20.6819196,3.49005682 20.7061942,3.84618506 20.5119978,4.05986201 Z"
+                          fillRule="nonzero"
+                          id="Shape"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div
+          className="tab-title"
+        >
+          Travel Checklist
+        </div>
+        <div
+          className="foot-text"
+        />
+        <div
+          className="foot-text"
+        >
+          You are currently here
+        </div>
+      </div>
+      <div
+        className="request__tab-card  incomplete"
+        key="4"
+      >
+        <div
+          className="mark"
+        >
+          <img
+            alt=""
+            src="mark.svg"
+          />
+        </div>
+        <div
+          className="tab-logo"
+        >
+          <svg
+            height="45px"
+            version="1.1"
+            viewBox="0 0 45 45"
+            width="45px"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              fill="none"
+              fillRule="evenodd"
+              id="Web-App"
+              stroke="none"
+              strokeWidth="1"
+            >
+              <g
+                fillRule="nonzero"
+                id="Create-Request->-4-Checklist-Copy-4"
+                transform="translate(-1171.000000, -205.000000)"
+              >
+                <g
+                  id="top"
+                  transform="translate(300.000000, 185.000000)"
+                >
+                  <g
+                    id="Group-9"
+                    transform="translate(871.000000, 20.000000)"
+                  >
+                    <g
+                      id="verified-Icon"
+                    >
+                      <path
+                        d="M23.4214556,12 C18.1164156,12 13.8429111,16.1964071 13.8429111,21.2988566 C13.8429111,22.7294499 14.1867563,24.0646703 14.7762052,25.3045179 L13.0569793,29.8824165 C12.8113756,30.5023403 13.4008245,31.1222641 14.0393941,30.9792047 L19.6391585,29.8824165 C20.8180563,30.359281 22.0951956,30.6453996 23.4214556,30.6453996 C28.7264956,30.6453996 33,26.4489926 33,21.346543 C33,16.1487206 28.6773748,12 23.4214556,12 Z M27.7345571,19.8211261 L23.2651551,24.6554019 C22.8326323,25.0819556 22.1598191,25.1293505 21.7272964,24.7027967 L19.3243921,22.3330537 C18.8918693,21.9064999 18.8918693,21.2429719 19.3243921,20.8164181 C19.7569149,20.3898644 20.4297281,20.3898644 20.8622508,20.8164181 L22.4481677,22.3804486 L26.1486403,18.3518854 C26.5331049,17.9253316 27.2059181,17.8779368 27.686499,18.2570956 C28.0709637,18.6836494 28.1190218,19.3945723 27.7345571,19.8211261 Z"
+                        fill="#3359DB"
+                        id="Shape"
+                      />
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div
+          className="tab-title"
+        >
+          Travel Verification
+        </div>
+        <div
+          className="foot-text"
+        />
+        <div
+          className="foot-text"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="travelCheck-list"
+  >
+    <div
+      className="travelCheckList__row"
+    >
+      <div
+        className="travelCheckList__col-7"
+      >
+        <div
+          className="travelCheckList--card"
+        >
+          <div
+            className="travelCheckList--card__head"
+          >
+            Travel CheckList Required For This Trip
+          </div>
+          <div
+            className="travelCheckList"
+          >
+            <div
+              className="travelCheckList__destination"
+              key="0"
+            >
+              <div
+                className="travelSubmission--item"
+              >
+                <span
+                  className="travelSubmission--item__name"
+                >
+                  visa
+                </span>
+                <div
+                  className="travelSubmission--input__upload-field__"
+                >
+                  <div
+                    className="travelSubmission--input__input-field__"
+                  >
+                    <img
+                      alt="document"
+                      className="travelSubmission--input__input-field__image"
+                      src="document-rect.png"
+                    />
+                    <div
+                      className="travelSubmission--input__btn--"
+                      role="presentation"
+                    >
+                      <div
+                        className="travelSubmission--input__btn--uploadedFileName"
+                        id="file-upload"
+                        role="presentation"
+                      >
+                        Passport.jpeg
+                      </div>
+                      <div
+                        className="travelSubmission--input__btn--uploadedFileDate"
+                      >
+                        Uploaded
+                         
+                        13-03-19
+                      </div>
+                      <div>
+                        <a
+                          href="http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg"
+                          target="_blank"
+                        >
+                          <img
+                            alt="upload_icon"
+                            className="travelSubmission--input__image"
+                            src="download_file.svg"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                    <input
+                      className="uploadedFile"
+                      disabled=""
+                      name="file"
+                      onChange={[Function]}
+                      type="file"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="travelCheckList__destination"
+              key="1"
+            >
+              0
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="travelCheckList__col-5"
+      >
+        <div
+          className="travelCheckList--card"
+        >
+          <div
+            className="travelCheckList--card__head"
+          >
+            Your Travel Readiness
+          </div>
+          <div
+            className="progressBar"
+          >
+            <div
+              className="progressBar__text"
+            >
+              <div
+                className="progressBar__text-head"
+              >
+                You are
+              </div>
+              <div
+                className="progressBar__text-foot"
+              >
+                Travel Ready
+              </div>
+            </div>
+            <svg
+              height={169}
+              viewBox="0 0 169 169"
+              width={169}
+            >
+              <circle
+                className="circle-background"
+                cx={84.5}
+                cy={84.5}
+                r={79.5}
+                strokeWidth="10px"
+              />
+              <circle
+                className="circle-progress"
+                cx={84.5}
+                cy={84.5}
+                r={79.5}
+                stroke="#10A36D"
+                strokeWidth="10px"
+                style={
+                  Object {
+                    "strokeDasharray": 499.5132319207771,
+                    "strokeDashoffset": 0,
+                  }
+                }
+                transform="rotate(-90 84.5 84.5)"
+              />
+              <text
+                className="circle-text"
+                dy=".3em"
+                textAnchor="middle"
+                x="50%"
+                y="50%"
+              >
+                100%
+              </text>
+            </svg>
+          </div>
+          <div
+            className="progressBar__message"
+          >
+            <p>
+              Travel Team will review your document and advise accordingly
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="travelCheckList__row"
+    >
+      <div
+        className="travelSubmission--submit-area__button"
+      >
+        <button
+          className="bg-btn bg-btn--inactive"
+          id="submit-button"
+          type="button"
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

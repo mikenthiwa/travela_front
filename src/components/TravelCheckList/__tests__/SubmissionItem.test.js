@@ -1,10 +1,11 @@
 import React from 'react';
-import SubmissionItem from '../SubmissionItem';
+import SubmissionItem from '../Submissions/SubmissionItem';
 import {
   checklistSubmission, fileUploadStore,
   itemsToCheck, requestId,
   LagosSubmission,
 } from '../../../mockData/checklistSubmissionMockData';
+
 import tripRequest from '../../../mockData/checklistSubmissionMocks';
 
 
@@ -32,7 +33,11 @@ describe('SubmissionItem Component', () => {
     },
     tripId: 'NumC5-pK7G',
     request: {...tripRequest},
-    trip: tripRequest.trips[0]
+    trip: tripRequest.trips[0],
+    handleUserDocumentUpload: jest.fn(),
+    history: {
+      push: jest.fn()
+    }
   };
 
   const setup = (props) => mount(<SubmissionItem {...props} />);
@@ -40,13 +45,12 @@ describe('SubmissionItem Component', () => {
   it('should render the component', () => {
     const wrapper = setup(props);
     const submissionItem = wrapper.find('.travelSubmission--item');
-    const submissionItemLink = wrapper
-      .find('.travelSubmission--item__resource-link');
+    const submissionItemName = wrapper
+      .find('.travelSubmission--item__name');
     const textAreaField = wrapper.find('.travelSubmission--item__textarea');
 
-
     expect(submissionItem.length).toBe(1);
-    expect(submissionItemLink.length).toBe(1);
+    expect(submissionItemName.length).toBe(1);
     expect(textAreaField.length).toBe(1);
   });
 
@@ -265,8 +269,7 @@ describe('SubmissionItem Component', () => {
     });
 
     const uploadedField = wrapper.find('.uploadedFile');
-    const uploadedFileName = wrapper.find('.uploadedFileName');
-
+    const uploadedFileName = wrapper.find('.travelSubmission--input__btn--uploadedFileName');
     expect(uploadedField.length).toBe(1);
     expect(uploadedFileName.text()).toBe('test.png');
   });
@@ -324,5 +327,11 @@ describe('SubmissionItem Component', () => {
     expect(wrapper.state().type).toBe('success');
     expect(wrapper.state().info).toBe('Done');
     expect(wrapper.state().uploadedFileName).toBe('');
+  });
+
+  it('should post submission when submitAttachDocument is called', () => {
+    const wrapper = setup(props);
+    wrapper.instance().submitAttachedDocument('xyz', 'filename', 1);
+    expect(wrapper.instance().props.postSubmission).toBeCalled;
   });
 });

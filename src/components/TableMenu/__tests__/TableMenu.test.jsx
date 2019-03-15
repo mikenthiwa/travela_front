@@ -81,8 +81,8 @@ describe('<TableMenu />', () => {
     wrapper = shallow(<TableMenu {...props} />);
 
     expect(wrapper.find('ul').length).toBe(10);
-    expect(wrapper.find('li').length).toBe(31);
-    expect(wrapper.find('img').length).toBe(31);
+    expect(wrapper.find('li').length).toBe(30);
+    expect(wrapper.find('img').length).toBe(30);
   });
 
   it('should not render the ellipses on verifications table', () => {
@@ -161,39 +161,6 @@ describe('<TableMenu />', () => {
     const toggleButton = wrapper.find('#toggleButton2');
     toggleButton.at(0).simulate('click');
     expect(spy.calledOnce).toEqual(false);
-  });
-
-  it('should call `showTravelChecklist` on click', () => {
-    let newProps = {
-      ...props,
-      requestStatus: 'Open',
-      type: 'requests'
-    };
-    wrapper = shallow(<TableMenu {...newProps} />);
-
-    const { showTravelChecklist, request } = props;
-    const travelChecklistBtn = wrapper.find('#travelChecklistBtn');
-    travelChecklistBtn.simulate('click');
-    expect(showTravelChecklist).toHaveBeenCalled();
-    expect(wrapper.find('#travelChecklistBtn').length).toBe(1);
-  });
-
-  it('should call `fetchTravelChecklist` on click', () => {
-    let newProps = {
-      ...props,
-      uploadTripSubmissions: jest.fn(),
-      toggleMenu: jest.fn(),
-      fetchTravelChecklist: jest.fn(),
-      requestStatus: 'Approved',
-      type: 'requests'
-    };
-    wrapper = shallow(<TableMenu {...newProps} />);
-
-    const { showTravelChecklist, request } = props;
-    const travelChecklistSubmission = wrapper.find('#checklistSubmission');
-    travelChecklistSubmission.simulate('click');
-    expect(showTravelChecklist).toHaveBeenCalled();
-    expect(wrapper.find('#checklistSubmission').length).toBe(1);
   });
 
   it('should call `showDeleteModal` on click', () => {

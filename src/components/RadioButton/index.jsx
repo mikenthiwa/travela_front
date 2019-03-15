@@ -27,7 +27,7 @@ class RadioButton extends Component {
 }
 
 RadioButton.propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   value:  PropTypes.string,
   id:  PropTypes.string,
   defaultChecked: PropTypes.bool,
