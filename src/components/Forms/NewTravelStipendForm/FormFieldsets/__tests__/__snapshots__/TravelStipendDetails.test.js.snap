@@ -30,15 +30,23 @@ exports[`<TravelStipendFieldset /> should match snapshot 1`] = `
         >
           <Input
             autoComplete="off"
-            className="request_dropdown stipend-amount"
+            className="request_dropdown stipend-amount "
             id="your-manager"
             label="Enter Amount in Dollars ($)"
             labelNote=""
+            min="1"
             name="stipend"
-            onChange={null}
+            onChange={[Function]}
+            onInvalid={[Function]}
+            placeholder="1000"
             size=""
-            type="text"
+            type="number"
           />
+          <span
+            className="hide-error"
+          >
+            Amount should be a positive integer
+          </span>
         </div>
       </div>
     </div>

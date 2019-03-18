@@ -299,23 +299,6 @@ class TravelDetailsItem extends Component {
     );
   };
 
-  reasonsWarningColor = (length, max) =>{
-    const charLeft = max - length;
-    switch(true){
-    case (charLeft===0):
-      return { 
-        color:'red', 
-        charLeft: `You have reached a maximum of ${140} Characters`, 
-        top: '70px'};
-    case (charLeft < 11):
-      return {color:'red', charLeft };
-    case (charLeft < 20): 
-      return {color:'#E67373', charLeft };
-    default:
-      return {color: '#3359db', charLeft};
-    }
-  }
-
   renderOtherTravelReasons =()=>{
     const{ itemId,
       selection,
@@ -324,9 +307,9 @@ class TravelDetailsItem extends Component {
       handleReason,
     } = this.props;
     const reason = values[`reasons-${itemId}`];
-    const characters = values[`otherReasons-${itemId}`] || '';
-    let charLength = characters ? characters.trim().length : '';  
-    let reasonsLimit = this.reasonsWarningColor(charLength, 140);
+    const characters = values[`otherReasons-${itemId}`];
+    let charLength = characters ? characters.trim().length : '';
+    let reasonsLimit =  reasonsWarningColor(charLength, 140);
 
     return (
       <div className="other__reason" onChange={typedReason => handleReason(typedReason.target.value, itemId, 'other')}>
@@ -420,6 +403,20 @@ class TravelDetailsItem extends Component {
     );
   }
 }
+
+export const reasonsWarningColor = (length, max) =>{
+  const charLeft = max - length;
+  switch(true){
+  case (charLeft===0):
+    return { color:'red', charLeft: `You have reached a maximum of ${140} Characters`};
+  case (charLeft < 11):
+    return {color:'red', charLeft };
+  case (charLeft < 20):
+    return {color:'#E67373', charLeft };
+  default:
+    return {color: '#3359db', charLeft};
+  }
+};
 
 export default TravelDetailsItem;
 

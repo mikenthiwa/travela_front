@@ -11,7 +11,7 @@ exports[`TEST ConnectedVerificationDetails COMPONENT TEST COMPONENT WITH AND WIT
       className="header text--black"
     >
       <a
-        href="/requests/my-verifications"
+        href="/requests/my-approvals"
         onClick={[Function]}
       >
         <img
@@ -70,7 +70,7 @@ exports[`TEST ConnectedVerificationDetails COMPONENT TEST COMPONENT WITH AND WIT
           >
             <div
               className="attachment-item"
-              key="Yellow Fever Certificate"
+              key="PUk9KCG-7"
             >
               <p
                 className="attachment-header"
@@ -123,7 +123,7 @@ exports[`TEST ConnectedVerificationDetails COMPONENT TEST COMPONENT WITH AND WIT
           </div>
           <div
             className="checklist-items"
-            key="Checklist Item"
+            key="PUk9445uui"
           >
             <div
               className="checklist-item-name"
@@ -153,67 +153,72 @@ exports[`TEST ConnectedVerificationDetails COMPONENT TEST COMPONENT WITH AND WIT
           </p>
           <div
             className="flight-detail clearfix"
-            key="Kampala, Uganda"
+            key="112233445"
           >
-            <div
-              className="destination"
-            >
-              <span>
-                Destination: 
-              </span>
-              <span>
-                <strong>
-                  Kampala, Uganda
-                </strong>
-              </span>
-            </div>
-            <div
-              className="detail-left"
-            >
-              <p>
-                Departure Time
-              </p>
-              <p>
-                <strong>
-                  11/3/2019, 15:00
-                </strong>
-              </p>
-            </div>
-            <div
-              className="detail-right"
-            >
-              <p>
-                Arrival Time
-              </p>
-              <p>
-                <strong>
-                  12/3/2019, 0:00
-                </strong>
-              </p>
-            </div>
-            <div
-              className="detail-left"
-              data-test="ticketNumber"
-            >
-              <p>
-                Ticket Number
-              </p>
-              <p>
-                <strong>
-                  112233445
-                </strong>
-              </p>
-            </div>
-            <div
-              className="detail-right"
-            >
-              <p>
-                <strong
-                  key="Nai Air"
-                >
-                  Nai Air
-                </strong>
-              </p>
+            <div>
+              <div
+                className="destination"
+              >
+                <span>
+                  Destination: 
+                </span>
+                <span>
+                  <strong>
+                    Kampala, Uganda
+                  </strong>
+                </span>
+              </div>
+              <div
+                className="detail-left"
+              >
+                <p>
+                  Departure Time
+                </p>
+                <p>
+                  <strong>
+                    11/3/2019, 15:00
+                  </strong>
+                </p>
+              </div>
+              <div
+                className="detail-right"
+              >
+                <p>
+                  Arrival Time
+                </p>
+                <p>
+                  <strong>
+                    12/3/2019, 0:00
+                  </strong>
+                </p>
+              </div>
+              <div
+                className="detail-left"
+                data-test="ticketNumber"
+              >
+                <p>
+                  Ticket Number
+                </p>
+                <p>
+                  <strong>
+                    112233445
+                  </strong>
+                </p>
+              </div>
+              <div
+                className="detail-right"
+              >
+                <p>
+                  Airline
+                </p>
+                <p>
+                  <strong
+                    key="Nai Air"
+                  >
+                    Nai Air
+                  </strong>
+                </p>
+              </div>
             </div>
           </div>
         </div>

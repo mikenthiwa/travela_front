@@ -77,7 +77,7 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
                     placeholder="MM/DD/YYYY"
                     readOnly={false}
                     type="text"
-                    value="02/28/2019"
+                    value="03/14/2019"
                   />
                 </div>
               </div>
@@ -160,7 +160,7 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
                     placeholder="MM/DD/YYYY"
                     readOnly={false}
                     type="text"
-                    value="02/28/2019"
+                    value="03/14/2019"
                   />
                 </div>
               </div>
@@ -200,6 +200,11 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
           >
             <p>
               Drag file here or choose from computer
+            </p>
+            <p
+              className="maximum-file-size"
+            >
+              Maximum file size - 20MB
             </p>
           </div>
           <input

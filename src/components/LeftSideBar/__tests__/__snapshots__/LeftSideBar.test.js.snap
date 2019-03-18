@@ -54,6 +54,14 @@ exports[`<LeftSideBar /> renders correctly 1`] = `
                   "text": "My Approvals",
                 },
                 Object {
+                  "link_to": "/requests/budgets/",
+                  "onlyVisibleTo": Array [
+                    "Super Administrator",
+                    "Budget Checker",
+                  ],
+                  "text": "Budget Checks",
+                },
+                Object {
                   "link_to": "/requests/my-verifications",
                   "onlyVisibleTo": Array [
                     "Travel Administrator",
@@ -201,7 +209,7 @@ exports[`<LeftSideBar /> renders correctly 1`] = `
                 },
                 Object {
                   "exact": true,
-                  "link_to": "/settings/travelStipends",
+                  "link_to": "/settings/travel-stipends",
                   "onlyVisibleTo": Array [
                     "Travel Administrator",
                     "Super Administrator",

@@ -59,6 +59,66 @@ describe('<AddVisaForm />', () => {
     });
   });
 
+  it('Check for hasBlankFields when different visa types are selected',  () => {
+    wrapper.setProps({
+      modalType: 'add visa'
+    });
+
+    const expectedValues = {
+      country: 'Uganda',
+      entryType: 'Single',
+      dateOfIssue: '03/01/2018',
+      expiryDate: '10/27/2019',
+      otherVisaTypeDetails: '',
+      visaType: 'Other',
+      imageName: 'image.jpg'
+    };
+    wrapper.find('#select-file').simulate('change', event);
+   
+    wrapper.find('input[name="country"]').simulate('change', {
+      target: {
+        value: 'Uganda'
+      }});
+    
+    wrapper.find('.select-dropdown').at(0).simulate('click');
+    const activeEntryType = wrapper.find('.select-menu--active');
+    activeEntryType.find('#choice').at(1).simulate('click');
+   
+    wrapper.find('input[name="dateOfIssue"]').simulate('change', {target: {value: '03/01/2018'}});
+    wrapper.find('input[name="expiryDate"]').simulate('change', {target: {value: '10/27/2019'}});
+    wrapper.find('.select-dropdown').at(1).simulate('click');
+    const activeSeletMenu = wrapper.find('.select-menu--active');
+    activeSeletMenu.find('#choice').at(5).simulate('click');
+    const { values, hasBlankFields } = wrapper.state();
+    expect(values).toMatchObject(expectedValues);
+    expect(hasBlankFields).toEqual(true);
+
+    wrapper.find('.other-visa-description').at(3).simulate('change', {target: {value: 'visa option'}});
+    wrapper.find('#select-file').simulate('change', event);
+    const { hasBlankFields: hasBlankFields2 } = wrapper.state();
+    expect(hasBlankFields2).toEqual(false);
+
+    activeSeletMenu.find('#choice').at(1).simulate('click');
+    const { hasBlankFields: hasBlankFields3 } = wrapper.state();
+    expect(hasBlankFields3).toEqual(false);
+  });
+
+  it('Renders Visa modal with button text \'Add Visa Details\'', () => {
+    expect(
+      wrapper.find('button#submit').text()).toEqual('Add Visa Details');
+  });
+  it('Renders Visa modal with modal title text \'Attach the image of your visa page\'', () => {
+    expect(
+      wrapper.find('.travel-document-select-file p').at(0).text()).toEqual(
+      'Attach the image of your visa page'
+    );
+  });
+
+  it('Renders Visa modal with modal title text \'Maximum file size - 20MB\'', () => {
+    expect(
+      wrapper.find('.maximum-file-size').text()).toEqual('Maximum file size - 20MB');
+  });
+
   it('changes state accordingly',  () => {
     moxios.stubRequest(
       process.env.REACT_APP_CLOUNDINARY_API, 

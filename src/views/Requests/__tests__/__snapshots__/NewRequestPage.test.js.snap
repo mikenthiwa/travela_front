@@ -3,27 +3,23 @@
 exports[`<Request Page> renders appropriately 1`] = `
 Array [
   <div>
-    <div
-        className="PageHeader"
+    <h1
+        className="page-header__request"
     >
-        <div>
-            <a
-                href="/requests"
-                onClick={[Function]}
-            >
-                <img
-                    alt="icon"
-                    className="header__link"
-                    src="back-icon.svg"
-                />
-            </a>
-            <span
-                className="title"
-            >
-                REQUEST #xDh20btGx
-            </span>
-        </div>
-    </div>
+        <a
+            href="/requests"
+            onClick={[Function]}
+        >
+            <img
+                alt="back icon"
+                className="header__link"
+                src="back-icon.svg"
+            />
+        </a>
+        <span>
+            REQUEST #xDh20btGx
+        </span>
+    </h1>
 </div>,
   <div
     className="width-91"
@@ -166,10 +162,14 @@ Array [
                 </div>
                 <div
                     className="foot-text"
-                />
+                >
+                    Approved by undefined
+                </div>
                 <div
                     className="foot-text"
-                />
+                >
+                    Completed on 14/03/19
+                </div>
             </div>
             <div
                 className="request__tab-card  complete"
@@ -419,27 +419,23 @@ Array [
 exports[`<Request Page> renders appropriately with null fetching request false and request approved 1`] = `
 Array [
   <div>
-    <div
-        className="PageHeader"
+    <h1
+        className="page-header__request"
     >
-        <div>
-            <a
-                href="/requests"
-                onClick={[Function]}
-            >
-                <img
-                    alt="icon"
-                    className="header__link"
-                    src="back-icon.svg"
-                />
-            </a>
-            <span
-                className="title"
-            >
-                REQUEST #xDh20btGx
-            </span>
-        </div>
-    </div>
+        <a
+            href="/requests"
+            onClick={[Function]}
+        >
+            <img
+                alt="back icon"
+                className="header__link"
+                src="back-icon.svg"
+            />
+        </a>
+        <span>
+            REQUEST #xDh20btGx
+        </span>
+    </h1>
 </div>,
   <div
     className="width-91"
@@ -884,27 +880,23 @@ Array [
 exports[`<Request Page> renders appropriately with null fetching request false and request approved for multicity 1`] = `
 Array [
   <div>
-    <div
-        className="PageHeader"
+    <h1
+        className="page-header__request"
     >
-        <div>
-            <a
-                href="/requests"
-                onClick={[Function]}
-            >
-                <img
-                    alt="icon"
-                    className="header__link"
-                    src="back-icon.svg"
-                />
-            </a>
-            <span
-                className="title"
-            >
-                REQUEST #xDh20btGx
-            </span>
-        </div>
-    </div>
+        <a
+            href="/requests"
+            onClick={[Function]}
+        >
+            <img
+                alt="back icon"
+                className="header__link"
+                src="back-icon.svg"
+            />
+        </a>
+        <span>
+            REQUEST #xDh20btGx
+        </span>
+    </h1>
 </div>,
   <div
     className="width-91"
@@ -1347,27 +1339,32 @@ Array [
 `;
 
 exports[`<Request Page> renders appropriately with null fetching request true and request approved 1`] = `
-<div>
+Array [
+  <div>
+    <h1
+        className="page-header__request"
+    >
+        <a
+            href="/requests"
+            onClick={[Function]}
+        >
+            <img
+                alt="back icon"
+                className="header__link"
+                src="back-icon.svg"
+            />
+        </a>
+        <span>
+            REQUEST #xDh20btGx
+        </span>
+    </h1>
+</div>,
   <div
-    className="PageHeader"
-  >
-    <div>
-      <a
-        href="/requests"
-        onClick={[Function]}
-      >
-        <img
-          alt="icon"
-          className="header__link"
-          src="back-icon.svg"
-        />
-      </a>
-      <span
-        className="title"
-      >
-        REQUEST #xDh20btGx
-      </span>
-    </div>
-  </div>
-</div>
+    className="preloader"
+>
+    <div
+        className="spinner "
+    />
+</div>,
+]
 `;

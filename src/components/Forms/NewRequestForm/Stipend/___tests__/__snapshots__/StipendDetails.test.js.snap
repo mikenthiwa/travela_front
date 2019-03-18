@@ -2,7 +2,7 @@
 
 exports[`<StipendDetails /> renders without crashing 1`] = `
 <div
-  className="false stipend-container-block "
+  className="false stipend-container-block"
 >
   <div
     className="stipend-row header-tile"
@@ -27,7 +27,7 @@ exports[`<StipendDetails /> renders without crashing 1`] = `
     <div
       className="item"
     >
-      Nairobi[NBO]
+      Nairobi(NBO)
     </div>
     <div
       className="item"
@@ -52,7 +52,7 @@ exports[`<StipendDetails /> renders without crashing 1`] = `
     <div
       className="item"
     >
-      Kampala[KLA]
+      Kampala(KLA)
     </div>
     <div
       className="item"
@@ -82,7 +82,7 @@ exports[`<StipendDetails /> renders without crashing 1`] = `
     <div
       className="item"
     >
-      N/A
+      $ N/A
     </div>
     <div
       className="item"

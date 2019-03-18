@@ -198,7 +198,7 @@ describe('<OtherDocumentForm />', () => {
       <VisaDefault {...props} />
     );
     expect(
-      wrapperWithOtherDocumentField.find('button#submit').text()).toEqual('Add Visa');
+      wrapperWithOtherDocumentField.find('button#submit').text()).toEqual('Add Visa Details');
   });
 
   it('should update the existing document', () => {
@@ -435,6 +435,24 @@ describe('<OtherDocumentForm />', () => {
     });
     wrapperWithOtherDocumentField.instance().handleUpload(event);
     expect(wrapperWithOtherDocumentField.instance().state.hasBlankFields).toBe(false);
+  });
+
+  it('Maximum size should be 20MB', ()=>{
+    const newProps = {
+      ...props,
+      modalType: 'add visa'
+    };
+    const invalidFileSize = new Blob(['x'.repeat(40000001)], {type : 'image/png', size: 1092});
+    invalidFileSize.name = 'file.png';
+    const event = {
+      preventDefault: jest.fn(),
+      target:{
+        files: [invalidFileSize]
+      }};
+    const wrapper = mount(<VisaDefault {...newProps} />);
+    event.target.files = [invalidFileSize];
+    wrapper.find('#select-file').simulate('change', event);
+    expect(toast.error).toHaveBeenCalledWith('File is too large');
   });
 
   it('should create visa if all the data is valid',  () => {

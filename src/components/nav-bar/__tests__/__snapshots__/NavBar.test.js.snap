@@ -1,181 +1,185 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render NavBar component should match snapshot 1`] = `
-<header
-  className="mdl-layout__header navbar__layout_header"
+<div
+  className="header-container"
 >
-  <div
-    className="mdl-layout__header-row"
+  <header
+    className="mdl-layout__header navbar__layout_header"
   >
     <div
-      className="navbar__nav-size navbar__logo-icons"
+      className="mdl-layout__header-row"
     >
-      <button
-        className="material-icons hamburger"
-        onClick={[Function]}
-        type="button"
+      <div
+        className="navbar__nav-size navbar__logo-icons"
       >
-        menu
-      </button>
-      <span
-        className="navbar__logo-icons"
+        <button
+          className="material-icons hamburger"
+          onClick={[Function]}
+          type="button"
+        >
+          menu
+        </button>
+        <span
+          className="navbar__logo-icons"
+        >
+          <img
+            alt="Andela Logo"
+            className="mdl-cell--hide-phone"
+            src="travela.svg"
+          />
+          <img
+            alt="Travela Logo"
+            className="mdl-cell--hide-desktop mdl-cell--hide-tablet navbar__travela-logo"
+            src="travela-mobile.svg"
+          />
+        </span>
+      </div>
+      <div
+        className="mdl-layout-spacer"
+      />
+      <div
+        className="navbar__search-size mdl-cell--hide-phone"
       >
-        <img
-          alt="Andela Logo"
-          className="mdl-cell--hide-phone"
-          src="travela.svg"
+        <SearchBar
+          onChange={[Function]}
+          onSubmit={[Function]}
         />
-        <img
-          alt="Travela Logo"
-          className="mdl-cell--hide-desktop mdl-cell--hide-tablet navbar__travela-logo"
-          src="travela-mobile.svg"
-        />
-      </span>
+      </div>
+      <nav
+        className="mdl-navigation"
+      >
+        <div
+          className="navbar__nav-size"
+          id="notification"
+          onClick={[Function]}
+          role="presentation"
+        >
+          <span
+            className="material-icons mdl-badge navbar__badge"
+            data-badge={4}
+          >
+            <img
+              alt="Notification"
+              className="navbar__navbar-notification"
+              src="notification.svg"
+            />
+          </span>
+        </div>
+        <div
+          className="navbar__user-icon navbar__nav-size  mdl-cell--hide-tablet mdl-cell--hide-phone"
+        >
+          <div
+            className="profile-sec"
+          >
+            <span
+              className="navbar__mdl-icons"
+            >
+              <ImageLink
+                altText="Andela Logo"
+                imageClass="navbar__mdl-upic"
+                imageSrc="http://picture.com/gif"
+              />
+              <span
+                className="navbar__text-size"
+              >
+                Tomato Jos
+              </span>
+            </span>
+            <span
+              className="dropdown-arrow"
+            >
+              <Button
+                altText="Dropdown Icon"
+                badge={null}
+                badgeClass=""
+                buttonClass="mdl-button mdl-js-button mdl-button--icon mdl-Icons"
+                buttonId="demo-menu-lower-right"
+                buttonType="button"
+                disabled={false}
+                imageClass="navbar__mdl-Icon"
+                imageSrc="drop-down-icon.svg"
+                onClick={[Function]}
+                responsiveText=""
+                reverseText={false}
+                showBadge={false}
+                text=""
+                textClass=""
+              />
+              <div
+                className="navbar__mdl-list"
+                style={
+                  Object {
+                    "display": "none",
+                  }
+                }
+              >
+                <div
+                  className="navbar__link"
+                >
+                  <Link
+                    className="navbar__link"
+                    id="profile"
+                    replace={false}
+                    role="presentation"
+                    to="/settings/profile"
+                  >
+                    <img
+                      alt="profile"
+                      className="navbar__navbar-account"
+                      src="account_circle.svg"
+                    />
+                    Profile
+                  </Link>
+                </div>
+                <div
+                  className="border-line"
+                />
+                <div
+                  className="navbar__link"
+                  id="logout"
+                  onClick={[Function]}
+                  role="presentation"
+                >
+                  <img
+                    alt="profile"
+                    className="navbar__navbar--account"
+                    src="logout.svg"
+                  />
+                  Logout
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+      </nav>
     </div>
+    <button
+      className="navbar__search-icon--btn"
+      onClick={[Function]}
+      type="button"
+    >
+      <div>
+        <i
+          className="material-icons navbar__search-icon"
+        >
+          search
+        </i>
+      </div>
+    </button>
     <div
-      className="mdl-layout-spacer"
-    />
-    <div
-      className="navbar__search-size mdl-cell--hide-phone"
+      className="navbar__search-size  mdl-cell--hide-desktop mdl-cell--hide-tablet"
+      style={
+        Object {
+          "display": "block",
+        }
+      }
     >
       <SearchBar
         onChange={[Function]}
         onSubmit={[Function]}
       />
     </div>
-    <nav
-      className="mdl-navigation"
-    >
-      <div
-        className="navbar__nav-size"
-        id="notification"
-        onClick={[Function]}
-        role="presentation"
-      >
-        <span
-          className="material-icons mdl-badge navbar__badge"
-          data-badge={4}
-        >
-          <img
-            alt="Notification"
-            className="navbar__navbar-notification"
-            src="notification.svg"
-          />
-        </span>
-      </div>
-      <div
-        className="navbar__user-icon navbar__nav-size  mdl-cell--hide-tablet mdl-cell--hide-phone"
-      >
-        <div
-          className="profile-sec"
-        >
-          <span
-            className="navbar__mdl-icons"
-          >
-            <ImageLink
-              altText="Andela Logo"
-              imageClass="navbar__mdl-upic"
-              imageSrc="http://picture.com/gif"
-            />
-            <span
-              className="navbar__text-size"
-            >
-              Tomato Jos
-            </span>
-          </span>
-          <span
-            className="dropdown-arrow"
-          >
-            <Button
-              altText="Dropdown Icon"
-              badge={null}
-              badgeClass=""
-              buttonClass="mdl-button mdl-js-button mdl-button--icon mdl-Icons"
-              buttonId="demo-menu-lower-right"
-              buttonType="button"
-              disabled={false}
-              imageClass="navbar__mdl-Icon"
-              imageSrc="drop-down-icon.svg"
-              onClick={[Function]}
-              responsiveText=""
-              reverseText={false}
-              showBadge={false}
-              text=""
-              textClass=""
-            />
-            <div
-              className="navbar__mdl-list"
-              style={
-                Object {
-                  "display": "none",
-                }
-              }
-            >
-              <div
-                className="navbar__link"
-              >
-                <Link
-                  className="navbar__link"
-                  id="profile"
-                  replace={false}
-                  role="presentation"
-                  to="/settings/profile"
-                >
-                  <img
-                    alt="profile"
-                    className="navbar__navbar-account"
-                    src="account_circle.svg"
-                  />
-                  Profile
-                </Link>
-              </div>
-              <div
-                className="border-line"
-              />
-              <div
-                className="navbar__link"
-                id="logout"
-                onClick={[Function]}
-                role="presentation"
-              >
-                <img
-                  alt="profile"
-                  className="navbar__navbar--account"
-                  src="logout.svg"
-                />
-                Logout
-              </div>
-            </div>
-          </span>
-        </div>
-      </div>
-    </nav>
-  </div>
-  <button
-    className="navbar__search-icon--btn"
-    onClick={[Function]}
-    type="button"
-  >
-    <div>
-      <i
-        className="material-icons navbar__search-icon"
-      >
-        search
-      </i>
-    </div>
-  </button>
-  <div
-    className="navbar__search-size  mdl-cell--hide-desktop mdl-cell--hide-tablet"
-    style={
-      Object {
-        "display": "block",
-      }
-    }
-  >
-    <SearchBar
-      onChange={[Function]}
-      onSubmit={[Function]}
-    />
-  </div>
-</header>
+  </header>
+</div>
 `;

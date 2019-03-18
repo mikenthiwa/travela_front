@@ -13,5 +13,8 @@ export default {
   },
   visaType: {
     label: 'Select Visa Type'
+  },
+  otherVisaTypeDetails: {
+    label: 'Other Visa type'
   }
 };

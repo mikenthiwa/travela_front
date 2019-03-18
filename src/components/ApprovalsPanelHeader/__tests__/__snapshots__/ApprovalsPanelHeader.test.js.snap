@@ -13,7 +13,7 @@ exports[`should render approvals header correctly 1`] = `
     isLoading={false}
     location=""
     openModal={[Function]}
-    title="APPROVALS"
+    title="MANAGER APPROVALS"
     titleClassName="title"
   />
 </div>

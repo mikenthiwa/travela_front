@@ -201,6 +201,11 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
             <p>
               Drag file here or choose from computer
             </p>
+            <p
+              className="maximum-file-size"
+            >
+              Maximum file size - 20MB
+            </p>
           </div>
           <input
             id="select-file"

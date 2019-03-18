@@ -282,8 +282,9 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
               autoComplete="off"
               choices={
                 Array [
-                  "H-2A",
-                  "H-2B",
+                  "Business",
+                  "Tourist",
+                  "Other",
                 ]
               }
               className="input select  "
@@ -322,7 +323,7 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
               >
                 <li
                   id="choice"
-                  key="H-2A"
+                  key="Business"
                 >
                   <div
                     id="choice"
@@ -331,12 +332,12 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
                     role="button"
                     tabIndex="0"
                   >
-                    H-2A
+                    Business
                   </div>
                 </li>
                 <li
                   id="choice"
-                  key="H-2B"
+                  key="Tourist"
                 >
                   <div
                     id="choice"
@@ -345,7 +346,21 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
                     role="button"
                     tabIndex="0"
                   >
-                    H-2B
+                    Tourist
+                  </div>
+                </li>
+                <li
+                  id="choice"
+                  key="Other"
+                >
+                  <div
+                    id="choice"
+                    onClick={[Function]}
+                    onKeyPress={[Function]}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    Other
                   </div>
                 </li>
               </ul>
@@ -354,6 +369,17 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
           <span
             className="error"
           />
+        </div>
+        <div
+          className="character__conditions__visa error__height-one"
+          style={
+            Object {
+              "color": "#3359db",
+              "display": "none",
+            }
+          }
+        >
+          140
         </div>
       </div>
     </fieldset>
@@ -370,16 +396,24 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
           className="document-input__input-container__prompts"
           htmlFor="select-file"
         >
-          <img
-            alt="Document Upload"
+          <div
             className="document-input__input-container__prompts__img"
-            src="document-upload-blue.svg"
-          />
+          >
+            <img
+              alt="Document Upload"
+              src="document-upload-blue.svg"
+            />
+          </div>
           <div
             className="document-input__input-container__prompts__text"
           >
             <p>
               Drag file here or choose from computer
+            </p>
+            <p
+              className="maximum-file-size"
+            >
+              Maximum file size - 20MB
             </p>
           </div>
           <input

@@ -31,6 +31,36 @@ describe('user can add visas', () => {
       .get('.bg-btn.bg-btn--active.delete-document-button').contains('Delete').click();
   };
 
+  const createOtherVisaType = (expiryDate) => {
+    cy
+      .get('#actionButton').click()
+      .get('.modal-title-bar').contains('Add Visa Details')
+      .get('.travel-document-select-file > :nth-child(1)')
+      .contains('Attach the image of your visa page')
+      .get('.maximum-file-size').contains('Maximum file size - 20MB')
+      .get('input[name="country"]').type('Uganda')
+      .get('[name=entryType] ').click()
+      .get('div[name=entryType] > ul > li#choice:first').click()
+      .get('[name=visaType]').click()
+      .get('div[name=visaType] > ul > li#choice').eq(2).click()
+      .get('.character__conditions__visa').contains('140')
+      .get('.textarea-box').type('Two days Visa')
+      .get('input[name="dateOfIssue"]').type('12/25/2018')
+      .get('input[name="expiryDate"]').type(expiryDate)
+      .get('.document-input__input-container').click()
+      .uploadFile('../fixtures/images/guesthouse.jpg','image/jpeg')
+      .get('#submit').click().wait(9000)
+      .get('.modal-close').click({multiple: true});
+  };
+
+  const uploadLargeFile = () => {
+    cy
+      .get('#actionButton').click()
+      .uploadFile('../fixtures/images/largefile.jpg','image/jpeg')
+      .wait(2000).get('.toast-message').should('be.visible').contains('File is too large')
+      .get('#cancel').click();
+  };
+
   beforeEach(() => {
     cy.authenticateUser();
   });
@@ -39,6 +69,15 @@ describe('user can add visas', () => {
     cy
       .get('#actionButton')
       .contains('Add visa');
+  });
+
+  it('adds visa details with visaType Other', () => {
+    createOtherVisaType ('12/25/2020');
+    deleteTestVisa();
+  });
+
+  it('Upload file with size greater than 20MB', () => {
+    uploadLargeFile ('12/25/2020');
   });
 
   it('adds a visa', () => {

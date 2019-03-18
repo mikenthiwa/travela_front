@@ -24,6 +24,15 @@ exports[`<ListTravelStipends /> renders without crashing 1`] = `
                 className="table__menu-list"
               >
                 <li
+                  className="edit"
+                  onClick={[Function]}
+                  role="presentation"
+                >
+                  <span>
+                    Edit
+                  </span>
+                </li>
+                <li
                   className="delete"
                   onClick={[Function]}
                   role="presentation"
@@ -73,6 +82,15 @@ exports[`<ListTravelStipends /> renders without crashing 1`] = `
               <ul
                 className="table__menu-list"
               >
+                <li
+                  className="edit"
+                  onClick={[Function]}
+                  role="presentation"
+                >
+                  <span>
+                    Edit
+                  </span>
+                </li>
                 <li
                   className="delete"
                   onClick={[Function]}

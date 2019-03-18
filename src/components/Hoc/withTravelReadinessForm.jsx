@@ -4,7 +4,7 @@ import toast from 'toastr';
 import axios from 'axios';
 import { isEmpty } from 'lodash';
 import moment from 'moment';
-import {FormContext} from '../Forms/FormsAPI';
+import { FormContext, getDefaultBlanksValidatorFor } from '../Forms/FormsAPI';
 import '../Forms/TravelReadinessForm/TravelDocument.scss';
 import DocumentAPI from '../../services/DocumentAPI';
 import FileUploadField from '../Forms/TravelReadinessForm/FormFieldsets/FileUploadField';
@@ -13,11 +13,13 @@ import Preloader from '../Preloader/Preloader';
 import documentUpload from '../../images/icons/document-upload-blue.svg';
 import { isOptional } from '../Forms/FormsAPI/formValidator';
 
+
 export default function TravelReadinessForm (FormFieldSet, documentType, defaultFormState) {
   class BaseForm extends Component {
     constructor(props) {
       super(props);
       this.state = {...defaultFormState, imageChanged: false};
+      this.validate = getDefaultBlanksValidatorFor(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -127,15 +129,37 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
         .some(key => !values[key] && !isOptional(key, optionalFields));
       this.setState({name, image, imageChanged: true, hasBlankFields: hasBlankFields || false });
     };
-
+    onChangeVisa = (e) => {
+      const visaType = e;
+      const { modalType } = this.props;
+      this.setState((prevState) => {
+        if(visaType !== 'Other'){
+          delete prevState.values.otherVisaTypeDetails;
+          return {
+            values: {
+              ...prevState.values,
+              visaType
+            }
+          };
+        }
+        return {
+          values: {
+            ...prevState.values,
+            visaType,
+            otherVisaTypeDetails: ''
+          }
+        };
+      }, () =>  this.validate());
+    }
     render() {
       const {errors, values, hasBlankFields, uploadingDocument,
         name, imageChanged, uploadProgress} = this.state;
       const { modalType, document, fetchingDocument} = this.props;
       if (documentType === 'other') delete errors.documentid;
+      const { visaType, otherVisaTypeDetails } = values;
       const submitButton = {
         other: 'Add Document',
-        visa: 'Add Visa',
+        visa: 'Add Visa Details',
         passport: 'Add Passport'
       };
       return (
@@ -143,12 +167,12 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
           {fetchingDocument ? <Preloader /> : (
             <FormContext values={values} errors={errors} targetForm={this}>
               <form className="travel-document-form" onSubmit={this.handleSubmit}>
-                {<FormFieldSet />}
+                {<FormFieldSet visaType={visaType} onChangeVisa={this.onChangeVisa} otherVisaTypeDetails={otherVisaTypeDetails} />}
                 <div className="travel-document-select-file">
                   <p>
                     {
-                      modalType === 'add passport'
-                        ? `Attach image of your ${modalType.split(' ').splice(-1)} page`
+                      modalType === 'add visa'
+                        ? `Attach the image of your ${modalType.split(' ').splice(-1)} page`
                         : 'Attach File'
                     }
                   </p>

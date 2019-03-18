@@ -5,7 +5,6 @@ exports[`CommentItem component should match snapshot 1`] = `
   className="modal__modal1"
   key="1"
 >
-  <hr />
   <div
     className="modal__mdl-icons"
   >
@@ -96,7 +95,6 @@ exports[`CommentItem component should match snapshot 2`] = `
   className="modal__modal1"
   key="1"
 >
-  <hr />
   <div
     className="modal__mdl-icons"
   >
@@ -188,7 +186,6 @@ exports[`CommentItem component should match snapshot 3`] = `
   className="modal__modal1"
   key="1"
 >
-  <hr />
   <div
     className="modal__mdl-icons"
   >

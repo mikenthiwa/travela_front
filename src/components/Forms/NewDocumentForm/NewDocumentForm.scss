@@ -46,7 +46,7 @@ form fieldset:last-child .submit-area {
         background: rgba(100,100,100,.2);
         border-radius: 50%;
 
-        img {
+         img {
           width: 20px;
           height: 20px;
         }
@@ -61,7 +61,7 @@ form fieldset:last-child .submit-area {
         align-items: center;
         grid-template-rows: 20px 10px;
 
-        & > p {
+         & > p {
           font-family: "DIN Pro";
           font-size: 14px;
           line-height: 18px;

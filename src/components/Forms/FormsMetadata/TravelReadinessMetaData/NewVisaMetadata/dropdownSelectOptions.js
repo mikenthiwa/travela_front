@@ -4,7 +4,8 @@ export default {
     'Multiple'
   ],
   visaType: [
-    'H-2A',
-    'H-2B',
+    'Business',
+    'Tourist',
+    'Other'
   ]
 };

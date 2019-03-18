@@ -24,6 +24,7 @@ exports[`ConfirmDialog component should match snapshot 1`] = `
     <button
       className="undefined-comment-modal__btn"
       id={false}
+      onClick={[Function]}
       type="button"
     />
   </Modal>

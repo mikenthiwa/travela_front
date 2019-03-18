@@ -62,7 +62,7 @@ exports[`<Timeline /> renders correctly 1`] = `
       <span
         className="timeline-period value"
       >
-        February 2019
+        March 2019
       </span>
       <div
         className="timeline-navigator"
@@ -248,7 +248,7 @@ exports[`<Timeline /> renders correctly 1`] = `
         key="12"
       />
       <div
-        className="timeline__segment  month-view"
+        className="timeline__segment current month-view"
         data-segment-label="14"
         key="13"
       />
@@ -318,9 +318,24 @@ exports[`<Timeline /> renders correctly 1`] = `
         key="26"
       />
       <div
-        className="timeline__segment current month-view"
+        className="timeline__segment  month-view"
         data-segment-label="28"
         key="27"
+      />
+      <div
+        className="timeline__segment  month-view"
+        data-segment-label="29"
+        key="28"
+      />
+      <div
+        className="timeline__segment  month-view"
+        data-segment-label="30"
+        key="29"
+      />
+      <div
+        className="timeline__segment  month-view"
+        data-segment-label="31"
+        key="30"
       />
       <div
         className="rooms-geometry-wrapper"
@@ -430,7 +445,7 @@ exports[`<Timeline /> renders correctly 1`] = `
               <strong>
                 Requester
               </strong>
-               will be automatically notified of the room change.
+               will be automatically notified of the room change.
             </span>
           </div>
           <div
@@ -526,7 +541,7 @@ exports[`<Timeline /> renders the weekly view correctly 1`] = `
       <span
         className="timeline-period value"
       >
-        1 - 2 Feb 2019
+        1 - 2 Mar 2019
       </span>
       <div
         className="timeline-navigator"
@@ -648,37 +663,37 @@ exports[`<Timeline /> renders the weekly view correctly 1`] = `
     >
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Fri 2/1"
+        data-segment-label="Fri 3/1"
         key="0"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Sat 2/2"
+        data-segment-label="Sat 3/2"
         key="1"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Sun 2/3"
+        data-segment-label="Sun 3/3"
         key="2"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Mon 2/4"
+        data-segment-label="Mon 3/4"
         key="3"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Tue 2/5"
+        data-segment-label="Tue 3/5"
         key="4"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Wed 2/6"
+        data-segment-label="Wed 3/6"
         key="5"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Thu 2/7"
+        data-segment-label="Thu 3/7"
         key="6"
       />
       <div
@@ -789,7 +804,7 @@ exports[`<Timeline /> renders the weekly view correctly 1`] = `
               <strong>
                 Requester
               </strong>
-               will be automatically notified of the room change.
+               will be automatically notified of the room change.
             </span>
           </div>
           <div
@@ -1007,62 +1022,62 @@ exports[`<Timeline /> renders the year view correctly 1`] = `
     >
       <div
         className="timeline__segment current year-view"
-        data-segment-label="Feb"
+        data-segment-label="Mar"
         key="0"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Mar"
+        data-segment-label="Apr"
         key="1"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Apr"
+        data-segment-label="May"
         key="2"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="May"
+        data-segment-label="Jun"
         key="3"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Jun"
+        data-segment-label="Jul"
         key="4"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Jul"
+        data-segment-label="Aug"
         key="5"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Aug"
+        data-segment-label="Sep"
         key="6"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Sep"
+        data-segment-label="Oct"
         key="7"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Oct"
+        data-segment-label="Nov"
         key="8"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Nov"
+        data-segment-label="Dec"
         key="9"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Dec"
+        data-segment-label="Jan"
         key="10"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Jan"
+        data-segment-label="Feb"
         key="11"
       />
       <div
@@ -1173,7 +1188,7 @@ exports[`<Timeline /> renders the year view correctly 1`] = `
               <strong>
                 Requester
               </strong>
-               will be automatically notified of the room change.
+               will be automatically notified of the room change.
             </span>
           </div>
           <div

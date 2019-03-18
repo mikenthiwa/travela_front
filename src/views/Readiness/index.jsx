@@ -103,7 +103,7 @@ export class TravelReadinessDocuments extends Component {
         width="580px" height="600px"
         visibility={(shouldOpen && (modalType === 'add visa' || modalType === 'edit visa'))
           ? 'visible' : 'invisible'}
-        title={modalType === 'add visa' ? 'Add Visa' : 'Edit Visa'}
+        title={modalType === 'add visa' ? 'Add Visa Details' : 'Edit Visa'}
       >
         <AddVisaForm
           closeModal={closeModal}
