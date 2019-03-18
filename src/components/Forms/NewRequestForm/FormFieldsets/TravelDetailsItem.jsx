@@ -122,7 +122,7 @@ class TravelDetailsItem extends Component {
     onChangeInput(event);
     if (selection !== 'oneWay') {
       this.validateTripDetails(values, itemId, selection);
-      handlePickBed(null, itemId, false);
+      handlePickBed(null, itemId, false);       
     }
   };
 
@@ -283,6 +283,7 @@ class TravelDetailsItem extends Component {
       }
       return reasonsList;
     };
+    
     return (
       <div className="travel-to reasons__option">
         {renderInput(`reasons-${itemId}`, 'dropdown-select', {
@@ -302,10 +303,13 @@ class TravelDetailsItem extends Component {
     const charLeft = max - length;
     switch(true){
     case (charLeft===0):
-      return { color:'red', charLeft: `You have reached a maximum of ${140} Characters`};
+      return { 
+        color:'red', 
+        charLeft: `You have reached a maximum of ${140} Characters`, 
+        top: '70px'};
     case (charLeft < 11):
       return {color:'red', charLeft };
-    case (charLeft < 20):
+    case (charLeft < 20): 
       return {color:'#E67373', charLeft };
     default:
       return {color: '#3359db', charLeft};
@@ -320,35 +324,36 @@ class TravelDetailsItem extends Component {
       handleReason,
     } = this.props;
     const reason = values[`reasons-${itemId}`];
-    const characters = values[`otherReasons-${itemId}`];
-    let charLength = characters ? characters.trim().length : '';
-    let reasonsLimit =  this.reasonsWarningColor(charLength, 140);
+    const characters = values[`otherReasons-${itemId}`] || '';
+    let charLength = characters ? characters.trim().length : '';  
+    let reasonsLimit = this.reasonsWarningColor(charLength, 140);
 
     return (
       <div className="other__reason" onChange={typedReason => handleReason(typedReason.target.value, itemId, 'other')}>
         { reason === 'Other..' ? (
           <Fragment>
+            <div style={{ display: 'none' }}>{ values[`otherReasons-${itemId}`]  = '' || characters }</div>
             {renderInput(`otherReasons-${itemId}`, 'textarea', {
               maxLength:'140',
               rows:'20',
               parentid: itemId,
             })}
-            <div className="character__conditions" style={{ color: `${reasonsLimit.color}` }}>
+            <div className="character__conditions" style={{ color: `${reasonsLimit.color}`, top: `${reasonsLimit.top}` }}>
               {reasonsLimit.charLeft}
             </div>
           </Fragment>)
           : ''
         }
-
       </div>
     );
   }
-
+  
   validateTripDetails(values, i, selection) {
     const isValid =
     values.gender &&
-    values[`destination-${i}`] &&
-    values[`departureDate-${i}`];
+    values[`destination-${i}`] && 
+    values[`departureDate-${i}`] &&
+    values[`reasons-${i}`];
 
     if (isValid && selection === 'oneWay') {
       this.setState({ missingRequiredFields: false });
@@ -362,6 +367,7 @@ class TravelDetailsItem extends Component {
       this.setState({ missingRequiredFields: false });
     }
   }
+
 
   renderTravelHead(itemId, selection) {
     return (

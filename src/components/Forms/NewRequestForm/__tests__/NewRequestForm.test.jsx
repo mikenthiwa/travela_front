@@ -520,6 +520,20 @@ describe('<NewRequestForm />', () => {
     expect(shallowWrapper.instance().collapsible.calledOnce).toEqual(true);
   });
 
+  it('should open the personal field on button click ', () => {
+    const shallowWrapper = shallow(<NewRequestForm {...props} />);
+    shallowWrapper.setState({
+      collapse: false,
+      title: 'Hide Details',
+      position: 'none',
+      line: '1px solid #E4E4E4'
+    });
+    sinon.spy(shallowWrapper.instance(), 'collapsible');
+    shallowWrapper.instance().collapsible(event);
+    expect(shallowWrapper.instance().collapsible.calledOnce).toEqual(true);
+  });
+
+
   it('should not be able to selects female gender on button click', () => {
     let femaleButton = wrapper.find('button[data-value="Male"]');
     femaleButton.simulate('click', {

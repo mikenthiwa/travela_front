@@ -45,4 +45,10 @@ describe('<ListTravelReasons />',() => {
     wrapper.find('.delete').simulate('click');
     expect(props.openModal).toHaveBeenCalled();
   });
+
+  it('should simulate deletion of a travel Reason', () => {
+    const event = { preventDefault: jest.fn() };
+    wrapper.find('.delete-document-button');
+    wrapper.simulate('click', event);
+  });
 });

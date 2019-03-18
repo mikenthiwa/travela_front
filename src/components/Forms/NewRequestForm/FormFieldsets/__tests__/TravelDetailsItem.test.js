@@ -141,7 +141,7 @@ describe('Test Suite for <TravelDetailsItem />', () => {
   it('should change reason text color to red', () => {
     const wrapper = mount(<TravelDetailsItem {...props} />);
     wrapper.instance().reasonsWarningColor(140, 140);
-    expect(wrapper.instance().reasonsWarningColor(140, 140)).toEqual({ color:'red', charLeft: `You have reached a maximum of ${140} Characters`});
+    expect(wrapper.instance().reasonsWarningColor(140, 140)).toEqual({ color:'red', charLeft: `You have reached a maximum of ${140} Characters`, top:'70px'});
     expect(wrapper.instance().reasonsWarningColor(137, 140)).toEqual({ color:'red', charLeft: 3});
     expect(wrapper.instance().reasonsWarningColor(117, 140)).toEqual({charLeft: 23, color: '#3359db'});
   });

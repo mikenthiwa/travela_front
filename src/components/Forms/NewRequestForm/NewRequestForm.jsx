@@ -362,6 +362,7 @@ class NewRequestForm extends PureComponent {
     [`destination-${index}`]: '',
     [`arrivalDate-${index}`]: null,
     [`departureDate-${index}`]: valueObj && moment(valueObj.departureDate) || null,
+    [`otherReasons-${index}`]: '',
     [`reasons-${index}`]: '',
     [`bed-${index}`]: '',
   });
@@ -630,12 +631,14 @@ class NewRequestForm extends PureComponent {
 
   handleReason = (reason, tripIndex, other) => {
     const fieldName = `reasons-${tripIndex}`;
+    const otherfieldName = `otherReasons-${tripIndex}`;
     this.setState(prevState => {
       const { trips } = prevState;
       if (trips[tripIndex]) {
         if(other) {
           trips[tripIndex].otherTravelReasons = reason;
         } else {
+          delete prevState.values[otherfieldName];
           trips[tripIndex].travelReasons = this.handleReasonsId(reason);
           return {
             ...prevState,
@@ -647,7 +650,7 @@ class NewRequestForm extends PureComponent {
           };
         }
       }
-    });
+    }, () => this.validate());
   };
 
   handleReasonsId(reason) {
