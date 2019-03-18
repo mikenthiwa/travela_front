@@ -401,7 +401,7 @@ class NewRequestForm extends PureComponent {
       user,
       history
     } = this.props;
-    const { values, selection, trips, stipend, comments } = this.state;
+    const { values, selection, trips, stipend, stipendBreakdown, comments } = this.state;
     userData.name = userData.passportName;
     userData.role = userData.occupation;
 
@@ -413,6 +413,7 @@ class NewRequestForm extends PureComponent {
       trips,
       tripType: selection,
       stipend,
+      stipendBreakdown,
       comments
     };
 
@@ -551,11 +552,12 @@ class NewRequestForm extends PureComponent {
     validateTrips(trips, () => this.setState(newState), () => this.setState({ isLoading }));
     fetchAllTravelStipends();
   };
-  nextStep =  (e, totalStipend) => {
+
+  nextStep =  (e, travelStipends) => {
     e.preventDefault();
-    const {  steps, currentTab, trips } = this.state;
+    const { steps, currentTab, trips } = this.state;
     if(currentTab === 2) {
-      this.setState({ isLoading: true});
+      this.setState({ isLoading: true });
       return this.validator({trips});
     }
     const newSteps = steps;
@@ -570,15 +572,14 @@ class NewRequestForm extends PureComponent {
 
     if(currentTab === 3) {
       this.setState({
-        stipend: totalStipend === 'N/A'
-          ? 0
-          : totalStipend.split(' ')[1]
+        stipendBreakdown: travelStipends.length ? travelStipends : undefined,
+        stipend: 0
       });
     }
   };
 
   renderPersonalDetailsFieldset = () => {
-    const { collapse, title, position, line, values, hasBlankFields, errors } = this.state;
+    const { collapse, title, position, line, values, errors } = this.state;
     const { managers, creatingRequest } = this.props;
     return (
       <PersonalDetailsFieldset
@@ -722,11 +723,11 @@ class NewRequestForm extends PureComponent {
         {!isLoading && (
           <div className="request-submit-area submit-area">
             <button
-              onClick={e => this.nextStep(e, total)}
+              onClick={e => this.nextStep(e, travelStipends)}
               disabled={isLoading}
               type="button"
               className="bg-btn bg-btn--active" id="stipend-next">
-                     Next
+                Next
             </button>
           </div>
         )

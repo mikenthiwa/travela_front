@@ -54,12 +54,15 @@ describe('TEST ConnectedApproveRequests COMPONENT', () => {
   });
 
   describe('TEST COMPONENT METHODS', () => {
+    initialState.requests.requestData.stipend = [
+      { subTotal: 0, location: 'Nairobi, Kenya', dailyRate: 'N/A', duration: 3, centerExists: true }
+    ];
     store = mockStore(initialState);
     const wrapper = setupConnectedComponent(props, store);
     const instance = wrapper.find('ApproveRequests').instance();
     const buttons = wrapper.find('button');
-    const button1 = buttons.at(0);
-    const button2 = buttons.at(1);
+    const button1 = buttons.at(1);
+    const button2 = buttons.at(2);
 
     it('buttons disabled status should be false if request status is Open', () => {
       expect(button1.props().disabled).toBe(false);
@@ -91,6 +94,10 @@ describe('TEST ConnectedApproveRequests COMPONENT', () => {
     it('should pluralize name for approved requests', () => {
       initialState.requests.requestData.name = 'Christopher Moses';
       initialState.requests.requestData.status = 'Approved';
+      initialState.requests.requestData.stipend = [
+        ...initialState.requests.requestData.stipend,
+        { subTotal: 1800, location: 'Lagos, Nigeria', dailyRate: 600, duration: 3, centerExists: true }
+      ];
       store = mockStore(initialState);
       const wrapper = setupConnectedComponent(props, store);
       expect(wrapper.find('.text--grey').at(6).text()).toEqual('You have approved Christopher Moses\' travel request');
@@ -102,6 +109,20 @@ describe('TEST ConnectedApproveRequests COMPONENT', () => {
       store = mockStore(initialState);
       const wrapper = setupConnectedComponent(props, store);
       expect(wrapper.find('.text--grey').at(6).text()).toEqual('You have rejected Christopher Moses\' travel request');
+    });
+  });
+
+
+  describe('TEST TRAVEL STIPEND POP UP MODAL', () => {
+    it('should make modal appear', () => {
+      store = mockStore(initialState);
+      const wrapper = setupConnectedComponent(props, store);
+      const button = wrapper.find('button').at(0);
+      expect(wrapper.find('.modal')).toHaveLength(0);// check that modal is hidden
+      button.simulate('click');
+      expect(wrapper.find('.modal')).toHaveLength(1); // check that modal is now visible
+      button.simulate('click');
+      expect(wrapper.find('.modal')).toHaveLength(0); // check that modal has gone back into hiding
     });
   });
 });

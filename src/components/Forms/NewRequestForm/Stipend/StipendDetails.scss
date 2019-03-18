@@ -8,11 +8,10 @@
   }
 }
 .stipend-container-block {
-  height: 192px;	
+  min-height: 192px;	
   width: 579px;
   .stipend-row {
     display: flex;
-    height: 15px;
     font-size: 12px;	
     line-height: 15px;
     align-items: center;
@@ -22,18 +21,16 @@
     color: #3359DB;	
   }
   .single-trip {
-    height: 36px;	
     width: 579px;	
     border-radius: 5px;	
     background-color: #F8F8F8;
     margin-top: 10px;
     .item {
-      height: 18px;
       width: 87px;	
       color: #4F4F4F;	
       font-size: 14px;	
       line-height: 18px;
-      padding-left: .6em;
+      padding: 0.5em 0 0.5em 0.6em;
       text-align: center;
       :first {
         padding-left: .2em;

@@ -19,7 +19,7 @@ const StipendRow = ({
       </div>
       <div className="item">
         {
-          `$ ${dailyRate}`
+          dailyRate !== 'N/A' ? `$ ${dailyRate}` : dailyRate
         }
       </div>
       <div className="item">{`${duration} ${duration <= 1 ? 'day' : 'days'}`}</div>

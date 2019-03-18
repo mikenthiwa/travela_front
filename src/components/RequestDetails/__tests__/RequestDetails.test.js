@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { props } from '../__mocks__';
 import RequestDetails from '..';
 
-const setupConnectedComponent = (props, store) => {
+const setupConnectedComponent = (props) => {
   return mount(
     <Router>
       <RequestDetails
@@ -37,7 +37,6 @@ describe('TEST REQUEST DETAILS COMPONENT', () => {
     it('should render requests with otherTravelReason', () => {
       const wrapper = setupConnectedComponent({
         ...props,
-        request: { ...props.request, stipend: 1000 },
         isLoading: false
       });
       expect(wrapper.find('.partition')).toHaveLength(6);
@@ -51,7 +50,8 @@ describe('TEST REQUEST DETAILS COMPONENT', () => {
       };
       const request = {
         ...props.request,
-        trips: [trips]
+        trips: [trips],
+        stipend: 1500
       };
       const wrapper = setupConnectedComponent({ ...props, request, isLoading: false });
       expect(wrapper.find('.text--black').at(4).text()).toBe('For holiday');
@@ -65,7 +65,8 @@ describe('TEST REQUEST DETAILS COMPONENT', () => {
       };
       const request = {
         ...props.request,
-        trips: [trips]
+        trips: [trips],
+        stipend:0
       };
       const wrapper = setupConnectedComponent({
         ...props,

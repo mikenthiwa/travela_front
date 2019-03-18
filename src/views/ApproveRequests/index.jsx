@@ -10,7 +10,7 @@ import ConnectedCommentBox from '../../components/RequestsModal/CommentBox/Comme
 import ConnectedUserComments from '../../components/RequestsModal/UserComments/UserComments';
 import './ApproveRequests.scss';
 
-export const Approve = (type='manager') => {
+export const Approve = (type = 'manager') => {
   class ApproveRequests extends Component {
     state = {
       modalInvisible: true,
@@ -20,28 +20,28 @@ export const Approve = (type='manager') => {
     componentDidMount() {
       const {
         fetchUserRequestDetails,
-        match: {params: {requestId}}, 
+        match: { params: { requestId } }, 
       } = this.props;
       fetchUserRequestDetails(requestId);
     }
 
     handleButtonSelected = (e) => {
-      this.setState({buttonSelected: e.target.textContent, modalInvisible: false});
+      this.setState({ buttonSelected: e.target.textContent, modalInvisible: false });
     }
 
     handleDecision = (requestId) => {
-      const {updateRequestStatus, updateBudgetStatus} = this.props;
-      const {buttonSelected} = this.state;
+      const { updateRequestStatus, updateBudgetStatus } = this.props;
+      const { buttonSelected } = this.state;
       const newStatus = buttonSelected === 'approve'
         ? 'Approved' : 'Rejected';
       const action = () => type === 'budget'?
-        updateBudgetStatus(requestId, { budgetStatus: newStatus }): updateRequestStatus({requestId, newStatus});
+        updateBudgetStatus(requestId, { budgetStatus: newStatus }): updateRequestStatus({ requestId, newStatus });
       action();
-      this.setState({modalInvisible: true});
+      this.setState({ modalInvisible: true });
     };
 
     renderDialogText = () => {
-      const {buttonSelected} = this.state;
+      const { buttonSelected } = this.state;
       if (buttonSelected === 'approve') return 'approval';
       return 'rejection';
     };
@@ -64,7 +64,7 @@ export const Approve = (type='manager') => {
         <div className="btn-group">
           <button
             type="button"
-            className={`action-button--${type === 'budget'?approvedBudgetStatus:approvedStatus}`}
+            className={`action-button--${type === 'budget' ? approvedBudgetStatus : approvedStatus}`}
             disabled={disabled}
             onClick={this.handleButtonSelected}
           >
@@ -72,7 +72,7 @@ export const Approve = (type='manager') => {
           </button>
           <button
             type="button"
-            className={`action-button--${type === 'budget'?rejectedBudgetStatus:rejectedStatus}`}
+            className={`action-button--${type === 'budget' ? rejectedBudgetStatus : rejectedStatus}`}
             disabled={disabled}
             onClick={this.handleButtonSelected}
           >
@@ -92,8 +92,8 @@ export const Approve = (type='manager') => {
     };
 
     renderRightPaneQuestion = (name) => {
-      const {request: {status, budgetStatus }} = this.props;
-      const componentStatus = type === 'budget'? budgetStatus:status;
+      const { request: { status, budgetStatus } } = this.props;
+      const componentStatus = type === 'budget' ? budgetStatus : status;
       const pluralizedName = name && name[name.length - 1] === 's' ?
         `${name}'` : `${name}'s`;
       const statusText = componentStatus && componentStatus === 'Rejected' ? 'rejected' : 'approved'; 
@@ -108,7 +108,7 @@ export const Approve = (type='manager') => {
         match: { params: { requestId } },
         currentUser, email, location: { pathname },
       } = this.props;
-      const headerTags = type === 'budget'? ['Manager\'s Approval','Budget Check']:['Manager\'s Stage'];
+      const headerTags = type === 'budget' ? ['Manager\'s Approval','Budget Check'] : ['Manager\'s Stage'];
       return (
         <Fragment>
           <RequestDetails

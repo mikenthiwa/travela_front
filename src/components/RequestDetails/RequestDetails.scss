@@ -73,23 +73,65 @@
         display: flex;
 
         .partition {
-          text-transform: capitalize;
           padding: 2em 0 0 3em;
+          text-transform: capitalize;
           text-align: left;
           width: 33%;
 
-          i {
-            background-color: #3359DB;
-            border-radius: 100%;
-            color: #FFF;
-            font-size: 0.8em;
-            font-style: normal;
-            font-weight: 900;
-            margin: 0 0 0 0.5em;
-            padding: 0 0.6em;
+          .info-button {
 
-            &:hover {
-              cursor: pointer;
+            &--true {
+
+              span {
+                width: 11em;
+              }
+
+              &:hover {
+                cursor: not-allowed;
+  
+                span {
+                  display: block;
+                }
+              }
+            }
+
+            &--false {
+
+              span {
+                width: 16em;
+              }
+
+              &:hover {
+                cursor: pointer;
+  
+                span {
+                  display: block;
+                }
+              }
+            }
+
+            &--false, &--true {
+              background-color: #3359DB;
+              border: 0;
+              border-radius: 100%;
+              color: #FFF;
+              font-size: 0.8em;
+              font-style: normal;
+              font-weight: 900;
+              margin: 0 0 0 0.5em;
+              outline: none!important;
+              padding: 0 0.6em;
+              position: relative;
+  
+              span {
+                background-color: #F8F8F8;
+                box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2);
+                color: #4F4F4F;
+                display: none;
+                padding: 0.5em 1em;
+                position: absolute;
+                z-index: 2;
+              }
             }
           }
 
@@ -103,9 +145,28 @@
               border-radius: 100%;
               display: inline-block;
               height: 2.6em;
-              position: absolute;
               margin: -0.35em 0 0 -3em;
+              position: absolute;
               width: 2.6em;
+            }
+          }
+        }
+
+        .travel-stipend-modal {
+          position: relative;
+
+          .modal-content {
+            padding: 0;
+
+            .stipend-container-block {
+              background-color: #FFF;
+              box-shadow: 0 1px 5px 0 rgba(0,0,0,0.1);
+              padding: 1em;
+              width: initial;
+
+              .stipend-row {
+                width: initial;
+              }
             }
           }
         }

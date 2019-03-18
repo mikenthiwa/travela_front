@@ -126,7 +126,7 @@ describe('<StipendDetails />', () => {
     const dailyRate = stipendRows.at(2).find('.item').at(1).text();
     const subTotal = stipendRows.at(2).find('.item').at(3).text();
     expect(subTotal).toBe('N/A');
-    expect(dailyRate).toBe('$ N/A');
+    expect(dailyRate).toBe('N/A');
     expect(center).toBe('UK');
     const total = wrapper.find('.total-stipend').at(0);
     expect(total.text().includes('$ 3800')).toBe(true);

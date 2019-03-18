@@ -628,6 +628,7 @@ describe('<NewRequestForm />', () => {
       },
       trips: [],
       selection: 'return',
+      stipendBreakDown: []
     });
     const inputField = shallowWrapper.find('.occupationInput');
 

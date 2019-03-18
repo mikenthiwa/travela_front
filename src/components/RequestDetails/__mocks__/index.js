@@ -11,7 +11,10 @@ export const request = {
   role: 'Technical Team Lead',
   status: 'Open',
   tripType: 'oneWay',
-  stipend: 0,
+  stipend: [
+    { subTotal: 600, location: 'New York, United States', dailyRate: 300, duration: 2, centerExists: true },
+    { subTotal: 1000, location: 'Nairobi, Kenya', dailyRate: 500, duration: 2, centerExists: true }
+  ],
   trips: [{
     accommodationType: 'Hotel Booking',
     bedId: null,

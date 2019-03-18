@@ -37,6 +37,7 @@ const requests = {
     role: 'Technical Team Lead',
     status: 'Open',
     tripType: 'oneWay',
+    stipend: [{ subTotal: 600, location: 'New York, United States', dailyRate: 300, duration: 2, centerExists: true }],
     trips: [{
       accommodationType: 'Hotel Booking',
       bedId: null,

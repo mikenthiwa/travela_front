@@ -68,7 +68,7 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
     const wrapper = setupConnectedComponent(props, store);
     const instance = wrapper.find('VerificationDetails').instance();
     const buttons = wrapper.find('button');
-    const button1 = buttons.at(0);
+    const button1 = buttons.at(1);
 
     it('buttons disabled status should be false if request status is Open', () => {
       expect(button1.props().disabled).toBe(false);

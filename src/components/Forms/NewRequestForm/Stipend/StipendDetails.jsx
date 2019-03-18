@@ -35,7 +35,10 @@ const StipendDetails = ({ travelStipends, isLoading, total }) => {
 export default StipendDetails;
 
 StipendDetails.propTypes = {
-  travelStipends: PropTypes.array.isRequired,
+  travelStipends: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.number
+  ]).isRequired,
   total: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string
