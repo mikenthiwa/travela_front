@@ -9,16 +9,10 @@ export default class NotificationContainer extends PureComponent {
     this.state = {
       notificationsCount: 0
     };
-    this.handleMarkAllAsRead = this.handleMarkAllAsRead.bind(this);
-    this.getUnreadNotificationsCount = this.getUnreadNotificationsCount.bind(this);
   }
 
-  componentDidMount() {
-    this.getUnreadNotificationsCount();
-  }
-
-  getUnreadNotificationsCount() {
-    const { title, generalNotifications, pendingNotifications } = this.props;
+  static getDerivedStateFromProps(nextProps) {
+    const { title, generalNotifications, pendingNotifications } = nextProps;
     const notificationStatus =
       (title === 'Pending Approvals')
         ? pendingNotifications
@@ -28,7 +22,7 @@ export default class NotificationContainer extends PureComponent {
     const unreadNotifications =
       notificationStatus.filter(status => status === 'unread');
     const notificationsCount = unreadNotifications.length;
-    this.setState({ notificationsCount });
+    return { notificationsCount };
   }
 
   handleMarkSingleAsRead = (id) => {
@@ -40,7 +34,7 @@ export default class NotificationContainer extends PureComponent {
     );
   }
 
-  handleMarkAllAsRead() {
+  handleMarkAllAsRead = ()  => {
     const { title, updateAllNotificationStatus } = this.props;
     const currentStatus = 'unread';
     const newStatus = 'read';

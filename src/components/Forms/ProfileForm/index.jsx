@@ -69,7 +69,7 @@ class ProfileForm extends PureComponent {
     const manager = value ? value : values.manager;
 
     // if manager in manager input box is not in database
-    if ( managerChoices.indexOf(manager) === -1){
+    if ( managerChoices.length && managerChoices.indexOf(manager) === -1){
       this.setManagerError();
     } else {
       this.setState((prevState) => {

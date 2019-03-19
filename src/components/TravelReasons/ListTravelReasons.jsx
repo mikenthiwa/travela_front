@@ -34,7 +34,7 @@ class ListTravelReasons extends Component {
   };
 
   Pagination = (currentPage, pageCount, onPageChange) => {
-    return pageCount && pageCount===1?'': (
+    return (
       <TemplatesPagination
         currentPage={currentPage ? currentPage : 1}
         pageCount={pageCount ? pageCount : 1}
@@ -86,7 +86,7 @@ class ListTravelReasons extends Component {
         />
         {this.renderDeleteModal(closeModal,
           shouldOpen,deleteTravelReason,modalType,deleteReasonId,isDeleting)}
-        {!isLoading && pageCount === 0 ? null : this.Pagination(currentPage, pageCount, this.onPageChange)}
+        {!isLoading && pageCount > 0 && this.Pagination(currentPage, pageCount, this.onPageChange)}
       </Fragment>
     );
   }

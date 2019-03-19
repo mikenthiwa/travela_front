@@ -59,6 +59,8 @@ describe('Notification Container Component', () => {
     singleNotificationRead: 3
   };
 
+  const getDerivedStateFromPropsSpy =
+        jest.spyOn(NotificationContainer, 'getDerivedStateFromProps');
   const setup = (props = customProps) => shallow( <NotificationContainer {...props} />);
 
   it('should render Pending Approvals successfully', () => {
@@ -74,15 +76,39 @@ describe('Notification Container Component', () => {
     expect(wrapper.find('NotificationItem').length).toBe(1);
   });
 
-  it('should call `getUnreadNotifictionsCount` on component render',
+  it('should call `getDerivedStateFromprops` when the component renders',
     (done) => {
       const wrapper = setup();
-
-      const getUnreadNotificationsCountSpy =
-        jest.spyOn(wrapper.instance(), 'getUnreadNotificationsCount');
-      wrapper.instance().getUnreadNotificationsCount();
-      expect(getUnreadNotificationsCountSpy).toHaveBeenCalled();
-
+      getDerivedStateFromPropsSpy.mockReset();
+      const nextProps = {
+        ...customProps,
+        title: 'Pending Approvals',
+        pendingNotifications: [ {
+          isPending: true,
+          general: false,
+          name: 'Test pending',
+          notificationStatus: 'read',
+          notificationType: 'pending',
+          senderImage: testImage,
+          id: 2,
+          notificationLink: '/requests/my-approvals/id2',
+          updatedAt: new Date().toISOString()
+        }],
+        generalNotifications: [{
+          isPending: false,
+          general: true,
+          name: 'Test general',
+          message: 'posted a comment',
+          notificationStatus: 'read',
+          notificationType: 'general',
+          senderImage: testImage,
+          id: 11,
+          notificationLink: '/requests/my-approvals/EwUNJYzNg',
+          updatedAt: new Date().toISOString()
+        }]
+      };
+      wrapper.setProps(nextProps);
+      expect(getDerivedStateFromPropsSpy).toHaveBeenCalled();
       done();
     });
 
@@ -94,7 +120,6 @@ describe('Notification Container Component', () => {
         jest.spyOn(wrapper.instance(), 'handleMarkAllAsRead');
     wrapper.instance().handleMarkAllAsRead();
     expect(handleMarkAllAsReadSpy).toHaveBeenCalled();
-
     done();
   });
 
