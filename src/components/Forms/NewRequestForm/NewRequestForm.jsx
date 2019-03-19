@@ -558,7 +558,7 @@ class NewRequestForm extends PureComponent {
     const { steps, currentTab, trips } = this.state;
     if(currentTab === 2) {
       this.setState({ isLoading: true });
-      return this.validator({trips});
+      this.validator({trips});
     }
     const newSteps = steps;
     const prev = steps[currentTab-1];
