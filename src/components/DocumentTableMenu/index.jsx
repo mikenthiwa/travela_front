@@ -1,27 +1,27 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import cancelIcon from '../../images/cancel.svg';
-import deleteIcon from '../../images/document-delete.svg';
-import downloadIcon from '../../images/save_alt_24px.svg';
-import editIcon from '../../images/edit.svg';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import cancelIcon from "../../images/cancel.svg";
+import deleteIcon from "../../images/document-delete.svg";
+import downloadIcon from "../../images/save_alt_24px.svg";
+import editIcon from "../../images/edit.svg";
 
 class DocumentTableMenu extends PureComponent {
-  openDeleteModal = (documentId) => () => {
+  openDeleteModal = documentId => () => {
     const { toggleMenu, setItemToDelete, document } = this.props;
     setItemToDelete(documentId, document.name)();
     toggleMenu(document);
-  }
+  };
 
   handleOpenRenameModal = () => {
     const { document, editDocument, openModal } = this.props;
     editDocument(document);
-    openModal('rename document');
-  }
+    openModal("rename document");
+  };
 
   handleOpenDownloadModal = () => {
     const { openModal, document } = this.props;
-    openModal('download document', document);
-  }
+    openModal("download document", document);
+  };
 
   renderEllipsis = (toggleMenu, document) => {
     return (
@@ -61,7 +61,7 @@ class DocumentTableMenu extends PureComponent {
         Delete
       </li>
     );
-  }
+  };
 
   downloadDocument = () => {
     return (
@@ -75,7 +75,7 @@ class DocumentTableMenu extends PureComponent {
         Download
       </li>
     );
-  }
+  };
 
   renderDocumentRenameBtn = () => {
     return (
@@ -89,7 +89,7 @@ class DocumentTableMenu extends PureComponent {
         Rename
       </li>
     );
-  }
+  };
 
   renderMenu = () => {
     const { toggleMenu, document, menuOpen } = this.props;
@@ -98,7 +98,7 @@ class DocumentTableMenu extends PureComponent {
     return (
       <div>
         {this.renderEllipsis(toggleMenu, document)}
-        <div className={`table__menu-container ${openMenu ? 'open' : ''}`}>
+        <div className={`table__menu-container ${openMenu ? "open" : ""}`}>
           <ul className="table__menu-list doc">
             {this.renderDocumentDeleteBtn()}
             {this.downloadDocument()}
@@ -111,11 +111,7 @@ class DocumentTableMenu extends PureComponent {
   };
 
   render() {
-    return (
-      <div className="menu__container">
-        {this.renderMenu()}
-      </div>
-    );
+    return <div className="menu__container">{this.renderMenu()}</div>;
   }
 }
 
@@ -125,7 +121,7 @@ const propTypes = {
   toggleMenu: PropTypes.func.isRequired,
   menuOpen: PropTypes.object.isRequired,
   openModal: PropTypes.func.isRequired,
-  setItemToDelete: PropTypes.func.isRequired,
+  setItemToDelete: PropTypes.func.isRequired
 };
 
 DocumentTableMenu.propTypes = { ...propTypes };

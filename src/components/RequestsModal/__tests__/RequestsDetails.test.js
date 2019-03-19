@@ -73,7 +73,7 @@ const props = {
     postSuccess: [],
     requestId: 'xDh20btGz',
     submissions: [
-      {destinationName: 'Nairobi, Kenya', 
+      {destinationName: 'Nairobi, Kenya',
         checklist: [{
           deleteReason: null,
           destinationName: 'Nairobi, Kenya',
@@ -90,10 +90,10 @@ const props = {
             tripId: 'GCpkv0WQpg',
             updatedAt: '2019-03-12T20:40:53.694Z',
             value: {url: 'http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg', fileName: 'Passport.jpeg', documentId: 'zu6sKphUj'}}]
-        }], 
+        }],
         tripId: 'GCpkv0WQpg'},
-      {destinationName: 'Lagos, Nigeria', 
-        checklist: [], 
+      {destinationName: 'Lagos, Nigeria',
+        checklist: [],
         tripId: '3OIntw-g9F'}],
     successMessage: '',
     successStatus: false,
@@ -103,7 +103,7 @@ const props = {
   uploadFile: jest.fn(),
   user: {postUserData: [], getUserData: {}, currentUser: {}, errors: {}, getCurrentUserRole: []},
   userReadinessDocument: {passport: [{}]}
-  
+
 };
 
 let wrapper;
@@ -120,10 +120,10 @@ describe('<RequestDetails />', () => {
   });
   it('should set current tab to 4 if percentage is 100', () => {
     const wrapper = shallow(<RequestDetail {...props} />);
-    wrapper.instance().setSteps(100, 
+    wrapper.instance().setSteps(100,
       props.submissionInfo.submissions);
     expect(wrapper.instance().state.currentTab).toEqual(4);
   });
 
-  
+
 });

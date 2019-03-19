@@ -429,7 +429,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
                           className="travelSubmission--input__btn--uploadedFileDate"
                         >
                           Uploaded
-                           
+
                           12-03-19
                         </div>
                         <div>

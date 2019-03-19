@@ -9,14 +9,21 @@ import Teammates from '../../components/Teammates';
 import HomeRequests from '../../components/HomeRequests';
 
 import {
-  fetchAvailableRooms, fetchAvailableRoomsSuccess
+  fetchAvailableRooms,
+  fetchAvailableRoomsSuccess
 } from '../../redux/actionCreator/availableRoomsActions';
 import {
-  fetchUserRequests, createNewRequest, editRequest,
+  fetchUserRequests,
+  createNewRequest,
+  editRequest
 } from '../../redux/actionCreator/requestActions';
 import updateUserProfile from '../../redux/actionCreator/userProfileActions';
 import { fetchRoleUsers } from '../../redux/actionCreator/roleActions';
 import { getOccupation } from '../../redux/actionCreator/occupationActions';
+import HomePagePlaceholder from '../../components/Placeholders/HomePagePlaceholder';
+import TravelingMembersPlaceholder from '../../components/Placeholders/TravelingMembersPlaceholder';
+import TravelRequestPlaceholder from '../../components/Placeholders/TravelRequestPlaceholder';
+
 
 export class Home extends Component {
   constructor(props) {
@@ -25,7 +32,7 @@ export class Home extends Component {
     this.state = {
       url: location.search,
       department: '',
-      availableRooms:{}
+      availableRooms: {}
     };
   }
 
@@ -38,18 +45,40 @@ export class Home extends Component {
   }
 
   static getDerivedStateFromProps = (nextProps, prevState) => {
-    const { department, fetchTeammates, availableRooms, fetchAvailableRooms } = nextProps;
+    const {
+      department,
+      fetchTeammates,
+      availableRooms,
+      fetchAvailableRooms
+    } = nextProps;
 
-    if(department !== prevState.department) {
+    if (department !== prevState.department) {
       fetchTeammates(department);
-      return {department};
+      return { department };
     }
-    if(availableRooms === prevState.availableRooms){
+    if (availableRooms === prevState.availableRooms) {
       fetchAvailableRooms();
       return { availableRooms };
     }
-
     return null;
+  };
+
+  renderPlaceholders() {
+    return (
+      <div className="homeplaceholder">
+        <div className="getStarted">
+          <HomePagePlaceholder />
+        </div>
+        <div className="bottom">
+          <div className="teammates">
+            <TravelingMembersPlaceholder />
+          </div>
+          <div className="homeRequests">
+            <TravelRequestPlaceholder />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   render() {
@@ -57,22 +86,32 @@ export class Home extends Component {
     return (
       <div>
         <h1 className="home-title">HOME</h1>
-        <div className="home">
-          <GetStarted />
-          <div className="overview">
-            <Teammates teammates={teammates} />
-            <HomeRequests
-              isLoading={isFetching}
-              requests={requests}
-            />
+        {isFetching  ? (
+          <div className="">
+            {this.renderPlaceholders()}
           </div>
-        </div>
+        ): (
+          <div className="home">
+            <GetStarted />
+            <div className="overview">
+              <Teammates teammates={teammates} />
+              <HomeRequests isLoading={isFetching} requests={requests} />
+            </div>
+          </div>
+        )}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({requests, user, role, availableRooms, occupations, teammates}) => ({
+export const mapStateToProps = ({
+  requests,
+  user,
+  role,
+  availableRooms,
+  occupations,
+  teammates
+}) => ({
   ...requests,
   ...role,
   ...occupations,
@@ -92,7 +131,7 @@ const actionCreators = {
   fetchAvailableRoomsSuccess,
   fetchTeammates,
   getOccupation,
-  fetchRoleUsers,
+  fetchRoleUsers
 };
 
 Home.propTypes = {
@@ -115,7 +154,10 @@ Home.defaultProps = {
   availableRooms: {},
   location: { url: '' },
   department: '',
-  isFetching: false,
+  isFetching: false
 };
 
-export default connect(mapStateToProps, actionCreators)(Home);
+export default connect(
+  mapStateToProps,
+  actionCreators
+)(Home);

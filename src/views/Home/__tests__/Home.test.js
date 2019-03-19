@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 
-import ConnectedHome, { Home } from '..';
+import ConnectedHome, { Home, mapStateToProps } from '..';
 
 process.env.REACT_APP_CITY = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD-fvLImnNbTfYV3Pd1nJuK7NbzZJNr4ug&libraries=places';
 
@@ -45,7 +45,12 @@ beforeEach(() => {
       }
     },
     creatingRequest: false,
-    availableRooms: {},
+    availableRooms:{
+      beds: [],
+      bedsError: [],
+      isLoading: false,
+      rowId: 0,
+    },
     requestOnEdit: {},
     department: 'TDD',
     fetchTeammates: jest.fn(),
@@ -114,5 +119,48 @@ describe('<Home />', () => {
     });
     expect(props.fetchTeammates).toHaveBeenCalled();
     expect(wrapper.instance().state.department).toBe('TDD');
+  });
+
+  it('renders the skeleton-loader to the  home page when isFetching is true', () => {
+    const wrapper = mount(
+      <MemoryRouter>
+        <Home {...props} isFetching  />
+      </MemoryRouter>
+    );
+    expect(wrapper.find('HomePagePlaceholder').length).toBe(1);
+    expect(wrapper.find('TravelingMembersPlaceholder').length).toBe(1);
+    expect(wrapper.find('TravelRequestPlaceholder').length).toBe(1);
+    expect(wrapper.find('GetStarted').length).toBe(0);
+    expect(wrapper.find('Teammates').length).toBe(0);
+    expect(wrapper.find('HomeRequests').length).toBe(0);
+  });
+
+  it('checks if the skeleton-loader is not rendered when isFetching is false', () => {
+    const wrapper = mount(
+      <MemoryRouter>
+        <Home {...props} isFetching={false}  />
+      </MemoryRouter>
+    );
+    expect(wrapper.find('GetStarted').length).toBe(1);
+    expect(wrapper.find('Teammates').length).toBe(1);
+    expect(wrapper.find('HomeRequests').length).toBe(1);
+    expect(wrapper.find('TravelingMembersPlaceholder').length).toBe(0);
+    expect(wrapper.find('TravelRequestPlaceholder').length).toBe(0);
+    expect(wrapper.find('HomePagePlaceholder').length).toBe(0);
+  });
+
+  it('fetch available rooms',()=>{
+    wrapper = shallow(
+      <MemoryRouter>
+        <Home {...props} />
+      </MemoryRouter>
+    ).dive().dive();
+    wrapper.setState({availableRooms:{}});
+    wrapper.setProps({
+      ...props,
+      availableRooms:{}
+    });
+    expect(wrapper.instance().props.fetchAvailableRooms).toBeCalled;
+    expect(wrapper.instance().state.availableRooms).toEqual({});
   });
 });

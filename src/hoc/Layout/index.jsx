@@ -29,7 +29,7 @@ export class Layout extends Component {
       this.setState({ delay: true});
       setTimeout(() => {
         this.setState({ delay: false});
-      }, 20000);  
+      }, 20000);
     }
   };
 
@@ -152,7 +152,7 @@ export class Layout extends Component {
     if(delay || !isLoaded && token && pathname === '/home'){
       return <LoaderPage />;
     }
-   
+
     const { hideOverlay, openSearch } = this.state;
     const overlayClass = hideOverlay ? 'none': 'block';
     return (
