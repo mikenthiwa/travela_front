@@ -39,7 +39,7 @@ export function* updateRequestStatusSaga(action) {
     const { message, updatedRequest } = response.data;
     toast.success(message);
     yield put(updateRequestStatusSuccess(updatedRequest));
-    yield put(fetchUserRequestDetailsSuccess(updatedRequest));
+    yield put(fetchUserRequestDetailsSuccess(action.requestId));
   } catch (error) {
     const errorMessage = apiErrorHandler(error);
     yield put(updateRequestStatusFailure(errorMessage));

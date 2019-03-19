@@ -86,13 +86,13 @@ const approvals = (state = initState, action) => {
     return {
       ...state,
       updatingStatus: false,
-      budgetapprovals: state.budgetapprovals.map((budgetapproval) => {
+      budgetapprovals: state.budgetapprovals ? state.budgetapprovals.map((budgetapproval) => {
         if (budgetapproval.id === action.updatedBudgetRequest.id) {
           budgetapproval.budgetStatus = action.updatedBudgetRequest.budgetStatus;
         }
 
         return budgetapproval;
-      })
+      }) : []
     };
   case UPDATE_BUDGET_STATUS_FAILURE:
     return {
