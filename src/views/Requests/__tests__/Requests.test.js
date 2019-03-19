@@ -444,6 +444,15 @@ describe('<Requests>', () => {
     expect(handleCloseSubmissionModalSpy).toHaveBeenCalledTimes(1);
   });
 
+  it('should handle close travel checklist modal', () => {
+    const wrapper = shallow(<Requests {...props} />
+    );
+    const instance = wrapper.instance();
+    const handleCloseChecklistModalSpy = jest.spyOn(instance, 'handleCloseChecklistsModal');
+    wrapper.instance().handleCloseChecklistsModal();
+    expect(handleCloseChecklistModalSpy).toHaveBeenCalledTimes(1);
+  });
+
   it('should set openChecklist to true', () => {
     const prevProps = {
       ...props,

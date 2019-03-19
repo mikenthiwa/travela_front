@@ -11,33 +11,37 @@ class AnalyticsPagination extends PureComponent{
       handlePagination(id);
     }
   }
-  renderPaginationBtn (direction) {
-    const { pagination: {currentPage, pageCount, prevPage} } = this.props;
-    const renderButton = (text, disabled) => (
+  renderPaginationBtn (direction, previousButtonDisabled, nextButtonDisabled) {
+    const { pagination: {currentPage, pageCount, prevPage } } = this.props;
+    const renderButton = (text, disabled, previousButtonDisabled, nextButtonDisabled) => (
       <button
         id={text} 
-        className={`pg--button ${disabled && 'button-disabled'}`} onClick={this.handleClick} type="button">
+        className={(previousButtonDisabled || nextButtonDisabled) ? `pg--button ${disabled && 'button-disabled'}` :`pg--button ${disabled }`}
+        onClick={this.handleClick} 
+        type="button">
         {text}
       </button>
     );
 
     switch (direction) {
     case 'Previous':
-      return renderButton(direction, prevPage === 0);
+      return renderButton(direction, prevPage === 0, previousButtonDisabled);
     case 'Next':
-      return renderButton(direction, currentPage === pageCount);
+      return renderButton(direction, currentPage === pageCount, nextButtonDisabled);
     }
   }
 
   render () {
     const {pagination: {currentPage, pageCount}} = this.props;
+    const previousButtonDisabled = currentPage === 1 ? true: false;
+    const nextButtonDisabled = currentPage >= pageCount ? true: false;
     return(
       <div className="pg--container">
-        {this.renderPaginationBtn('Previous')}
+        { this.renderPaginationBtn('Previous', previousButtonDisabled, nextButtonDisabled) }
         <span className="pg--text">
-          {`Showing page ${currentPage} of ${pageCount} ${pageCount > 1 ? 'pages' : 'page'}`}
+          { `Showing page ${currentPage} of ${pageCount} ${pageCount > 1 ? 'pages' : 'page'}` }
         </span>
-        {this.renderPaginationBtn('Next')}
+        { this.renderPaginationBtn('Next', previousButtonDisabled, nextButtonDisabled) }
       </div>
     );
   }

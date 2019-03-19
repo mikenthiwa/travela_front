@@ -24,7 +24,7 @@ class TravelReadiness extends PureComponent {
     }
   }
   renderReadinessDetails = (item, index) => {
-    const { departureDate } = item;
+    const { departureDate } = item; 
     return (
       <div className="analyticsReport__row analyticsReport__report-details" key={`item${index}`}>
         <div>
@@ -97,10 +97,10 @@ class TravelReadiness extends PureComponent {
     const { readiness, fetchReadiness, range } = this.props;
     const { travelFlow } = this.state;
     if(readiness){
-      const { currentPage, pageCount, limit, prevPage, nextPage } = readiness.pagination;
-      if(direction==='Next' && currentPage <= pageCount){
+      const { currentPage, pageCount, limit, prevPage, nextPage, dataCount } = readiness.pagination;
+      if(direction==='Next' && currentPage <= pageCount && dataCount > limit){
         fetchReadiness({page: nextPage, limit, type:'json', travelFlow, range});
-      }else if(direction === 'Previous' && prevPage > 0){
+      }else if(direction === 'Previous' && prevPage > 0 && dataCount > limit){
         fetchReadiness({page: prevPage, limit, type:'json', travelFlow, range});
       }
 
