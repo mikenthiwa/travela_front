@@ -40,7 +40,7 @@ const routes = {
   '/requests/budgets/:requestId': [ConnectedApproveRequests('budget'),[SUPER_ADMINISTRATOR, BUDGET_CHECKER]],
   '/requests/budgets/': [ConnectedApprovals('budget'), [SUPER_ADMINISTRATOR, BUDGET_CHECKER]],
   '/requests/my-verifications': [ConnectedVerifications, TRAVEL_MANAGERS],
-  '/requests/my-verifications/:requestId': [ConnectedVerificationDetails, [TRAVEL_MANAGERS, FINANCE_TEAM_MEMBER]],
+  '/requests/my-verifications/:requestId': [ConnectedVerificationDetails, [FINANCE_TEAM_MEMBER, ...TRAVEL_MANAGERS ]],
   '/requests': [ConnectedRequests],
   '/requests/new-request': [ConnectedNewRequests],
   '/travel_readiness': [ConnectedReadiness],
