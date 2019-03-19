@@ -108,7 +108,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "jest -u --runInBand --no-cache --env=jsdom",
+    "test":  "jest -u --runInBand --no-cache --env=jsdom",
     "test:watch": "jest -u --runInBand --no-cache --env=jsdom --watch",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "end2end": "cypress open",

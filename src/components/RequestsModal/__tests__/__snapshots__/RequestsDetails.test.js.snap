@@ -315,189 +315,247 @@ exports[`<RequestDetails /> should render properly 1`] = `
       </div>
     </div>
   </div>
-  <div
-    className="travelCheck-list"
-  >
-    <div
-      className="travelCheckList__row"
-    >
+  <div>
+    <div>
       <div
-        className="travelCheckList__col-7"
+        className="request-details-container"
       >
-        <div
-          className="travelCheckList--card"
+        <table
+          className="trip-details-pod"
         >
-          <div
-            className="travelCheckList--card__head"
-          >
-            Travel CheckList Required For This Trip
-          </div>
-          <div
-            className="travelCheckList"
-          >
-            <div
-              className="travelCheckList__destination"
-              key="0"
-            >
-              <div
-                className="travelSubmission--item"
-              >
-                <span
-                  className="travelSubmission--item__name"
-                >
-                  visa
-                </span>
-                <div
-                  className="travelSubmission--input__upload-field__"
-                >
-                  <div
-                    className="travelSubmission--input__input-field__"
-                  >
-                    <img
-                      alt="document"
-                      className="travelSubmission--input__input-field__image"
-                      src="document-rect.png"
-                    />
-                    <div
-                      className="travelSubmission--input__btn--"
-                      role="presentation"
-                    >
-                      <div
-                        className="travelSubmission--input__btn--uploadedFileName"
-                        id="file-upload"
-                        role="presentation"
-                      >
-                        Passport.jpeg
-                      </div>
-                      <div
-                        className="travelSubmission--input__btn--uploadedFileDate"
-                      >
-                        Uploaded
-                         
-                        13-03-19
-                      </div>
-                      <div>
-                        <a
-                          href="http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg"
-                          target="_blank"
-                        >
-                          <img
-                            alt="upload_icon"
-                            className="travelSubmission--input__image"
-                            src="download_file.svg"
-                          />
-                        </a>
-                      </div>
-                    </div>
-                    <input
-                      className="uploadedFile"
-                      disabled=""
-                      name="file"
-                      onChange={[Function]}
-                      type="file"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className="travelCheckList__destination"
-              key="1"
-            >
-              0
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="travelCheckList__col-5"
-      >
-        <div
-          className="travelCheckList--card"
+          <thead>
+            <tr>
+              <th>
+                Flight Route
+              </th>
+              <th>
+                Travel Dates
+              </th>
+              <th>
+                Accommodation
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Lagos - Nairobi
+              </td>
+              <td>
+                01 AUG -
+                      02 AUG 2019
+              </td>
+              <td>
+                Residence
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table
+          className="reason-details-pod"
         >
-          <div
-            className="travelCheckList--card__head"
-          >
-            Your Travel Readiness
-          </div>
-          <div
-            className="progressBar"
-          >
-            <div
-              className="progressBar__text"
-            >
-              <div
-                className="progressBar__text-head"
-              >
-                You are
-              </div>
-              <div
-                className="progressBar__text-foot"
-              >
-                Travel Ready
-              </div>
-            </div>
-            <svg
-              height={169}
-              viewBox="0 0 169 169"
-              width={169}
-            >
-              <circle
-                className="circle-background"
-                cx={84.5}
-                cy={84.5}
-                r={79.5}
-                strokeWidth="10px"
-              />
-              <circle
-                className="circle-progress"
-                cx={84.5}
-                cy={84.5}
-                r={79.5}
-                stroke="#10A36D"
-                strokeWidth="10px"
-                style={
-                  Object {
-                    "strokeDasharray": 499.5132319207771,
-                    "strokeDashoffset": 0,
-                  }
-                }
-                transform="rotate(-90 84.5 84.5)"
-              />
-              <text
-                className="circle-text"
-                dy=".3em"
-                textAnchor="middle"
-                x="50%"
-                y="50%"
-              >
-                100%
-              </text>
-            </svg>
-          </div>
-          <div
-            className="progressBar__message"
-          >
-            <p>
-              Travel Team will review your document and advise accordingly
-            </p>
-          </div>
-        </div>
+          <thead>
+            <tr>
+              <th>
+                Travel Reason
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Nothing
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div
-      className="travelCheckList__row"
+      className="travelCheck-list"
     >
       <div
-        className="travelSubmission--submit-area__button"
+        className="travelCheckList__row"
       >
-        <button
-          className="bg-btn bg-btn--inactive"
-          id="submit-button"
-          type="button"
+        <div
+          className="travelCheckList__col-7"
         >
-          SUBMIT
-        </button>
+          <div
+            className="travelCheckList--card"
+          >
+            <div
+              className="travelCheckList--card__head"
+            >
+              Travel CheckList Required For This Trip
+            </div>
+            <div
+              className="travelCheckList"
+            >
+              <div
+                className="travelCheckList__destination"
+                key="0"
+              >
+                <div
+                  className="travelSubmission--item"
+                >
+                  <span
+                    className="travelSubmission--item__name"
+                  >
+                    visa
+                  </span>
+                  <div
+                    className="travelSubmission--input__upload-field__"
+                  >
+                    <div
+                      className="travelSubmission--input__input-field__"
+                    >
+                      <img
+                        alt="document"
+                        className="travelSubmission--input__input-field__image"
+                        src="document-rect.png"
+                      />
+                      <div
+                        className="travelSubmission--input__btn--"
+                        role="presentation"
+                      >
+                        <div
+                          className="travelSubmission--input__btn--uploadedFileName"
+                          id="file-upload"
+                          role="presentation"
+                        >
+                          Passport.jpeg
+                        </div>
+                        <div
+                          className="travelSubmission--input__btn--uploadedFileDate"
+                        >
+                          Uploaded
+                           
+                          12-03-19
+                        </div>
+                        <div>
+                          <a
+                            href="http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg"
+                            target="_blank"
+                          >
+                            <img
+                              alt="upload_icon"
+                              className="travelSubmission--input__image"
+                              src="download_file.svg"
+                            />
+                          </a>
+                        </div>
+                      </div>
+                      <input
+                        className="uploadedFile"
+                        disabled=""
+                        name="file"
+                        onChange={[Function]}
+                        type="file"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="travelCheckList__destination"
+                key="1"
+              >
+                0
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="travelCheckList__col-5"
+        >
+          <div
+            className="travelCheckList--card"
+          >
+            <div
+              className="travelCheckList--card__head"
+            >
+              Your Travel Readiness
+            </div>
+            <div
+              className="progressBar"
+            >
+              <div
+                className="progressBar__text"
+              >
+                <div
+                  className="progressBar__text-head"
+                >
+                  You are
+                </div>
+                <div
+                  className="progressBar__text-foot"
+                >
+                  Travel Ready
+                </div>
+              </div>
+              <svg
+                height={169}
+                viewBox="0 0 169 169"
+                width={169}
+              >
+                <circle
+                  className="circle-background"
+                  cx={84.5}
+                  cy={84.5}
+                  r={79.5}
+                  strokeWidth="10px"
+                />
+                <circle
+                  className="circle-progress"
+                  cx={84.5}
+                  cy={84.5}
+                  r={79.5}
+                  stroke="#10A36D"
+                  strokeWidth="10px"
+                  style={
+                    Object {
+                      "strokeDasharray": 499.5132319207771,
+                      "strokeDashoffset": 0,
+                    }
+                  }
+                  transform="rotate(-90 84.5 84.5)"
+                />
+                <text
+                  className="circle-text"
+                  dy=".3em"
+                  textAnchor="middle"
+                  x="50%"
+                  y="50%"
+                >
+                  100%
+                </text>
+              </svg>
+            </div>
+            <div
+              className="progressBar__message"
+            >
+              <p>
+                Travel Team will review your document and advise accordingly
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="travelCheckList__row"
+      >
+        <div
+          className="travelSubmission--submit-area__button"
+        >
+          <button
+            className="bg-btn bg-btn--inactive"
+            id="submit-button"
+            onClick={[Function]}
+            type="button"
+          >
+            SUBMIT
+          </button>
+        </div>
       </div>
     </div>
   </div>

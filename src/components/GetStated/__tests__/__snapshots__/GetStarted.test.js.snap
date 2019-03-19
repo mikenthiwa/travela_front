@@ -23,7 +23,7 @@ exports[`<GetStarted /> should render without crashing 1`] = `
       <p
         className="confirm"
       >
-        Confirm you have all the required travel documents today and avoid last minute hassle.
+        Upload details of your travel documents today and avoid last minute hassle.
       </p>
       <Link
         replace={false}

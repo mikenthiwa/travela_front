@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TravelChecklist Component should render the component 1`] = `
+<div
+  className="travelCheck-list"
+>
+  <div
+    className="travelCheckList__row"
+  >
+    <div
+      className="travelCheckList__col-7"
+    >
+      <div
+        className="travelCheckList--card"
+      >
+        <div
+          className="travelCheckList--card__head"
+        >
+          Travel CheckList Required For This Trip
+        </div>
+      </div>
+    </div>
+    <div
+      className="travelCheckList__col-5"
+    >
+      <div
+        className="travelCheckList--card"
+      >
+        <div
+          className="travelCheckList--card__head"
+        >
+          Your Travel Readiness
+        </div>
+        <div
+          className="progressBar"
+        >
+          <div
+            className="progressBar__text"
+          >
+            <div
+              className="progressBar__text-head"
+            >
+              You are
+            </div>
+            <div
+              className="progressBar__text-foot"
+            >
+              Travel Ready
+            </div>
+          </div>
+          <svg
+            height={169}
+            viewBox="0 0 169 169"
+            width={169}
+          >
+            <circle
+              className="circle-background"
+              cx={84.5}
+              cy={84.5}
+              r={79.5}
+              strokeWidth="10px"
+            />
+            <circle
+              className="circle-progress"
+              cx={84.5}
+              cy={84.5}
+              r={79.5}
+              stroke="#3359DB"
+              strokeWidth="10px"
+              style={
+                Object {
+                  "strokeDasharray": 499.5132319207771,
+                  "strokeDashoffset": 99.90264638415545,
+                }
+              }
+              transform="rotate(-90 84.5 84.5)"
+            />
+            <text
+              className="circle-text"
+              dy=".3em"
+              textAnchor="middle"
+              x="50%"
+              y="50%"
+            >
+              80%
+            </text>
+          </svg>
+        </div>
+        <div
+          className="progressBar__message"
+        >
+          <p>
+            Complete the checklist to continue
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="travelCheckList__row"
+  >
+    <div
+      className="travelSubmission--submit-area__button"
+    >
+      <button
+        className=""
+        id="save-button"
+        onClick={[Function]}
+        type="button"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+`;

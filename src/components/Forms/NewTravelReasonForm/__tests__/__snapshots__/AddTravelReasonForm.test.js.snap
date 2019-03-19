@@ -49,9 +49,14 @@ exports[`<AddTravelReason /> renders without crashing 1`] = `
           htmlFor="description"
         >
           Description
-          <span>
-             
-            (Optional)
+          <span
+            style={
+              Object {
+                "color": "red",
+              }
+            }
+          >
+             * 
           </span>
         </label>
         <textarea
@@ -62,7 +67,6 @@ exports[`<AddTravelReason /> renders without crashing 1`] = `
           name="description"
           onBlur={[Function]}
           onChange={[Function]}
-          required={false}
           rows="10"
           type="textarea"
           value=""

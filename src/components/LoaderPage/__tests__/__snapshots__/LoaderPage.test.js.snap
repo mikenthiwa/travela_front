@@ -1450,7 +1450,7 @@ exports[`<LoaderBody /> renders correctly 1`] = `
       <p
         className="loader__body-text"
       >
-        Forget champagne and caviar – Taste the world instead!
+        That awkward moment: When you walk through the metal detectors at the airport, and your abs of steel set them off
       </p>
     </div>
   </div>

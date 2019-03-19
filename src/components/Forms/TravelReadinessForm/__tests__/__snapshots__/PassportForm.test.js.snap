@@ -319,11 +319,14 @@ exports[`<PassportForm/> renders correctly 1`] = `
           className="document-input__input-container__prompts"
           htmlFor="select-file"
         >
-          <img
-            alt="Document Upload"
+          <div
             className="document-input__input-container__prompts__img"
-            src="document-upload-blue.svg"
-          />
+          >
+            <img
+              alt="Document Upload"
+              src="document-upload-blue.svg"
+            />
+          </div>
           <div
             className="document-input__input-container__prompts__text"
           >

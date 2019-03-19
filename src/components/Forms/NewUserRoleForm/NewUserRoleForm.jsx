@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
+import toast from 'toastr';
 import { PropTypes } from 'prop-types';
 import { FormContext } from '../FormsAPI';
 import PersonalDetailsFieldset from './FormFieldsets/PersonalDetails';
 import SubmitArea from '../NewRequestForm/FormFieldsets/SubmitArea';
-import { getUserRoleCenter } from '../../../helper/userDetails';
 
 class NewUserRoleForm extends PureComponent {
   constructor(props) {
@@ -12,15 +12,10 @@ class NewUserRoleForm extends PureComponent {
     let defaultValues = {
       email: userDetail ? userDetail.email : '',
       roleName: role,
+      department: '',
+      departments: [],
       roleId,
-      center: getUserRoleCenter(userDetail, null)
     };
-    if (role.toLowerCase() === 'travel team member') {
-      defaultValues = {
-        ...defaultValues,
-        center: getUserRoleCenter(userDetail, '')
-      };
-    }
     this.defaultState = {
       values: defaultValues,
       errors: {},
@@ -28,9 +23,9 @@ class NewUserRoleForm extends PureComponent {
     };
     this.state = { ...this.defaultState };
   }
+
   componentDidMount() {
-    const { fetchCenters, getAllUsersEmail } = this.props;
-    fetchCenters();
+    const { getAllUsersEmail } = this.props;
     getAllUsersEmail();
   }
 
@@ -44,14 +39,48 @@ class NewUserRoleForm extends PureComponent {
     event.preventDefault();
     const { handleUpdateRole, updateUserCenter, userDetail, myTitle } = this.props;
     const { values } = this.state;
+    const dataValue = {
+      email: values.email,
+      roleName: values.roleName,
+      departments: values.departments
+    };
     if (this.validate()) {
       let data = values;
-      if (!values.center) delete values.center;
       myTitle === 'Add User' ?
-        handleUpdateRole(data):
+        handleUpdateRole(dataValue):
         updateUserCenter(userDetail.id, data);
     }
   };
+
+
+  addDepartment = () => {
+    const { values } = this.state; 
+    if(values.departments.includes(values.department.trim())) {
+      return toast.error('You have added that department already');
+    }
+
+    this.setState({
+      values: {
+        ...values,
+        departments: values.departments.concat([values.department.trim()]),
+        department: ''
+      }
+    },  this.validate
+    );
+  }
+
+  removeDepartment = (i) => {
+    const { values } = this.state;
+    const array = values.departments;
+    array.splice(i, 1);
+    this.setState({ 
+      values: {
+        ...values,
+        departments: array
+      }
+    }, this.validate
+    );
+  }
 
   handleCancel = () => {
     this.setState({ ...this.defaultState });
@@ -59,15 +88,27 @@ class NewUserRoleForm extends PureComponent {
 
   validate = field => {
     let { values, errors } = this.state;
+    const { role } =  this.props;
     [errors, values] = [{ ...errors }, { ...values }];
     let hasBlankFields = false;
-    !values[field]
-      ? (errors[field] = 'This field is required')
-      : (errors[field] = '');
-    hasBlankFields = Object.keys(values).some(key => values[key] === '');
+    delete values.department;
+    if (!values[field]) {
+      errors[field] = 'This field is required';
+      delete errors.department;
+    } else {
+      errors[field] = '';
+    }
+  
+    hasBlankFields = Object.keys(values).some(key => !values[key]);
     this.setState(prevState => {
       return { ...prevState, errors, hasBlankFields };
     });
+
+    if(role === 'Budget Checker'  && values.departments.length < 1){
+      this.setState({
+        hasBlankFields:true
+      });
+    }
     return !hasBlankFields;
   };
 
@@ -81,10 +122,12 @@ class NewUserRoleForm extends PureComponent {
             values={values}
             roleName={role}
             centers={centers}
+            addDepartment={this.addDepartment}
+            hasBlankFields={hasBlankFields}
+            removeDepartment={this.removeDepartment}
             myTitle={myTitle}
             allMails={allMails}
           />
-          <hr />
           <SubmitArea
             onCancel={this.handleCancel}
             loading={updatingRole}
@@ -104,7 +147,6 @@ NewUserRoleForm.propTypes = {
   centers: PropTypes.array.isRequired,
   myTitle: PropTypes.string.isRequired,
   updateUserCenter: PropTypes.func,
-  fetchCenters: PropTypes.func,
   role: PropTypes.string.isRequired,
   userDetail:  PropTypes.object,
   roleId: PropTypes.string.isRequired,
@@ -115,7 +157,6 @@ NewUserRoleForm.propTypes = {
 NewUserRoleForm.defaultProps = {
   updatingRole: false,
   updateUserCenter: ()=> {},
-  fetchCenters: ()=> {},
   getAllUsersEmail: ()=> {},
   userDetail: {},
 };

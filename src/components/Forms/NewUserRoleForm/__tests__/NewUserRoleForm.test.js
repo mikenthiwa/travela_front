@@ -16,10 +16,16 @@ describe('<NewUserRoleForm />', () => {
     role: 'travel team member',
     loading: false,
     errors: [],
+    removeDepartment: jest.fn(() => {}),
+    addDepartment: jest.fn(() => {}),
     myTitle: 'Add User' ,
     getRoleData: jest.fn(() => {}),
     handleUpdateRole:  jest.fn(() => {}),
     onChange: jest.fn(),
+    values: {
+      departments: [],
+      department: 'lol',
+    },
     userDetail: {
       email: 'tomato@andela.com',
       id: 1,
@@ -27,6 +33,7 @@ describe('<NewUserRoleForm />', () => {
         location: 'New York, USA'
       }]
     },
+    roleName: 'Budget Checker',
     centers: [{location: 'Kigali, Rwanda'}],
     roleId: '33589',
     getAllUsersEmail: jest.fn(),
@@ -51,36 +58,9 @@ describe('<NewUserRoleForm />', () => {
     expect(personalDetails).toHaveLength(1);
   });
 
-
-  it('validates form before sending data', () => {
-    const form = wrapper.find('form');
-    form.simulate('submit');
-    expect(onSubmit).toHaveBeenCalledTimes(0);
-  });
-
   it('should render a loading indicator while updating a new role', () => {
     wrapper.setProps({ updatingRole: true });
     expect(wrapper.find('i.loading-icon')).toHaveLength(1);
-  });
-
-  it('calls on submit when all details are correct', () => {
-    const spy = jest.spyOn(wrapper.instance(), 'handleSubmit');
-    wrapper.instance().forceUpdate();
-    wrapper.find('form').simulate('submit');
-    wrapper.state().values.email = 'test';
-    expect(spy).toHaveBeenCalled();
-    expect(props.handleUpdateRole).toHaveBeenCalledWith(wrapper.state().values);
-    expect(props.handleUpdateRole).toHaveBeenCalledTimes(2);
-  });
-
-
-  it('calls on submit when all details are correct when changing user center ', () => {
-    const wrapper =  mount(<NewUserRoleForm {...{...props, myTitle: 'Change Center'}} />);
-    const spy = jest.spyOn(wrapper.instance(), 'handleSubmit');
-    wrapper.instance().forceUpdate();
-    wrapper.find('form').simulate('submit');
-    expect(spy).toHaveBeenCalled();
-    expect(props.handleUpdateRole).toHaveBeenCalledTimes(2);
   });
 
 
@@ -103,6 +83,28 @@ describe('<NewUserRoleForm />', () => {
         }}} />);
     expect(spy.called).toEqual(true);
     wrapper.unmount();
+  });
+
+
+  it('should add department button when role is budgetChecker', () => {
+    const wrapper = mount(
+      <NewUserRoleForm {...{...props, role: 'Budget Checker', roleId: '6000' }} />);
+    const spy = jest.spyOn(wrapper.instance(), 'handleSubmit');
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'test@andela.com'}});
+    wrapper.find('input').at(1).simulate('change', { target: { value: 'test'}});
+    wrapper.find('.add_button').simulate('click');
+    wrapper.find('.remove').simulate('click');
+    wrapper.find('input').at(1).simulate('change', { target: { value: 'test'}});
+    wrapper.find('.add_button').simulate('click');
+    wrapper.find('form').simulate('submit');
+    expect(spy).toHaveBeenCalled();
+    expect(props.handleUpdateRole).toHaveBeenCalledTimes(1);
+    expect(props.handleUpdateRole).toHaveBeenCalledWith({
+      email: 'test@andela.com',
+      roleName: 'Budget Checker',
+      departments: ['test']
+    });
+    spy.mockClear();
   });
 
   describe('<PersonalDetails />', () => {

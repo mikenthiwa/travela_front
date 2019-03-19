@@ -20,31 +20,12 @@ exports[`<NewUserRoleForm /> <PersonalDetails /> renders correctly 1`] = `
           ]
         }
         className="email_dropdown"
-        disabled={true}
         label="Andela Email Address"
         labelNote=""
         name="email"
         onChange={null}
         size=""
         type="filter-dropdown-select"
-      />
-    </div>
-    <div>
-      <Input
-        autoComplete="off"
-        choices={
-          Array [
-            Array [],
-          ]
-        }
-        className="request_dropdown"
-        label="Center"
-        labelNote=""
-        name="center"
-        onChange={null}
-        required={true}
-        size=""
-        type="dropdown-select"
       />
     </div>
   </div>
@@ -107,7 +88,6 @@ exports[`<NewUserRoleForm /> renders correctly 1`] = `
                   ]
                 }
                 className="occupationInput"
-                disabled={false}
                 label="Andela Email Address"
                 name="role"
                 onChange={[Function]}
@@ -130,98 +110,8 @@ exports[`<NewUserRoleForm /> renders correctly 1`] = `
           />
         </div>
       </div>
-      <div>
-        <div
-          className="form-input request_dropdown "
-        >
-          <label
-            htmlFor="center"
-          >
-            Center
-            <span
-              style={
-                Object {
-                  "color": "red",
-                }
-              }
-            >
-               * 
-            </span>
-          </label>
-          <div
-            style={
-              Object {
-                "position": "relative",
-              }
-            }
-          >
-            <div
-              autoComplete="off"
-              choices={
-                Array [
-                  "Kigali, Rwanda",
-                ]
-              }
-              className="input select  request_dropdown"
-              label="Center"
-              name="center"
-              onChange={[Function]}
-              onClick={[Function]}
-              onKeyPress={[Function]}
-              required={true}
-              role="button"
-              size=""
-              tabIndex="0"
-              type="dropdown-select"
-              value="New York, USA"
-            >
-              <div
-                className="value"
-                style={
-                  Object {
-                    "width": "",
-                  }
-                }
-              >
-                 
-                <div
-                  className="select-dropdown inactive"
-                >
-                  <img
-                    alt="icn"
-                    src="form_select_dropdown.svg"
-                  />
-                </div>
-              </div>
-              <ul
-                className="select-menu select-menu--inactive"
-                onScroll={[Function]}
-              >
-                <li
-                  id="choice"
-                  key="Kigali, Rwanda"
-                >
-                  <div
-                    id="choice"
-                    onClick={[Function]}
-                    onKeyPress={[Function]}
-                    role="button"
-                    tabIndex="0"
-                  >
-                    Kigali, Rwanda
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <span
-            className="error"
-          />
-        </div>
-      </div>
     </div>
   </fieldset>
-  <hr />
   <fieldset
     className={null}
   >

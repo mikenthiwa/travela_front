@@ -38,7 +38,7 @@ Array [
                         className="mdl-data-table__cell--non-numeric 
                                           checkInTable__data residence__text"
                     >
-                        14th Mar - 4th Oct 2025
+                        19th Mar - 4th Oct 2025
                     </td>
                     <td
                         className="mdl-data-table__cell--non-numeric  checkInTable__data__column table__button-column"
@@ -76,7 +76,7 @@ Array [
         <div
             className="checkInTable__trips--empty"
         >
-            You have no check-in record
+            You have no check-in record yet, because you haven't booked a room in any of the Andela Guest Houses
         </div>
     </div>
 </div>,

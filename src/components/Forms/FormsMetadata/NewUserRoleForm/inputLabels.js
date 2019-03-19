@@ -8,6 +8,9 @@ const inputLabels = {
   center: {
     label: 'Center',
   },
+  department: {
+    label: 'Add Department'
+  }
 };
 
 export default inputLabels;

@@ -2,32 +2,13 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import InputRenderer from '../../FormsAPI';
 import * as formMetadata from '../../FormsMetadata/NewUserRoleForm';
+import './PersonalDetails.scss';
 
 class PersonalDetailsFiedset extends Component {
-  renderCenterField(roleName, renderInput) {
-    if (roleName.toLowerCase() === 'travel team member') {
-      return renderInput('center', 'dropdown-select',
-        { required: true, className: 'request_dropdown',size: '' });
-    }
-    return renderInput('center', 'dropdown-select',
-      {
-        labelNote: '(Optional)',
-        required: false,
-        className: 'request_dropdown',
-        size: ''
-      });
-  }
 
-  renderRmailField(emails, renderInput) {
-    
-  }
   render() {
-    
-    const { roleName, centers, myTitle, allMails } = this.props;
-    const checkStatus = myTitle === 'Change Center';
-    const centerLocations = centers && centers.map(center => center.location);
-    formMetadata.dropdownSelectOptions.center = centerLocations;
-    const emails = allMails.map(email=>email.text);
+    const { roleName, values, allMails, addDepartment, removeDepartment } = this.props;
+    const emails = allMails.map(email => email.text);
     formMetadata.dropdownSelectOptions.email = emails;
     this.inputRenderer = new InputRenderer(formMetadata);
     const { renderInput } = this.inputRenderer;
@@ -35,13 +16,69 @@ class PersonalDetailsFiedset extends Component {
       <fieldset className="personal-details">
         <div>
           <div style={{ paddingTop: '14px' }}>
-            {renderInput('email', 'filter-dropdown-select', 
-              { className: 'email_dropdown',
-                disabled: checkStatus, size: '' 
+            {renderInput('email', 'filter-dropdown-select',
+              {
+                className: 'email_dropdown', size: ''
               })
             }
           </div>
-          <div>{centers && this.renderCenterField(roleName, renderInput)}</div>
+          {roleName === 'Budget Checker' ? (
+            <div>
+              <div className="size_in">
+                <div className="add_dept">
+                  {renderInput('department', 'filter-dropdown-select',
+                    {
+                      className: 'department_dropdown', size: ''
+                    })
+                  }
+                </div>
+                <button
+                  type="button"
+                  onClick={addDepartment} 
+                  disabled={values.department.length < 1}
+                  className={values.department.length > 1 ? 'add_button' : 'disable_button'}>
+                  Add
+                </button>
+              </div>
+              <div className="back table__container">
+                <table className="mdl-data-table mdl-js-data-table table__requests" style={{ width: '104%'}}>
+                  { values.departments.length > 0 ?
+                    (
+                      <thead>
+                        <tr>
+                          <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze">
+                      Departments
+                          </th>
+                        </tr>
+                      </thead>
+                    ) : null
+                  }
+                  {values.departments.map((list, i) =>
+                    (
+                      <tbody key={Math.floor((Math.random() * 500) + 1)} className="table__body">
+                        <tr className="table__row">
+                          <td className="mdl-data-table__cell--non-numeric table__data" style={{ textTransform: 'capitalize'}}>
+                            {list}  
+                          </td>
+                          <td>
+                            <i
+                              role="button"
+                              className="remove"
+                              id="remove"
+                              onKeyDown={this.handleKeyDown}
+                              tabIndex="0"
+                              onClick={() =>removeDepartment(i)}>
+                              remove
+                            </i>
+                          </td>
+                        </tr>
+                      </tbody> 
+                    ))}
+                </table>
+              </div>
+            </div>
+          ) : null
+          }
         </div>
       </fieldset>
     );
@@ -49,15 +86,23 @@ class PersonalDetailsFiedset extends Component {
 }
 
 const roleName = PropTypes.string;
-const centers = PropTypes.array;
-const myTitle = PropTypes.string;
 const allMails = PropTypes.array;
-
+const values = PropTypes.object;
+const addDepartment = PropTypes.func;
+const removeDepartment = PropTypes.func
+;
 PersonalDetailsFiedset.propTypes = {
   roleName: roleName.isRequired,
-  centers: centers.isRequired,
-  myTitle: myTitle.isRequired,
   allMails: allMails.isRequired,
+  values: values,
+  removeDepartment: removeDepartment,
+  addDepartment: addDepartment
+};
+
+PersonalDetailsFiedset.defaultProps = {
+  removeDepartment: () => {},
+  addDepartment: () => {},
+  values: {}
 };
 
 export default PersonalDetailsFiedset;

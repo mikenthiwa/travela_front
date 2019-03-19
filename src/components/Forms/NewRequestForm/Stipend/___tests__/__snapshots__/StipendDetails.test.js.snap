@@ -82,7 +82,7 @@ exports[`<StipendDetails /> renders without crashing 1`] = `
     <div
       className="item"
     >
-      $ N/A
+      N/A
     </div>
     <div
       className="item"
