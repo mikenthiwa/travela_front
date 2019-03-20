@@ -464,7 +464,7 @@ class NewRequestForm extends PureComponent {
     return this.setState((prevState) => {
       const newError =  {
         ...prevState.errors,
-        manager: 'Please select a manager from the dropdown'
+        manager: 'That manager does not exist.'
       };
       return { ...prevState, errors: { ...newError } };
     });

@@ -532,9 +532,8 @@ describe('<NewRequestForm />', () => {
     shallowWrapper.instance().collapsible(event);
     expect(shallowWrapper.instance().collapsible.calledOnce).toEqual(true);
   });
-
-
-  it('should not be able to selects female gender on button click', () => {
+  
+  it('should be able to select female gender on button click', () => {
     let femaleButton = wrapper.find('button[data-value="Male"]');
     femaleButton.simulate('click', {
       target: {
@@ -546,7 +545,7 @@ describe('<NewRequestForm />', () => {
       }
     });
 
-    expect(wrapper.state('values').gender).toBe('Male');
+    expect(wrapper.state('values').gender).toBe('Female');
   });
 
   it('should change the radio button on click', () => {
@@ -563,7 +562,7 @@ describe('<NewRequestForm />', () => {
     expect(wrapper.state('values').gender).toBe('Male');
   });
 
-  it('should not selects gender with browsers that do not support custom datasets', () => {
+  it('should selects gender with browsers that do not support custom datasets', () => {
     let femaleButton = wrapper.find('button[data-value="Female"]');
     femaleButton.simulate('click', {
       target: {
@@ -572,7 +571,7 @@ describe('<NewRequestForm />', () => {
       }
     });
 
-    expect(wrapper.state('values').gender).toBe('Male');
+    expect(wrapper.state('values').gender).toBe('Female');
   });
 
   it('should not toggle the modal if request submission failed', () => {
@@ -642,7 +641,7 @@ describe('<NewRequestForm />', () => {
     const { manager: newManager } = shallowWrapper.state('values');
     const { manager: secondManagerError } = shallowWrapper.state('errors');
     expect(newManager).toEqual('will fail');
-    expect(secondManagerError).toEqual('Please select a manager from the dropdown');
+    expect(secondManagerError).toEqual('That manager does not exist.');
   });
 
   it('should add new trip field for multi trip  ', () => {

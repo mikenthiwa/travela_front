@@ -38,18 +38,18 @@ class PersonalDetailsFieldset extends Component {
             <div className={`input-group ${disabled}`}>
               <div className="spaces">
                 {renderInput('name', 'text', { 
-                  className: 'request_dropdown', disabled: true })}
+                  className: 'request_dropdown', disabled: false })}
               </div>
               <div className="spaces">
-                {renderInput('gender', 'button-toggler', {disabled: true})}
+                {renderInput('gender', 'button-toggler', {disabled: false})}
               </div>
-              {renderInput('department', 'text', { disabled: true, size: value,
+              {renderInput('department', 'text', { disabled: false, size: value,
                 className: 'request_dropdown'})}
             </div>
             <div className={`input-group ${disabled}`}>
               <div className="spaces">
                 {renderInput('role', 'text', {
-                  disabled: true,
+                  disabled: false,
                   size: value,
                   className: 'request_dropdown',
                   id: 'your-role'
@@ -67,7 +67,7 @@ class PersonalDetailsFieldset extends Component {
               <div className="spaces">
                 {
                   renderInput('location', 'text', {
-                    disabled: true,
+                    disabled: false,
                     size: value,
                     className: 'request_dropdown user-location',
                     id: 'user-location',
