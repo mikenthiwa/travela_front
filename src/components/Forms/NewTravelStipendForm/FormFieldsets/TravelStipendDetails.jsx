@@ -5,27 +5,12 @@ import formMetadata from '../../FormsMetadata/NewTravelStipendFormMetadata';
 
 class TravelStipendFieldset extends Component {
 
-  renderCenter = (renderInput, editing, centerChoices) => (
-    editing ? (renderInput('center', 'text', {
-      disabled: true,
-      className: 'stipend-location'
-    })) :
-      (
-        renderInput('center', 'dropdown-select', {
-          choices: centerChoices,
-          size: '',
-          className: 'request_dropdown stipend-location',
-          id: 'user-location'
-        })
-      )
-  );
   renderfields = () => {
     const { 
       centers, 
       handleShowEventError, isValidAmount, 
       onChangeAmountInput, 
       isEmpty,
-      editing
     } = this.props;
     const centerChoices = centers.map(center => center.location);
     const { renderInput } = this.inputRenderer;
@@ -35,13 +20,19 @@ class TravelStipendFieldset extends Component {
           <div className="input-group">
             <div className="spaces">
               {
-                this.renderCenter(renderInput, editing, centerChoices)
+                renderInput('center', 'dropdown-select', {
+                  choices: centerChoices,
+                  size: '',
+                  className: 'request_dropdown stipend-location',
+                  id: 'user-location'
+                })
               }
             </div>
             <div className="spaces">
               {renderInput('stipend', 'number', {
                 size: '',
                 min: '1',
+                max: '1000',
                 onChange: (event) => onChangeAmountInput(event),
                 onInvalid: (event) => handleShowEventError(event),
                 placeholder: '1000',
@@ -54,7 +45,7 @@ class TravelStipendFieldset extends Component {
                   className={`${isValidAmount 
                     || isEmpty ? 'hide-error': 'show-error'}`}
                 >
-                  Amount should be a positive integer
+                  Amount should be a positive integer and not more than 1000
                 </span>
               }
             </div>

@@ -60,17 +60,17 @@ export const deleteTravelStipendSuccess = (deleteMessage, stipendId) => ({
   type: DELETE_TRAVEL_STIPEND_SUCCESS,
   deleteMessage,
   stipendId
-
 });
 export const deleteTravelStipendFailure = (error) => ({
   type: DELETE_TRAVEL_STIPEND_FAILURE,
   error,
 });
 
-export const updateTravelStipend = (stipendId, payload) => ({
+export const updateTravelStipend = (stipendId, payload, history) => ({
   type: EDIT_TRAVEL_STIPEND,
   stipendId,
-  payload
+  payload,
+  history
 });
 
 export const updateTravelStipendSuccess = (response) => ({

@@ -59,6 +59,9 @@ let props = {
   fetchSingleTravelStipend: jest.fn(),
   deleteTravelStipend: jest.fn(),
   updateTravelStipend: jest.fn(),
+  history: {
+    push: jest.fn()
+  },
 };
 
 const initialState = {
@@ -112,7 +115,7 @@ describe('<TravelStipends>', () => {
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
-          <TravelStipends { ... {...props, shouldOpen: true, modalType: 'create travel stipend' }} />
+          <TravelStipends {... {...props, shouldOpen: true, modalType: 'create travel stipend' }} />
         </MemoryRouter>
       </Provider>
     );
@@ -294,7 +297,7 @@ describe('<TravelStipends>', () => {
       const wrapper = mount(<TravelStipends {...newProps} />);
       const event = {
         target: {
-          value: 30000000
+          value: 300
         }
       };
 
@@ -304,11 +307,7 @@ describe('<TravelStipends>', () => {
 
       expect(props.updateTravelStipend).toBeCalled();
       expect(props.updateTravelStipend).toBeCalledWith(
-        12,
-        {
-          stipend: 30000000,
-          center: 'Nairobi, Kenya'
-        }
+        12, {center: 'Nairobi, Kenya', 'stipend': 300, }, props.history
       );
     });
 

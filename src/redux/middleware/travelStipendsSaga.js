@@ -81,7 +81,7 @@ export function* watchUpdateTravelStipend(){
 }
 
 export function* updateTravelStipendSaga(action){
-  const { payload, stipendId } = action;
+  const { payload, stipendId, history } = action;
   try {
     const response = yield call(TravelStipendsAPI.updateTravelStipend, stipendId, payload);
 
@@ -89,7 +89,7 @@ export function* updateTravelStipendSaga(action){
 
     toast.success('Travel stipend successfully updated');
     yield put(closeModal());
-
+    history.push('/settings/travel-stipends');
   } catch (error){
 
     let errors = {};

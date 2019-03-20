@@ -34,7 +34,7 @@ describe('<TravelStipendFieldset />', () => {
     };
     const wrapper = setup(newProps);
     expect(wrapper.find('span.show-error').text())
-      .toBe('Amount should be a positive integer');
+      .toBe('Amount should be a positive integer and not more than 1000');
   });
 
 });

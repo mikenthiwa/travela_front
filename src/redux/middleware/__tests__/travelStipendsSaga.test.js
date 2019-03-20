@@ -223,12 +223,15 @@ describe('Update Travel Stipend', () => {
   });
 
   it('should update a travel stipend', () => {
+    const history = {
+      push: jest.fn(),
+    };
     return expectSaga(watchUpdateTravelStipend, TravelStipendsAPI)
       .provide([
         [matchers.call.fn(
           TravelStipendsAPI.updateTravelStipend,
           stipendId,
-          payload
+          payload,
         ), response]
       ])
       .put({
@@ -238,7 +241,8 @@ describe('Update Travel Stipend', () => {
       .dispatch({
         type: EDIT_TRAVEL_STIPEND,
         stipendId,
-        payload
+        payload,
+        history
       })
       .silentRun();
   });

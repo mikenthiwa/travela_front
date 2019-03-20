@@ -60,7 +60,7 @@ class NewTravelStipendForm extends PureComponent {
       } = this.props;
 
       if (editing) {
-        updateTravelStipend(id, values);
+        updateTravelStipend(id, values, history);
       } else {
         handleCreateTravelStipend(values, history);
       }
@@ -81,7 +81,7 @@ class NewTravelStipendForm extends PureComponent {
           stipend: amount
         },
         errors: {},
-        isValidAmount: (amount ? amount > 0 : true),
+        isValidAmount: (amount ? (amount > 0 && amount <= 1000)  : true),
       };
     }, () => this.validate());
   }
@@ -133,7 +133,7 @@ class NewTravelStipendForm extends PureComponent {
             hasBlankFields={hasBlankFields || !isValidAmount}
             selection={selection}
             loading={isSaving}
-            send={editing ? 'Edit Stipend' : 'Add Stipend'} />
+            send={editing ? 'Save Stipend' : 'Add Stipend'} />
         </form>
       </FormContext>
     );
