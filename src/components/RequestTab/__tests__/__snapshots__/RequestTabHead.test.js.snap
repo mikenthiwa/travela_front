@@ -67,7 +67,7 @@ exports[`<RequestTabHead /> should render properly 1`] = `
       />
     </div>
     <div
-      className="request__tab-card current incomplete"
+      className="request__tab-card current_request incomplete"
       key="3"
     >
       <div

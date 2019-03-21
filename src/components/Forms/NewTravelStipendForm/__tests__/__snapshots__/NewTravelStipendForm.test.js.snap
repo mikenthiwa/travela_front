@@ -221,6 +221,7 @@ exports[`<NewTravelStipendForm /> renders correctly 1`] = `
                     className=" request_dropdown stipend-amount "
                     id="your-manager"
                     label="Enter Amount in Dollars ($)"
+                    max="1000"
                     min="1"
                     name="stipend"
                     onBlur={[Function]}
@@ -253,7 +254,7 @@ exports[`<NewTravelStipendForm /> renders correctly 1`] = `
               <span
                 className="hide-error"
               >
-                Amount should be a positive integer
+                Amount should be a positive integer and not more than 1000
               </span>
             </div>
           </div>

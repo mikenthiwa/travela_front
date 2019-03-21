@@ -34,6 +34,7 @@ exports[`<TravelStipendFieldset /> should match snapshot 1`] = `
             id="your-manager"
             label="Enter Amount in Dollars ($)"
             labelNote=""
+            max="1000"
             min="1"
             name="stipend"
             onChange={[Function]}
@@ -45,7 +46,7 @@ exports[`<TravelStipendFieldset /> should match snapshot 1`] = `
           <span
             className="hide-error"
           >
-            Amount should be a positive integer
+            Amount should be a positive integer and not more than 1000
           </span>
         </div>
       </div>

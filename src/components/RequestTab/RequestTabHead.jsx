@@ -12,7 +12,7 @@ class RequestTabHead extends Component {
   renderTab(obj, currentTab, Icon){
     const { id, name, status } = obj;
     const range = _.range(1,currentTab);
-    const current = id === currentTab ? 'current': '';
+    const current = id === currentTab ? 'current_request': '';
     const completed = range.indexOf(id) !== -1? 'complete' : 'incomplete'; 
     const iconColor = range.indexOf(id) !== -1? '#10A36D' : '#3359DB'; 
     return(

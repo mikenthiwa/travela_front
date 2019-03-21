@@ -15,7 +15,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
         className="request__tab"
       >
         <div
-          className="request__tab-card current incomplete"
+          className="request__tab-card current_request incomplete"
           key="1"
         >
           <div
@@ -341,7 +341,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                   <input
                     autoComplete="off"
                     className=" request_dropdown"
-                    disabled={true}
+                    disabled={false}
                     label="Your Name"
                     name="name"
                     onBlur={[Function]}
@@ -380,7 +380,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                     <button
                       className="bg-btn bg-btn--inactive"
                       data-value="Female"
-                      disabled={true}
+                      disabled={false}
                       key="Female"
                       name="gender"
                       onClick={[Function]}
@@ -391,7 +391,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                     <button
                       className="bg-btn bg-btn--active"
                       data-value="Male"
-                      disabled={true}
+                      disabled={false}
                       key="Male"
                       name="gender"
                       onClick={[Function]}
@@ -425,7 +425,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                 <input
                   autoComplete="off"
                   className=" request_dropdown"
-                  disabled={true}
+                  disabled={false}
                   label="Your Department"
                   name="department"
                   onBlur={[Function]}
@@ -465,7 +465,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                   <input
                     autoComplete="off"
                     className=" request_dropdown"
-                    disabled={true}
+                    disabled={false}
                     id="your-role"
                     label="Your Role"
                     name="role"
@@ -570,7 +570,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                   <input
                     autoComplete="off"
                     className=" request_dropdown user-location"
-                    disabled={true}
+                    disabled={false}
                     id="user-location"
                     label="Location"
                     name="location"

@@ -56,7 +56,6 @@ exports[`<LeftSideBar /> renders correctly 1`] = `
                 Object {
                   "link_to": "/requests/budgets/",
                   "onlyVisibleTo": Array [
-                    "Super Administrator",
                     "Budget Checker",
                   ],
                   "text": "Budget Checks",

@@ -63,7 +63,7 @@ class PersonalDetailsFiedset extends Component {
                           <td>
                             <i
                               role="button"
-                              className="remove"
+                              className="remove_department"
                               id="remove"
                               onKeyDown={this.handleKeyDown}
                               tabIndex="0"
