@@ -12,6 +12,15 @@
     }
   }
 
+
+  .form-input.fluid {
+    width: 100%;
+
+    &:first-child {
+      margin-top: 2em;
+    }
+  }
+
   hr {
     margin: 0;
     width: calc(100% + 60px);

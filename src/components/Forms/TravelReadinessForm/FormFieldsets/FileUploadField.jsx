@@ -16,12 +16,19 @@ class FileUploadField extends Component{
           : `${cloudinaryUrl}`;
       return documentImage;
     }
+    const uploadText = (
+      <span className="upload-text">
+        Drag file here to upload or
+        {' '}
+        <span className="upload-text--underline">choose from computer</span>
+      </span>
+    );
     return (
       name !== ''
         ? name.length > 50
           ? `${name.substring(0, 50)}...`
           : name
-        : 'Drag file here or choose from computer'
+        : uploadText
     );
   };
 

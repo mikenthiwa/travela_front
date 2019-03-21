@@ -43,7 +43,7 @@ form fieldset:last-child .submit-area {
         justify-content: center;
         width: 40px;
         height: 40px;
-        background: rgba(100,100,100,.2);
+        background-color: #E1E3EC;
         border-radius: 50%;
 
          img {
@@ -66,6 +66,13 @@ form fieldset:last-child .submit-area {
           font-size: 14px;
           line-height: 18px;
           color: #999999;
+
+          .upload-text {
+
+            &--underline {
+              text-decoration: underline;
+            }
+          }
         }
 
         .maximum-file-size{

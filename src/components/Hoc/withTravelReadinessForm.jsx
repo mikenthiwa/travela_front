@@ -152,8 +152,8 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
       }, () =>  this.validate());
     }
     render() {
-      const {errors, values, hasBlankFields, uploadingDocument,
-        name, imageChanged, uploadProgress} = this.state;
+      const { errors, values, hasBlankFields, uploadingDocument,
+        name, imageChanged, uploadProgress, documentUploaded } = this.state;
       const { modalType, document, fetchingDocument} = this.props;
       if (documentType === 'other') delete errors.documentid;
       const { visaType, otherVisaTypeDetails } = values;
@@ -192,7 +192,9 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
                     send={
                       (modalType.startsWith('edit')) ? 'Save Changes' :
                         submitButton[documentType]}
-                    loading={uploadingDocument} />
+                    loading={uploadingDocument} 
+                    documentUploaded={documentUploaded}
+                  />
                 </div>
               </form>
             </FormContext>)}
