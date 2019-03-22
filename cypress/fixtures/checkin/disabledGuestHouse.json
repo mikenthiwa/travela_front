@@ -1,0 +1,41 @@
+{
+    "success": true,
+    "message": "Guesthouses retrieved successfully",
+    "guestHouses": [
+        {
+            "id": "10948",
+            "houseName": "Guest House B",
+            "location": "Nairobi, Kenya",
+            "bathRooms": 3,
+            "imageUrl": "https://res.cloudinary.com/authors-haven/image/upload/v1553167046/rxpwhtlhrzr5s1i5i8gt.jpg",
+            "disabled": true,
+            "createdAt": "2019-03-21T11:17:14.928Z",
+            "updatedAt": "2019-03-21T11:17:14.928Z",
+            "userId": "-LSsFyueC086niFc9rrz",
+            "rooms": [
+                {
+                    "id": "RknCqCEwot",
+                    "roomName": "Room 1",
+                    "roomType": "Non-Ensuite",
+                    "bedCount": 4,
+                    "isDeleted": false,
+                    "faulty": false,
+                    "createdAt": "2019-03-21T11:17:14.977Z",
+                    "updatedAt": "2019-03-21T11:17:14.977Z",
+                    "guestHouseId": "9IrdQagKa"
+                },
+                {
+                    "id": "u0XAapkwYh",
+                    "roomName": "Room 2",
+                    "roomType": "Ensuite",
+                    "bedCount": 4,
+                    "isDeleted": false,
+                    "faulty": false,
+                    "createdAt": "2019-03-21T11:17:14.977Z",
+                    "updatedAt": "2019-03-21T11:17:14.977Z",
+                    "guestHouseId": "9IrdQagKa"
+                }
+            ]
+        }
+    ]
+}
