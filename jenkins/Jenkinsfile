@@ -1,0 +1,145 @@
+#!groovy​
+
+pipeline {
+agent {
+  kubernetes {
+    label 'travela-frontend'
+    defaultContainer 'jnlp'
+    yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+labels:
+  component: ci
+spec:
+  containers:
+  - name: travela-frontend-agent
+    image: harithj/jenkins-travela-frontend
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "1Gi"
+      limits:
+        cpu: "500m"
+        memory: "2Gi"
+    command:
+    - cat
+    tty: true
+    env:
+      - name: DOCKER_HOST
+        value: tcp://localhost:2375
+  - name: dind
+    image: docker:18.05-dind
+    securityContext:
+      privileged: true
+    volumeMounts:
+      - name: dind-storage
+        mountPath: /var/lib/docker
+  volumes:
+  - name: dind-storage
+    emptyDir: {}
+"""
+}
+  }
+
+  environment {
+    PROJECT_NAME = 'travela-frontend'
+  }
+
+  stages {
+    stage('checkout code') {
+        steps {
+          checkout scm
+        }
+    }
+
+    stage('Load deployment environment variable file') {
+      steps {
+        container('travela-frontend-agent') {
+          withCredentials([
+            file(credentialsId: 'travela-deployment-env-vars', variable: 'DEPLOYMENT_ENV_VARS')
+          ]) {
+            load "$DEPLOYMENT_ENV_VARS"
+            sh "echo $PRODUCTION_COMPUTE_ZONE"
+          }
+        }
+      }
+    }
+
+    stage('Install dependencies') {
+      steps {
+        container('travela-frontend-agent') {
+          sh "yarn install"
+        }
+      }
+    }
+
+    stage('Test and Report') {
+      steps {
+        container('travela-frontend-agent') {
+          withCredentials([
+            file(credentialsId: 'travela-frontend-env-vars', variable: 'ENV_FILE'),
+            string(credentialsId: 'travela-frontend-codeclimate-id', variable: 'CC_TEST_REPORTER_ID')
+          ]) {
+            sh "chmod +x jenkins/scripts/load_env_variables.sh"
+            sh "jenkins/scripts/load_env_variables.sh test"
+            sh "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
+            sh "chmod +x ./cc-test-reporter"
+            sh "chmod +x jenkins/scripts/test_and_report.sh"
+            sh "jenkins/scripts/test_and_report.sh"
+          }
+        }
+      }
+    }
+
+    stage('build') {
+      steps {
+        container('travela-frontend-agent') {
+          sh "chmod +x jenkins/scripts/load_env_variables.sh"
+          withCredentials([
+            file(credentialsId: 'travela-frontend-env-vars', variable: 'ENV_FILE')
+          ]) {
+            sh "jenkins/scripts/load_env_variables.sh"
+          }
+          sh "yarn run build"
+        }
+      }
+    }
+
+    stage('Deploy') {
+      when {
+        anyOf {
+          branch 'master'
+          branch 'develop'
+        }
+      }
+      steps {
+        container('travela-frontend-agent') {
+          sh "npm install -g rok8s-scripts"
+
+          sh "chmod +x jenkins/scripts/build_deploy.sh"
+          sh "chmod +x jenkins/scripts/setup_k8s.sh"
+
+          withCredentials([
+            file(credentialsId: 'apprenticeship-projects-svc-acc', variable: 'GCLOUD_SERVICE_KEY'),
+            string(credentialsId: 'SQL_SERVICE_ACCOUNT', variable: 'SQL_SERVICE_ACCOUNT'),
+            string(credentialsId: 'travela-deployment-clone-branch', variable: 'CLONE_BRANCH')
+          ]) {
+            sh "jenkins/scripts/setup_k8s.sh main"
+            sh "jenkins/scripts/build_deploy.sh main"
+          }
+        }
+      }
+    }
+
+  }
+
+  post {
+    failure {
+      container('travela-frontend-agent') {
+        sh "chmod +x jenkins/scripts/build_deploy.sh"
+        sh "jenkins/scripts/build_deploy.sh sendSlackDeployNotification fail"
+      }
+    }
+  }
+}

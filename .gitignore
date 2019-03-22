@@ -11,6 +11,9 @@
 
 .env
 
+#folder to store secrets
+secrets
+
 #end-to-end
 cypress.env.json
 cypress/screenshots/
@@ -33,4 +36,3 @@ yarn-error.log*
 package-lock.json
 deploy
 .vscode
-
