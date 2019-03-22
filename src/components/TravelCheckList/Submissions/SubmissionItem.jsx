@@ -296,6 +296,13 @@ class SubmissionItem extends Component {
     return (
       <div className="travelSubmission--item">
         <span className="travelSubmission--item__name">{name}</span>
+        {resources.length > 0 && resources.map(resource => (
+          <a
+            key={id} href={resource.link} target="blank"
+            className="travelSubmission--item__resource-link">
+            [{resource.label}]
+          </a>
+        ))}
         { name==='Travel Ticket Details' && <span className="travelSubmission--item__name-two">Upload Ticket</span>}
         {this.renderField()}
       </div>

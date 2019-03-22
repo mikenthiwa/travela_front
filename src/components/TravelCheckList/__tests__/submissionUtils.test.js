@@ -18,7 +18,7 @@ describe('SubmissionUtils Component', () => {
           checklistItemId: 1,
           id: 1,
           label: 'Flight Application Guide',
-          link: 'http://andela.com'
+          link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk'
         },
       ],
       submissions: [

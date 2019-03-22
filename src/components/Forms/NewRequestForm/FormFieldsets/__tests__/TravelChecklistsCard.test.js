@@ -13,43 +13,108 @@ const props = {
   ],
   checklistItems: [
     {
-      id: 1,
-      name: 'passport',
+      destinationName: 'Kampala, Uganda',
       checklist: [
         {
-          id: 1,
-          name: 'passport',
-          destinationName: 'Kigali, Rwanda'
+          id: 'sCldWOedv',
+          name: 'kamp Green card',
+          requiresFiles: false,
+          destinationName: 'Kampala, Uganda',
+          deleteReason: null,
+          resources: []
+        },
+        {
+          id: 'h43l4o5Iy',
+          name: 'kam Visa',
+          requiresFiles: true,
+          destinationName: 'Kampala, Uganda',
+          deleteReason: null,
+          resources: []
+        },
+        {
+          id: '1y-xh1HaB',
+          name: 'kam passport',
+          requiresFiles: true,
+          destinationName: 'Kampala, Uganda',
+          deleteReason: null,
+          resources: []
+        },
+        {
+          id: 'qkYkwgkT-',
+          name: 'kam Yellow Card',
+          requiresFiles: false,
+          destinationName: 'Kampala, Uganda',
+          deleteReason: null,
+          resources: []
+        },
+        {
+          id: '1',
+          name: 'Travel Ticket Details',
+          requiresFiles: false,
+          destinationName: 'Default',
+          deleteReason: null,
+          resources: [
+            {
+              id: '1',
+              label: 'Flight Application Guide',
+              link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
+              checklistItemId: '1'
+            }
+          ]
         }
       ]
     },
     {
-      id: 2,
-      name: 'ticketDetails',
-      checklist: [{
-        id: 2,
-        name: 'ticketDetails',
-        destinationName: 'Lagos, Nigeria',
-
-      }]
-    },
-    {
-      id: 3,
-      name: 'visa',
+      destinationName: 'Nairobi, Kenya',
       checklist: [
         {
-          id: 3,
-          name: 'visa',
-          destinationName: 'Lagos, Nigeria',
-
+          id: 'XJtQjQ7Du',
+          name: 'nair visa',
+          requiresFiles: true,
+          destinationName: 'Nairobi, Kenya',
+          deleteReason: null,
+          resources: []
+        },
+        {
+          id: 'XovqH4rSl',
+          name: 'nair passport',
+          requiresFiles: true,
+          destinationName: 'Nairobi, Kenya',
+          deleteReason: null,
+          resources: []
+        },
+        {
+          id: '1NDjDXCx8',
+          name: 'nair yellow card',
+          requiresFiles: false,
+          destinationName: 'Nairobi, Kenya',
+          deleteReason: null,
+          resources: []
+        },
+        {
+          id: 'H5vn0XjVm',
+          name: 'nair green card',
+          requiresFiles: false,
+          destinationName: 'Nairobi, Kenya',
+          deleteReason: null,
+          resources: []
+        },
+        {
+          id: '1',
+          name: 'Travel Ticket Details',
+          requiresFiles: false,
+          destinationName: 'Default',
+          deleteReason: null,
+          resources: [
+            {
+              id: '1',
+              label: 'Flight Application Guide',
+              link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
+              checklistItemId: '1'
+            }
+          ]
         }
       ]
-    },
-    {
-      id: 4,
-      name: 'visa',
-      destinationName: 'Lagos, Nigeria',
-
     }
   ],
   userData:{
@@ -101,9 +166,6 @@ describe('<TravelChecklistsCard />',() => {
   it('should render all checkists', () =>{
     const wrapper = mount(<TravelChecklistsCard {...props} />);
     const approvalList = wrapper.find('.approval-list-items');
-    expect(approvalList).toHaveLength(1);
-    expect(wrapper.find('.checklist-name').at(0).text()).toBe('passport');
-    expect(wrapper.find('.checklist-name').at(1).text()).toBe('ticketDetails');
-    expect(wrapper.find('.checklist-name').at(2).text()).toBe('visa');
+    expect(approvalList).toHaveLength(2);
   });
 });

@@ -111,20 +111,15 @@ class RequestUtils {
       return location;
     }
   }
-  static cleanChecklists(checklistItems, userData) {
-    let trimmedCheckLists = [];
-    let finalCheckLists = [];
-    if(checklistItems.length) {
-      checklistItems.forEach(item => {
-        if(item && item.checklist) {
-          trimmedCheckLists.push(...item.checklist);
-        }
-      });
-      finalCheckLists = trimmedCheckLists.filter(trip => {
-        return !trip.destinationName.startsWith(userData.location);
-      });
-    }
-    return finalCheckLists;
+
+  static removeLocationChecklist (checklistItems, userData) {
+    const newChecklist = [...checklistItems];
+    newChecklist.map((checkItem, index) => {
+      if(checkItem.destinationName.includes(userData.location)) {
+        newChecklist[index].checklist.splice(0, newChecklist[index].checklist.length -1);
+      }
+    });
+    return newChecklist;
   }
 
   static getTravelReason(trip) {

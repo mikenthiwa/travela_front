@@ -144,10 +144,110 @@ describe('<NewRequestForm />', () => {
     },
     travelChecklists: {
       isLoading: false,
-      checklistItems: [
+      checklistItems:[
         {
-          id: 1,
-          name: 'Lagos, Nigeria'
+          destinationName: 'Kampala, Uganda',
+          checklist: [
+            {
+              id: 'sCldWOedv',
+              name: 'kamp Green card',
+              requiresFiles: false,
+              destinationName: 'Kampala, Uganda',
+              deleteReason: null,
+              resources: []
+            },
+            {
+              id: 'h43l4o5Iy',
+              name: 'kam Visa',
+              requiresFiles: true,
+              destinationName: 'Kampala, Uganda',
+              deleteReason: null,
+              resources: []
+            },
+            {
+              id: '1y-xh1HaB',
+              name: 'kam passport',
+              requiresFiles: true,
+              destinationName: 'Kampala, Uganda',
+              deleteReason: null,
+              resources: []
+            },
+            {
+              id: 'qkYkwgkT-',
+              name: 'kam Yellow Card',
+              requiresFiles: false,
+              destinationName: 'Kampala, Uganda',
+              deleteReason: null,
+              resources: []
+            },
+            {
+              id: '1',
+              name: 'Travel Ticket Details',
+              requiresFiles: false,
+              destinationName: 'Default',
+              deleteReason: null,
+              resources: [
+                {
+                  id: '1',
+                  label: 'Flight Application Guide',
+                  link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
+                  checklistItemId: '1'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          destinationName: 'Nairobi, Kenya',
+          checklist: [
+            {
+              id: 'XJtQjQ7Du',
+              name: 'nair visa',
+              requiresFiles: true,
+              destinationName: 'Nairobi, Kenya',
+              deleteReason: null,
+              resources: []
+            },
+            {
+              id: 'XovqH4rSl',
+              name: 'nair passport',
+              requiresFiles: true,
+              destinationName: 'Nairobi, Kenya',
+              deleteReason: null,
+              resources: []
+            },
+            {
+              id: '1NDjDXCx8',
+              name: 'nair yellow card',
+              requiresFiles: false,
+              destinationName: 'Nairobi, Kenya',
+              deleteReason: null,
+              resources: []
+            },
+            {
+              id: 'H5vn0XjVm',
+              name: 'nair green card',
+              requiresFiles: false,
+              destinationName: 'Nairobi, Kenya',
+              deleteReason: null,
+              resources: []
+            },
+            {
+              id: '1',
+              name: 'Travel Ticket Details',
+              requiresFiles: false,
+              destinationName: 'Default',
+              deleteReason: null,
+              resources: [
+                {
+                  id: '1',
+                  label: 'Flight Application Guide',
+                  link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
+                  checklistItemId: '1'
+                }
+              ]
+            }
+          ]
         }
       ]
     },

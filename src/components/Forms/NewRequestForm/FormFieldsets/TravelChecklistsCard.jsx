@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import * as _ from 'lodash';
 import Preloader from '../../../Preloader/Preloader';
-import travelChecklistHelper from '../../../../helper/request/RequestUtils';
+import RequestUtils from '../../../../helper/request/RequestUtils';
 
 class TravelChecklistsCard extends Component {
   componentDidMount() {
@@ -15,7 +14,7 @@ class TravelChecklistsCard extends Component {
   }
   displayTravelChecklist(checklistItems) {
     return (
-      <li className="approval-item" key={checklistItems.id}> 
+      <li className="approval-item" key={checklistItems.name}> 
         <div className="oval" />
         <div className="checklist-name">{checklistItems.name}</div>
       </li>
@@ -24,15 +23,7 @@ class TravelChecklistsCard extends Component {
 
   render() {
     const { checklistItems, isLoading, userData } = this.props;
-    let finalCheckLists = travelChecklistHelper.cleanChecklists(checklistItems, userData);
-  
-    finalCheckLists = finalCheckLists.reduce((accumulator, checklist) => {
-      if(!accumulator.ids.includes(checklist.id)) {
-        accumulator.ids.push(checklist.id);
-        accumulator.checklist.push(checklist);
-      }
-      return accumulator;
-    }, {ids: [], checklist: []}).checklist;
+    const newChecklist = RequestUtils.removeLocationChecklist(checklistItems,userData);
     return (
       <div>
         <div className="travel-checklist-rectangle">
@@ -43,11 +34,22 @@ class TravelChecklistsCard extends Component {
           {isLoading
             ? <Preloader /> :  (
               <div className="pending-approvals-block">
-                <ul className="approval-list-items">
-                  { finalCheckLists && finalCheckLists.map(checklist => {
-                    return this.displayTravelChecklist((checklist));
-                  })}
-                </ul>
+                {newChecklist.map(checklist => {
+                  const { checklist: checklistItems } = checklist;
+                  return (
+                    <Fragment key={checklist.destinationName}>
+                      <div className="travel-checklist-text">
+                        <p> 
+                          {checklist.destinationName}
+                        </p>
+                      </div>
+                      <ul className="approval-list-items">
+                        {checklistItems.map(item => 
+                          this.displayTravelChecklist(item)
+                        )}
+                      </ul>
+                    </Fragment>);
+                })}
               </div>
             )}
         </div>
