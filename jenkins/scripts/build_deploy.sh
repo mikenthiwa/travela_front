@@ -3,6 +3,8 @@ ROOT_DIR=$(pwd)
 
 source $ROOT_DIR/jenkins/scripts/utils.sh
 
+# This function is for clonning deployment script repository
+# that contains files to deploy the application
 checkoutDeployScriptRepo(){
     require DEPLOY_SCRIPTS_REPO $DEPLOY_SCRIPTS_REPO
     require CLONE_BRANCH $CLONE_BRANCH
@@ -14,7 +16,8 @@ checkoutDeployScriptRepo(){
     rm -rf $HOME/travela-deploy
 }
 
-# checkout
+# This function builds the docker image that would be having application
+# for staging and production and pushes it to docker registry
 buildTagAndPushDockerImage() {
     require 'DOCKER_REGISTRY' $DOCKER_REGISTRY
     require 'PROJECT_ID' $PROJECT_ID
@@ -44,6 +47,8 @@ buildTagAndPushDockerImage() {
 
 }
 
+# This function converts the template kubernetes files into
+# actual kubernetes files that would be used for deployment
 buildLintAndDeployK8sConfiguration(){
     findTempateFiles 'TEMPLATES'
     findAndReplaceVariables
@@ -57,6 +62,8 @@ buildLintAndDeployK8sConfiguration(){
     is_success "$TAGGED_IMAGE successfully deployed"
 }
 
+# This function sets the message that would be sent to slack for notifying
+# us about the status of deployment
 slackPayLoad() {
   if [ "$1" == "fail" ]; then
     TEXT=":fire: Travela Frontend deployment failed :fire:"
@@ -106,6 +113,8 @@ cat <<EOF
 EOF
 }
 
+# This function sends the status of the deployment to slack for master
+# or develop branch
 sendSlackDeployNotification() {
   if [ "${BRANCH_NAME}" == "master" ] \
   || [ "${BRANCH_NAME}" == "develop" ] \
@@ -128,6 +137,7 @@ sendSlackDeployNotification() {
   fi
 }
 
+# This function is used to call all the other functions in this script
 main() {
     checkoutDeployScriptRepo
     buildTagAndPushDockerImage
@@ -136,4 +146,5 @@ main() {
     cleanGeneratedYamlFiles
 }
 
+# This would expand to the positional parameters, starting from one
 $@

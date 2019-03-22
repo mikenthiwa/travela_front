@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+#########################################################################
+# This script is used to create a .env file that would contain environment
+# varibles for appropriate environment to be used by the application
+#########################################################################
+
 ROOT_DIR=$(pwd)
 
 source $ROOT_DIR/jenkins/scripts/utils.sh

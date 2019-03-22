@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#########################################################################
+# This script is used to run tests against the application
+# and send coverage report to CodeClimate
+#########################################################################
+
 set -e pipefail
 
 echo $GIT_COMMIT # only needed for debugging

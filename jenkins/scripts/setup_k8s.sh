@@ -3,6 +3,7 @@ ROOT_DIR=$(pwd)
 
 source $ROOT_DIR/jenkins/scripts/utils.sh
 
+# This function is used to sign into google cloud's command line application
 activateServiceAccount() {
     require PROJECT_ID $PROJECT_ID
     require COMPUTE_ZONE $COMPUTE_ZONE

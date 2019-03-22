@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -e pipefail
 
+#########################################################################
+# This script contains basic functions that would help us to print out
+# messages depending on what the message is about.
+#########################################################################
+
 BOLD='\e[1m'
 BLUE='\e[34m'
 RED='\e[31m'
@@ -39,6 +44,11 @@ is_success() {
 require () {
     if [ -z ${2+x} ]; then error "Required variable ${1} has not been set"; fi
 }
+
+#########################################################################
+# The part below sets environment varibles that would be used for deployment
+# according to staging or production environment.
+#########################################################################
 
 SERVICE_KEY_PATH=$HOME/service-account-key.json
 
