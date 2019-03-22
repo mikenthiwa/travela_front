@@ -8,7 +8,8 @@ import {
   watchCreateNewRequestAsync,
   watchFetchUserRequestsDetails,
   watchEditRequest,
-  watchDeleteRequest
+  watchDeleteRequest,
+  watchFetchEditRequest
 } from '../requestsSaga';
 import { fetchRequestsResponse } from '../../__mocks__/reduxMocks';
 
@@ -157,27 +158,47 @@ describe('Requests Saga', () => {
 
     const response = {
       data: {
-        updatedRequest: {
-          name: 'Incredible Hulk',
-          origin: 'Lagos',
-          destination: 'Nairobi'
+        trips: [],
+        request: {
+          budgetStatus: 'Open',
+          createdAt: '2019-03-18T11:14:09.300Z',
+          deletedAt: null,
+          department: 'Fellowship-Programs',
+          gender: 'Male',
+          id: 'JUEi8-3L9',
+          manager: 'John Mutuma',
+          name: 'Super Modo',
+          picture: 'https://lh3.googleusercontent.com/photo.jpg',
+          role: 'Technical Team Lead',
+          status: 'Open',
+          stipend: 0,
+          tripType: 'oneWay',
+          updatedAt: '2019-03-18T11:14:09.300Z',
+          userId: '-LTMfbvXO0D9BQjhggygXgl'
         }
       }
     };
 
     it('edits request details', () => {
+      const { data: { trips, request } } = response;
       return expectSaga(watchEditRequest, RequestAPI)
         .provide([
           [call(RequestAPI.editRequest, requestId, action.requestData), response]
         ])
         .put({
           type: 'EDIT_REQUEST_SUCCESS',
-          updatedRequest: response.data.updatedRequest,
+          updatedRequest: {
+            ...request,
+            trips
+          }
         })
         .dispatch({
           type: 'EDIT_REQUEST',
           requestId,
-          requestData: action.requestData
+          requestData: action.requestData,
+          history: {
+            push: () => {}
+          }
         })
         .silentRun();
     });
@@ -245,4 +266,69 @@ describe('Requests Saga', () => {
         .silentRun();
     });
   });
+
+  describe('FETCH A REQUEST TO EDIT', () => {
+    const action = {
+      requestId: 'yl61obdLF'
+    };
+    const error = {
+      response: {
+        status: 500,
+        message:  'Server error, try again'
+      }
+    };
+    const requestId = action.requestId;
+    const response = {
+      success: true,
+      data: {
+        requestData: {
+          id: 'yl61obdLF',
+          name: 'Super Modo',
+          tripType: 'return',
+          manager: 'Super Model',
+          gender: 'Male',
+          department: 'Fellowship-Programs',
+          role: 'Technical Team Lead',
+          status: 'Open',
+          userId: '-GHMfmwvrO0D9BQ9frgy',
+          picture: 'https://lh3.usercontent.com/photo.jpg',
+          stipend: 1000,
+          comments: [],
+          trips: []
+        }
+      }
+    };
+    it('should fetch a request provided the requestId', () => {
+      return expectSaga(watchFetchEditRequest, RequestAPI)
+        .provide([
+          [matchers.call.fn(RequestAPI.getUserRequestDetails, requestId), response]
+        ])
+        .put({
+          type: 'FETCH_EDIT_REQUEST_SUCCESS',
+          response: response.data.requestData
+        })
+        .dispatch({
+          type: 'FETCH_EDIT_REQUEST',
+          requestId
+        })
+        .silentRun();
+    });
+
+    it('should throw errors if any', () => {
+      return expectSaga(watchFetchEditRequest, RequestAPI)
+        .provide([
+          [matchers.call.fn(RequestAPI.getUserRequestDetails, requestId), throwError(error)]
+        ])
+        .put({
+          type: 'FETCH_EDIT_REQUEST_FAILURE',
+          errors: error.response.message
+        })
+        .dispatch({
+          type: 'FETCH_EDIT_REQUEST',
+          requestId
+        })
+        .silentRun();
+    });
+  });
 });
+

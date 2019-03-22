@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Moment from 'moment';
 import { PropTypes } from 'prop-types';
+import _ from 'lodash';
 import location from '../../../../images/location.svg';
 import deleteBtn from '../../../../images/icons/new-request-icons/deleteBtn.svg';
 
@@ -19,15 +20,15 @@ class TravelDetailsItem extends Component {
 
  
   componentDidMount() {
-    const { itemId, modalType, requestOnEdit, values } = this.props;
-    this.loadState(requestOnEdit, itemId, modalType, values);
+    const { itemId, editing, requestOnEdit, values } = this.props;
+    this.loadState(requestOnEdit, itemId, editing, values);
   }
 
   componentWillReceiveProps(nextProps) {
-    const { itemId, selection, availableRooms, values, modalType } = nextProps;
+    const { itemId, selection, availableRooms, values, editing } = nextProps;
     const rowId = availableRooms.rowId || 0;
     if (rowId === itemId) {
-      this.setBedChoices(modalType, values, availableRooms.beds);
+      this.setBedChoices(editing, values, availableRooms.beds);
     }
     this.validateTripDetails(values, itemId, selection);
   }
@@ -49,10 +50,10 @@ class TravelDetailsItem extends Component {
     );
   };
 
-  getRawBedChoices = (modalType, values, beds) => {
+  getRawBedChoices = (editing, values, beds) => {
     const { bedOnEdit, itemId } = this.state;
     let bedChoices = [...beds];
-    if (modalType === 'edit request' && bedOnEdit) {
+    if (editing && bedOnEdit) {
       if (this.validateTripRecord(values, itemId)) {
         bedChoices = [bedOnEdit, ...beds];
       }
@@ -60,10 +61,10 @@ class TravelDetailsItem extends Component {
     return bedChoices;
   };
 
-  loadState = (request = [], itemId, modalType, values) => {
+  loadState = (request = [], itemId, editing, values) => {
     const trip = request.trips && request.trips[itemId];
     const pendingState = { itemId };
-    if (trip && modalType === 'edit request') {
+    if (trip && editing) {
       pendingState.bedOnEdit = trip.beds;
       pendingState.trip = { ...trip };
       pendingState.gender = request.gender;
@@ -71,29 +72,29 @@ class TravelDetailsItem extends Component {
       pendingState.accommodationType = trip.accommodationType;
     }
     this.setState({ ...pendingState }, () =>
-      this.setBedChoices(modalType, values, [])
+      this.setBedChoices(editing, values, [])
     );
   };
 
-  setValues = (values, itemId, id, modalType) => {
-    if (modalType === 'edit request') {
+  setValues = (values, itemId, id, editing) => {
+    if (editing) {
       values[`bed-${itemId}`] = values[`bed-${itemId}`] || id || null;
     }
   };
 
-  setBedChoices = (modalType, values, beds) => {
+  setBedChoices = (editing, values, beds) => {
     const { itemId, selection } = this.props;
     const { accommodationType } = this.state;
-    let bedChoices = this.getRawBedChoices(modalType, values, beds);
+    let bedChoices = this.getRawBedChoices(editing, values, beds);
     if (bedChoices.length < 1) {
       switch (accommodationType) {
       case 'Hotel Booking':
-        this.setValues(values, itemId, -1, modalType);
+        this.setValues(values, itemId, -1, editing);
         bedChoices.unshift({ label: 'Hotel Booking', value: -1 });
         bedChoices.unshift({ label: 'Not Required', value: -2 });
         break;
       case 'Not Required':
-        this.setValues(values, itemId, -2, modalType);
+        this.setValues(values, itemId, -2, editing);
         bedChoices.unshift({ label: 'Not Required', value: -2 });
         bedChoices.unshift({ label: 'Hotel Booking', value: -1 });
         break;
@@ -104,7 +105,7 @@ class TravelDetailsItem extends Component {
       }
     } else {
       bedChoices = bedChoices.map(choice => {
-        this.setValues(values, itemId, choice.id, modalType);
+        this.setValues(values, itemId, choice.id, editing);
         return {
           label: `${choice.rooms.roomName}, ${choice.bedName}`,
           value: choice.id
@@ -122,7 +123,7 @@ class TravelDetailsItem extends Component {
     onChangeInput(event);
     if (selection !== 'oneWay') {
       this.validateTripDetails(values, itemId, selection);
-      handlePickBed(null, itemId, false);       
+      handlePickBed(null, itemId, false);
     }
   };
 
@@ -283,7 +284,7 @@ class TravelDetailsItem extends Component {
       }
       return reasonsList;
     };
-    
+
     return (
       <div className="travel-to reasons__option">
         {renderInput(`reasons-${itemId}`, 'dropdown-select', {
@@ -305,8 +306,14 @@ class TravelDetailsItem extends Component {
       values,
       renderInput,
       handleReason,
+      listTravelReasons,
+      editing
     } = this.props;
-    const reason = values[`reasons-${itemId}`];
+    const { travelReasons } = listTravelReasons;
+    const isThere = _.find(travelReasons, {
+      title: values[`reasons-${itemId}`]
+    });
+    const reason = !isThere && editing ? 'Other..' : values[`reasons-${itemId}`];
     const characters = values[`otherReasons-${itemId}`];
     let charLength = characters ? characters.trim().length : '';
     let reasonsLimit =  reasonsWarningColor(charLength, 140);
@@ -330,11 +337,11 @@ class TravelDetailsItem extends Component {
       </div>
     );
   }
-  
+
   validateTripDetails(values, i, selection) {
     const isValid =
     values.gender &&
-    values[`destination-${i}`] && 
+    values[`destination-${i}`] &&
     values[`departureDate-${i}`] &&
     values[`reasons-${i}`];
 
@@ -433,9 +440,9 @@ const renderInput = PropTypes.func;
 const customPropsForDeparture = PropTypes.func;
 const customPropsForArrival = PropTypes.func;
 const fetchRoomsOnFocus = PropTypes.func;
-const modalType = PropTypes.string;
 const requestOnEdit = PropTypes.object;
 const listTravelReasons = PropTypes.object;
+const editing = PropTypes.bool;
 
 TravelDetailsItem.propTypes = {
   itemId: itemId.isRequired,
@@ -451,7 +458,7 @@ TravelDetailsItem.propTypes = {
   customPropsForDeparture: customPropsForDeparture.isRequired,
   customPropsForArrival: customPropsForArrival.isRequired,
   fetchRoomsOnFocus: fetchRoomsOnFocus.isRequired,
-  modalType: modalType,
+  editing: editing,
   requestOnEdit: requestOnEdit.isRequired,
   parentIds: PropTypes.number,
   listTravelReasons: listTravelReasons,
@@ -459,6 +466,6 @@ TravelDetailsItem.propTypes = {
 
 TravelDetailsItem.defaultProps = {
   parentIds: 0,
-  modalType: null,
+  editing: false,
   listTravelReasons: {},
 };

@@ -5,7 +5,8 @@ import {
   CREATE_NEW_REQUEST,
   FETCH_USER_REQUEST_DETAILS,
   EDIT_REQUEST,
-  DELETE_REQUEST
+  DELETE_REQUEST,
+  FETCH_EDIT_REQUEST
 } from '../constants/actionTypes';
 import RequestAPI from '../../services/RequestAPI';
 import apiErrorHandler from '../../services/apiErrorHandler';
@@ -19,9 +20,9 @@ import {
   editRequestSuccess,
   editRequestFailure,
   deleteRequestSuccess,
-  deleteRequestFailure
+  deleteRequestFailure,
+  fetchEditRequestSuccess, fetchEditRequestFailure
 } from '../actionCreator/requestActions';
-import { closeModal } from '../actionCreator/modalActions';
 
 export function* fetchUserRequestsSaga(action) {
   try {
@@ -80,9 +81,10 @@ export function* watchFetchUserRequestsDetails() {
 export function* editRequest(action) {
   try {
     const response = yield call(RequestAPI.editRequest, action.requestId, action.requestData);
-    yield put(editRequestSuccess(response.data.updatedRequest));
-    toast.success('Request updated');
-    yield put(closeModal());
+    const {data: { request, trips }  } = response;
+    yield put(editRequestSuccess({...request, trips }));
+    toast.success('Request updated successfully');
+    action.history.push('/requests');
   } catch (error) {
     const errorMessage = apiErrorHandler(error);
     yield put(editRequestFailure(errorMessage));
@@ -106,6 +108,24 @@ export function* deleteRequestSaga(action) {
   } catch (error) {
     const errorMessage = apiErrorHandler(error);
     yield put(deleteRequestFailure(errorMessage));
+    toast.error(errorMessage);
+  }
+}
+
+export function* watchFetchEditRequest() {
+  yield takeLatest(FETCH_EDIT_REQUEST, fetchEdit);
+}
+
+export function* fetchEdit(action) {
+  try {
+    const response = yield call(RequestAPI.getUserRequestDetails, action.requestId);
+
+    yield put(fetchEditRequestSuccess(response.data.requestData));
+
+  } catch (error) {
+    const errorMessage = apiErrorHandler(error);
+
+    yield put(fetchEditRequestFailure(errorMessage));
     toast.error(errorMessage);
   }
 }

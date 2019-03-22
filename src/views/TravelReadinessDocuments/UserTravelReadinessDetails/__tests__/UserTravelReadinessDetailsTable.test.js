@@ -19,6 +19,9 @@ describe('UserTravelReadinessDetailsTable', () => {
     },
     location: {
       search: '/travel-readiness/_GHGFFFHHHHHHH?id=EBUmAX3z1&type=passport',
+    },
+    history: {
+      push: jest.fn()
     }
   };
 

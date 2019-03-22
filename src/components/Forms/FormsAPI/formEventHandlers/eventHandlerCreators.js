@@ -35,7 +35,7 @@ export function getDateHandler(targetForm, validate, targetField) {
   return date =>
     updateFormValues.call(
       targetForm,
-      date.format('MM/DD/YYYY'),
+      date && date.format('MM/DD/YYYY'),
       targetField,
       validate
     );

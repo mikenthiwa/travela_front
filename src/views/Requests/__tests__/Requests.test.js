@@ -414,8 +414,8 @@ describe('<Requests>', () => {
     );
     const mountWrapper = wrapper.find('li#iconBtn');
     mountWrapper.simulate('click');
-    expect(props.fetchEditRequest.called).toBe(true);
-    expect(props.openModal.called).toBe(true);
+    const { history: { push } } = props;
+    expect(push).toBeCalledWith('/requests/edit-request/xDh20btGz');
   });
 
   it('should handle delete request', () => {

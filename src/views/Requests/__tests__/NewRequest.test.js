@@ -1,11 +1,12 @@
 import React from 'react';
 import sinon from 'sinon';
 import configureStore from 'redux-mock-store';
-import { NewRequests } from '../NewRequests';
+import { RequestPage as RequestPageHOC } from '../NewRequests';
 import travelChecklistMockData from '../../../mockData/travelChecklistMockData';
 import beds from '../../AvailableRooms/__mocks__/mockData/availableRooms';
 import { submissionInfo } from '../../../mockData/checklistSubmissionMockData';
 
+const RequestPage = RequestPageHOC();
 
 let props = {
   requests: [
@@ -151,7 +152,8 @@ let props = {
   postSubmission: jest.fn(),
   fetchAllTravelReasons: sinon.spy(() => Promise.resolve()),
   listTravelReasons: {},
-  validateTrips: jest.fn()
+  validateTrips: jest.fn(),
+  fetchEditRequest: jest.fn(),
 };
 
 const initialState = {
@@ -189,20 +191,27 @@ describe('<Requests>', () => {
   process.env.REACT_APP_CITY = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD-fvLImnNbTfYV3Pd1nJuK7NbzZJNr4ug&libraries=places';
 
   it('should render the Requests without crashing', () => {
-    const wrapper = mount(<NewRequests {...props} />
+    const wrapper = mount(<RequestPage {...props} />
     );
     expect(wrapper.length).toBe(1);
     wrapper.unmount();
   });
 
   it('calls the componentDidMount method', () => {
-    const spy = sinon.spy(NewRequests.prototype, 'componentDidMount');
+    const spy = sinon.spy(RequestPage.prototype, 'componentDidMount');
     const { fetchUserRequests, fetchRoleUsers, fetchAllTravelReasons} = props;
-    const wrapper = mount(<NewRequests {...props} />);
+    const wrapper = mount(<RequestPage {...props} />);
     expect(spy.called).toEqual(true);
     expect(fetchRoleUsers.called).toEqual(true);
     expect(fetchRoleUsers.calledWith(53019)).toEqual(true);
     expect(fetchAllTravelReasons.called).toEqual(true);
+    wrapper.unmount();
+  });
+
+  it('should render the Requests for editing', () => {
+    const RequestPage = RequestPageHOC(true);
+    const wrapper = mount(<RequestPage {...props} />);
+    expect(wrapper.length).toBe(1);
     wrapper.unmount();
   });
 

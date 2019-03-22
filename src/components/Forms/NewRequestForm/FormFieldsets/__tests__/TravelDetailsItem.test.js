@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import _ from 'lodash';
 import { mount } from 'enzyme';
 import TravelDetailsItem, { reasonsWarningColor } from '../TravelDetailsItem';
 import beds from '../../../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
@@ -36,6 +37,7 @@ let props = {
     ['origin-0']: 'Lagos',
     ['departureDate-0']: moment('2018-10-20'),
     ['arrivalDate-0']: moment('2018-10-30'),
+    ['reasons-0']: 'Other..',
   },
   handleDate: jest.fn(),
   onChangeInput: jest.fn(),
@@ -55,7 +57,6 @@ let props = {
   },
   handleReason : jest.fn()
 };
-
 
 const setup = (props) => shallow(<TravelDetailsItem {...props} />);
 
@@ -93,9 +94,8 @@ describe('Test Suite for <TravelDetailsItem />', () => {
       accommodationType: 'Hotel Booking',
       bedOnEdit: []
     });
-    wrapper.instance().setBedChoices('creat', '', []);
+    wrapper.instance().setBedChoices(false, '', []);
     expect(wrapper.state().choices[1].value).toEqual(-1);
-    
   });
 
   it('should update state with bedId when accomodationType is not required', () => {
@@ -104,7 +104,7 @@ describe('Test Suite for <TravelDetailsItem />', () => {
       accommodationType: 'Not Required',
       bedOnEdit: []
     });
-    wrapper.instance().setBedChoices('creat', '', []);
+    wrapper.instance().setBedChoices(false, '', []);
     expect(wrapper.state().choices[1].value).toEqual(-2);
     
   });
@@ -143,6 +143,10 @@ describe('Test Suite for <TravelDetailsItem />', () => {
     expect(reasonsWarningColor(140, 140)).toEqual({ color:'red', charLeft: `You have reached a maximum of ${140} Characters`});
     expect(reasonsWarningColor(137, 140)).toEqual({ color:'red', charLeft: 3});
     expect(reasonsWarningColor(117, 140)).toEqual({charLeft: 23, color: '#3359db'});
+  });
+
+  it('sets the correct travelReason in state when editing requests', () => {
+    const wrapper = mount(<TravelDetailsItem {...props} editing />);
   });
 });
 

@@ -78,11 +78,11 @@ class InfoCenter extends Component {
     } = request;
     let total;
     if (Array.isArray(stipend)) {
-      if(stipend.length > 1) {
+      if(stipend.length > 0) {
         const totArr = stipend.map(obj => obj.subTotal);
         total = totArr.reduce((acc, num) => acc + num);
       } else {
-        total = stipend[0].subTotal;
+        total = 0;
       }
     } else {
       total = stipend ? stipend : 'N/A';

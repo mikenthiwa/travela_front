@@ -94,7 +94,7 @@ class TableMenu extends PureComponent {
   }
 
   renderToggle = () => {
-    const { toggleMenu, editRequest, request, type, requestStatus } = this.props;
+    const { toggleMenu, editRequest, request, type, requestStatus, history } = this.props;
 
     return (
       <div>
@@ -106,8 +106,8 @@ class TableMenu extends PureComponent {
                 <li
                   className="table__menu-list-item" id="iconBtn"
                   onClick={() => {
-                    editRequest(request.id);
                     toggleMenu(request.id);
+                    history.push(`/requests/edit-request/${request.id}`);
                   }} role="presentation"
                 >
                   <img src={editIcon} alt="edit-icon" className="menu-icon" />
@@ -193,7 +193,8 @@ TableMenu.propTypes = {
   visaData: PropTypes.object,
   documentData: PropTypes.object,
   editDocument: PropTypes.func,
-  deleteDocument: PropTypes.func
+  deleteDocument: PropTypes.func,
+  history: PropTypes.object.isRequired
 };
 TableMenu.defaultProps = {
   modalType: '',

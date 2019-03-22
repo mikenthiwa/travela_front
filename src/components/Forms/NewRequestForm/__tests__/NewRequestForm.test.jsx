@@ -1,6 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import moxios from 'moxios';
+import moment from 'moment';
 import NewRequestForm from '../NewRequestForm';
 import beds from '../../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
 import profileMock from '../../ProfileForm/__mocks__';
@@ -8,29 +9,31 @@ import tabIcons from '../../../../images/icons/new-request-icons';
 import travelStipendHelper from '../../../../helper/request/RequestUtils';
 
 
-const { centers } = profileMock;
+const {centers} = profileMock;
 
 describe('<NewRequestForm />', () => {
   let wrapper, onSubmit;
   onSubmit = jest.fn();
 
   class AutocompleteServiceMock {
-    addListener (place_changed ,callback) {
-      callback( this.getPlace(), 'OK');
+    addListener(place_changed, callback) {
+      callback(this.getPlace(), 'OK');
     }
+
     getPlace = () => {
       const components = {
-        address_components:  [
+        address_components: [
           {long_name: 'Las Vegas', short_name: 'Las Vegas', types: ['locality', 'political']},
           {long_name: 'Las Vegas', short_name: 'Las Vegas', types: ['political']},
           {long_name: 'Las Vegas', short_name: 'Las Vegas', types: ['country', 'political']},
         ]
       };
       return components;
-    }
+    };
   }
+
   window.url = 'http://www.goo.com';
-  window.google ={
+  window.google = {
     maps: {
       places: {
         Autocomplete: AutocompleteServiceMock,
@@ -47,7 +50,7 @@ describe('<NewRequestForm />', () => {
         name: 'Collins',
       }
     },
-    userData:{
+    userData: {
       id: '2',
       fullName: 'Collins Muru',
       name: 'Collins',
@@ -63,7 +66,7 @@ describe('<NewRequestForm />', () => {
       roleId: 401938,
       location: 'Kigali'
     },
-    userDataUpdate:[],
+    userDataUpdate: [],
     requestOnEdit: {
       id: '1',
       name: 'Seun Undefined',
@@ -88,6 +91,18 @@ describe('<NewRequestForm />', () => {
           requestId: 'NfR-9KoCP',
           bedId: beds[0].id,
           otherTravelReasons: 'my reason'
+        },
+        {
+          id: '2',
+          origin: 'Kigali Rwanda',
+          destination: 'Nairobi Kenya',
+          departureDate: '2020-09-30',
+          returnDate: '2021-09-30',
+          createdAt: '2019-09-27T18:49:03.626Z',
+          updatedAt: '2019-09-27T18:49:43.803Z',
+          requestId: 'MfR-9KoCQ',
+          bedId: beds[1].id,
+          otherTravelReasons: 'my other reason'
         }
       ],
     },
@@ -95,14 +110,21 @@ describe('<NewRequestForm />', () => {
       beds
     },
     google: {},
-    getUserData: jest.fn(() => {}),
-    handleCreateRequest: jest.fn(() => {}),
-    updateUserProfile: jest.fn(() => {}),
+    getUserData: jest.fn(() => {
+    }),
+    handleCreateRequest: jest.fn(() => {
+    }),
+    updateUserProfile: jest.fn(() => {
+    }),
     creatingRequest: false,
-    handleEditRequest: jest.fn(() => {}),
-    fetchUserRequests: jest.fn(() => {}),
-    fetchAvailableRooms: jest.fn(() => {}),
-    fetchAvailableRoomsSuccess: jest.fn(() => {}),
+    handleEditRequest: jest.fn(() => {
+    }),
+    fetchUserRequests: jest.fn(() => {
+    }),
+    fetchAvailableRooms: jest.fn(() => {
+    }),
+    fetchAvailableRoomsSuccess: jest.fn(() => {
+    }),
     fetchAllTravelStipends: jest.fn(),
     closeModal: jest.fn(),
     choices: ['director', 'chef'],
@@ -114,8 +136,8 @@ describe('<NewRequestForm />', () => {
       fullName: 'Samuel Kubai',
       email: 'samuel@andela.com'
     }],
-    modalType:'new model',
-    listTravelReasons: { 
+    modalType: 'new model',
+    listTravelReasons: {
       travelReasons: [
         {id: 1, title: 'Bootcamp'}
       ]
@@ -131,20 +153,20 @@ describe('<NewRequestForm />', () => {
     },
     trips: [{
       trip:
-      {
-        destination: 'Lagos, Nigeria'
-      }
+        {
+          destination: 'Lagos, Nigeria'
+        }
     }],
     tripDestinations: {
       destination: 'Lagos, Nigeria'
     },
     fetchTravelChecklist: jest.fn(),
     centers,
-    history:{
+    history: {
       push: jest.fn()
     },
-    travelStipends: { 
-      stipends:[
+    travelStipends: {
+      stipends: [
         {
           'id': 1,
           'amount': 100,
@@ -159,7 +181,7 @@ describe('<NewRequestForm />', () => {
       ],
       isLoading: true
     },
-    stipends:[
+    stipends: [
       {
         'id': 1,
         'amount': 100,
@@ -172,7 +194,7 @@ describe('<NewRequestForm />', () => {
         }
       }
     ],
-    validateTrips: jest.fn(),
+    validateTrips: jest.fn()
   };
   const event = {
     preventDefault: jest.fn(),
@@ -184,7 +206,7 @@ describe('<NewRequestForm />', () => {
   const handleCreateRequest = jest.fn();
   const backToTripDetails = jest.fn();
 
-  const { requestOnEdit } = props;
+  const {requestOnEdit} = props;
   const user = localStorage.getItem('name');
   const gender = localStorage.getItem('gender');
   const department = localStorage.getItem('department');
@@ -194,9 +216,9 @@ describe('<NewRequestForm />', () => {
   const defaultState = {
     values: {
       name: !(/^null|undefined$/).test(user) ? user : '', // FIX: need to be
-      gender: !(/^null|undefined$/).test(gender) ? gender: '',
-      department: !(/^null|undefined$/).test(department) ? department: '',
-      role: !(/^null|undefined$/).test(role) ? role :'',
+      gender: !(/^null|undefined$/).test(gender) ? gender : '',
+      department: !(/^null|undefined$/).test(department) ? department : '',
+      role: !(/^null|undefined$/).test(role) ? role : '',
       manager: !(/^null|undefined$/).test(manager) ? manager : '',
     },
     trips: requestOnEdit.trips || [{}],
@@ -208,11 +230,11 @@ describe('<NewRequestForm />', () => {
     position: 'none',
     line: '1px solid #E4E4E4',
     parentIds: 1,
-    steps:[
-      { id:1, name:'Personal Information', status:'', icon: tabIcons.personal },
-      { id:2, name:'Trip Details', status:'', icon: tabIcons.tripDetails },
-      { id:3, name:'Travel Stipends', status:'', icon: tabIcons.stipend },
-      { id:4, name:'Travel Checklist', status:'', icon: tabIcons.checkList }
+    steps: [
+      {id: 1, name: 'Personal Information', status: '', icon: tabIcons.personal},
+      {id: 2, name: 'Trip Details', status: '', icon: tabIcons.tripDetails},
+      {id: 3, name: 'Travel Stipends', status: '', icon: tabIcons.stipend},
+      {id: 4, name: 'Travel Checklist', status: '', icon: tabIcons.checkList}
     ],
     currentTab: 1,
   };
@@ -264,7 +286,7 @@ describe('<NewRequestForm />', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
     const event = {
       nativeEvent: {
-        path: [0,1,2,3,4,5,6,{id: 'departureDate-0_date'}]
+        path: [0, 1, 2, 3, 4, 5, 6, {id: 'departureDate-0_date'}]
       }
     };
     sinon.spy(shallowWrapper.instance(), 'onChangeDate');
@@ -279,14 +301,20 @@ describe('<NewRequestForm />', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
     const event = {
       nativeEvent: {
-        path: [0,1,2,3,4,5,6,{id: 'arrival-0_date'}]
+        path: [0, 1, 2, 3, 4, 5, 6, {id: 'arrival-0_date'}]
       }
     };
     shallowWrapper.setState({
       selection: 'multi',
       parentIds: 2,
       trips: [
-        {destination: 'Amsterdam North Holland', origin: 'Lagos Nigeria', departureDate: '2018-09-24', returnDate: '2018-09-30', bedId: beds[0].id},
+        {
+          destination: 'Amsterdam North Holland',
+          origin: 'Lagos Nigeria',
+          departureDate: '2018-09-24',
+          returnDate: '2018-09-30',
+          bedId: beds[0].id
+        },
       ]
     });
     sinon.spy(shallowWrapper.instance(), 'onChangeDate');
@@ -301,14 +329,20 @@ describe('<NewRequestForm />', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
     const event = {
       nativeEvent: {
-        path: [0,1,2,3,4,5,6,{id: 'departureDate-0_date'}]
+        path: [0, 1, 2, 3, 4, 5, 6, {id: 'departureDate-0_date'}]
       }
     };
     shallowWrapper.setState({
       selection: 'multi',
       parentIds: 2,
       trips: [
-        {destination: 'Amsterdam North Holland', origin: 'Lagos Nigeria', departureDate: '2018-09-24', returnDate: '2018-09-30', bedId: beds[0].id},
+        {
+          destination: 'Amsterdam North Holland',
+          origin: 'Lagos Nigeria',
+          departureDate: '2018-09-24',
+          returnDate: '2018-09-30',
+          bedId: beds[0].id
+        },
       ]
     });
     sinon.spy(shallowWrapper.instance(), 'onChangeDate');
@@ -349,7 +383,13 @@ describe('<NewRequestForm />', () => {
       parentIds: 2,
       currentTab: 2,
       trips: [
-        {destination: 'Amsterdam North Holland', origin: 'Lagos Nigeria', departureDate: '2018-09-24', returnDate: '2018-09-30', bedId: beds[0].id},
+        {
+          destination: 'Amsterdam North Holland',
+          origin: 'Lagos Nigeria',
+          departureDate: '2018-09-24',
+          returnDate: '2018-09-30',
+          bedId: beds[0].id
+        },
       ]
     });
     sinon.spy(shallowWrapper.instance(), 'onChangeInput');
@@ -372,7 +412,13 @@ describe('<NewRequestForm />', () => {
       parentIds: 2,
       currentTab: 2,
       trips: [
-        {destination: 'Amsterdam North Holland', origin: 'Lagos Nigeria', departureDate: '2018-09-24', returnDate: '2018-09-30', bedId: beds[0].id},
+        {
+          destination: 'Amsterdam North Holland',
+          origin: 'Lagos Nigeria',
+          departureDate: '2018-09-24',
+          returnDate: '2018-09-30',
+          bedId: beds[0].id
+        },
       ]
     });
     sinon.spy(shallowWrapper.instance(), 'onChangeInput');
@@ -395,7 +441,13 @@ describe('<NewRequestForm />', () => {
       parentIds: 2,
       currentTab: 2,
       trips: [
-        {destination: 'Amsterdam North Holland', origin: 'Lagos Nigeria', departureDate: '2018-09-24', returnDate: '2018-09-30', bedId: beds[0].id},
+        {
+          destination: 'Amsterdam North Holland',
+          origin: 'Lagos Nigeria',
+          departureDate: '2018-09-24',
+          returnDate: '2018-09-30',
+          bedId: beds[0].id
+        },
       ]
     });
     sinon.spy(shallowWrapper.instance(), 'onChangeInput');
@@ -418,7 +470,7 @@ describe('<NewRequestForm />', () => {
 
   it('should change the radio button on click to single and collapse true', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
-    shallowWrapper.instance().state.collapse=true;
+    shallowWrapper.instance().state.collapse = true;
     const event = {
       preventDefault: jest.fn(),
       target: {
@@ -477,7 +529,7 @@ describe('<NewRequestForm />', () => {
 
   it('should update trip selection to oneWay on select oneWay radio', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
-    shallowWrapper.setState({ selection: 'return', currentTab: 2 });
+    shallowWrapper.setState({selection: 'return', currentTab: 2});
     const event = {
       preventDefault: jest.fn(),
       target: {
@@ -538,7 +590,8 @@ describe('<NewRequestForm />', () => {
     femaleButton.simulate('click', {
       target: {
         name: 'gender',
-        getAttribute: () => {},
+        getAttribute: () => {
+        },
         dataset: {
           value: 'Female'
         }
@@ -553,7 +606,8 @@ describe('<NewRequestForm />', () => {
     maleButton.simulate('click', {
       target: {
         name: 'gender',
-        getAttribute: () => {},
+        getAttribute: () => {
+        },
         dataset: {
           value: 'Male'
         }
@@ -631,15 +685,15 @@ describe('<NewRequestForm />', () => {
     });
     const inputField = shallowWrapper.find('.occupationInput');
 
-    inputField.simulate('change', { target: { value: 'Samuel Kubai' } });
-    const { manager } = shallowWrapper.state('values');
-    const { manager: firstManagerError } = shallowWrapper.state('errors');
+    inputField.simulate('change', {target: {value: 'Samuel Kubai'}});
+    const {manager} = shallowWrapper.state('values');
+    const {manager: firstManagerError} = shallowWrapper.state('errors');
     expect(manager).toEqual('Samuel Kubai');
     expect(firstManagerError).toEqual('');
 
-    inputField.simulate('change', { target: { value: 'will fail' } });
-    const { manager: newManager } = shallowWrapper.state('values');
-    const { manager: secondManagerError } = shallowWrapper.state('errors');
+    inputField.simulate('change', {target: {value: 'will fail'}});
+    const {manager: newManager} = shallowWrapper.state('values');
+    const {manager: secondManagerError} = shallowWrapper.state('errors');
     expect(newManager).toEqual('will fail');
     expect(secondManagerError).toEqual('That manager does not exist.');
   });
@@ -654,7 +708,6 @@ describe('<NewRequestForm />', () => {
     expect(shallowWrapper.instance().addNewTrip.calledOnce).toEqual(true);
   });
 
-  
 
   xit('should save return hasBlankTrips', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
@@ -663,7 +716,7 @@ describe('<NewRequestForm />', () => {
     expect(shallowWrapper.instance().hasBlankTrips.calledOnce).toEqual(true);
   });
 
-  xit('check hasBlankTrips works', ()=>{
+  xit('check hasBlankTrips works', () => {
     const wrapper = shallow(<NewRequestForm {...props} />);
     const wrapperInstance = wrapper.instance();
     wrapperInstance.state.trips = ['Nigeria', 'Ghana'];
@@ -691,7 +744,7 @@ describe('<NewRequestForm />', () => {
 
   it('should call localStorage when savePersonalDetails is called', () => {
     const wrapper = shallow(<NewRequestForm {...props} />);
-    wrapper.instance().savePersonalDetails({ key: 'value'});
+    wrapper.instance().savePersonalDetails({key: 'value'});
     expect(localStorage.getItem('key')).toEqual('value');
   });
 
@@ -713,7 +766,7 @@ describe('<NewRequestForm />', () => {
       selection: 'return',
     });
 
-    wrapper.find('form').simulate('submit', { preventDefault: jest.fn()});
+    wrapper.find('form').simulate('submit', {preventDefault: jest.fn()});
     expect(props.updateUserProfile).toHaveBeenCalledWith(values, props.user.UserInfo.id);
     expect(localStorage.getItem('location')).toEqual('San Fransisco');
   });
@@ -727,7 +780,8 @@ describe('<NewRequestForm />', () => {
   it('should set the location when on edit', () => {
     const wrapper = shallow(<NewRequestForm {...props} modalType="edit request" />);
     wrapper.setState({
-      trips: [ { id: '1',
+      trips: [{
+        id: '1',
         origin: 'Nairobi Kenya',
         destination: 'Lagos Nigeria',
         departureDate: '2018-09-30',
@@ -736,7 +790,8 @@ describe('<NewRequestForm />', () => {
         updatedAt: '2018-09-27T18:49:43.803Z',
         requestId: 'NfR-9KoCP',
         accomodationType: 'Not Required',
-        bedId: 1 } ]
+        bedId: 1
+      }]
     });
     expect(wrapper.state().trips[0].origin).toEqual('Nairobi Kenya');
 
@@ -754,7 +809,7 @@ describe('<NewRequestForm />', () => {
     const shallowWrapper = mount(<NewRequestForm {...props} />);
     shallowWrapper.setState({
       currentTab: 2,
-      trips:[{travelReasons:1}]
+      trips: [{travelReasons: 1}]
     });
     const event = {
       preventDefault: jest.fn(),
@@ -765,7 +820,7 @@ describe('<NewRequestForm />', () => {
 
     const selectField = shallowWrapper.find('DropdownSelect[name="reasons-0"]');
     expect(selectField.props().choices).toEqual(['Other..', 'Bootcamp']);
-    selectField.simulate('change', { target: { value: 'Bootcamp' } });
+    selectField.simulate('change', {target: {value: 'Bootcamp'}});
     const travelReasons = shallowWrapper.state('trips');
     expect(travelReasons[0].travelReasons).toEqual(1);
 
@@ -778,7 +833,7 @@ describe('<NewRequestForm />', () => {
     const shallowWrapper = mount(<NewRequestForm {...props} />);
     shallowWrapper.setState({
       currentTab: 2,
-      trips:[{otherTravelReasons:1}]
+      trips: [{otherTravelReasons: 1}]
     });
     const event = {
       preventDefault: jest.fn(),
@@ -788,7 +843,7 @@ describe('<NewRequestForm />', () => {
     };
 
     const selectField = shallowWrapper.find('DropdownSelect[name="reasons-0"]');
-    selectField.simulate('change', { target: { value: 'Other..' } });
+    selectField.simulate('change', {target: {value: 'Other..'}});
     const travelReasons = shallowWrapper.state('trips');
     expect(travelReasons[0].otherTravelReasons).toEqual(1);
     sinon.spy(shallowWrapper.instance(), 'handleReason');
@@ -850,7 +905,9 @@ describe('<NewRequestForm />', () => {
         {title: 'reason', id: 2}
       ]
     };
-    const shallowWrapper = shallow(<NewRequestForm {...props} listTravelReasons={listTravelReasons} />);
+    const shallowWrapper = shallow(<NewRequestForm
+      {...props}
+      listTravelReasons={listTravelReasons} />);
     shallowWrapper.setState({
       trips: [
         {travelReasons: ''},
@@ -931,7 +988,8 @@ describe('<NewRequestForm />', () => {
     const shallowWrapper = mount(<NewRequestForm {...newProps} />);
     shallowWrapper.setState({
       currentTab: 3,
-      trips: [ { id: '1',
+      trips: [{
+        id: '1',
         origin: 'Nairobi Kenya',
         destination: 'Lagos Nigeria',
         departureDate: '2018-09-30',
@@ -940,10 +998,11 @@ describe('<NewRequestForm />', () => {
         updatedAt: '2018-09-27T18:49:43.803Z',
         requestId: 'NfR-9KoCP',
         accomodationType: 'Not Required',
-        bedId: 1 },
+        bedId: 1
+      },
       {
         destination: 'Nairobi, Kenya'
-      } ]
+      }]
     });
     const nextButton = shallowWrapper.find('#stipend-next');
     const event = {
@@ -997,7 +1056,7 @@ describe('<NewRequestForm />', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
-        status:200
+        status: 200
       });
       expect(event.preventDefault).toBeCalled();
       expect(travelStipendHelper.getAllTripsStipend).toHaveBeenCalled();
@@ -1007,13 +1066,14 @@ describe('<NewRequestForm />', () => {
     });
     moxios.uninstall();
   });
-  
+
   it('should display trip checkList  ', () => {
     const shallowWrapper = mount(<NewRequestForm {...props} />);
     shallowWrapper.setState({
       currentTab: 4,
-      errors: { manager:'' },
-      trips: [ { id: '1',
+      errors: {manager: ''},
+      trips: [{
+        id: '1',
         origin: 'Nairobi Kenya',
         destination: 'Lagos Nigeria',
         departureDate: '2018-09-30',
@@ -1022,13 +1082,14 @@ describe('<NewRequestForm />', () => {
         updatedAt: '2018-09-27T18:49:43.803Z',
         requestId: 'NfR-9KoCP',
         accomodationType: 'Not Required',
-        bedId: 1 } ]
+        bedId: 1
+      }]
     });
     sinon.spy(shallowWrapper.instance(), 'renderTravelCheckList');
     shallowWrapper.instance().renderTravelCheckList();
     expect(shallowWrapper.instance().renderTravelCheckList.calledOnce).toEqual(true);
   });
-  describe('Travel Details', ()=>{
+  describe('Travel Details', () => {
     const shallowWrapper = mount(<NewRequestForm {...props} />);
     shallowWrapper.setState({
       currentTab: 2
@@ -1060,7 +1121,8 @@ describe('<NewRequestForm />', () => {
 
   it('returns trip details page if trip validation fails', (done) => {
     const wrapper = mount(<NewRequestForm {...props} />);
-    const trips = [{ id: '1',
+    const trips = [{
+      id: '1',
       origin: 'Nairobi Kenya',
       destination: 'Lagos Nigeria',
       departureDate: '2018-09-30',
@@ -1069,7 +1131,8 @@ describe('<NewRequestForm />', () => {
       updatedAt: '2018-09-27T18:49:43.803Z',
       requestId: 'NfR-9KoCP',
       accomodationType: 'Not Required',
-      bedId: 1 }];
+      bedId: 1
+    }];
     wrapper.instance().setState({
       currentTab: 2,
       trips
@@ -1086,5 +1149,155 @@ describe('<NewRequestForm />', () => {
     expect(wrapper.instance().validator).toHaveBeenCalled();
     expect(props.fetchAllTravelStipends).toHaveBeenCalled();
     done();
+  });
+
+  it('sets personal details when editing a trip request', () => {
+    const wrapper = mount(<NewRequestForm {...props} editing />);
+    const {requestOnEdit} = props;
+    wrapper.setProps({
+      requestOnEdit
+    });
+    const wrapperState = wrapper.state();
+    const {
+      values: {
+        name, gender, department, role, location, manager
+      }
+    } = wrapperState;
+    const {
+      name: nameOnRequest,
+      gender: genderOnRequest,
+      department: departmentOnRequest,
+      role: roleOnRequest,
+      manager: managerOnRequest
+    } = requestOnEdit;
+
+    expect(name).toEqual(nameOnRequest);
+    expect(gender).toEqual(genderOnRequest);
+    expect(department).toEqual(departmentOnRequest);
+    expect(role).toEqual(roleOnRequest);
+    expect(location).toEqual('Kigali');
+    expect(manager).toEqual(managerOnRequest);
+  });
+
+  it('sets default trip state values when user is editing', () => {
+    const wrapper = mount(<NewRequestForm {...props} editing />);
+    const {requestOnEdit} = props;
+    const {trips} = requestOnEdit;
+    wrapper.setProps({
+      requestOnEdit
+    });
+    const wrapperState = wrapper.state();
+    const {values} = wrapperState;
+
+    expect(values['origin-0']).toEqual(trips[0].origin);
+    expect(values['destination-0']).toEqual(trips[0].destination);
+    expect(values['departureDate-0']).toEqual(moment(trips[0].departureDate));
+    expect(values['bed-0']).toEqual(trips[0].bedId);
+    expect(values['otherReasons-0']).toEqual(trips[0].otherTravelReasons);
+    expect(values['trip-type-0']).toEqual(requestOnEdit.tripType);
+  });
+
+  it('sets the trips from the requestOnEdit', () => {
+    const wrapper = mount(<NewRequestForm {...props} />);
+
+    let wrapperState = wrapper.state();
+    expect(wrapperState.trips).toEqual([{}]);
+
+    wrapper.unmount();
+
+    wrapper.setProps({
+      editing: true
+    });
+
+    wrapper.mount();
+    wrapperState = wrapper.state();
+
+    const {requestOnEdit: {trips}} = props;
+    expect(wrapperState.trips[0].id).toEqual(trips[0].id);
+  });
+
+  it('sets the correct tab status "You are currently here" ', () => {
+    const wrapper = mount(<NewRequestForm {...props} />);
+    const currentTabString = 'You are currently here';
+
+    let wrapperState = wrapper.state();
+    let status = wrapperState.steps[0].status;
+    let currentTab = wrapperState.currentTab;
+
+    expect(status).toEqual(currentTabString);
+    expect(currentTab).toBe(1);
+
+    wrapper.unmount();
+
+    wrapper.setProps({
+      editing: true
+    });
+
+    wrapper.mount();
+    wrapperState = wrapper.state();
+    status = wrapperState.steps[0].status;
+    currentTab = wrapperState.currentTab;
+
+    const status2 = wrapperState.steps[1].status;
+
+    expect(status).toEqual('');
+    expect(currentTab).toBe(2);
+    expect(status2).toEqual(currentTabString);
+  });
+
+  it('should not submit data without validation', () => {
+    const wrapper = mount(<NewRequestForm {...props} editing />);
+    const requestForm = wrapper.find('form');
+    requestForm.simulate('submit');
+    expect(onSubmit).toHaveBeenCalledTimes(0);
+  });
+
+  it('should call the handleEditRequest on form submit', () => {
+    travelStipendHelper.getAllTripsStipend = jest.fn(() => ({
+      totalStipend: '$ 100',
+      stipendSubTotals: []
+    }));
+    const { handleEditRequest } = props;
+    const wrapper = mount(
+      <NewRequestForm
+        {...props}
+        editing
+        handleEditRequest={handleEditRequest}
+      />);
+
+    const tripOriginField = wrapper.find('input[name="origin-0"]');
+    const changeEvent = {
+      target: {
+        name: 'origin-0',
+        value: 'Lagos, Nigeria',
+        dataset: {
+          parentid: 0
+        }
+      }
+    };
+    tripOriginField.simulate('change', changeEvent);
+
+    const nextButton = wrapper.find('button.bg-btn--active');
+    const clickEvent = {
+      preventDefault: jest.fn()
+    };
+    nextButton.simulate('click', clickEvent);
+
+    const { travelStipends } = props;
+
+    wrapper.setProps({
+      travelStipends: {
+        ...travelStipends,
+        isLoading: false
+      }
+    });
+
+    const stipendNextButton = wrapper.find('form').find('#stipend-next');
+    stipendNextButton.simulate('click', clickEvent);
+
+    const newRequestForm = wrapper.find('form');
+    newRequestForm.simulate('submit');
+
+    expect(props.handleEditRequest).toHaveBeenCalled();
   });
 });

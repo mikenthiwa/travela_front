@@ -6,7 +6,8 @@ import {
   watchCreateNewRequestAsync,
   watchFetchUserRequestsDetails,
   watchEditRequest,
-  watchDeleteRequest
+  watchDeleteRequest,
+  watchFetchEditRequest
 } from './requestsSaga';
 import {
   watchPostUserDataSagaAsync,
@@ -232,6 +233,7 @@ function* rootSaga() {
     watchUpdateTravelStipend(),
     watchValidateTrips(),
     watchUpdateBudgetStatus(),
+    watchFetchEditRequest()
   ]);
 }
 

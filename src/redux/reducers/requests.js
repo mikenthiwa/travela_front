@@ -18,7 +18,9 @@ import {
   DELETE_REQUEST,
   DELETE_REQUEST_SUCCESS,
   DELETE_REQUEST_FAILURE,
-  UPDATE_REQUEST_STATUS_SUCCESS
+  UPDATE_REQUEST_STATUS_SUCCESS,
+  FETCH_EDIT_REQUEST_SUCCESS,
+  FETCH_EDIT_REQUEST_FAILURE
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -27,8 +29,11 @@ const initialState = {
     comments: [],
     accommodationType: ''
   },
-  requestOnEdit: {},
+  requestOnEdit: {
+    trips: []
+  },
   comments: [],
+  fetchingRequest: false
 };
 
 export const commentsUpdate = (commentsArray, action) => {
@@ -41,13 +46,6 @@ export const commentsUpdate = (commentsArray, action) => {
   });
   return updatedCommentArray;
 };
-
-const getRequestOnEdit = (state, action) => (
-  {
-    ...state.requests.find(
-      request => request.id === action.requestId)
-  }
-);
 
 let editedRequestIndex, comments;
 const requests = (state = initialState, action) => {
@@ -143,11 +141,23 @@ const requests = (state = initialState, action) => {
   case FETCH_EDIT_REQUEST:
     return {
       ...state,
-      requestOnEdit: getRequestOnEdit(state, action)
+      fetchingRequest: true
+    };
+  case FETCH_EDIT_REQUEST_SUCCESS:
+    return {
+      ...state,
+      fetchingRequest: false,
+      requestOnEdit: action.response
+    };
+  case FETCH_EDIT_REQUEST_FAILURE:
+    return {
+      ...state,
+      fetchingRequest: false,
+      errors: action.errors
     };
   case EDIT_REQUEST_SUCCESS:
-    editedRequestIndex = state.requests.findIndex((request) => {
-      request.id === action.updatedRequest.id; });
+    editedRequestIndex = state.requests.findIndex((request) =>
+      request.id === action.updatedRequest.id);
     return {
       ...state,
       editingRequest: false,

@@ -114,9 +114,9 @@ class TravelDetailsFieldset extends Component {
       handlePickBed,
       removeTrip,
       availableRooms,
-      modalType,
       requestOnEdit,
-      listTravelReasons
+      listTravelReasons,
+      editing
     } = this.props;
 
     const { renderInput } = this.inputRenderer;
@@ -136,10 +136,10 @@ class TravelDetailsFieldset extends Component {
         customPropsForDeparture={this.customPropsForDeparture}
         customPropsForArrival={this.customPropsForArrival}
         fetchRoomsOnFocus={this.fetchRoomsOnFocus}
-        modalType={modalType}
         requestOnEdit={requestOnEdit}
         parentIds={parentIds}
         listTravelReasons={listTravelReasons}
+        editing={editing}
       />
     );
   };
@@ -187,8 +187,8 @@ const handlePickBed = PropTypes.func;
 const fetchAvailableRooms = PropTypes.func;
 const availableRooms = PropTypes.object;
 const listTravelReasons = PropTypes.object;
-const modalType = PropTypes.string;
 const requestOnEdit = PropTypes.object;
+const editing = PropTypes.bool;
 
 TravelDetailsFieldset.propTypes = {
   values: values.isRequired,
@@ -205,13 +205,13 @@ TravelDetailsFieldset.propTypes = {
   fetchAvailableRooms: fetchAvailableRooms.isRequired,
   availableRooms: availableRooms.isRequired,
   listTravelReasons: listTravelReasons.isRequired,
-  modalType: modalType,
   requestOnEdit: requestOnEdit.isRequired,
+  editing: editing
 };
 
 TravelDetailsFieldset.defaultProps = {
   existingTrips: null,
-  modalType: null
+  editing: false
 };
 
 export default TravelDetailsFieldset;

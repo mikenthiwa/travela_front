@@ -214,7 +214,8 @@ export class TravelReadinessDocuments extends Component {
 
   render() {
     const { documentId, documentContext, } = this.state;
-    const { userReadiness, isLoading, shouldOpen, modalType, closeModal, location, openModal } = this.props;
+    const { userReadiness, isLoading, shouldOpen,
+      modalType, closeModal, location, openModal, history } = this.props;
     const { travelDocuments: { passport, visa, other  } } = userReadiness;
     return (
       <Fragment>
@@ -229,7 +230,8 @@ export class TravelReadinessDocuments extends Component {
           activeDocument={documentContext} passports={passport}
           visas={visa} others={other} location={location}
           handleShowDocument={this.showDocumentDetail} documentId={documentId}
-          userData={userReadiness} editDocument={this.handleEditDocument} />
+          userData={userReadiness} editDocument={this.handleEditDocument} history={history}
+        />
         <ReadinessInteractiveModal
           closeModal={closeModal} shouldOpen={shouldOpen}
           modalType={modalType} documentContext={documentContext}

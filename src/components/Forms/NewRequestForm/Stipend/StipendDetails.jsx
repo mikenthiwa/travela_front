@@ -38,7 +38,7 @@ StipendDetails.propTypes = {
   travelStipends: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.number
-  ]).isRequired,
+  ]),
   total: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string
@@ -47,5 +47,6 @@ StipendDetails.propTypes = {
 };
 
 StipendDetails.defaultProps = {
-  isLoading: false
+  isLoading: false,
+  travelStipends: []
 };

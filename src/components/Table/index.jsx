@@ -129,7 +129,7 @@ export class Table extends Component {
   renderRequestStatus(request){
     const {
       editRequest, type, uploadTripSubmissions, deleteRequest,
-      openModal, closeModal, shouldOpen, modalType
+      openModal, closeModal, shouldOpen, modalType, history
     } = this.props;
     const { menuOpen } = this.state;
     return (
@@ -150,6 +150,7 @@ export class Table extends Component {
                 requestStatus={request.status} type={type} modalType={modalType}
                 menuOpen={menuOpen} request={request} openModal={openModal}
                 toggleMenu={this.toggleMenu} shouldOpen={shouldOpen}
+                history={history}
               />
             )
           }

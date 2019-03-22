@@ -34,9 +34,12 @@ class RequestTabHead extends Component {
   }
 
   renderTitle(){
+    const { editing } = this.props;
     return (
       <div className="new-request_title">
-        CREATE A NEW TRAVEL REQUEST
+        {
+          editing ? 'EDIT A TRAVEL REQUEST' : 'CREATE A NEW TRAVEL REQUEST'
+        }
       </div>
     );
   }
@@ -54,10 +57,14 @@ class RequestTabHead extends Component {
   }
 
 }
+RequestTabHead.defaultProps = {
+  editing: false,
+};
 
 RequestTabHead.propTypes = {
   currentTab: PropTypes.number.isRequired,
   steps: PropTypes.array.isRequired,
+  editing: PropTypes.bool,
 };
 
 

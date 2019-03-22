@@ -141,7 +141,7 @@ export class UserTravelReadinessDetailsTable extends Component {
 
   renderTableMenu(props) {
     const { type, editDocument, shouldOpen,
-      modalType, closeModal, openModal, deleteDocument, viewType  } = this.props;
+      modalType, closeModal, openModal, deleteDocument, viewType, history  } = this.props;
     const { menuOpen } = this.state;
     return (viewType === 'self' && (
       <td className="mdl-data-table__cell--non-numeric table__data">
@@ -149,6 +149,7 @@ export class UserTravelReadinessDetailsTable extends Component {
           {...props} menuOpen={menuOpen} type={type} closeModal={closeModal}
           shouldOpen={shouldOpen} openModal={openModal} deleteDocument={deleteDocument}
           toggleMenu={this.toggleMenu} editDocument={editDocument} modalType={modalType}
+          history={history}
         />
       </td>
     ));

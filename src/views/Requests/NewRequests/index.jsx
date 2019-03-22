@@ -6,7 +6,7 @@ import {
   fetchAvailableRooms, fetchAvailableRoomsSuccess
 } from '../../../redux/actionCreator/availableRoomsActions';
 import {
-  fetchUserRequests, createNewRequest, editRequest,
+  fetchUserRequests, createNewRequest, editRequest, fetchEditRequest
 } from '../../../redux/actionCreator/requestActions';
 import updateUserProfile from '../../../redux/actionCreator/userProfileActions';
 import { openModal } from '../../../redux/actionCreator/modalActions';
@@ -16,73 +16,71 @@ import {fetchAllTravelReasons} from '../../../redux/actionCreator/listTravelReas
 import { fetchAllTravelStipends } from '../../../redux/actionCreator/travelStipendsActions';
 import { fetchTravelChecklist } from '../../../redux/actionCreator/travelChecklistActions';
 import { validateTrips } from '../../../redux/actionCreator/tripActions';
+import Preloader from '../../../components/Preloader/Preloader';
+import '../Requests.scss';
 
-export class NewRequests extends Base {
-  constructor(props) {
-    super(props);
-    const { location } = this.props;
-    this.state = {
-      url: location.search,
-      department: '',
-      availableRooms:{}
-    };
+export const RequestPage = (editing = false) => {
+  class NewRequests extends Base {
+    constructor(props) {
+      super(props);
+      const {location} = this.props;
+      this.state = {
+        url: location.search,
+        department: '',
+        availableRooms: {}
+      };
+    }
+
+    componentDidMount() {
+      const {
+        fetchRoleUsers, fetchAllTravelReasons,
+        match, fetchEditRequest
+      } = this.props;
+      const {params: {request_id}} = match;
+      fetchRoleUsers(53019);
+      fetchAllTravelReasons('');
+      if (editing) {
+        fetchEditRequest(request_id);
+      }
+    }
+
+    render() {
+      const { updateUserProfile, userData, fetchPostUserData, user, createNewRequest, listTravelReasons,
+        loading, errors, roleUsers, requestOnEdit, editRequest, fetchUserRequests, occupations,
+        travelChecklists, fetchTravelChecklist, fetchAvailableRooms, availableRooms,
+        fetchAvailableRoomsSuccess, creatingRequest, fetchAllTravelReasons, history,
+        fetchAllTravelStipends, travelStipends, validateTrips, fetchingRequest, editingRequest
+      } = this.props;
+      const { url } = this.state;
+      return (
+        fetchingRequest ? (
+          <div className="request-page__preloader">
+            <Preloader />
+          </div>
+        ):
+          (
+            <NewRequestForm
+              updateUserProfile={updateUserProfile} user={user} errors={errors}
+              userData={userData && userData.result} occupations={occupations}
+              handleCreateRequest={createNewRequest} handleEditRequest={editRequest}
+              loading={loading} managers={roleUsers} availableRooms={availableRooms}
+              fetchAvailableRooms={fetchAvailableRooms} fetchAvailableRoomsSuccess={fetchAvailableRoomsSuccess}
+              creatingRequest={creatingRequest} userDataUpdate={fetchPostUserData}
+              fetchAllTravelReasons={fetchAllTravelReasons} listTravelReasons={listTravelReasons}
+              travelChecklists={travelChecklists} fetchTravelChecklist={fetchTravelChecklist}
+              requestOnEdit={requestOnEdit} fetchUserRequests={() => fetchUserRequests(url)}
+              history={history} fetchAllTravelStipends={fetchAllTravelStipends} travelStipends={travelStipends}
+              validateTrips={validateTrips} editing={editing} isEditing={editingRequest}
+            />)
+      );
+    }
   }
+  return NewRequests;
+};
 
-  componentDidMount() {
-    const {
-      fetchRoleUsers,
-      fetchAllTravelReasons
-    } = this.props;
-    fetchRoleUsers(53019);
-    fetchAllTravelReasons('');
-  }
-
-  render() {
-    const {
-      updateUserProfile, userData, fetchPostUserData,
-      user, createNewRequest, listTravelReasons,
-      loading, errors,
-      modalType, roleUsers, requestOnEdit, editRequest,
-      fetchUserRequests, occupations, travelChecklists, fetchTravelChecklist,
-      fetchAvailableRooms, availableRooms, fetchAvailableRoomsSuccess, creatingRequest,
-      fetchAllTravelReasons,
-      history,
-      fetchAllTravelStipends,
-      travelStipends, validateTrips
-    } = this.props;
-    const { url } = this.state;
-    return (
-      <NewRequestForm
-        updateUserProfile={updateUserProfile} user={user} errors={errors}
-        userData={userData && userData.result} occupations={occupations}
-        handleCreateRequest={createNewRequest}
-        handleEditRequest={editRequest} loading={loading}
-        managers={roleUsers} availableRooms={availableRooms} modalType={modalType}
-        fetchAvailableRooms={fetchAvailableRooms}
-        fetchAvailableRoomsSuccess={fetchAvailableRoomsSuccess}
-        creatingRequest={creatingRequest}
-        userDataUpdate={fetchPostUserData}
-        fetchAllTravelReasons={fetchAllTravelReasons}
-        listTravelReasons={listTravelReasons}
-        travelChecklists={travelChecklists}
-        fetchTravelChecklist={fetchTravelChecklist}
-        requestOnEdit={requestOnEdit} fetchUserRequests={() => fetchUserRequests(url)}
-        history={history}
-        fetchAllTravelStipends={fetchAllTravelStipends}
-        travelStipends={travelStipends}
-        validateTrips={validateTrips}
-      />
-    );
-  }
-}
-
-const mapStateToProps = ({requests, user, role, availableRooms, 
-  occupations,
-  modal, 
-  teammates, 
-  travelReason, 
-  travelStipends,
-  travelChecklist
+const mapStateToProps = ({
+  requests, user, role, availableRooms, occupations,
+  modal, teammates, travelReason, travelStipends, travelChecklist
 }) => ({
   ...requests,
   ...role,
@@ -111,7 +109,10 @@ const actions = () => ({
   fetchAllTravelReasons,
   fetchAllTravelStipends,
   fetchTravelChecklist,
-  validateTrips
+  validateTrips,
+  fetchEditRequest
 });
 
-export default connect(mapStateToProps, actions())(NewRequests);
+export default (editing = false) => {
+  return connect(mapStateToProps, actions())(RequestPage(editing));
+};

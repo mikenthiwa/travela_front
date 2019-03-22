@@ -60,7 +60,10 @@ let props = {
     }
   },
   editDocument: sinon.spy(() => Promise.resolve()),
-  deleteDocument: sinon.spy(() => Promise.resolve())
+  deleteDocument: sinon.spy(() => Promise.resolve()),
+  history: {
+    push: jest.fn()
+  }
 };
 
 let wrapper = shallow(<TableMenu {...props} />);
@@ -118,11 +121,21 @@ describe('<TableMenu />', () => {
 
     wrapper = mount(<TableMenu {...props} />);
 
-    const { editRequest, request } = props;
-    const iconBtn = wrapper.find('#iconBtn');
+    const { history: { push }, request } = props;
+
+    wrapper.setProps({
+      type: 'requests',
+      requestStatus: 'Open'
+    });
+
+    const menuIcon = wrapper.find('.fa-ellipsis-v').first();
+    menuIcon.simulate('click');
+
+    const iconBtn = wrapper.find('li.table__menu-list-item').first();
     iconBtn.simulate('click');
-    expect(editRequest.called).toEqual(true);
-    expect(editRequest.calledWith(request.id)).toEqual(true);
+
+    expect(push).toBeCalled();
+    expect(push).toBeCalledWith(`/requests/edit-request/${request.id}`);
   });
   
   it('should render Onclick for document works as exepected', () => {

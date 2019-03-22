@@ -20,8 +20,11 @@ describe('Requests Reducer', () => {
         trips: [],
         comments: []
       },
-      requestOnEdit: {},
-      comments: []
+      requestOnEdit: {
+        trips: []
+      },
+      comments: [],
+      fetchingRequest: false
     };
     const error = 'Error fetching requests, network error';
     it('returns the correct initial state', () => {
@@ -210,31 +213,82 @@ describe('Requests Reducer', () => {
         ...initialState,
         editingRequest: false,
         requests: [
-          fetchRequestsDetailsResponse.requestData,
-          fetchRequestsDetailsResponse.requestData,
+          fetchRequestsDetailsResponse.requestData
         ],
         editRequestError: null
       });
     });
     it('returns the correct state for FETCH_EDIT_REQUEST action', () => {
       const initialState = {
-        requests: [fetchRequestsDetailsResponse.requestData],
         requestData: {
           trips: [],
-          comments: []
+          comments: [],
+          accommodationType: ''
         },
-        requestOnEdit: {},
-        comments: []
-      };
-      const action = {
-        type: 'FETCH_EDIT_REQUEST',
-        requestId: 'xDh20cuGx',
-      };
-      expect(requests(initialState, action)).toEqual({
-        ...initialState,
         requestOnEdit: {
-          ...fetchRequestsDetailsResponse.requestData,
+          trips: []
         },
+        comments: [],
+        fetchingRequest: false
+      };
+      const dispatchedAction = {
+        type: 'FETCH_EDIT_REQUEST'
+      };
+      const newState = requests(initialState, dispatchedAction);
+      expect(newState).toEqual({
+        ...initialState,
+        fetchingRequest: true
+      });
+    });
+
+    it('returns the correct state for FETCH_EDIT_REQUEST_SUCCESS', () => {
+      const initialState = {
+        requestData: {
+          trips: [],
+          comments: [],
+          accommodationType: ''
+        },
+        requestOnEdit: {
+          trips: []
+        },
+        comments: [],
+        fetchingRequest: false
+      };
+      const dispatchedAction = {
+        type: 'FETCH_EDIT_REQUEST_SUCCESS',
+        response: fetchRequestsDetailsResponse.requestData
+      };
+      const newState = requests(initialState, dispatchedAction);
+      expect(newState).toEqual({
+        ...initialState,
+        fetchingRequest: false,
+        requestOnEdit: fetchRequestsDetailsResponse.requestData
+      });
+    });
+
+    it('returns the correct state for FETCH_EDIT_REQUEST_FAILURE', () => {
+      const error = 'Something went wrong';
+      const initialState = {
+        requestData: {
+          trips: [],
+          comments: [],
+          accommodationType: ''
+        },
+        requestOnEdit: {
+          trips: []
+        },
+        comments: [],
+        fetchingRequest: false
+      };
+      const dispatchedAction = {
+        type: 'FETCH_EDIT_REQUEST_FAILURE',
+        errors: error
+      };
+      const newState = requests(initialState, dispatchedAction);
+      expect(newState).toEqual({
+        ...initialState,
+        fetchingRequest: false,
+        errors: error
       });
     });
     it('returns the correct state for EDIT_REQUEST_FAILURE action', () => {

@@ -26,7 +26,7 @@ import {
 import { uploadFile } from '../../redux/actionCreator/fileUploadActions';
 import {fetchCenters} from '../../redux/actionCreator/centersActions';
 import { fetchAllTravelStipends } from '../../redux/actionCreator/travelStipendsActions';
-import {validateTrips} from '../../redux/actionCreator/tripActions';
+import { validateTrips } from '../../redux/actionCreator/tripActions';
 
 export class Requests extends Base {
   state = {
@@ -97,9 +97,8 @@ export class Requests extends Base {
   }
 
   handleEditRequest = (requestId) => {
-    const { openModal, fetchEditRequest } = this.props;
+    const { fetchEditRequest } = this.props;
     fetchEditRequest(requestId);
-    openModal(true, 'edit request');
   }
 
   handleShowTravelChecklist = (request, modalType) => {

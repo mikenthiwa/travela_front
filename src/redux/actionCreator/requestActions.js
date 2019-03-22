@@ -14,7 +14,9 @@ import {
   EDIT_REQUEST_FAILURE,
   DELETE_REQUEST,
   DELETE_REQUEST_SUCCESS,
-  DELETE_REQUEST_FAILURE
+  DELETE_REQUEST_FAILURE,
+  FETCH_EDIT_REQUEST_SUCCESS,
+  FETCH_EDIT_REQUEST_FAILURE
 } from '../constants/actionTypes';
 
 export const fetchUserRequests = url => ({
@@ -71,10 +73,21 @@ export const fetchEditRequest = (requestId) => ({
   requestId
 });
 
-export const editRequest = (requestId, requestData) => ({
+export const fetchEditRequestFailure = (errors) => ({
+  type: FETCH_EDIT_REQUEST_FAILURE,
+  errors
+});
+
+export const fetchEditRequestSuccess = (response) => ({
+  type: FETCH_EDIT_REQUEST_SUCCESS,
+  response
+});
+
+export const editRequest = (requestId, requestData, history) => ({
   type: EDIT_REQUEST,
   requestId,
-  requestData
+  requestData,
+  history
 });
 export const editRequestSuccess = (updatedRequest) => ({
   type: EDIT_REQUEST_SUCCESS,

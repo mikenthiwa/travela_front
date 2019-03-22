@@ -7,7 +7,10 @@ import {
   createNewRequestFailure,
   deleteRequest,
   deleteRequestSuccess,
-  deleteRequestFailure
+  deleteRequestFailure,
+  fetchEditRequest,
+  fetchEditRequestSuccess,
+  fetchEditRequestFailure
 } from '../requestActions';
 import { fetchRequestsResponse } from '../../__mocks__/reduxMocks';
 
@@ -131,6 +134,44 @@ describe('Requests Actions', () => {
       };
       const newAction = deleteRequestFailure(error);
       expect(newAction).toEqual(receivedAction);
+    });
+  });
+
+  describe('UPDATE REQUEST actions', () => {
+    it('should return action of type FETCH_EDIT_REQUEST', () => {
+      const requestId = 'yl61obdLF';
+      const expectedAction = {
+        type: 'FETCH_EDIT_REQUEST',
+        requestId
+      };
+      const createdAction = fetchEditRequest(requestId);
+
+      expect(createdAction).toEqual(expectedAction);
+    });
+
+    it('should return action of type FETCH_EDIT_REQUEST_SUCCESS', () => {
+      const { requests } = fetchRequestsResponse;
+      const response = {
+        ...requests[0]
+      };
+      const expectedAction = {
+        type: 'FETCH_EDIT_REQUEST_SUCCESS',
+        response
+      };
+      const createdAction = fetchEditRequestSuccess(response);
+
+      expect(createdAction).toEqual(expectedAction);
+    });
+
+    it('should return action of type FETCH_EDIT_REQUEST_FAILURE', () => {
+      const errors = 'SOmething went wrong';
+      const expectedAction = {
+        type: 'FETCH_EDIT_REQUEST_FAILURE',
+        errors
+      };
+      const createdAction = fetchEditRequestFailure(errors);
+
+      expect(createdAction).toEqual(expectedAction);
     });
   });
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {PropTypes} from 'prop-types';
+import { PropTypes } from 'prop-types';
 import ButtonLoadingIcon from '../../ButtonLoadingIcon';
 import commentIcon from '../../../../images/icons/new-request-icons/Chat.svg';
 import ConnectedCommentBox from '../../../RequestsModal/CommentBox/CommentBox';
@@ -35,12 +35,21 @@ class SubmitArea extends Component{
           </div>
         </div>
       );
-    }
-    submitButton = (hasBlankFields, loading, isCreating, sameOriginDestination, disableOnChangeProfile, send, nextStep) =>{
-      return(
+    };
+
+  handleSubmitButtonClick = (event, nextStep) => {
+    nextStep && nextStep(event);
+  };
+  
+    submitButton = (
+      hasBlankFields, loading, isCreating,
+      sameOriginDestination, disableOnChangeProfile,
+      send, nextStep
+    ) => {
+      return (
         <button 
           type="submit"
-          onClick={e =>{ nextStep ? nextStep(e) : null; }}
+          onClick={e => this.handleSubmitButtonClick(e, nextStep)}
           disabled={hasBlankFields || loading || isCreating || (sameOriginDestination && disableOnChangeProfile)}
           className="bg-btn bg-btn--active"
           id="submit">
@@ -67,22 +76,20 @@ class SubmitArea extends Component{
         ));
     }
 
-
     render(){
       const { hasBlankFields,sameOriginDestination, onCancel, send, modalType,
-        onEditCancel, selection, loading, isCreating, disableOnChangeProfile, nextStep } = this.props;
+        onEditCancel, selection, loading, isCreating, disableOnChangeProfile, nextStep
+      } = this.props;
       return(
         <fieldset className={send==='Next' ?'submit__area-border': null}>
           <div className={selection ? `submit-area submit-area--${selection}` : 'submit-area'}>
             {send==='Next' && this.commentSession() }
             { onCancel ? this.renderCancelButton(modalType, onEditCancel, onCancel) : (<div />)}
-            { send === 'Next' ? (
-              this.submitButton(hasBlankFields, loading, isCreating, sameOriginDestination, disableOnChangeProfile, send, nextStep)
+            { this.submitButton(
+              hasBlankFields, loading, isCreating,
+              sameOriginDestination, disableOnChangeProfile,
+              send, nextStep
             )
-              : (
-                this.submitButton(hasBlankFields, loading, isCreating, sameOriginDestination, disableOnChangeProfile, send)
-                
-              )
             }
           </div>
         </fieldset>
@@ -108,8 +115,7 @@ SubmitArea.propTypes = {
   collapsible: PropTypes.func,
   handleComment: PropTypes.func,
   collapse: PropTypes.bool,
-  commentTitle: PropTypes.string,
-
+  commentTitle: PropTypes.string
 };
 
 SubmitArea.defaultProps = {
@@ -125,7 +131,7 @@ SubmitArea.defaultProps = {
   collapsible: () => {},
   handleComment: () => {},
   collapse: false,
-  commentTitle: '',
+  commentTitle: ''
 };
 
 export default SubmitArea;

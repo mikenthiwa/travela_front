@@ -20,7 +20,7 @@ class DateInput extends Component {
   handleChange = (date, event) => {
     const { onChange } = this.props;
     this.setState({ selectedDate: date });
-    date && onChange(date, event);
+    onChange(date, event);
   };
 
   render() {

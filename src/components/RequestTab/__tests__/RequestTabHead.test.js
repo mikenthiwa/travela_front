@@ -11,6 +11,7 @@ const props = {
     { id:4, name:'Travel Checklist', status:'', icon: tabIcons.checkList }   
   ],
   currentTab: 3,
+  editing: false
 };
 
 let wrapper;
@@ -28,5 +29,23 @@ describe('<RequestTabHead />', () => {
     const renderTabSpy = jest.spyOn(wrapper.instance(), 'renderTab');
     wrapper.instance().renderTab(props.steps[0], 1, props.steps[1].icon);
     expect(renderTabSpy).toHaveBeenCalled();
+  });
+  it('should render the correct title', () => {
+    const wrapper = mount(<RequestTabHead {...props} />);
+
+    let title = wrapper.find('.new-request_title').text();
+
+    expect(/CREATE/.test(title)).toBeTruthy();
+
+    wrapper.unmount();
+
+    wrapper.setProps({
+      editing: true
+    });
+
+    wrapper.mount();
+
+    title = wrapper.find('.new-request_title').text();
+    expect(/EDIT/.test(title)).toBeTruthy();
   });
 });
