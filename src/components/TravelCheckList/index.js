@@ -86,6 +86,7 @@ class TravelCheckListPage extends Component{
     }
     
     renderReadinessProgressBar = (percentage) => {
+      const { hideSubmit } = this.props;
       const message = percentage === 100 ?  
         'Travel Team will review your document and advise accordingly' 
         : 'Complete the checklist to continue';
@@ -117,8 +118,9 @@ class TravelCheckListPage extends Component{
               </div>
           
             </div>
-
-        
+            <div className="travelCheckList__row--button-area">
+              { !hideSubmit && this.renderSubmitButton(percentage) }
+            </div>
           </Fragment>
         </div>
 
@@ -152,7 +154,7 @@ class TravelCheckListPage extends Component{
       
       render() {
         const { request, submissionInfo: {percentageCompleted},
-          hideSubmit } = this.props;
+        } = this.props;
         return (
           <div className="travelCheck-list">
 
@@ -169,9 +171,7 @@ class TravelCheckListPage extends Component{
               { this.renderReadinessProgressBar(percentageCompleted) }
             
             </div>
-            <div className="travelCheckList__row">
-              { !hideSubmit && this.renderSubmitButton(percentageCompleted) }
-            </div>
+           
             
           </div>
           

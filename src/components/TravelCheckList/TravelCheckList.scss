@@ -61,9 +61,11 @@
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
     -ms-flex-pack: start;
-  }
-  &__row:last-child {
-    justify-content: flex-end;
+    &--button-area{
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
   }
   &__col {
     width: 50%;
@@ -73,6 +75,7 @@
   }
   &__col-5 {
     width: 41.6%;
+    position: relative;
   }
   &--card {
     margin: 5px;
@@ -85,6 +88,7 @@
     text-align: center;
     padding: 22px 0px 20px 0px;
   }
+  
 }
 .progressBar {
   position: relative;

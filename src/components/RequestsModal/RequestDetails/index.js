@@ -24,7 +24,8 @@ export class RequestDetails extends Component {
   }
 
   componentDidMount() {
-    this.setSteps();
+    const { submissionInfo: {percentageCompleted, submissions } } = this.props;
+    this.setSteps(percentageCompleted, submissions);
   }
 
   componentWillReceiveProps(nextProp){
@@ -42,17 +43,14 @@ export class RequestDetails extends Component {
     const { steps, currentTab } = this.state;
     const newSteps = steps;
     if (requestData.status === 'Verified') {
-      this.loadStatus(3);
+      this.loadStatus(3, submission);
       this.setState({
         steps: newSteps,
         currentTab: 5
       });
     } 
     else if (percent === 100) {
-      const completionTime = this.checklistCompletionDate(submission);
-      this.loadStatus(3);
-      newSteps[2].status = '';
-      newSteps[2].statusDate = `Completed on ${completionTime}`;
+      this.loadStatus(3, submission);
       this.setState({
         steps: newSteps,
         currentTab: 4
@@ -84,15 +82,19 @@ export class RequestDetails extends Component {
     
   }
 
-  loadStatus(tab) {
+  loadStatus(tab, submission) {
     const { requestData } = this.props;
     const { steps } = this.state;
+    const completionTime = tab === 3 ? `Completed on ${this.checklistCompletionDate(submission)}` : '';
     const newSteps = steps;
     newSteps[0].status = `Approved by ${requestData.approver}`;
     newSteps[0].statusDate = `Completed on ${moment(requestData.timeApproved).format('DD/MM/YY')}`;
     newSteps[1].status = `Approved by ${requestData.budgetApprovedBy}`;
     newSteps[1].statusDate = `Completed on ${moment(requestData.budgetApprovedAt).format('DD/MM/YY')}`;
-    newSteps[tab].statusDate = 'You are currently here';
+    newSteps[2].statusDate = completionTime;
+    newSteps[tab].statusDate = requestData.status === 'Verified' ? 
+      `Completed on ${moment(requestData.updatedAt).format('DD/MM/YY')}` : 
+      'You are currently here';
   }
 
   handleDisplayCommentBox() {
@@ -174,7 +176,7 @@ export class RequestDetails extends Component {
   renderRequestDetails(requestData) {
     return (
       <div>
-        {requestData.trips.map(request => {
+        {requestData.trips && requestData.trips.map(request => {
           return (
             <Fragment key={request.id}>
               <div className="request-details-container">
@@ -291,7 +293,7 @@ export class RequestDetails extends Component {
     const { comments } = requestData; 
     return (
       <Fragment>
-        {comments.length < 1 ? (
+        {requestData.comments && comments.length < 1 ? (
           <div className="requestDetails__comment">
             {this.renderAddCommentText()}
           </div>)
@@ -325,7 +327,7 @@ export class RequestDetails extends Component {
           {currentTab === 4 && (
             <div>
               {this.renderRequestDetails(requestData)}
-              { this.renderCheckListSubmission('hideButton')}
+              { this.renderCheckListSubmission()}
             </div>
           )}
           {currentTab === 5 && this.renderRequestDetails(requestData)}

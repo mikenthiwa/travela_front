@@ -94,7 +94,7 @@ describe('TravelChecklist Component', () => {
     const travelChecklistCardHead = wrapper.find('.travelCheckList--card__head');
     const checklistItem = wrapper.find('.travelCheck-list');
     const progressBarMessage = wrapper.find('.progressBar__message');
-    expect(travelChecklistRow.length).toBe(2);
+    expect(travelChecklistRow.length).toBe(1);
     expect(progressBarText2.text()).toBe('You are');
     expect(progressBarText1.text()).toBe('Travel Ready');
     expect(progressBarMessage.text()).toBe('Complete the checklist to continue');
