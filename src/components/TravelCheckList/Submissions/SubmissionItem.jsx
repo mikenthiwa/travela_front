@@ -12,19 +12,21 @@ class SubmissionItem extends Component {
     returnAirline: '', validTicket: true, uploadedFileName: '', validInput: true,
     uploadedFileDate: '', uploadedFileUrl: '', hasSelectedDocument: false,
   };
-  
+
   componentWillReceiveProps(nextProps) {
     const {
-      fileUploadData: {isUploading, uploadSuccess}, checkId, 
+      fileUploadData: {isUploading, uploadSuccess}, checkId,
+      checklistItem : { name , submissions: [ item ] }
     } = nextProps;
 
-    if (isUploading.match(checkId)) {
+    if (isUploading.match(checkId) && ( item || name !== 'Travel Ticket Details')) {
       return this.setState({info: 'Uploading file...', type: 'uploading'});
     }
-    uploadSuccess.match(checkId) && this.setState({	
-      info: 'Done', type: 'success', uploadedFileName: ''	
-    });
-    
+    if(!(name === 'Travel Ticket Details' && !item)){
+      uploadSuccess.match(checkId) && this.setState({
+        info: 'Done', type: 'success', uploadedFileName: ''
+      });
+    }
   }
 
   getEmptyFieldsMessage = () => {
@@ -69,7 +71,7 @@ class SubmissionItem extends Component {
 
   setUploadedFileName = (uploadedFileName, date, id, url) => {
     const {checkId} = this.props;
-    if(checkId.match(id)) this.setState({uploadedFileName, 
+    if(checkId.match(id)) this.setState({uploadedFileName,
       uploadedFileDate: date, uploadedFileUrl : url });
   }
 
@@ -125,7 +127,7 @@ class SubmissionItem extends Component {
     const {submissionText} = this.state;
     this.setState({validInput: !!submissionText});
     return !!submissionText;
-  }
+  };
 
   validateTicketFields = () => {
     const {tripType} = this.props;
@@ -142,7 +144,7 @@ class SubmissionItem extends Component {
     const valid = !valuesArr.includes('');
     this.setState({validTicket: valid});
     return valid;
-  }
+  };
 
   submitTicket = (valid) => {
     const {
@@ -182,7 +184,7 @@ class SubmissionItem extends Component {
         )}
       </Fragment>
     );
-  }
+  };
 
   renderUploadError = () => {
     const {info} = this.state;
@@ -197,14 +199,14 @@ class SubmissionItem extends Component {
 
   renderIsUploading = () => {
     const {
-      fileUploadData: {isUploading}, checkId, isUploadingStage2
+      fileUploadData: {isUploading}, checkId, isUploadingStage2, checklistItem: {name}
     } = this.props;
     return (
       <Fragment>
         {
           isUploading.match(checkId) &&
           isUploadingStage2.includes(checkId) && (
-            <div className="submission-progress__">
+            <div className={`submission-progress__ ${name === 'Travel Ticket' && 'travelTicket'}`}>
               <div className="submission-progress__spinner" />
               <div id="submission-progress" className="submission-progress__">
                 Uploading file...
@@ -214,30 +216,30 @@ class SubmissionItem extends Component {
         }
       </Fragment>
     );
-  }
+  };
 
   renderUploadDone = () => {
     const {postSuccess, checkId, checklistItem} = this.props;
     const {requiresFiles, submissions: [item]} = checklistItem;
+
+    const submitted = item || (postSuccess.includes(checkId) && !requiresFiles);
     return (
-      <Fragment>
-        {postSuccess.includes(checkId) && !requiresFiles && (
-          <div className="submission-progress__">
-            <div className="submission-progress__success">Done</div>
-          </div>
-        )}
-      </Fragment>
+      <div className={`submission-progress__wrapper  ${submitted ? '': 'hidden_progress'}`}>
+        <div className="submission-progress__">
+          <div className="submission-progress__success">Done</div>
+        </div>
+      </div>
     );
-  }
+  };
 
   setUploadedFile = (fileName, url, updatedAt) => {
     const { fileName: prevFileName } = this.state;
-    if (!prevFileName && (prevFileName !== fileName)) this.setState({ fileName, 
-      type: 'success', 
+    if (!prevFileName && (prevFileName !== fileName)) this.setState({ fileName,
+      type: 'success',
       uploadedFileUrl: url,
-      uploadedFileDate: updatedAt 
+      uploadedFileDate: updatedAt
     });
-  }
+  };
 
   renderField = () => {
     const {
@@ -274,7 +276,7 @@ class SubmissionItem extends Component {
           returnDepartureTime={returnDepartureTime} returnTime={returnTime}
           ticketNumber={ticketNumber} returnTicketNumber={returnTicketNumber}
           airline={airline} returnAirline={returnAirline} validTicket={validTicket}
-          uploadedFileDate={uploadedFileDate} closeModal={closeModal} 
+          uploadedFileDate={uploadedFileDate} closeModal={closeModal}
           handleUserDocumentUpload={handleUserDocumentUpload} shouldOpen={shouldOpen}
           userReadinessDocument={userReadinessDocument} modalType={modalType}
           hasSelectedDocument={hasSelectedDocument}
@@ -282,28 +284,41 @@ class SubmissionItem extends Component {
           submitAttachedDocument={this.submitAttachedDocument}
         />
         {type === 'error' && this.renderUploadError()}
-        {type === 'uploading' && this.renderIsUploading()}
+        {type === 'uploading' && name !== 'Travel Ticket Details' && this.renderIsUploading()}
         {this.renderError(utilsType)}
-        {type === 'success' && this.renderUploadDone()}
+        {this.renderUploadDone()}
       </Fragment>
     );
   };
 
 
   renderTravelChecklistItem = () => {
-    const {checklistItem: {id, name, resources}} = this.props;
+    const {checklistItem: {name, id, resources}, travelTicket, travelTicket: {submissions}, tripId} = this.props;
 
     return (
-      <div className="travelSubmission--item">
+      <div className={`travelSubmission--item ${name === 'Travel Ticket Details' && 'travelTicket'}`}>
         <span className="travelSubmission--item__name">{name}</span>
-        {resources.length > 0 && resources.map(resource => (
+        {resources && resources.length > 0 && resources.map(resource => (
           <a
             key={id} href={resource.link} target="blank"
             className="travelSubmission--item__resource-link">
             [{resource.label}]
           </a>
         ))}
-        { name==='Travel Ticket Details' && <span className="travelSubmission--item__name-two">Upload Ticket</span>}
+        { name==='Travel Ticket Details' && (
+          <div className="travelSubmission--item__name-two">
+            {
+              submissions.length === 0 && (
+                <SubmissionItem
+                  {...this.props}
+                  key={`${travelTicket.id}`}
+                  checkId={`${tripId}-${travelTicket.id}`}
+                  checklistItem={travelTicket}
+                />
+              )
+            }
+          </div>
+        )}
         {this.renderField()}
       </div>
     );
@@ -319,6 +334,7 @@ SubmissionItem.propTypes = {
   postSubmission: PropTypes.func.isRequired, fileUploadData: PropTypes.object.isRequired,
   tripId: PropTypes.string.isRequired, itemsToCheck: PropTypes.array.isRequired,
   request: PropTypes.object.isRequired, modalType: PropTypes.string,
+  travelTicket: PropTypes.object,
   postSuccess: PropTypes.array.isRequired, isUploadingStage2: PropTypes.array.isRequired,
   requestId: PropTypes.string.isRequired, tripType: PropTypes.string.isRequired,
   checkId: PropTypes.string.isRequired, handleUserDocumentUpload: PropTypes.func.isRequired,
@@ -326,7 +342,11 @@ SubmissionItem.propTypes = {
   history: PropTypes.object.isRequired
 };
 SubmissionItem.defaultProps = {
-  closeModal: () => {}, userReadinessDocument: {}, shouldOpen: false, modalType: ''
+  closeModal: () => {}, userReadinessDocument: {}, shouldOpen: false, modalType: '',
+  travelTicket: {
+    name: 'Travel Ticket',
+    submissions: []
+  }
 };
 
 export default SubmissionItem;

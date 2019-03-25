@@ -28,11 +28,12 @@
     &__destination:first-child {
       margin: 20px 0;
     }
-    &__destination {
-      margin: 50px 0;
-    }
     &__destination:last-child {
         margin-bottom: 25px;
+
+        &:after {
+            display: none;
+        }
     }
     &__destination-name {
       text-transform: capitalize;
@@ -170,6 +171,40 @@
         margin: 0px 0;
         text-transform: capitalize;
         border-bottom: 1px solid #E4E4E4;
+        &:last-child{
+            border-bottom: 1px #E4E4E4;
+        }
+
+        &.travelTicket {
+
+            .travelSubmission--item__name-two{
+                margin-left: 5px;
+                display: inline-block !important;
+                .travelSubmission {
+                    &--item {
+                        padding: 0;
+                        margin: 0;
+                        border-bottom: none;
+                        &__name {
+                            display: none;
+                        }
+                    }
+                    &--input__upload-field {
+                        display: inline-flex;
+                        margin: 0;
+
+                        button {
+                            outline: none;
+                            border: none;
+                            color: #3359DB;
+                            font-weight: 900;
+                            font-size: 12px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
         .ticket-submission {
             display: flex;
         }
@@ -221,7 +256,7 @@
         position: relative;
         &__modal {
             top: 28%;
-            &-content-body{
+            &-content-body {
                 max-height: 198px;
                 overflow-y: scroll;
             }
@@ -348,9 +383,6 @@
                 
             }
         }
-    }
-    &--item:last-child {
-        border-bottom: none;
     }
     &--submit-area {
         display: flex;
@@ -545,6 +577,21 @@
     font-size: 11px;
     display: inline-flex;
     align-items: center;
+    transition: 1s all;
+
+    &.travelTicket{
+        position: absolute;
+    }
+
+    &wrapper {
+      transition: 1s all;
+
+      &.hidden_progress {
+        opacity: 0;
+        display: inline;
+        pointer-events: none;
+      }
+    }
     &success {
         font-size: 11px;
         margin-bottom: 5px;
@@ -565,7 +612,11 @@
         animation: spin 2s linear infinite;
     }
 }
-#checklist-submission-modal-content{
+#checklist-submission-modal-content {
     overflow-y: auto;
     max-height: 600px;
   }
+
+.upload_ticket{
+    padding-right: 2px;
+}

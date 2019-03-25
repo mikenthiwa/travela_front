@@ -1,4 +1,4 @@
-const tripRequest = {
+export const tripRequest = {
   createdAt: '2018-12-19T15:32:39.167Z',
   deletedAt: null,
   department: 'Talent & Development',
@@ -67,4 +67,20 @@ const tripRequest = {
   userId: '-LTMfmwvXO0D9BQ8fXgl',
 };
 
-export default tripRequest;
+export const LagosExtraSubmission =   {
+  destinationName: 'Lagos, Nigeria',
+  tripId: 'NumC5-pK7G',
+  checklist: [
+    {
+      id: '9',
+      name: 'Travel stipend',
+      requiresFiles: true,
+      destinationName: 'Lagos, Nigeria',
+      deleteReason: null,
+      resources: [],
+      submissions:[]
+
+    }
+  ]
+};
+

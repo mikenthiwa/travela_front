@@ -42,7 +42,7 @@
     "cookies-js": "^1.2.3",
     "country-data": "^0.0.31",
     "css-loader": "0.28.7",
-    "cypress": "^3.1.5",
+    "cypress": "^3.2.0",
     "date-fns": "^1.29.0",
     "dotenv": "4.0.0",
     "dotenv-expand": "^4.2.0",
@@ -108,7 +108,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test":  "jest -u --runInBand --no-cache --env=jsdom",
+    "test": "jest -u --runInBand --no-cache --env=jsdom",
     "test:watch": "jest -u --runInBand --no-cache --env=jsdom --watch",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "end2end": "cypress open",

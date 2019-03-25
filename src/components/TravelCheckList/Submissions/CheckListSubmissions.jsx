@@ -6,42 +6,47 @@ import SubmissionItem from './SubmissionItem';
 import Preloader from '../../Preloader/Preloader';
 import '../travelSubmission.scss';
 
-
 class CheckListSubmissions extends Component {
 
   renderCheckList = (list, keyIndex) => {
     const {
       fileUploads, handleFileUpload, postSuccess, tripType,
       postSubmission, itemsToCheck, isUploadingStage2, requestId,
-      request, handleUserDocumentUpload, closeModal, shouldOpen, 
-      modalType, userReadinessDocument, history
+      request, history, shouldOpen, modalType, handleUserDocumentUpload,userReadinessDocument,closeModal
     } = this.props;
     const {checklist, destinationName, tripId} = list;
     const countryFlagUrl = countryUtils.getCountryFlagUrl(destinationName);
+    const travelTicket = checklist.length && checklist.find(item => item.name === 'Travel Ticket');
     return (
       <div key={keyIndex} className="travelCheckList__destination">
         {
           checklist.length &&
           checklist.map((item) => (
-            <SubmissionItem
-              key={`${item.id}`} checklistItem={item}
-              checkId={`${tripId}-${item.id}`}
-              fileUploadData={fileUploads}
-              request={request}
-              handleFileUpload={handleFileUpload}
-              requestId={requestId}
-              postSubmission={postSubmission}
-              postSuccess={postSuccess}
-              tripId={tripId}
-              tripType={tripType}
-              itemsToCheck={itemsToCheck}
-              isUploadingStage2={isUploadingStage2}
-              handleUserDocumentUpload={handleUserDocumentUpload}
-              closeModal={closeModal}
-              shouldOpen={shouldOpen}
-              modalType={modalType} history={history}
-              userReadinessDocument={userReadinessDocument} 
-            />
+            (
+              (item.name !== 'Travel Ticket' || item.submissions.length > 0) &&
+            (
+              <SubmissionItem
+                key={`${item.id}`}
+                checklistItem={item}
+                travelTicket={travelTicket}
+                checkId={`${tripId}-${item.id}`}
+                fileUploadData={fileUploads}
+                request={request}
+                handleFileUpload={handleFileUpload}
+                requestId={requestId}
+                postSubmission={postSubmission}
+                postSuccess={postSuccess}
+                tripId={tripId}
+                tripType={tripType}
+                itemsToCheck={itemsToCheck}
+                isUploadingStage2={isUploadingStage2}
+                handleUserDocumentUpload={handleUserDocumentUpload}
+                closeModal={closeModal}
+                shouldOpen={shouldOpen}
+                modalType={modalType} history={history}
+                userReadinessDocument={userReadinessDocument}
+              />
+            ))
           ))
         }
       </div>
@@ -53,7 +58,7 @@ class CheckListSubmissions extends Component {
     return (
       <Fragment>
         <div className="travelCheckList">
-          { 
+          {
             submissions.length
               ? submissions.map((list, i) => this.renderCheckList(list, i))
               : (
@@ -64,7 +69,7 @@ class CheckListSubmissions extends Component {
               )
           }
         </div>
-        
+
       </Fragment>
     );
   };
@@ -109,7 +114,7 @@ CheckListSubmissions.propTypes = {
   userReadinessDocument: PropTypes.object,
   modalType: PropTypes.string,
   history: PropTypes.object.isRequired
-  
+
 };
 
 export default CheckListSubmissions;

@@ -1,5 +1,4 @@
 import { getItemsToCheck } from '../helper/travelChecklist-helper';
-import { submission } from '../redux/__mocks__/travelChecklistsMockData';
 
 export const LagosSubmission =   {
   destinationName: 'Lagos, Nigeria',
@@ -54,12 +53,30 @@ export const LagosSubmission =   {
     },
     {
       id: '7',
-      name: 'travel stipend',
+      name: 'Travel stipend',
       requiresFiles: true,
       destinationName: 'Lagos, Nigeria',
       deleteReason: null,
       resources: [],
-      submissions: []
+      submissions:[
+        {
+          id: 'fopl4zG0p',
+          value: {
+            url: 'image.com',
+            fileName: 'test.png'
+          },
+          tripId: 'H5X8CVA0IR',
+          checklistItemId: 9,
+          documentId: null,
+          createdAt: '2019-03-21T05:03:51.398Z',
+          updatedAt: '2019-03-21T05:03:51.398Z',
+          deletedAt: null,
+          checklistSubmissions: {
+            id: 9
+          }
+        }
+      ]
+
     },
     {
       id: '3',
@@ -91,6 +108,15 @@ export const LagosSubmission =   {
           }
         }
       ]
+    },
+    {
+      id: '10',
+      name: 'Travel stipend',
+      requiresFiles: true,
+      destinationName: 'Lagos, Nigeria',
+      deleteReason: null,
+      resources: [],
+      submissions:[]
     }
   ]
 };
@@ -185,32 +211,6 @@ export const KampalaSubmission = {
   tripId: 'TegwiWkL3'
 };
 
-export const CairoSubmission = {
-  destinationName: 'Cairo, Egypt',
-  tripId: '4nTOeHMxo6',
-  checklist: [
-    {
-      id: '3',
-      name: 'Travel Ticket Details',
-      requiresFiles: false,
-      destinationName: 'Default',
-      deleteReason: null,
-      resources: [],
-      submissions: [
-        {
-          id: '2Vlv7uYwN',
-          value: {
-            arrivalTime: '15:02', airline: 'hjhvjhbjhb ', ticketNumber: 'jkhbb mb ',
-            returnTime: '', returnTicketNumber: '',returnAirline: ''
-          },
-          tripId: '4nTOeHMxo6', checklistItemId: '3',
-          createdAt: '2018-11-18T22:04:50.700Z', updatedAt: '2018-11-18T22:04:50.700Z',
-          checklistSubmissions: { id: '3' }, deletedAt: null,
-        }
-      ]
-    }
-  ]
-};
 
 export const aSubmission = {
   id: 'MtSjqm616', value: 'andela.com', tripId: 'NumC5-pK7G', checklistItemId: '9',

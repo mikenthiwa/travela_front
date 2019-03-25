@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="13px" viewBox="0 0 10 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>upload ticket</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Web-App" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Create-Request-&gt;-4-Checklist-Copy-3" transform="translate(-439.000000, -583.000000)">
+            <g id="Tasks" transform="translate(300.000000, 359.000000)">
+                <g id="Group-7-Copy-2" transform="translate(32.000000, 222.500000)">
+                    <g id="Group-7" transform="translate(108.000000, 0.000000)">
+                        <g id="upload-ticket">
+                            <g transform="translate(0.000000, 2.000000)">
+                                <rect id="Rectangle" stroke="#3359DB" stroke-width="0.1" fill="#2F54DF" x="0" y="0" width="8" height="1" rx="0.5"></rect>
+                                <path d="M4.72832374,9.44666667 L5.98165707,8.19333333 C6.24165707,7.93333333 6.66165707,7.93333333 6.92165707,8.19333333 C7.18165707,8.45333333 7.18165707,8.87333333 6.92165707,9.13333333 L4.52832374,11.5266667 C4.26832374,11.7866667 3.84832374,11.7866667 3.58832374,11.5266667 L1.1949904,9.13333333 C1.07015529,9.00877898 1,8.83967843 1,8.66333333 C1,8.48698824 1.07015529,8.31788768 1.1949904,8.19333333 C1.4549904,7.93333333 1.8749904,7.93333333 2.1349904,8.19333333 L3.3949904,9.44666667 L3.3949904,3.66666667 C3.3949904,3.3 3.6949904,3 4.06165707,3 C4.42832374,3 4.72832374,3.3 4.72832374,3.66666667 L4.72832374,9.44666667 Z" id="Path" fill="#3359DB" fill-rule="nonzero" transform="translate(4.058329, 7.360833) scale(1, -1) translate(-4.058329, -7.360833) "></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,6 +1,6 @@
 import React from 'react';
 import SubmissionUtils from '../Submissions/SubmissionsUtils';
-import tripRequest from '../../../mockData/checklistSubmissionMocks';
+import  {tripRequest } from '../../../mockData/checklistSubmissionMocks';
 
 describe('SubmissionUtils Component', () => {
   let props = {
@@ -295,7 +295,6 @@ describe('SubmissionUtils Component', () => {
       showUploadedField: true
     });
     const radioButton = wrapper.find('.travelSubmission--radio');
-
     const uploadDate = wrapper.find('.travelSubmission--input__btn--uploadedFileDate');
     expect(uploadDate.text()).toEqual('Uploaded 08-07-19');
   });
@@ -318,14 +317,41 @@ describe('SubmissionUtils Component', () => {
   it('should getItemValue when item changes', ()=>{
     props.checklistItem.submissions=[];
     const wrapper = mount(<SubmissionUtils {...props} />);
-    wrapper.setProps={
+    const getItem = jest.spyOn(wrapper.instance(), 'getItemValue');
+    wrapper.setProps({
       checklistItem: {
-        submissions: [
-          
+        deleteReason: null,
+        destinationName: 'Default',
+        id: 2,
+        name: 'Travel Ticket',
+        requiresFiles: false,
+        resources: [
+          {
+            checklistItemId: 2,
+            id: 2,
+            label: 'Flight Application Guide',
+            link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk'
+          },
         ],
-      },
-    };
-    
-    expect(wrapper.instance().getItemValue()).toBeCalled;
+        submissions: [
+          {
+            checklistItemId: 2,
+            checklistSubmissions: {
+              id: 2
+            },
+            createdAt: '2018-12-21T13:53:23.696Z',
+            deletedAt: null,
+            id: 'jypZLrts-',
+            tripId: 'QbTyCm5XIF',
+            updatedAt: '2019-01-02T07:19:56.715Z',
+            value: {
+              link:'image.com',
+              fileName: 'resource'
+            }
+          },
+        ],
+      }
+    });
+    expect(getItem).toHaveBeenCalled();
   });
 });

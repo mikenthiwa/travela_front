@@ -14,6 +14,7 @@ import check from '../../../images/check.svg';
 import downloadIcon from '../../../images/icons/download_file.svg';
 import uploadIcon from '../../../images/uploadIcon.svg';
 import documentIcon from '../../../images/document-rect.png';
+import upload_ticket from '../../../images/upload_ticket.svg';
 
 class SubmissionsUtils extends Component {
   state = { showUploadedField: false, departureDate: null, departureTime: null, arrivalTime: null,
@@ -28,7 +29,6 @@ class SubmissionsUtils extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-
     const { checkId, checklistItem: {submissions: [item]}, setUploadedFile, postSuccess, } = nextProps;
     if(item && item.value.fileName) {
       setUploadedFile(item.value.fileName, item.value.url, item.createdAt );
@@ -37,8 +37,7 @@ class SubmissionsUtils extends Component {
     if(item && !prevItem){
       this.getItemValue( item, checkId);
     }
-    postSuccess.includes(checkId) && this.setState({showUploadedField: true});
-    
+    postSuccess.includes(checkId) && item && this.setState({showUploadedField: true});
   }
 
   initializeDates = (props) => {
@@ -56,7 +55,7 @@ class SubmissionsUtils extends Component {
     const { utilsType, setTextArea, setTicketFields, setUploadedFileName } = this.props;
     utilsType.match('textarea') && item && setTextArea(item.value, checkId);
     utilsType.match('ticketFieldset') && item && setTicketFields(item.value, checkId);
-    utilsType.match('uploadField') && item && 
+    utilsType.match('uploadField') && item &&
     setUploadedFileName(item.value.fileName, item.createdAt, checkId, item.value.url);
   }
 
@@ -104,11 +103,11 @@ class SubmissionsUtils extends Component {
         <RadioButton
           key={id}
           name={(
-            <span className="travelSubmission--select__modal-option"> 
+            <span className="travelSubmission--select__modal-option">
               <span className="travelSubmission--select__modal-image">
                 <img
-                  src={documentIcon} 
-                  className="travelSubmission--select__modal-image--letter" alt="document" 
+                  src={documentIcon}
+                  className="travelSubmission--select__modal-image--letter" alt="document"
                 />
               </span>
               <span className="travelSubmission--select__modal-text">
@@ -119,16 +118,16 @@ class SubmissionsUtils extends Component {
                   {' '}
                   {moment(updatedAt).format('DD-MM-YY')}
                 </span>
-              </span>  
+              </span>
             </span>)}
           value={`${imageName},${cloudinaryUrl},${id}`}
-          id={file.id}     
+          id={file.id}
           defaultChecked={selectedDocumentInfo === `${imageName},${cloudinaryUrl},${id}`}
         />
-      </div>     
+      </div>
     );
   };
-  
+
   renderAttachButton = () => {
     const { fileUploadData: { isUploading }, submitAttachedDocument, hasSelectedDocument, uploadProcess } = this.props;
     const loading = isUploading ? true : false;
@@ -137,16 +136,15 @@ class SubmissionsUtils extends Component {
       <div className="travelSubmission--select__modal-foot">
         <button
           id="attach-button"
-          type="button" 
+          type="button"
           disabled={selectedDocumentInfo ? false : true}
-          onClick={() => {this.handleRadioSubmit();}} 
+          onClick={() => {this.handleRadioSubmit();}}
         >
           <ButtonLoadingIcon isLoading={loading} buttonText="Attach" />
-        </button>   
-      </div>   
+        </button>
+      </div>
     );
   };
-
 
   renderTravelDocumentList = (documentArray) => {
     return (
@@ -156,19 +154,18 @@ class SubmissionsUtils extends Component {
             documentArray.map(file => this.renderRadioButton(file))
           }
         </div>
-       
         {this.renderAttachButton()}
-      </form>  
+      </form>
     );
   }
 
   renderUserDocumentModalUpload = () => {
     const {
-      closeModal, shouldOpen, modalType, 
+      closeModal, shouldOpen, modalType,
       userReadinessDocument, checkId
     } = this.props;
     let documentArray = [];
-    const uploadedDocument = _.values(userReadinessDocument).map(allDocument => 
+    const uploadedDocument = _.values(userReadinessDocument).map(allDocument =>
       allDocument.map(specificDocument => specificDocument.isVerified && documentArray.push(specificDocument)));
     return(
       <Modal
@@ -185,14 +182,14 @@ class SubmissionsUtils extends Component {
         { _.isEmpty(documentArray) ?
           (
             <div className="travelSubmission--select__no-document">
-            You have no verified travel document 
+            You have no verified travel document
             </div>
-          ) 
+          )
           :(
             <div>
               {this.renderTravelDocumentList(documentArray)}
             </div>
-          )}  
+          )}
       </Modal>
     );
   }
@@ -201,45 +198,52 @@ class SubmissionsUtils extends Component {
     this.refs.fileUploader.click();
     this.toggleDropdownDisplay();
   }
-  
+
   toggleDropdownDisplay = () => {
     const { displayDropdown: display } = this.state;
     this.setState({
       displayDropdown: !display
-    }); 
+    });
   }
   selectDocumentDropdowndown = () =>{
     const { displayDropdown } = this.state;
-    const { handleUserDocumentUpload, checkId } = this.props;
-    const visible = displayDropdown ? 'block' : 'none'; 
+    const { handleUserDocumentUpload, checkId, checklistItem: { name } } = this.props;
+    const visible = displayDropdown ? 'block' : 'none';
     return (
-      <div className="travelSubmission--select"> 
-        <button type="button" onClick={this.toggleDropdownDisplay} className="travelSubmission--select__button">
-            Select Document
+      name === 'Travel Ticket' ? (
+        <button className="from-computer" onClick={this.selectFromComputer} type="button">
+          <img src={upload_ticket} alt="upload_image" className="upload_ticket" />
+            Upload Ticket Image
         </button>
-        <div className="travelSubmission--select__upload-modal " style={{display:visible}}>
-          <button className="from-uploads" onClick={()=> handleUserDocumentUpload(`modal-${checkId}`)} type="button">
+      ): (
+        <div className="travelSubmission--select">
+          <button type="button" onClick={this.toggleDropdownDisplay} className="travelSubmission--select__button">
+            Select Document
+          </button>
+          <div className="travelSubmission--select__upload-modal " style={{display:visible}}>
+            <button className="from-uploads" onClick={()=> handleUserDocumentUpload(`modal-${checkId}`)} type="button">
             Verified Document(s)
-          </button>
-          <button className="from-computer" onClick={this.selectFromComputer} type="button">
+            </button>
+            <button className="from-computer" onClick={this.selectFromComputer} type="button">
             Upload from Computer
-          </button>
+            </button>
+          </div>
+          {this.renderUserDocumentModalUpload()}
         </div>
-        {this.renderUserDocumentModalUpload()}
-      </div>
-    );
+      ));
   }
+
   renderUploadField = () => {
-    const { fileUploadData, itemsToCheck, checkId, handleUpload} = this.props;
+    const { fileUploadData, itemsToCheck, checklistItem: { name }, checkId, handleUpload} = this.props;
     return (
       <div className="travelSubmission--input__upload-field">
         {this.selectDocumentDropdowndown()}
         <input
           type="file" name="file" ref="fileUploader" className="uploadFile"
-          onChange={handleUpload} disabled={fileUploadData.isUploading}
+          onChange={handleUpload} disabled={fileUploadData.isUploading} accept="image/x-png,image/gif,image/jpeg,application/pdf"
         />
         {
-          itemsToCheck.includes(checkId) && (
+          itemsToCheck.includes(checkId) && name !== 'Travel Ticket' && (
             <img
               src={check} alt="check_icon"
               className="travelCheckList--input__check-image__ticket visible"
@@ -254,33 +258,39 @@ class SubmissionsUtils extends Component {
   renderUploadedField = () => {
     const { itemsToCheck, checkId, uploadedFileName, handleUpload,checklistItem: {submissions: [item]}, setUploadedFile,
       fileUploadData: { isUploading }, uploadedFileDate, uploadProcess, uploadedFileUrl } = this.props;
-    const fileName = (!uploadProcess || uploadProcess.match('success')) && uploadedFileName;
+    const isPdf = uploadedFileName.substr(-3) ==='pdf';
+    const fileName = (!uploadProcess || uploadedFileDate) && uploadedFileName;
     const fileDate = (!uploadProcess || uploadProcess.match('success')) && uploadedFileDate;
     return (
       <div className="travelSubmission--input__upload-field__">
-        <div className="travelSubmission--input__input-field__">
-          <img className="travelSubmission--input__input-field__image" src={documentIcon} alt="document" />
-          <div role="presentation" className="travelSubmission--input__btn--">
-            <div id="file-upload" role="presentation" className="travelSubmission--input__btn--uploadedFileName">
-              {fileName}
+        {(!uploadProcess || uploadedFileDate) &&
+        (
+          <div className="travelSubmission--input__input-field__">
+            <img className="travelSubmission--input__input-field__image" src={isPdf ? documentIcon : uploadedFileUrl} alt="document" />
+            <div role="presentation" className="travelSubmission--input__btn--">
+              <div id="file-upload" role="presentation" className="travelSubmission--input__btn--uploadedFileName">
+                {fileName}
+              </div>
+              {fileDate &&(
+                <Fragment>
+                  <div className="travelSubmission--input__btn--uploadedFileDate">
+             Uploaded
+                    {' '}
+                    {moment(new Date(fileDate)).format('DD-MM-YY')}
+                  </div>
+                  <div>
+                    <a href={uploadedFileUrl} target="_blank">
+                      <img src={downloadIcon} alt="upload_icon" className="travelSubmission--input__image" />
+                    </a>
+                  </div>
+                </Fragment>
+              )}
             </div>
-            {fileDate &&(
-              <Fragment>
-                <div className="travelSubmission--input__btn--uploadedFileDate">
-             Uploaded 
-                  {' '}
-                  {moment(new Date(fileDate)).format('DD-MM-YY')}
-                </div>
-                <div>     
-                  <a href={uploadedFileUrl} target="_blank"><img src={downloadIcon} alt="upload_icon" className="travelSubmission--input__image" /></a>   
-                </div> 
-              </Fragment>
-            )}   
+            <input
+              type="file" name="file" className="uploadedFile"
+              onChange={handleUpload} disabled={isUploading} />
           </div>
-          <input
-            type="file" name="file" className="uploadedFile"
-            onChange={handleUpload} disabled={isUploading} />
-        </div>
+        )}
       </div>
     );
   };
@@ -357,7 +367,7 @@ class SubmissionsUtils extends Component {
     return (
       name.toLowerCase().includes('travel ticket') &&
       (
-        <form className="ticket-submission" autoComplete="off"> 
+        <form className="ticket-submission" autoComplete="off">
           <div className="ticket-submission--ticket__fieldSet">
             <div className="travel-submission-details__return" id="departure-fields">
               {this.renderTicketInput('datetime-local', '19:35:00', 'Departure Time',
@@ -402,16 +412,17 @@ class SubmissionsUtils extends Component {
 
   renderSubmissionsUtils = () => {
     const {utilsType, checklistItem: {submissions: [item]}} = this.props;
-    
     const {showUploadedField} = this.state;
     return (
       <Fragment>
-        {utilsType && utilsType.match('ticketFieldset') && this.renderTicketFieldset()}
-        {(utilsType && utilsType.match('uploadField') && !item && !showUploadedField) &&
-        this.renderUploadField()}
-        {utilsType && utilsType.match('uploadField') && (item || showUploadedField) &&
-        this.renderUploadedField()}
-        {utilsType && utilsType.match('textarea') && this.renderTextarea()}
+        {utilsType && utilsType.match('ticketFieldset')
+        && this.renderTicketFieldset()}
+        {(utilsType && utilsType.match('uploadField') && !item && !showUploadedField)
+        && this.renderUploadField()}
+        {utilsType && utilsType.match('uploadField') && (item || showUploadedField)
+        && this.renderUploadedField()}
+        {utilsType && utilsType.match('textarea')
+        && this.renderTextarea()}
       </Fragment>
     );
   };
@@ -438,8 +449,7 @@ SubmissionsUtils.propTypes = {
   submitAttachedDocument: PropTypes.func.isRequired, hasSelectedDocument:PropTypes.bool.isRequired,
   uploadedFileUrl: PropTypes.string, setUploadedFile: PropTypes.func.isRequired
 };
-
-SubmissionsUtils.defaultProps = {utilsType: '', closeModal: () => {}, userReadinessDocument: {}, 
+SubmissionsUtils.defaultProps = {utilsType: '', closeModal: () => {}, userReadinessDocument: {},
   shouldOpen: false, modalType: '', handleUserDocumentUpload: () => {}, uploadedFileUrl: ''};
 
 export default SubmissionsUtils;

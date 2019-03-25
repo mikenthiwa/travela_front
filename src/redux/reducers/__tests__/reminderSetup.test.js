@@ -31,6 +31,9 @@ describe('reminder setup reducer', () =>{
     templates: [
       {
         id: 1
+      },
+      {
+        id: 2
       }
     ],
     errors:{},
@@ -123,6 +126,9 @@ describe('reminder setup reducer', () =>{
       templates: [
         {
           id: 1
+        },
+        {
+          id: 2
         }
       ],
       errors,
@@ -185,6 +191,9 @@ describe('reminder setup reducer', () =>{
       templates: [
         {
           id: 1
+        },
+        {
+          id: 2
         }
       ],
       errors,
@@ -192,5 +201,22 @@ describe('reminder setup reducer', () =>{
       isLoading: false
     };
     expect(reminderTemplateDisableReducer(initialState, action)).toEqual(expectedOutput);
+  });
+
+  it('tests enable email template success', ()=>{
+    const enabledTemplate = {
+      id: 2,
+      disabled: true
+    };
+    const action = enableReminderEmailTemplateSuccess(enabledTemplate,  2);
+    const expectedOutput = {
+      ...initialState,
+      isLoading: false,
+      templates: [
+        {id: 1},
+        {disabled: true,
+          id: 2}]
+    };
+    expect(reminderSetupReducer(initialState, action)).toEqual(expectedOutput);
   });
 });

@@ -19,17 +19,17 @@ class TravelCheckListPage extends Component{
 
   componentWillReceiveProps(nextProps) {
     const {
-      fileUploads: {isUploading, uploadSuccess}, request
+      fileUploads: {isUploading, uploadSuccess}, request, submissionInfo: {percentageCompleted}
     } = nextProps;
 
     const {
-      fileUploads: { uploadSuccess: prevUploadSucess}, showTravelChecklist
+      fileUploads: { uploadSuccess: prevUploadSucess}, showTravelChecklist,
+      submissionInfo: {percentageCompleted: percentage}
     } = this.props;
-    
-    if(prevUploadSucess !== uploadSuccess){
+
+    if(percentage !== percentageCompleted){
       showTravelChecklist(request);
     }
-    
   }
 
     handleFileUpload = async (file, checklistItemId, tripId, checkId, requestId) => {

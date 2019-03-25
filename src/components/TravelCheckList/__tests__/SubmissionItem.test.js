@@ -6,7 +6,7 @@ import {
   LagosSubmission,
 } from '../../../mockData/checklistSubmissionMockData';
 
-import tripRequest from '../../../mockData/checklistSubmissionMocks';
+import {tripRequest, LagosExtraSubmission} from '../../../mockData/checklistSubmissionMocks';
 
 
 describe('SubmissionItem Component', () => {
@@ -193,7 +193,7 @@ describe('SubmissionItem Component', () => {
   });
 
   it('should handle file upload if file size is less than 1.5mb', () => {
-    props.checklistItem = LagosSubmission.checklist[2];
+    props.checklistItem = LagosExtraSubmission.checklist[0];
     const wrapper = setup(props);
     const event = {
       target: {files: [{size: 1000, name: 'test.png'}]}
@@ -201,14 +201,13 @@ describe('SubmissionItem Component', () => {
 
     const fileInput = wrapper.find('.uploadFile');
 
-
     expect(fileInput.length).toBe(1);
     fileInput.simulate('change', event);
     expect(props.handleFileUpload).toHaveBeenCalled();
   });
 
   it('should render file size error if file size is greater than 1.5mb', () => {
-    props.checklistItem = LagosSubmission.checklist[2];
+    props.checklistItem = LagosExtraSubmission.checklist[0];
     const wrapper = setup(props);
     const event = {
       target: {files: [{size: 17000000, name: 'test.png'}]}
@@ -272,6 +271,7 @@ describe('SubmissionItem Component', () => {
     const uploadedFileName = wrapper.find('.travelSubmission--input__btn--uploadedFileName');
     expect(uploadedField.length).toBe(1);
     expect(uploadedFileName.text()).toBe('test.png');
+
   });
 
   it('should render `Done` when text is successfully uploaded', () => {
