@@ -548,13 +548,11 @@ class NewRequestForm extends PureComponent {
         }]),
         values: {...values, ...addedTripStateValues}
       };
-    }, () => {
-      this.validate;
-    });
+    }, () => this.validate());
   };
 
   removeTrip = (i) => {
-    const tripProps = ['origin', 'destination', 'arrivalDate', 'departureDate', 'bed'];
+    const tripProps = ['origin', 'destination', 'arrivalDate', 'departureDate', 'bed', 'reasons', 'otherReasons'];
     this.setState((prevState) => {
       let {parentIds, trips, values, errors} = prevState;
       trips.splice(i, 1);
@@ -570,10 +568,8 @@ class NewRequestForm extends PureComponent {
         delete values[`${prop}-${parentIds}`];
         delete errors[`${prop}-${i}`];
       });
-      return {trips, values, parentIds, errors};
-    }, () => {
-      this.validate;
-    });
+      return { trips, values, parentIds, errors };
+    }, () => this.validate());
   };
 
   collapsible = () => {

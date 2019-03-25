@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { uniq } from 'lodash';
 import InputRenderer from '../../FormsAPI';
 import formMetadata from '../../FormsMetadata/NewTravelStipendFormMetadata';
 
@@ -11,8 +12,19 @@ class TravelStipendFieldset extends Component {
       handleShowEventError, isValidAmount, 
       onChangeAmountInput, 
       isEmpty,
+      stipends,
+      values,
     } = this.props;
+    const dropDownnDisplay = [];
+    const centersWithStipends = stipends.map(stipend => stipend.center.location);
     const centerChoices = centers.map(center => center.location);
+    const finalCenterChoices = centerChoices.filter((center, i) => {
+      if(i > centerChoices.length -1) return false;
+      return !centersWithStipends.includes(center);
+    }
+    
+    );
+    if (values.center) finalCenterChoices.push(values.center);
     const { renderInput } = this.inputRenderer;
     return (
       <div>
@@ -21,9 +33,9 @@ class TravelStipendFieldset extends Component {
             <div className="spaces">
               {
                 renderInput('center', 'dropdown-select', {
-                  choices: centerChoices,
+                  choices: uniq(finalCenterChoices),
                   size: '',
-                  className: 'request_dropdown stipend-location',
+                  className: 'request{ uniq }dropdown stipend-location',
                   id: 'user-location'
                 })
               }
@@ -36,7 +48,7 @@ class TravelStipendFieldset extends Component {
                 onChange: (event) => onChangeAmountInput(event),
                 onInvalid: (event) => handleShowEventError(event),
                 placeholder: '1000',
-                className: `request_dropdown stipend-amount ${isValidAmount
+                className: `request{ uniq }dropdown stipend-amount ${isValidAmount
                   || isEmpty ? '' : 'input-border-error'}`,
                 id: 'your-manager',
               })}
@@ -75,7 +87,9 @@ TravelStipendFieldset.propTypes = {
   isValidAmount: PropTypes.bool,
   onChangeAmountInput: PropTypes.func,
   isEmpty: PropTypes.bool,
-  editing: PropTypes.bool
+  editing: PropTypes.bool,
+  stipends: PropTypes.array,
+  values: PropTypes.object,
 };
 
 TravelStipendFieldset.defaultProps = {
@@ -84,7 +98,9 @@ TravelStipendFieldset.defaultProps = {
   isValidAmount: true,
   isEmpty: true,
   onChangeAmountInput: () => {},
-  editing: false
+  editing: false,
+  stipends: [],
+  values: {},
 };
 
 export default TravelStipendFieldset;

@@ -88,7 +88,7 @@ class NewTravelStipendForm extends PureComponent {
 
   renderTravelStipendFieldset = (isEmpty) => {
     const { values, isValidAmount,  } = this.state;
-    const { centers, editing } = this.props;
+    const { centers, editing, travelStipends } = this.props;
     return (
       <TravelStipendFieldset
         centers={centers}
@@ -99,6 +99,7 @@ class NewTravelStipendForm extends PureComponent {
         isValidAmount={isValidAmount}
         value="245px"
         editing={editing}
+        stipends={travelStipends.stipends}
       />
     );
   };
