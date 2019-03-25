@@ -5,35 +5,6 @@ import DropdownHelper from '../DropdownItems/utils/dropdownHelper';
 import './_leftSideNavItem.scss';
 
 export class LeftSideNavItem extends PureComponent {
-  static propTypes = {
-    text: PropTypes.string.isRequired,
-    link_to: PropTypes.string.isRequired,
-    linkIcons: PropTypes.object.isRequired,
-    activateOnLogin: PropTypes.bool,
-    isDropdown: PropTypes.bool,
-    children: PropTypes.oneOfType([
-      PropTypes.object.isRequired,
-      PropTypes.array.isRequired,
-      PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
-    ]),
-    location: PropTypes.object.isRequired,
-    onClick: PropTypes.func,
-    className: PropTypes.string
-  }
-
-  static contextTypes = {
-    activeNavItem: PropTypes.object.isRequired,
-    setActiveNavItem: PropTypes.func.isRequired
-  }
-
-  static defaultProps = {
-    children: {},
-    isDropdown: false,
-    activateOnLogin: false,
-    onClick: () => {},
-    className: ''
-  }
-
   constructor(props) {
     super(props);
     this.dropdownHelper = new DropdownHelper();
@@ -72,7 +43,6 @@ export class LeftSideNavItem extends PureComponent {
 
   isActive = () => {
     const { location, link_to } = this.props;
-    const { activeNavItem } = this.context;
     return location.pathname.startsWith(link_to);
   }
 
@@ -126,6 +96,35 @@ const DropdownNavLink = (props) => {
       {children}
     </div>
   );
+};
+
+LeftSideNavItem.propTypes = {
+  text: PropTypes.string.isRequired,
+  link_to: PropTypes.string.isRequired,
+  linkIcons: PropTypes.object.isRequired,
+  activateOnLogin: PropTypes.bool,
+  isDropdown: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.object.isRequired,
+    PropTypes.array.isRequired,
+    PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
+  ]),
+  location: PropTypes.object.isRequired,
+  onClick: PropTypes.func,
+  className: PropTypes.string
+};
+
+LeftSideNavItem.contextTypes = {
+  activeNavItem: PropTypes.object.isRequired,
+  setActiveNavItem: PropTypes.func.isRequired
+};
+
+LeftSideNavItem.defaultProps = {
+  children: {},
+  isDropdown: false,
+  activateOnLogin: false,
+  onClick: () => {},
+  className: ''
 };
 
 DropdownNavLink.propTypes = {

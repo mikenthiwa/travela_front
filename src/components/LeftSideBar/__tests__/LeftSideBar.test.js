@@ -2,6 +2,13 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { LeftSideBar } from '../LeftSideBar';
 
+const props = {
+  getCurrentUserRole: [
+    'Requester', 'Super Administrator', 'Manager',
+    'Finance Team Member', 'Travel Team Member',
+    'Travel Administrator', 'Budget Checker'
+  ]
+};
 describe('<LeftSideBar />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<LeftSideBar />);
@@ -11,7 +18,7 @@ describe('<LeftSideBar />', () => {
   it('changes active navigation link', () => {
     const wrapper = mount(
       <MemoryRouter>
-        <LeftSideBar />
+        <LeftSideBar {...props} />
       </MemoryRouter>
     );
 

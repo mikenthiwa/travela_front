@@ -6,7 +6,7 @@ describe('Travel checklists page', () => {
     localStorage.setItem('location', 'Nairobi');
     cy.server();
     cy.route('GET', `${baseAPI}/checklists?destinationName=Nairobi`, 'fixture:checklist/defaultChecklist');
-    cy.visit('/checklists');  
+    cy.visit('/trip-planner/checklists');
   });
 
   it ('should display default items else user-friendly message', () =>{
@@ -71,7 +71,7 @@ describe('Travel checklists page', () => {
       cy.get('button#submit.bg-btn.bg-btn--active')
         .click()
         .url()
-        .should('include', '/checklists');
+        .should('include', '/trip-planner/checklists');
       cy.get('.toast-message')
         .should('be.visible')
         .contains('Check list item created successfully');

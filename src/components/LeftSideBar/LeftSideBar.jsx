@@ -19,17 +19,19 @@ export class LeftSideBar extends Component {
   render() {
     const {activeNavItem} = this.state;
     const {getCurrentUserRole} = this.props;
-
+    const body = getCurrentUserRole.length ? (
+      <LeftSideNavItems
+        activeNavItem={activeNavItem}
+        metadata={SideBarMetadata}
+        setActiveNavItem={this.setActiveNavItem}
+        userRole={getCurrentUserRole}
+      />
+    ): '';
     return (
       <div className="left-sidebar">
         <div className="left-sidebar__fixed_wrapper">
           <div className="left-sidebar__scrollable_wrapper">
-            <LeftSideNavItems
-              activeNavItem={activeNavItem}
-              metadata={SideBarMetadata}
-              setActiveNavItem={this.setActiveNavItem}
-              userRole={getCurrentUserRole}
-            />
+            {body}
           </div>
         </div>
       </div>
@@ -37,7 +39,7 @@ export class LeftSideBar extends Component {
   }
 }
 
-export const mapStateToProps = ({ modal, role, user }) => ({
+export const mapStateToProps = ({ user }) => ({
   ...user
 });
 

@@ -112,13 +112,13 @@ const NavItemsMetadata = [
     isDropdown: true,
     dropdownItems: [
       {
-        link_to: '/travel-readiness',
+        link_to: '/trip-planner/travel-readiness',
         exact: true,
         text: 'Travel Readiness',
         onlyVisibleTo: ['Super Administrator', 'Travel Administrator', 'Travel Team Member']
       },
       {
-        link_to: '/checklists',
+        link_to: '/trip-planner/checklists',
         exact: true,
         text: 'Travel Checklist',
         onlyVisibleTo: ['Super Administrator', 'Travel Administrator', 'Travel Team Member']

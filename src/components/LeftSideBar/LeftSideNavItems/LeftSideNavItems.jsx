@@ -8,25 +8,6 @@ import './_leftSideNavItems.scss';
 
 
 class LeftSideNavItems extends PureComponent {
-
-  static propTypes = {
-    setActiveNavItem: PropTypes.func.isRequired,
-    activeNavItem: PropTypes.object.isRequired,
-    userRole: PropTypes.array,
-    metadata: PropTypes.arrayOf(PropTypes.object).isRequired,
-    history: PropTypes.object
-  };
-
-  static childContextTypes = {
-    activeNavItem: PropTypes.object.isRequired,
-    setActiveNavItem: PropTypes.func.isRequired
-  };
-
-  static defaultProps = {
-    userRole: [],
-    history: {}
-  };
-
   getChildContext() {
     const {setActiveNavItem, activeNavItem} = this.props;
     return {
@@ -109,5 +90,23 @@ class LeftSideNavItems extends PureComponent {
     );
   }
 }
+
+LeftSideNavItems.propTypes = {
+  setActiveNavItem: PropTypes.func.isRequired,
+  activeNavItem: PropTypes.object.isRequired,
+  userRole: PropTypes.array,
+  metadata: PropTypes.arrayOf(PropTypes.object).isRequired,
+  history: PropTypes.object
+};
+
+LeftSideNavItems.childContextTypes = {
+  activeNavItem: PropTypes.object.isRequired,
+  setActiveNavItem: PropTypes.func.isRequired
+};
+
+LeftSideNavItems.defaultProps = {
+  userRole: [],
+  history: {}
+};
 
 export default withRouter(LeftSideNavItems);
