@@ -47,12 +47,6 @@ spec:
   }
 
   stages {
-    stage('checkout code') {
-        steps {
-          checkout scm
-        }
-    }
-
     stage('Load deployment environment variable file') {
       steps {
         container('travela-frontend-agent') {
@@ -60,8 +54,15 @@ spec:
             file(credentialsId: 'travela-deployment-env-vars', variable: 'DEPLOYMENT_ENV_VARS')
           ]) {
             load "$DEPLOYMENT_ENV_VARS"
-            sh "echo $PRODUCTION_COMPUTE_ZONE"
           }
+        }
+      }
+    }
+
+    stage('Make all the scripts used in this build executable') {
+      steps {
+        container('travela-frontend-agent') {
+          sh "chmod +x jenkins/scripts/*"
         }
       }
     }
@@ -81,11 +82,9 @@ spec:
             file(credentialsId: 'travela-frontend-env-vars', variable: 'ENV_FILE'),
             string(credentialsId: 'travela-frontend-codeclimate-id', variable: 'CC_TEST_REPORTER_ID')
           ]) {
-            sh "chmod +x jenkins/scripts/load_env_variables.sh"
             sh "jenkins/scripts/load_env_variables.sh test"
             sh "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter"
             sh "chmod +x ./cc-test-reporter"
-            sh "chmod +x jenkins/scripts/test_and_report.sh"
             sh "jenkins/scripts/test_and_report.sh"
           }
         }
@@ -117,9 +116,6 @@ spec:
         container('travela-frontend-agent') {
           sh "npm install -g rok8s-scripts"
 
-          sh "chmod +x jenkins/scripts/build_deploy.sh"
-          sh "chmod +x jenkins/scripts/setup_k8s.sh"
-
           withCredentials([
             file(credentialsId: 'apprenticeship-projects-svc-acc', variable: 'GCLOUD_SERVICE_KEY'),
             string(credentialsId: 'SQL_SERVICE_ACCOUNT', variable: 'SQL_SERVICE_ACCOUNT'),
@@ -137,7 +133,6 @@ spec:
   post {
     failure {
       container('travela-frontend-agent') {
-        sh "chmod +x jenkins/scripts/build_deploy.sh"
         sh "jenkins/scripts/build_deploy.sh sendSlackDeployNotification fail"
       }
     }
