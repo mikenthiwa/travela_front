@@ -16,6 +16,7 @@ Cypress.Commands.add('uploadFile', (filePath,fileType) => {
           const el = $input[0]
           dataTransfer.items.add(testFile)
           el.files = dataTransfer.files;
+          return cy.wrap($input).trigger('change', {force: true});
         });
     });
   });
