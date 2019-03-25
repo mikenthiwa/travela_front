@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "message": "Comment created successfully",
+  "comment": {
+    "comment": "Admin testing comments",
+    "requestId": "AWQqIucjm",
+    "id": "36gDcSWCx",
+    "userId": 1,
+    "updatedAt": "2019-03-20T12:01:12.830Z",
+    "createdAt": "2019-03-20T12:01:12.830Z",
+    "isEdited": false,
+    "deletedAt": null,
+    "documentId": null
+  }
+}

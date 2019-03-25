@@ -1,0 +1,24 @@
+{
+  "success": true,
+  "message": "Verification Successful",
+  "updatedRequest": {
+    "request": {
+      "id": "AWQqIucjm",
+      "name": "Bolton Opondo",
+      "tripType": "oneWay",
+      "manager": "Bolton Opondo",
+      "gender": "Male",
+      "department": "Fellowship-Programs",
+      "role": "Technical Team Lead",
+      "status": "Verified",
+      "userId": "-LaGj_yrS0OH1yci8Wtq",
+      "picture": "https://lh6.googleusercontent.com/-tlvwM5GMjQg/AAAAAAAAAAI/AAAAAAAAAAc/WTL3FRFob7w/s50/photo.jpg",
+      "stipend": 0,
+      "stipendBreakdown": "",
+      "budgetStatus": "Approved",
+      "createdAt": "2019-03-20T05:07:04.579Z",
+      "updatedAt": "2019-03-20T08:51:24.959Z",
+      "deletedAt": null
+    }
+  }
+}

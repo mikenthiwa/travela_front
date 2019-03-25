@@ -1,0 +1,52 @@
+{
+  "success": true,
+  "message": "Checklist with submissions retrieved successfully",
+  "percentageCompleted": 100,
+  "submissions": [
+    {
+      "destinationName": "Lagos, Nigeria",
+      "checklist": [
+        {
+          "id": "1",
+          "name": "Travel Ticket Details",
+          "requiresFiles": false,
+          "destinationName": "Default",
+          "deleteReason": null,
+          "resources": [
+            {
+              "id": "1",
+              "label": "Flight Application Guide",
+              "link": "http://andela.com",
+              "checklistItemId": "1"
+            }
+          ],
+          "submissions": [
+            {
+              "id": "FXOAqoBUE",
+              "value": {
+                "departureTime": "2019-07-01T08:00",
+                "arrivalTime": "2019-07-01T11:00",
+                "airline": "Kenya airways",
+                "ticketNumber": "kk 333",
+                "returnDepartureTime": "",
+                "returnTime": "",
+                "returnTicketNumber": "",
+                "returnAirline": ""
+              },
+              "tripId": "gSnCvLMHvz",
+              "checklistItemId": "1",
+              "documentId": null,
+              "createdAt": "2019-03-20T05:08:08.029Z",
+              "updatedAt": "2019-03-20T05:08:16.814Z",
+              "deletedAt": null,
+              "checklistSubmissions": {
+                "id": "1"
+              }
+            }
+          ]
+        }
+      ],
+      "tripId": "gSnCvLMHvz"
+    }
+  ]
+}

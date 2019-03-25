@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "requestData": {
+    "id": "AWQqIucjm",
+    "name": "Bolton Opondo",
+    "tripType": "oneWay",
+    "manager": "Bolton Opondo",
+    "gender": "Male",
+    "department": "Fellowship-Programs",
+    "role": "Technical Team Lead",
+    "status": "Approved",
+    "userId": "-LaGj_yrS0OH1yci8Wtq",
+    "picture": "https://lh6.googleusercontent.com/-tlvwM5GMjQg/AAAAAAAAAAI/AAAAAAAAAAc/WTL3FRFob7w/s50/photo.jpg",
+    "stipend": 0,
+    "budgetStatus": "Approved",
+    "createdAt": "2019-03-20T05:07:04.579Z",
+    "updatedAt": "2019-03-20T08:51:24.959Z",
+    "deletedAt": null,
+    "comments": [],
+    "trips": [
+      {
+        "id": "gSnCvLMHvz",
+        "origin": "Nairobi, Kenya",
+        "destination": "Lagos, Nigeria",
+        "departureDate": "2019-07-01",
+        "returnDate": "2019-08-01",
+        "checkStatus": "Not Checked In",
+        "checkInDate": null,
+        "checkOutDate": null,
+        "accommodationType": "Not Required",
+        "lastNotifyDate": null,
+        "notificationCount": 0,
+        "travelCompletion": "false",
+        "otherTravelReasons": "exe",
+        "createdAt": "2019-03-20T05:07:04.588Z",
+        "updatedAt": "2019-03-20T05:07:04.588Z",
+        "deletedAt": null,
+        "travelReasons": null,
+        "bedId": null,
+        "requestId": "AWQqIucjm",
+        "reasons": null,
+        "beds": null
+      }
+    ],
+    "approver": "Bolton Opondo",
+    "timeApproved": "2019-03-20T08:51:25.098Z",
+    "approverImage": "https://lh6.googleusercontent.com/-tlvwM5GMjQg/AAAAAAAAAAI/AAAAAAAAAAc/WTL3FRFob7w/s50/photo.jpg",
+    "budgetApprovedBy": "Bolton Opondo",
+    "budgetApprovedAt": "2019-03-20T00:00:00.000Z"
+  }
+}
