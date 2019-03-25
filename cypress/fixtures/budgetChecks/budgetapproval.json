@@ -1,0 +1,58 @@
+{
+    "success": true,
+    "message": "Approvals retrieved successfully",
+    "approvals": [
+        {
+            "id": "SZlShsOOW",
+            "name": "Travela Test",
+            "tripType": "return",
+            "manager": "Travela Test",
+            "gender": "Female",
+            "department": "Fellowship-Programs",
+            "role": "Technical Team Lead",
+            "status": "Open",
+            "userId": "-LSsFyueC086niFc9rrz",
+            "picture": "https://lh5.googleusercontent.com/-PbuF53uxx4U/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdjr4eMvuGvkumbC20tfiQsn0RwLw/s50-mo/photo.jpg",
+            "stipend": 0,
+            "budgetStatus": "Open",
+            "createdAt": "2019-03-20T11:19:23.525Z",
+            "updatedAt": "2019-03-20T11:19:23.525Z",
+            "deletedAt": null,
+            "trips": [
+                {
+                    "id": "gLspBR9TK",
+                    "origin": "Nairobi, Kenya",
+                    "destination": "Lagos, Nigeria",
+                    "departureDate": "2019-03-20",
+                    "returnDate": "2019-03-23",
+                    "checkStatus": "Not Checked In",
+                    "checkInDate": null,
+                    "checkOutDate": null,
+                    "accommodationType": "Residence",
+                    "lastNotifyDate": null,
+                    "notificationCount": 0,
+                    "travelCompletion": "false",
+                    "otherTravelReasons": "Leisure",
+                    "createdAt": "2019-03-20T11:19:23.535Z",
+                    "updatedAt": "2019-03-20T11:19:23.535Z",
+                    "deletedAt": null,
+                    "travelReasons": null,
+                    "bedId": 6000,
+                    "requestId": "SZlShsOOW"
+                }
+            ],
+            "travelCompletion": "0% complete"
+        }
+    ],
+    "meta": {
+        "count": {
+            "open": 1,
+            "past": 0
+        },
+        "pagination": {
+            "pageCount": 1,
+            "currentPage": 1,
+            "dataCount": 1
+        }
+    }
+}

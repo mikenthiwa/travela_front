@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "message": "Comment created successfully",
+  "comment": {
+    "requestId": "SZlShsOOW",
+    "documentId": null,
+    "comment": "<p>chgcfbcvb</p>",
+    "id": "9aYCgUUNj",
+    "userId": 1,
+    "updatedAt": "2019-03-20T11:43:46.138Z",
+    "createdAt": "2019-03-20T11:43:46.138Z",
+    "isEdited": false,
+    "deletedAt": null
+  }
+}

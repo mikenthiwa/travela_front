@@ -1,0 +1,80 @@
+{
+    "success": true,
+    "requestData": {
+        "id": "aYzohHxie",
+        "name": "Travela Test",
+        "tripType": "return",
+        "manager": "Travela Test",
+        "gender": "Male",
+        "department": "Fellowship-Programs",
+        "role": "Technical Team Lead",
+        "status": "Approved",
+        "userId": "-LSsFyueC086niFc9rrz",
+        "picture": "https://lh5.googleusercontent.com/-PbuF53uxx4U/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdjr4eMvuGvkumbC20tfiQsn0RwLw/s50-mo/photo.jpg",
+        "stipend": 0,
+        "budgetStatus": "Rejected",
+        "createdAt": "2019-03-20T13:53:24.006Z",
+        "updatedAt": "2019-03-20T13:53:37.859Z",
+        "deletedAt": null,
+        "comments": [],
+        "trips": [
+            {
+                "id": "IY0nEVTQ_C",
+                "origin": "Nairobi, Kenya",
+                "destination": "Lagos, Nigeria",
+                "departureDate": "2019-05-09",
+                "returnDate": "2019-07-11",
+                "checkStatus": "Not Checked In",
+                "checkInDate": null,
+                "checkOutDate": null,
+                "accommodationType": "Residence",
+                "lastNotifyDate": null,
+                "notificationCount": 0,
+                "travelCompletion": "false",
+                "otherTravelReasons": "travel",
+                "createdAt": "2019-03-20T13:53:24.014Z",
+                "updatedAt": "2019-03-20T13:53:24.014Z",
+                "deletedAt": null,
+                "travelReasons": null,
+                "bedId": 6000,
+                "requestId": "aYzohHxie",
+                "reasons": null,
+                "beds": {
+                    "id": 6000,
+                    "bedName": "bed 1",
+                    "booked": false,
+                    "createdAt": "2018-08-16T11:11:52.181Z",
+                    "updatedAt": "2018-08-16T11:11:52.181Z",
+                    "roomId": "room-id-1",
+                    "rooms": {
+                        "id": "room-id-1",
+                        "roomName": "Kwetu",
+                        "roomType": "ensuited",
+                        "bedCount": 2,
+                        "isDeleted": false,
+                        "faulty": false,
+                        "createdAt": "2018-08-16T11:11:52.181Z",
+                        "updatedAt": "2018-08-16T11:11:52.181Z",
+                        "guestHouseId": "guest-house-1",
+                        "guestHouses": {
+                            "id": "guest-house-1",
+                            "houseName": "Mini flat-B",
+                            "location": "Lagos, Nigeria",
+                            "bathRooms": 1,
+                            "imageUrl": "https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1",
+                            "disabled": false,
+                            "createdAt": "2018-08-16T11:11:52.181Z",
+                            "updatedAt": "2018-08-16T11:11:52.181Z",
+                            "userId": "-LJV4b1QTCYewOtk5F63"
+                        }
+                    }
+                }
+            }
+        ],
+        "approver": "Travela Test",
+        "timeApproved": "2019-03-20T13:53:37.852Z",
+        "approverImage": "https://lh5.googleusercontent.com/-PbuF53uxx4U/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdjr4eMvuGvkumbC20tfiQsn0RwLw/s50-mo/photo.jpg",
+        "budgetApprovedBy": "Travela Test",
+        "budgetApprovedAt": "2019-03-21T13:53:37.852Z"
+    }
+}

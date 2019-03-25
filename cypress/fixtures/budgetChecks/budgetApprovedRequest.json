@@ -1,0 +1,21 @@
+{
+    "success": true,
+    "message": "Success",
+    "updatedRequest": {
+        "id": "aYzohHxie",
+        "name": "Travela Test",
+        "manager": "Travela Test",
+        "gender": "Male",
+        "department": "Fellowship-Programs",
+        "role": "Technical Team Lead",
+        "status": "Approved",
+        "userId": "-LSsFyueC086niFc9rrz",
+        "tripType": "return",
+        "createdAt": "2019-03-20T13:53:24.006Z",
+        "updatedAt": "2019-03-20T14:00:13.535Z",
+        "picture": "https://lh5.googleusercontent.com/-PbuF53uxx4U/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdjr4eMvuGvkumbC20tfiQsn0RwLw/s50-mo/photo.jpg",
+        "deletedAt": null,
+        "stipend": 0,
+        "budgetStatus": "Approved"
+    }
+}
