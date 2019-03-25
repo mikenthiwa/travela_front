@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "message": "Checklist item deleted successfully",
+  "checklistItem": {
+    "id": "ETYIArN1Z",
+    "name": "Dianas Doc",
+    "requiresFiles": false,
+    "deleteReason": "i dont need it anymore",
+    "destinationName": "Lagos, Nigeria",
+    "createdAt": "2019-03-21T16:54:47.235Z",
+    "updatedAt": "2019-03-21T16:59:57.912Z",
+    "deletedAt": "2019-03-21T16:59:57.922Z"
+  }
+}

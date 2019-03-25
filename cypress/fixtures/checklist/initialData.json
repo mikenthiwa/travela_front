@@ -1,0 +1,34 @@
+{
+  "success": true,
+  "message": "travel checklist retrieved successfully",
+  "travelChecklists": [
+    {
+      "destinationName": "Lagos, Nigeria",
+      "checklist": [
+        {
+          "id": "ETYIArN1Z",
+          "name": "Dianas Doc",
+          "requiresFiles": false,
+          "destinationName": "Lagos, Nigeria",
+          "deleteReason": null,
+          "resources": []
+        },
+        {
+          "id": "1",
+          "name": "Travel Ticket Details",
+          "requiresFiles": false,
+          "destinationName": "Default",
+          "deleteReason": null,
+          "resources": [
+            {
+              "id": "1",
+              "label": "Flight Application Guide",
+              "link": "http://andela.com",
+              "checklistItemId": "1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

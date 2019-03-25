@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "message": "Checklist item successfully updated",
+  "updatedChecklistItem": {
+    "name": "Visa",
+    "resources": [
+      {
+        "id": "id",
+        "label": "edit",
+        "link": "www.com",
+        "checklistItemId": "Checklist",
+        "createdAt": "2019-03-21T17:53:09.451Z",
+        "updatedAt": "2019-03-21T17:53:09.451Z",
+        "deletedAt": null
+      }
+    ],
+    "destinationName": "Lagos, Nigeria",
+    "deletedAt": null,
+    "requiresFiles": true
+  }
+}

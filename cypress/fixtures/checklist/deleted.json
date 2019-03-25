@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "message": "deleted travel checklist items retrieved successfully",
+  "deletedTravelChecklists": [
+    {
+      "id": "TbTktUUUw",
+      "name": "Disabled checklist",
+      "requiresFiles": false,
+      "deleteReason": ",nznjjz",
+      "destinationName": "Lagos, Nigeria",
+      "createdAt": "2019-03-21T12:18:47.030Z",
+      "updatedAt": "2019-03-21T12:19:00.118Z",
+      "deletedAt": "2019-03-21T12:19:00.151Z",
+      "resources": []
+    }
+  ]
+}

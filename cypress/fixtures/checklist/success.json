@@ -1,0 +1,24 @@
+{
+  "success": true,
+  "message": "Check list item created successfully",
+  "checklistItem": {
+    "name": "East African Passport",
+    "requiresFiles": true,
+    "id": "22veqnLhf",
+    "destinationName": "Nairobi, Kenya",
+    "updatedAt": "2019-03-20T10:31:30.445Z",
+    "createdAt": "2019-03-20T10:31:30.445Z",
+    "deleteReason": null,
+    "deletedAt": null,
+    "resources": [
+      {
+        "id": "80QBRNlvX0",
+        "label": "passport",
+        "link": "www.com",
+        "checklistItemId": "22veqnLhf",
+        "createdAt": "2019-03-20T10:31:30.458Z",
+        "updatedAt": "2019-03-20T10:31:30.458Z"
+      }
+    ]
+  }
+}

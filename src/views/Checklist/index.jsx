@@ -163,12 +163,12 @@ Restore
     const { isLoading, deletedCheckListItems } = this.props;
     const { defaultChecklistItems,  addedChecklistItems } = this.separateChecklistItems();
     const defaultChecklistItem = this.renderDefaultCheckListItems(defaultChecklistItems);
+    const disabledMessage = 'There are currently no disabled travel checklist items for your location';
 
     const currentChecklistItems = (addedChecklistItems.length) ? this.renderChecklistItems()
       : this.renderNoMessage('No new checklist item added yet');
     const deletedItems = (deletedCheckListItems.length !== 0 )
-      ? this.renderDeletedChecklistItems() : this.renderNoMessage(`${`There are currently no
-       disabled travel checklist items for your location`}`);
+      ? this.renderDeletedChecklistItems() : this.renderNoMessage(disabledMessage);
     return (
       <Fragment>
         {this.renderChecklistPanelHeader()}
