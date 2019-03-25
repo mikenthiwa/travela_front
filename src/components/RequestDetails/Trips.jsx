@@ -4,8 +4,10 @@ import formatDate from '../../helper/formatDate';
 export default ({ trips }) => trips.map((trip) => {
   const {
     id, accommodationType, departureDate, returnDate, origin,
-    destination
+    destination, beds
   } = trip;
+  const accommodation = accommodationType !== 'Residence' ? 
+    accommodationType : `${beds.rooms.roomName} ${beds.rooms.guestHouses.houseName}`; 
   return (
     <div className="row" key={id}>
       <div className="partition">
@@ -23,7 +25,7 @@ export default ({ trips }) => trips.map((trip) => {
       <div className="partition">
         <p className="text--grey">Accommodation</p>
         <p className="text--black">
-          {accommodationType}
+          {accommodation}
         </p>
       </div>
     </div>

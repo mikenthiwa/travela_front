@@ -21,11 +21,14 @@ exports[`<MaintainanceForm /> renders correctly 1`] = `
         },
       },
       "handleClearForm": [Function],
+      "handleMaintenanceValues": [Function],
       "handleSetState": [Function],
       "props": Object {
         "addmaintenanceRecord": [Function],
         "closeModal": [Function],
-        "editMaintenance": Object {},
+        "editMaintenance": Object {
+          "maintenance": Object {},
+        },
         "errors": Array [],
         "guestHouseId": "",
         "history": Object {
@@ -75,7 +78,11 @@ exports[`<MaintainanceForm /> renders correctly 1`] = `
           "_element": <MaintainceForm
             addmaintenanceRecord={[Function]}
             closeModal={[Function]}
-            editMaintenance={Object {}}
+            editMaintenance={
+                    Object {
+                            "maintenance": Object {},
+                          }
+            }
             errors={Array []}
             guestHouseId=""
             history={
@@ -106,7 +113,20 @@ exports[`<MaintainanceForm /> renders correctly 1`] = `
     />,
           "_forcedUpdate": false,
           "_instance": [Circular],
-          "_newState": null,
+          "_newState": Object {
+            "errors": Object {},
+            "hasBlankFields": true,
+            "hideNotificationPane": true,
+            "hideOverlay": false,
+            "hideSideBar": false,
+            "openSearch": false,
+            "selectedLink": "settings page",
+            "values": Object {
+              "maintainanceEnd": "",
+              "maintainanceStart": "",
+              "reason": "",
+            },
+          },
           "_rendered": <FormContext
             errors={Object {}}
             targetForm={[Circular]}
@@ -124,7 +144,11 @@ exports[`<MaintainanceForm /> renders correctly 1`] = `
                     onSubmit={[Function]}
             >
                     <MaintainanceFieldSets
-                            editMaintenance={Object {}}
+                            editMaintenance={
+                                    Object {
+                                            "maintenance": Object {},
+                                          }
+                            }
                             hasBlankFields={true}
                             values={
                                     Object {
@@ -180,7 +204,11 @@ exports[`<MaintainanceForm /> renders correctly 1`] = `
     onSubmit={[Function]}
   >
     <MaintainanceFieldSets
-      editMaintenance={Object {}}
+      editMaintenance={
+        Object {
+          "maintenance": Object {},
+        }
+      }
       hasBlankFields={true}
       values={
         Object {

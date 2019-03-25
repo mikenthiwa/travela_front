@@ -9,22 +9,21 @@ class MaintainanceFieldSets extends Component {
   render() {
     this.inputRenderer = new InputRenderer(MaintanceFormMetadata);
     const { renderInput } = this.inputRenderer;
-    const { values: { maintainanceStart, maintainanceEnd, reason }, editMaintenance } = this.props;
-    const {maintenance} = editMaintenance;
+    const { values: { maintainanceStart, maintainanceEnd, reason } } = this.props;
     return (
       <fieldset className="maintainance-details">
         <div className="input-group">
           {renderInput('maintainanceStart', 'date',
             {
-              value: maintenance ? maintenance.start : maintainanceStart,
+              value: maintainanceStart,
               minDate: moment(new Date())
             })}
           {renderInput('maintainanceEnd', 'date',
             {
-              value: maintenance ? maintenance.end : maintainanceEnd,
+              value: maintainanceEnd,
               minDate: moment(new Date(maintainanceStart))
             })}
-          {renderInput('reason', 'text', {value: maintenance ? maintenance.reason : reason })}
+          {renderInput('reason', 'text', {value: reason })}
         </div>
         <span className="msg-maintainence">
           <img src={error} alt="error" className="img_error" />
@@ -37,12 +36,10 @@ class MaintainanceFieldSets extends Component {
 
 MaintainanceFieldSets.propTypes = {
   values: PropTypes.object,
-  editMaintenance: PropTypes.object
 };
 
 MaintainanceFieldSets.defaultProps = {
   values: {},
-  editMaintenance: {}
 };
 
 export default MaintainanceFieldSets;

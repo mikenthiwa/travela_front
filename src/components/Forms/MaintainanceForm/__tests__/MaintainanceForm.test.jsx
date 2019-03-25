@@ -29,7 +29,9 @@ describe('<MaintainanceForm />' , () =>{
         fullName: 'Test User',
         email: 'test.user@andela.com'
       }
-    ]
+    ],
+    editMaintenance : { maintenance: {} },
+    maintenance: {}
   };
 
 
@@ -91,6 +93,30 @@ describe('<MaintainanceForm />' , () =>{
     Mountwrapper.update();
     expect(Mountwrapper.state().errors.reason).toBe('This field is required');
   });
+  it('Renders when maintenance props is supplied', ()=>{
+    props.maintenance= { departureDate: '2018/04/10', 
+      returnDate: '2018/04/11', 
+      reason: 'Broken windows' };
+    const Mountwrapper = mount(<MaintainceForm {...props} />);
+    
+   
+    expect(Mountwrapper.state().values.reason).toBe('Broken windows');
+    expect(Mountwrapper.state().values.maintainanceStart).toBe('04/10/2018');
+    expect(Mountwrapper.state().values.maintainanceEnd).toBe('04/11/2018');
+  });
+
+  it('Renders when editting', ()=>{
+    props.editMaintenance= {maintenance: {
+      start: '04/10/2018',
+      end: '04/11/2018',
+      reason: 'Broken windows'
+    }};
+    const Mountwrapper = mount(<MaintainceForm {...props} />);
+    
+    expect(Mountwrapper.state().values.reason).toBe('Broken windows');
+    expect(Mountwrapper.state().values.maintainanceStart).toBe('04/10/2018');
+    expect(Mountwrapper.state().values.maintainanceEnd).toBe('04/11/2018');
+  });
 });
 
 describe('<SubmitArea />', () => {
@@ -115,5 +141,6 @@ describe('<SubmitArea />', () => {
     wrapper.find('#submit').simulate('click');
     expect(handleDelete).toBeCalled;
   });
+  
 });
 

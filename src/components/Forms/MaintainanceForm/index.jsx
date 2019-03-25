@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
 import moment from 'moment';
+import _ from 'lodash';
 import { FormContext } from '../FormsAPI';
 import MaintainanceFieldSets from './FormFieldsets/maintaince';
 import './maintainance.scss';
@@ -27,16 +28,32 @@ class MaintainceForm extends PureComponent {
   }
 
   componentDidMount() {
-    this.handleSetState;
+    this.handleMaintenanceValues();
   }
 
-  handleSetState = () => {
+  handleMaintenanceValues = () => {
+    const { maintenance: { departureDate, returnDate, reason }, 
+      editMaintenance : { maintenance } }  = this.props;
+    
+    const notEdit = _.isEmpty(maintenance);
+    const startValue  = !notEdit ? maintenance.start:
+      (departureDate ? moment(departureDate, 'YYYY-MM-DD').format('MM/DD/YYYY') : '');
+    const endValue = !notEdit ? maintenance.end: 
+      (returnDate ?moment(returnDate, 'YYYY-MM-DD').format('MM/DD/YYYY'): '');
+    const reasonValue = !notEdit ? maintenance.reason: (reason ? reason: '');
+    this.handleSetState(startValue, endValue, reasonValue);
+  }
 
-    const { maintenance: { departureDate, returnDate, reason }}  = this.props;
-    const startDate = departureDate ? moment(departureDate, 'YYYY-MM-DD').format('MM/DD/YYYY') : '';
-    const endDate = returnDate ? moment(returnDate, 'YYYY-MM-DD').format('MM/DD/YYYY') : '';
+  handleSetState = (departureDate, returnDate, reason) => {
+    const startDate = departureDate ? departureDate : '';
+    const endDate = returnDate ? returnDate : '';
     const disableReason = reason ? reason : '';
-    this.setState(prevState => ({ ...prevState, values: { maintainanceStart: startDate, maintainanceEnd: endDate, reason: disableReason } }));
+    
+    this.setState(prevState => ({ ...prevState, 
+      values: { maintainanceStart: startDate, 
+        maintainanceEnd: endDate, 
+        reason: disableReason } 
+    }));
   }
 
   submitMaintainanceData = event => {

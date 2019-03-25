@@ -36,7 +36,18 @@ const props = {
     trips: [{
       accommodationType: 'Residence',
       bedId: 10945,
-      beds: {id: 10945, bedName: 'Bed 1', booked: false, createdAt: '2018-08-16T11:11:52.181Z', updatedAt: '2018-08-16T11:11:52.181Z'},
+      beds: {id: 10945, bedName: 'Bed 1', booked: false, createdAt: '2018-08-16T11:11:52.181Z', updatedAt: '2018-08-16T11:11:52.181Z',
+        rooms:{
+          bedCount: 2,
+          createdAt: '2018-08-16T11:11:52.181Z',
+          faulty: true,
+          guestHouseId: 'guest-house-1',
+          guestHouses: {id: 'guest-house-1', houseName: 'Mini flat-B', location: 'Lagos, Nigeria', bathRooms: 1, imageUrl: 'https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1'},
+          id: 'room-id-1',
+          isDeleted: false,
+          roomName: 'Kwetu',
+          roomType: 'ensuited',
+          updatedAt: '2019-03-23T17:50:09.903Z'}},
       checkInDate: null,
       checkOutDate: null,
       checkStatus: 'Not Checked In',
@@ -124,6 +135,35 @@ describe('<RequestDetails />', () => {
       props.submissionInfo.submissions);
     expect(wrapper.instance().state.currentTab).toEqual(4);
   });
+  it('should show Hotel Booking', () => {
+    const wrapper = shallow(<RequestDetail {...props} />);
+    wrapper.setProps({
+      requestData:{
+        trips:[{accommodationType: 'Hotel Bookings',
+          bedId: 10945,
+          beds: null,
+          
+          createdAt: '2019-03-12T13:18:30.109Z',
+          deletedAt: null,
+          departureDate: '2019-08-01',
+          destination: 'Nairobi, Kenya',
+          id: 'GCpkv0WQpg',
+          lastNotifyDate: null,
+          notificationCount: 0,
+          origin: 'Lagos, Nigeria',
+          otherTravelReasons: null,
+          reasons: {id: 3, title: 'nothing', description: '', createdAt: '2019-02-28T22:46:28.714Z', updatedAt: '2019-02-28T22:46:28.714Z'},
+          requestId: 'rlP_5EOkU',
+          returnDate: '2019-08-02',
+          travelCompletion: 'false',
+          travelReasons: 3,
+          updatedAt: '2019-03-12T13:18:30.109Z'}]
+      }
+    });
+    expect(wrapper.find('.trip-detail__information-table').find('td').at(2).text()).toEqual('Hotel Bookings');
+  
+  });
+
 
 
 });
