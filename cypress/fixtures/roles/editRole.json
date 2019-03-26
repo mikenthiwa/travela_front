@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "message": "User role updated successfully",
+  "result": [
+    1,
+    [
+      {
+        "id": 25,
+        "roleName": "Finance",
+        "description": "Andela finance accounts manager",
+        "createdAt": "2019-03-25T14:33:29.137Z",
+        "updatedAt": "2019-03-25T14:35:30.269Z"
+      }
+    ]
+  ]
+}

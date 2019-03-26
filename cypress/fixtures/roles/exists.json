@@ -1,0 +1,86 @@
+{
+  "success": true,
+  "message": "data",
+  "result": [
+    {
+      "id": 25,
+      "roleName": "finance",
+      "description": "Manage Andela finance accounts",
+      "updatedAt": "2019-03-25T14:33:29.137Z",
+      "createdAt": "2019-03-25T14:33:29.137Z",
+      "users": []
+    },
+    {
+      "id": 6000,
+      "roleName": "budgetChecker",
+      "description": "Can request and approve travel request",
+      "createdAt": "2019-03-25T13:35:08.516Z",
+      "updatedAt": "2019-03-25T13:35:08.516Z",
+      "users": []
+    },
+    {
+      "id": 339458,
+      "roleName": "Travel Team Member",
+      "description": "Can view all request made on travela",
+      "createdAt": "2018-08-16T11:11:52.181Z",
+      "updatedAt": "2018-08-16T11:11:52.181Z",
+      "users": [
+        {
+          "email": "travela-test@andela.com",
+          "userId": "-LSsFyueC086niFc9rrz"
+        }
+      ]
+    },
+    {
+      "id": 401938,
+      "roleName": "Requester",
+      "description": "Can make travel request",
+      "createdAt": "2018-08-16T11:11:52.181Z",
+      "updatedAt": "2018-08-16T11:11:52.181Z",
+      "users": [
+        {
+          "email": "travela-test@andela.com",
+          "userId": "-LSsFyueC086niFc9rrz"
+        }
+      ]
+    },
+    {
+      "id": 53019,
+      "roleName": "Manager",
+      "description": "Can request and approve travel request ",
+      "createdAt": "2018-08-16T11:11:52.181Z",
+      "updatedAt": "2018-08-16T11:11:52.181Z",
+      "users": [
+        {
+          "email": "trey@efficientoffice.com",
+          "userId": "-KXGy1MT1oimjQgFimA1"
+        },
+        {
+          "email": "travela-test@andela.com",
+          "userId": "-LSsFyueC086niFc9rrz"
+        }
+      ]
+    },
+    {
+      "id": 10948,
+      "roleName": "Super Administrator",
+      "description": "Can perform all task on travela",
+      "createdAt": "2018-08-16T11:11:52.181Z",
+      "updatedAt": "2019-03-25T11:46:46.940Z",
+      "users": [
+        {
+          "email": "travela-test@andela.com",
+          "userId": "-LSsFyueC086niFc9rrz"
+        }
+      ]
+    },
+    {
+      "id": 29187,
+      "roleName": "Travel Administrator",
+      "description": "Can view and approve all request on  travela",
+      "createdAt": "2018-08-16T11:11:52.181Z",
+      "updatedAt": "2018-08-16T11:11:52.181Z",
+      "users": []
+    }
+  ]
+}

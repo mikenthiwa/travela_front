@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "message": "Role created successfully",
+  "result": {
+    "id": 25,
+    "description": "Manage Andela finance accounts",
+    "roleName": "finance",
+    "updatedAt": "2019-03-25T14:33:29.137Z",
+    "createdAt": "2019-03-25T14:33:29.137Z"
+  }
+}
