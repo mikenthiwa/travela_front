@@ -556,7 +556,8 @@ describe('<NewRequestForm />', () => {
   });
 
   it('should change the radio button on click to multi ', () => {
-    const shallowWrapper = shallow(<NewRequestForm {...props} />);
+    const newProps = { ...props, editing: true };
+    const shallowWrapper = shallow(<NewRequestForm {...newProps} />);
     const event = {
       preventDefault: jest.fn(),
       target: {
@@ -1391,6 +1392,7 @@ describe('<NewRequestForm />', () => {
         isLoading: false
       }
     });
+    wrapper.setState({ currentTab: 3 });
 
     const stipendNextButton = wrapper.find('form').find('#stipend-next');
     stipendNextButton.simulate('click', clickEvent);

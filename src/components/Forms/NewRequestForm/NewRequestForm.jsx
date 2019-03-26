@@ -14,6 +14,7 @@ import './RequestLoader.scss';
 import tabIcons from '../../../images/icons/new-request-icons';
 import travelStipendHelper from '../../../helper/request/RequestUtils';
 import hideSection from '../../../helper/hideSection';
+import newSteps from '../../../helper/newSteps';
 import TravelChecklistsCard from './FormFieldsets/TravelChecklistsCard';
 import PendingApprovals from './FormFieldsets/PendingApprovalsCard';
 
@@ -42,7 +43,7 @@ class NewRequestForm extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {values, trips, selection, currentTab} = this.state;
+    const {values, trips, selection, currentTab } = this.state;
     if ((
       (prevState.values.gender !== values.gender) || (prevState.values.role !== values.role))
       && selection !== 'oneWay') {
@@ -357,7 +358,7 @@ class NewRequestForm extends PureComponent {
   };
 
   handleRadioButton = event => {
-    const {editing, requestOnEdit} = this.props;
+    const { editing } = this.props;
     let {collapse, trips, values, prevValues, prevTrips = []} = this.state;
     const tripType = event.target.value;
 
@@ -601,37 +602,33 @@ class NewRequestForm extends PureComponent {
   };
 
   validator = (trips) => {
-    const newState = {
-      currentTab: 3, isLoading: false
-    };
-    const isLoading = false;
-    const {fetchAllTravelStipends, validateTrips} = this.props;
-    validateTrips(trips, () => this.setState(newState), () => this.setState({isLoading}));
-    fetchAllTravelStipends();
+    const { editing, requestOnEdit, validateTrips } = this.props;
+    const { steps, currentTab } = this.state;
+    validateTrips(
+      { ...trips, editing, id: requestOnEdit.id },
+      () => this.setState({
+        currentTab: 3, isLoading: false, steps: newSteps(steps, currentTab)
+      }),
+      () => this.setState({ isLoading: false, hasBlankFields: true })
+    );
   };
 
   nextStep = (e, travelStipends) => {
     e.preventDefault();
-    const {steps, currentTab, trips} = this.state;
-    const {editing} = this.props;
-    if (currentTab === 2 && !editing) {
-      this.setState({isLoading: true});
-      this.validator({trips});
-    }
-    const newSteps = steps;
-    const prev = steps[currentTab - 1];
-    const next = steps[currentTab];
-    prev.status = '';
-    next.status = 'You are currently here';
-    this.setState({
-      steps: newSteps,
-      currentTab: currentTab + 1,
-    });
-
-    if (currentTab === 3) {
+    const { steps, currentTab, trips } = this.state;
+    if (currentTab === 2) {
+      this.setState({
+        isLoading: true
+      }, () => this.validator({ trips }));
+    } if (currentTab === 3) {
       this.setState({
         stipendBreakdown: travelStipends.length ? travelStipends : undefined,
         stipend: 0
+      });
+    } if (currentTab !== 2) {
+      this.setState({
+        steps: newSteps(steps, currentTab),
+        currentTab: currentTab + 1
       });
     }
   };

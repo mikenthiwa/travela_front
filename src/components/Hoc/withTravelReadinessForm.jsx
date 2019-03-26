@@ -39,7 +39,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
       const { data } = document;
       return this.setState(prevState => {
         const newValues = { ...prevState.values, ...data };
-        return { ...prevState, id: document.id, documentUploaded: true, values: {...newValues}, imageChanged:true };
+        return { ...prevState, id: document.id, values: {...newValues}, imageChanged:true };
       });
     }
 
