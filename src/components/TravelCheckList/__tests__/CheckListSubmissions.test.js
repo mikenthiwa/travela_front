@@ -51,12 +51,12 @@ describe('ChecklistSubmission Component', () => {
     const travelChecklistDestination = wrapper
       .find('.travelCheckList__destination');
 
-    expect(submissionItem.length).toBe(6);
+    expect(submissionItem.length).toBe(5);
     expect(submissionItemLink.length).toBe(0);
     expect(uploadedField.length).toBe(2);
     expect(ticketSubmission.length).toBe(1);
     expect(uploadfield.length).toBe(1);
-    expect(textAreaField.length).toBe(2);
+    expect(textAreaField.length).toBe(1);
     expect(travelChecklistDestination.length).toBe(1);
   });
 

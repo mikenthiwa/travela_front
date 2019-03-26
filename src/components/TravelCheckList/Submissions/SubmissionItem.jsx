@@ -293,8 +293,7 @@ class SubmissionItem extends Component {
 
 
   renderTravelChecklistItem = () => {
-    const {checklistItem: {name, id, resources}, travelTicket, travelTicket: {submissions}, tripId} = this.props;
-
+    const {checklistItem: {name, id, resources}, travelTicket, tripId} = this.props;
     return (
       <div className={`travelSubmission--item ${name === 'Travel Ticket Details' && 'travelTicket'}`}>
         <span className="travelSubmission--item__name">{name}</span>
@@ -305,17 +304,16 @@ class SubmissionItem extends Component {
             [{resource.label}]
           </a>
         ))}
-        { name==='Travel Ticket Details' && (
+        { name === 'Travel Ticket Details' && (
           <div className="travelSubmission--item__name-two">
-            {
-              submissions.length === 0 && (
-                <SubmissionItem
-                  {...this.props}
-                  key={`${travelTicket.id}`}
-                  checkId={`${tripId}-${travelTicket.id}`}
-                  checklistItem={travelTicket}
-                />
-              )
+            {travelTicket && travelTicket.submissions.length === 0  && (
+              <SubmissionItem
+                {...this.props}
+                key={`${travelTicket.id}`}
+                checkId={`${tripId}-${travelTicket.id}`}
+                checklistItem={travelTicket}
+              />
+            )
             }
           </div>
         )}
@@ -334,7 +332,6 @@ SubmissionItem.propTypes = {
   postSubmission: PropTypes.func.isRequired, fileUploadData: PropTypes.object.isRequired,
   tripId: PropTypes.string.isRequired, itemsToCheck: PropTypes.array.isRequired,
   request: PropTypes.object.isRequired, modalType: PropTypes.string,
-  travelTicket: PropTypes.object,
   postSuccess: PropTypes.array.isRequired, isUploadingStage2: PropTypes.array.isRequired,
   requestId: PropTypes.string.isRequired, tripType: PropTypes.string.isRequired,
   checkId: PropTypes.string.isRequired, handleUserDocumentUpload: PropTypes.func.isRequired,
@@ -343,10 +340,6 @@ SubmissionItem.propTypes = {
 };
 SubmissionItem.defaultProps = {
   closeModal: () => {}, userReadinessDocument: {}, shouldOpen: false, modalType: '',
-  travelTicket: {
-    name: 'Travel Ticket',
-    submissions: []
-  }
 };
 
 export default SubmissionItem;
