@@ -3,7 +3,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import CentersAPI from '../../../services/CentersAPI';
-import { watchFetchCenters, watchUpdateUserCenterAsync } from '../centersSaga';
+import { watchFetchCenters } from '../centersSaga';
 
 const error = {
   response: {
@@ -68,44 +68,5 @@ describe('Centers Saga', () => {
         type: 'FETCH_CENTERS'
       })
       .silentRun();
-  });
-
-  describe('Update user center  Saga', () => {
-    it('update user centers', () => {
-      return expectSaga(watchUpdateUserCenterAsync, CentersAPI)
-        .provide([[call(CentersAPI.updateUserCenter, userId,
-          action.newCenter
-        ),  response11]])
-        .put({
-          type: 'UPDATE_USER_CENTER_SUCCESS',
-          userCenter: response11.data
-        })
-        .dispatch({
-          type: 'UPDATE_USER_CENTER',
-          userId,
-          newCenter: {
-            center: 'New York, USA'
-          }
-        })
-        .silentRun();
-    });
-
-    it('throws error if there is an error fetching a user\'s requests', () => {
-      return expectSaga(watchUpdateUserCenterAsync, CentersAPI)
-        .provide([
-          [
-            matchers.call.fn(CentersAPI.updateUserCenter, 1, action.newCenter),
-            throwError(error)
-          ]
-        ])
-        .put({
-          type: 'UPDATE_USER_CENTER_FAILURE',
-          error: error.response.data.error
-        })
-        .dispatch({
-          type: 'UPDATE_USER_CENTER'
-        })
-        .silentRun();
-    });
   });
 });

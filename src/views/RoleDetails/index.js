@@ -13,9 +13,10 @@ import {
   fetchRoleUsers,
   hideDeleteRoleModal,
   putRoleData,
-  showDeleteRoleModal
+  showDeleteRoleModal,
+  updateBudgetChecker,
 } from '../../redux/actionCreator/roleActions';
-import {fetchCenters, updateUserCenter} from '../../redux/actionCreator/centersActions';
+import { fetchCenters } from '../../redux/actionCreator/centersActions';
 import {getAllUsersEmail} from '../../redux/actionCreator/userActions';
 import './RoleDetails.scss';
 import NotFound from '../ErrorPages';
@@ -52,12 +53,12 @@ export class RoleDetails extends Component {
     openModal(true, 'new model');
   }
 
-  handleEditCenter = (user) => {
+  handleEditRole = (user) => {
     let { openModal, hideDeleteRoleModal, deleteModalState } = this.props;
     deleteModalState === 'visible' && hideDeleteRoleModal();
     openModal(true, 'new model');
     this.setState({
-      headTitle: 'Change Center',
+      headTitle: 'Edit Budget Checker Role',
       userDetail: user
     });
   }
@@ -104,7 +105,7 @@ export class RoleDetails extends Component {
           roleUsers={roleUsers}
           error={error}
           roleName={roleName}
-          handleEditCenter={this.handleEditCenter}
+          handleEditRole={this.handleEditRole}
           handleDeleteUserRole={this.handleDeleteUserRole}
           deleteModalState={deleteModalState}
           deleteModalRoleId={deleteModalRoleId}
@@ -116,10 +117,10 @@ export class RoleDetails extends Component {
   }
 
   renderRoleForm() {
-    const { 
-      error, closeModal, shouldOpen, modalType, isUpatingCenter,
+    const {
+      error, closeModal, shouldOpen, modalType, isUpdating,
       roleName, fetchRoleUsers, fetchCenters, centers, getUsersEmail: allMails,
-      putRoleData, updateUserCenter, match, getAllUsersEmail, updatingRole } = this.props;
+      putRoleData, updateBudgetChecker, match, getAllUsersEmail, updatingRole } = this.props;
     const { headTitle, userDetail } = this.state;
     const { params: {roleId } } = match;
     const page = Utils.getCurrentPage(this);
@@ -137,13 +138,13 @@ export class RoleDetails extends Component {
         <NewUserRoleForm
           role={roleName}
           roleId={roleId}
-          updatingRole={updatingRole || isUpatingCenter}
+          updatingRole={updatingRole || isUpdating}
           errors={error}
           closeModal={closeModal}
           getRoleData={() => fetchRoleUsers(roleId, page)}
           handleUpdateRole={putRoleData}
           fetchCenters={fetchCenters}
-          updateUserCenter={updateUserCenter}
+          updateBudgetChecker={updateBudgetChecker}
           centers={centers}
           userDetail={userDetail}
           myTitle={headTitle}
@@ -155,7 +156,7 @@ export class RoleDetails extends Component {
   }
 
   renderUserRolePage() {
-    const { 
+    const {
       roleUsers,
       meta: { currentPage, pageCount }
     } = this.props;
@@ -164,7 +165,7 @@ export class RoleDetails extends Component {
       <Fragment>
         {this.renderUserRolePanelHeader()}
         {this.renderRoles()}
-        {!isEmpty(roleUsers) 
+        {!isEmpty(roleUsers)
         && (
           <Pagination
             currentPage={currentPage}
@@ -221,7 +222,7 @@ RoleDetails.propTypes = {
   fetchCenters: PropTypes.func.isRequired,
   centers: PropTypes.array,
   putRoleData: PropTypes.func.isRequired,
-  updateUserCenter: PropTypes.func.isRequired,
+  updateBudgetChecker: PropTypes.func.isRequired,
   deleteModalRoleId: PropTypes.oneOfType([
     PropTypes.string, PropTypes.number
   ]).isRequired,
@@ -232,7 +233,7 @@ RoleDetails.propTypes = {
   getAllUsersEmail: PropTypes.func.isRequired,
   getUsersEmail: PropTypes.array,
   meta: PropTypes.object,
-  isUpatingCenter: PropTypes.bool,
+  isUpdating: PropTypes.bool,
 };
 
 RoleDetails.defaultProps = {
@@ -242,7 +243,7 @@ RoleDetails.defaultProps = {
   modalType: '',
   roleName: '',
   updatingRole: false,
-  isUpatingCenter: false,
+  isUpdating: false,
   centers: [],
   getUsersEmail: [],
   meta: { currentPage: 1, pageCount: 0 }
@@ -254,11 +255,11 @@ const actionCreators = {
   openModal,
   closeModal,
   fetchCenters,
-  updateUserCenter,
   deleteUserRole,
   hideDeleteRoleModal,
   showDeleteRoleModal,
-  getAllUsersEmail
+  getAllUsersEmail,
+  updateBudgetChecker,
 };
 
 export default connect(

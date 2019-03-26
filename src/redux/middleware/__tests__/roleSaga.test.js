@@ -1,14 +1,22 @@
 import { call } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
+import * as matchers from 'redux-saga-test-plan/matchers';
 import toast from 'toastr';
 import RoleAPI from '../../../services/RoleAPI';
-import { watchFetchRoleUsers, watchDeleteUserRoleAsync } from '../roleSaga';
+import {
+  watchFetchRoleUsers,
+  watchDeleteUserRoleAsync,
+  watchUpdateBudgetCheckerAsync
+} from '../roleSaga';
 import {
   DELETE_USER_ROLE,
   DELETE_USER_ROLE_FAILURE,
   DELETE_USER_ROLE_SUCCESS,
-  HIDE_DELETE_ROLE_MODAL
+  HIDE_DELETE_ROLE_MODAL,
+  UPDATE_BUDGET_CHECKER,
+  UPDATE_BUDGET_CHECKER_FAILURE,
+  UPDATE_BUDGET_CHECKER_SUCCESS
 } from '../../constants/actionTypes';
 import { fetchRoleUsersResponse } from '../../__mocks__/reduxMocks';
 
@@ -75,7 +83,6 @@ describe('Role Saga', () => {
   describe('Delete user role saga', () => {
     const userId = 1;
     const roleId = 2;
-    const fullName = 'Test User';
 
     it('deletes a travel checklist item successfully', () => {
       const response = {
@@ -132,6 +139,63 @@ describe('Role Saga', () => {
     it('should call toast.error once', (done) => {
       expect(toast.error).toHaveBeenCalledTimes(1);
       done();
+    });
+  });
+
+  describe('Update budget checker saga', () => {
+    const newRoleData = {
+      email: 'test.user@andela.com',
+      departments: ['Success']
+    };
+
+    it('Updates budget checker successfully', () => {
+      const response = {
+        data: {
+          user: {
+            email: 'test.andela.com',
+            fullName: 'test andela'
+          },
+          budgetCheckerDepartments: [{
+            name: 'Success'
+          }]
+        }
+      };
+
+      return expectSaga(watchUpdateBudgetCheckerAsync)
+        .provide([[
+          matchers.call.fn(RoleAPI.updateBudgetChecker, newRoleData), response
+        ]])
+        .put({
+          type: UPDATE_BUDGET_CHECKER_SUCCESS,
+          userDetail: response.data.user,
+        })
+        .dispatch({
+          type: UPDATE_BUDGET_CHECKER,
+          newRoleData: {
+            email: 'test.andela.com',
+            departments: ['Success']
+          }
+        })
+        .silentRun();
+    });
+
+    it('handles update budget checker error', () => {
+      const error = new Error('Server error, try again');
+      error.response = { status: 500 };
+
+      return expectSaga(watchUpdateBudgetCheckerAsync)
+        .provide([[
+          call(RoleAPI.updateBudgetChecker, newRoleData), throwError(error)
+        ]])
+        .put({
+          type: UPDATE_BUDGET_CHECKER_FAILURE,
+          error: error.message,
+        })
+        .dispatch({
+          type: UPDATE_BUDGET_CHECKER,
+          newRoleData
+        })
+        .silentRun();
     });
   });
 });

@@ -7,8 +7,9 @@ import './PersonalDetails.scss';
 class PersonalDetailsFiedset extends Component {
 
   render() {
-    const { roleName, values, allMails, addDepartment, removeDepartment } = this.props;
+    const { roleName, values, allMails, addDepartment, removeDepartment, myTitle } = this.props;
     const emails = allMails.map(email => email.text);
+    const disabled = myTitle === 'Edit Budget Checker Role';
     formMetadata.dropdownSelectOptions.email = emails;
     this.inputRenderer = new InputRenderer(formMetadata);
     const { renderInput } = this.inputRenderer;
@@ -18,7 +19,7 @@ class PersonalDetailsFiedset extends Component {
           <div style={{ paddingTop: '14px' }}>
             {renderInput('email', 'filter-dropdown-select',
               {
-                className: 'email_dropdown', size: ''
+                className: 'email_dropdown', size: '', disabled
               })
             }
           </div>
@@ -34,7 +35,7 @@ class PersonalDetailsFiedset extends Component {
                 </div>
                 <button
                   type="button"
-                  onClick={addDepartment} 
+                  onClick={addDepartment}
                   disabled={values.department.length < 1}
                   className={values.department.length > 1 ? 'add_button' : 'disable_button'}>
                   Add
@@ -58,7 +59,7 @@ class PersonalDetailsFiedset extends Component {
                       <tbody key={Math.floor((Math.random() * 500) + 1)} className="table__body">
                         <tr className="table__row">
                           <td className="mdl-data-table__cell--non-numeric table__data" style={{ textTransform: 'capitalize'}}>
-                            {list}  
+                            {list}
                           </td>
                           <td>
                             <i
@@ -72,7 +73,7 @@ class PersonalDetailsFiedset extends Component {
                             </i>
                           </td>
                         </tr>
-                      </tbody> 
+                      </tbody>
                     ))}
                 </table>
               </div>
@@ -96,13 +97,15 @@ PersonalDetailsFiedset.propTypes = {
   allMails: allMails.isRequired,
   values: values,
   removeDepartment: removeDepartment,
-  addDepartment: addDepartment
+  addDepartment: addDepartment,
+  myTitle: PropTypes.string
 };
 
 PersonalDetailsFiedset.defaultProps = {
   removeDepartment: () => {},
   addDepartment: () => {},
-  values: {}
+  values: {},
+  myTitle: ''
 };
 
 export default PersonalDetailsFiedset;

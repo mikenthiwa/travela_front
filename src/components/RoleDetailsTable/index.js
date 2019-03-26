@@ -44,26 +44,27 @@ export class RoleDetailsTable extends PureComponent {
   }
 
   renderRoleUser(roleUser) {
-    const { handleEditCenter, deleteModalRoleId, deleteModalState } = this.props;
+    const { handleEditRole, deleteModalRoleId, deleteModalState, roleName } = this.props;
     return (
       <tr key={roleUser.id} className="table__rows">
         <td
-          className="mdl-data-table__cell--non-numeric role-user__name
-          table__data freeze-role-table">
+          className="mdl-data-table__cell--non-numeric role-user__name table__data freeze-role-table">
           {roleUser.fullName}
-        </td>
-        <td className="mdl-data-table__cell--non-numeric table__data pl-sm-120">
-          {roleUser.centers[0] ? roleUser.centers[0].location : 'N/A'}
         </td>
         <td
           className="mdl-data-table__cell--non-numeric table__requests__status table__data delete"
           style={testColor}>
-          <span
-            onClick={() => handleEditCenter(roleUser)} id="editButton" role="presentation"
-            onKeyDown={this.key}>
-            Edit
-          </span>
-          &ensp; &ensp;  &ensp;  &ensp; &ensp;
+          {roleName == 'Budget Checker' && (
+            <Fragment>
+              <span
+                onClick={() => handleEditRole(roleUser)} id="editButton" role="presentation"
+                onKeyDown={this.key}>
+                Edit
+                &ensp; &ensp; &ensp; &ensp; &ensp;
+              </span>
+            </Fragment>
+          )
+          }
           <span
             onClick={() => this.showDeleteModal(roleUser.id)}
             id="deleteButton"
@@ -96,9 +97,6 @@ export class RoleDetailsTable extends PureComponent {
       <tr>
         <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze freeze-head ">
           Name
-        </th>
-        <th className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left">
-          Center
         </th>
         <th className="mdl-data-table__cell--non-numeric table__head table__head--last">
           Actions
@@ -134,7 +132,7 @@ export class RoleDetailsTable extends PureComponent {
 
 RoleDetailsTable.propTypes = {
   roleUsers: PropTypes.array,
-  handleEditCenter: PropTypes.func,
+  handleEditRole: PropTypes.func,
   handleDeleteUserRole: PropTypes.func,
   error: PropTypes.oneOfType([
     PropTypes.string,
@@ -154,7 +152,7 @@ RoleDetailsTable.defaultProps = {
   roleUsers: [],
   error: '',
   roleName: '',
-  handleEditCenter: ()=> {},
+  handleEditRole: ()=> {},
   deleteModalState: 'invisible',
   deleteModalRoleId: 0,
   hideDeleteRoleModal: ()=> {},

@@ -2,9 +2,6 @@ import {
   fetchCenters,
   fetchCentersSuccess,
   fetchCentersFailure,
-  updateUserCenter,
-  updateUserSuccess,
-  updateUserFailure
 } from '../centersActions';
 
 const centersResponse = {
@@ -46,36 +43,5 @@ describe('Centers Actions', () => {
       const newAction = fetchCentersFailure(error);
       expect(newAction).toEqual(expectedAction);
     });
-  });
-
-  describe('Update user center', () => {
-    it('should return action type UPDATE_USER_CENTER', () => {
-      const expectedAction = {
-        type: 'UPDATE_USER_CENTER',
-      };
-      const createdAction = updateUserCenter();
-      expect(createdAction).toEqual(expectedAction);
-    });
-
-    it('should return action type UPDATE_USER_CENTER_SUCCESS', () => {
-      const expectedAction = {
-        type: 'UPDATE_USER_CENTER_SUCCESS',
-        userCenter: centersResponse.data
-      };
-      const newAction = updateUserSuccess(centersResponse.data);
-      expect(newAction).toEqual(expectedAction);
-    });
-
-    it('should return action type UPDATE_USER_CENTER_FAILURE', () => {
-      const error = 'An error occurred. Please reload page';
-      const expectedAction = {
-        type: 'UPDATE_USER_CENTER_FAILURE',
-        error
-      };
-
-      const newAction = updateUserFailure(error);
-      expect(newAction).toEqual(expectedAction);
-    });
-
   });
 });

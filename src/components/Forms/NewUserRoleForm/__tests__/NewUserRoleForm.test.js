@@ -37,6 +37,7 @@ describe('<NewUserRoleForm />', () => {
     centers: [{location: 'Kigali, Rwanda'}],
     roleId: '33589',
     getAllUsersEmail: jest.fn(),
+    closeModal: jest.fn(),
     allMails: [{id:'travela', text:'travela@travela.com'}],
   };
 
@@ -73,7 +74,7 @@ describe('<NewUserRoleForm />', () => {
   it('calls the componentDidMount method', () => {
     const spy = sinon.spy(NewUserRoleForm.prototype, 'componentDidMount');
     const wrapper = mount(
-      <NewUserRoleForm {...{...props,  
+      <NewUserRoleForm {...{...props,
         role: 'travel team member',  userDetail: {
           email: 'tomato@andela.com',
           id: 1,

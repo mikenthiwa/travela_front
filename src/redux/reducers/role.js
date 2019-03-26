@@ -18,7 +18,10 @@ import {
   ADD_ROLE_FAILURE,
   UPDATE_ROLE,
   UPDATE_ROLE_SUCCESS,
-  UPDATE_ROLE_FAILURE
+  UPDATE_ROLE_FAILURE,
+  UPDATE_BUDGET_CHECKER,
+  UPDATE_BUDGET_CHECKER_SUCCESS,
+  UPDATE_BUDGET_CHECKER_FAILURE
 } from '../constants/actionTypes';
 
 
@@ -121,6 +124,20 @@ const role = (state = initialState, action) => {
       ...state,
       isLoading: false,
       error: action.error
+    };
+  case UPDATE_BUDGET_CHECKER:
+    return { ...state, isUpdating: true };
+  case UPDATE_BUDGET_CHECKER_SUCCESS:
+    return {
+      ...state,
+      isUpdating: false,
+      userDetail: action.userDetail,
+    };
+  case UPDATE_BUDGET_CHECKER_FAILURE:
+    return {
+      ...state,
+      isUpdating: false,
+      updateError: action.error
     };
   default: return state;
   }

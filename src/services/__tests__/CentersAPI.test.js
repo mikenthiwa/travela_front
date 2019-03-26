@@ -33,24 +33,4 @@ describe('CentersAPI', () => {
     expect(request.config.method).toEqual('get');
     expect(response.data).toEqual(centersResponse);
   });
-
-  it('should send a patch request to center api to update the user center record', async () => {
-    const userId = 1;
-    const newCenter = {
-      center: 'Lagos, Nigeria'
-    };
-
-    moxios.stubRequest(`${baseUrl}/center/user/${userId}`, {
-      status: 200,
-      response: {
-        center: 'Lagos, Nigeria'
-      }
-    });
-
-    const response = await CentersAPI.updateUserCenter(userId, newCenter);
-    const request = (moxios.requests.mostRecent());
-    expect(request.url).toEqual(`${baseUrl}/center/user/1`);
-    expect(request.config.method).toEqual('patch');
-    expect(response.data).toEqual(newCenter);
-  });
 });

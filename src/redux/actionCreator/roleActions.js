@@ -18,7 +18,10 @@ import {
   ADD_ROLE_FAILURE,
   UPDATE_ROLE,
   UPDATE_ROLE_SUCCESS,
-  UPDATE_ROLE_FAILURE
+  UPDATE_ROLE_FAILURE,
+  UPDATE_BUDGET_CHECKER,
+  UPDATE_BUDGET_CHECKER_SUCCESS,
+  UPDATE_BUDGET_CHECKER_FAILURE
 } from '../constants/actionTypes';
 
 export const getRoleData  = () => ({
@@ -124,5 +127,20 @@ export const updateRoleSuccess = (role) => ({
 
 export const updateRoleFailure = (error) => ({
   type: UPDATE_ROLE_FAILURE,
+  error
+});
+
+export const updateBudgetChecker = (newRoleData) => ({
+  type: UPDATE_BUDGET_CHECKER,
+  newRoleData
+});
+
+export const updateBudgetCheckerSuccess = (userDetail) => ({
+  type: UPDATE_BUDGET_CHECKER_SUCCESS,
+  userDetail
+});
+
+export const updateBudgetCheckerFailure = (error) => ({
+  type: UPDATE_BUDGET_CHECKER_FAILURE,
   error
 });

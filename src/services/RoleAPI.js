@@ -29,5 +29,9 @@ class RoleAPI {
   static updateRole(roleId, newRoleData) {
     return axios.patch(`${baseUrl}/user/role/${roleId}`, newRoleData);
   }
+
+  static updateBudgetChecker(newRoleData) {
+    return axios.patch(`${baseUrl}/user/roles/budgetChecker`, newRoleData);
+  }
 }
 export default RoleAPI;

@@ -299,4 +299,44 @@ describe('Role Reducer', () => {
       expect(newState.error).toEqual('An error occurred');
     });
   });
+
+  describe('Update budget checer reducer', () => {
+
+    it('should return correct state for UPDATE_BUDGET_CHECKER action', () => {
+      const action = {
+        type: actionTypes.UPDATE_BUDGET_CHECKER,
+        newRoleData: newRole,
+      };
+      const newState = roleReducer(initialState, action)
+      expect(newState.isUpdating).toEqual(true);
+    });
+
+    it('should return correct state for UPDATE_BUDGET_CHECKER_SUCCESS', () => {
+      const action = {
+        type: actionTypes.UPDATE_BUDGET_CHECKER_SUCCESS,
+        userDetail: {
+          user: {
+            email: 'test.andela.com',
+            fullName: 'tester',
+            budgetCheckerDepartments: [{
+              name: 'Fellow-partner service'
+            }]
+          }
+        }
+      };
+      const newState = roleReducer(initialState, action);
+      expect(newState.userDetail).toEqual(action.userDetail);
+      expect(newState.isUpdating).toEqual(false);
+    });
+
+    it('should return correct state for UPDATE_BUDGET_CHECKER_FAILURE', () => {
+      const action = {
+        type: actionTypes.UPDATE_BUDGET_CHECKER_FAILURE,
+        error: 'An error occurred'
+      };
+      const newState = roleReducer(initialState, action);
+      expect(newState.isUpdating).toEqual(false);
+      expect(newState.updateError).toEqual('An error occurred');
+    });
+  });
 });

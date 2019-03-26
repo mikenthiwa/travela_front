@@ -10,10 +10,10 @@ class NewUserRoleForm extends PureComponent {
     super(props);
     const { role, userDetail, roleId } = this.props;
     let defaultValues = {
-      email: userDetail ? userDetail.email : '',
+      email: (userDetail || {}).email,
       roleName: role,
       department: '',
-      departments: [],
+      departments: (userDetail.budgetCheckerDepartments || []).map(dept => dept.name),
       roleId,
     };
     this.defaultState = {
@@ -37,7 +37,7 @@ class NewUserRoleForm extends PureComponent {
 
   handleSubmit = event => {
     event.preventDefault();
-    const { handleUpdateRole, updateUserCenter, userDetail, myTitle } = this.props;
+    const { handleUpdateRole, updateBudgetChecker, myTitle } = this.props;
     const { values } = this.state;
     const dataValue = {
       email: values.email,
@@ -45,17 +45,17 @@ class NewUserRoleForm extends PureComponent {
       departments: values.departments
     };
     if (this.validate()) {
-      let data = values;
       myTitle === 'Add User' ?
         handleUpdateRole(dataValue):
-        updateUserCenter(userDetail.id, data);
+        updateBudgetChecker({email: dataValue.email, departments: values.departments});
     }
   };
 
 
   addDepartment = () => {
-    const { values } = this.state; 
-    if(values.departments.includes(values.department.trim())) {
+    const { values } = this.state;
+    const testPattern = new RegExp(`^${values.department.trim()}$`, 'i');
+    if (values.departments.find(value => testPattern.test(value))) {
       return toast.error('You have added that department already');
     }
 
@@ -73,7 +73,7 @@ class NewUserRoleForm extends PureComponent {
     const { values } = this.state;
     const array = values.departments;
     array.splice(i, 1);
-    this.setState({ 
+    this.setState({
       values: {
         ...values,
         departments: array
@@ -83,7 +83,9 @@ class NewUserRoleForm extends PureComponent {
   }
 
   handleCancel = () => {
+    const { closeModal } = this.props;
     this.setState({ ...this.defaultState });
+    closeModal();
   };
 
   validate = field => {
@@ -98,7 +100,7 @@ class NewUserRoleForm extends PureComponent {
     } else {
       errors[field] = '';
     }
-  
+
     hasBlankFields = Object.keys(values).some(key => !values[key]);
     this.setState(prevState => {
       return { ...prevState, errors, hasBlankFields };
@@ -146,17 +148,18 @@ NewUserRoleForm.propTypes = {
   getRoleData: PropTypes.func.isRequired,
   centers: PropTypes.array.isRequired,
   myTitle: PropTypes.string.isRequired,
-  updateUserCenter: PropTypes.func,
+  updateBudgetChecker: PropTypes.func,
   role: PropTypes.string.isRequired,
   userDetail:  PropTypes.object,
   roleId: PropTypes.string.isRequired,
   getAllUsersEmail: PropTypes.func,
   allMails: PropTypes.array.isRequired,
+  closeModal: PropTypes.func.isRequired
 };
 
 NewUserRoleForm.defaultProps = {
   updatingRole: false,
-  updateUserCenter: ()=> {},
+  updateBudgetChecker: ()=> {},
   getAllUsersEmail: ()=> {},
   userDetail: {},
 };

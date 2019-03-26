@@ -1,6 +1,10 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import toast from 'toastr';
-import { FETCH_ROLE_USERS, DELETE_USER_ROLE } from '../constants/actionTypes';
+import {
+  FETCH_ROLE_USERS,
+  DELETE_USER_ROLE,
+  UPDATE_BUDGET_CHECKER,
+} from '../constants/actionTypes';
 import RoleAPI from '../../services/RoleAPI';
 import apiErrorHandler from '../../services/apiErrorHandler';
 import {
@@ -9,9 +13,13 @@ import {
   deleteUserRoleFailure,
   deleteUserRoleSuccess,
   hideDeleteRoleModal,
-  addRoleFailure,
-  addRoleSuccess
+  updateBudgetCheckerSuccess,
+  updateBudgetCheckerFailure
 } from '../actionCreator/roleActions';
+
+import {
+  closeModal
+} from '../actionCreator/modalActions';
 
 export function* watchFetchRoleUsers() {
   yield takeLatest(FETCH_ROLE_USERS, fetchRoleUsersSaga);
@@ -45,3 +53,20 @@ export function* deleteUserRoleSaga(action) {
   }
 }
 
+export function* watchUpdateBudgetCheckerAsync() {
+  yield takeLatest(UPDATE_BUDGET_CHECKER, updateBudgetCheckerSaga);
+}
+
+export function* updateBudgetCheckerSaga(action) {
+  try {
+    const { newRoleData } = action;
+    response = yield call(RoleAPI.updateBudgetChecker, newRoleData);
+    yield put(updateBudgetCheckerSuccess(response.data.user));
+    toast.success(response.data.message);
+    yield put(closeModal());
+  } catch (error) {
+    const errorMessage = apiErrorHandler(error);
+    yield put(updateBudgetCheckerFailure(errorMessage));
+    toast.error(errorMessage);
+  }
+}

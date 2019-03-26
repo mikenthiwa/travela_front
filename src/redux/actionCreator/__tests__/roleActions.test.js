@@ -15,7 +15,10 @@ import {
   HIDE_DELETE_ROLE_MODAL,
   ADD_ROLE,
   ADD_ROLE_SUCCESS,
-  ADD_ROLE_FAILURE
+  ADD_ROLE_FAILURE,
+  UPDATE_BUDGET_CHECKER,
+  UPDATE_BUDGET_CHECKER_SUCCESS,
+  UPDATE_BUDGET_CHECKER_FAILURE
 } from '../../constants/actionTypes';
 
 import {
@@ -35,7 +38,10 @@ import {
   hideDeleteRoleModal,
   addRole,
   addRoleFailure,
-  addRoleSuccess
+  addRoleSuccess,
+  updateBudgetChecker,
+  updateBudgetCheckerSuccess,
+  updateBudgetCheckerFailure
 } from '../roleActions';
 
 import { fetchRoleUsersResponse } from '../../__mocks__/reduxMocks';
@@ -216,6 +222,35 @@ describe('Role Actions', () => {
     };
 
     const createdAction = addRoleFailure('Server Error');
+    expect(createdAction).toEqual(expectedAction);
+  });
+  it('should return action type UPDATE_BUDGET_CHECKER', () => {
+    const expectedAction = {
+      type: UPDATE_BUDGET_CHECKER,
+      newRoleData: newRole
+    };
+
+    const createdAction = updateBudgetChecker(newRole);
+    expect(createdAction).toEqual(expectedAction);
+  });
+
+  it('should return action type UPDATE_BUDGET_CHECKER_SUCCESS', () => {
+    const expectedAction = {
+      type: UPDATE_BUDGET_CHECKER_SUCCESS,
+      userDetail: newRole
+    };
+
+    const createdAction = updateBudgetCheckerSuccess(newRole);
+    expect(createdAction).toEqual(expectedAction);
+  });
+
+  it('should return action type UPDATE_BUDGET_CHECKER_FAILURE', () => {
+    const expectedAction = {
+      type: UPDATE_BUDGET_CHECKER_FAILURE,
+      error: 'Server Error'
+    };
+
+    const createdAction = updateBudgetCheckerFailure('Server Error');
     expect(createdAction).toEqual(expectedAction);
   });
 });

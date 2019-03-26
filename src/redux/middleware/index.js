@@ -18,9 +18,13 @@ import {
   watchGetRoleDataSagaAsync,
   watchPutRoleDataSagaAsync,
   watchAddRoleSaga,
-  watchUpdateRoleSaga
+  watchUpdateRoleSaga,
 } from './roleDataSaga';
-import { watchFetchRoleUsers, watchDeleteUserRoleAsync } from './roleSaga';
+import {
+  watchFetchRoleUsers,
+  watchDeleteUserRoleAsync,
+  watchUpdateBudgetCheckerAsync
+} from './roleSaga';
 import {
   watchCreateComment,
   watchEditComment,
@@ -74,7 +78,7 @@ import {
   watchDownloadCalendarAnalytics
 } from './travelCalendarSaga';
 
-import { watchFetchCenters, watchUpdateUserCenterAsync } from './centersSaga';
+import { watchFetchCenters } from './centersSaga';
 import { watchFetchAnalytics, watchdownloadAnalytics } from './analyticsSaga';
 import {
   watchFetchReadiness,
@@ -169,7 +173,6 @@ function* rootSaga() {
     watchDeleteChecklist(),
     watchRestoreChecklist(),
     watchFetchCenters(),
-    watchUpdateUserCenterAsync(),
     watchFetchDeletedChecklistItems(),
     watchFetchAvailableRooms(),
     watchUpdateTripRoom(),
@@ -233,7 +236,8 @@ function* rootSaga() {
     watchUpdateTravelStipend(),
     watchValidateTrips(),
     watchUpdateBudgetStatus(),
-    watchFetchEditRequest()
+    watchFetchEditRequest(),
+    watchUpdateBudgetCheckerAsync()
   ]);
 }
 

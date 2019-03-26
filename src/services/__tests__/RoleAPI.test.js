@@ -2,7 +2,6 @@ import moxios from 'moxios';
 import RoleAPI from '../RoleAPI';
 import { roleResponses } from '../__mocks__/serviceMocks';
 import expectedResponse from '../__mocks__/mocks';
-import { decorators } from 'handlebars';
 
 const baseUrl = 'http://127.0.0.1:5000/api/v1';
 const id = 'JFENDVNDK';
@@ -25,6 +24,16 @@ const updateRoleResponse = {
   message: 'User role updated successfully.',
   result: updateRole
 };
+
+const updateBudgetCheckerResponse = {
+  user: {
+    email: 'test.user@andela.com',
+    fullName: 'test user'
+  },
+  budgetCheckerDepartments: [{
+    name: 'Fellows'
+  }]
+}
 
 describe('RoleAPI', () => {
   beforeEach(() => {
@@ -153,6 +162,26 @@ describe('RoleAPI', () => {
       expect(request.url).toEqual(`${baseUrl}/user/role/1`);
       expect(request.config.method).toEqual('patch');
       expect(response.data).toEqual(updateRoleResponse);
+    });
+  });
+
+  describe('Update budget checker', () => {
+    beforeEach(() => {
+      moxios.install();
+    });
+    afterEach(() => {
+      moxios.uninstall();
+    });
+
+    it('should send a PATCH request to update budget checker', async() => {
+      moxios.stubRequest(`${baseUrl}/user/roles/budgetChecker`, {
+        status: 200,
+        response: { ...updateBudgetCheckerResponse }
+      });
+      const response = await RoleAPI.updateBudgetChecker();
+      const request = moxios.requests.mostRecent();
+      expect(request.config.method).toEqual('patch');
+      expect(response.data).toEqual(updateBudgetCheckerResponse);
     });
   });
 });

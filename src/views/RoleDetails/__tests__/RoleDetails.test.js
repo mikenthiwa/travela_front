@@ -35,7 +35,7 @@ const props = {
   },
   closeModal: jest.fn(),
   fetchRoleUsers: sinon.spy(),
-  updateUserCenter: jest.fn(),
+  updateBudgetChecker: jest.fn(),
   getRoleData: jest.fn(),
   isLoading: false,
   getCurrentUserRole: ['Travel Administrator', 'Requester'],
@@ -101,7 +101,7 @@ const mockStore = configureStore();
 const store = mockStore(initialState);
 
 
-describe('<ROleDetails />', () => {
+describe('<RoleDetails />', () => {
   beforeEach(() => {
     wrapper = shallow(<RoleDetails {...props} />);
   });
@@ -128,16 +128,16 @@ describe('<ROleDetails />', () => {
   });
 
 
-  it('should call handleEditCenter  ', () => {
+  it('should call handleEditRole', () => {
     const newProps = { ...props, deleteModalState: 'visible' };
     const shallowWrapper = shallow(<RoleDetails {...newProps} />);
     shallowWrapper.setState({
-      headTitle: 'Change Center',
+      headTitle: 'Edit Budget Checker Role',
       userDetail: user ,
     });
-    sinon.spy(shallowWrapper.instance(), 'handleEditCenter');
-    shallowWrapper.instance().handleEditCenter(user);
-    expect(shallowWrapper.instance().handleEditCenter.calledOnce).toEqual(true);
+    sinon.spy(shallowWrapper.instance(), 'handleEditRole');
+    shallowWrapper.instance().handleEditRole(user);
+    expect(shallowWrapper.instance().handleEditRole.calledOnce).toEqual(true);
   });
 
   it('should call `handleAddUser`', (done) => {
@@ -204,7 +204,7 @@ describe('<ROleDetails />', () => {
     expect(onPageChange).toHaveBeenCalledWith(2);
     expect(props.history.push)
       .toHaveBeenCalledWith('/settings/roles/10948?page=2');
-  }); 
+  });
 
   it('should show loading icon when the `updatingRole` is true', () => {
     const newProps = {
@@ -218,11 +218,11 @@ describe('<ROleDetails />', () => {
     expect(wrapper.find('i.loading-icon').length).toBe(1);
   });
 
-  it('should show loading icon when the `isUpatingCenter` is true', () => {
+  it('should show loading icon when the `isUpdating` is true', () => {
     const newProps = {
       ...props,
       shouldOpen: true,
-      isUpatingCenter: true
+      isUpdating: true
     };
     const wrapper = mount(
       <RoleDetails {...newProps} />
@@ -242,11 +242,11 @@ describe('<ROleDetails />', () => {
     expect(wrapper.find('i.loading-icon').length).toBe(0);
   });
 
-  it('should not show loading icon when the `isUpatingCenter` is false', () => {
+  it('should not show loading icon when the `isUpdating` is false', () => {
     const newProps = {
       ...props,
       shouldOpen: true,
-      isUpatingCenter: false
+      isUpdating: false
     };
     const wrapper = mount(
       <RoleDetails {...newProps} />

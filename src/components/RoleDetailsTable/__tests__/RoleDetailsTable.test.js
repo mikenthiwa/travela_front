@@ -13,7 +13,6 @@ const props = {
     ]
   }],
   roleName: 'Travel team member',
-  handleEditCenter: jest.fn(),
   roleUser: {
     id: 1,
     fullName: 'tomato',
@@ -43,8 +42,6 @@ describe('<RoleDetailsTable />', () => {
   it('renders all the columns for a user', () => {
     expect(wrapper.find('.role-user__name')
       .text()).toEqual('A user');
-    expect(wrapper.find('.pl-sm-120')
-      .text()).toEqual('Nairobi, Kenya');
   });
 
   it('renders delete confirmation modal when delete button is clicked', () => {
@@ -77,8 +74,13 @@ describe('<RoleDetailsTable />', () => {
       .text()).toEqual('Network error');
   });
 
-  it('should set `visibility` prop to `visible` when add new role button is clicked', () => {
-    const {handleEditCenter } = props;
-    wrapper.find('#editButton').simulate('click');
+  it('does not render edit button for a role that is not budget checker', () => {
+    wrapper = shallow (<RoleDetailsTable {...props} />);
+    expect(wrapper.find('#editButton').length).toEqual(0);
+  });
+
+  it('renders edit button for budget checker role', () => {
+    wrapper = shallow (<RoleDetailsTable {...{...props, roleName: 'Budget Checker'}} />);
+    expect(wrapper.find('#editButton').length).toEqual(1);
   });
 });

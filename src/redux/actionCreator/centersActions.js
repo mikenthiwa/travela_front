@@ -2,9 +2,6 @@ import {
   FETCH_CENTERS,
   FETCH_CENTERS_SUCCESS,
   FETCH_CENTERS_FAILURE,
-  UPDATE_USER_CENTER,
-  UPDATE_USER_CENTER_SUCCESS,
-  UPDATE_USER_CENTER_FAILURE
 } from '../constants/actionTypes';
 
 export const fetchCenters = () => ({
@@ -21,18 +18,3 @@ export const fetchCentersFailure = error => ({
   error
 });
 
-export const updateUserCenter = (userId, newCenter) => ({
-  type: UPDATE_USER_CENTER,
-  userId,
-  newCenter
-});
-
-export const updateUserSuccess = (userCenter) => ({
-  type: UPDATE_USER_CENTER_SUCCESS,
-  userCenter
-});
-
-export const updateUserFailure = error => ({
-  type: UPDATE_USER_CENTER_FAILURE,
-  error
-});
