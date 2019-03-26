@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import DataRow from '../DataRow';
 import './index.scss';
-// { renderRequests().map(item => <DataRow key={item.id} item={item} />) }
 
-const HomeRequests = ({ requests, isLoading }) => {
+const HomeRequests = ({ requests, isLoading, history }) => {
   const renderRequests = () => {
     let data;
-    if(requests) {
+    if (requests) {
       data = requests.slice(0, 4).map((req) => {
         const [trip] = req.trips;
         const start = moment(trip.departureDate);
@@ -47,7 +46,7 @@ const HomeRequests = ({ requests, isLoading }) => {
                   <div>Status</div>
                 </div>
                 <div className="tbody">
-                  { renderRequests().map(item => <DataRow key={item.id} item={item} />) }
+                  {renderRequests().map(item => <DataRow key={item.id} item={item} history={history} />)}
                 </div>
               </div>
             ) : (
@@ -64,6 +63,7 @@ const HomeRequests = ({ requests, isLoading }) => {
 HomeRequests.propTypes = {
   requests: PropTypes.array,
   isLoading: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 HomeRequests.defaultProps = {

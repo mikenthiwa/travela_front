@@ -82,23 +82,24 @@ export class Home extends Component {
   }
 
   render() {
-    const { requests, isFetching, teammates } = this.props;
+    const { requests, isFetching, teammates, history } = this.props;
     return (
       <div>
         <h1 className="home-title">HOME</h1>
-        {isFetching  ? (
+        {isFetching ? (
           <div className="">
             {this.renderPlaceholders()}
           </div>
-        ): (
-          <div className="home">
-            <GetStarted />
-            <div className="overview">
-              <Teammates teammates={teammates} />
-              <HomeRequests isLoading={isFetching} requests={requests} />
+        ) :
+          (
+            <div className="home">
+              <GetStarted />
+              <div className="overview">
+                <Teammates teammates={teammates} />
+                <HomeRequests isLoading={isFetching} requests={requests} history={history} />
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     );
   }
@@ -145,7 +146,8 @@ Home.propTypes = {
   location: PropTypes.object,
   department: PropTypes.string,
   requests: PropTypes.array,
-  getOccupation: PropTypes.func.isRequired
+  getOccupation: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 Home.defaultProps = {

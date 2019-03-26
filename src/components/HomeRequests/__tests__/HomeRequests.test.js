@@ -13,11 +13,17 @@ const props = {
     }]
   }],
   isLoading: false,
+  history: {
+    push: jest.fn()
+  }
 };
 
 const props2 = {
   requests: [],
   isLoading: false,
+  history: {
+    push: jest.fn()
+  }
 };
 
 describe('<HomeRequests />', () => {

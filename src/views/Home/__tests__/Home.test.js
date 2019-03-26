@@ -23,6 +23,9 @@ let wrapper, props, fetchTeammates;
 
 beforeEach(() => {
   props = {
+    history: {
+      push: jest.fn()
+    },
     teammates: {
       payload: [
         {
@@ -45,7 +48,7 @@ beforeEach(() => {
       }
     },
     creatingRequest: false,
-    availableRooms:{
+    availableRooms: {
       beds: [],
       bedsError: [],
       isLoading: false,
@@ -124,7 +127,7 @@ describe('<Home />', () => {
   it('renders the skeleton-loader to the  home page when isFetching is true', () => {
     const wrapper = mount(
       <MemoryRouter>
-        <Home {...props} isFetching  />
+        <Home {...props} isFetching />
       </MemoryRouter>
     );
     expect(wrapper.find('HomePagePlaceholder').length).toBe(1);
@@ -138,7 +141,7 @@ describe('<Home />', () => {
   it('checks if the skeleton-loader is not rendered when isFetching is false', () => {
     const wrapper = mount(
       <MemoryRouter>
-        <Home {...props} isFetching={false}  />
+        <Home {...props} isFetching={false} />
       </MemoryRouter>
     );
     expect(wrapper.find('GetStarted').length).toBe(1);
@@ -149,16 +152,16 @@ describe('<Home />', () => {
     expect(wrapper.find('HomePagePlaceholder').length).toBe(0);
   });
 
-  it('fetch available rooms',()=>{
+  it('fetch available rooms', () => {
     wrapper = shallow(
       <MemoryRouter>
         <Home {...props} />
       </MemoryRouter>
     ).dive().dive();
-    wrapper.setState({availableRooms:{}});
+    wrapper.setState({ availableRooms: {} });
     wrapper.setProps({
       ...props,
-      availableRooms:{}
+      availableRooms: {}
     });
     expect(wrapper.instance().props.fetchAvailableRooms).toBeCalled;
     expect(wrapper.instance().state.availableRooms).toEqual({});
