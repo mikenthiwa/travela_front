@@ -77,7 +77,7 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
                     placeholder="MM/DD/YYYY"
                     readOnly={false}
                     type="text"
-                    value="03/21/2019"
+                    value="03/25/2019"
                   />
                 </div>
               </div>
@@ -160,7 +160,7 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
                     placeholder="MM/DD/YYYY"
                     readOnly={false}
                     type="text"
-                    value="03/21/2019"
+                    value="03/25/2019"
                   />
                 </div>
               </div>
@@ -202,7 +202,17 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
             className="document-input__input-container__prompts__text"
           >
             <p>
-              Drag file here or choose from computer
+              <span
+                className="upload-text"
+              >
+                Drag file here to upload or
+                 
+                <span
+                  className="upload-text--underline"
+                >
+                  choose from computer
+                </span>
+              </span>
             </p>
             <p
               className="maximum-file-size"
@@ -228,6 +238,7 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
         >
           <button
             className="bg-btn bg-btn--inactive"
+            disabled={false}
             id="cancel"
             onClick={[Function]}
             type="button"

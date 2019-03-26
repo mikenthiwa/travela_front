@@ -51,20 +51,25 @@ export class RoleDetailsTable extends PureComponent {
           className="mdl-data-table__cell--non-numeric role-user__name table__data freeze-role-table">
           {roleUser.fullName}
         </td>
+        <td className="mdl-data-table__cell--non-numeric table__data pl-sm-120">
+          {roleUser.location}
+        </td>
         <td
           className="mdl-data-table__cell--non-numeric table__requests__status table__data delete"
           style={testColor}>
-          {roleName == 'Budget Checker' && (
-            <Fragment>
-              <span
-                onClick={() => handleEditRole(roleUser)} id="editButton" role="presentation"
-                onKeyDown={this.key}>
-                Edit
-                &ensp; &ensp; &ensp; &ensp; &ensp;
-              </span>
-            </Fragment>
-          )
+          {
+            roleName === 'Budget Checker' ?
+              ( 
+                <span
+                  onClick={() => handleEditRole(roleUser)} id="editButton" role="presentation"
+                  onKeyDown={this.key}>
+            Edit
+            &ensp;  &ensp;  &ensp; &ensp;
+                </span>
+                
+              ): null
           }
+          &ensp;
           <span
             onClick={() => this.showDeleteModal(roleUser.id)}
             id="deleteButton"
@@ -97,6 +102,9 @@ export class RoleDetailsTable extends PureComponent {
       <tr>
         <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze freeze-head ">
           Name
+        </th>
+        <th className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left">
+          Center
         </th>
         <th className="mdl-data-table__cell--non-numeric table__head table__head--last">
           Actions

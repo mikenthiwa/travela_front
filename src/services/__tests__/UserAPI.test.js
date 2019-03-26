@@ -105,5 +105,20 @@ describe('UserAPI', () => {
     });
   });
 
-  
+  it('should send a GET request to get all departments', async () => {
+    const data = {
+      message: 'Department List',
+      success: true,
+      result: [{
+        'id': 1,
+        'name': 'success',
+        'createdAt': '2019-03-22T12:12:57.134Z',
+        'updatedAt': '2019-03-22T12:12:57.134Z'
+      },]
+    };
+    moxios.stubRequest(`${baseUrl}/departments`, {
+      status: 200,
+      response: data,
+    });
+  });
 });

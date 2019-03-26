@@ -408,7 +408,17 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
             className="document-input__input-container__prompts__text"
           >
             <p>
-              Drag file here or choose from computer
+              <span
+                className="upload-text"
+              >
+                Drag file here to upload or
+                 
+                <span
+                  className="upload-text--underline"
+                >
+                  choose from computer
+                </span>
+              </span>
             </p>
             <p
               className="maximum-file-size"
@@ -434,6 +444,7 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
         >
           <button
             className="bg-btn bg-btn--inactive"
+            disabled={false}
             id="cancel"
             onClick={[Function]}
             type="button"

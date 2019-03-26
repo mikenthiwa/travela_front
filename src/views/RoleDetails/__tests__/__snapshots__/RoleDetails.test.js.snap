@@ -31,8 +31,10 @@ exports[`<ROleDetails /> renders correctly 1`] = `
         ]
       }
       closeModal={[Function]}
+      departments={Array []}
       errors=""
       fetchCenters={[Function]}
+      getAllDepartment={[Function]}
       getAllUsersEmail={[Function]}
       getRoleData={[Function]}
       handleUpdateRole={[Function]}

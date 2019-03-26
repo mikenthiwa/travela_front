@@ -25,8 +25,9 @@ class NewUserRoleForm extends PureComponent {
   }
 
   componentDidMount() {
-    const { getAllUsersEmail } = this.props;
+    const { getAllUsersEmail, getAllDepartment } = this.props;
     getAllUsersEmail();
+    getAllDepartment();
   }
 
   componentWillUnmount() {
@@ -90,7 +91,7 @@ class NewUserRoleForm extends PureComponent {
 
   validate = field => {
     let { values, errors } = this.state;
-    const { role } =  this.props;
+    const { role } = this.props;
     [errors, values] = [{ ...errors }, { ...values }];
     let hasBlankFields = false;
     delete values.department;
@@ -106,9 +107,9 @@ class NewUserRoleForm extends PureComponent {
       return { ...prevState, errors, hasBlankFields };
     });
 
-    if(role === 'Budget Checker'  && values.departments.length < 1){
+    if (role === 'Budget Checker' && values.departments.length < 1) {
       this.setState({
-        hasBlankFields:true
+        hasBlankFields: true
       });
     }
     return !hasBlankFields;
@@ -116,7 +117,7 @@ class NewUserRoleForm extends PureComponent {
 
   render() {
     const { values, errors, hasBlankFields } = this.state;
-    const { updatingRole, role, centers, myTitle, allMails } = this.props;
+    const { updatingRole, role, centers, myTitle, allMails, departments } = this.props;
     return (
       <FormContext targetForm={this} values={values} errors={errors} validatorName="validate">
         <form onSubmit={this.handleSubmit} className="new-request">
@@ -129,6 +130,7 @@ class NewUserRoleForm extends PureComponent {
             removeDepartment={this.removeDepartment}
             myTitle={myTitle}
             allMails={allMails}
+            departments={departments}
           />
           <SubmitArea
             onCancel={this.handleCancel}
@@ -150,18 +152,22 @@ NewUserRoleForm.propTypes = {
   myTitle: PropTypes.string.isRequired,
   updateBudgetChecker: PropTypes.func,
   role: PropTypes.string.isRequired,
-  userDetail:  PropTypes.object,
+  userDetail: PropTypes.object,
   roleId: PropTypes.string.isRequired,
   getAllUsersEmail: PropTypes.func,
   allMails: PropTypes.array.isRequired,
-  closeModal: PropTypes.func.isRequired
+  getAllDepartment: PropTypes.func,
+  departments: PropTypes.array,
+  closeModal: PropTypes.func.isRequired,
 };
 
 NewUserRoleForm.defaultProps = {
   updatingRole: false,
+  getAllUsersEmail: () => { },
   updateBudgetChecker: ()=> {},
-  getAllUsersEmail: ()=> {},
   userDetail: {},
+  getAllDepartment: () => { },
+  departments: []
 };
 
 export default NewUserRoleForm;

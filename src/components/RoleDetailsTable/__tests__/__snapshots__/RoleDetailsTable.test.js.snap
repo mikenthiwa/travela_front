@@ -41,9 +41,7 @@ exports[`<RoleDetailsTable /> renders correctly 1`] = `
           </td>
           <td
             className="mdl-data-table__cell--non-numeric table__data pl-sm-120"
-          >
-            Nairobi, Kenya
-          </td>
+          />
           <td
             className="mdl-data-table__cell--non-numeric table__requests__status table__data delete"
             style={
@@ -52,14 +50,7 @@ exports[`<RoleDetailsTable /> renders correctly 1`] = `
               }
             }
           >
-            <span
-              id="editButton"
-              onClick={[Function]}
-              role="presentation"
-            >
-              Edit
-            </span>
-                       
+             
             <span
               id="deleteButton"
               onClick={[Function]}

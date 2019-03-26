@@ -26,6 +26,21 @@ const user = {
   userId: '-121323'
 };
 
+const depart = [
+  {
+    'id': 8,
+    'name': 'Success',
+    'createdAt': '2019-03-25T15:50:11.090Z',
+    'updatedAt': '2019-03-25T15:50:11.090Z'
+  },
+  {
+    'id': 9,
+    'name': 'Fellows-partner service',
+    'createdAt': '2019-03-25T15:50:11.133Z',
+    'updatedAt': '2019-03-25T15:50:11.133Z'
+  }
+];
+
 describe('User Reducer', () => {
   const initialState = {
     postUserData: [],
@@ -35,10 +50,11 @@ describe('User Reducer', () => {
     getCurrentUserRole: [],
     isLoaded: false,
     getUsersEmail: [],
+    departments: []
   };
 
   it('should return proper initial state', done => {
-    expect(userReducer(undefined, {})).toEqual({...initialState, isUpdating: false});
+    expect(userReducer(undefined, {})).toEqual({ ...initialState, isUpdating: false });
     done();
   });
 
@@ -139,7 +155,7 @@ describe('User Reducer', () => {
     const action = {
       type: actionTypes.UPDATE_USER_PROFILE
     };
-    const newState = userReducer( { ...initialState, isUpdating: false }, action);
+    const newState = userReducer({ ...initialState, isUpdating: false }, action);
     expect(newState.isUpdating).toEqual(true);
     done();
   });
@@ -149,8 +165,39 @@ describe('User Reducer', () => {
       type: actionTypes.UPDATE_PROFILE_SUCCESS,
       response: res,
     };
-    const newState = userReducer({...initialState, isUpdating: false}, action);
+    const newState = userReducer({ ...initialState, isUpdating: false }, action);
     expect(newState.isUpdating).toEqual(false);
+    done();
+  });
+
+  it('dispatches action GET_ALL_DEPARTMENT', done => {
+    const action = {
+      type: actionTypes.GET_ALL_DEPARTMENT
+    };
+    const newState = userReducer(initialState, action);
+    expect(newState).toEqual(initialState);
+    done();
+  });
+
+  it('dispatches action GET_ALL_DEPARTMENT_SUCCESS', done => {
+    const action = {
+      type: actionTypes.GET_ALL_DEPARTMENT_SUCCESS,
+      response: depart
+    };
+    const newState = userReducer(initialState, action);
+    expect(newState.departments).toEqual(depart);
+    done();
+  });
+
+  it('dispatches action GET_ALL_DEPARTMENT_FAILURE', done => {
+    const action = {
+      type: actionTypes.GET_ALL_DEPARTMENT_FAILURE,
+      error: 'Possible network error, please reload the page'
+    };
+    const newState = userReducer(initialState, action);
+    expect(newState.errors).toEqual(
+      'Possible network error, please reload the page'
+    );
     done();
   });
 });

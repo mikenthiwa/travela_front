@@ -165,6 +165,7 @@ exports[`<Requests> renders as expected 1`] = `
       }
       closeModal={[Function]}
       creatingRequest={false}
+      editing={false}
       errors={Array []}
       fetchAllTravelStipends={[Function]}
       fetchAvailableRooms={[Function]}
@@ -174,6 +175,7 @@ exports[`<Requests> renders as expected 1`] = `
       handleCreateRequest={[Function]}
       handleEditRequest={[Function]}
       history={Object {}}
+      isEditing={false}
       listTravelReasons={Object {}}
       loading={false}
       managers={Array []}
@@ -363,6 +365,7 @@ exports[`<Requests> renders as expected 1`] = `
           "itemsToCheck": Array [
             "NumC5-pK7G-9",
             "NumC5-pK7G-8",
+            "H5X8CVA0IR-9",
             "NumC5-pK7G-3",
           ],
           "percentageCompleted": 0,
@@ -423,10 +426,27 @@ exports[`<Requests> renders as expected 1`] = `
                   "deleteReason": null,
                   "destinationName": "Lagos, Nigeria",
                   "id": "7",
-                  "name": "travel stipend",
+                  "name": "Travel stipend",
                   "requiresFiles": true,
                   "resources": Array [],
-                  "submissions": Array [],
+                  "submissions": Array [
+                    Object {
+                      "checklistItemId": 9,
+                      "checklistSubmissions": Object {
+                        "id": 9,
+                      },
+                      "createdAt": "2019-03-21T05:03:51.398Z",
+                      "deletedAt": null,
+                      "documentId": null,
+                      "id": "fopl4zG0p",
+                      "tripId": "H5X8CVA0IR",
+                      "updatedAt": "2019-03-21T05:03:51.398Z",
+                      "value": Object {
+                        "fileName": "test.png",
+                        "url": "image.com",
+                      },
+                    },
+                  ],
                 },
                 Object {
                   "deleteReason": null,
@@ -458,6 +478,15 @@ exports[`<Requests> renders as expected 1`] = `
                       },
                     },
                   ],
+                },
+                Object {
+                  "deleteReason": null,
+                  "destinationName": "Lagos, Nigeria",
+                  "id": "10",
+                  "name": "Travel stipend",
+                  "requiresFiles": true,
+                  "resources": Array [],
+                  "submissions": Array [],
                 },
               ],
               "destinationName": "Lagos, Nigeria",

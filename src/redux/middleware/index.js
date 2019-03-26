@@ -12,7 +12,8 @@ import {
 import {
   watchPostUserDataSagaAsync,
   watchGetUserDataSagaAsync,
-  watchFetchUsersEmail
+  watchFetchUsersEmail,
+  watchGetDepartmentDataSagaAsync
 } from './userDataSaga';
 import {
   watchGetRoleDataSagaAsync,
@@ -225,6 +226,7 @@ function* rootSaga() {
     watchEditReminder(),
     watchGetSingleReminder(),
     watchFetchUsersEmail(),
+    watchGetDepartmentDataSagaAsync(),
     watchFetchAllTravelReasons(),
     watchCreateTravelReason(),
     watchgetAllTravelStipends(),

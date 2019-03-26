@@ -94,22 +94,22 @@ exports[`TravelChecklist Component should render the component 1`] = `
           </p>
         </div>
       </div>
-    </div>
-  </div>
-  <div
-    className="travelCheckList__row"
-  >
-    <div
-      className="travelSubmission--submit-area__button"
-    >
-      <button
-        className=""
-        id="save-button"
-        onClick={[Function]}
-        type="button"
+      <div
+        className="travelCheckList__row--button-area"
       >
-        Save
-      </button>
+        <div
+          className="travelSubmission--submit-area__button"
+        >
+          <button
+            className=""
+            id="save-button"
+            onClick={[Function]}
+            type="button"
+          >
+            Save
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -18,12 +18,19 @@ exports[`<TravelChecklistsCard /> renders without crashing 1`] = `
     <div
       className="pending-approvals-block"
     >
+      <div
+        className="travel-checklist-text"
+      >
+        <p>
+          Kampala, Uganda
+        </p>
+      </div>
       <ul
         className="approval-list-items"
       >
         <li
           className="approval-item"
-          key="1"
+          key="kamp Green card"
         >
           <div
             className="oval"
@@ -31,12 +38,12 @@ exports[`<TravelChecklistsCard /> renders without crashing 1`] = `
           <div
             className="checklist-name"
           >
-            passport
+            kamp Green card
           </div>
         </li>
         <li
           className="approval-item"
-          key="2"
+          key="kam Visa"
         >
           <div
             className="oval"
@@ -44,12 +51,12 @@ exports[`<TravelChecklistsCard /> renders without crashing 1`] = `
           <div
             className="checklist-name"
           >
-            ticketDetails
+            kam Visa
           </div>
         </li>
         <li
           className="approval-item"
-          key="3"
+          key="kam passport"
         >
           <div
             className="oval"
@@ -57,7 +64,109 @@ exports[`<TravelChecklistsCard /> renders without crashing 1`] = `
           <div
             className="checklist-name"
           >
-            visa
+            kam passport
+          </div>
+        </li>
+        <li
+          className="approval-item"
+          key="kam Yellow Card"
+        >
+          <div
+            className="oval"
+          />
+          <div
+            className="checklist-name"
+          >
+            kam Yellow Card
+          </div>
+        </li>
+        <li
+          className="approval-item"
+          key="Travel Ticket Details"
+        >
+          <div
+            className="oval"
+          />
+          <div
+            className="checklist-name"
+          >
+            Travel Ticket Details
+          </div>
+        </li>
+      </ul>
+      <div
+        className="travel-checklist-text"
+      >
+        <p>
+          Nairobi, Kenya
+        </p>
+      </div>
+      <ul
+        className="approval-list-items"
+      >
+        <li
+          className="approval-item"
+          key="nair visa"
+        >
+          <div
+            className="oval"
+          />
+          <div
+            className="checklist-name"
+          >
+            nair visa
+          </div>
+        </li>
+        <li
+          className="approval-item"
+          key="nair passport"
+        >
+          <div
+            className="oval"
+          />
+          <div
+            className="checklist-name"
+          >
+            nair passport
+          </div>
+        </li>
+        <li
+          className="approval-item"
+          key="nair yellow card"
+        >
+          <div
+            className="oval"
+          />
+          <div
+            className="checklist-name"
+          >
+            nair yellow card
+          </div>
+        </li>
+        <li
+          className="approval-item"
+          key="nair green card"
+        >
+          <div
+            className="oval"
+          />
+          <div
+            className="checklist-name"
+          >
+            nair green card
+          </div>
+        </li>
+        <li
+          className="approval-item"
+          key="Travel Ticket Details"
+        >
+          <div
+            className="oval"
+          />
+          <div
+            className="checklist-name"
+          >
+            Travel Ticket Details
           </div>
         </li>
       </ul>

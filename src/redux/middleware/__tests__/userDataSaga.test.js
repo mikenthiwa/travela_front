@@ -8,6 +8,7 @@ import {
   watchPostUserDataSagaAsync,
   watchGetUserDataSagaAsync,
   watchFetchUsersEmail,
+  fetchDepartmentDataSaga,
 } from '../userDataSaga';
 import user from '../../__mocks__/user';
 
@@ -28,6 +29,14 @@ const thirdResponse = {
   data: {
     result: [
       {fullName:'', email: 'travela@andela.com'}]
+    
+  }
+};
+
+const departmentResponse = {
+  data: {
+    result: [
+      { id: 1, name:'Fellow'} ]
     
   }
 };
@@ -132,8 +141,34 @@ describe('User Saga', () => {
         })
         .silentRun();
     });
-
-    
   });
 
+  describe('Fetch departments ', () => {
+    it('successfully runs saga to fetch departments', () => {
+      return expectSaga(fetchDepartmentDataSaga)
+        .provide([[call(UserAPI.getAllDepartment), departmentResponse]])
+        .put({
+          type: 'GET_ALL_DEPARTMENT_SUCCESS',
+          response: [ { id: 'Fellow', text: 'Fellow' } ]
+        })
+        .dispatch({
+          type: 'GET_ALL_DEPARTMENT',
+        })
+        .silentRun();
+    });
+  
+    
+    it('fails to get user emails', () => {
+      return expectSaga(fetchDepartmentDataSaga, UserAPI)
+        .provide([[call(UserAPI.getAllDepartment), throwError(error)]])
+        .put({
+          type: 'GET_ALL_DEPARTMENT_FAILURE',
+          error
+        })
+        .dispatch({
+          type: 'GET_ALL_DEPARTMENT',
+        })
+        .silentRun();
+    });
+  });
 });

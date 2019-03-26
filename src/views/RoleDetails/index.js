@@ -1,13 +1,13 @@
-import React, {Component, Fragment} from 'react';
-import {connect} from 'react-redux';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
-import {PropTypes} from 'prop-types';
+import { PropTypes } from 'prop-types';
 import WithLoadingRoleDetailsTable from '../../components/RoleDetailsTable';
 import PageHeader from '../../components/PageHeader';
 import Modal from '../../components/modal/Modal';
 import Pagination from '../../components/Pagination/Pagination';
-import {NewUserRoleForm} from '../../components/Forms';
-import {closeModal, openModal} from '../../redux/actionCreator/modalActions';
+import { NewUserRoleForm } from '../../components/Forms';
+import { closeModal, openModal } from '../../redux/actionCreator/modalActions';
 import {
   deleteUserRole,
   fetchRoleUsers,
@@ -17,7 +17,7 @@ import {
   updateBudgetChecker,
 } from '../../redux/actionCreator/roleActions';
 import { fetchCenters } from '../../redux/actionCreator/centersActions';
-import {getAllUsersEmail} from '../../redux/actionCreator/userActions';
+import { getAllUsersEmail, getAllDepartment } from '../../redux/actionCreator/userActions';
 import './RoleDetails.scss';
 import NotFound from '../ErrorPages';
 import Utils from '../../helper/Utils';
@@ -74,7 +74,7 @@ export class RoleDetails extends Component {
     return (
       <div className="rp-role__header">
         <div className="role-panel-header">
-          { roleName && (
+          {roleName && (
             <div className="role-details__header">
               <PageHeader
                 addLink={isSuperAdmin}
@@ -85,7 +85,7 @@ export class RoleDetails extends Component {
                 openModal={this.handleAddUser}
               />
             </div>
-          ) }
+          )}
         </div>
       </div>
     );
@@ -120,9 +120,9 @@ export class RoleDetails extends Component {
     const {
       error, closeModal, shouldOpen, modalType, isUpdating,
       roleName, fetchRoleUsers, fetchCenters, centers, getUsersEmail: allMails,
-      putRoleData, updateBudgetChecker, match, getAllUsersEmail, updatingRole } = this.props;
+      putRoleData, updateBudgetChecker, match, getAllUsersEmail, updatingRole, departments, getAllDepartment } = this.props;
     const { headTitle, userDetail } = this.state;
-    const { params: {roleId } } = match;
+    const { params: { roleId } } = match;
     const page = Utils.getCurrentPage(this);
 
     return (
@@ -150,6 +150,8 @@ export class RoleDetails extends Component {
           myTitle={headTitle}
           getAllUsersEmail={getAllUsersEmail}
           allMails={allMails}
+          departments={departments}
+          getAllDepartment={getAllDepartment}
         />
       </Modal>
     );
@@ -166,13 +168,13 @@ export class RoleDetails extends Component {
         {this.renderUserRolePanelHeader()}
         {this.renderRoles()}
         {!isEmpty(roleUsers)
-        && (
-          <Pagination
-            currentPage={currentPage}
-            pageCount={pageCount}
-            onPageChange={(page) => this.handlePageChange(page)}
-          />
-        )
+          && (
+            <Pagination
+              currentPage={currentPage}
+              pageCount={pageCount}
+              onPageChange={(page) => this.handlePageChange(page)}
+            />
+          )
         }
       </Fragment>
     );
@@ -186,7 +188,7 @@ export class RoleDetails extends Component {
     } = this.props;
     return (
       <Fragment>
-        { !isFetching && !roleName && error &&<NotFound redirectLink="/settings/roles" /> }
+        {!isFetching && !roleName && error && <NotFound redirectLink="/settings/roles" />}
         {this.renderRoleForm()}
         {this.renderUserRolePage()}
       </Fragment>
@@ -233,6 +235,8 @@ RoleDetails.propTypes = {
   getAllUsersEmail: PropTypes.func.isRequired,
   getUsersEmail: PropTypes.array,
   meta: PropTypes.object,
+  departments: PropTypes.array,
+  getAllDepartment: PropTypes.func,
   isUpdating: PropTypes.bool,
 };
 
@@ -246,7 +250,10 @@ RoleDetails.defaultProps = {
   isUpdating: false,
   centers: [],
   getUsersEmail: [],
-  meta: { currentPage: 1, pageCount: 0 }
+  meta: { currentPage: 1, pageCount: 0 },
+  departments: [],
+  getAllDepartment: () => { }
+
 };
 
 const actionCreators = {
@@ -259,6 +266,7 @@ const actionCreators = {
   hideDeleteRoleModal,
   showDeleteRoleModal,
   getAllUsersEmail,
+  getAllDepartment,
   updateBudgetChecker,
 };
 

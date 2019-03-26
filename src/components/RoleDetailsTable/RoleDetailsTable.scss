@@ -4,9 +4,9 @@ $border-color: #e4e4e4;
 .role-user__name {
   color: $primary-color;
   border-left: 1px solid $border-color;
-  width: 80%;
+  width: 60%;
     @media (max-width: 839px) {
-    width: 60%;
+    width: 40%;
   }
 }
 

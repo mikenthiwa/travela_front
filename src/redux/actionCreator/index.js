@@ -82,7 +82,6 @@ export {
   fetchAttachments,
   fetchAttachmentsSuccess,
   fetchAttachmentsFailure,
-  downloadAttachments,
   downloadAttachmentsSuccess,
   downloadAttachmentsFailure,
   //Get template details

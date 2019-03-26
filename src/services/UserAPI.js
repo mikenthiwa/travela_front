@@ -14,8 +14,7 @@ class UserAPI {
     return axios.get(`${baseUrl}/user/${id}`);
   }
 
-  static getAllUsersEmail() {
-    
+  static getAllUsersEmail() { 
     return axios.get(`${baseUrl}/user?field=email`);
   }
   
@@ -25,6 +24,10 @@ class UserAPI {
     return axios.get(
       `${usersStagingUrl}${email}`,
       { headers: { Authorization: `Bearer ${token}` } });
+  }
+
+  static getAllDepartment() {
+    return axios.get(`${baseUrl}/departments`);
   }
 }
 

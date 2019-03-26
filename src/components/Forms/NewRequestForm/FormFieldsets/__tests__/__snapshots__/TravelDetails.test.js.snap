@@ -184,6 +184,7 @@ exports[`<TravelDetails /> should match snapshot 1`] = `
         }
         customPropsForArrival={[Function]}
         customPropsForDeparture={[Function]}
+        editing={false}
         fetchRoomsOnFocus={[Function]}
         handleDate={[Function]}
         handlePickBed={[Function]}
@@ -199,7 +200,6 @@ exports[`<TravelDetails /> should match snapshot 1`] = `
             ],
           }
         }
-        modalType="edit request"
         onChangeInput={[Function]}
         parentIds={1}
         removeTrip={[Function]}

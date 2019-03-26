@@ -61,11 +61,44 @@ exports[`Test Suite for <TravelDetailsItem /> should match snapshot 1`] = `
           />
           <div
             className="travel-to bed__option"
-          />
+          >
+            <div>
+              <img
+                alt="icon"
+                src="/static/media/form_select_dropdown.d19986d7.svg"
+                style={
+                  Object {
+                    "position": "absolute",
+                    "right": "15px",
+                    "top": "43px",
+                  }
+                }
+              />
+            </div>
+          </div>
           <div
             className="other__reason"
             onChange={[Function]}
-          />
+          >
+            <div
+              style={
+                Object {
+                  "display": "none",
+                }
+              }
+            />
+            <div
+              className="character__conditions"
+              style={
+                Object {
+                  "color": "#3359db",
+                  "top": "undefined",
+                }
+              }
+            >
+              140
+            </div>
+          </div>
         </div>
       </div>
     </div>

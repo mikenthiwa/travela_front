@@ -10,6 +10,9 @@ import {
   UPDATE_USER_PROFILE,
   GET_ALL_EMAILS_SUCCESS,
   GET_ALL_EMAILS_FAILURE,
+  GET_ALL_DEPARTMENT,
+  GET_ALL_DEPARTMENT_SUCCESS,
+  GET_ALL_DEPARTMENT_FAILURE,
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -20,6 +23,7 @@ const initialState = {
   getCurrentUserRole: [],
   isLoaded: false,
   getUsersEmail: [],
+  departments: [],
   isUpdating: false
 };
 const user = (state = initialState, action) => {
@@ -76,6 +80,21 @@ const user = (state = initialState, action) => {
       getUsersEmail: action.response,
     };
   case GET_ALL_EMAILS_FAILURE:
+    return {
+      ...state,
+      errors: action.error,
+    };
+  case GET_ALL_DEPARTMENT:
+    return {
+      ...state,
+      departments:[]
+    };
+  case GET_ALL_DEPARTMENT_SUCCESS:
+    return {
+      ...state,
+      departments: action.response,
+    };
+  case GET_ALL_DEPARTMENT_FAILURE:
     return {
       ...state,
       errors: action.error,

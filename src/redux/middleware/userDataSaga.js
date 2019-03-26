@@ -1,7 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import toast from 'toastr';
-import Cookie from 'cookies-js';
-import axios from 'axios';
 import UserAPI from '../../services/UserAPI';
 import apiErrorHandler from '../../services/apiErrorHandler';
 import {
@@ -14,6 +12,9 @@ import {
   getAllUsersEmail,
   getAllUsersEmailSuccess,
   getAllUsersEmailFailure,
+  getAllDepartment,
+  getAllDepartmentSuccess,
+  getAllDepartmentFailure
 } from '../actionCreator/userActions';
 
 export function* watchPostUserDataSagaAsync() {
@@ -69,5 +70,23 @@ export function* fetchUserDataSaga(action) {
   } catch (error) {
     const errorMessage = apiErrorHandler(error);
     yield put(getUserDataFailure(errorMessage));
+  }
+}
+
+
+
+export function* watchGetDepartmentDataSagaAsync() {
+  yield takeLatest(getAllDepartment().type, fetchDepartmentDataSaga);
+}
+
+export function* fetchDepartmentDataSaga() {
+  try {
+    const data = yield call(UserAPI.getAllDepartment);
+    const allDepartments = data.data.result.map((dept, _) => ({
+      id: dept.name, text: dept.name}));
+    yield put(getAllDepartmentSuccess(allDepartments));
+  } catch (error) {
+    const errorMessage = apiErrorHandler(error);
+    yield put(getAllDepartmentFailure(errorMessage));
   }
 }

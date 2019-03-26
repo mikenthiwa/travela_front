@@ -5,12 +5,13 @@ import * as formMetadata from '../../FormsMetadata/NewUserRoleForm';
 import './PersonalDetails.scss';
 
 class PersonalDetailsFiedset extends Component {
-
   render() {
-    const { roleName, values, allMails, addDepartment, removeDepartment, myTitle } = this.props;
+    const { roleName, values, allMails, addDepartment, removeDepartment, myTitle, departments } = this.props;
     const emails = allMails.map(email => email.text);
+    const allDepartments = departments.map(dept => dept.text);
     const disabled = myTitle === 'Edit Budget Checker Role';
     formMetadata.dropdownSelectOptions.email = emails;
+    formMetadata.dropdownSelectOptions.department = allDepartments;
     this.inputRenderer = new InputRenderer(formMetadata);
     const { renderInput } = this.inputRenderer;
     return (
@@ -25,7 +26,7 @@ class PersonalDetailsFiedset extends Component {
           </div>
           {roleName === 'Budget Checker' ? (
             <div>
-              <div className="size_in">
+              <div className="size_in" onBlur={this.handleBlur} onFocus={this.handleFocus}>
                 <div className="add_dept">
                   {renderInput('department', 'filter-dropdown-select',
                     {
@@ -41,8 +42,8 @@ class PersonalDetailsFiedset extends Component {
                   Add
                 </button>
               </div>
-              <div className="back table__container">
-                <table className="mdl-data-table mdl-js-data-table table__requests" style={{ width: '104%'}}>
+              <div className="">
+                <table className="mdl-js-data-table table__requests">
                   { values.departments.length > 0 ?
                     (
                       <thead>
@@ -90,7 +91,8 @@ const roleName = PropTypes.string;
 const allMails = PropTypes.array;
 const values = PropTypes.object;
 const addDepartment = PropTypes.func;
-const removeDepartment = PropTypes.func
+const removeDepartment = PropTypes.func;
+const departments = PropTypes.array
 ;
 PersonalDetailsFiedset.propTypes = {
   roleName: roleName.isRequired,
@@ -98,14 +100,16 @@ PersonalDetailsFiedset.propTypes = {
   values: values,
   removeDepartment: removeDepartment,
   addDepartment: addDepartment,
-  myTitle: PropTypes.string
+  myTitle: PropTypes.string,
+  departments: PropTypes.array
 };
 
 PersonalDetailsFiedset.defaultProps = {
   removeDepartment: () => {},
   addDepartment: () => {},
   values: {},
-  myTitle: ''
+  myTitle: '',
+  departments: []
 };
 
 export default PersonalDetailsFiedset;

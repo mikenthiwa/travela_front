@@ -176,7 +176,7 @@ Array [
                 <div
                     className="foot-text"
                 >
-                    Completed on 21/03/19
+                    Completed on 25/03/19
                 </div>
             </div>
             <div
@@ -260,7 +260,9 @@ Array [
                 />
                 <div
                     className="foot-text"
-                />
+                >
+                    Completed on 13/03/19
+                </div>
             </div>
             <div
                 className="request__tab-card  complete"
@@ -330,7 +332,7 @@ Array [
                 <div
                     className="foot-text"
                 >
-                    You are currently here
+                    Completed on 25/03/19
                 </div>
             </div>
         </div>
