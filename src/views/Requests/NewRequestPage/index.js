@@ -34,9 +34,10 @@ export class NewRequestPage extends Component {
   renderRequestDetailsPage = () => {
     const { match:{ params: { requestId } },
       requestData, fetchingRequest, currentUser, user, shouldOpen, modalType,
-      userReadinessDocument, fetchSubmission, postSubmission, travelChecklists, 
+      userReadinessDocument, fetchSubmission, postSubmission, travelChecklists,
       submissionInfo, fileUploads, uploadFile, openModal, closeModal, history
     } = this.props;
+
     return (
       <RequestDetailsPage
         fetchingRequest={fetchingRequest} requestData={requestData}
@@ -45,16 +46,16 @@ export class NewRequestPage extends Component {
         showTravelChecklist={this.handleShowTravelChecklist}
         closeModal={closeModal} openModal={openModal}
         modalType={modalType} shouldOpen={shouldOpen} history={history}
-        fileUploads={fileUploads} fetchSubmission={fetchSubmission} 
+        fileUploads={fileUploads} fetchSubmission={fetchSubmission}
         postSubmission={postSubmission} submissionInfo={submissionInfo}
-        uploadFile={uploadFile} userReadinessDocument={userReadinessDocument} 
+        uploadFile={uploadFile} userReadinessDocument={userReadinessDocument}
       />
 
     );
   }
 
   render() {
-    const { match:{ params: { requestId } }, fetchingRequest, 
+    const { match:{ params: { requestId } }, fetchingRequest,
     } = this.props;
     return (
       <Fragment>
@@ -123,7 +124,7 @@ const mapStateToProps = ({ requests, travelChecklist,
   };
 };
 
-const actionCreators = { 
+const actionCreators = {
   fetchUserRequestDetails,
   fetchTravelChecklist,
   fetchSubmission,

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ROleDetails /> renders correctly 1`] = `
+exports[`<RoleDetails /> renders correctly 1`] = `
 <Fragment>
   <Modal
     closeDeleteModal={null}
@@ -41,7 +41,7 @@ exports[`<ROleDetails /> renders correctly 1`] = `
       myTitle="Add User"
       role="Travel team member"
       roleId="335498"
-      updateUserCenter={[Function]}
+      updateBudgetChecker={[Function]}
       updatingRole={false}
       userDetail={Object {}}
     />
@@ -79,7 +79,7 @@ exports[`<ROleDetails /> renders correctly 1`] = `
       deleteModalState="invisible"
       error=""
       handleDeleteUserRole={[Function]}
-      handleEditCenter={[Function]}
+      handleEditRole={[Function]}
       hideDeleteRoleModal={[Function]}
       isLoading={false}
       roleName="Travel team member"

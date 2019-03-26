@@ -339,7 +339,9 @@ exports[`<RequestDetails /> should render properly 1`] = `
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr
+              className="trip-detail__information-table"
+            >
               <td>
                 Lagos - Nairobi
               </td>
@@ -348,7 +350,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
                       02 AUG 2019
               </td>
               <td>
-                Residence
+                Kwetu Mini flat-B
               </td>
             </tr>
           </tbody>
@@ -431,7 +433,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
                           className="travelSubmission--input__btn--uploadedFileDate"
                         >
                           Uploaded
-                           
+
                           12-03-19
                         </div>
                         <div>
@@ -475,6 +477,20 @@ exports[`<RequestDetails /> should render properly 1`] = `
                 className="travelCheckList__destination"
                 key="1"
               >
+                <div
+                  className="destination"
+                >
+                  <div
+                    className="country-flag"
+                  >
+                    <img
+                      alt="country flag"
+                      className="flag"
+                      src="https://www.countryflags.io/NG/flat/64.png"
+                    />
+                  </div>
+                  Lagos, Nigeria
+                </div>
                 0
               </div>
             </div>

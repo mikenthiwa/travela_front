@@ -24,7 +24,7 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
                 }
               }
             >
-               * 
+               *
             </span>
           </label>
           <input
@@ -133,7 +133,7 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
                 }
               }
             >
-               * 
+               *
             </span>
           </label>
           <div
@@ -206,7 +206,7 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
                 className="upload-text"
               >
                 Drag file here to upload or
-                 
+
                 <span
                   className="upload-text--underline"
                 >
