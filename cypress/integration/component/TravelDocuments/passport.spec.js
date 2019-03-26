@@ -5,6 +5,7 @@ describe('Add passport page ', () => {
     cy.authenticateUser();
     cy.visit('/travel_readiness');
   });
+  
   describe('Add passport form', () => {
     before(() => {
       cy.get('#passportButton')
@@ -27,7 +28,7 @@ describe('Add passport page ', () => {
       cy.get('@add-passport-form').contains('Nationality');
       cy.get('@add-passport-form').contains('Place of Issue');
       cy.get('@add-passport-form').contains('Expiry Date');
-      cy.get('@add-passport-form').contains('Attach image of your passport page');
+      cy.get('@add-passport-form').contains('Attach File');
       cy.get('div.document-input__input-container').contains('Maximum file size - 20MB');
     });
 
@@ -184,7 +185,7 @@ describe('Add passport page ', () => {
       cy.get('input[name=dateOfIssue]')
         .clear()
         .wait(2000)
-        .type('01/01/2016');
+        .type('{downarrow}{enter}');
       cy.get('#submit')
         .click();
       cy.get('.toast-message')
@@ -192,6 +193,34 @@ describe('Add passport page ', () => {
         .should('be.visible')
         .contains('Passport updated successfully!')
         .wait(2000);
+    });
+  });
+
+  describe('Comment on passport information', () => {
+    it('users should be able to comment on passport information', ()=> {
+      cy.get('span.document-name')
+      .first()
+      .click();
+      cy.get('.modal')
+        .as('comment-modal')
+        .should('be.visible')
+        .contains('Passport Details');
+      cy.get('@comment-modal')
+        .find('.ql-editor')
+        .as('comment-editor')
+        .should('be.visible');
+      cy.get('@comment-editor')
+        .type('Hello, World');
+      cy.get('#post-submit')
+        .contains('Post')
+        .click()
+        .wait(2000);
+      cy.get('.modal__status-update > p')
+        .should('be.visible')
+        .contains('Hello,World');
+      cy.get('.modal-close > img')
+        .should('be.visible')
+        .click();
     });
   });
 
@@ -214,33 +243,8 @@ describe('Add passport page ', () => {
         .contains('Document successfully deleted')
         .wait(2000);
     });
-  });
 
-  describe('Comment on passport information', () => {
-    it('users should be able to comment on passport information', ()=> {
-      cy.get('span.document-name')
-        .click();
-      cy.get('.modal')
-        .as('comment-modal')
-        .should('be.visible')
-        .contains('Passport Details');
-      cy.get('@comment-modal')
-        .find('.ql-editor')
-        .as('comment-editor')
-        .should('be.visible');
-      cy.get('@comment-editor')
-        .type('Hello, World');
-      cy.get('#post-submit')
-        .contains('Post')
-        .click()
-        .wait(2000);
-      cy.get('.modal__status-update > p')
-        .should('be.visible')
-        .contains('Hello,World');
-      cy.get('.modal-close > img')
-        .should('be.visible')
-        .click();
-
+    it('user should be able to delete second passport', ()=> {
       cy.get('#toggleIcon2')
         .click();
       cy.get('.table__menu-list')
@@ -252,7 +256,8 @@ describe('Add passport page ', () => {
         .should('be.visible');
       cy.get('@delete-modal')
         .find('button.bg-btn')
-        .contains('Delete').click();
+        .contains('Delete')
+        .click().wait(3000);
     });
   });
 });
