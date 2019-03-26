@@ -333,7 +333,7 @@ export class RequestDetails extends Component {
             </div>
           )}
           {currentTab === 5 && this.renderRequestDetails(requestData)}
-          {currentTab !== 3 && this.renderComment(requestData)}   
+          {this.renderComment(requestData)}   
         </div>
       </Fragment>
     );

@@ -101,13 +101,6 @@ describe('TravelChecklist Component', () => {
     expect(travelChecklistCardHead.length).toBe(2);
     expect(checklistItem.length).toBe(1);
   });
-  
-  it('should render submit button', () => {
-    props.submissionInfo.percentageCompleted= 100;
-    const wrapper = setup(props);
-    const submitButton = wrapper.find('#submit-button');
-    expect(submitButton.text()).toEqual('SUBMIT');
-  });
 
   it('should call showTravelChecklist on componentWillRecieveProps', () => {
     const wrapper = setup(props);

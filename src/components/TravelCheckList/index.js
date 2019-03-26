@@ -131,22 +131,13 @@ class TravelCheckListPage extends Component{
         return(
           
           <div className="travelSubmission--submit-area__button">
-            { percentage === 100 ?
-              (
-                <button type="button" onClick={this.returnToRequestPage} className="bg-btn bg-btn--inactive" id="submit-button">
-                SUBMIT
-                </button>
-              ) :
+            { percentage !== 100 && 
               ( 
                 <button type="button" onClick={this.returnToRequestPage} className="" id="save-button">
                 Save     
                 </button>
               )
-
-    
-            }
-              
-              
+            }            
           </div>
          
         );

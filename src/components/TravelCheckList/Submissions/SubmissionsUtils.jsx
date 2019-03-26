@@ -38,6 +38,7 @@ class SubmissionsUtils extends Component {
       this.getItemValue( item, checkId);
     }
     postSuccess.includes(checkId) && item && this.setState({showUploadedField: true});
+    this.initializeDates(nextProps);
   }
 
   initializeDates = (props) => {
