@@ -79,19 +79,19 @@ export class Login extends Component {
   }
 
   renderLinks() {
-    const bookTrip = 'https://drive.google.com/file/d/1UasidXRo32pQscj4pVBQssrnG91Ig11S/view';
+    const travelIntranet = 'https://sites.google.com/andela.com/travel-intranet/home?authuser=0';
     const andelaPolicy = `${`
       https://docs.google.com/document/d/1ZqJ3OAF-7NfJAgkzMBdiMoTrsftTWJp9tNhV8eOe1d8/edit`}`;
     return (
       <Fragment>
         <TextLink
-          imageSrc={videoSymbol}
-          symbolClass="login-symbol__video"
+          imageSrc={fileSymbol}
+          symbolClass="login-symbol__file"
           textLinkClass="login-page__link"
           textClass="login-page__link-text"
-          altText="Video Symbol"
-          text="How to book a trip"
-          link={bookTrip} />
+          altText="File Symbol"
+          text="Andela Travel Intranet"
+          link={travelIntranet} />
 
         <TextLink
           imageSrc={fileSymbol}
@@ -99,7 +99,7 @@ export class Login extends Component {
           textLinkClass="login-page__link"
           textClass="login-page__link-text"
           altText="File Symbol"
-          text="Andela travel policy"
+          text="Andela Travel Policy"
           link={andelaPolicy} />
       </Fragment>
     );
