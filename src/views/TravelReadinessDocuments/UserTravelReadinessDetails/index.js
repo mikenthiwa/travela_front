@@ -48,7 +48,7 @@ class UserTravelReadinessDetails extends Component {
                 <PageHeader
                   addLink
                   title={fullName}
-                  iconLink="/travel-readiness"
+                  iconLink="/trip-planner/travel-readiness"
                 />
                 <div className="open-requests">
                   <div className="button-group">

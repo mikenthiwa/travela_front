@@ -3,7 +3,7 @@ const baseAPI = Cypress.env('REACT_APP_API_URL');
 const navigateToModal = () => {
   cy.server();
   cy.authenticateUser();
-  cy.visit('/travel-readiness');
+  cy.visit('/trip-planner/travel-readiness');
   cy.get(':nth-child(1) > .readiness__cell-name > .table__data--link')
     .click();
   cy.get('.document-name')
@@ -15,7 +15,7 @@ describe('Travel admin can view and verify travel documents', () => {
     before(() => {
       cy.server();
       cy.authenticateUser();
-      cy.visit('/travel-readiness');
+      cy.visit('/trip-planner/travel-readiness');
     });
 
     it('should show the list of developers who have uploaded the travel documents', () => {
@@ -30,9 +30,9 @@ describe('Travel admin can view and verify travel documents', () => {
     before(() => {
       cy.server();
       cy.authenticateUser();
-      cy.route('GET', `${baseAPI}/travelreadiness/users?*`,
+      cy.route('GET', `${baseAPI}/travelreadiness/users?searchQuery=&page=1`,
         'fixture:travelReadiness/document').wait(3000);
-      cy.visit('/travel-readiness');
+      cy.visit('/trip-planner/travel-readiness');
     });
 
     it('should show a friendly message if no item exists', () => {
@@ -107,7 +107,9 @@ describe('Travel admin can view and verify travel documents', () => {
     });
     it('travel admin should be able to verify a user\'s document', () => {
       cy.authenticateUser();
-      cy.visit('/travel-readiness');
+      cy.server();
+      cy.route('PUT', `${baseAPI}/travelreadiness/documents/vbhg4567h/verify`, 'fixtures:travelReadiness/documentVerify');
+      cy.visit('/trip-planner/travel-readiness');
       cy.get(':nth-child(2) > .readiness__cell-name > .table__data--link')
         .click();
       cy.get('.document-name')

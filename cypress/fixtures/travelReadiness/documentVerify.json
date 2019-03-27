@@ -1,0 +1,27 @@
+{
+    "message": "Document successfully verified",
+    "success": true,
+    "updatedDocument": {
+      "comments": [],
+      "createdAt": "2019-01-04T11:11:52.181Z",
+      "data": {
+        "expiryDate": "2029-11-01",
+        "dateOfBirth": "1970-01-01",
+        "dateOfIssue": "2018-11-01",
+        "nationality": "kenyan"
+      },
+      "cloudinaryUrl": "https://res.cloudinary.com/dbk8ky2",
+      "dateOfBirth": "1970-01-01",
+      "dateOfIssue": "2018-11-01",
+      "expiryDate": "2029-11-01",
+      "nationality": "kenyan",
+      "passportNumber": "qw357etrty",
+      "placeOfIssue": "Kenya",
+      "deletedAt": null,
+      "id": "vbhg4567h",
+      "isVerified": true,
+      "type": "passport",
+      "updatedAt": "2019-03-27T10:22:19.939Z",
+      "userId": "-LJlsimdclse9s"
+    }
+  }
