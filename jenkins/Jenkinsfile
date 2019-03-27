@@ -17,10 +17,10 @@ spec:
     image: harithj/jenkins-travela-frontend
     resources:
       requests:
-        cpu: "500m"
-        memory: "1Gi"
+        cpu: "2000m"
+        memory: "2Gi"
       limits:
-        cpu: "500m"
+        cpu: "2000m"
         memory: "2Gi"
     command:
     - cat

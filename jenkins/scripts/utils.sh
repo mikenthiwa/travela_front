@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e pipefail
+set -e
 
 #########################################################################
 # This script contains basic functions that would help us to print out
