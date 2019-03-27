@@ -82,16 +82,16 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
             { onUploadProgress: this.handleUploadProgress
             }
           );
-          const {data: {url}} = imageData;
+          const {data: {secure_url}} = imageData;
           this.setState({
             documentUploaded: true,
             uploadingDocument: false,
-            values: {...values, cloudinaryUrl: url}
+            values: {...values, cloudinaryUrl: secure_url}
           });
           DocumentAPI.setToken();
           const documentValues = {
             ...newValues,
-            cloudinaryUrl: url,
+            cloudinaryUrl: secure_url,
           };
           if (/edit/.test(modalType)) {
             return editTravelReadinessDocument(documentType, {...documentValues}, id);
