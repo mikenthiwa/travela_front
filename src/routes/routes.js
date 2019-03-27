@@ -37,7 +37,7 @@ const routes = {
   '/home': [ConnectedHome] ,
   '/requests/my-approvals/': [ConnectedApprovals(), [SUPER_ADMINISTRATOR, MANAGER]],
   '/requests/my-approvals/:requestId': [ConnectedApproveRequests(), [SUPER_ADMINISTRATOR, MANAGER]],
-  '/requests/budgets/:requestId': [ConnectedApproveRequests('budget'),[SUPER_ADMINISTRATOR, BUDGET_CHECKER]],
+  '/requests/budgets/:requestId': [ConnectedApproveRequests('budget'),[SUPER_ADMINISTRATOR, BUDGET_CHECKER, FINANCE_TEAM_MEMBER]],
   '/requests/budgets/': [ConnectedApprovals('budget'), [SUPER_ADMINISTRATOR, BUDGET_CHECKER]],
   '/requests/my-verifications': [ConnectedVerifications, TRAVEL_MANAGERS],
   '/requests/my-verifications/:requestId': [ConnectedVerificationDetails, [FINANCE_TEAM_MEMBER, ...TRAVEL_MANAGERS ]],
