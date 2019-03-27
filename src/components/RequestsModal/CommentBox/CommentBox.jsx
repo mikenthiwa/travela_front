@@ -33,6 +33,11 @@ export class CommentBox extends Component {
     }
   };
 
+  urlDetector = (html) => {
+    const pattern = /(http[s]?:\/\/)?[^\s(["<,>]*\.[^\s[",><]*/gim;
+    return html.replace(pattern, url => `<a href=${url} target=_blank>${url}</a>`);
+  };
+
   handleKeyUp = event => {
     if (event.target.innerText.trim().length >= 1) {
       this.setState({
@@ -79,13 +84,13 @@ export class CommentBox extends Component {
     event.preventDefault();
     if (text.trim() !== '') {
       if (newRequest) {
-        handleComment(this.sanitizeInputData(text));
+        handleComment( this.sanitizeInputData(this.urlDetector(text)));
         toast.success('Comment Added Successfully. Please proceed to submit the request.');
         this.setState({
           text: ''
         });
       } else {
-        createComment(requestId, documentId, this.sanitizeInputData(text));
+        createComment(requestId, documentId, this.sanitizeInputData(this.urlDetector(text)));
       }
     }
     this.setState({
