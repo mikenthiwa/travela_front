@@ -9,10 +9,10 @@ describe('OtherDocumentMetaData', () => {
       label: 'Document Id'
     },
     dateOfIssue: {
-      label: 'Date of Issue'
+      label: 'Date of Issue (MM/DD/YYYY)'
     },
     expiryDate: {
-      label: 'Expiry Date'
+      label: 'Expiry Date (MM/DD/YYYY)'
     },
   };
   it('renders returns other document input lable', () => {

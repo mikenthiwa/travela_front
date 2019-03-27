@@ -11,6 +11,8 @@ export default function (attachments) {
         const result = {
           itemId: checklistItem.id,
           itemName: checklistItem.name,
+          itemDestination: checklistItem.destinationName,
+          itemTripId: item.tripId,
           itemUrl: checklistItem.submissions[0].value.url,
           fileName: checklistItem.submissions[0].value.fileName,
           uploadDate:formatDateString(new Date(checklistItem.submissions[0].updatedAt), true),

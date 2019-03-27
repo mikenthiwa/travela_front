@@ -4,22 +4,25 @@ import { isEmpty } from 'lodash';
 import ConnectedUserComments from '../../components/RequestsModal/UserComments/UserComments';
 import ConnectedCommentBox from '../../components/RequestsModal/CommentBox/CommentBox';
 
-export default function CommentsSection({request, requestId, currentUser, email, displayComments}) {
+export default function CommentsSection({renderCommentsToggle, request, requestId, currentUser, email, displayComments}) {
  
   return (
-    <div className={`comments-section--${displayComments}`}>
+    <div className="comments-section">
       {
         !isEmpty(request) ? (
           <div className="request-comment">
-            <ConnectedCommentBox
-              requestId={requestId}
-              documentId={null}
-            />
-            <ConnectedUserComments
-              comments={request.comments}
-              email={email.result && email.result.email}
-              currentUser={currentUser}
-            />
+            {renderCommentsToggle()}
+            <div className={`${displayComments}`}>
+              <ConnectedCommentBox
+                requestId={requestId}
+                documentId={null}
+              />
+              <ConnectedUserComments
+                comments={request.comments}
+                email={email.result && email.result.email}
+                currentUser={currentUser}
+              />
+            </div>
           </div> 
         ): ''
       }
@@ -30,7 +33,7 @@ export default function CommentsSection({request, requestId, currentUser, email,
 CommentsSection.defaultProps = {
   request: {},
   currentUser: {},
-  email: {},
+  email: {}
 };
 
 CommentsSection.propTypes = {
@@ -38,5 +41,6 @@ CommentsSection.propTypes = {
   request: PropTypes.object,
   currentUser: PropTypes.object,
   email: PropTypes.object,
-  displayComments: PropTypes.bool.isRequired
+  displayComments: PropTypes.bool.isRequired,
+  renderCommentsToggle: PropTypes.func.isRequired,
 };

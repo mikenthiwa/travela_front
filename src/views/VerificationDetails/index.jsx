@@ -8,11 +8,12 @@ import { updateRequestStatus } from '../../redux/actionCreator/approvalActions';
 import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import RequestDetails from '../../components/RequestDetails';
 import CommentsSection from './CommentsSection';
-
+import countryUtils from '../../helper/countryUtils';
 import { AttachmentItems, ChecklistItems, TicketDetails } from './TravelChecklistItems';
 import getValues from './getValues';
 import saveIcon from '../../images/icons/save-icon.svg';
 import chatIcon from '../../images/icons/Chat.svg';
+import Preloader from '../../components/Preloader/Preloader';
 import './VerificationDetails.scss';
 
 
@@ -20,7 +21,6 @@ import './VerificationDetails.scss';
 class VerificationDetails extends Component {
 
   state = {   
-    commentText: '',
     modalInvisible: true,
     buttonSelected: '',
     displayComments: true
@@ -28,8 +28,7 @@ class VerificationDetails extends Component {
 
   componentDidMount() {
     const {       
-      fetchUserRequestDetails,
-      fetchAttachments,
+      fetchUserRequestDetails, fetchAttachments,
       match: { params: { requestId } } } = this.props;
     fetchUserRequestDetails(requestId);
     fetchAttachments(requestId);
@@ -57,7 +56,7 @@ class VerificationDetails extends Component {
   }
 
   
-  toggleComments() {
+  toggleComments = () => {
     const { displayComments } = this.state;  
     if (displayComments) {
       return this.setState({ displayComments: false});
@@ -91,27 +90,62 @@ class VerificationDetails extends Component {
       </div>           
     );
   }
-  renderTravelCheckList() {
+  renderTravelCheckList = () =>{
+    const { attachments, request, email, currentUser,
+      match: { params: { requestId } } } = this.props;
     const { checklistItems, attachmentDetails } = this.getValues();
+    const { displayComments } = this.state;
     return (
       <div className="rectangle left">
         <div className="attachments">
           <p className="heading">Travel Checklist For This Trip</p>
-          <div className="attachment-items">
-            { attachmentDetails.length
-              ? <AttachmentItems attachmentDetails={attachmentDetails} handleDownloadAttachments={this.handleDownloadAttachments} />            
-              : (
-                <div className="no-attachments">
-                  <p>No Uploaded Attachments.</p>
-                </div>
-              )}         
-          </div> 
-          {
-            checklistItems.length
-              ? <ChecklistItems checklistItems={checklistItems} />           
-              : null
-          }
-        </div>   
+          <div>
+            <div>
+              { attachments.length ? (attachments.map(item => { 
+                return (
+                  <div key={item.destinationName} className="location-items">
+                    <div className="destination">
+                      <span className="country-flag">
+                        <img className="flag" src={countryUtils.getCountryFlagUrl(item.destinationName)} alt="country flag" />
+                      </span>
+                      <span><strong>{ item.destinationName }</strong></span>
+                    </div>
+                    <div className="attachment-items">
+                      {(attachmentDetails.length)
+                        ? (
+                          <AttachmentItems 
+                            attachments={item}
+                            attachmentDetails={attachmentDetails} 
+                            handleDownloadAttachments={this.handleDownloadAttachments} 
+                          />
+                              
+                        ): (
+                          <div className="no-attachments">
+                            <p>No Uploaded Attachments.</p>
+                          </div>
+                        )}
+                    </div>
+                    {checklistItems.length
+                      ? <ChecklistItems checklistItems={checklistItems} destination={item.destinationName} /> 
+                      : null
+                    }                  
+                  </div>                  
+                ); })) : 
+                (
+                  <div className="no-attachments">
+                    <p>No Uploaded Attachments.</p>
+                  </div>
+                )
+              }       
+            </div> 
+          </div>
+        </div> 
+        <CommentsSection
+          renderCommentsToggle={this.renderCommentsToggle}
+          request={request} requestId={requestId} 
+          currentUser={currentUser} email={email} 
+          displayComments={displayComments}
+        />  
       </div>
     );   
   }
@@ -128,13 +162,13 @@ class VerificationDetails extends Component {
     );
   } 
 
-  renderCommentsToggle() {
-    const { commentText } = this.state;
+  renderCommentsToggle = () =>{
+    const { displayComments } = this.state;
     return (
       <div>
-        <button onClick={() => this.toggleComments()} type="button" className="comment-toggle-button">            
+        <button onClick={this.toggleComments} type="button" className="comment-toggle-button">            
           <img className="chat image" src={chatIcon} alt="chat-icon" />
-          <p className="comment-button-text">{commentText || 'Hide Comments'}</p>            
+          <p className="comment-button-text">{displayComments ? 'Hide Comments' : 'Show Comments'}</p>            
         </button>
       </div>
     );
@@ -175,29 +209,25 @@ class VerificationDetails extends Component {
   
   render() {
     const { 
-      request, email, currentUser,
-      isLoading,
+      request, isLoading,
       match: { params: { requestId } }, location: { pathname },
     } = this.props;
     const headerTags = ['Manager\'s Approval', 'Budget Check', 'Travel Verification'];
-    const { displayComments } = this.state;
     return (
       <Fragment>
-        <div className="verification-page-container">          
-          <RequestDetails
-            request={request} requestId={requestId} renderButtons={this.renderButtons} 
-            renderRightPaneQuestion={this.renderRightPaneQuestion} isLoading={isLoading}
-            headerTags={headerTags} pathname={pathname}
-          />
-          {this.renderBottomPane()}
-          {this.renderCommentsToggle()}
-          <CommentsSection 
-            request={request} requestId={requestId} 
-            currentUser={currentUser} email={email} 
-            displayComments={displayComments}
-          />
-
-        </div>
+        {isLoading 
+          ? <Preloader />
+          : ( 
+            <div className="verification-page-container">          
+              <RequestDetails
+                request={request} requestId={requestId} renderButtons={this.renderButtons} 
+                renderRightPaneQuestion={this.renderRightPaneQuestion} isLoading={isLoading}
+                headerTags={headerTags} pathname={pathname}
+              />
+              {this.renderBottomPane()}
+            </div>
+          )
+        }
       </Fragment>
     );
   }

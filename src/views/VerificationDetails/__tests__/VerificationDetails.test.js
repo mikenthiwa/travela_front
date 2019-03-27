@@ -104,11 +104,9 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
   });
 
   describe('TEST RENDERING TRAVEL CHECKLIST ITEMS', () => {
-    it('should toggle comments on and off', () => {
+    it('should display checklist items', () => {
       const wrapper = setupConnectedComponent(props, store);
-      const downloadButton = wrapper.find('.attachment-item button');
-      const attachmentItem = wrapper.find('.attachment-item');
-      downloadButton.simulate('click');
+      const attachmentItem = wrapper.find('.attachment-items');
       expect(attachmentItem.length).toBeGreaterThanOrEqual(1);
     });
   });

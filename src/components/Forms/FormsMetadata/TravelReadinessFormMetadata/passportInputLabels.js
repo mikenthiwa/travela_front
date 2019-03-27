@@ -12,11 +12,11 @@ const inputLabels = {
   },
 
   dateOfBirth: {
-    label: 'Date of Birth'
+    label: 'Date of Birth (MM/DD/YYYY)'
   },
 
   dateOfIssue: {
-    label: 'Date of Issue',
+    label: 'Date of Issue (MM/DD/YYYY)',
   },
 
   placeOfIssue: {
@@ -24,7 +24,7 @@ const inputLabels = {
   },
 
   expiryDate: {
-    label: 'Expiry Date'
+    label: 'Expiry Date (MM/DD/YYYY)'
   },
 };
 export default inputLabels;

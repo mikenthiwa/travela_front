@@ -31,14 +31,14 @@
                     flex-wrap: wrap;
 
                     .no-attachments {
-                        margin: 0 auto;
+                        margin: 10px;
                         font-size: 16px;
-                        padding: 20px;
+                        padding: 10px;
                         color: #4F4F4F;
                     }
 
                     .attachment-item {
-                        
+                        margin-bottom: 10px;
                         text-align: left;
                         width: 44%;
                         padding: 20px 0 10px 32px;
@@ -90,9 +90,38 @@
               }
 
               .checklist-items {
-                  border-top: 1px solid #E4E4E4;
                   text-align: left;
-                  padding: 10px 10px 20px 20px
+                  padding: 10px 10px 20px 20px;
+                  border-top: 1px dotted #E4E4E4;
+                  margin-left: 10px;
+                  margin-right: 10px;
+              }
+              .location-items {
+                border-bottom: 1px solid #E4E4E4;
+                padding: 20px;
+                .destination {
+                    padding-left: 30px;
+                    margin-bottom: 10px;
+                    font-weight: bold;
+                    font-size: 1em;
+                    display: flex;
+                    align-items: center;
+                  }
+                  
+                   .country-flag {
+                    height: 64px;
+                    width: 64px;
+                    overflow: hidden;
+                    border-radius: 50%;
+                    margin-right: 12px;
+                  }
+                  
+                   .flag {
+                    height: 171%;
+                    width: 136%;
+                    margin-left: -11px;
+                    margin-top: -23px;
+                  }
               }
 
               .checklist-item-name {
@@ -102,6 +131,70 @@
               .checklist-item-value {
                   font-size: 12px;
               }
+            }
+            .comments-section {
+                width: 100%;
+                    .request-comment{
+                        width: 100%;
+                        .editor__editor-form {
+
+                            .quill-contents {
+                        
+                              .ql-snow {
+                                background-color: #FFF;
+                              }
+                            
+                              .ql-toolbar {
+                                border-top-left-radius: 0.1em;
+                                border-top-right-radius: 0.1em;
+                              }
+                            
+                              .ql-container {
+                                border-bottom-left-radius: 0.1em;
+                                border-bottom-right-radius: 0.1em;
+                              }
+                            }
+                        
+                            .editor__btn-size {
+                        
+                              .editor__btn-wrap {
+                                
+                                .editor__post-btn {
+                                  border-radius: 0.1em;
+                                }
+                              }
+                            }
+                          }
+                          .true{
+                              display: block;
+                              padding-top: 20px;
+                              text-align: left;
+                          }
+                          .false{
+                            display: none;
+                    
+                    }
+                }
+            }
+        
+            .comment-toggle-button {        
+               display: flex;
+               align-items: center;
+               border: none;
+               background-color: inherit;
+               cursor: pointer;
+            }
+        
+            .comment-toggle-button:focus {
+                outline: none;
+            }
+        
+            .comment-button-text {
+                margin: 0;
+                padding-left: 10px;
+                padding-bottom: 2px;
+                font-weight: 500;
+                color: #3359DB;
             }
           }
 
@@ -175,38 +268,5 @@
               } 
               
           }       
-    }
-
-    .comments-section {
-        width: 61.5%;
-        padding-top: 20px;
-
-        &--true {
-            display: block;
-        }
-
-        &--false {
-            display: none;
-        }
-    }
-
-    .comment-toggle-button {        
-       display: flex;
-       align-items: center;
-       border: none;
-       background-color: inherit;
-       cursor: pointer;
-    }
-
-    .comment-toggle-button:focus {
-        outline: none;
-    }
-
-    .comment-button-text {
-        margin: 0;
-        padding-left: 10px;
-        padding-bottom: 2px;
-        font-weight: 500;
-        color: #3359DB;
     }
 }

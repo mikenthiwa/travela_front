@@ -2,38 +2,39 @@ import React from 'react';
 import saveIcon from '../../images/icons/save-icon.svg';
 
 
-export function AttachmentItems({ attachmentDetails, handleDownloadAttachments}) {
+export function AttachmentItems({ attachments, attachmentDetails, handleDownloadAttachments}) {
   return (
     attachmentDetails.map((item) => {
-      return (
-        <div key={item.itemId} className="attachment-item">
-          <p className="attachment-header">{item.itemName}</p>
-          <div className="split">
-            <div className="attachment-image">
-              <img src={item.itemUrl} alt={item.itemName} />
-            </div>
-            <div className="attachment-value">
-              <p className="bold">                                             
-                <span><strong>{item.fileName}</strong></span>       
-              </p>
-              <p>
-                <span>Uploaded </span> 
-                <span>{item.uploadDate}</span>
-              </p>
-              <button type="button" onClick={() => handleDownloadAttachments(item.itemUrl, item.fileName)}><img src={saveIcon} alt="save" /></button>
+      return (attachments.destinationName === item.itemDestination || attachments.tripId === item.itemTripId)? 
+        (
+          <div key={item.itemId} className="attachment-item">
+            <p className="attachment-header">{item.itemName}</p>
+            <div className="split">
+              <div className="attachment-image">
+                <img src={item.itemUrl} alt={item.itemName} />
+              </div>
+              <div className="attachment-value">
+                <p className="bold">                                             
+                  <span><strong>{item.fileName}</strong></span>       
+                </p>
+                <p>
+                  <span>Uploaded </span> 
+                  <span>{item.uploadDate}</span>
+                </p>
+                <button type="button" onClick={() => handleDownloadAttachments(item.itemUrl, item.fileName)}><img src={saveIcon} alt="save" /></button>
               
+              </div>
             </div>
           </div>
-        </div>
-      );
+        ): null;
     })
   );
 }
 
-export  function ChecklistItems({ checklistItems }) {
+export  function ChecklistItems({ destination, checklistItems }) {
   return (
     checklistItems.map(item => {
-      return item.submissions[0] ?
+      return (item.submissions[0]  && destination === item.destinationName)?
         (
           <div key={item.id} className="checklist-items">
             <div className="checklist-item-name"><strong>{item.name}</strong></div>
@@ -99,12 +100,8 @@ export function TicketDetails({ ticketDetails }) {
           )            
             : null
           } 
-        </div>
-
-                     
+        </div>                     
       );
     })   
   );
 }
-
-
