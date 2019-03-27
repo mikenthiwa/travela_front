@@ -73,8 +73,12 @@ describe('<AddVisaForm />', () => {
       visaType: 'Other',
       imageName: 'image.jpg'
     };
+
+    expect(
+      wrapper.find(
+        '.document-input__input-container__prompts__text p'
+      ).at(0).text()).toEqual('Choose from computer');
     wrapper.find('#select-file').simulate('change', event);
-   
     wrapper.find('input[name="country"]').simulate('change', {
       target: {
         value: 'Uganda'
@@ -110,13 +114,13 @@ describe('<AddVisaForm />', () => {
   it('Renders Visa modal with modal title text \'Attach the image of your visa page\'', () => {
     expect(
       wrapper.find('.travel-document-select-file p').at(0).text()).toEqual(
-      'Attach the image of your visa page'
+      'Attach the image or PDF of your visa document'
     );
   });
 
-  it('Renders Visa modal with modal title text \'Maximum file size - 20MB\'', () => {
+  it('Renders Visa modal with modal title text \'Maximum file size - 10MB\'', () => {
     expect(
-      wrapper.find('.maximum-file-size').text()).toEqual('Maximum file size - 20MB');
+      wrapper.find('.maximum-file-size').text()).toEqual('Maximum file size - 10MB');
   });
 
   it('changes state accordingly',  () => {

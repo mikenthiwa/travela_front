@@ -29,7 +29,7 @@ const TravelDocumentModal = (props) => {
         closeModal={closeModal}
         openModal={openModal}
         createTravelReadinessDocument={createTravelReadinessDocument}
-        travelReadinessDocuments={travelReadinessDocuments}
+        {...travelReadinessDocuments}
         documentType="other"
         fetchUserData={fetchUserData}
         user={user}

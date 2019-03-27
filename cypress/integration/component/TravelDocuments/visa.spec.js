@@ -35,9 +35,11 @@ describe('user can add visas', () => {
     cy
       .get('#actionButton').click()
       .get('.modal-title-bar').contains('Add Visa Details')
+      .get('.document-input__input-container__prompts__text > :nth-child(1)')
+      .contains('Choose from computer')
       .get('.travel-document-select-file > :nth-child(1)')
-      .contains('Attach the image of your visa page')
-      .get('.maximum-file-size').contains('Maximum file size - 20MB')
+      .contains('Attach the image or PDF of your visa document')
+      .get('.maximum-file-size').contains('Maximum file size - 10MB')
       .get('input[name="country"]').type('Uganda')
       .get('[name=entryType] ').click()
       .get('div[name=entryType] > ul > li#choice:first').click()
@@ -57,7 +59,18 @@ describe('user can add visas', () => {
     cy
       .get('#actionButton').click()
       .uploadFile('../fixtures/images/largefile.jpg','image/jpeg')
-      .wait(2000).get('.toast-message').should('be.visible').contains('File is too large')
+      .wait(2000).get('.toast-message').should('be.visible')
+      .contains('This upload has exceeded the 10 MB limit that is allowed')
+      .get('#cancel').click();
+  };
+
+  const uploadPdfDocument = () => {
+    cy
+      .get('#actionButton').click()
+      .upload_pdf('images/pdfImage.pdf', 'application/pdf', 'input[type=file]')
+      .wait(2000)
+      .get('.document-input__input-container__prompts__text > :nth-child(1)')
+      .contains('images/pdfImage.pdf')
       .get('#cancel').click();
   };
 
@@ -76,7 +89,11 @@ describe('user can add visas', () => {
     deleteTestVisa();
   });
 
-  it('Upload file with size greater than 20MB', () => {
+  it('Should upload pdf document', () => {
+    uploadPdfDocument();
+  });
+
+  it('Upload file with size greater than 10MB', () => {
     uploadLargeFile ('12/25/2020');
   });
 

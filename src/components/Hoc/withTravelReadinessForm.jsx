@@ -117,11 +117,12 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
       e.preventDefault();
       const image = e.target.files[0];
       if( !image ) return;
-      if (!['image/jpeg', 'image/png'].includes(image.type)) {
+      if (!['image/jpeg', 'image/png', 'application/pdf'].includes(image.type)) {
         return toast.error('Invalid file type. Please upload an image');
       }
-      if (image.size > 10**7*2) {
-        return toast.error('File is too large');
+      if (image.size > 10**7) {
+        e.target.value= '';
+        return toast.error('This upload has exceeded the 10 MB limit that is allowed');
       }
       const {name} = image;
       const { values, optionalFields } = this.state;
@@ -153,8 +154,8 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
     }
     render() {
       const { errors, values, hasBlankFields, uploadingDocument,
-        name, imageChanged, uploadProgress, documentUploaded } = this.state;
-      const { modalType, document, fetchingDocument} = this.props;
+        name, imageChanged, uploadProgress } = this.state;
+      const { modalType, document, fetchingDocument, updatingDocument } = this.props;
       if (documentType === 'other') delete errors.documentid;
       const { visaType, otherVisaTypeDetails } = values;
       const submitButton = {
@@ -162,6 +163,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
         visa: 'Add Visa Details',
         passport: 'Add Passport'
       };
+      
       return (
         <div>
           {fetchingDocument ? <Preloader /> : (
@@ -169,11 +171,9 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
               <form className="travel-document-form" onSubmit={this.handleSubmit}>
                 {<FormFieldSet visaType={visaType} onChangeVisa={this.onChangeVisa} otherVisaTypeDetails={otherVisaTypeDetails} />}
                 <div className="travel-document-select-file">
-                  <p>
+                  <p className="attach-document-text">
                     {
-                      modalType === 'add visa'
-                        ? `Attach the image of your ${modalType.split(' ').splice(-1)} page`
-                        : 'Attach File'
+                      `Attach the image or PDF of your ${modalType.split(' ').splice(-1)} document`
                     }
                   </p>
                   <FileUploadField
@@ -192,8 +192,8 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
                     send={
                       (modalType.startsWith('edit')) ? 'Save Changes' :
                         submitButton[documentType]}
-                    loading={uploadingDocument} 
-                    documentUploaded={documentUploaded}
+                    loading={uploadingDocument}
+                    updatingDocument={updatingDocument}
                   />
                 </div>
               </form>
@@ -211,7 +211,8 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
     user: PropTypes.object.isRequired,
     editTravelReadinessDocument: PropTypes.func,
     document: PropTypes.object,
-    modalType: PropTypes.string, fetchingDocument: PropTypes.bool
+    modalType: PropTypes.string, fetchingDocument: PropTypes.bool,
+    updatingDocument: PropTypes.bool
   };
 
   BaseForm.defaultProps = {
@@ -220,7 +221,8 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
     document: {},
     modalType: '',
     errors: {},
-    fetchingDocument: false
+    fetchingDocument: false,
+    updatingDocument: false
   };
   return BaseForm;
 }

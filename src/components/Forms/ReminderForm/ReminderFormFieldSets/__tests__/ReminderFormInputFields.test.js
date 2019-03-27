@@ -46,12 +46,21 @@ describe('ReminderFormInputFields', () => {
 
   it('should render the correct singular or plural form of dates', () => {
     const wrapper = setup(props);
-
     const singular = ['Day', 'Week', 'Month', 'Year'];
     const plural = singular.map((period) => `${period}s`);
-
     expect(wrapper.find('Input[name="period-0"]').props().choices).toEqual(singular);
     expect(wrapper.find('Input[name="period-1"]').props().choices).toEqual(plural);
     expect(wrapper.find('Input[name="period-2"]').props().choices).toEqual(plural);
+  });
+
+  it('should simulate onchange and onclick when they are called', () => {
+    const wrapper = setup(props);
+    const event = { preventDefault: jest.fn()};
+    wrapper.find('[name="reminderTemplate-2"]').simulate('change', event);
+    expect(props.onReminderTemplateChange).toBeCalled();
+    wrapper.find('[name="period-0"]').simulate('change', event);
+    expect(props.onReminderPeriodChange).toBeCalled();
+    wrapper.find('.delete-icon').at(0).simulate('click');
+    expect(props.removeReminder).toBeCalled();
   });
 });

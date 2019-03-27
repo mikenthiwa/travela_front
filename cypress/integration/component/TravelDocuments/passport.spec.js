@@ -28,8 +28,8 @@ describe('Add passport page ', () => {
       cy.get('@add-passport-form').contains('Nationality');
       cy.get('@add-passport-form').contains('Place of Issue');
       cy.get('@add-passport-form').contains('Expiry Date');
-      cy.get('@add-passport-form').contains('Attach File');
-      cy.get('div.document-input__input-container').contains('Maximum file size - 20MB');
+      cy.get('@add-passport-form').contains('Attach the image or PDF of your passport document');
+      cy.get('div.document-input__input-container').contains('Maximum file size - 10MB');
     });
 
     it(`should show a validation error if
@@ -74,6 +74,8 @@ describe('Add passport page ', () => {
       cy.get('input[name=expiryDate]')
         .wait(2000)
         .type('{downarrow}{enter}');
+      cy.get('.document-input__input-container__prompts__text > :nth-child(1)')
+        .contains('Choose from computer');
       cy.uploadFile('images/guesthouse.jpg', 'image/jpeg');
       cy.get('button#submit')
         .should('not.be.disabled')
@@ -91,7 +93,7 @@ describe('Add passport page ', () => {
         .click();
     });
 
-    it('should add second passport successfully', () => {
+    it('should add second passport with passport document in pdf', () => {
       cy.get('input[name=name]')
         .wait(2000)
         .type('Susan Keru');
@@ -113,7 +115,9 @@ describe('Add passport page ', () => {
       cy.get('input[name=expiryDate]')
         .wait(2000)
         .type('{downarrow}{enter}');
-      cy.uploadFile('images/guesthouse.jpg', 'image/jpeg');
+      cy.upload_pdf('images/pdfImage.pdf', 'application/pdf', 'input[type=file]');
+      cy.get('.document-input__input-container__prompts__text > :nth-child(1)')
+        .contains('images/pdfImage.pdf');
       cy.get('button#submit')
         .should('not.be.disabled')
         .click();
@@ -160,7 +164,7 @@ describe('Add passport page ', () => {
       cy.get('.toast-message')
         .wait(3000)
         .should('be.visible')
-        .contains('File is too large')
+        .contains('This upload has exceeded the 10 MB limit that is allowed')
         .wait(2000);
       cy.get('button#cancel').click();
 
@@ -182,10 +186,8 @@ describe('Add passport page ', () => {
         .should('have.value', 'Susan Keru')
         .clear()
         .type(`Requester ${Math.random().toString(36).substr(2).toUpperCase()}`);
-      cy.get('input[name=dateOfIssue]')
-        .clear()
-        .wait(2000)
-        .type('{downarrow}{enter}');
+      cy.get('input[name=dateOfBirth]').clear().click();
+      cy.get('.react-datepicker__day + div:first').wait(2000).click();
       cy.get('#submit')
         .click();
       cy.get('.toast-message')
@@ -199,8 +201,8 @@ describe('Add passport page ', () => {
   describe('Comment on passport information', () => {
     it('users should be able to comment on passport information', ()=> {
       cy.get('span.document-name')
-      .first()
-      .click();
+        .first()
+        .click();
       cy.get('.modal')
         .as('comment-modal')
         .should('be.visible')

@@ -109,7 +109,7 @@ export class TravelReadinessDocuments extends Component {
           closeModal={closeModal}
           createTravelReadinessDocument={createTravelReadinessDocument}
           editTravelReadinessDocument={editTravelReadinessDocument}
-          documentType="visa" travelReadinessDocuments={travelReadinessDocuments}
+          documentType="visa" {...travelReadinessDocuments}
           fetchUserData={fetchUserData} user={user}
           document={document} modalType={modalType} fetchingDocument={fetchingDocument} />
       </Modal>

@@ -8,7 +8,7 @@ import './Attachments.scss';
 
 class Attachments extends Component {
   renderThumbnail = (filename, url) => {
-    if (path.extname(filename) === '.pdf') {
+    if (path.extname(url) === '.pdf') {
       return (
         <embed
           src={`${url}#toolbar=0&statusbar=0&page=1`}

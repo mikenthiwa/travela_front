@@ -35,7 +35,7 @@ describe('<PassportForm/>',  () => {
   };
 
 
-  const passportFile = new Blob(['Passport file'], {type: 'application/pdf', name: 'Filename.pdf'});
+  const passportFile = new Blob(['Passport file'], {type: 'application/msword', name: 'Filename.doc'});
 
   const event = {
     target: {
@@ -153,7 +153,7 @@ describe('<PassportForm/>',  () => {
 
     wrapper.setState({documentUploaded: false});
     wrapper.find('form').simulate('submit');
-    expect(toast.error).toHaveBeenCalled();
+    expect(toast.error).toHaveBeenCalledWith('Invalid file type. Please upload an image');
   });
 
   it('toasts an error if cloudinary returns an error', () => {

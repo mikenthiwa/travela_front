@@ -98,10 +98,10 @@ const wrapperWithVisaDocumentField = mount(
 const textFile = new Blob(['This is a text file'], {type : 'text/plain'});
 textFile.name = 'textFile.txt';
 
-const validFile =new Blob(['x'.repeat(20000000)], {type : 'image/jpeg'});
+const validFile =new Blob(['x'.repeat(10000000)], {type : 'image/jpeg'});
 validFile.name = 'file.png';
 
-const invalidFileSize = new Blob(['x'.repeat(20000001)], {type : 'image/jpeg'});
+const invalidFileSize = new Blob(['x'.repeat(10000001)], {type : 'image/jpeg'});
 invalidFileSize.name = 'invalidFileSize.jpeg';
 
 
@@ -437,7 +437,7 @@ describe('<OtherDocumentForm />', () => {
     expect(wrapperWithOtherDocumentField.instance().state.hasBlankFields).toBe(false);
   });
 
-  it('Maximum size should be 20MB', ()=>{
+  it('Maximum size should be 10MB', ()=>{
     const newProps = {
       ...props,
       modalType: 'add visa'
@@ -452,7 +452,7 @@ describe('<OtherDocumentForm />', () => {
     const wrapper = mount(<VisaDefault {...newProps} />);
     event.target.files = [invalidFileSize];
     wrapper.find('#select-file').simulate('change', event);
-    expect(toast.error).toHaveBeenCalledWith('File is too large');
+    expect(toast.error).toHaveBeenCalledWith('This upload has exceeded the 10 MB limit that is allowed');
   });
 
   it('should create visa if all the data is valid',  () => {
@@ -608,7 +608,7 @@ describe('<OtherDocumentForm />', () => {
   it('shows a toaster if file size is invalid', () => {
     event.target.files = [invalidFileSize];
     wrapper.find('#select-file').simulate('change', event);
-    expect(toast.error).toHaveBeenCalledWith('File is too large');
+    expect(toast.error).toHaveBeenCalledWith('This upload has exceeded the 10 MB limit that is allowed');
   });
 
 });

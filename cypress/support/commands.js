@@ -13,12 +13,30 @@ Cypress.Commands.add('uploadFile', (filePath,fileType) => {
             type: fileType
           });
           const dataTransfer = new DataTransfer();
-          const el = $input[0]
-          dataTransfer.items.add(testFile)
+          const el = $input[0];
+          dataTransfer.items.add(testFile);
           el.files = dataTransfer.files;
           return cy.wrap($input).trigger('change', {force: true});
         });
     });
+  });
+});
+
+//Adds pdf document
+Cypress.Commands.add('upload_pdf', (fileName, fileType, selector) => {
+  return cy.get(selector).then(subject => {
+    cy.fixture(fileName, 'base64')
+      .then(Cypress.Blob.base64StringToBlob)
+      .then(blob => {
+        const el = subject[0];
+        const testFile = new File([blob], fileName, {
+          type: fileType
+        });
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(testFile);
+        el.files = dataTransfer.files;
+        return cy.wrap(subject).trigger('change', {force: true});
+      });
   });
 });
 

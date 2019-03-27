@@ -28,7 +28,7 @@ class FileUploadField extends Component{
         ? name.length > 50
           ? `${name.substring(0, 50)}...`
           : name
-        : uploadText
+        : 'Choose from computer'
     );
   };
 
@@ -46,9 +46,9 @@ class FileUploadField extends Component{
             <p>
               { this.getUrlLink(name)}
             </p>
-            <p className="maximum-file-size">Maximum file size - 20MB</p>
+            <p className="maximum-file-size">Maximum file size - 10MB</p>
           </div>
-          <input type="file" onChange={handleUpload} id="select-file"  />
+          <input type="file" onChange={handleUpload} id="select-file" accept="image/jpg, image/png, application/pdf" />
         </label>
       </div>
     );
