@@ -28,10 +28,9 @@ filters: &filters
   filters:
     branches:
       only:
-        - dont-deploy
-        # - master
-        # - develop
-        # - /(release|hotfix)\/v[0-9].[0-9].[0-9]/
+        - master
+        - develop
+        - /(release|hotfix)\/v[0-9].[0-9].[0-9]/
 
 persist_to_workspace: &persist_to_workspace
   persist_to_workspace:
