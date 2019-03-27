@@ -39,17 +39,18 @@ export default class CalendarRange extends Component {
   }
 
   render() {
-    const { dateRangePicker } = this.state;
+    const { dateRangePicker: { selection, selection: { startDate }} } = this.state;
     return (
       <DateRangePicker
         onChange={this.handleRangeChange}
         className="PreviewArea"
         months={2}
+        shownDate={startDate}
         minDate={addDays(new Date(), -300)}
         maxDate={addDays(new Date(), 900)}
         direction="horizontal"
-        scroll={{ enabled: true }}
-        ranges={[dateRangePicker.selection]}
+        scroll={{ enabled: false }}
+        ranges={[selection]}
       />
     );
   }
