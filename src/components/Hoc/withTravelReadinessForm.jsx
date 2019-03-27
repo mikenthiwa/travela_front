@@ -70,7 +70,6 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
           'MM/DD/YYYY'
         )
       };
-
       if (image) {
         const fd = new FormData();
         fd.append('file', image);
@@ -169,7 +168,9 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
           {fetchingDocument ? <Preloader /> : (
             <FormContext values={values} errors={errors} targetForm={this}>
               <form className="travel-document-form" onSubmit={this.handleSubmit}>
-                {<FormFieldSet visaType={visaType} onChangeVisa={this.onChangeVisa} otherVisaTypeDetails={otherVisaTypeDetails} />}
+                {<FormFieldSet
+                  visaType={visaType} onChangeVisa={this.onChangeVisa}
+                  values={values} otherVisaTypeDetails={otherVisaTypeDetails} />}
                 <div className="travel-document-select-file">
                   <p className="attach-document-text">
                     {

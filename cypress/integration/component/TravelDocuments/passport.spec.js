@@ -59,7 +59,7 @@ describe('Add passport page ', () => {
       cy.get('input[name=passportNumber]')
         .wait(2000)
         .type('PST 45678');
-      cy.get('input[name=nationality]')
+      cy.get('.occupationInput')
         .wait(2000)
         .type('Ugandan');
       cy.get('input[name=dateOfBirth]')
@@ -100,7 +100,7 @@ describe('Add passport page ', () => {
       cy.get('input[name=passportNumber]')
         .wait(2000)
         .type('PST 87654');
-      cy.get('input[name=nationality]')
+      cy.get('.occupationInput')
         .wait(2000)
         .type('Ugandan');
       cy.get('input[name=dateOfBirth]')
@@ -145,7 +145,7 @@ describe('Add passport page ', () => {
       cy.get('input[name=passportNumber]')
         .wait(2000)
         .type('PST 87654');
-      cy.get('input[name=nationality]')
+      cy.get('.occupationInput')
         .wait(2000)
         .type('Ugandan');
       cy.get('input[name=dateOfBirth]')

@@ -15,7 +15,6 @@ class TravelStipendFieldset extends Component {
       stipends,
       values,
     } = this.props;
-    const dropDownnDisplay = [];
     const centersWithStipends = stipends.map(stipend => stipend.center.location);
     const centerChoices = centers.map(center => center.location);
     const finalCenterChoices = centerChoices.filter((center, i) => {

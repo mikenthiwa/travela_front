@@ -11,7 +11,7 @@ describe('user can add visas', () => {
   const createTestVisa = (expiryDate) => {
     cy
       .get('#actionButton').click()
-      .get('input[name="country"]').type('Uganda')
+      .get('.occupationInput').type('Uganda')
       .get('[name=entryType] ').click()
       .get('div[name=entryType] > ul > li#choice:first').click()
       .get('[name=visaType]').click()
@@ -40,7 +40,7 @@ describe('user can add visas', () => {
       .get('.travel-document-select-file > :nth-child(1)')
       .contains('Attach the image or PDF of your visa document')
       .get('.maximum-file-size').contains('Maximum file size - 10MB')
-      .get('input[name="country"]').type('Uganda')
+      .get('.occupationInput').type('Uganda')
       .get('[name=entryType] ').click()
       .get('div[name=entryType] > ul > li#choice:first').click()
       .get('[name=visaType]').click()
@@ -119,7 +119,7 @@ describe('user can add visas', () => {
       .get('#toggleIcon2').click()
       .get('#iconBtn2').click()
       .get('input[name="dateOfIssue"]').clear().type('12/12/2010')
-      .get('input[name="country"]').clear().type('Nigeria')
+      .get('.occupationInput').clear().type('Nigeria')
       .get('#submit').click().wait(9000);
     deleteTestVisa();
   });

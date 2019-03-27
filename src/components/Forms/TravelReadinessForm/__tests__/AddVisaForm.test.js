@@ -79,7 +79,7 @@ describe('<AddVisaForm />', () => {
         '.document-input__input-container__prompts__text p'
       ).at(0).text()).toEqual('Choose from computer');
     wrapper.find('#select-file').simulate('change', event);
-    wrapper.find('input[name="country"]').simulate('change', {
+    wrapper.find('.occupationInput').simulate('change', {
       target: {
         value: 'Uganda'
       }});

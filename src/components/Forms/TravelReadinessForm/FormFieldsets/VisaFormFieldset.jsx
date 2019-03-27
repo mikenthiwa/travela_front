@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import {PropTypes} from 'prop-types';
 import '../TravelDocument.scss';
+import { uniq } from 'lodash';
+import countries  from 'world-countries';
 import InputRenderer from '../../FormsAPI';
 import formMetadata from '../../FormsMetadata/TravelReadinessMetaData/NewVisaMetadata';
 import { reasonsWarningColor } from '../../NewRequestForm/FormFieldsets/TravelDetailsItem';
@@ -17,10 +19,14 @@ class VisaFormFieldSet extends Component {
       </div>
     );
   }
+  getCountry = () => {
+    const countryChoices = countries.map(country => country.name.common);
+    return uniq(countryChoices);
+  }
 
   render() {
     const {renderInput} = new InputRenderer(formMetadata);
-    const { visaType, onChangeVisa, otherVisaTypeDetails } = this.props;
+    const { visaType, onChangeVisa, otherVisaTypeDetails, values: { country } } = this.props;
     const characters = otherVisaTypeDetails;
     let charLength = characters ? characters.trim().length : '';
     let reasonsLimit = reasonsWarningColor(charLength, 140);
@@ -28,13 +34,12 @@ class VisaFormFieldSet extends Component {
     return (
       <fieldset>
         <div className="input-group visa-input">
-          {renderInput('country', 'text')}
-          {renderInput('entryType', 'dropdown-select', {
-            size: ''
-          })}
+          {renderInput('country', 'filter-dropdown-select',
+            { choices: this.getCountry(), size: '', value: country }
+          )}
+          {renderInput('entryType', 'dropdown-select', { size: '' })}
           {renderInput('dateOfIssue', 'date', {
-            maxDate: moment(),
-            showYearDropdown: true
+            maxDate: moment(), showYearDropdown: true
           })}
           {renderInput('expiryDate', 'date', {
             minDate: moment(),
@@ -60,12 +65,14 @@ class VisaFormFieldSet extends Component {
 VisaFormFieldSet.propTypes={
   visaType: PropTypes.string,
   onChangeVisa: PropTypes.func.isRequired,
-  otherVisaTypeDetails: PropTypes.string
+  otherVisaTypeDetails: PropTypes.string,
+  values: PropTypes.object
 };
 
 VisaFormFieldSet.defaultProps = {
   visaType: '',
-  otherVisaTypeDetails: ''
+  otherVisaTypeDetails: '',
+  values: {}
 };
 
 export default VisaFormFieldSet;

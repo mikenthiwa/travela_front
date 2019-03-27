@@ -1,4 +1,4 @@
-const inputLabels = {
+export default {
   name: {
     label: 'Name as Seen On Passport',
   },
@@ -27,4 +27,3 @@ const inputLabels = {
     label: 'Expiry Date (MM/DD/YYYY)'
   },
 };
-export default inputLabels;
