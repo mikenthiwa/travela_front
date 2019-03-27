@@ -21,10 +21,12 @@ class ProfileDetailsFieldSets extends Component {
         </div>
         {renderInput('gender', 'button-toggler')}
         <div>
-          {renderInput('role', 'text', { disabled: true })}
+          {renderInput('role', 'text', {
+            className: 'no-disable' })}
         </div>
         <div>
-          {renderInput('department', 'text', { disabled: true })}
+          {renderInput('department', 'text', {
+            className: 'no-disable' })}
         </div>
         {renderInput('manager', 'filter-dropdown-select', {
           className: 'profile_dropdown no-disable manager',
