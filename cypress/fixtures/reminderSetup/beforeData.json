@@ -1,0 +1,34 @@
+{
+    "success": true,
+    "message": "success",
+    "metaData": {
+        "templates": [
+            {
+                "cc": [
+                    "kamau.mbugua@andela.com"
+                ],
+                "id": 24,
+                "name": "passport reminder two",
+                "from": "mary.njau@andela.com",
+                "subject": "Reminder for passport upload",
+                "message": "Please upload your passport for travel readiness by tommorow",
+                "disabled": false,
+                "createdAt": "2019-03-26T18:00:33.861Z",
+                "updatedAt": "2019-03-26T18:00:33.861Z",
+                "deletedAt": null,
+                "createdBy": 1,
+                "creator": {
+                    "fullName": "Travela Test",
+                    "email": "travela-test@andela.com",
+                    "userId": "-LSsFyueC086niFc9rrz"
+                },
+                "disableReasons": []
+            }
+        ],
+        "pagination": {
+            "pageCount": 1,
+            "currentPage": 1,
+            "totalCount": 1
+        }
+    }
+}

@@ -1,0 +1,40 @@
+{
+  "success": true,
+  "message": "passport has been successfully disabled",
+  "updatedTemplate": {
+    "cc": ["sylvia.mbugua@andela.com"],
+    "id": 28,
+    "name": "passport reminder",
+    "from": "andrew.hinga@andela.com",
+    "subject": "Second Reminder for passport upload",
+    "message": "Please upload your passport for travel readiness by tommorow",
+    "disabled": true,
+    "createdAt": "2019-03-26T11:52:13.584Z",
+    "updatedAt": "2019-03-26T15:51:48.644Z",
+    "deletedAt": null,
+    "createdBy": 1,
+    "creator": {
+      "fullName": "Travela Test",
+      "email": "travela-test@andela.com",
+      "userId": "-LSsFyueC086niFc9rrz"
+    },
+    "disableReasons": [
+      {
+        "id": 1,
+        "reason": "This template is no longer in use",
+        "createdAt": "2019-03-27T09:40:18.574Z",
+        "updatedAt": "2019-03-27T09:40:18.574Z",
+        "conditionId": null,
+        "reminderEmailTemplateId": 28
+      }
+    ]
+  },
+  "reason": {
+    "id": 1,
+    "reason": "This template is no longer in use",
+    "reminderEmailTemplateId": 28,
+    "updatedAt": "2019-03-27T09:40:18.574Z",
+    "createdAt": "2019-03-27T09:40:18.574Z",
+    "conditionId": null
+  }
+}

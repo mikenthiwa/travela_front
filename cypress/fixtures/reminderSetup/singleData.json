@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "reminderEmailTemplate": {
+    "cc": ["sylvia.mbugua@andela.com"],
+    "id": 28,
+    "name": "passport reminder",
+    "from": "andrew.hinga@andela.com",
+    "subject": "Second Reminder for passport upload",
+    "message": "Please upload your passport for travel readiness by tommorow",
+    "disabled": false,
+    "createdAt": "2019-03-26T11:52:13.584Z",
+    "updatedAt": "2019-03-26T15:51:48.644Z",
+    "deletedAt": null,
+    "createdBy": 1,
+    "creator": {
+      "id": 1,
+      "fullName": "Travela Test",
+      "email": "travela-test@andela.com",
+      "department": "Fellowship-Programs"
+    }
+  }
+}
