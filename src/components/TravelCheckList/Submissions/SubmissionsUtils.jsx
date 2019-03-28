@@ -206,9 +206,16 @@ class SubmissionsUtils extends Component {
       displayDropdown: !display
     });
   }
+
+  handleShowDocumentsModal = () => {
+    const { handleUserDocumentUpload, checkId } = this.props;
+    this.toggleDropdownDisplay();
+    handleUserDocumentUpload(`modal-${checkId}`);
+  }
+
   selectDocumentDropdowndown = () =>{
     const { displayDropdown } = this.state;
-    const { handleUserDocumentUpload, checkId, checklistItem: { name } } = this.props;
+    const {checklistItem: { name } } = this.props;
     const visible = displayDropdown ? 'block' : 'none';
     return (
       name === 'Travel Ticket' ? (
@@ -222,7 +229,7 @@ class SubmissionsUtils extends Component {
             Select Document
           </button>
           <div className="travelSubmission--select__upload-modal " style={{display:visible}}>
-            <button className="from-uploads" onClick={()=> handleUserDocumentUpload(`modal-${checkId}`)} type="button">
+            <button className="from-uploads" onClick={()=> this.handleShowDocumentsModal()} type="button">
             Verified Document(s)
             </button>
             <button className="from-computer" onClick={this.selectFromComputer} type="button">

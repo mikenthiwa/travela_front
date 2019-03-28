@@ -17,7 +17,7 @@ class RequestTabHead extends Component {
     const completed = range.indexOf(id) !== -1? 'complete' : 'incomplete';
     const iconColor = range.indexOf(id) !== -1? '#10A36D' : '#3359DB';
     return(
-      <div key={id} className={`request__tab-card ${current} ${completed}`}>
+      <div key={id} className={`request__tab-card ${current} ${!current && completed}`}>
         <div className="mark">
           <img src={mark} alt="" />
         </div>

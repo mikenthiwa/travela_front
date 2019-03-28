@@ -28,9 +28,9 @@ class TravelReadinessDocuments extends Component {
     let searchParams = params.get('search');
     if(searchParams) {
       const searchWithPagination = `search=${searchParams}&page=${page}`;
-      history.push(`/travel-readiness?${searchWithPagination}`);
+      history.push(`/trip-planner/travel-readiness?${searchWithPagination}`);
     } else {
-      history.push(`/travel-readiness?page=${page}`);
+      history.push(`/trip-planner/travel-readiness?page=${page}`);
     }
   }
 

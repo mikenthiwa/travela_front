@@ -37,30 +37,36 @@ class CheckListSubmissions extends Component {
           </div>
           {destinationName}
         </div>
-        {checklist.length &&
-          checklist.map(item => (
-            <SubmissionItem
-              key={`${item.id}`}
-              checklistItem={item}
-              checkId={`${tripId}-${item.id}`}
-              fileUploadData={fileUploads}
-              request={request}
-              handleFileUpload={handleFileUpload}
-              requestId={requestId}
-              postSubmission={postSubmission}
-              postSuccess={postSuccess}
-              tripId={tripId}
-              tripType={tripType}
-              itemsToCheck={itemsToCheck}
-              isUploadingStage2={isUploadingStage2}
-              handleUserDocumentUpload={handleUserDocumentUpload}
-              closeModal={closeModal}
-              shouldOpen={shouldOpen}
-              modalType={modalType}
-              history={history}
-              userReadinessDocument={userReadinessDocument}
-            />
-          ))}
+        {
+          checklist.length &&
+          checklist.map((item) => (
+            (
+              (item.name !== 'Travel Ticket' || item.submissions.length > 0) &&
+              (
+                <SubmissionItem
+                  key={`${item.id}`}
+                  checklistItem={item}
+                  travelTicket={travelTicket}
+                  checkId={`${tripId}-${item.id}`}
+                  fileUploadData={fileUploads}
+                  request={request}
+                  handleFileUpload={handleFileUpload}
+                  requestId={requestId}
+                  postSubmission={postSubmission}
+                  postSuccess={postSuccess}
+                  tripId={tripId}
+                  tripType={tripType}
+                  itemsToCheck={itemsToCheck}
+                  isUploadingStage2={isUploadingStage2}
+                  handleUserDocumentUpload={handleUserDocumentUpload}
+                  closeModal={closeModal}
+                  shouldOpen={shouldOpen}
+                  modalType={modalType} history={history}
+                  userReadinessDocument={userReadinessDocument}
+                />
+              ))
+          ))
+        }
       </div>
     );
   };

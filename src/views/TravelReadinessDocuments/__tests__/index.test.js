@@ -67,7 +67,7 @@ describe('TravelReadinessDocuments', () => {
     travelReadinessDocuments.find('#next-button').simulate('click');
     expect(onPageChange).toHaveBeenCalledWith(2);
     expect(props.history.push)
-      .toHaveBeenCalledWith('/travel-readiness?page=2');
+      .toHaveBeenCalledWith('/trip-planner/travel-readiness?page=2');
   });
 
   it('should not display pagination component when there\'s no travel readiness data', () => {

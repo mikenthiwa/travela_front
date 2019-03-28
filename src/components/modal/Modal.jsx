@@ -37,13 +37,11 @@ class Modal extends PureComponent {
           (
             (url.includes('/requests')) ?
               (
-                <Link to={url}>
-                  <button
-                    type="button" onClick={closeDeleteModal ?
-                      closeDeleteModal : closeModal} className="modal-close">
-                    <img alt="close" src={closeButton} />
-                  </button>
-                </Link>
+                <button
+                  type="button" onClick={closeDeleteModal ?
+                    closeDeleteModal : closeModal} className="modal-close">
+                  <img alt="close" src={closeButton} />
+                </button>
               ) : (
                 <button
                   type="button" onClick={closeDeleteModal ? 

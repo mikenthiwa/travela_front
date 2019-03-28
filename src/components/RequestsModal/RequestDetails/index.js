@@ -67,7 +67,8 @@ export class RequestDetails extends Component {
       newSteps[currentTab].statusDate = 'You are currently here';
       this.setState({
         steps: newSteps,
-        currentTab: 2});
+        currentTab: 2}
+      );
     }
   }
 

@@ -25,9 +25,6 @@
     flex-direction: row-reverse;
   }
 
-  &__destination:first-child {
-    margin: 20px 0;
-  }
   &__destination:last-child {
     margin-bottom: 25px;
 
@@ -252,6 +249,8 @@
   }
   &--select {
     position: relative;
+    margin-top: 20px;
+
     &__modal {
       top: 28%;
       &-content-body {
@@ -336,6 +335,7 @@
       box-sizing: border-box;
       height: 29px;
       width: 142px;
+      display: block;
       border: 1px solid #e4e4e4;
       border-radius: 1px;
       background-color: white;
@@ -412,8 +412,6 @@
   &--input {
     &__upload-field {
         display: flex;
-        justify-content: flex-end;
-        margin-top: -22px;
       input {
         display: none;
       }
@@ -615,6 +613,7 @@
 }
 
 .destination {
+  padding-top: 20px;
   padding-left: 30px;
   font-weight: bold;
   font-size: 1.2em;
@@ -623,16 +622,16 @@
 }
 
 .country-flag {
-  height: 56px;
-  width: 56px;
+  height: 36px;
+  width: 36px;
   overflow: hidden;
   border-radius: 50%;
   margin-right: 12px;
 }
 
 .flag {
-  height: 171%;
-  width: 136%;
-  margin-left: -11px;
-  margin-top: -23px;
+  height: 220%;
+  width: 150%;
+  margin-left: -9px;
+  margin-top: -22px;
 }
