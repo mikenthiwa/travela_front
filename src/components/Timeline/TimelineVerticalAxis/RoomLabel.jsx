@@ -16,12 +16,13 @@ class RoomLabel extends PureComponent {
   }
 
   renderMainteinanceForm(type){
-    const {closeModal, name, id, status, shouldOpen, addmaintenanceRecord, 
+    const {closeModal, name, id, status, shouldOpen, addmaintenanceRecord,
       updateMaintenanceRecord, modalType, timelineDateRange, guestHouseId} = this.props;
     return(
       <Modal
         closeModal={closeModal}
         width="480px"
+        customModalStyles="room-maintanance"
         visibility={shouldOpen && type === modalType ? 'visible' : 'invisible'}
         title={`Mark ${name} Unavailable`}
       >

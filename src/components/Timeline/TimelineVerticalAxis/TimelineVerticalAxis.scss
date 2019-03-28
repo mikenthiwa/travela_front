@@ -81,7 +81,7 @@
   }
 }
 
-.container_room_fault{
+.container_room_fault {
   border-style: solid;
   border-width: 1px;
   height: 14px;
@@ -89,11 +89,14 @@
   outline:none !important;
   background: cornflowerblue;
 }
-.container_room_fine{
+.container_room_fine {
   border-style: solid;
   border-width: 1px;
   height: 14px;
   width: 14px;
   outline:none !important;
+}
+.room-maintanance {
+  margin-top: 154px;
 }
 
