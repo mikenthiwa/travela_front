@@ -23,6 +23,7 @@
   border-right: 1px solid #E4E4E4;
 
   &__fixed_wrapper {
+    overflow-y: scroll;
     position: fixed;
     top: 0px;
     width: 16.666667%;
