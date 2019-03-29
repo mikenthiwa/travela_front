@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { FormContext } from '../FormsAPI';
 import SubmitArea from './FormFieldsets/SubmitArea';
 import TravelReasonFieldset from './FormFieldsets';
@@ -28,7 +29,7 @@ export default class NewTravelReasonForm extends Component {
       const { title, description } = editReason;
       this.setState(
         {
-          values: { title, description }
+          values: { title: _.capitalize(title), description }
         });
     }
   };

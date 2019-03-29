@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import Modal from '../modal/Modal';
 import InputRenderer from '../Forms/FormsAPI';
 import FormContext from '../Forms/FormsAPI/FormContext/FormContext';
@@ -17,7 +18,7 @@ const RenderTravelReasonDetails = (props) => {
           {renderInput('title', 'text', {
             className: 'title-input',
             disabled: true,
-            value: reasonDetails.title
+            value: _.capitalize(reasonDetails.title)
           }
           )}
           {renderInput('description', 'textarea', {

@@ -26,7 +26,7 @@ const DeleteRequestForm = ({
         <strong>{ itemName }</strong>
           will be removed from guest travel checklist
       </span>
-      <div className="delete-checklist-item__hr" />
+      <div className="delete-checklist-item__hr checklist-hr" />
       <SubmitArea
         loading={deletingChecklist}
         onCancel={closeModal}
