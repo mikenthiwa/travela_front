@@ -1,4 +1,3 @@
-
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ImageLink from '../../image-link/ImageLink';
@@ -14,16 +13,11 @@ class UserInfo extends PureComponent {
           imageClass="modal__oval"
         />
         <div>
-          <div>
-            {requestData && requestData.name}
-          </div>
+          <div>{requestData && requestData.name}</div>
           <div className="user-role">
-            {
-              requestData && (
-                `${requestData.role}${requestData.role && ','} 
-                ${requestData.department || ''}`
-              )
-            }
+            {requestData &&
+              `${requestData.role || 'N/A'} , 
+               ${requestData.department || 'N/A'}`}
           </div>
         </div>
       </div>
@@ -32,11 +26,11 @@ class UserInfo extends PureComponent {
 }
 
 UserInfo.propTypes = {
-  requestData: PropTypes.object,
+  requestData: PropTypes.object
 };
 
 UserInfo.defaultProps = {
-  requestData: {},
+  requestData: {}
 };
 
 export default UserInfo;
