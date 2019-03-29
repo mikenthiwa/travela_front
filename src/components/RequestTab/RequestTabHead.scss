@@ -115,3 +115,10 @@
 .hide_element {
   z-index: -1;
 }
+  .page-header__edit-request{
+    display: inline;
+    align-items: center;
+    a {
+      margin-right: 5px;
+    }
+  }

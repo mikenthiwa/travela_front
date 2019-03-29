@@ -7,7 +7,7 @@ export default ({ trips }) => trips.map((trip) => {
     destination, beds
   } = trip;
   const accommodation = accommodationType !== 'Residence' ? 
-    accommodationType : `${beds.rooms.roomName} ${beds.rooms.guestHouses.houseName}`; 
+    accommodationType : `${beds.bedName}, ${beds.rooms.roomName}, ${beds.rooms.guestHouses.houseName}`; 
   return (
     <div className="row" key={id}>
       <div className="partition">

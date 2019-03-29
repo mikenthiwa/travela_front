@@ -1,7 +1,7 @@
 
 function validate(field)  {
   const targetForm = this;
-  let { values, errors, optionalFields } = targetForm.state;
+  let { values, errors, optionalFields, trips } = targetForm.state;
   [errors, values] = [{ ...errors }, { ...values }];
   let hasBlankFields = false;
   let sameOriginDestination = true;
@@ -30,6 +30,13 @@ function validate(field)  {
     errors[`destination-${index}`] = '';
     targetForm.setState(prevState => ({
       ...prevState, errors, hasBlankFields, sameOriginDestination}));
+  }
+  // when removing a trip on edit 
+  if(!index && targetForm.props.requestOnEdit && 
+    (targetForm.props.requestOnEdit.trips.length !== trips.length)){
+    targetForm.setState(prevState =>({
+      ...prevState, sameOriginDestination: false
+    }));
   }
 
   if (!field){

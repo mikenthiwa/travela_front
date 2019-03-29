@@ -147,6 +147,7 @@ const requests = (state = initialState, action) => {
     return {
       ...state,
       fetchingRequest: false,
+      comments: action.response.comments,
       requestOnEdit: action.response
     };
   case FETCH_EDIT_REQUEST_FAILURE:
@@ -200,7 +201,9 @@ const requests = (state = initialState, action) => {
       comments
     };
   case DELETE_COMMENT_SUCCESS:
+
     comments = state.comments.filter(comment => comment.id !== action.commentId);
+
     return {
       ...state,
       requestData: {

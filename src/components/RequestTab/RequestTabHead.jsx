@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { PropTypes } from 'prop-types';
 import './RequestTabHead.scss';
+import { Link } from 'react-router-dom';
 import mark from '../../images/icons/new-request-icons/mark.svg';
+import backButton from '../../images/back-icon.svg';
+
 
 class RequestTabHead extends Component {
   constructor(props){
@@ -38,7 +41,27 @@ class RequestTabHead extends Component {
     return (
       <div className="new-request_title">
         {
-          editing ? 'EDIT A TRAVEL REQUEST' : 'CREATE A NEW TRAVEL REQUEST'
+          editing ? 
+            (
+              <div>
+                <h1 className="page-header__edit-request">
+               
+                  <Link to="/requests"><img src={backButton} className="header__link" alt="back icon" /></Link>
+                
+                  <span className="edit__request-title-text">
+                    {'EDIT A TRAVEL REQUEST'}
+                  </span>
+                </h1>
+              </div>
+            ):
+            (
+              <div>
+                <span className="new__request-title-text">
+                  {'CREATE A NEW TRAVEL REQUEST'}
+                </span>
+    
+              </div>
+            )
         }
       </div>
     );

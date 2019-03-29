@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { MemoryRouter } from 'react-router-dom';
 import RequestTabHead from '../RequestTabHead';
+
 import tabIcons from '../../../images/icons/new-request-icons';
 
 const props = {
@@ -11,7 +13,8 @@ const props = {
     { id:4, name:'Travel Checklist', status:'', icon: tabIcons.checkList }   
   ],
   currentTab: 3,
-  editing: false
+  editing: false,
+
 };
 
 let wrapper;
@@ -30,22 +33,26 @@ describe('<RequestTabHead />', () => {
     wrapper.instance().renderTab(props.steps[0], 1, props.steps[1].icon);
     expect(renderTabSpy).toHaveBeenCalled();
   });
-  it('should render the correct title', () => {
-    const wrapper = mount(<RequestTabHead {...props} />);
+  it('should render the correct title for creating request', () => {
+    const wrapper = mount(
+      <MemoryRouter>
+        <RequestTabHead {...props} />
+      </MemoryRouter>);
 
-    let title = wrapper.find('.new-request_title').text();
+    let title = wrapper.find('.new__request-title-text').text();
+    
 
-    expect(/CREATE/.test(title)).toBeTruthy();
+    expect(title).toEqual('CREATE A NEW TRAVEL REQUEST');
+  });
+  it('should render the correct title for edit', () => {
+    const wrapper = mount(
+      <MemoryRouter>
+        <RequestTabHead {...props} editing />
+      </MemoryRouter>);
+    let title = wrapper.find('.edit__request-title-text').text();
+    
 
-    wrapper.unmount();
+    expect(title).toEqual('EDIT A TRAVEL REQUEST');
 
-    wrapper.setProps({
-      editing: true
-    });
-
-    wrapper.mount();
-
-    title = wrapper.find('.new-request_title').text();
-    expect(/EDIT/.test(title)).toBeTruthy();
   });
 });

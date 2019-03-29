@@ -1,12 +1,17 @@
 import React from 'react';
 import sinon from 'sinon';
+import { Provider } from 'react-redux';
+import { MemoryRouter, Link } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
+import MutationObserver from 'mutation-observer';
 import { RequestPage as RequestPageHOC } from '../NewRequests';
 import travelChecklistMockData from '../../../mockData/travelChecklistMockData';
 import beds from '../../AvailableRooms/__mocks__/mockData/availableRooms';
 import { submissionInfo } from '../../../mockData/checklistSubmissionMockData';
 
 const RequestPage = RequestPageHOC();
+global.MutationObserver = MutationObserver;
+window.document.getSelection = () => {};
 
 let props = {
   requests: [
@@ -154,6 +159,8 @@ let props = {
   listTravelReasons: {},
   validateTrips: jest.fn(),
   fetchEditRequest: jest.fn(),
+  comments:[],
+ 
 };
 
 const initialState = {
@@ -182,7 +189,15 @@ const initialState = {
     { fullName: 'Chris Akanmu', email: 'chris@andela.com' }
   ],
   getCurrentUserRole: 'tomato',
-  travelChecklist: { checklistItems: travelChecklistMockData }
+  travelChecklist: { checklistItems: travelChecklistMockData },
+  comments: {
+    creatingComment: false,
+    handleEditComment: jest.fn(),
+    editComment: jest.fn(),
+    handleNoEdit: jest.fn(),
+
+  }
+
 };
 const mockStore = configureStore();
 const store = mockStore(initialState);
@@ -191,16 +206,27 @@ describe('<Requests>', () => {
   process.env.REACT_APP_CITY = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD-fvLImnNbTfYV3Pd1nJuK7NbzZJNr4ug&libraries=places';
 
   it('should render the Requests without crashing', () => {
-    const wrapper = mount(<RequestPage {...props} />
-    );
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <RequestPage {...props} />
+        </MemoryRouter>
+      </Provider>);
     expect(wrapper.length).toBe(1);
     wrapper.unmount();
   });
 
+  
+
   it('calls the componentDidMount method', () => {
     const spy = sinon.spy(RequestPage.prototype, 'componentDidMount');
     const { fetchUserRequests, fetchRoleUsers, fetchAllTravelReasons} = props;
-    const wrapper = mount(<RequestPage {...props} />);
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <RequestPage {...props} />
+        </MemoryRouter>
+      </Provider>);
     expect(spy.called).toEqual(true);
     expect(fetchRoleUsers.called).toEqual(true);
     expect(fetchRoleUsers.calledWith(53019)).toEqual(true);
@@ -210,9 +236,16 @@ describe('<Requests>', () => {
 
   it('should render the Requests for editing', () => {
     const RequestPage = RequestPageHOC(true);
-    const wrapper = mount(<RequestPage {...props} />);
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <RequestPage {...props} />
+        </MemoryRouter>
+      </Provider>);
+    
     expect(wrapper.length).toBe(1);
     wrapper.unmount();
   });
+
 
 });

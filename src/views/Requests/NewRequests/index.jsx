@@ -42,6 +42,7 @@ export const RequestPage = (editing = false) => {
       if (editing) {
         fetchEditRequest(request_id);
       }
+
     }
 
     render() {
@@ -49,7 +50,7 @@ export const RequestPage = (editing = false) => {
         loading, errors, roleUsers, requestOnEdit, editRequest, fetchUserRequests, occupations,
         travelChecklists, fetchTravelChecklist, fetchAvailableRooms, availableRooms,
         fetchAvailableRoomsSuccess, creatingRequest, fetchAllTravelReasons, history,
-        fetchAllTravelStipends, travelStipends, validateTrips, fetchingRequest, editingRequest
+        fetchAllTravelStipends, travelStipends, validateTrips, fetchingRequest, editingRequest, comments
       } = this.props;
       const { url } = this.state;
       return (
@@ -70,7 +71,7 @@ export const RequestPage = (editing = false) => {
               travelChecklists={travelChecklists} fetchTravelChecklist={fetchTravelChecklist}
               requestOnEdit={requestOnEdit} fetchUserRequests={() => fetchUserRequests(url)}
               history={history} fetchAllTravelStipends={fetchAllTravelStipends} travelStipends={travelStipends}
-              validateTrips={validateTrips} editing={editing} isEditing={editingRequest}
+              validateTrips={validateTrips} editing={editing} isEditing={editingRequest} comments={comments}
             />)
       );
     }

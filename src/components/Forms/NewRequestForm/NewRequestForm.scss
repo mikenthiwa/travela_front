@@ -306,6 +306,7 @@ form.new-request {
         justify-content:flex-end;
         width: 100%!important;
         justify-content: space-between;
+        margin-top: 10px;
         button:first-child{
           display:none;
         }
@@ -575,5 +576,19 @@ form.new-request {
     }
   }
 }
-
-
+.editrequest-details__comments{
+  margin-top: 22px;
+  margin-bottom: 78px;
+}
+.editRequest-comment__toggle{
+  width: 59%;
+}
+.editRequest__add-comment{
+  margin-bottom: 33px;
+  span:hover {
+    cursor: pointer;
+  }
+  img {
+    margin-right: 10px;
+  }
+}

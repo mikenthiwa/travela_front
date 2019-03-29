@@ -361,7 +361,7 @@ class NewRequestForm extends PureComponent {
     const { editing } = this.props;
     let {collapse, trips, values, prevValues, prevTrips = []} = this.state;
     const tripType = event.target.value;
-
+    const { requestOnEdit: { trips: nextTrips } } = this.props;
     this.setState(
       {
         selection: tripType
@@ -377,9 +377,10 @@ class NewRequestForm extends PureComponent {
     if (tripType === 'multi' && !collapse) {
       let parentIds,
         secondTripStateValues = {};
-      if (editing && newTrips.length > 1) {
-        parentIds = newTrips.length ;
+      if (editing || newTrips.length > 1) {
+        parentIds = newTrips.length || nextTrips.length;
         trips = newTrips;
+
       } else {
         parentIds = 2;
         trips = [].concat([trips[0] || {}, {
@@ -805,6 +806,7 @@ class NewRequestForm extends PureComponent {
     commentTitle, currentTab, editing
   ) => {
     const {isLoading} = this.state;
+    const { requestOnEdit, userData, comments } = this.props;
     return (
       <div className="trip__tab-body">
         <span className={`trip-${isLoading ? 'loading' : 'not-loading'}`}>
@@ -834,6 +836,9 @@ class NewRequestForm extends PureComponent {
           commentTitle={commentTitle}
           handleComment={this.handleComment}
           editing={editing}
+          requestData={requestOnEdit}
+          currentUser={userData}
+          comments={comments}
         />
       </div>
     );
@@ -893,7 +898,7 @@ class NewRequestForm extends PureComponent {
       ? true : false;
     return (
       <div className="width-91">
-        <RequestTabHeader steps={steps} currentTab={currentTab} editing={editing} />
+        <RequestTabHeader steps={steps} currentTab={currentTab} editing={editing} history={history} />
         <FormContext
           targetForm={this}
           values={values}
@@ -952,7 +957,8 @@ NewRequestForm.propTypes = {
   fetchTravelChecklist: PropTypes.func,
   travelChecklists: PropTypes.object,
   validateTrips: PropTypes.func.isRequired,
-  isEditing: PropTypes.bool
+  isEditing: PropTypes.bool,
+  comments: PropTypes.array,
 };
 
 NewRequestForm.defaultProps = {
@@ -973,7 +979,8 @@ NewRequestForm.defaultProps = {
   travelChecklists: {},
   fetchTravelChecklist: () => {
   },
-  isEditing: false
+  isEditing: false,
+  comments: []
 };
 
 export default NewRequestForm;

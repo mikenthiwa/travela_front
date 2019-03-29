@@ -2,6 +2,12 @@ import React from 'react';
 import sinon from 'sinon';
 import moxios from 'moxios';
 import moment from 'moment';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
+import MutationObserver from 'mutation-observer';
+import configureStore from 'redux-mock-store';
+import createSagaMiddleware from 'redux-saga';
+import { PropTypes } from 'prop-types';
 import NewRequestForm from '../NewRequestForm';
 import beds from '../../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
 import profileMock from '../../ProfileForm/__mocks__';
@@ -9,6 +15,8 @@ import tabIcons from '../../../../images/icons/new-request-icons';
 import travelStipendHelper from '../../../../helper/request/RequestUtils';
 
 
+global.MutationObserver = MutationObserver;
+window.document.getSelection = () => {};
 const {centers} = profileMock;
 
 describe('<NewRequestForm />', () => {
@@ -105,6 +113,7 @@ describe('<NewRequestForm />', () => {
           otherTravelReasons: 'my other reason'
         }
       ],
+      comments: []
     },
     availableRooms: {
       beds
@@ -294,7 +303,8 @@ describe('<NewRequestForm />', () => {
         }
       }
     ],
-    validateTrips: jest.fn()
+    validateTrips: jest.fn(),
+    comments: []
   };
   const event = {
     preventDefault: jest.fn(),
@@ -1252,154 +1262,214 @@ describe('<NewRequestForm />', () => {
     done();
   });
 
-  it('sets personal details when editing a trip request', () => {
-    const wrapper = mount(<NewRequestForm {...props} editing />);
-    const {requestOnEdit} = props;
-    wrapper.setProps({
-      requestOnEdit
-    });
-    const wrapperState = wrapper.state();
-    const {
-      values: {
-        name, gender, department, role, location, manager
+  describe('Request Edit', () => {
+    const sagaMiddleware = [createSagaMiddleware];
+    const mockStore = configureStore(sagaMiddleware);
+    const store = mockStore({
+      requests : {
+        requestOnEdit: props.requestOnEdit,
+        requestData: {
+          comments: {}
+        },
+      },
+      comments: {
+        creatingComment: false,
+        editingComment: false
       }
-    } = wrapperState;
-    const {
-      name: nameOnRequest,
-      gender: genderOnRequest,
-      department: departmentOnRequest,
-      role: roleOnRequest,
-      manager: managerOnRequest
-    } = requestOnEdit;
-
-    expect(name).toEqual(nameOnRequest);
-    expect(gender).toEqual(genderOnRequest);
-    expect(department).toEqual(departmentOnRequest);
-    expect(role).toEqual(roleOnRequest);
-    expect(location).toEqual('Kigali');
-    expect(manager).toEqual(managerOnRequest);
-  });
-
-  it('sets default trip state values when user is editing', () => {
-    const wrapper = mount(<NewRequestForm {...props} editing />);
+        
+    });
+    const wrapper =  mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <NewRequestForm {...props} editing />
+        </MemoryRouter>                  
+      </Provider>
+    );
     const {requestOnEdit} = props;
-    const {trips} = requestOnEdit;
-    wrapper.setProps({
-      requestOnEdit
-    });
-    const wrapperState = wrapper.state();
-    const {values} = wrapperState;
-
-    expect(values['origin-0']).toEqual(trips[0].origin);
-    expect(values['destination-0']).toEqual(trips[0].destination);
-    expect(values['departureDate-0']).toEqual(moment(trips[0].departureDate));
-    expect(values['bed-0']).toEqual(trips[0].bedId);
-    expect(values['otherReasons-0']).toEqual(trips[0].otherTravelReasons);
-    expect(values['trip-type-0']).toEqual(requestOnEdit.tripType);
-  });
-
-  it('sets the trips from the requestOnEdit', () => {
-    const wrapper = mount(<NewRequestForm {...props} />);
-
-    let wrapperState = wrapper.state();
-    expect(wrapperState.trips).toEqual([{}]);
-
-    wrapper.unmount();
-
-    wrapper.setProps({
-      editing: true
-    });
-
-    wrapper.mount();
-    wrapperState = wrapper.state();
-
-    const {requestOnEdit: {trips}} = props;
-    expect(wrapperState.trips[0].id).toEqual(trips[0].id);
-  });
-
-  it('sets the correct tab status "You are currently here" ', () => {
-    const wrapper = mount(<NewRequestForm {...props} />);
-    const currentTabString = 'You are currently here';
-
-    let wrapperState = wrapper.state();
-    let status = wrapperState.steps[0].status;
-    let currentTab = wrapperState.currentTab;
-
-    expect(status).toEqual(currentTabString);
-    expect(currentTab).toBe(1);
-
-    wrapper.unmount();
-
-    wrapper.setProps({
-      editing: true
-    });
-
-    wrapper.mount();
-    wrapperState = wrapper.state();
-    status = wrapperState.steps[0].status;
-    currentTab = wrapperState.currentTab;
-
-    const status2 = wrapperState.steps[1].status;
-
-    expect(status).toEqual('');
-    expect(currentTab).toBe(2);
-    expect(status2).toEqual(currentTabString);
-  });
-
-  it('should not submit data without validation', () => {
-    const wrapper = mount(<NewRequestForm {...props} editing />);
-    const requestForm = wrapper.find('form');
-    requestForm.simulate('submit');
-    expect(onSubmit).toHaveBeenCalledTimes(0);
-  });
-
-  it('should call the handleEditRequest on form submit', () => {
-    travelStipendHelper.getAllTripsStipend = jest.fn(() => ({
-      totalStipend: '$ 100',
-      stipendSubTotals: []
-    }));
-    const { handleEditRequest } = props;
-    const wrapper = mount(
-      <NewRequestForm
-        {...props}
-        editing
-        handleEditRequest={handleEditRequest}
-      />);
-
-    const tripOriginField = wrapper.find('input[name="origin-0"]');
-    const changeEvent = {
-      target: {
-        name: 'origin-0',
-        value: 'Lagos, Nigeria',
-        dataset: {
-          parentid: 0
+    it('sets personal details when editing a trip request', () => {
+      
+      wrapper.setProps({
+        requestOnEdit
+      });
+      const wrapperState = wrapper.find('NewRequestForm').instance().state;
+      const {
+        values: {
+          name, gender, department, role, location, manager
         }
-      }
-    };
-    tripOriginField.simulate('change', changeEvent);
-
-    const nextButton = wrapper.find('button.bg-btn--active');
-    const clickEvent = {
-      preventDefault: jest.fn()
-    };
-    nextButton.simulate('click', clickEvent);
-
-    const { travelStipends } = props;
-
-    wrapper.setProps({
-      travelStipends: {
-        ...travelStipends,
-        isLoading: false
-      }
+      } = wrapperState;
+      const {
+        name: nameOnRequest,
+        gender: genderOnRequest,
+        department: departmentOnRequest,
+        role: roleOnRequest,
+        manager: managerOnRequest
+      } = requestOnEdit;
+  
+      expect(name).toEqual(nameOnRequest);
+      expect(gender).toEqual(genderOnRequest);
+      expect(department).toEqual(departmentOnRequest);
+      expect(role).toEqual(roleOnRequest);
+      expect(location).toEqual('Kigali');
+      expect(manager).toEqual(managerOnRequest);
     });
-    wrapper.setState({ currentTab: 3 });
+  
+    it('sets default trip state values when user is editing', () => {
+      
+      const {trips} = requestOnEdit;
+      wrapper.setProps({
+        requestOnEdit
+      });
+      const wrapperState = wrapper.find('NewRequestForm').instance().state;
+      const {values} = wrapperState;
+  
+      expect(values['origin-0']).toEqual(trips[0].origin);
+      expect(values['destination-0']).toEqual(trips[0].destination);
+      expect(values['departureDate-0']).toEqual(moment(trips[0].departureDate));
+      expect(values['bed-0']).toEqual(trips[0].bedId);
+      expect(values['otherReasons-0']).toEqual(trips[0].otherTravelReasons);
+      expect(values['trip-type-0']).toEqual(requestOnEdit.tripType);
+    });
+  
+    it('sets the trips from the requestOnEdit', () => {
+      wrapper.setProps({
+        editing: false
+      });
+  
+      let wrapperState = wrapper.find('NewRequestForm').instance().state;
+      expect(wrapperState.trips).toEqual(props.requestOnEdit.trips);
+  
+      wrapper.unmount();
+  
+      wrapper.setProps({
+        editing: true
+      });
+  
+      wrapper.mount();
+      wrapperState = wrapper.find('NewRequestForm').instance().state;
+  
+      const {requestOnEdit: {trips}} = props;
+      expect(wrapperState.trips[0].id).toEqual(trips[0].id);
+    });
 
-    const stipendNextButton = wrapper.find('form').find('#stipend-next');
-    stipendNextButton.simulate('click', clickEvent);
+    it('should render comments', () => {
+      props.comments = [{
+        comment: '<p>testing <strong>#b5tdJCef7 #b5tdJCef7 #b5tdJCef7 #b5tdJCef7 #b5tdJCef7</strong></p>',
+        createdAt: '2019-02-26T16:29:13.579Z',
+        deletedAt: null,
+        documentId: null,
+        id: 'b-PDWlDkm',
+        isEdited: false,
+        requestId: 'b5tdJCef7',
+        updatedAt: '2019-02-26T16:29:13.579Z',
+        user: {
+          fullName: 'Hope Uwa',
+          gender: 'Male',
+          id: 1,
+          location: 'Lagos',
+          manager: 'Samuel Kubai',
+          occupation: 'Technical Team Lead',
+          passportName: 'Hope Uwa',
+          picture: 'https://lh3.googleusercontent.com/-0IiIxTNUkIY/AAAAAAAAAAI/AAAAAAAAAAc/bjqhX-Jagqc/photo.jpg?sz=50',
+          updatedAt: '2019-02-27T12:44:18.033Z',
+          userId: '-LVoI8g-LZGO0W4S2xRt',
+        },
+        
+      }];
+      const wrapper =  mount(
+        <Provider store={store}>
+          <MemoryRouter>
+            <NewRequestForm {...props} editing />
+          </MemoryRouter>                
+        </Provider>
+      );
 
-    const newRequestForm = wrapper.find('form');
-    newRequestForm.simulate('submit');
+      expect(wrapper.find('.modal__user-name').text()).toEqual('Hope Uwa');
 
-    expect(props.handleEditRequest).toHaveBeenCalled();
+    });
+  
+    it('sets the correct tab status "You are currently here" ', () => {
+      let editing = true;
+      const wrapper =  mount(
+        <Provider store={store}>
+          <MemoryRouter>
+            <NewRequestForm {...props} editing />
+          </MemoryRouter>                
+        </Provider>
+      );
+  
+      let wrapperState = wrapper.find('NewRequestForm').instance().state;
+      let status = wrapperState.steps[0].status;
+      const status2 = wrapperState.steps[1].status;
+      let currentTab = wrapperState.currentTab;
+      
+  
+      expect(status).toEqual('');
+      expect(currentTab).toBe(2);
+      expect(status2).toEqual('You are currently here');
+  
+      wrapper.unmount();
+
+      
+    });
+  
+    it('should not submit data without validation', () => {
+      const requestForm = wrapper.find('form');
+      requestForm.simulate('submit');
+      expect(onSubmit).toHaveBeenCalledTimes(0);
+    });
+  
+    it('should call the handleEditRequest on form submit', () => {
+      travelStipendHelper.getAllTripsStipend = jest.fn(() => ({
+        totalStipend: '$ 100',
+        stipendSubTotals: []
+      }));
+      const { handleEditRequest } = props;
+      const editing = true;
+      const mountedWrapper =  mount(
+        <Provider store={store}>
+          <MemoryRouter>
+            <NewRequestForm
+              {...props} editing 
+              handleEditRequest={handleEditRequest}
+            />
+          </MemoryRouter>                    
+        </Provider>
+      );
+      let wrapper = mountedWrapper;
+  
+      const tripOriginField = mountedWrapper.find('input[name="origin-0"]');
+      const changeEvent = {
+        target: {
+          name: 'origin-0',
+          value: 'Lagos, Nigeria',
+          dataset: {
+            parentid: 0
+          }
+        }
+      };
+      tripOriginField.simulate('change', changeEvent);
+      const nextButton = mountedWrapper.find('button.bg-btn--active');
+      const clickEvent = {
+        preventDefault: jest.fn()
+      };
+      nextButton.simulate('click', clickEvent);
+  
+      const { travelStipends } = props;
+  
+      mountedWrapper.setProps({
+        travelStipends: {
+          ...travelStipends,
+          isLoading: false
+        }
+      });
+      mountedWrapper.setState({ currentTab: 3 });
+      const newRequestForm = mountedWrapper.find('form');
+      newRequestForm.simulate('submit');
+  
+      expect(props.handleEditRequest).toHaveBeenCalled();
+    });
+
   });
+
+  
 });

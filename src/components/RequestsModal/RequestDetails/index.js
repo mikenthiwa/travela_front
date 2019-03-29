@@ -167,7 +167,7 @@ export class RequestDetails extends Component {
     const travelDates = this.renderTripDates(requestData);
     const { accommodationType, beds} = requestData;
     const accommodation = accommodationType !== 'Residence' ? 
-      accommodationType : `${beds.rooms.roomName} ${beds.rooms.guestHouses.houseName}`; 
+      accommodationType : `${beds.bedName}, ${beds.rooms.roomName}, ${beds.rooms.guestHouses.houseName}`; 
     return (
       <tr className="trip-detail__information-table">
         <td>{flightRoute}</td>

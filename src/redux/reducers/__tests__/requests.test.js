@@ -245,13 +245,35 @@ describe('Requests Reducer', () => {
       const initialState = {
         requestData: {
           trips: [],
-          comments: [],
+          comments: [{
+            comment: 'See you next week',
+            createdAt: '2018-08-16T11:11:52.181Z',
+            id: 'xGh30atGz',
+            'updatedAt': '2018-08-16T11:11:52.181Z',
+          },
+          {
+            comment: 'See you next two weeks',
+            createdAt: '2018-08-17T11:11:52.181Z',
+            id: 'xGh30atGl',
+            updatedAt: '2018-08-17T11:11:52.181Z',
+          },],
           accommodationType: ''
         },
         requestOnEdit: {
           trips: []
         },
-        comments: [],
+        comments: [{
+          comment: 'See you next week',
+          createdAt: '2018-08-16T11:11:52.181Z',
+          id: 'xGh30atGz',
+          'updatedAt': '2018-08-16T11:11:52.181Z',
+        },
+        {
+          comment: 'See you next two weeks',
+          createdAt: '2018-08-17T11:11:52.181Z',
+          id: 'xGh30atGl',
+          updatedAt: '2018-08-17T11:11:52.181Z',
+        },],
         fetchingRequest: false
       };
       const dispatchedAction = {

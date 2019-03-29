@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { PropTypes } from 'prop-types';
 import ButtonLoadingIcon from '../../ButtonLoadingIcon';
 import commentIcon from '../../../../images/icons/new-request-icons/Chat.svg';
 import ConnectedCommentBox from '../../../RequestsModal/CommentBox/CommentBox';
+import ConnectedUserComments from '../../../RequestsModal/UserComments/UserComments';
+import addCommentIcon from '../../../../images/icons/new-request-icons/AddComment.svg';
 
 class SubmitArea extends Component{
   constructor(props){
     super(props);
+    this.state = {
+      displayCommentBox: true,
+    };
   }
+  
+
+  
 
     commentSession = () =>{
       const { collapsible, collapse, commentTitle, handleComment } = this.props;
@@ -37,9 +45,13 @@ class SubmitArea extends Component{
       );
     };
 
+    
+
   handleSubmitButtonClick = (event, nextStep) => {
     nextStep && nextStep(event);
   };
+
+  
   
     submitButton = (
       hasBlankFields, loading, isCreating,
@@ -55,6 +67,96 @@ class SubmitArea extends Component{
           id="submit">
           <ButtonLoadingIcon isLoading={loading || isCreating} buttonText={send} />
         </button>
+      );
+    }
+    
+    handleCommentBoxDisplay() {
+      const { displayCommentBox } = this.state;
+      displayCommentBox ?
+        this.setState({
+          displayCommentBox: false
+        }):
+        this.setState({
+          displayCommentBox: true
+        });
+    
+    }
+
+    renderDisplayCommentBox(text, icon) {
+      return (
+        <div
+          onClick={() => this.handleCommentBoxDisplay()}
+          role="presentation"
+          className="editRequest__add-comment">
+          <img src={icon} alt="comment icon" />
+          <span>
+            {text}
+          </span>
+        </div>);
+    }
+
+    renderHideCommentText() {
+      const { requestData } = this.props;
+      const { displayCommentBox } = this.state;
+      return (
+        <Fragment>
+          {displayCommentBox ?
+            (
+              <div className="editRequest-comment__toggle">
+                {this.renderDisplayCommentBox('Hide Comment', addCommentIcon)}
+                <div className="editrequest-details__comments">
+                  <ConnectedCommentBox requestId={requestData.id} documentId={null} />
+                  {this.renderComments()}
+                </div>
+              </div>
+            ):
+            this.renderDisplayCommentBox('Show Comment', commentIcon)}
+        </Fragment>);
+    }
+  
+
+    renderAddCommentText() {
+      const { requestData } = this.props;
+      const { displayCommentBox } = this.state;
+      return (
+        <Fragment>
+          <div className="editRequest-comment__toggle">
+            {this.renderDisplayCommentBox('Add Comment', commentIcon)}
+            {displayCommentBox && (
+              <div className="editrequest-details__comments">
+                <ConnectedCommentBox requestId={requestData.id} documentId={null} />
+                {this.renderComments()}
+              </div>)}
+          </div>
+        </Fragment>
+      );
+    }
+
+    renderComment = (comments) => {
+      return (
+        <div className="submit-area__comment">
+          {comments && comments.length < 1 ? (
+            <div className="editrequest-comment-box">
+              {this.renderAddCommentText()}
+            </div>)
+            : (
+              <div className="editrequest-comment-box">
+                {this.renderHideCommentText()}
+              </div>)}
+        </div>
+  
+      );
+    }
+  
+
+    renderComments() {
+      const { currentUser, comments } = this.props;
+      return(
+        <ConnectedUserComments
+          comments={comments ? comments.slice(0).reverse() : []}
+          email={currentUser.email}
+          currentUser={currentUser}
+        />
       );
     }
 
@@ -77,13 +179,14 @@ class SubmitArea extends Component{
     }
 
     render(){
-      const { hasBlankFields,sameOriginDestination, onCancel, send, modalType,
-        onEditCancel, selection, loading, isCreating, disableOnChangeProfile, nextStep
-      } = this.props;
+      const { hasBlankFields,sameOriginDestination, onCancel, send, modalType, comments,
+        onEditCancel, selection, loading, isCreating, disableOnChangeProfile, nextStep,
+        editing } = this.props;
+     
       return(
         <fieldset className={send==='Next' ?'submit__area-border': null}>
           <div className={selection ? `submit-area submit-area--${selection}` : 'submit-area'}>
-            {send==='Next' && this.commentSession() }
+            { (send==='Next' && !editing) && this.commentSession() }
             { onCancel ? this.renderCancelButton(modalType, onEditCancel, onCancel) : (<div />)}
             { this.submitButton(
               hasBlankFields, loading, isCreating,
@@ -92,6 +195,7 @@ class SubmitArea extends Component{
             )
             }
           </div>
+          { (send==='Next' && editing) && this.renderComment(comments)} 
         </fieldset>
 
       );
@@ -115,7 +219,11 @@ SubmitArea.propTypes = {
   collapsible: PropTypes.func,
   handleComment: PropTypes.func,
   collapse: PropTypes.bool,
-  commentTitle: PropTypes.string
+  commentTitle: PropTypes.string,
+  currentUser: PropTypes.object,
+  requestData: PropTypes.object,
+  editing: PropTypes.bool,
+  comments: PropTypes.array
 };
 
 SubmitArea.defaultProps = {
@@ -131,7 +239,11 @@ SubmitArea.defaultProps = {
   collapsible: () => {},
   handleComment: () => {},
   collapse: false,
-  commentTitle: ''
+  commentTitle: '',
+  currentUser: {},
+  requestData: {},
+  editing: false,
+  comments: []
 };
 
 export default SubmitArea;
