@@ -4,7 +4,7 @@ const managers = [
     email: 'test.user@andela.com'
   }
 ];
-const centers =  [
+const centers = [
   {
     id: 12345,
     location: 'Lagos, Nigeria',
@@ -37,7 +37,8 @@ const centers =  [
 
 const values = {
   name: 'Moses Muigai Gitau',
-  passportName : 'Moses Muigai Gitau',
+  passportName: 'Moses Muigai Gitau',
+  fullName: 'Moses Muigai Gitau',
   gender: 'Male',
   department: 'Talent Development Department',
   role: '',

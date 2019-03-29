@@ -1,0 +1,100 @@
+{
+    "success": true,
+    "message": "Guesthouses retrieved successfully",
+    "guestHouses": [
+        {
+            "id": "10948",
+            "houseName": "Guest House B",
+            "location": "Nairobi, Kenya",
+            "bathRooms": 3,
+            "imageUrl": "https://res.cloudinary.com/authors-haven/image/upload/v1553167046/rxpwhtlhrzr5s1i5i8gt.jpg",
+            "disabled": false,
+            "createdAt": "2019-03-21T11:17:14.928Z",
+            "updatedAt": "2019-03-21T11:17:14.928Z",
+            "userId": "-LSsFyueC086niFc9rrz",
+            "rooms": [
+                {
+                    "id": "RknCqCEwot",
+                    "roomName": "Room 1",
+                    "roomType": "Non-Ensuite",
+                    "bedCount": 4,
+                    "isDeleted": false,
+                    "faulty": false,
+                    "createdAt": "2019-03-21T11:17:14.977Z",
+                    "updatedAt": "2019-03-21T11:17:14.977Z",
+                    "guestHouseId": "10948"
+                },
+                {
+                    "id": "u0XAapkwYh",
+                    "roomName": "Room 2",
+                    "roomType": "Ensuite",
+                    "bedCount": 4,
+                    "isDeleted": false,
+                    "faulty": false,
+                    "createdAt": "2019-03-21T11:17:14.977Z",
+                    "updatedAt": "2019-03-21T11:17:14.977Z",
+                    "guestHouseId": "10948"
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "houseName": "Qwetu",
+            "location": "Nairobi, Kenya",
+            "bathRooms": 3,
+            "imageUrl": "https://res.cloudinary.com/skybound/image/upload/s--GDp7KfXp--/v1553082791/frontend_upload/image_bd6dvy.jpg",
+            "disabled": false,
+            "createdAt": "2018-08-16T11:11:52.181Z",
+            "updatedAt": "2018-08-16T11:11:52.181Z",
+            "userId": "-LMgZQKq6MXAj_41iRWi",
+            "rooms": [
+                {
+                    "id": "1",
+                    "roomName": "room1",
+                    "roomType": "Ensuite",
+                    "bedCount": 1,
+                    "isDeleted": false,
+                    "faulty": false,
+                    "createdAt": "2018-08-16T11:11:52.181Z",
+                    "updatedAt": "2018-08-16T11:11:52.181Z",
+                    "guestHouseId": "4"
+                },
+                {
+                    "id": "2",
+                    "roomName": "room2",
+                    "roomType": "Ensuite",
+                    "bedCount": 1,
+                    "isDeleted": false,
+                    "faulty": false,
+                    "createdAt": "2018-08-16T11:11:52.181Z",
+                    "updatedAt": "2018-08-16T11:11:52.181Z",
+                    "guestHouseId": "4"
+                }
+            ]
+        },
+        {
+            "id": "12312",
+            "houseName": "Travel Team Guest House",
+            "location": "Lagos, Nigeria",
+            "bathRooms": 1,
+            "imageUrl": "guest.com",
+            "disabled": false,
+            "createdAt": "2018-08-16T11:11:52.181Z",
+            "updatedAt": "2018-08-16T11:11:52.181Z",
+            "userId": "-LSsFyueC086niFc9rrz",
+            "rooms": [
+                {
+                    "id": "12313",
+                    "roomName": "Room 1",
+                    "roomType": "Ensuite",
+                    "bedCount": 1,
+                    "isDeleted": false,
+                    "faulty": false,
+                    "createdAt": "2018-08-16T11:11:52.181Z",
+                    "updatedAt": "2018-08-16T11:11:52.181Z",
+                    "guestHouseId": "12312"
+                }
+            ]
+        }
+    ]
+}

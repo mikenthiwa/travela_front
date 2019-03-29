@@ -1,0 +1,5 @@
+{
+    "success": true,
+    "message": "No guesthouse exists at the moment",
+    "guestHouses": []
+}

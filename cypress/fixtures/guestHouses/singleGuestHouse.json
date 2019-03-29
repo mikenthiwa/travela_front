@@ -1,0 +1,115 @@
+{
+    "guestHouse": {
+        "id": "10948",
+        "houseName": "Guest House B",
+        "location": "Nairobi, Kenya",
+        "bathRooms": 3,
+        "imageUrl": "https://res.cloudinary.com/authors-haven/image/upload/v1553167046/rxpwhtlhrzr5s1i5i8gt.jpg",
+        "disabled": false,
+        "createdAt": "2019-03-21T11:17:14.928Z",
+        "updatedAt": "2019-03-21T11:17:14.928Z",
+        "userId": "-LSsFyueC086niFc9rrz",
+        "rooms": [
+            {
+                "id": "RknCqCEwot",
+                "roomName": "Room 1",
+                "roomType": "Non-Ensuite",
+                "bedCount": 4,
+                "isDeleted": false,
+                "faulty": false,
+                "createdAt": "2019-03-21T11:17:14.977Z",
+                "updatedAt": "2019-03-21T11:17:14.977Z",
+                "guestHouseId": "10948",
+                "beds": [
+                    {
+                        "id": 4,
+                        "bedName": "bed 4",
+                        "booked": false,
+                        "createdAt": "2019-03-27T15:47:03.090Z",
+                        "updatedAt": "2019-03-27T15:47:03.090Z",
+                        "roomId": "RknCqCEwot",
+                        "trips": []
+                    },
+                    {
+                        "id": 3,
+                        "bedName": "bed 3",
+                        "booked": false,
+                        "createdAt": "2019-03-27T15:47:03.090Z",
+                        "updatedAt": "2019-03-27T15:47:03.090Z",
+                        "roomId": "RknCqCEwot",
+                        "trips": []
+                    },
+                    {
+                        "id": 2,
+                        "bedName": "bed 2",
+                        "booked": false,
+                        "createdAt": "2019-03-27T15:47:03.090Z",
+                        "updatedAt": "2019-03-27T15:47:03.090Z",
+                        "roomId": "RknCqCEwot",
+                        "trips": []
+                    },
+                    {
+                        "id": 1,
+                        "bedName": "bed 1",
+                        "booked": false,
+                        "createdAt": "2019-03-27T15:47:03.090Z",
+                        "updatedAt": "2019-03-27T15:47:03.090Z",
+                        "roomId": "RknCqCEwot",
+                        "trips": []
+                    }
+                ],
+                "maintainances": []
+            },
+            {
+                "id": "u0XAapkwYh",
+                "roomName": "Room 2",
+                "roomType": "Ensuite",
+                "bedCount": 4,
+                "isDeleted": false,
+                "faulty": false,
+                "createdAt": "2019-03-21T11:17:14.977Z",
+                "updatedAt": "2019-03-21T11:17:14.977Z",
+                "guestHouseId": "10948",
+                "beds": [
+                    {
+                        "id": 8,
+                        "bedName": "bed 4",
+                        "booked": false,
+                        "createdAt": "2019-03-27T15:47:03.090Z",
+                        "updatedAt": "2019-03-27T15:47:03.090Z",
+                        "roomId": "u0XAapkwYh",
+                        "trips": []
+                    },
+                    {
+                        "id": 7,
+                        "bedName": "bed 3",
+                        "booked": false,
+                        "createdAt": "2019-03-27T15:47:03.090Z",
+                        "updatedAt": "2019-03-27T15:47:03.090Z",
+                        "roomId": "u0XAapkwYh",
+                        "trips": []
+                    },
+                    {
+                        "id": 6,
+                        "bedName": "bed 2",
+                        "booked": false,
+                        "createdAt": "2019-03-27T15:47:03.090Z",
+                        "updatedAt": "2019-03-27T15:47:03.090Z",
+                        "roomId": "u0XAapkwYh",
+                        "trips": []
+                    },
+                    {
+                        "id": 5,
+                        "bedName": "bed 1",
+                        "booked": false,
+                        "createdAt": "2019-03-27T15:47:03.090Z",
+                        "updatedAt": "2019-03-27T15:47:03.090Z",
+                        "roomId": "u0XAapkwYh",
+                        "trips": []
+                    }
+                ],
+                "maintainances": []
+            }
+        ]
+    }
+}

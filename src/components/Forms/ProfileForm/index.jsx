@@ -38,16 +38,16 @@ class ProfileForm extends PureComponent {
     this.validate = getDefaultBlanksValidatorFor(this);
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     const { userData, userDataUpdate: { result }, managers, isUpdating } = nextProps;
 
-    if(userData !== undefined && !isUpdating){
-      const { passportName, gender, department, occupation, manager, location } = userData;
+    if (userData !== undefined && !isUpdating) {
+      const { fullName, gender, department, occupation, manager, location } = userData;
       const userGender = result ? result.gender : gender;
       this.setState((prevState) => ({
         ...prevState,
         values: {
-          name: Validator.databaseValueValidator(passportName),
+          name: Validator.databaseValueValidator(fullName),
           gender: Validator.databaseValueValidator(userGender),
           department: Validator.databaseValueValidator(department),
           role: Validator.databaseValueValidator(occupation),
@@ -56,24 +56,24 @@ class ProfileForm extends PureComponent {
         }
       }));
       this.checkManager(managers);
-      this.setState((prevState => ( {
+      this.setState((prevState => ({
         userProfile: prevState.values,
         hasBlankFields: true
       })));
     }
   }
 
-  checkManager = (managers,value) => {
+  checkManager = (managers, value) => {
     const { values } = this.state;
     const managerChoices = managers.map(manager => manager.fullName);
     const manager = value ? value : values.manager;
 
     // if manager in manager input box is not in database
-    if ( managerChoices.length && managerChoices.indexOf(manager) === -1){
+    if (managerChoices.length && managerChoices.indexOf(manager) === -1) {
       this.setManagerError();
     } else {
       this.setState((prevState) => {
-        const newError =  { ...prevState.errors, manager: '' };
+        const newError = { ...prevState.errors, manager: '' };
         return { ...prevState, errors: { ...newError }, hasBlankFields: false };
       });
     }
@@ -86,12 +86,12 @@ class ProfileForm extends PureComponent {
       const newState = { ...prevState.values, manager: value };
       return { ...prevState, values: { ...newState } };
     });
-    this.checkManager(managers,value);
+    this.checkManager(managers, value);
   }
 
   submitProfileForm = event => {
     event.preventDefault();
-    const { updateUserProfile, user} = this.props;
+    const { updateUserProfile, user } = this.props;
 
     const userId = user.UserInfo.id;
     const { values } = this.state;
@@ -101,14 +101,14 @@ class ProfileForm extends PureComponent {
       data.occupation = data.role;
 
       updateUserProfile(data, userId, true);
-      this.setState({hasBlankFields: true});
+      this.setState({ hasBlankFields: true });
       localStorage.setItem('location', values.location);
     }
   };
 
   setManagerError = () => {
     return this.setState((prevState) => {
-      const newError =  {
+      const newError = {
         ...prevState.errors,
         manager: 'Please select a manager from the dropdown'
       };
@@ -119,7 +119,7 @@ class ProfileForm extends PureComponent {
   handleClearForm = () => {
     this.setState((prevState => ({
       ...this.defaultState,
-      values: {...prevState.userProfile},
+      values: { ...prevState.userProfile },
       userProfile: prevState.userProfile
     })));
   };
@@ -132,13 +132,13 @@ class ProfileForm extends PureComponent {
           className="bg-btn bg-btn--active"
           disabled={hasBlankFields}
         >
-                Save Changes
+          Save Changes
         </button>
         <button
           type="button"
           className="bg-btn bg-btn--inactive"
           onClick={this.handleClearForm} id="btn-cancel">
-                Cancel
+          Cancel
         </button>
       </div>
     );
@@ -162,7 +162,7 @@ class ProfileForm extends PureComponent {
                 id="btn-update"
                 disabled={hasBlankFields}
                 className="profile-bg-btn bg-btn bg-btn--inactive">
-                { isUpdating ? <i className="loading-icon" /> : '' }
+                {isUpdating ? <i className="loading-icon" /> : ''}
                 Save Changes
               </button>
             </div>
