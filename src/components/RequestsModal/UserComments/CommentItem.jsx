@@ -5,6 +5,7 @@ import ImageLink from '../../image-link/ImageLink';
 import ConnectedCommentBox from '../CommentBox/CommentBox';
 import './UserComments.scss';
 import ButtonLoadingIcon from '../../Forms/ButtonLoadingIcon';
+import defaultProfilePicture from '../../../images/default_profilepic.jpg';
 
 export default class CommentItem extends Component {
   state = {
@@ -82,11 +83,13 @@ export default class CommentItem extends Component {
       commentOnEdit,
     } = this.props;
     const { deletingComment } = this.state;
+    const profilePic = comment.user.picture
+      ? comment.user.picture : defaultProfilePicture;
     return (
       <div className="modal__modal1" key={comment.id}>
         <div className="modal__mdl-icons">
           <ImageLink
-            imageSrc={comment.userId === currentUser.id ? currentUser.picture : comment.user.picture}
+            imageSrc={comment.userId === currentUser.id ? currentUser.picture : profilePic}
             altText="avatar"
             imageClass="modal__oval-copy"
           />
