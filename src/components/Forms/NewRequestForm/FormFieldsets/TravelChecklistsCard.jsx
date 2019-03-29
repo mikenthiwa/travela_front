@@ -22,8 +22,9 @@ class TravelChecklistsCard extends Component {
   }
 
   render() {
-    const { checklistItems, isLoading, userData } = this.props;
-    const newChecklist = RequestUtils.removeLocationChecklist(checklistItems,userData);
+    const { checklistItems, trips, isLoading, userData } = this.props;
+    const allChecklistItems = RequestUtils.getDefaultChecklist(checklistItems, trips);
+    const newChecklist = RequestUtils.removeLocationChecklist(allChecklistItems, userData);
     return (
       <div>
         <div className="travel-checklist-rectangle">

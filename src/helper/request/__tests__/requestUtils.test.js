@@ -18,6 +18,53 @@ const trips = [
   },
 ];
 
+const checklistItems = [
+  {
+    destinationName: 'Kampala, Uganda',
+    checklist: [
+      {
+        id: 'yuVpBVtjr',
+        name: 'Kampala Passport',
+        requiresFiles: false,
+        destinationName: 'Kampala, Uganda',
+        deleteReason: null,
+        resources: []
+      },
+      {
+        id: 'b3klCohox',
+        name: 'Kigali Visa',
+        requiresFiles: false,
+        destinationName: 'Kampala, Uganda',
+        deleteReason: null,
+        resources: []
+      },
+      {
+        id: 2,
+        name: 'Travel Ticket Details',
+        requiresFiles: false,
+        destinationName: 'Default',
+        deleteReason: null,
+        resources: [
+          {
+            id: '1',
+            label: 'Flight Application Guide',
+            link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
+            checklistItemId: '2'
+          }
+        ]
+      },
+      {
+        id: '1',
+        name: 'Travel Ticket',
+        requiresFiles: true,
+        destinationName: 'Default',
+        deleteReason: null,
+        resources: []
+      }
+    ]
+  }
+]
+
 const nonAndelanCenterTrip = {
   bedId: 3,
   departureDate: '2019-03-29',
@@ -163,5 +210,47 @@ describe('Request Travel Stipend', () => {
       'totalStipend': '$ 3700'
     };
     expect(stipend).toMatchObject(expected);
+  });
+});
+
+
+describe('Request Travel Checklist', () => {
+  it('should return default checklist items', () => {
+    const newItems = checklistItems;
+    const newChecklist = RequestUtils.getDefaultChecklist(
+      checklistItems,
+      trips
+    );
+    const expected = {
+      destinationName: 'Nairobi, Kenya',
+      checklist: [
+        {
+          id: 2,
+          name: 'Travel Ticket Details',
+          requiresFiles: false,
+          destinationName: 'Default',
+          deleteReason: null,
+          resources: [
+            {
+              id: '1',
+              label: 'Flight Application Guide',
+              link:
+                  'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
+              checklistItemId: '2'
+            }
+          ]
+        },
+        {
+          id: '1',
+          name: 'Travel Ticket',
+          requiresFiles: true,
+          destinationName: 'Default',
+          deleteReason: null,
+          resources: []
+        }
+      ]
+    };
+    newItems.push(expected);
+    expect(newChecklist).toMatchObject(newItems);
   });
 });

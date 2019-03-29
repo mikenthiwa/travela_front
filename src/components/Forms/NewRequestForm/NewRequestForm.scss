@@ -475,6 +475,16 @@ form.new-request {
   background-color: #FFFFFF;
   overflow-y: scroll
 }
+.travel-checklist-rectangle::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 6px;
+  }
+  .travel-checklist-rectangle::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+  box-shadow: 0 0 1px rgba(255,255,255,.5);
+  }
 .pending-approvals-rectangle {
   height: 353px;
   width: 394px;
@@ -485,7 +495,7 @@ form.new-request {
   overflow-y: scroll
 }
 .travel-checklist-text {	
-  height: 18px;	
+  height: 14px;	
   width: 243px;	
   color: #4F4F4F;	
   font-family: "DIN Pro";	

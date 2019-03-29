@@ -126,6 +126,36 @@ class RequestUtils {
     const reason = trip.otherTravelReasons || (trip.reasons || {}).title;
     return _.capitalize(reason) || 'N/A';
   }
+  static getDefaultChecklist(checklistItems, trips) {
+    if (checklistItems.length < trips.length && checklistItems.length !== 0) {
+      const checklistItemsValues = [
+        ...new Set(checklistItems.map(checklistItem => checklistItem.destinationName))
+      ];
+
+      const tripsValues = [...new Set(trips.map(trip => trip.destination))];
+
+      const differenceDestinations = tripsValues.filter(
+        destination => !checklistItemsValues.includes(destination)
+      );
+
+      if (checklistItems.length !== 0) {
+        const checklists = checklistItems[0].checklist;
+
+        const defaultChecklists = checklists.filter(function(checklist) {
+          return checklist.destinationName.includes('Default');
+        });
+
+        differenceDestinations.map(differenceDestination => {
+          const newItems = {
+            destinationName: differenceDestination,
+            checklist: defaultChecklists
+          };
+          checklistItems.push(newItems);
+        });
+      }
+    }
+    return checklistItems;
+  }
 }
 
 export default RequestUtils;
