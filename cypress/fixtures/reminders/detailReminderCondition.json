@@ -1,0 +1,31 @@
+{
+  "status": true,
+  "message": "Reminder found",
+  "reminder": {
+    "id": 7,
+    "conditionName": "visa should be renewed",
+    "documentType": "Visa",
+    "disabled": false,
+    "createdAt": "2019-03-27T10:47:07.052Z",
+    "updatedAt": "2019-03-27T10:47:07.052Z",
+    "userId": "-LSsFyueC086niFc9rrz",
+    "reminders": [
+      {
+        "id": 1,
+        "frequency": "2 Day",
+        "createdAt": "2019-03-27T10:47:07.069Z",
+        "updatedAt": "2019-03-27T10:47:07.069Z",
+        "conditionId": 1,
+        "reminderEmailTemplateId": 1
+      },
+      {
+        "id": 2,
+        "frequency": "2 Week",
+        "createdAt": "2019-03-27T10:47:07.069Z",
+        "updatedAt": "2019-03-27T10:47:07.069Z",
+        "conditionId": 1,
+        "reminderEmailTemplateId": 1
+      }
+    ]
+  }
+}

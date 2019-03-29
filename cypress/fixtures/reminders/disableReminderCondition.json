@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "message": "Condition has been successfully disabled",
+  "condition": {
+    "id": 7,
+    "conditionName": "visa should be renewed",
+    "documentType": "Visa",
+    "disabled": true,
+    "createdAt": "2019-03-26T20:03:18.843Z",
+    "updatedAt": "2019-03-27T06:51:25.971Z",
+    "userId": "-LSsFyueC086niFc9rrz",
+    "user": {
+      "fullName": "Travela Test"
+    },
+    "reasons": [
+      {
+        "reason": "no longer valid",
+        "conditionId": 7,
+        "createdAt": "2019-03-27T06:51:25.987Z"
+      },
+      {
+        "reason": "no longer valid",
+        "conditionId": 7,
+        "createdAt": "2019-03-26T23:03:33.812Z"
+      }
+    ]
+  }
+}

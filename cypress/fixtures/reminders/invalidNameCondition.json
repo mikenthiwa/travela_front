@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "message": "Condition name should be more than 4 characters",
+  "errors": [
+    {
+      "message": "Condition name should be more than 4 characters",
+      "name": "conditionName"
+    }
+  ]
+}

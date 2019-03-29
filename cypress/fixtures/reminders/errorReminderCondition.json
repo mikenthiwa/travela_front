@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "message": "Validation failed",
+  "errors": [
+    {
+      "message": "Reminder condition name already exists",
+      "name": "conditionName"
+    }
+  ]
+}

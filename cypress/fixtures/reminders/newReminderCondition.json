@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "message": "Reminder successfully created",
+  "reminder": {
+    "condition": {
+      "disabled": false,
+      "id": 7,
+      "conditionName": "Visa correction details",
+      "documentType": "Visa",
+      "userId": "-LSsFyueC086niFc9rrz",
+      "updatedAt": "2019-03-26T20:03:18.843Z",
+      "createdAt": "2019-03-26T20:03:18.843Z"
+    },
+    "reminders": [
+      {
+        "id": 12,
+        "frequency": "2 Months",
+        "createdAt": "2019-03-26T20:03:18.859Z",
+        "updatedAt": "2019-03-26T20:03:18.859Z",
+        "conditionId": 7,
+        "reminderEmailTemplateId": 1
+      },
+      {
+        "id": 13,
+        "frequency": "2 Day",
+        "createdAt": "2019-03-26T20:03:18.859Z",
+        "updatedAt": "2019-03-26T20:03:18.859Z",
+        "conditionId": 7,
+        "reminderEmailTemplateId": 1
+      }
+    ]
+  }
+}

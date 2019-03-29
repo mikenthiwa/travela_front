@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "message": "Reminder successfully upated",
+  "reminder": {
+    "condition": {
+      "id": 7,
+      "conditionName": "Visa Replacement",
+      "documentType": "Visa",
+      "disabled": false,
+      "createdAt": "2019-03-26T20:03:18.843Z",
+      "updatedAt": "2019-03-26T21:28:42.075Z",
+      "userId": "-LSsFyueC086niFc9rrz"
+    },
+    "reminders": [
+      {
+        "id": 12,
+        "frequency": "2 Weeks",
+        "createdAt": "2019-03-26T21:28:42.085Z",
+        "updatedAt": "2019-03-26T21:28:42.085Z",
+        "conditionId": 7,
+        "reminderEmailTemplateId": 1
+      }
+    ]
+  }
+}

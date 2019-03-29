@@ -1,0 +1,126 @@
+{
+  "success": true,
+  "message": "Successfully retrieved visas",
+  "reminders": [
+    {
+      "id": 7,
+      "conditionName": "visa should be renewed",
+      "documentType": "Visa",
+      "disabled": false,
+      "createdAt": "2019-03-26T20:03:18.843Z",
+      "updatedAt": "2019-03-27T07:13:40.287Z",
+      "userId": "-LSsFyueC086niFc9rrz",
+      "user": {
+        "fullName": "Travela Test"
+      },
+      "reasons": [
+        {
+          "reason": "no longer valid",
+          "conditionId": 7,
+          "createdAt": "2019-03-27T06:51:25.987Z"
+        },
+        {
+          "reason": "no longer valid",
+          "conditionId": 7,
+          "createdAt": "2019-03-26T23:03:33.812Z"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "conditionName": "change the all",
+      "documentType": "Visa",
+      "disabled": false,
+      "createdAt": "2019-03-26T18:15:14.578Z",
+      "updatedAt": "2019-03-26T18:15:14.578Z",
+      "userId": "-LSsFyueC086niFc9rrz",
+      "user": {
+        "fullName": "Travela Test"
+      },
+      "reasons": []
+    },
+    {
+      "id": 4,
+      "conditionName": "there has to be more",
+      "documentType": "Visa",
+      "disabled": false,
+      "createdAt": "2019-03-26T18:13:12.798Z",
+      "updatedAt": "2019-03-26T18:13:12.798Z",
+      "userId": "-LSsFyueC086niFc9rrz",
+      "user": {
+        "fullName": "Travela Test"
+      },
+      "reasons": []
+    },
+    {
+      "id": 3,
+      "conditionName": "Invalid",
+      "documentType": "Visa",
+      "disabled": false,
+      "createdAt": "2019-03-26T17:49:06.373Z",
+      "updatedAt": "2019-03-26T17:49:06.373Z",
+      "userId": "-LSsFyueC086niFc9rrz",
+      "user": {
+        "fullName": "Travela Test"
+      },
+      "reasons": []
+    },
+    {
+      "id": 2,
+      "conditionName": "Visa Replacement",
+      "documentType": "Visa",
+      "disabled": true,
+      "createdAt": "2019-03-26T15:34:35.474Z",
+      "updatedAt": "2019-03-27T06:16:47.298Z",
+      "userId": "-LSsFyueC086niFc9rrz",
+      "user": {
+        "fullName": "Travela Test"
+      },
+      "reasons": [
+        {
+          "reason": "No longer Valid",
+          "conditionId": 2,
+          "createdAt": "2019-03-27T06:16:47.361Z"
+        },
+        {
+          "reason": "Not valid",
+          "conditionId": 2,
+          "createdAt": "2019-03-26T21:14:33.140Z"
+        },
+        {
+          "reason": "Not valid",
+          "conditionId": 2,
+          "createdAt": "2019-03-26T16:00:54.215Z"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "conditionName": "visa should be changed",
+      "documentType": "Visa",
+      "disabled": false,
+      "createdAt": "2019-03-26T15:22:25.077Z",
+      "updatedAt": "2019-03-26T21:45:33.386Z",
+      "userId": "-LSsFyueC086niFc9rrz",
+      "user": {
+        "fullName": "Travela Test"
+      },
+      "reasons": [
+        {
+          "reason": "No longer Valid",
+          "conditionId": 1,
+          "createdAt": "2019-03-26T15:33:50.351Z"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "documentCount": {
+      "Visa": "6"
+    },
+    "pagination": {
+      "pageCount": 1,
+      "currentPage": 1
+    }
+  }
+}
