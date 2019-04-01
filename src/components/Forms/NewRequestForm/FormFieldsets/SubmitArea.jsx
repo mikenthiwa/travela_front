@@ -18,7 +18,7 @@ class SubmitArea extends Component{
   
 
     commentSession = () =>{
-      const { collapsible, collapse, commentTitle, handleComment } = this.props;
+      const { collapsible, collapse, commentTitle, handleComment} = this.props;
       return(
         <div className="submit-area__comment">
           <div
@@ -56,13 +56,13 @@ class SubmitArea extends Component{
     submitButton = (
       hasBlankFields, loading, isCreating,
       sameOriginDestination, disableOnChangeProfile,
-      send, nextStep
+      send, nextStep, isSameDate
     ) => {
       return (
         <button 
           type="submit"
           onClick={e => this.handleSubmitButtonClick(e, nextStep)}
-          disabled={hasBlankFields || loading || isCreating || (sameOriginDestination && disableOnChangeProfile)}
+          disabled={isSameDate || hasBlankFields || loading || isCreating || (sameOriginDestination && disableOnChangeProfile)}
           className="bg-btn bg-btn--active"
           id="submit">
           <ButtonLoadingIcon isLoading={loading || isCreating} buttonText={send} />
@@ -181,7 +181,7 @@ class SubmitArea extends Component{
     render(){
       const { hasBlankFields,sameOriginDestination, onCancel, send, modalType, comments,
         onEditCancel, selection, loading, isCreating, disableOnChangeProfile, nextStep,
-        editing } = this.props;
+        editing, isSameDate } = this.props;
      
       return(
         <fieldset className={send==='Next' ?'submit__area-border': null}>
@@ -191,7 +191,7 @@ class SubmitArea extends Component{
             { this.submitButton(
               hasBlankFields, loading, isCreating,
               sameOriginDestination, disableOnChangeProfile,
-              send, nextStep
+              send, nextStep, isSameDate
             )
             }
           </div>
@@ -223,7 +223,8 @@ SubmitArea.propTypes = {
   currentUser: PropTypes.object,
   requestData: PropTypes.object,
   editing: PropTypes.bool,
-  comments: PropTypes.array
+  comments: PropTypes.array,
+  isSameDate: PropTypes.bool,
 };
 
 SubmitArea.defaultProps = {
@@ -243,7 +244,8 @@ SubmitArea.defaultProps = {
   currentUser: {},
   requestData: {},
   editing: false,
-  comments: []
+  comments: [],
+  isSameDate: false
 };
 
 export default SubmitArea;

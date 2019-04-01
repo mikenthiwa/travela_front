@@ -3,6 +3,7 @@ import {PropTypes} from 'prop-types';
 import Script from 'react-load-script';
 import {isEqual, pick} from 'lodash';
 import moment from 'moment';
+import toast from 'toastr';
 import {FormContext, getDefaultBlanksValidatorFor} from '../FormsAPI';
 import PersonalDetailsFieldset from './FormFieldsets/PersonalDetails';
 import TravelDetailsFieldset from './FormFieldsets/TravelDetails';
@@ -122,6 +123,7 @@ class NewRequestForm extends PureComponent {
       comments: {},
       errors: {},
       hasBlankFields: true,
+      isSameDate: false,
       sameOriginDestination: true,
       checkBox: 'notClicked',
       selection: 'return',
@@ -275,7 +277,29 @@ class NewRequestForm extends PureComponent {
       }),
       onPickDate
     );
+    selection !== 'oneWay' && this.checkSameDate();
   };
+
+    checkSameDate = () => {
+      const {trips} = this.state;
+      const tripsLength = trips.length > 1 ? trips.length - 1 : trips.length;
+      const tripsDate = [];
+      for (let i = 0; i < tripsLength; i++) {
+        tripsDate.push(moment(trips[i].departureDate).isSame(trips[i].returnDate, 'day'));
+      }
+      let theBool = 0;
+      for (let i = 0; i < tripsDate.length; i++){
+        theBool += tripsDate[i];
+      }
+      if (theBool) {
+        this.setState({isSameDate: true});
+        const firstMatch = tripsDate.findIndex(trip => trip);
+        trips[0].returnDate &&
+        firstMatch !== -1 && toast
+          .error(`Return date must be the greater than Departure date for Trip ${
+            tripsLength > 1 ? firstMatch + 1 : ''}`);
+      } else  this.setState({isSameDate: false});
+    };
 
   resetTripArrivalDate = (id, dateName) => {
     this.setState(
@@ -359,7 +383,7 @@ class NewRequestForm extends PureComponent {
 
   handleRadioButton = event => {
     const { editing } = this.props;
-    let {collapse, trips, values, prevValues, prevTrips = []} = this.state;
+    let {collapse, trips, values, selection, prevValues, prevTrips = []} = this.state;
     const tripType = event.target.value;
     const { requestOnEdit: { trips: nextTrips } } = this.props;
     this.setState(
@@ -400,6 +424,7 @@ class NewRequestForm extends PureComponent {
         return {
           parentIds: 1,
           values: newValues,
+          isSameDate: false,
           trips: trips || [{}]
         };
       });
@@ -414,6 +439,7 @@ class NewRequestForm extends PureComponent {
       });
       this.collapsible();
     }
+    selection !== 'oneWay' && this.checkSameDate();
   };
 
   getDefaultTripStateValues = (index, valueObj) => ({
@@ -803,9 +829,9 @@ class NewRequestForm extends PureComponent {
 
   renderSubmitArea = (hasBlankFields, errors, sameOriginDestination,
     selection, creatingRequest, disableOnChangeProfile, collapse,
-    commentTitle, currentTab, editing
+    commentTitle, currentTab, editing,
   ) => {
-    const {isLoading} = this.state;
+    const {isLoading, isSameDate} = this.state;
     const { requestOnEdit, userData, comments } = this.props;
     return (
       <div className="trip__tab-body">
@@ -824,6 +850,7 @@ class NewRequestForm extends PureComponent {
             !hasBlankFields && !errors.manager
               ? false : true
           }
+          isSameDate={isSameDate}
           sameOriginDestination={sameOriginDestination}
           selection={selection}
           loading={creatingRequest}
