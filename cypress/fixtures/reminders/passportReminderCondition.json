@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "message": "Reminder successfully created",
+  "reminder": {
+    "condition": {
+      "disabled": false,
+      "id": 2,
+      "conditionName": "Passport Expiry",
+      "documentType": "Passport",
+      "userId": "-LSsFyueC086niFc9rrz",
+      "updatedAt": "2019-03-28T11:58:38.289Z",
+      "createdAt": "2019-03-28T11:58:38.289Z"
+    },
+    "reminders": [
+      {
+        "id": 3,
+        "frequency": "4 Days",
+        "createdAt": "2019-03-28T11:58:38.299Z",
+        "updatedAt": "2019-03-28T11:58:38.299Z",
+        "conditionId": 2,
+        "reminderEmailTemplateId": 1
+      }
+    ]
+  }
+}
