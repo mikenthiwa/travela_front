@@ -1,7 +1,6 @@
 import React, { Component, Fragment}  from  'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { isEmpty, isEqual } from 'lodash';
 import { fetchUserRequestDetails } from '../../redux/actionCreator/requestActions';
 import { fetchAttachments, downloadAttachments } from '../../redux/actionCreator/attachmentActions';
 import { updateRequestStatus } from '../../redux/actionCreator/approvalActions';
@@ -11,23 +10,20 @@ import CommentsSection from './CommentsSection';
 import countryUtils from '../../helper/countryUtils';
 import { AttachmentItems, ChecklistItems, TicketDetails } from './TravelChecklistItems';
 import getValues from './getValues';
-import saveIcon from '../../images/icons/save-icon.svg';
 import chatIcon from '../../images/icons/Chat.svg';
 import Preloader from '../../components/Preloader/Preloader';
+import NotFound from '../ErrorPages/NotFound';
 import './VerificationDetails.scss';
 
-
-
 class VerificationDetails extends Component {
-
-  state = {   
+  state = {
     modalInvisible: true,
     buttonSelected: '',
     displayComments: true
   };
 
   componentDidMount() {
-    const {       
+    const {
       fetchUserRequestDetails, fetchAttachments,
       match: { params: { requestId } } } = this.props;
     fetchUserRequestDetails(requestId);
@@ -41,28 +37,25 @@ class VerificationDetails extends Component {
 
   handleButtonSelected = (e) => {
     this.setState({ buttonSelected: e.target.textContent, modalInvisible: false });
-  }
+  };
 
   handleDecision = (requestId) => {
     const { updateRequestStatus } = this.props;
     const newStatus = 'Verified';
     updateRequestStatus({ requestId, newStatus });
     this.setState({ modalInvisible: true });
-  }
+  };
 
   handleDownloadAttachments = (url, fileName) => {
     const { downloadAttachments } = this.props;
     downloadAttachments(url, fileName);
-  }
+  };
 
-  
   toggleComments = () => {
-    const { displayComments } = this.state;  
-    if (displayComments) {
-      return this.setState({ displayComments: false});
-    } 
+    const { displayComments } = this.state;
+    if (displayComments) return this.setState({ displayComments: false});
     return this.setState({displayComments: true});
-  }
+  };
 
   renderRightPaneQuestion = (name) => {
     const { request: { status } } = this.props;
@@ -71,37 +64,41 @@ class VerificationDetails extends Component {
     return status === 'Approved'
       ? `Do you want to Verify ${pluralizedName} travel request?`
       : `You have ${status && status.toLowerCase()} ${pluralizedName} travel request`;
-  }
- 
+  };
+
   renderFlightDetails() {
     const { ticketDetails } = this.getValues();
-    return ( 
+    return (
       <div className="rectangle right">
         <div className="flightDetails">
-          <p className="flight-heading">Flight Details</p>       
-          { ticketDetails.length 
-            ? <TicketDetails ticketDetails={ticketDetails} />            
+          <p className="flight-heading">Flight Details</p>
+          { ticketDetails.length
+            ? <TicketDetails ticketDetails={ticketDetails} />
             : (
               <div className="no-flightDetails">
-                <p>No Flight Details</p> 
+                <p>No Flight Details</p>
               </div>
-            )}  
-        </div>       
-      </div>           
+            )}
+        </div>
+      </div>
     );
   }
+
   renderTravelCheckList = () =>{
-    const { attachments, request, email, currentUser,
+    const { attachments, request, email, currentUser, errors,
       match: { params: { requestId } } } = this.props;
     const { checklistItems, attachmentDetails } = this.getValues();
     const { displayComments } = this.state;
+    if(typeof(errors) === 'string' && errors.includes('does not exist')) {
+      return <NotFound redirectLink="/requests/my-verifications" errorMessage={errors} />;
+    }
     return (
       <div className="rectangle left">
         <div className="attachments">
           <p className="heading">Travel Checklist For This Trip</p>
           <div>
             <div>
-              { attachments.length ? (attachments.map(item => { 
+              { attachments.length ? (attachments.map(item => {
                 return (
                   <div key={item.destinationName} className="location-items">
                     <div className="destination">
@@ -113,12 +110,11 @@ class VerificationDetails extends Component {
                     <div className="attachment-items">
                       {(attachmentDetails.length)
                         ? (
-                          <AttachmentItems 
+                          <AttachmentItems
                             attachments={item}
-                            attachmentDetails={attachmentDetails} 
-                            handleDownloadAttachments={this.handleDownloadAttachments} 
+                            attachmentDetails={attachmentDetails}
+                            handleDownloadAttachments={this.handleDownloadAttachments}
                           />
-                              
                         ): (
                           <div className="no-attachments">
                             <p>No Uploaded Attachments.</p>
@@ -126,77 +122,73 @@ class VerificationDetails extends Component {
                         )}
                     </div>
                     {checklistItems.length
-                      ? <ChecklistItems checklistItems={checklistItems} destination={item.destinationName} /> 
+                      ? <ChecklistItems checklistItems={checklistItems} destination={item.destinationName} />
                       : null
-                    }                  
-                  </div>                  
-                ); })) : 
+                    }
+                  </div>
+                ); })) :
                 (
                   <div className="no-attachments">
                     <p>No Uploaded Attachments.</p>
                   </div>
                 )
-              }       
-            </div> 
+              }
+            </div>
           </div>
-        </div> 
+        </div>
         <CommentsSection
           renderCommentsToggle={this.renderCommentsToggle}
-          request={request} requestId={requestId} 
-          currentUser={currentUser} email={email} 
+          request={request} requestId={requestId}
+          currentUser={currentUser} email={email}
           displayComments={displayComments}
-        />  
+        />
       </div>
-    );   
-  }
-  
+    );
+  };
+
   renderBottomPane() {
     return (
       <div className="">
         <div className="bottom-container">
           {this.renderTravelCheckList()}
-          {this.renderFlightDetails()}         
+          {this.renderFlightDetails()}
         </div>
-        
       </div>
     );
-  } 
+  }
 
   renderCommentsToggle = () =>{
     const { displayComments } = this.state;
     return (
       <div>
-        <button onClick={this.toggleComments} type="button" className="comment-toggle-button">            
+        <button onClick={this.toggleComments} type="button" className="comment-toggle-button">
           <img className="chat image" src={chatIcon} alt="chat-icon" />
-          <p className="comment-button-text">{displayComments ? 'Hide Comments' : 'Show Comments'}</p>            
+          <p className="comment-button-text">{displayComments ? 'Hide Comments' : 'Show Comments'}</p>
         </button>
       </div>
     );
-  }
+  };
 
   renderDialogText = () => {
     const { buttonSelected } = this.state;
-    if (buttonSelected === 'verify') return 'approval'; 
+    if (buttonSelected === 'verify') return 'approval';
     return 'rejection';
-  }
-
+  };
 
   renderButtons  = (request) => {
-    const { modalInvisible, buttonSelected } = this.state;    
-    const { status } = request; 
-    const disabled = status !== 'Approved' ? true : false;
+    const { modalInvisible, buttonSelected } = this.state;
+    const { status } = request;
+    const disabled = status !== 'Approved';
     const verifiedStatus = status === 'Verified'
       ? 'verified' : (status === 'Approved' ? 'verify' : 'disabled');
     return (
       <div className="btn-group">
         <button
-          type="button"
-          className={`action-button--${verifiedStatus}`}
-          disabled={disabled}
-          onClick={this.handleButtonSelected}
+          type="button" className={`action-button--${verifiedStatus}`}
+          disabled={disabled} onClick={this.handleButtonSelected}
         >
           {verifiedStatus === 'disabled' ? 'verify' : verifiedStatus}
-        </button>        
+        </button>
         <ConfirmDialog
           id={request.id} modalInvisible={modalInvisible}
           buttonSelected={buttonSelected} closeDeleteModal={()=> {}}
@@ -205,22 +197,22 @@ class VerificationDetails extends Component {
         />
       </div>
     );
-  }
-  
+  };
+
   render() {
-    const { 
+    const {
       request, isLoading,
       match: { params: { requestId } }, location: { pathname },
     } = this.props;
     const headerTags = ['Manager\'s Approval', 'Budget Check', 'Travel Verification'];
     return (
       <Fragment>
-        {isLoading 
+        {isLoading
           ? <Preloader />
-          : ( 
-            <div className="verification-page-container">          
+          : (
+            <div className="verification-page-container">
               <RequestDetails
-                request={request} requestId={requestId} renderButtons={this.renderButtons} 
+                request={request} requestId={requestId} renderButtons={this.renderButtons}
                 renderRightPaneQuestion={this.renderRightPaneQuestion} isLoading={isLoading}
                 headerTags={headerTags} pathname={pathname}
               />
@@ -238,6 +230,7 @@ VerificationDetails.defaultProps = {
   isLoading: true,
   currentUser: {},
   email: {},
+  errors: {}
 };
 
 VerificationDetails.propTypes = {
@@ -251,12 +244,14 @@ VerificationDetails.propTypes = {
   updateRequestStatus: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   attachments: PropTypes.array.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 };
 
 const mapStateToProps = (state) => {
   return {
     request: state.requests.requestData,
+    errors: state.requests.errors,
     checklist: state.attachments,
     isLoading: state.requests.fetchingRequest,
     currentUser: state.user.currentUser,
@@ -268,7 +263,7 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   fetchUserRequestDetails,
   fetchAttachments,
-  updateRequestStatus,  
+  updateRequestStatus,
   downloadAttachments
 };
 export default connect(mapStateToProps, actionCreators)(VerificationDetails);

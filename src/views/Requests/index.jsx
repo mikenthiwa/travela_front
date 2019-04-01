@@ -288,7 +288,8 @@ Requests.propTypes = {
   creatingRequest: PropTypes.bool,
   errors: PropTypes.oneOfType([
     PropTypes.object,
-    PropTypes.array
+    PropTypes.array,
+    PropTypes.string
   ]),
   shouldOpen: PropTypes.bool.isRequired,
   modalType: PropTypes.string,

@@ -8,6 +8,7 @@ import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import RequestDetails from '../../components/RequestDetails';
 import ConnectedCommentBox from '../../components/RequestsModal/CommentBox/CommentBox';
 import ConnectedUserComments from '../../components/RequestsModal/UserComments/UserComments';
+import NotFound from '../ErrorPages/NotFound';
 import './ApproveRequests.scss';
 
 export const Approve = (type = 'manager') => {
@@ -20,14 +21,14 @@ export const Approve = (type = 'manager') => {
     componentDidMount() {
       const {
         fetchUserRequestDetails,
-        match: { params: { requestId } }, 
+        match: { params: { requestId } },
       } = this.props;
       fetchUserRequestDetails(requestId);
     }
 
     handleButtonSelected = (e) => {
       this.setState({ buttonSelected: e.target.textContent, modalInvisible: false });
-    }
+    };
 
     handleDecision = (requestId) => {
       const { updateRequestStatus, updateBudgetStatus } = this.props;
@@ -96,7 +97,7 @@ export const Approve = (type = 'manager') => {
       const componentStatus = type === 'budget' ? budgetStatus : status;
       const pluralizedName = name && name[name.length - 1] === 's' ?
         `${name}'` : `${name}'s`;
-      const statusText = componentStatus && componentStatus === 'Rejected' ? 'rejected' : 'approved'; 
+      const statusText = componentStatus && componentStatus === 'Rejected' ? 'rejected' : 'approved';
       return componentStatus === 'Open'
         ? `Do you want to approve ${pluralizedName} travel request?`
         : `You have ${statusText} ${pluralizedName} travel request`;
@@ -104,11 +105,13 @@ export const Approve = (type = 'manager') => {
 
     render() {
       const {
-        request, isLoading,
-        match: { params: { requestId } },
-        currentUser, email, location: { pathname },
+        request, isLoading, match: { params: { requestId } },
+        currentUser, email, location: { pathname }, errors
       } = this.props;
       const headerTags = type === 'budget' ? ['Manager\'s Approval','Budget Check'] : ['Manager\'s Stage'];
+      if(typeof(errors) === 'string' && errors.includes('does not exist')) {
+        return <NotFound redirectLink="/requests/my-approvals" errorMessage={errors} />;
+      }
       return (
         <Fragment>
           <RequestDetails
@@ -124,9 +127,7 @@ export const Approve = (type = 'manager') => {
             !isEmpty(request) ? (
               <div className="request-comment">
                 <ConnectedCommentBox
-                  requestId={requestId}
-                  documentId={null}
-                />
+                  requestId={requestId} documentId={null} />
                 <ConnectedUserComments
                   comments={request.comments}
                   email={email.result && email.result.email}
@@ -148,20 +149,23 @@ export const Approve = (type = 'manager') => {
     isLoading: PropTypes.bool,
     currentUser: PropTypes.object,
     email: PropTypes.object,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   };
 
   ApproveRequests.defaultProps = {
     request: {},
     isLoading: true,
     currentUser: {},
-    email: {}
+    email: {},
+    errors: {}
   };
   return ApproveRequests;
 };
 
 const mapStateToProps = (state) => ({
   request: state.requests.requestData,
+  errors: state.requests.errors,
   isLoading: state.requests.fetchingRequest,
   currentUser: state.user.currentUser,
   email: state.user.getUserData,

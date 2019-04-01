@@ -8,13 +8,12 @@ import RequestDetailsPage from '../../../components/RequestsModal/RequestDetails
 import backButton from '../../../images/back-icon.svg';
 import './NewRequestPage.scss';
 import { fetchTravelChecklist } from '../../../redux/actionCreator/travelChecklistActions';
-import {
-  fetchSubmission, postSubmission } from '../../../redux/actionCreator/checkListSubmissionActions';
+import { fetchSubmission, postSubmission } from '../../../redux/actionCreator/checkListSubmissionActions';
 import { uploadFile } from '../../../redux/actionCreator/fileUploadActions';
 import { openModal, closeModal } from '../../../redux/actionCreator/modalActions';
 import {
-  fetchUserReadinessDocuments
-} from '../../../redux/actionCreator/travelReadinessDocumentsActions';
+  fetchUserReadinessDocuments } from '../../../redux/actionCreator/travelReadinessDocumentsActions';
+import NotFound from '../../ErrorPages/NotFound';
 
 export class NewRequestPage extends Component {
   componentDidMount() {
@@ -29,7 +28,7 @@ export class NewRequestPage extends Component {
     const { fetchTravelChecklist, openModal, fetchSubmission } = this.props;
     const { id: requestId, tripType } = request;
     fetchSubmission({ requestId, tripType });
-  }
+  };
 
   renderRequestDetailsPage = () => {
     const { match:{ params: { requestId } },
@@ -50,13 +49,15 @@ export class NewRequestPage extends Component {
         postSubmission={postSubmission} submissionInfo={submissionInfo}
         uploadFile={uploadFile} userReadinessDocument={userReadinessDocument}
       />
-
     );
-  }
+  };
 
   render() {
-    const { match:{ params: { requestId } }, fetchingRequest,
+    const { match:{ params: { requestId } }, fetchingRequest, errors
     } = this.props;
+    if(typeof(errors) === 'string' && errors.includes('does not exist')) {
+      return <NotFound redirectLink="/requests" errorMessage={errors} />;
+    }
     return (
       <Fragment>
         <div>
@@ -95,10 +96,9 @@ NewRequestPage.propTypes = {
   uploadFile: PropTypes.func.isRequired,
   fetchTravelChecklist: PropTypes.func.isRequired,
   fetchUserReadinessDocuments: PropTypes.func.isRequired,
-  fetchSubmission: PropTypes.func.isRequired
-
+  fetchSubmission: PropTypes.func.isRequired,
+  errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
-
 
 NewRequestPage.defaultProps = {
   fetchUserRequestDetails: () => { },
@@ -107,7 +107,8 @@ NewRequestPage.defaultProps = {
   currentUser: {},
   user: {},
   travelChecklists: {},
-  modalType: '', userReadinessDocument: {}
+  modalType: '', userReadinessDocument: {},
+  errors: {}
 };
 
 const mapStateToProps = ({ requests, travelChecklist,
@@ -133,7 +134,6 @@ const actionCreators = {
   openModal,
   closeModal,
   fetchUserReadinessDocuments
-
 };
 
 export default connect(mapStateToProps, actionCreators)(NewRequestPage);
