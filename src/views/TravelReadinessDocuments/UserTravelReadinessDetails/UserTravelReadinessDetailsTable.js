@@ -232,16 +232,33 @@ export class UserTravelReadinessDetailsTable extends Component {
     );
   }
 
+  renderOtherDocuments() {
+    return(
+      <div className="other__documents--empty">
+        <p>Other documents you can upload include:-</p>
+        <p>
+          <span>&#8226;</span>
+          {' '}
+          A yellow fever card
+        </p>
+        <p>
+          <span>&#8226;</span>
+          {' '}
+          Travel Health Insurance
+        </p>
+      </div>
+    );
+  }
+
   render() {
     const { activeDocument } = this.props;
     const { props } = this;
     if((!props[`${activeDocument}s`].length) ) {
       return (
         <div className="table__readiness--empty">
-          No
-          {' '}
-          {`${activeDocument === 'other' ? 'other document uploaded' : activeDocument}`}
-          {`${activeDocument === 'other' ? '' : 's'}`}
+          {`${activeDocument}` === 'other' ?
+            this.renderOtherDocuments() :
+            `No ${activeDocument}s  are displayed because you have no uploaded ${activeDocument} documents`}
         </div>
       );
     }
