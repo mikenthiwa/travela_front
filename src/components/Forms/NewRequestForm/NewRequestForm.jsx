@@ -291,7 +291,7 @@ class NewRequestForm extends PureComponent {
       for (let i = 0; i < tripsDate.length; i++){
         theBool += tripsDate[i];
       }
-      if (theBool) {
+      if (theBool && trips[0].departureDate) {
         this.setState({isSameDate: true});
         const firstMatch = tripsDate.findIndex(trip => trip);
         trips[0].returnDate &&
