@@ -108,9 +108,8 @@ spec:
     stage('Deploy') {
       when {
         anyOf {
-          branch 'dont-deploy'
-          /*branch 'master'
-          branch 'develop'*/
+          branch 'master'
+          branch 'develop'
         }
       }
       steps {
