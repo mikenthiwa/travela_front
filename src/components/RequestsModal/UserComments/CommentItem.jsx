@@ -83,8 +83,7 @@ export default class CommentItem extends Component {
       commentOnEdit,
     } = this.props;
     const { deletingComment } = this.state;
-    const profilePic = comment.user.picture
-      ? comment.user.picture : defaultProfilePicture;
+    const profilePic= (comment.user || {}).picture || defaultProfilePicture;
     return (
       <div className="modal__modal1" key={comment.id}>
         <div className="modal__mdl-icons">
