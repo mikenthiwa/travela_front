@@ -50,6 +50,7 @@ $font-normal: 'DIN Pro';
   list-style-type: none;
   font-size: 15px;
   color: $primary-color;
+  cursor:pointer;
 }
 
 .button-outline {
@@ -155,6 +156,18 @@ td.pl-sm-100 {
       box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
       background-color: $white-color !important;
     }
+  }
+  &__effects{
+    &:hover {
+      box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+      background-color: $white-color !important;
+    }
+  }
+  &__data-pointer{
+    cursor: default;
+  }
+  &__id-pointer{
+    cursor: pointer;
   }
   &__head {
     @include fontStyle(14px, 500);
@@ -298,4 +311,7 @@ td.pl-sm-100 {
     margin-bottom: -10px;
     cursor: pointer;
   }
+}
+.fa.fa-ellipsis-v{
+  cursor: pointer;
 }

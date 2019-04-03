@@ -161,13 +161,13 @@ export class Table extends Component {
 
   renderApprovalsIdCell(request) {
     return (
-      <td className="mdl-data-table__cell--non-numeric table__data freeze">
+      <td className="mdl-data-table__cell--non-numeric table__data freeze table__data-pointer">
         <div
           onKeyPress={() => {}}
           onClick={() => this.handleClickRequest(request.id)}
           role="button"
           tabIndex="0"
-          className="button-outline"
+          className="button-outline table__id-pointer"
         >
           {request.id}
         </div>
@@ -176,8 +176,8 @@ export class Table extends Component {
   }
 
   renderName(type, request) {
-    return type === 'approvals' && (
-      <td className="mdl-data-table__cell--non-numeric table__data pl-sm-100">
+    return (type === 'approvals' || type === 'verifications') && (
+      <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer pl-sm-100">
         {request.name}
       </td>
     );
@@ -185,9 +185,16 @@ export class Table extends Component {
 
   renderTravelCompletion(type, travelCompletion) {
     return (type === 'requests' || type === 'verifications') && (
-      <td className="mdl-data-table__cell--non-numeric table__data">
+      <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer">
         {travelCompletion || '0% complete'}
       </td>
+    );
+  }
+  renderTravelDuration(type) {
+    return type === 'verifications' ? '' : (
+      <th className="mdl-data-table__cell--non-numeric table__head">
+      Duration
+      </th>
     );
   }
 
@@ -197,27 +204,29 @@ export class Table extends Component {
     const travelDuration =
       request.tripType !== 'oneWay' ? getTripDuration(trips) : 'Not applicable';
     return (
-      <tr key={request.id} className="table__row">
+      <tr key={request.id} className="table__row table__effects">
         {this.renderApprovalsIdCell(request)}
         {this.renderName(type, request)}
         <td
-          className={`mdl-data-table__cell--non-numeric table__data ${
+          className={`mdl-data-table__cell--non-numeric table__data table__data-pointer ${
             type === 'requests' ? 'pl-sm-100' : ''
           }`}
         >
           {tripTypeFormatted}
         </td>
-        <td className="mdl-data-table__cell--non-numeric table__data">
+        <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer">
           {trips.length > 0 && trips[0].origin}
         </td>
-        <td className="mdl-data-table__cell--non-numeric table__data">
-          {travelDuration}
-        </td>
-        <td className="mdl-data-table__cell--non-numeric table__data">
+        {type === 'verifications' ? '' : (
+          <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer">
+            {travelDuration}
+          </td>
+        ) }
+        <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer">
           {moment(request.updatedAt).format('DD MMM YYYY')}
         </td>
         { this.renderTravelCompletion(type, travelCompletion)}
-        <td className="mdl-data-table__cell--non-numeric table__requests__status table__data">
+        <td className="mdl-data-table__cell--non-numeric table__requests__status table__data table__data-pointer">
           {this.renderRequestStatus(request)}
         </td>
       </tr>
@@ -230,7 +239,7 @@ export class Table extends Component {
         <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze">
           Request ID
         </th>
-        {type === 'approvals' && (
+        {(type === 'approvals' || type === 'verifications')&& (
           <th className="mdl-data-table__cell--non-numeric table__head pl-sm-100">
             Owner
           </th>
@@ -245,9 +254,7 @@ export class Table extends Component {
         <th className="mdl-data-table__cell--non-numeric table__head">
           Origin
         </th>
-        <th className="mdl-data-table__cell--non-numeric table__head">
-          Duration
-        </th>
+        {this.renderTravelDuration(type)}
         <th className="mdl-data-table__cell--non-numeric table__head">
           Date Created
         </th>
