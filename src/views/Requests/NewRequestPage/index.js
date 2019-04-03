@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchUserRequestDetails } from '../../../redux/actionCreator/requestActions';
 import Preloader from '../../../components/Preloader/Preloader';
@@ -25,7 +24,7 @@ export class NewRequestPage extends Component {
   }
 
   handleShowTravelChecklist = (request) => {
-    const { fetchTravelChecklist, openModal, fetchSubmission } = this.props;
+    const {fetchSubmission } = this.props;
     const { id: requestId, tripType } = request;
     fetchSubmission({ requestId, tripType });
   };
@@ -53,7 +52,7 @@ export class NewRequestPage extends Component {
   };
 
   render() {
-    const { match:{ params: { requestId } }, fetchingRequest, errors
+    const { match:{ params: { requestId } }, fetchingRequest, history, errors
     } = this.props;
     if(typeof(errors) === 'string' && errors.includes('does not exist')) {
       return <NotFound redirectLink="/requests" errorMessage={errors} />;
@@ -62,9 +61,13 @@ export class NewRequestPage extends Component {
       <Fragment>
         <div>
           <h1 className="page-header__request">
-            <Link to="/requests">
+            <span
+              className="goback"
+              role="presentation" onClick={() => {
+                history.goBack();
+              }}>
               <img src={backButton} className="header__link" alt="back icon" />
-            </Link>
+            </span>
             <span>
               {`REQUEST #${requestId}`}
             </span>

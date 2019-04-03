@@ -128,7 +128,6 @@ let props1 = {
   },
   modalType: null,
   shouldOpen: false,
-  history: {push: jest.fn()},
   closeModal: jest.fn(),
   openModal: jest.fn(),
   postSubmission: jest.fn(),
@@ -136,7 +135,11 @@ let props1 = {
   uploadFile: jest.fn(),
   fetchTravelChecklist: jest.fn(),
   fetchUserReadinessDocuments: jest.fn(),
-  fetchSubmission: jest.fn()
+  fetchSubmission: jest.fn(),
+  history: {
+    push: jest.fn(),
+    goBack: jest.fn()
+  },
 };
 
 let props2 = {
@@ -838,5 +841,11 @@ describe('<Request Page>', () => {
     wrapper.instance().handleShowTravelChecklist(request);
     expect(fetchSubmission).toHaveBeenCalled();
      
+  });
+  
+  it('should go to the previous page when back button is clicked', () => {
+    wrapper = shallow(<NewRequestPage {...props1} />);
+    wrapper.find('span.goback').simulate('click');
+    expect(props1.history.goBack).toHaveBeenCalled();
   });
 });
