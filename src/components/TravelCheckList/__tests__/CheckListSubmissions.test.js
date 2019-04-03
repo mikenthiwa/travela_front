@@ -53,7 +53,7 @@ describe('ChecklistSubmission Component', () => {
 
     expect(submissionItem.length).toBe(5);
     expect(submissionItemLink.length).toBe(0);
-    expect(uploadedField.length).toBe(2);
+    expect(uploadedField.length).toBe(4);
     expect(ticketSubmission.length).toBe(1);
     expect(uploadfield.length).toBe(1);
     expect(textAreaField.length).toBe(1);

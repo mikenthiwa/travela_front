@@ -1,17 +1,28 @@
 import React from 'react';
 import saveIcon from '../../images/icons/save-icon.svg';
+import documentIcon from '../../images/document-rect.png';
+
 
 
 export function AttachmentItems({ attachments, attachmentDetails, handleDownloadAttachments}) {
   return (
     attachmentDetails.map((item) => {
+      const isPdf = item.itemUrl.substr(-3) ==='pdf';
       return (attachments.destinationName === item.itemDestination || attachments.tripId === item.itemTripId)? 
         (
           <div key={item.itemId} className="attachment-item">
             <p className="attachment-header">{item.itemName}</p>
             <div className="split">
               <div className="attachment-image">
-                <img src={item.itemUrl} alt={item.itemName} />
+                {isPdf ? (
+                  <embed
+                    src={`${item.itemUrl}#toolbar=0&statusbar=0&page=1`}
+                    alt={item.itemName}
+                    className="travelSubmission--input__input-field__image"
+                    type="application/pdf"
+                  />
+                ): 
+                  <img src={item.itemUrl} alt={item.itemName} className="travelSubmission--input__input-field__image" />}
               </div>
               <div className="attachment-value">
                 <p className="bold">                                             

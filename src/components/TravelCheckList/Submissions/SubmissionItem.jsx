@@ -15,7 +15,7 @@ class SubmissionItem extends Component {
 
   componentWillReceiveProps(nextProps) {
     const {
-      fileUploadData: {isUploading, uploadSuccess}, checkId,
+      fileUploadData: {isUploading, uploadSuccess, cloudinaryUrl}, checkId,
       checklistItem : { name , submissions: [ item ] }
     } = nextProps;
 
@@ -24,7 +24,8 @@ class SubmissionItem extends Component {
     }
     if(!(name === 'Travel Ticket Details' && !item)){
       uploadSuccess.match(checkId) && this.setState({
-        info: 'Done', type: 'success', uploadedFileName: ''
+        info: 'Done', type: 'success', uploadedFileName: '',
+        uploadedFileUrl: cloudinaryUrl
       });
     }
   }

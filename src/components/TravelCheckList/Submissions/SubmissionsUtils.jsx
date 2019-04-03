@@ -29,7 +29,7 @@ class SubmissionsUtils extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    const { checkId, checklistItem: {submissions: [item]}, setUploadedFile, postSuccess, } = nextProps;
+    const { checkId, checklistItem: {submissions: [item]}, setUploadedFile, postSuccess } = nextProps;
     if(item && item.value.fileName) {
       setUploadedFile(item.value.fileName, item.value.url, item.createdAt );
     }
@@ -265,8 +265,10 @@ class SubmissionsUtils extends Component {
 
   renderUploadedField = () => {
     const { itemsToCheck, checkId, uploadedFileName, handleUpload,checklistItem: {submissions: [item]}, setUploadedFile,
-      fileUploadData: { isUploading }, uploadedFileDate, uploadProcess, uploadedFileUrl } = this.props;
+      fileUploadData: { isUploading, cloudinaryUrl, uploadSuccess }, uploadedFileDate, uploadProcess, uploadedFileUrl } = this.props;
     const isPdf = uploadedFileName.substr(-3) ==='pdf';
+    let cloudinaryLink =  uploadSuccess === checkId && cloudinaryUrl;
+    const imageUrl = cloudinaryLink ? cloudinaryLink: uploadedFileUrl;
     const fileName = (!uploadProcess || uploadedFileDate) && uploadedFileName;
     const fileDate = (!uploadProcess || uploadProcess.match('success')) && uploadedFileDate;
     return (
@@ -274,7 +276,15 @@ class SubmissionsUtils extends Component {
         {(!uploadProcess || uploadedFileDate) &&
         (
           <div className="travelSubmission--input__input-field__">
-            <img className="travelSubmission--input__input-field__image" src={isPdf ? documentIcon : uploadedFileUrl} alt="document" />
+            {isPdf ? (
+              <embed
+                src={`${imageUrl}#toolbar=0&statusbar=0&page=1`}
+                alt="document"
+                className="travelSubmission--input__input-field__image"
+                type="application/pdf"
+              />
+            ): 
+              <img src={imageUrl} alt="document" className="travelSubmission--input__input-field__image" />}
             <div role="presentation" className="travelSubmission--input__btn--">
               <div id="file-upload" role="presentation" className="travelSubmission--input__btn--uploadedFileName">
                 {fileName}
@@ -425,9 +435,11 @@ class SubmissionsUtils extends Component {
       <Fragment>
         {utilsType && utilsType.match('ticketFieldset')
         && this.renderTicketFieldset()}
-        {(utilsType && utilsType.match('uploadField') && !item && !showUploadedField)
+        {utilsType && utilsType.match('uploadField') && !item && !showUploadedField
         && this.renderUploadField()}
-        {utilsType && utilsType.match('uploadField') && (item || showUploadedField)
+        {(utilsType && utilsType.match('uploadField') && (item && typeof item.value !== 'object'))
+        && this.renderUploadField()}
+        {((utilsType && utilsType.match('uploadField') && (item && typeof item.value === 'object')) || showUploadedField)
         && this.renderUploadedField()}
         {utilsType && utilsType.match('textarea')
         && this.renderTextarea()}
@@ -443,7 +455,11 @@ class SubmissionsUtils extends Component {
 SubmissionsUtils.propTypes = {
   checklistItem: PropTypes.object.isRequired, utilsType: PropTypes.string,
   checkId: PropTypes.string.isRequired, returnTicketNumber: PropTypes.string.isRequired,
-  submissionText: PropTypes.string.isRequired, ticketNumber: PropTypes.string.isRequired,
+  submissionText: PropTypes.oneOfType([
+    PropTypes.shape({}),
+    PropTypes.string
+  ]).isRequired,
+  ticketNumber: PropTypes.string.isRequired,
   airline: PropTypes.string.isRequired, returnAirline: PropTypes.string.isRequired,
   handleUpload: PropTypes.func.isRequired, setTicketFields: PropTypes.func.isRequired,
   setTextArea: PropTypes.func.isRequired, postSuccess: PropTypes.array.isRequired,
