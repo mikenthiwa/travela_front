@@ -16,6 +16,9 @@
     margin-left:0px !important;
   }
   .checklist-page {
+    padding: 50px 4px 4px 0;
+  }
+  .checklist-page {
     .checklist-item {
       #deleted-item,
       #item-name {
@@ -25,7 +28,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      #item-name,
+      #item-name{
+        max-width: 135px;
+      }
       #deleted-item,
       #deleted-item:nth-child(2) {
         max-width: 120px;
@@ -45,6 +50,9 @@
   .add-checklist-item {
     fieldset {
       float: right;
+    }
+    form fieldset:last-child .submit-area{
+      width: auto;
     }
   }
 }

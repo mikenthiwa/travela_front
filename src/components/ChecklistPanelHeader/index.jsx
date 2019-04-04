@@ -7,7 +7,7 @@ class ChecklistPanelHeader extends PureComponent {
   render() {
     const { openModal, location } = this.props;
     return (
-      <div className="role-panel-header">
+      <div className="role-panel-header checklist-header">
         <PageHeader
           title="TRAVEL CHECKLIST"
           actionBtn="Add Item"
