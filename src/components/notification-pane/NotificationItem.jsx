@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import HtmlToReact from 'html-to-react';
 import './_notificationItem.scss';
 import readMessageIcon from '../../images/read-message.svg';
 import unreadMessageIcon from '../../images/unread-message.svg';
 import generateDynamicDate from '../../helper/generateDynamicDate';
 
+const HtmlToReactParser = new HtmlToReact.Parser();
 export default class NotificationItem extends PureComponent {
   state = {
     localNotificationStatus: 'unread'
@@ -59,7 +61,7 @@ export default class NotificationItem extends PureComponent {
   render() {
     const { name, image, message } = this.props;
     const bgColorClass = this.checkMarkedAsRead() ? 'message-opened' : '';
-
+    const handle = /<\/a>/.test(message);
     return (
       <div className={`notification-item ${bgColorClass}`}>
         <div className="notification-item__image__container">
@@ -69,9 +71,9 @@ export default class NotificationItem extends PureComponent {
           <div className="notification--item__info__top">
             <div>
               <span className="notification--item__info__top__name">
-                {`@${name} `}
+                {handle ? '' : `@${name} `}
               </span>
-              {message}
+              {HtmlToReactParser.parse(message)}
             </div>
           </div>
           {this.renderNotificationItemMetaInfo()}
