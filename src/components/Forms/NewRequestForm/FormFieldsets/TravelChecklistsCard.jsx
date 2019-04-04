@@ -29,7 +29,7 @@ class TravelChecklistsCard extends Component {
       <div>
         <div className="travel-checklist-rectangle">
           <div className="travel-checklist-text">
-            <p> Travel Checklist Required For This Trip</p> 
+            <p> These are the checklist items that you will be required to submit for this trip </p> 
           </div>
           <hr className="travel-checklist-line" />        
           {isLoading
@@ -39,7 +39,7 @@ class TravelChecklistsCard extends Component {
                   const { checklist: checklistItems } = checklist;
                   return (
                     <Fragment key={checklist.destinationName}>
-                      <div className="travel-checklist-text">
+                      <div className="travel-checklist-loc-title">
                         <p> 
                           {checklist.destinationName}
                         </p>

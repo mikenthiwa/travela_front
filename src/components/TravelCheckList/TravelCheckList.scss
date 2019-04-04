@@ -93,7 +93,12 @@
     border-radius: 6px;
     background-color: #FFFFFF;
     margin-bottom: 60px;
+    &__sticky {
+      top: 80px;
+      position: sticky;
+    }
   }
+
   &--card__head {
     border-bottom: 1px solid #E4E4E4;
     text-align: center;

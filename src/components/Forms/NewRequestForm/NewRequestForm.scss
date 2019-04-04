@@ -496,14 +496,25 @@ form.new-request {
 }
 .travel-checklist-text {	
   height: 14px;	
-  width: 243px;	
   color: #4F4F4F;	
   font-family: "DIN Pro";	
   font-size: 14px;	
   line-height: 18px;	
+  margin: 20px;
+  text-align: center;
+}
+
+.travel-checklist-loc-title {	
+  height: 14px;	
+  width: 243px;	
+  color: #4F4F4F;	
+  font-family: "DIN Pro";	
+  font-size: 14px;	
+  line-height: 18px;
   text-align: center;
   margin: 22px 176.5px 13px 174.5px
 }
+
 .pending-approvals-text {	
   height: 18px;	
   width: 226px;	

@@ -9,7 +9,6 @@ import './TravelCheckList.scss';
 import CircularProgressBar from './CircularLoader';
 import documentIcon from '../../images/document-rect.png';
 
-
 class TravelCheckListPage extends Component{
 
   componentDidMount() {
@@ -82,90 +81,85 @@ class TravelCheckListPage extends Component{
       );
         
     }
-    
-    renderReadinessProgressBar = (percentage) => {
-      const { hideSubmit } = this.props;
-      const message = percentage === 100 ?  
-        'Travel Team will review your document and advise accordingly' 
-        : 'Complete the checklist to continue';
-      return (
-        <div className="travelCheckList__col-5">
-          <Fragment>
+  
+  renderReadinessProgressBar = (percentage, modalOpen) => {
+    const { hideSubmit } = this.props;
+    const checklistCardStyle = !modalOpen ? 'travelCheckList--card__sticky' : '';
+    const message = percentage === 100 ?  
+      'Travel Team will review your document and advise accordingly' 
+      : 'Complete the checklist to continue';
+    return (
+      <div className="travelCheckList__col-5">
+        <Fragment>
+          <div className={`travelCheckList--card ${checklistCardStyle}`}>
+            <div className="travelCheckList--card__head">
+              Your Travel Readiness
+            </div>
+
+            <div className="progressBar">
+              <div className="progressBar__text">
+                <div className="progressBar__text-head">You are</div>
+                <div className="progressBar__text-foot">Travel Ready</div>
+              </div>
+              <CircularProgressBar
+                percentage={percentage}
+                strokeWidth={10}
+                sqSize={169}
+              />
+            </div>
+            <div className="progressBar__message">
+              <p>{message}</p>
+            </div>
+          </div>
+          <div className="travelCheckList__row--button-area">
+            {!hideSubmit && this.renderSubmitButton(percentage)}
+          </div>
+        </Fragment>
+      </div>
+    );
+  };
+
+  renderSubmitButton = percentage => {
+    return (
+      <div className="travelSubmission--submit-area__button">
+        {percentage !== 100 && (
+          <button
+            type="button"
+            onClick={this.returnToRequestPage}
+            className=""
+            id="save-button"
+          >
+            Save
+          </button>
+        )}
+      </div>
+    );
+  };
+
+  render() {
+    const { request, submissionInfo: {percentageCompleted},
+    } = this.props;
+    return (
+      <div className="travelCheck-list">
+
+        <div className="travelCheckList__row">
+          <div className="travelCheckList__col-7">
             <div className="travelCheckList--card">
               <div className="travelCheckList--card__head">
-            Your Travel Readiness
+              These are the checklist items required to be submitted for this trip
               </div>
-          
-              <div className="progressBar">
-                <div className="progressBar__text">
-                  <div className="progressBar__text-head">
-                    You are
-                  </div>
-                  <div className="progressBar__text-foot">
-                    Travel Ready
-                  </div>
-                </div>       
-                <CircularProgressBar 
-                  percentage={percentage}
-                  strokeWidth={10}
-                  sqSize={169}
-                />
-              </div>
-              <div className="progressBar__message">
-                <p>{message}</p>
-              </div>
-          
+              { this.renderSubmissionsCard(request) }
             </div>
-            <div className="travelCheckList__row--button-area">
-              { !hideSubmit && this.renderSubmitButton(percentage) }
-            </div>
-          </Fragment>
+          </div>
+          { this.renderReadinessProgressBar(percentageCompleted) }
+        
         </div>
-
-      );
-    }
-
-      renderSubmitButton = (percentage) => {
-        return(
-          
-          <div className="travelSubmission--submit-area__button">
-            { percentage !== 100 && 
-              ( 
-                <button type="button" onClick={this.returnToRequestPage} className="" id="save-button">
-                Save     
-                </button>
-              )
-            }            
-          </div>
-         
-        );
-      }
+       
+        
+      </div>
       
-      render() {
-        const { request, submissionInfo: {percentageCompleted},
-        } = this.props;
-        return (
-          <div className="travelCheck-list">
-
-            <div className="travelCheckList__row">
-              <div className="travelCheckList__col-7">
-                <div className="travelCheckList--card">
-                  <div className="travelCheckList--card__head">
-                    Travel CheckList Required For This Trip
-                  </div>
-                  { this.renderSubmissionsCard(request) }
-                 
-                </div>
-              </div>
-              { this.renderReadinessProgressBar(percentageCompleted) }
-            
-            </div>
-           
-            
-          </div>
-          
-        );
-      }
+    );
+  }
 
 }
 
