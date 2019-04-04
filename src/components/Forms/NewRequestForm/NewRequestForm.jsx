@@ -124,6 +124,7 @@ class NewRequestForm extends PureComponent {
       errors: {},
       hasBlankFields: true,
       isSameDate: false,
+      inValidOtherReason: false,
       sameOriginDestination: true,
       checkBox: 'notClicked',
       selection: 'return',
@@ -735,8 +736,21 @@ class NewRequestForm extends PureComponent {
       }
     }, () => {
       this.validate(fieldName);
+      this.checkValidOtherReason();
     });
   };
+
+  checkValidOtherReason = () => {
+    const { trips } = this.state;
+    const otherReasons = [];
+    for (let i = 0; i < trips.length; i++){
+      if (trips[i].travelReasons) {continue;}
+      otherReasons.push(trips[i].otherTravelReasons ? trips[i].otherTravelReasons.trim() : '');
+    }
+    const invalidReason = otherReasons.find(reason => reason.length <= 7);
+    invalidReason ? this.setState({ inValidOtherReason: true})
+      : this.setState({ inValidOtherReason: false});
+  }
 
   onEditCancelHandler = () => {
     const {history} = this.props;
@@ -831,7 +845,7 @@ class NewRequestForm extends PureComponent {
     selection, creatingRequest, disableOnChangeProfile, collapse,
     commentTitle, currentTab, editing,
   ) => {
-    const {isLoading, isSameDate} = this.state;
+    const {isLoading, isSameDate, inValidOtherReason} = this.state;
     const { requestOnEdit, userData, comments } = this.props;
     return (
       <div className="trip__tab-body">
@@ -851,6 +865,7 @@ class NewRequestForm extends PureComponent {
               ? false : true
           }
           isSameDate={isSameDate}
+          inValidOtherReason={inValidOtherReason}
           sameOriginDestination={sameOriginDestination}
           selection={selection}
           loading={creatingRequest}

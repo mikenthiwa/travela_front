@@ -325,6 +325,7 @@ class TravelDetailsItem extends Component {
             <div style={{ display: 'none' }}>{ values[`otherReasons-${itemId}`]  = '' || characters }</div>
             {renderInput(`otherReasons-${itemId}`, 'textarea', {
               maxLength:'140',
+              placeholder:'describe other reason',
               rows:'20',
               parentid: itemId,
             })}
@@ -414,6 +415,8 @@ class TravelDetailsItem extends Component {
 export const reasonsWarningColor = (length, max) =>{
   const charLeft = max - length;
   switch(true){
+  case (charLeft > 132):
+    return { color:'red', charLeft: `A minimum of ${8} Characters is required`};
   case (charLeft===0):
     return { color:'red', charLeft: `You have reached a maximum of ${140} Characters`};
   case (charLeft < 11):

@@ -944,7 +944,7 @@ describe('<NewRequestForm />', () => {
     const shallowWrapper = mount(<NewRequestForm {...props} />);
     shallowWrapper.setState({
       currentTab: 2,
-      trips: [{otherTravelReasons: 1}]
+      trips: [{otherTravelReasons: 'otherTravelReason'}]
     });
     const event = {
       preventDefault: jest.fn(),
@@ -956,7 +956,7 @@ describe('<NewRequestForm />', () => {
     const selectField = shallowWrapper.find('DropdownSelect[name="reasons-0"]');
     selectField.simulate('change', {target: {value: 'Other..'}});
     const travelReasons = shallowWrapper.state('trips');
-    expect(travelReasons[0].otherTravelReasons).toEqual(1);
+    expect(travelReasons[0].otherTravelReasons).toEqual('otherTravelReason');
     sinon.spy(shallowWrapper.instance(), 'handleReason');
     shallowWrapper.instance().handleReason('Bootcamp', null, 'conference');
     expect(shallowWrapper.instance().handleReason.calledOnce).toEqual(true);

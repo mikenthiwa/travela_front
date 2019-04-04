@@ -56,13 +56,14 @@ class SubmitArea extends Component{
     submitButton = (
       hasBlankFields, loading, isCreating,
       sameOriginDestination, disableOnChangeProfile,
-      send, nextStep, isSameDate
+      send, nextStep, isSameDate, inValidOtherReason
     ) => {
       return (
         <button 
           type="submit"
           onClick={e => this.handleSubmitButtonClick(e, nextStep)}
-          disabled={isSameDate || hasBlankFields || loading || isCreating || (sameOriginDestination && disableOnChangeProfile)}
+          disabled={inValidOtherReason || isSameDate || hasBlankFields || loading || isCreating ||
+           (sameOriginDestination && disableOnChangeProfile)}
           className="bg-btn bg-btn--active"
           id="submit">
           <ButtonLoadingIcon isLoading={loading || isCreating} buttonText={send} />
@@ -181,7 +182,7 @@ class SubmitArea extends Component{
     render(){
       const { hasBlankFields,sameOriginDestination, onCancel, send, modalType, comments,
         onEditCancel, selection, loading, isCreating, disableOnChangeProfile, nextStep,
-        editing, isSameDate } = this.props;
+        editing, isSameDate, inValidOtherReason } = this.props;
      
       return(
         <fieldset className={send==='Next' ?'submit__area-border': null}>
@@ -191,7 +192,7 @@ class SubmitArea extends Component{
             { this.submitButton(
               hasBlankFields, loading, isCreating,
               sameOriginDestination, disableOnChangeProfile,
-              send, nextStep, isSameDate
+              send, nextStep, isSameDate, inValidOtherReason
             )
             }
           </div>
@@ -225,6 +226,7 @@ SubmitArea.propTypes = {
   editing: PropTypes.bool,
   comments: PropTypes.array,
   isSameDate: PropTypes.bool,
+  inValidOtherReason : PropTypes.bool
 };
 
 SubmitArea.defaultProps = {
@@ -245,7 +247,8 @@ SubmitArea.defaultProps = {
   requestData: {},
   editing: false,
   comments: [],
-  isSameDate: false
+  isSameDate: false,
+  inValidOtherReason: false
 };
 
 export default SubmitArea;
