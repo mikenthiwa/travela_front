@@ -27,8 +27,9 @@
 
   .notification-item__info {
     width: 66.08%;
+    height: 100%;
+    padding: 13px 10px 0 0;
     .notification--item__info__top {
-      height: 56px;
       display: flex;
       align-items: center;
 
@@ -43,6 +44,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 5px 5px 5px 0;
       
       .t-hours-ago {
         height: 14px;
