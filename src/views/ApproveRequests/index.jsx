@@ -106,7 +106,7 @@ export const Approve = (type = 'manager') => {
     render() {
       const {
         request, isLoading, match: { params: { requestId } },
-        currentUser, email, location: { pathname }, errors
+        currentUser, email, location: { pathname }, errors, history
       } = this.props;
       const headerTags = type === 'budget' ? ['Manager\'s Approval','Budget Check'] : ['Manager\'s Stage'];
       if(typeof(errors) === 'string' && errors.includes('does not exist')) {
@@ -116,6 +116,7 @@ export const Approve = (type = 'manager') => {
         <Fragment>
           <RequestDetails
             request={request}
+            history={history}
             requestId={requestId}
             renderButtons={this.renderButtons}
             renderRightPaneQuestion={this.renderRightPaneQuestion}
@@ -150,6 +151,7 @@ export const Approve = (type = 'manager') => {
     currentUser: PropTypes.object,
     email: PropTypes.object,
     location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
     errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   };
 

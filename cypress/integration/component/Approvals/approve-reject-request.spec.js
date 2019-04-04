@@ -13,8 +13,8 @@ describe('Approval page(Approval or rejection of request by managers)', () => {
     });
   
     it('should approve a request and toast success message', () => {
-      cy.get('.action-button--approve').click();
-      cy.get('#approve').click();
+      cy.get('button.action-button--approve').click();
+      cy.get('button#approve').click();
       cy.get('.toast-message')
         .wait(3000)
         .should('be.visible')
@@ -84,5 +84,6 @@ describe('Approval page(Approval or rejection of request by managers)', () => {
         .should('be.visible')
         .contains('Request rejected successfully');
     });
+
   });
 });

@@ -33,7 +33,7 @@ class RequestDetails extends Component {
   render() {
     const {
       request, requestId,
-      isLoading, pathname, headerTags, 
+      isLoading, pathname, headerTags, history
     } = this.props;
     const body = isLoading
       ? this.renderLoader() : (isEmpty(request)
@@ -43,9 +43,9 @@ class RequestDetails extends Component {
     return (
       <div className="approval">
         <h1 className="header text--black">
-          <Link to={url}>
+          <span role="presentation" onClick={()=> history.goBack()}>
             <img src={backButton} className="header__link" alt="back icon" />
-          </Link>
+          </span>
           {`REQUEST #${requestId}`}
           {headerTags.map(tag => <span className="stage" key={tag}>{tag}</span>)}
         </h1>
@@ -63,6 +63,7 @@ RequestDetails.propTypes = {
   renderRightPaneQuestion: PropTypes.func.isRequired,
   pathname: PropTypes.string.isRequired,
   headerTags: PropTypes.array.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 RequestDetails.defaultProps = {

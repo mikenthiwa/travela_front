@@ -3,14 +3,25 @@ const baseAPI = Cypress.env('REACT_APP_API_URL');
 describe('Approvals', () => {
   before(() => {
     cy.server();
-    cy.route('GET', `${baseAPI}/approvals`,
+    cy.route('GET', `${baseAPI}/approvals?page=2`,
       'fixture:approvals/approval');
   });
 
   describe('Managers approval page', () => {
     before(() => {
       cy.authenticateUser();
-      cy.visit('/requests/my-approvals');
+      cy.visit('/requests/my-approvals?page=2');
+    });
+
+    it('should go back to page two when the back button is clicked', ()=>{
+      cy.server();
+      cy.route('GET', `${baseAPI}/requests/*`,
+        'fixture:approvals/OpenRequest');
+      cy.authenticateUser();
+      cy.visit('/requests/my-approvals/CVEgPxX1q').wait(3000);
+      cy.get('.header__link').click();
+      cy.get('.pagination__current-page').contains('2');
+      cy.url().should('include', '/my-approvals?page=2');
     });
 
     it('displays the approvals header', () => {

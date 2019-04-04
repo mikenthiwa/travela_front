@@ -23,6 +23,7 @@ describe('Verification page(Verification of requests by Travel Admin)', () => {
       cy.visit('/requests/my-verifications/AWQqIucjm');
     });
 
+
     it('should verify a request and toast success message', () => {
       cy.get('.action-button--verify').click();
       cy.get('#verify').click();
@@ -59,6 +60,7 @@ describe('Verification page(Verification of requests by Travel Admin)', () => {
       cy.get('.ql-editor');
     });
 
+
     describe('Travel Admin Posts a Comment', () => {
       before(() => {
         cy.server();
@@ -73,6 +75,8 @@ describe('Verification page(Verification of requests by Travel Admin)', () => {
       it('should verify that a comment has been posted', () => {
         cy.get('.modal__status-update').contains('Admin testing comments');
       });
+
+
     });
   });
 });

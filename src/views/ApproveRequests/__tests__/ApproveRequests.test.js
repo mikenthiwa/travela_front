@@ -88,6 +88,12 @@ describe('TEST ConnectedApproveRequests COMPONENT', () => {
       rejectButton.simulate('click');
       expect(instance.state.modalInvisible).toBe(true);
     });
+
+    it('should test behaviour of back button', () => {
+      const wrapper = setupConnectedComponent(props, store);
+      wrapper.find('span[role="presentation"]').simulate('click');
+      expect(props.history.goBack).toHaveBeenCalled();
+    });
   });
 
   describe('TEST PLURALIZATION', () => {

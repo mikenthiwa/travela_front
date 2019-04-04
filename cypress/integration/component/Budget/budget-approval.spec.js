@@ -5,7 +5,7 @@ describe('Budget check approvals', () => {
     cy.server();
     cy.route(
       'GET',
-      `${baseAPI}/approvals/budget`,
+      `${baseAPI}/approvals/budget?page=2`,
       'fixture:budgetChecks/budgetapproval'
     );
   });
@@ -13,7 +13,17 @@ describe('Budget check approvals', () => {
   describe('Budget checkers approval page', () => {
     before(() => {
       cy.authenticateUser();
-      cy.visit('/requests/budgets/');
+      cy.visit('/requests/budgets?page=2');
+    });
+
+    it('should go back to page two when the back button is clicked', ()=>{
+      cy.server();
+      cy.route('GET', `${baseAPI}/requests/*`,
+        'fixture:approvals/OpenRequest');
+      cy.authenticateUser();
+      cy.visit('/requests/my-verifications/AWQqIucjm').wait(3000);
+      cy.get('.header__link').click();
+      cy.url().should('include', '/budgets?page=2');
     });
 
     it('should display the Budget checkers approvals header', () => {

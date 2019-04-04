@@ -93,7 +93,7 @@ export default class CommentItem extends Component {
             imageClass="modal__oval-copy"
           />
           <span className="modal__user-name">
-            {comment.userId === currentUser.id ? currentUser.fullName : comment.user.fullName}
+            {comment.userId === currentUser.id ? currentUser.fullName : (comment.user || {}).fullName}
           </span>
           <span className="modal__hours-status">
             {formatDate(comment.createdAt)}

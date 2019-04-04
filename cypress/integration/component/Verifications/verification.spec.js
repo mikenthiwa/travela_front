@@ -7,7 +7,17 @@ describe('Requests', () => {
       cy.route('GET', `${baseAPI}/approvals?verified=true`,
         'fixture:requests/requests');
       cy.authenticateUser();
-      cy.visit('/requests/my-verifications');
+      cy.visit('/requests/my-verifications?page=2');
+    });
+
+    it('should go back to page two when the back button is clicked', ()=>{
+      cy.server();
+      cy.route('GET', `${baseAPI}/requests/*`,
+        'fixture:approvals/OpenRequest');
+      cy.authenticateUser();
+      cy.visit('/requests/my-verifications/AWQqIucjm').wait(3000);
+      cy.get('.header__link').click();
+      cy.url().should('include', '/my-verifications?page=2');
     });
 
     it('displays the verifications header', () => {
@@ -36,7 +46,7 @@ describe('Requests', () => {
 
     it('displays a component that shows travel request for the admin verification', () => {
       cy.get(
-        '.mdl-data-table .table__body > :nth-child(1) > :nth-child(2)'
+        '.mdl-data-table .table__body > :nth-child(1) > :nth-child(3)'
       ).contains('One-way');
     });
 

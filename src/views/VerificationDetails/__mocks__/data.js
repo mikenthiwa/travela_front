@@ -208,6 +208,9 @@ export const props = {
   },
   location: {
     pathname: '/requests/my-approvals/requestId'
+  },
+  history: {
+    goBack: jest.fn()
   }
 };
 

@@ -6,8 +6,44 @@
         "id": "CVEgPxX1q",
         "name": "Ronald Ndirangu",
         "tripType": "return",
-        "manager": "Ronald Ndirangu",
+        "manager": "Mirriam Maina",
         "gender": "Male",
+        "department": "IT",
+        "role": "Software developer",
+        "status": "Open",
+        "userId": "-LOmrkv2HPmwdZvwvec7",
+        "picture": "https://lh6.googleusercontent.com/--MWn6ZsbsqY/AAAAAAAAAAI/AAAAAAAAAAw/IDxtzW5nRwM/photo.jpg?sz=50",
+        "createdAt": "2018-12-10T14:21:31.792Z",
+        "updatedAt": "2018-12-10T14:21:31.792Z",
+        "deletedAt": null,
+        "trips": [
+          {
+            "id": "wbYixF-791",
+            "origin": "Nairobi, Kenya",
+            "destination": "Lagos, Nigeria",
+            "departureDate": "2019-01-01",
+            "returnDate": "2019-01-05",
+            "checkStatus": "Not Checked In",
+            "checkInDate": null,
+            "checkOutDate": null,
+            "lastNotifyDate": null,
+            "notificationCount": 0,
+            "travelCompletion": "false",
+            "createdAt": "2018-12-10T14:21:31.798Z",
+            "updatedAt": "2018-12-10T14:21:31.798Z",
+            "deletedAt": null,
+            "bedId": 6001,
+            "requestId": "CVEgPxX1q"
+          }
+        ],
+        "travelCompletion": "0% complete"
+      },
+      {
+        "id": "CVEgPyY3R",
+        "name": "Mirriam Maina",
+        "tripType": "return",
+        "manager": "Mirriam Maina",
+        "gender": "Female",
         "department": "IT",
         "role": "Software developer",
         "status": "Open",
@@ -45,8 +81,8 @@
         "past": 0
       },
       "pagination": {
-        "pageCount": 1,
-        "currentPage": 1,
+        "pageCount": 2,
+        "currentPage": 2,
         "dataCount": 1
       }
     }

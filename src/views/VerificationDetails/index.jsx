@@ -202,7 +202,7 @@ class VerificationDetails extends Component {
   render() {
     const {
       request, isLoading,
-      match: { params: { requestId } }, location: { pathname },
+      match: { params: { requestId } }, location: { pathname }, history
     } = this.props;
     const headerTags = ['Manager\'s Approval', 'Budget Check', 'Travel Verification'];
     return (
@@ -212,7 +212,7 @@ class VerificationDetails extends Component {
           : (
             <div className="verification-page-container">
               <RequestDetails
-                request={request} requestId={requestId} renderButtons={this.renderButtons}
+                request={request} requestId={requestId} renderButtons={this.renderButtons} history={history}
                 renderRightPaneQuestion={this.renderRightPaneQuestion} isLoading={isLoading}
                 headerTags={headerTags} pathname={pathname}
               />
@@ -235,17 +235,12 @@ VerificationDetails.defaultProps = {
 
 VerificationDetails.propTypes = {
   request: PropTypes.object,
-  isLoading: PropTypes.bool,
-  currentUser: PropTypes.object,
-  email: PropTypes.object,
-  fetchUserRequestDetails: PropTypes.func.isRequired,
-  fetchAttachments: PropTypes.func.isRequired,
-  downloadAttachments: PropTypes.func.isRequired,
-  updateRequestStatus: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired,
-  attachments: PropTypes.array.isRequired,
-  location: PropTypes.object.isRequired,
-  errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  isLoading: PropTypes.bool, currentUser: PropTypes.object,
+  email: PropTypes.object, fetchUserRequestDetails: PropTypes.func.isRequired,
+  fetchAttachments: PropTypes.func.isRequired, downloadAttachments: PropTypes.func.isRequired,
+  updateRequestStatus: PropTypes.func.isRequired, match: PropTypes.object.isRequired,
+  attachments: PropTypes.array.isRequired, location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired, errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 };
 
 const mapStateToProps = (state) => {
