@@ -163,6 +163,56 @@
   justify-content: space-between;
 }
 
+@media (max-width: 1350px) {
+  .overview {
+    .card-layout {
+      overflow: visible;
+      overflow-x: scroll;
+    }
+    .card--request-table {
+      width: 32em;
+      overflow: visible;
+      overflow-x: scroll;
+      white-space: nowrap;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .home-title {
+    margin-top: 4em;
+  }
+
+  .overview {
+    display: block;
+
+    .card-layout {
+      width: 100%;
+      margin-bottom: 1em;
+    }
+  }
+
+  .started .card-layout{
+    display: block;
+
+    img {
+      width: 100%;
+      height: 120px;
+      margin-bottom: -40px;
+    }
+
+    .details {
+      padding-left: 40px;
+
+      .confirm {
+        padding-top: 5px;
+        padding-bottom: 17px;
+        margin-top: -13px;
+      }
+    }
+  }
+}
+
 .rap-popover-content {
   height: 89px;
   width: 174px;
