@@ -131,7 +131,8 @@
       "<rootDir>/src/redux/actionCreator/index.js",
       "<rootDir>/src/mockData/*",
       "<rootDir>/src/mockData/*",
-      "<rootDir>/src/redux/store/selectors.js"
+      "<rootDir>/src/redux/store/selectors.js",
+      "<rootDir>/src/scripts"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"

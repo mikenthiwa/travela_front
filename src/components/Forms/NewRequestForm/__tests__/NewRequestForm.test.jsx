@@ -352,7 +352,7 @@ describe('<NewRequestForm />', () => {
 
   beforeEach(() => {
     wrapper = mount(<NewRequestForm {...props} />);
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   it('renders correctly', () => {
@@ -1491,6 +1491,59 @@ describe('<NewRequestForm />', () => {
       expect(props.handleEditRequest).toHaveBeenCalled();
     });
 
+    it('should test setCurrentOrigin method', () => {
+      let state;
+      travelStipendHelper.getAllTripsStipend = jest.fn(() => ({
+        totalStipend: '$ 100',
+        stipendSubTotals: []
+      }));
+      const { handleEditRequest } = props;
+      const mountedWrapper =  mount(
+        <Provider store={store}>
+          <MemoryRouter>
+            <NewRequestForm
+              {...props} editing
+              handleEditRequest={handleEditRequest}
+            />
+          </MemoryRouter>
+        </Provider>
+      );
+      mountedWrapper.find('.check').at(2).simulate('click');
+      expect(mountedWrapper.find('.trip__detail-col').length).toBe(2);
+      
+      state = mountedWrapper.find('NewRequestForm').instance().state;
+      expect(state.currentOrigin).toBe(0);
+      
+      const instance = mountedWrapper.find('NewRequestForm').instance();
+      const spy = jest.spyOn(instance, 'setCurrentOrigin');
+      instance.forceUpdate();
+      mountedWrapper.find('.travel-to').at(4).simulate('focus');
+
+      state = mountedWrapper.find('NewRequestForm').instance().state;
+      expect(state.currentOrigin).toBe(1);
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should test locationDropdownStick', () => {
+      let state;
+      travelStipendHelper.getAllTripsStipend = jest.fn(() => ({
+        totalStipend: '$ 100',
+        stipendSubTotals: []
+      }));
+      const { handleEditRequest } = props;
+      const mountedWrapper =  mount(
+        <Provider store={store}>
+          <MemoryRouter>
+            <NewRequestForm
+              {...props} editing
+              handleEditRequest={handleEditRequest}
+            />
+          </MemoryRouter>
+        </Provider>
+      );
+      const locationDropdownStick = mountedWrapper.find('NewRequestForm').instance().locationDropdownStick;
+      locationDropdownStick();
+    });
   });
 
   

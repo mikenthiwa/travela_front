@@ -138,9 +138,9 @@ class TravelDetailsItem extends Component {
   };
 
   renderLocation = locationType => {
-    const { itemId, renderInput } = this.props;
+    const { itemId, renderInput, setCurrentOrigin } = this.props;
     return (
-      <div className="travel-to" onChange={this.handleChangeInput}>
+      <div className="travel-to" onChange={this.handleChangeInput} onFocus={() => setCurrentOrigin(itemId)}>
         {renderInput(`${locationType}-${itemId}`, 'text', { parentid: itemId })}
         <img src={location} alt="icn" className="location-icon" />
       </div>
@@ -446,6 +446,7 @@ const fetchRoomsOnFocus = PropTypes.func;
 const requestOnEdit = PropTypes.object;
 const listTravelReasons = PropTypes.object;
 const editing = PropTypes.bool;
+const setCurrentOrigin = PropTypes.func;
 
 TravelDetailsItem.propTypes = {
   itemId: itemId.isRequired,
@@ -465,6 +466,7 @@ TravelDetailsItem.propTypes = {
   requestOnEdit: requestOnEdit.isRequired,
   parentIds: PropTypes.number,
   listTravelReasons: listTravelReasons,
+  setCurrentOrigin: setCurrentOrigin.isRequired
 };
 
 TravelDetailsItem.defaultProps = {

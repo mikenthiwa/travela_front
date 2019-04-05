@@ -116,11 +116,12 @@ class TravelDetailsFieldset extends Component {
       availableRooms,
       requestOnEdit,
       listTravelReasons,
-      editing
+      editing,
+      setCurrentOrigin
     } = this.props;
 
     const { renderInput } = this.inputRenderer;
-
+ 
     return (
       <TravelDetailsItem
         itemId={i}
@@ -140,6 +141,7 @@ class TravelDetailsFieldset extends Component {
         parentIds={parentIds}
         listTravelReasons={listTravelReasons}
         editing={editing}
+        setCurrentOrigin={setCurrentOrigin}
       />
     );
   };
@@ -189,6 +191,7 @@ const availableRooms = PropTypes.object;
 const listTravelReasons = PropTypes.object;
 const requestOnEdit = PropTypes.object;
 const editing = PropTypes.bool;
+const setCurrentOrigin = PropTypes.func;
 
 TravelDetailsFieldset.propTypes = {
   values: values.isRequired,
@@ -206,7 +209,8 @@ TravelDetailsFieldset.propTypes = {
   availableRooms: availableRooms.isRequired,
   listTravelReasons: listTravelReasons.isRequired,
   requestOnEdit: requestOnEdit.isRequired,
-  editing: editing
+  editing: editing,
+  setCurrentOrigin: setCurrentOrigin.isRequired
 };
 
 TravelDetailsFieldset.defaultProps = {

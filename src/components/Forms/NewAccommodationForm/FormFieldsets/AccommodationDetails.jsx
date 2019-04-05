@@ -5,8 +5,25 @@ import * as formMetadata from '../../FormsMetadata/NewAccommodationForm';
 import '../NewAccommodation.scss';
 import addMoreRoomIcon from '../../../../images/add.svg';
 import deleteRoomIcon from '../../../../images/delete.svg';
+import setDropdownLocation from '../../../../scripts/dropdownLocation';
 
 class AccommodationDetails extends Component {
+
+  componentDidMount() {
+    const overlay = document.getElementsByClassName('overlay')[0];
+    if (overlay) overlay.addEventListener('scroll', this.locationDropdownStick);
+  }
+
+  componentWillUnmount() {
+    const overlay = document.getElementsByClassName('overlay')[0];
+    if (overlay) overlay.removeEventListener('scroll', this.locationDropdownStick);
+  }
+
+  locationDropdownStick = () => {
+    const dropdown = document.getElementsByClassName('pac-container');
+    if (dropdown) setDropdownLocation('location', 0);
+  }
+
   renderAddRoomBtn = () => {
     const { addRoomOnClick } = this.props;
     return (
