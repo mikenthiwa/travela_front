@@ -536,6 +536,28 @@ describe('<NewRequestForm />', () => {
     expect(shallowWrapper.instance().onChangeInput.calledOnce).toEqual(true);
   });
 
+
+  it(`The arrival date/ next-departure date of
+  the previous trip should be automatically filled`, () => {
+    const wrapper = mount(<NewRequestForm {...props}  />);
+    wrapper.setState({
+      selection: 'multi',
+      parentIds: 1,
+      currentTab: 2,
+    });
+    wrapper.find('.another-trip').simulate('click');
+    const event = {
+      nativeEvent: {
+        path: [0, 1, 2, 3, 4, 5, 6, {id: 'departureDate-1_date'}]
+      },
+    };
+    const spyChange = sinon.spy(wrapper.instance(), 'onChangeDate');
+    wrapper.instance().onChangeDate(moment('2018-12-01'), event);
+    expect(wrapper.state().values['arrivalDate-0'].toISOString())
+      .toEqual('2018-12-01T00:00:00.000Z');
+    expect(spyChange.called).toEqual(true);
+  });
+
   it('call event when available room is picked', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
     const event = {

@@ -263,7 +263,29 @@ class NewRequestForm extends PureComponent {
         }
       );
     }
-
+    if (
+      dateStartsWithDeparture
+      && selection === 'multi'
+      && `departureDate-${getId}` !== 'departureDate-0'
+    ) {
+      const targetFieldId = getId - 1;
+      this.setState(
+        prevState => {
+          const {trips} = prevState;
+          const newTrips = [...trips];
+          newTrips[targetFieldId].arrivalDate = dateFormat;
+          newTrips[targetFieldId].returnDate = dateFormat;
+          return {
+            targetFieldId,
+            values: {
+              ...prevState.values,
+              [`arrivalDate-${targetFieldId}`]: date
+            },
+            trips: [...newTrips]
+          };
+        }
+      );
+    }
     const onPickDate =
       dateStartsWithDeparture && selection !== 'oneWay'
         ? () => this.resetTripArrivalDate(getId, dateName)
