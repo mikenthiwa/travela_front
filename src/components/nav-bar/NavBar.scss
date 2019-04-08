@@ -96,11 +96,15 @@
         }
     }
     &__travela-logo {
-        @media (max-width: 479px) {
+        @media (max-width: 480px) {
             top: 1.5%;
-            position: absolute;
+            position: fixed;
             height: 36px;
             width: 36px;
+        }
+
+        @media (min-width: 480px) {
+            display: none;
         }
     }
     &__search-icon {
@@ -261,3 +265,4 @@
     }
     }
 }
+

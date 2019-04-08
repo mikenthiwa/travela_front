@@ -149,7 +149,7 @@ export class NavBar extends PureComponent {
         <img
           src={mobileTravel} 
           alt="Travela Logo" 
-          className="mdl-cell--hide-desktop mdl-cell--hide-tablet navbar__travela-logo" />
+          className="navbar__travela-logo" />
       </span>
     );
   }

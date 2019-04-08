@@ -86,6 +86,10 @@
     p {
       opacity: 0.8;
     }
+
+    @media (max-width: 840px) {
+    left: 40%;
+    }
   }
 }
 .no-email-templates {

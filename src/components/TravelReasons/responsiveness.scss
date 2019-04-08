@@ -1,0 +1,77 @@
+@media (max-width: 840px) and (min-width: 812px){
+
+    .table__container {
+        margin-top: 50px;
+        position: unset;
+    }
+
+
+
+}
+
+@media (max-width: 812px) and (min-width: 560px){
+    .table__container {
+        margin-top: 50px;
+        position: unset;
+    }
+
+    .pagination {
+        width: 100%;
+    }
+
+    .list-templates .table__menu-container ul.table__menu-list, .list-reasons .table__menu-container ul.table__menu-list {
+        right: -20px
+    }
+
+    .reasons-header {
+        min-height: 30px;
+        overflow: visible;
+    }
+
+}
+
+@media (max-width: 560px) and (min-width: 480px){
+
+    .table__container {
+        margin-top: 50px;
+        position: unset;
+    }
+
+}
+
+
+@media (max-width: 479px) {
+    @mixin flexDisplay($flexDirection, $justifyContent, $alignItems) {
+        display: flex;
+        flex-direction: $flexDirection;
+        justify-content: $justifyContent;
+        align-items: $alignItems;
+      }
+
+.list-reasons {
+    margin-top: 110px;
+}
+
+
+
+.mdl-data-table thead > tr{
+    @include flexDisplay(row, center, flex-start);
+}
+
+.table__rows {
+    
+    @include flexDisplay(row, flex-start, left);
+}
+
+.mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric {
+    width: 100%;
+}
+
+.modal{
+    width: 80vw;
+}
+
+
+}
+
+

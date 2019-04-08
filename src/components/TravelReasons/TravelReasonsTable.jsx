@@ -12,14 +12,14 @@ import MenuItem from '../ContextMenu/MenuItem';
 const className = 'mdl-data-table__cell--non-numeric';
 
 export class TravelReasonsTable extends Component {
-  renderTravelReasonsTableHead () {
+  renderTravelReasonsTableHead() {
     return (
       <thead>
         <tr>
           <th className={`${className} table__head`}>Reason</th>
-          <th className={`${className} table__head pl-sm-100d description-left`}><span /></th>
-          <th className={`${className} table__head pl-sm-100d description-left`}>Created By</th>
-          <th className={`${className} table__head pl-sm-100d description-left`}><span /></th>
+          <th className={`${className} table__head`}><span /></th>
+          <th className={`${className} table__head`}>Created By</th>
+          <th className={`${className} table__head`}><span /></th>
           <th className={`${className} table__head`}>Created On</th>
           <th className={`${className} table__head`} />
         </tr>
@@ -27,12 +27,12 @@ export class TravelReasonsTable extends Component {
     );
   }
 
-  renderTravelReasonsTableRow({id,
-    key, showDeleteModal, deleteTravelReason, title, createdOn, createdBy: {fullName}}) {
+  renderTravelReasonsTableRow({ id,
+    key, showDeleteModal, deleteTravelReason, title, createdOn, createdBy: { fullName } }) {
     const {
       renderDisplayTravelReasonDetails, shouldOpen, closeModal, modalType,
-      reasonDetails, isFetching , editTravelReason } = this.props;
-    return(
+      reasonDetails, isFetching, editTravelReason } = this.props;
+    return (
       <Fragment key={key}>
         <tr className="table__rows">
           <td className={`${className} table__data readiness__cell-name`}>
@@ -73,12 +73,12 @@ export class TravelReasonsTable extends Component {
     );
   }
 
-  renderTravelReasonsBody ({reasons, editTravelReason, showDeleteModal, deleteTravelReason }) {
+  renderTravelReasonsBody({ reasons, editTravelReason, showDeleteModal, deleteTravelReason }) {
     return (
       <tbody className="table__body">
         {
           reasons.map(reason => {
-            return(
+            return (
               this.renderTravelReasonsTableRow({
                 id: reason.id,
                 key: reason.id,
@@ -87,7 +87,8 @@ export class TravelReasonsTable extends Component {
                 deleteTravelReason,
                 createdOn: reason.createdAt,
                 editTravelReason: editTravelReason,
-                createdBy: reason.creator})
+                createdBy: reason.creator
+              })
             );
           })
         }
@@ -104,7 +105,7 @@ export class TravelReasonsTable extends Component {
             <div className="table__container">
               <table className="mdl-data-table mdl-js-data-table readiness-table">
                 {this.renderTravelReasonsTableHead()}
-                {this.renderTravelReasonsBody({ reasons,showDeleteModal, deleteTravelReason })}
+                {this.renderTravelReasonsBody({ reasons, showDeleteModal, deleteTravelReason })}
               </table>
             </div>
           </div>
