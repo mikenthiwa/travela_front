@@ -100,7 +100,7 @@ class NewRequestForm extends PureComponent {
         trips: requestTrips,
         prevValues: values,
         prevTrips: requestTrips
-      });
+      }, () => this.checkSameDate());
     }
   }
 
