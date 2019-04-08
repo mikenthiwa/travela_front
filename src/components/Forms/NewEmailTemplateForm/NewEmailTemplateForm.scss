@@ -105,3 +105,28 @@
     width: 100%;
   }
 }
+
+@media only screen and (max-width: 700px) {
+  .new-email-template-form{
+    .emails{
+      display: block;
+    }
+  }
+  
+}
+
+@media only screen and (max-width: 550px) {
+
+  .template-details{
+
+    .input-group.template-details{
+      .subject-input{
+        width: 250px;
+        padding: 1px;
+      }
+      .message-input{
+        width: 250px;
+      }
+    }
+  }
+}

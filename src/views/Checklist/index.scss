@@ -308,3 +308,9 @@
 }
 
 @import 'responsiveness';
+
+@media only screen and (max-width: 550px) {
+  .delete-checklist-item {
+    width:320px;
+  }
+}
