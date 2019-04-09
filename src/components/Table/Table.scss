@@ -77,7 +77,6 @@ $font-normal: 'DIN Pro';
 }
 .freeze {
   @media (max-width: 839px) {
-    position: absolute !important;
     background-color: #ffffff;
     width: 27vw !important;
     z-index: 99;
@@ -93,18 +92,13 @@ $font-normal: 'DIN Pro';
 
 th.bb-md-0 {
     @media (min-width: 480px) and (max-width: 839px) {
-        border-bottom: 0;
+        border-bottom: 0;     
       }
 }
 
-th.pl-sm-100,
-td.pl-sm-100 {
-  @media (max-width: 479px) {
-    padding-left: 125px !important;
-  }
-  @media (min-width: 480px) and (max-width: 839px) {
-    padding-left: 137px !important;
-  }
+th.request_id{
+  position: sticky;
+  left: 0;
 }
 
 .table {
@@ -177,7 +171,7 @@ td.pl-sm-100 {
     padding: 13px 30px !important;
     @media (max-width: 479px) {
       padding: 11px 14px !important;
-      background-color: #f8f8f8;
+      background-color: #f8f8f8;    
     }
 
     &--last {

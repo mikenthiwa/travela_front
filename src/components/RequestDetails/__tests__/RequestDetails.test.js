@@ -39,7 +39,7 @@ describe('TEST REQUEST DETAILS COMPONENT', () => {
         ...props,
         isLoading: false
       });
-      expect(wrapper.find('.partition')).toHaveLength(6);
+      expect(wrapper.find('.partition')).toHaveLength(7);
     });
 
     it('should render with travelReason', () => {

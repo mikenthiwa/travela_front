@@ -236,7 +236,7 @@ export class Table extends Component {
   renderTableHead(type) {
     return (
       <tr>
-        <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze">
+        <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze request_id">
           Request ID
         </th>
         {(type === 'approvals' || type === 'verifications')&& (
@@ -311,7 +311,7 @@ export class Table extends Component {
             requests.length > 0 && (
             <table className="mdl-data-table mdl-js-data-table table__requests">
               <thead>{this.renderTableHead(type)}</thead>
-              <tbody className="table__body">
+              <tbody className="table__body approvals_table_body">
                 {requests.map(request => this.renderRequest(request, type))}
               </tbody>
             </table>

@@ -106,7 +106,7 @@ describe('TEST ConnectedApproveRequests COMPONENT', () => {
       ];
       store = mockStore(initialState);
       const wrapper = setupConnectedComponent(props, store);
-      expect(wrapper.find('.text--grey').at(6).text()).toEqual('You have approved Christopher Moses\' travel request');
+      expect(wrapper.find('.text--grey').at(7).text()).toEqual('You have approved Christopher Moses\' travel request');
     });
 
     it('should pluralize name rejected requests', () => {
@@ -114,7 +114,7 @@ describe('TEST ConnectedApproveRequests COMPONENT', () => {
       initialState.requests.requestData.status = 'Rejected';
       store = mockStore(initialState);
       const wrapper = setupConnectedComponent(props, store);
-      expect(wrapper.find('.text--grey').at(6).text()).toEqual('You have rejected Christopher Moses\' travel request');
+      expect(wrapper.find('.text--grey').at(7).text()).toEqual('You have rejected Christopher Moses\' travel request');
     });
   });
 

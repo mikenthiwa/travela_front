@@ -70,6 +70,10 @@
   .PageHeader {
     width: 96%;
     margin-bottom: -20px !important;
+
+    @media (max-width: 482px) {
+      margin-bottom: 0 !important;
+    }
   }
 }
 .no-templates {
@@ -134,7 +138,7 @@ form.template-details{
 .reasons-header {
   .PageHeader {
     width: 96%;
-    margin-bottom: 60px;
+    margin-bottom: 60px !important;
   }
 }
 

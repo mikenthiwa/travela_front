@@ -40,7 +40,7 @@ class Button extends PureComponent {
         type="button"
         disabled={disabled} className={buttonClass} onClick={onClick} id={buttonId}>
         {!reverseText && imageSrc && <img src={imageSrc} alt={altText} className={imageClass} />}
-        <span className={`${textClass} mdl-cell--hide-phone`}>
+        <span className={`${textClass}`}>
           {text}
         </span>
         {reverseText && imageSrc && <img src={imageSrc} alt={altText} className={imageClass} />}

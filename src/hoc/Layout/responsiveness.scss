@@ -13,3 +13,9 @@
 .mdl-layout {
   min-width: 320px;
 }
+
+.request-page__left-side-bar{
+  @media (max-width: 1178px)  {
+    display: none;
+  }
+}

@@ -97,7 +97,7 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
       initialState.requests.requestData.status = 'Verified';
       store = mockStore(initialState);
       const wrapper = setupConnectedComponent(props, store);
-      expect(wrapper.find('.text--grey').at(6).text()).toEqual('You have verified Christopher Moses\' travel request');
+      expect(wrapper.find('.text--grey').at(7).text()).toEqual('You have verified Christopher Moses\' travel request');
     });
   });
 

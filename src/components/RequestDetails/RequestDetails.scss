@@ -1,7 +1,5 @@
 .approval {
-
   .preloader {
-
     .spinner {
       top: 35%;
     }
@@ -9,19 +7,18 @@
 
   .error-msg {
     height: initial;
-    width:initial;
+    width: initial;
   }
 
   .text {
-
     &--blue {
-      color: #3359DB;
+      color: #3359db;
       font-weight: 900;
     }
 
     &--grey,
-    &--black  {
-      color: #4F4F4F;
+    &--black {
+      color: #4f4f4f;
     }
 
     &--black {
@@ -34,16 +31,16 @@
     display: inline-block;
     height: initial;
     margin: 3.5em 0 1.2em 0;
-    width:initial;
+    width: initial;
 
     a {
       margin-right: 0.7em;
     }
 
     .stage {
-      background-color: #DFE3E8;
+      background-color: #dfe3e8;
       border-radius: 0.4em;
-      color: #4A4A4A;
+      color: #4a4a4a;
       font-size: 0.6em;
       font-weight: 100;
       margin: 0 0 0 1.4em;
@@ -58,8 +55,8 @@
     width: 100%;
 
     .row {
-      background-color: #FFF;
-      border: 1px solid #E4E4E4;
+      background-color: #fff;
+      border: 1px solid #e4e4e4;
       border-radius: 0.5em;
       height: 10em;
       margin: 1em 0 0;
@@ -72,6 +69,10 @@
       .row {
         display: flex;
 
+        .mobile {
+          display: none;
+        }
+
         .partition {
           padding: 2em 0 0 3em;
           text-transform: capitalize;
@@ -79,16 +80,14 @@
           width: 33%;
 
           .info-button {
-
             &--true {
-
               span {
                 width: 11em;
               }
 
               &:hover {
                 cursor: not-allowed;
-  
+
                 span {
                   display: block;
                 }
@@ -96,37 +95,37 @@
             }
 
             &--false {
-
               span {
                 width: 16em;
               }
 
               &:hover {
                 cursor: pointer;
-  
+
                 span {
                   display: block;
                 }
               }
             }
 
-            &--false, &--true {
-              background-color: #3359DB;
+            &--false,
+            &--true {
+              background-color: #3359db;
               border: 0;
               border-radius: 100%;
-              color: #FFF;
+              color: #fff;
               font-size: 0.8em;
               font-style: normal;
               font-weight: 900;
               margin: 0 0 0 0.5em;
-              outline: none!important;
+              outline: none !important;
               padding: 0 0.6em;
               position: relative;
-  
+
               span {
-                background-color: #F8F8F8;
-                box-shadow: 0 1px 5px 0 rgba(0,0,0,0.2);
-                color: #4F4F4F;
+                background-color: #f8f8f8;
+                box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+                color: #4f4f4f;
                 display: none;
                 padding: 0.5em 1em;
                 position: absolute;
@@ -159,10 +158,19 @@
             padding: 0;
 
             .stipend-container-block {
-              background-color: #FFF;
-              box-shadow: 0 1px 5px 0 rgba(0,0,0,0.1);
+              background-color: #fff;
+              box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
               padding: 1em;
               width: initial;
+              text-align: right;
+
+              .total-stipend {
+                display: inline-block;
+                width: initial;
+                height: initial;
+                padding: 0.5em;
+                margin-left: 0;
+              }
 
               .stipend-row {
                 width: initial;
@@ -177,7 +185,6 @@
       width: 38%;
 
       .row {
-
         .btn-group {
           position: relative;
 
@@ -186,7 +193,7 @@
             border-radius: 0.1em;
             font-size: 1em;
             margin: 0 2em;
-            outline: none!important;
+            outline: none !important;
             padding: 0.6em 1.4em;
             text-transform: capitalize;
 
@@ -196,16 +203,15 @@
           }
 
           .action-button {
-
             &--verify {
-              border: 1px solid #3359DB;
-              color: #3359DB;
+              border: 1px solid #3359db;
+              color: #3359db;
             }
 
             &--verified {
               background-color: #49aaaf;
               border: 1px solid #49aaaf;
-              color: #FFF;
+              color: #fff;
 
               &:hover {
                 cursor: not-allowed;
@@ -213,13 +219,13 @@
             }
 
             &--approve {
-              border: 1px solid #3359DB;
-              color: #3359DB;
+              border: 1px solid #3359db;
+              color: #3359db;
             }
             &--approved {
               background-color: #49aaaf;
               border: 1px solid #49aaaf;
-              color: #FFF;
+              color: #fff;
 
               &:hover {
                 cursor: not-allowed;
@@ -227,14 +233,14 @@
             }
 
             &--reject {
-              border: 1px solid #D0021B;
-              color: #D0021B;
+              border: 1px solid #d0021b;
+              color: #d0021b;
             }
 
             &--rejected {
-              background-color: #FF5359;
-              border: 1px solid #FF5359;
-              color: #FFF;
+              background-color: #ff5359;
+              border: 1px solid #ff5359;
+              color: #fff;
 
               &:hover {
                 cursor: not-allowed;
@@ -272,7 +278,7 @@
               }
 
               button {
-                color: #FFF;
+                color: #fff;
                 height: auto;
                 margin: 0 1.5em 0 0;
                 padding: 0.2em 1em;
@@ -281,23 +287,20 @@
 
               .approval-comment-modal,
               .rejection-comment-modal {
-
                 &__btn {
                   border-radius: 0;
                 }
               }
 
               .approval-comment-modal {
-
                 &__btn {
                   background-color: #08c75e;
                 }
               }
 
               .rejection-comment-modal {
-
                 &__btn {
-                  background-color: #FF5359;
+                  background-color: #ff5359;
                 }
               }
             }
@@ -315,7 +318,6 @@
         }
 
         .text {
-
           &--grey {
             padding-left: 2em;
             padding-right: 2em;
@@ -327,6 +329,121 @@
 
           &--black {
             padding-left: 1.6em;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1018px) {
+  .approval {
+    .text {
+      &--black {
+        font-size: 1em;
+      }
+      &--grey {
+        font-size: 0.8em;
+      }
+    }
+    .header {
+      font-size: 1.3em;
+      font-weight: 900;
+    }
+    .main-container {
+      display: block;
+      width: 100%;
+
+      .left-pane {
+        width: 100%;
+        margin: 0 1.2% 0 0;
+        .row {
+          .mobile {
+            display: block;
+          }
+
+          .partition {
+            padding: 2em 0 0 2em;
+          }
+        }
+      }
+
+      .right-pane {
+        width: 100%;
+        .btn-group {
+          .approval-modal-overlay {
+            top: 3em !important;
+          }
+
+          .rejection-modal-overlay {
+            top: 3em !important;
+            left: 265px !important;
+          }
+        }
+        .desktop {
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 520px) {
+  .approval {
+    .main-container {
+      .left-pane {
+        .row {
+          height: initial;
+          display: block;
+          border: 1px solid #e4e4e4;
+
+          &:first-child {
+            display: flex;
+            border: 0;
+            .partition {
+              border: 0;
+            }
+          }
+
+          .partition {
+            width: 100%;
+            text-align: center;
+            padding: 0;
+            margin: 1em 0;
+            border-bottom: 1px solid #e4e4e4;
+
+            &:last-child {
+              border: 0;
+            }
+          }
+        }
+      }
+      .right-pane {
+        width: 100%;
+        .btn-group {
+          .approval-modal-overlay {
+            top: 3em !important;
+          }
+          .rejection-modal-overlay {
+            top: 3em !important;
+            left: 160px !important;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 459px) {
+  .approval {
+    .main-container {
+      .right-pane {
+        width: 100%;
+        .btn-group {
+          .approval-modal-overlay {
+            top: 3em !important;
+          }
+          .rejection-modal-overlay {
+            top: 3em !important;
+            left: 75px !important;
           }
         }
       }

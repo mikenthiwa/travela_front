@@ -25,17 +25,21 @@
   &__fixed_wrapper {
     overflow-y: scroll;
     position: fixed;
-    top: 0px;
     width: 16.666667%;
     height: 100vh;
-  }
 
+    @media (min-width: 1178px)  {
+      background: #f8f8f8;
+      z-index: 20;
+    }
+  }
+  
   &__scrollable_wrapper {
     overflow-y: scroll;
     height: 100%;
     position: relative;
     top: 108px;
-    min-width: 200px;
+    min-width: 200px;   
   }
 
   .logout-button {

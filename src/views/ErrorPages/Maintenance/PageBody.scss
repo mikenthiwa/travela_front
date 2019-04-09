@@ -7,13 +7,17 @@
   box-shadow: none;
   display: block;
   border-bottom: 1px solid #ece5e5;
-  z-index: auto;
-  
-  .navbar__logo-icons {
-    margin-left: 40px;
-    margin-top: 20px;
+  z-index: auto; 
+}
+
+@media(max-width:1178px){
+  .navbar__logo-icons .mdl-cell--hide-phone {
+    position: relative;
+    margin-left: 25px !important;
+    
   }
 }
+
 .maintenanceBody {
   margin: 60px auto 0 auto;
   display: flex;

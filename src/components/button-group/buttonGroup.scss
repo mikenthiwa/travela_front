@@ -93,3 +93,12 @@ $white-color: #FFF;
       display: none !important;
     }
   }
+
+  @media only screen and (max-width: 638px) {
+    .bg-btn {
+      &:first-child {
+        padding: 9px 21px;
+      }
+      padding: 0 1em 0 1em;
+    }
+  }

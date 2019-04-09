@@ -78,3 +78,10 @@ $border-color: #E4E4E4;
 .table__image:hover .tool__tip {
   visibility: visible;
 }
+
+.approvals_table_body{
+  td:first-child {
+    position: sticky;
+    left: 0;
+  }
+}
