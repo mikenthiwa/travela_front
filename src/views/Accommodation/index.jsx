@@ -121,7 +121,7 @@ export class Accommodation extends Component {
         {this.renderAccommodationPanelHeader()}
         {this.renderAccommodationForm()}
         {this.renderRestoreDisabledAccommodationModal()}
-        <div className="table__container">
+        <div className="table__container accommodation__container">
           <WithLoadingCentreGrid
             id="handleOnRestoreId" handleOnRestore={this.handleOnRestore}
             guestHouses={guestHouses}

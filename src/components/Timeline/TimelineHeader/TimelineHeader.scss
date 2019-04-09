@@ -60,6 +60,31 @@
       }
     }
   }
+  @media (max-width: 470px) {
+    .timeline-period-selector,
+    .selector {
+      min-width: 225px;
+      span.value {
+        padding-right: 0;
+      }
+    }
+  }
+  @media (max-width: 450px) {
+    .timeline-period-selector,
+    .selector {
+      min-width: 200px;
+      span.value {
+        padding-right: 0;
+        font-size: 12px;
+      }
+    }
+  }
+  @media (max-width: 430px) {
+    .timeline-period-selector,
+    .selector {
+      min-width: 180px;
+    }
+  }
   .go-to-today:hover {
     background-color: #e9e9e9;
   }
@@ -117,5 +142,14 @@
   }
   .view-type-selector.dropdown-icon > img {
     transform: rotate(180deg);
+  }
+}
+
+@media (max-width: 470px) {
+  .timeline__body__header  {
+    .go-to-today {
+      font-size: 12px;
+      font-weight:500;
+    }
   }
 }

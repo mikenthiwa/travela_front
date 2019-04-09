@@ -43,8 +43,47 @@ form.maintainance-form{
       font-size: 14px;
       line-height: 18px;
     }
+    @media (max-width: 450px) {
+      .input-group {
+        width: 380px;
+      }
+      input {
+        width: 380px;
+      }
+    }
+    @media (max-width: 420px) {
+      .input-group {
+        width: 350px;
+      }
+      input {
+        width: 350px;
+      }
+    }
+    @media (max-width: 390px) {
+      .input-group {
+        width: 320px;
+      }
+      input {
+        width: 320px;
+      }
+    }
+    @media (max-width: 360px) {
+      .input-group {
+        width: 300px;
+      }
+      input {
+        width: 300px;
+      }
+    }
+    @media (max-width: 340px) {
+      .input-group {
+        width: 280px;
+      }
+      input {
+        width: 280px;
+      }
+    }
   }
-
 }
 .msg-maintainence{
   height: 18px;
@@ -53,6 +92,12 @@ form.maintainance-form{
   font-family: "DIN Pro";
   font-size: 14px;
   line-height: 18px;
+  @media(max-width: 390px) {
+    width: 320px;
+  }
+  @media(max-width: 340px) {
+    width: 280px;
+  }
 }
 .img_error{
   margin-right: 8px;

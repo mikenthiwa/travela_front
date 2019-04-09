@@ -64,3 +64,17 @@
     margin-right: 15px;
   }
 }
+
+@media (max-width: 479px) {
+  .accommodation {
+    .PageHeader {
+      top: 70px;
+      display: flex;
+    }
+  }
+  .rp-requests {
+    .accommodation__container {
+      margin: 20px 0 0 0;
+    }
+  }
+}

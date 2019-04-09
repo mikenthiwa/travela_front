@@ -14,7 +14,51 @@
         }
 
         .image-rectangle {
-          width: 100%;
+          text-align: center;
+          margin-left: 25%;
+          width: 50%;
+          min-width: 302px;
+
+          .add-photo {
+            left: 0;
+          }
+        }
+
+        @media screen and (max-width: 615px) {
+          .image-rectangle {
+            margin-left: 22%;
+          }
+        }
+        @media screen and (max-width: 560px) {
+          .image-rectangle {
+            margin-left: 20%;
+          }
+        }
+        @media screen and (max-width: 530px) {
+          .image-rectangle {
+            margin-left: 18%;
+          }
+        }
+        @media screen and (max-width: 495px) {
+          .image-rectangle {
+            margin-left: 16%;
+          }
+        }
+        @media screen and (max-width: 475px) {
+          .image-rectangle {
+            margin-left: 14%;
+          }
+        }
+        @media screen and (max-width: 460px) {
+          .image-rectangle {
+            margin-left: 12%;
+          }
+        }
+        @media screen and (max-width: 440px) {
+          .image-rectangle {
+            margin-left: 0;
+            width: 100%;
+          }
         }
 
         .image-space {
