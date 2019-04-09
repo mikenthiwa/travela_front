@@ -16,7 +16,7 @@ exports[`TravelChecklist Component should render the component 1`] = `
         <div
           className="travelCheckList--card__head"
         >
-          Travel CheckList Required For This Trip
+          These are the checklist items required to be submitted for this trip
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@ exports[`TravelChecklist Component should render the component 1`] = `
       className="travelCheckList__col-5"
     >
       <div
-        className="travelCheckList--card"
+        className="travelCheckList--card travelCheckList--card__sticky"
       >
         <div
           className="travelCheckList--card__head"

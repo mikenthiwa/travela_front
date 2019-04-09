@@ -33,7 +33,7 @@ exports[`<RoomLabel /> renders properly 1`] = `
   <Modal
     closeDeleteModal={null}
     closeModal={[Function]}
-    customModalStyles=""
+    customModalStyles="room-maintanance"
     customOverlayStyle=""
     modalBar={<div />}
     modalContentId=""

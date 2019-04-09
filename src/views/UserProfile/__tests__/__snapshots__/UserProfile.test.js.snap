@@ -118,7 +118,7 @@ Array [
                     </div>
                     <div>
                         <div
-                            className="form-input  "
+                            className="form-input no-disable "
                         >
                             <label
                                 htmlFor="role"
@@ -136,8 +136,7 @@ Array [
                             </label>
                             <input
                                 autoComplete="off"
-                                className=" "
-                                disabled={true}
+                                className=" no-disable"
                                 label="Role"
                                 name="role"
                                 onBlur={[Function]}
@@ -152,7 +151,7 @@ Array [
                     </div>
                     <div>
                         <div
-                            className="form-input  "
+                            className="form-input no-disable "
                         >
                             <label
                                 htmlFor="department"
@@ -170,8 +169,7 @@ Array [
                             </label>
                             <input
                                 autoComplete="off"
-                                className=" "
-                                disabled={true}
+                                className=" no-disable"
                                 label="Department"
                                 name="department"
                                 onBlur={[Function]}

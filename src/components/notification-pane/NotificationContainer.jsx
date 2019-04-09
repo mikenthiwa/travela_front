@@ -49,7 +49,7 @@ export default class NotificationContainer extends PureComponent {
     );
   }
 
-  renderNotifications = (notifications) => {
+  renderNotifications = (notifications, user) => {
     const displayViewDetails =
       ['approved your request', 'posted a comment', 'rejected your request',
         'updated your travel residence record.'];
@@ -82,6 +82,7 @@ export default class NotificationContainer extends PureComponent {
             image={senderImage}
             timeStamp={updatedAt}
             message={message}
+            user={user}
           />
         );
       }
@@ -89,7 +90,7 @@ export default class NotificationContainer extends PureComponent {
   };
 
   render() {
-    const { title, pendingNotifications, generalNotifications } = this.props;
+    const { title, pendingNotifications, generalNotifications, user} = this.props;
     const { notificationsCount } = this.state;
     const customClass = title === 'Pending Approvals' ? 'pending' : 'general';
     const number = title === 'Pending Approvals'
@@ -113,9 +114,9 @@ export default class NotificationContainer extends PureComponent {
           </div>
         </div>
         {title === 'Pending Approvals' && number !== 0 &&
-        this.renderNotifications(pendingNotifications)}
+        this.renderNotifications(pendingNotifications, user)}
         {title === 'General Notifications' && number !== 0 &&
-        this.renderNotifications(generalNotifications)}
+        this.renderNotifications(generalNotifications, user)}
       </div>
     );
   }
@@ -135,7 +136,8 @@ NotificationContainer.propTypes = {
   pendingNotifications: NOTIFICATIONS_PROPTYPES,
   generalNotifications: NOTIFICATIONS_PROPTYPES,
   markSingleNotificationAsRead: PropTypes.func.isRequired,
-  singleNotificationRead: PropTypes.number.isRequired
+  singleNotificationRead: PropTypes.number.isRequired,
+  user: PropTypes.string.isRequired,
 };
 
 NotificationContainer.defaultProps = {

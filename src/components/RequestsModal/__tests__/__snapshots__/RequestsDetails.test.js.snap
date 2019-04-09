@@ -245,7 +245,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
         </div>
       </div>
       <div
-        className="request__tab-card current incomplete"
+        className="request__tab-card current false"
         key="4"
       >
         <div
@@ -350,7 +350,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
                       02 AUG 2019
               </td>
               <td>
-                Kwetu Mini flat-B
+                Bed 1, Kwetu, Mini flat-B
               </td>
             </tr>
           </tbody>
@@ -390,7 +390,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
             <div
               className="travelCheckList--card__head"
             >
-              Travel CheckList Required For This Trip
+              These are the checklist items required to be submitted for this trip
             </div>
             <div
               className="travelCheckList"
@@ -399,6 +399,20 @@ exports[`<RequestDetails /> should render properly 1`] = `
                 className="travelCheckList__destination"
                 key="0"
               >
+                <div
+                  className="destination"
+                >
+                  <div
+                    className="country-flag"
+                  >
+                    <img
+                      alt="country flag"
+                      className="flag"
+                      src="https://www.countryflags.io/KE/flat/64.png"
+                    />
+                  </div>
+                  Nairobi, Kenya
+                </div>
                 <div
                   className="travelSubmission--item false"
                 >
@@ -433,7 +447,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
                           className="travelSubmission--input__btn--uploadedFileDate"
                         >
                           Uploaded
-
+                           
                           12-03-19
                         </div>
                         <div>
@@ -500,7 +514,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
           className="travelCheckList__col-5"
         >
           <div
-            className="travelCheckList--card"
+            className="travelCheckList--card travelCheckList--card__sticky"
           >
             <div
               className="travelCheckList--card__head"
@@ -575,16 +589,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
           >
             <div
               className="travelSubmission--submit-area__button"
-            >
-              <button
-                className="bg-btn bg-btn--inactive"
-                id="submit-button"
-                onClick={[Function]}
-                type="button"
-              >
-                SUBMIT
-              </button>
-            </div>
+            />
           </div>
         </div>
       </div>

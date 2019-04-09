@@ -18,7 +18,7 @@ exports[`<NewTravelStipendForm /> renders correctly 1`] = `
               className="spaces"
             >
               <div
-                className="form-input request_dropdown stipend-location "
+                className="form-input request{ uniq }dropdown stipend-location "
               >
                 <label
                   htmlFor="center"
@@ -54,7 +54,7 @@ exports[`<NewTravelStipendForm /> renders correctly 1`] = `
                         "Austin, United States",
                       ]
                     }
-                    className="input select  request_dropdown stipend-location"
+                    className="input select  request{ uniq }dropdown stipend-location"
                     id="user-location"
                     label="Select Location"
                     name="center"
@@ -199,7 +199,7 @@ exports[`<NewTravelStipendForm /> renders correctly 1`] = `
               className="spaces"
             >
               <div
-                className="form-input request_dropdown stipend-amount  "
+                className="form-input request{ uniq }dropdown stipend-amount  "
               >
                 <label
                   htmlFor="stipend"
@@ -218,7 +218,7 @@ exports[`<NewTravelStipendForm /> renders correctly 1`] = `
                 <div>
                   <input
                     autoComplete="off"
-                    className=" request_dropdown stipend-amount "
+                    className=" request{ uniq }dropdown stipend-amount "
                     id="your-manager"
                     label="Enter Amount in Dollars ($)"
                     max="1000"

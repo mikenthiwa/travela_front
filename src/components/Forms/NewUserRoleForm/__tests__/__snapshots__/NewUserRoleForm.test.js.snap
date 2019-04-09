@@ -20,6 +20,7 @@ exports[`<NewUserRoleForm /> <PersonalDetails /> renders correctly 1`] = `
           ]
         }
         className="email_dropdown"
+        disabled={false}
         label="Andela Email Address"
         labelNote=""
         name="email"
@@ -88,6 +89,7 @@ exports[`<NewUserRoleForm /> renders correctly 1`] = `
                   ]
                 }
                 className="occupationInput"
+                disabled={false}
                 label="Andela Email Address"
                 name="role"
                 onChange={[Function]}

@@ -59,9 +59,10 @@ export default class NotificationItem extends PureComponent {
   };
 
   render() {
-    const { name, image, message } = this.props;
+    const { name, image, message, user } = this.props;
     const bgColorClass = this.checkMarkedAsRead() ? 'message-opened' : '';
-    const handle = /<\/a>/.test(message);
+    const userName = user.UserInfo && user.UserInfo.name;
+    const handle = new RegExp(userName).test(message);
     return (
       <div className={`notification-item ${bgColorClass}`}>
         <div className="notification-item__image__container">
@@ -103,4 +104,5 @@ NotificationItem.propTypes = {
   timeStamp: PropTypes.string.isRequired,
   message: PropTypes.string,
   markSingleAsRead: PropTypes.func,
+  user: PropTypes.string.isRequired,
 };

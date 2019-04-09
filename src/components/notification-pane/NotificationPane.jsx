@@ -18,7 +18,7 @@ export class NotificationPane extends PureComponent {
   componentDidMount() {
     const { user, fetchUsersNotification } = this.props;
     fetchUsersNotification();
-    handleManagerNotification(user && user.UserInfo.id);
+    handleManagerNotification(user);
   }
 
   getNotifications() {
@@ -46,7 +46,8 @@ export class NotificationPane extends PureComponent {
   render() {
     const {
       onCloseNotificationPane, updateAllNotificationStatus,
-      markSingleNotificationAsRead, singleNotificationRead
+      markSingleNotificationAsRead, singleNotificationRead, 
+      user
     } = this.props;
     const { generalNotifications, pendingNotifications } = this.getNotifications();
     return (
@@ -62,6 +63,7 @@ export class NotificationPane extends PureComponent {
                     updateAllNotificationStatus={updateAllNotificationStatus}
                     singleNotificationRead={singleNotificationRead}
                     markSingleNotificationAsRead={markSingleNotificationAsRead}
+                    user={user}
                   />
                 )
               }
@@ -72,6 +74,7 @@ export class NotificationPane extends PureComponent {
                     updateAllNotificationStatus={updateAllNotificationStatus} 
                     markSingleNotificationAsRead={markSingleNotificationAsRead}
                     singleNotificationRead={singleNotificationRead}
+                    user={user}
                   />)
               }
             </div>

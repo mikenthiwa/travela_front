@@ -108,7 +108,7 @@ exports[`<ProfileForm /> renders correctly 1`] = `
       </div>
       <div>
         <div
-          className="form-input  "
+          className="form-input no-disable "
         >
           <label
             htmlFor="role"
@@ -126,8 +126,7 @@ exports[`<ProfileForm /> renders correctly 1`] = `
           </label>
           <input
             autoComplete="off"
-            className=" "
-            disabled={true}
+            className=" no-disable"
             label="Role"
             name="role"
             onBlur={[Function]}
@@ -142,7 +141,7 @@ exports[`<ProfileForm /> renders correctly 1`] = `
       </div>
       <div>
         <div
-          className="form-input  "
+          className="form-input no-disable "
         >
           <label
             htmlFor="department"
@@ -160,8 +159,7 @@ exports[`<ProfileForm /> renders correctly 1`] = `
           </label>
           <input
             autoComplete="off"
-            className=" "
-            disabled={true}
+            className=" no-disable"
             label="Department"
             name="department"
             onBlur={[Function]}

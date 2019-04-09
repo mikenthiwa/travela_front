@@ -164,6 +164,7 @@ exports[`<Requests> renders as expected 1`] = `
         }
       }
       closeModal={[Function]}
+      comments={Array []}
       creatingRequest={false}
       editing={false}
       errors={Array []}

@@ -62,7 +62,7 @@ exports[`<Timeline /> renders correctly 1`] = `
       <span
         className="timeline-period value"
       >
-        March 2019
+        April 2019
       </span>
       <div
         className="timeline-navigator"
@@ -218,7 +218,7 @@ exports[`<Timeline /> renders correctly 1`] = `
         key="6"
       />
       <div
-        className="timeline__segment  month-view"
+        className="timeline__segment current month-view"
         data-segment-label="8"
         key="7"
       />
@@ -303,12 +303,12 @@ exports[`<Timeline /> renders correctly 1`] = `
         key="23"
       />
       <div
-        className="timeline__segment current month-view"
+        className="timeline__segment  month-view"
         data-segment-label="25"
         key="24"
       />
       <div
-        className="timeline__segment current month-view"
+        className="timeline__segment  month-view"
         data-segment-label="26"
         key="25"
       />
@@ -331,11 +331,6 @@ exports[`<Timeline /> renders correctly 1`] = `
         className="timeline__segment  month-view"
         data-segment-label="30"
         key="29"
-      />
-      <div
-        className="timeline__segment  month-view"
-        data-segment-label="31"
-        key="30"
       />
       <div
         className="rooms-geometry-wrapper"
@@ -541,7 +536,7 @@ exports[`<Timeline /> renders the weekly view correctly 1`] = `
       <span
         className="timeline-period value"
       >
-        1 - 2 Mar 2019
+        1 - 6 Apr 2019
       </span>
       <div
         className="timeline-navigator"
@@ -663,37 +658,37 @@ exports[`<Timeline /> renders the weekly view correctly 1`] = `
     >
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Fri 3/1"
+        data-segment-label="Mon 4/1"
         key="0"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Sat 3/2"
+        data-segment-label="Tue 4/2"
         key="1"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Sun 3/3"
+        data-segment-label="Wed 4/3"
         key="2"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Mon 3/4"
+        data-segment-label="Thu 4/4"
         key="3"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Tue 3/5"
+        data-segment-label="Fri 4/5"
         key="4"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Wed 3/6"
+        data-segment-label="Sat 4/6"
         key="5"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Thu 3/7"
+        data-segment-label="Sun 4/7"
         key="6"
       />
       <div
@@ -1022,62 +1017,62 @@ exports[`<Timeline /> renders the year view correctly 1`] = `
     >
       <div
         className="timeline__segment current year-view"
-        data-segment-label="Mar"
+        data-segment-label="Apr"
         key="0"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Apr"
+        data-segment-label="May"
         key="1"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="May"
+        data-segment-label="Jun"
         key="2"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Jun"
+        data-segment-label="Jul"
         key="3"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Jul"
+        data-segment-label="Aug"
         key="4"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Aug"
+        data-segment-label="Sep"
         key="5"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Sep"
+        data-segment-label="Oct"
         key="6"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Oct"
+        data-segment-label="Nov"
         key="7"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Nov"
+        data-segment-label="Dec"
         key="8"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Dec"
+        data-segment-label="Jan"
         key="9"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Jan"
+        data-segment-label="Feb"
         key="10"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Feb"
+        data-segment-label="Mar"
         key="11"
       />
       <div

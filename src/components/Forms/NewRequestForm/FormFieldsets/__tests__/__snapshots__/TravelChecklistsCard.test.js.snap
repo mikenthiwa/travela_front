@@ -9,7 +9,7 @@ exports[`<TravelChecklistsCard /> renders without crashing 1`] = `
       className="travel-checklist-text"
     >
       <p>
-         Travel Checklist Required For This Trip
+         These are the checklist items that you will be required to submit for this trip 
       </p>
     </div>
     <hr
@@ -19,7 +19,7 @@ exports[`<TravelChecklistsCard /> renders without crashing 1`] = `
       className="pending-approvals-block"
     >
       <div
-        className="travel-checklist-text"
+        className="travel-checklist-loc-title"
       >
         <p>
           Kampala, Uganda
@@ -95,7 +95,7 @@ exports[`<TravelChecklistsCard /> renders without crashing 1`] = `
         </li>
       </ul>
       <div
-        className="travel-checklist-text"
+        className="travel-checklist-loc-title"
       >
         <p>
           Nairobi, Kenya

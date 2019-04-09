@@ -6,16 +6,17 @@ Array [
     <h1
         className="page-header__request"
     >
-        <a
-            href="/requests"
+        <span
+            className="goback"
             onClick={[Function]}
+            role="presentation"
         >
             <img
                 alt="back icon"
                 className="header__link"
                 src="back-icon.svg"
             />
-        </a>
+        </span>
         <span>
             REQUEST #xDh20btGx
         </span>
@@ -176,7 +177,7 @@ Array [
                 <div
                     className="foot-text"
                 >
-                    Completed on 25/03/19
+                    Completed on 08/04/19
                 </div>
             </div>
             <div
@@ -332,7 +333,7 @@ Array [
                 <div
                     className="foot-text"
                 >
-                    Completed on 25/03/19
+                    Completed on 08/04/19
                 </div>
             </div>
         </div>
@@ -423,16 +424,17 @@ Array [
     <h1
         className="page-header__request"
     >
-        <a
-            href="/requests"
+        <span
+            className="goback"
             onClick={[Function]}
+            role="presentation"
         >
             <img
                 alt="back icon"
                 className="header__link"
                 src="back-icon.svg"
             />
-        </a>
+        </span>
         <span>
             REQUEST #xDh20btGx
         </span>
@@ -519,7 +521,7 @@ Array [
                 </div>
             </div>
             <div
-                className="request__tab-card current incomplete"
+                className="request__tab-card current false"
                 key="2"
             >
                 <div
@@ -883,16 +885,17 @@ Array [
     <h1
         className="page-header__request"
     >
-        <a
-            href="/requests"
+        <span
+            className="goback"
             onClick={[Function]}
+            role="presentation"
         >
             <img
                 alt="back icon"
                 className="header__link"
                 src="back-icon.svg"
             />
-        </a>
+        </span>
         <span>
             REQUEST #xDh20btGx
         </span>
@@ -979,7 +982,7 @@ Array [
                 </div>
             </div>
             <div
-                className="request__tab-card current incomplete"
+                className="request__tab-card current false"
                 key="2"
             >
                 <div
@@ -1343,16 +1346,17 @@ Array [
     <h1
         className="page-header__request"
     >
-        <a
-            href="/requests"
+        <span
+            className="goback"
             onClick={[Function]}
+            role="presentation"
         >
             <img
                 alt="back icon"
                 className="header__link"
                 src="back-icon.svg"
             />
-        </a>
+        </span>
         <span>
             REQUEST #xDh20btGx
         </span>

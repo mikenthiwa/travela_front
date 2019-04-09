@@ -5,7 +5,13 @@ exports[`<RequestTabHead /> should render properly 1`] = `
   <div
     className="new-request_title"
   >
-    CREATE A NEW TRAVEL REQUEST
+    <div>
+      <span
+        className="new__request-title-text"
+      >
+        CREATE A NEW TRAVEL REQUEST
+      </span>
+    </div>
   </div>
   <div
     className="request__tab"

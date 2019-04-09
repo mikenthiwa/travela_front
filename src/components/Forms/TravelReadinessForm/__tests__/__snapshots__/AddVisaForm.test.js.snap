@@ -419,7 +419,7 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
           <label
             htmlFor="dateOfIssue"
           >
-            Date of Issue
+            Date of Issue (MM/DD/YYYY)
             <span
               style={
                 Object {
@@ -475,7 +475,7 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
           <label
             htmlFor="expiryDate"
           >
-            Expiry Date
+            Expiry Date (MM/DD/YYYY)
             <span
               style={
                 Object {
@@ -645,20 +645,22 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
           className="character__conditions__visa error__height-one"
           style={
             Object {
-              "color": "#3359db",
+              "color": "red",
               "display": "none",
             }
           }
         >
-          140
+          A minimum of 8 Characters is required
         </div>
       </div>
     </fieldset>
     <div
       className="travel-document-select-file"
     >
-      <p>
-        Attach File
+      <p
+        className="attach-document-text"
+      >
+        Attach the image or PDF of your  document
       </p>
       <div
         className="document-input__input-container"
@@ -679,25 +681,16 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
             className="document-input__input-container__prompts__text"
           >
             <p>
-              <span
-                className="upload-text"
-              >
-                Drag file here to upload or
-                 
-                <span
-                  className="upload-text--underline"
-                >
-                  choose from computer
-                </span>
-              </span>
+              Choose from computer
             </p>
             <p
               className="maximum-file-size"
             >
-              Maximum file size - 20MB
+              Maximum file size - 10MB
             </p>
           </div>
           <input
+            accept="image/jpg, image/png, application/pdf"
             id="select-file"
             onChange={[Function]}
             type="file"

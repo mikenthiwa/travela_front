@@ -15,7 +15,8 @@ describe('Notification Item Component', () => {
     id: 12,
     timeStamp: '',
     message: '',
-    link: ''
+    link: '',
+    user:{UserInfo: {name:'Ademola Ariya'}}
   };
 
   it('should render successfully if notification is pending', () => {

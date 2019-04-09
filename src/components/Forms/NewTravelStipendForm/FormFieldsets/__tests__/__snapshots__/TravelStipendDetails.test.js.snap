@@ -15,7 +15,7 @@ exports[`<TravelStipendFieldset /> should match snapshot 1`] = `
           <Input
             autoComplete="off"
             choices={Array []}
-            className="request_dropdown stipend-location"
+            className="request{ uniq }dropdown stipend-location"
             id="user-location"
             label="Select Location"
             labelNote=""
@@ -30,7 +30,7 @@ exports[`<TravelStipendFieldset /> should match snapshot 1`] = `
         >
           <Input
             autoComplete="off"
-            className="request_dropdown stipend-amount "
+            className="request{ uniq }dropdown stipend-amount "
             id="your-manager"
             label="Enter Amount in Dollars ($)"
             labelNote=""

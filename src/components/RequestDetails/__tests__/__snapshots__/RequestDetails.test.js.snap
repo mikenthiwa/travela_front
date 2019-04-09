@@ -7,16 +7,16 @@ exports[`TEST REQUEST DETAILS COMPONENT TEST COMPONENT WHEN REQUEST IS LOADING s
   <h1
     className="header text--black"
   >
-    <a
-      href="/requests/my-approvals"
+    <span
       onClick={[Function]}
+      role="presentation"
     >
       <img
         alt="back icon"
         className="header__link"
         src="back-icon.svg"
       />
-    </a>
+    </span>
     REQUEST #nXCj4U57J
     <span
       className="stage"
