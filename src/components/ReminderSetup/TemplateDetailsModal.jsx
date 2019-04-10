@@ -15,7 +15,8 @@ class TemplateDetailsModal extends Component {
             closeModal={closeModal} width="504px"
             visibility={(shouldOpen && (modalType === 'template details'))
               ? 'visible' : 'invisible'}
-            title="View Details">
+            title="View Details"
+            modalContentId="template-modal">
             <TemplateDetailsForm
               closeModal={closeModal}
               selectedTemplate={selectedTemplate}

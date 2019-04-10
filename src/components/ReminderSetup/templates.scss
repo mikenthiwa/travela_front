@@ -1,6 +1,10 @@
 .list-templates , .list-reasons{
   table {
     padding-top: 0 !important;
+
+    @media (max-width: 839px) {
+      margin-bottom: 70px;
+    }
   }
   .tiny.material-icons {
     margin-left: 10px;
@@ -28,6 +32,7 @@
   .table__menu-container {
     ul.table__menu-list {
       right: -36px;
+      z-index: 20;
     }
 
     ul:before {
@@ -73,6 +78,7 @@
 
     @media (max-width: 482px) {
       margin-bottom: 0 !important;
+      display: flex;
     }
   }
 }
@@ -90,17 +96,26 @@
     p {
       opacity: 0.8;
     }
-
-    @media (max-width: 840px) {
+  }
+  @media (max-width: 840px) {
     left: 40%;
     }
-  }
 }
 .no-email-templates {
   .content {
+    position: static;
+    display: grid;
+    transform: none;
+    justify-content: center;
+    justify-items: center;
     img {
-      padding: 0 0 0 120px;
+      margin-top: 2em;
+      align-self: center;
     }
+
+    p {
+     text-align: center;
+      }
   }
 }
 .visible.template-details{
@@ -144,14 +159,16 @@ form.template-details{
 
 @media only screen and (max-width: 550px) {
     .visible.template-details{
-      width: 320px;
+      min-width: 280px;
+      width: 280px;
       hr{
-        width: 320px;
+        width: 280px;
+        margin-left: 15px;
       }
     }
     form.template-details{
       .bg-btn--active{
-        width: 162px !important;
+        width: 130px !important;
       }
     }
 
@@ -159,5 +176,8 @@ form.template-details{
       .table__head {
         padding-left: 14px !important;
       }
+    }
+    #template-modal{
+      padding-left:15px;
     }
 }
