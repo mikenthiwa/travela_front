@@ -31,9 +31,13 @@ describe('Dashboard navigation', () => {
       .wait(2000)
       .type('{downarrow}{enter}');
     cy.get('input[name=departureDate-0]').click();
-    cy.get('div.react-datepicker__day--today').click();
+    cy.get('button.react-datepicker__navigation--next').click();
+    cy.get('div.react-datepicker__day--mon')
+      .first().click();
     cy.get('input[name=arrivalDate-0]').click();
-    cy.get('div.react-datepicker__day--today').next().click();
+    cy.get('button.react-datepicker__navigation--next').click();
+    cy.get('div.react-datepicker__day--fri')
+      .first().click();
     cy.get('div[name=reasons-0]').wait(3000).click();
     cy.get('div[name=reasons-0] > ul > li#choice:first')
       .wait(3000)
@@ -96,8 +100,6 @@ describe('Dashboard navigation', () => {
       .contains('Download Successful')
       .wait(3000);
   });
-
-
   it('can set filter for dashboard data', () => {
     //filter the dashboard and set new data
     cy.server();
@@ -127,7 +129,6 @@ describe('Dashboard navigation', () => {
     cy.get('.analytics-card__stat').eq(2).contains(newData.peopleVisiting);
     cy.get('.analyticsReport__report-details').contains(deptData[0].label);
   });
-
   it('loads the travel calendar with correct data from the server',  ()=>{
     //ensure travel calendar can toggle between show details and hide details
     cy.server();
@@ -159,15 +160,28 @@ describe('Dashboard navigation', () => {
       travelReadinessDetails = travelReadinessData.response.body;
       cy.get('div.analyticsReport__report-details').contains(travelReadinessDetails.readiness[0].request.name);
     });
-
-    //delete the request from the list of created requests
-    cy.authenticateUser();
-    cy.visit('/requests').wait(3000);
-    cy.get('i.fa.fa-ellipsis-v').first().click();
-    cy.get('li#deleteRequest').first().click();
-    cy.get('button.bg-btn.bg-btn--active').contains('Delete').click();
+    
   });
+ it('should redirect to correct view when  cards are clicked', () => { 
+  cy.authenticateUser();
+  cy.get('.analytics-card__stat').eq(1)
+    .click()
+    .wait(2000);
+  cy.url().should('include', '/requests/my-verifications?status=approved');
 
+  cy.visit('/dashboard').wait(2000);
+  cy.authenticateUser();
+  cy.get('.analytics-card__stat').eq(0)
+    .click()
+    .wait(2000);
+  cy.url().should('include', '/requests/my-verifications');
+
+  //delete the request from the list of created requests
+  cy.visit('/requests').wait(3000);
+  cy.get('i.fa.fa-ellipsis-v').first().click();
+  cy.get('li#deleteRequest').first().click();
+  cy.get('button.bg-btn.bg-btn--active').contains('Delete').click();
+  });
 });
 
 

@@ -82,4 +82,17 @@ describe('<Analytics />', () => {
 
     expect(wrapper).toMatchSnapshot();
   });
+  it('should redirect to correct link when cards are clicked', () => {
+    wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <ConnectedAnalytics {...props} />
+        </MemoryRouter>
+      </Provider>
+    );
+    let allRequestsCard = wrapper.find('.analytics-card').at(0);
+    let pendingRequestsCard = wrapper.find('.analytics-card').at(1);
+    expect(allRequestsCard.find('Link').prop('to')).toEqual('/requests/my-verifications');
+    expect(pendingRequestsCard.find('Link').prop('to')).toEqual('/requests/my-verifications?status=approved');
+  });
 });

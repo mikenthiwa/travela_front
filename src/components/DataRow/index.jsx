@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Utils from '../../helper/Utils';
 
 const DataRow = ({ item, history }) => {
   const getRequestStatusClassName = (status) => {
@@ -7,6 +8,7 @@ const DataRow = ({ item, history }) => {
     newStatus = (status === 'Open') ? 'data-row__status--open' : newStatus;
     newStatus = (status === 'Rejected') ? 'data-row__status--rejected' : newStatus;
     newStatus = (status === 'Verified') ? 'data-row__status--verified' : newStatus;
+    newStatus = (status === 'Checked') ? 'data-row__status--checked' : newStatus;
     return newStatus;
   };
 
@@ -25,7 +27,10 @@ const DataRow = ({ item, history }) => {
         </div>
         <div className="data-row__content">{item.destination}</div>
         <div className="data-row__content">{item.duration}</div>
-        <div className={`${getRequestStatusClassName(item.status)} data-row__status`}>{item.status}</div>
+        <div className={`${getRequestStatusClassName(item.status)} data-row__status tool__tip__container`}>
+          <span>{item.status}</span>
+          {Utils.renderToolTip(item.status, item.budgetStatus)}
+        </div>
       </div>
     </React.Fragment>
   );

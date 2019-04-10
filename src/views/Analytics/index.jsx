@@ -84,11 +84,12 @@ export class Analytics extends Component {
           { 
             stats: totalRequests, 
             icon: flightIcon, error 
-          }
+          },
+          '/requests/my-verifications'
         )}
         {this.renderCards('Total Number of Pending Requests', 
           { stats: pendingRequests, icon: pendingIcon, error }, 
-          '/requests/my-verifications')}
+          '/requests/my-verifications?status=approved')}
         {this.renderCards('Average Travel Duration', 
           {
             data: (analytics.success ? travelDurationBreakdown.durations : []), 

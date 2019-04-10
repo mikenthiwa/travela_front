@@ -14,6 +14,7 @@ import getTripDuration from '../../helper/getTripDuration';
 import formatTripType from '../../helper/formatTripType';
 import retrieveStatusTag from '../../helper/retrieveStatusTag';
 import RequestDetailsView from '../../views/Requests/NewRequestPage';
+import Utils from '../../helper/Utils';
 
 export class Table extends Component {
   state = {
@@ -23,14 +24,14 @@ export class Table extends Component {
     }
   };
 
-  componentDidUpdate(prevProps){
+  componentDidUpdate(prevProps) {
     const {
       requests,
       openChecklist,
       requestId
     } = this.props;
     const { requests: prevRequests } = prevProps;
-    if(!isEqual(requests, prevRequests) && openChecklist) {
+    if (!isEqual(requests, prevRequests) && openChecklist) {
       const request = requests.find(request => request.id === requestId);
       this.renderPopUp(request, requestId);
     }
@@ -41,23 +42,23 @@ export class Table extends Component {
     newStatus = (status === 'Open') ? 'request__status--open' : newStatus;
     newStatus = (status === 'Rejected') ? 'request__status--rejected' : newStatus;
     newStatus = (status === 'Verified') ? 'request__status--verified' : newStatus;
-    newStatus = (status === 'Checked') ? 'request__status--checked': newStatus;
-    return newStatus;
+    newStatus = (status === 'Checked') ? 'request__status--checked' : newStatus;
+    return `${newStatus} tool__tip__container`;
   }
 
   renderPopUp = (request, requestId) => {
     const { openModal } = this.props;
     // if request does not exist
-    if(!request) return toast.error('This checklist cannot be found!');
+    if (!request) return toast.error('This checklist cannot be found!');
     // if document has not been approved
-    if(request.status !== 'Approved') return openModal(true, 'travel checklist');
+    if (request.status !== 'Approved') return openModal(true, 'travel checklist');
     // if document has been approved
     this.toggleMenu(requestId, request, true);
   }
 
   toggleMenu = (requestId, request, status) => {
     const { setOpenChecklist, openModal } = this.props;
-    if(status) {
+    if (status) {
       this.setState(
         () => ({ menuOpen: { open: true, id: request.id, request } }),
         () => openModal(true, 'upload submissions')
@@ -88,11 +89,11 @@ export class Table extends Component {
       history,
       location: { pathname }
     } = this.props;
-    history.push(`${pathname}${/\/$/.test(pathname) ? '': '/'}${requestId}`);
+    history.push(`${pathname}${/\/$/.test(pathname) ? '' : '/'}${requestId}`);
   };
 
   getApprovalStatus = (status, budgetStatus) => {
-    if (status === 'Verified'){
+    if (status === 'Verified') {
       return status;
     }
     return budgetStatus === 'Checked' || budgetStatus === 'Rejected' ?
@@ -100,10 +101,10 @@ export class Table extends Component {
       status;
   };
 
-  computeRequestStatus({status, budgetStatus}) {
+  computeRequestStatus({ status, budgetStatus }) {
     const { approvalsType } = this.props;
 
-    if(approvalsType === 'budget') {
+    if (approvalsType === 'budget') {
       return budgetStatus;
     }
 
@@ -126,12 +127,14 @@ export class Table extends Component {
       </div>
     );
   }
-  renderRequestStatus(request){
+  
+  renderRequestStatus(request) {
     const {
       editRequest, type, uploadTripSubmissions, deleteRequest,
       openModal, closeModal, shouldOpen, modalType, history
     } = this.props;
     const { menuOpen } = this.state;
+    const requestStatus = this.computeRequestStatus(request);
     return (
       <div>
         <div className="table__menu">
@@ -139,7 +142,8 @@ export class Table extends Component {
             id={`status-${request.id}`}
             className={this.getRequestStatusClassName(this.computeRequestStatus(request))}
           >
-            {this.computeRequestStatus(request)}
+            <span>{requestStatus}</span>
+            {Utils.renderToolTip(requestStatus, request.budgetStatus)}
           </div>
           {
             type !== 'approvals' && (
@@ -163,7 +167,7 @@ export class Table extends Component {
     return (
       <td className="mdl-data-table__cell--non-numeric table__data freeze table__data-pointer">
         <div
-          onKeyPress={() => {}}
+          onKeyPress={() => { }}
           onClick={() => this.handleClickRequest(request.id)}
           role="button"
           tabIndex="0"
@@ -353,18 +357,18 @@ Table.defaultProps = {
   fetchRequestsError: null,
   requests: [],
   approvalsType: '',
-  closeModal: () => {},
+  closeModal: () => { },
   shouldOpen: false,
   modalType: null,
   message: '',
   page: '',
   requestId: '',
   requestData: {},
-  deleteRequest: () => {},
-  editRequest: () => {},
-  uploadTripSubmissions: () => {},
+  deleteRequest: () => { },
+  editRequest: () => { },
+  uploadTripSubmissions: () => { },
   openChecklist: false,
-  setOpenChecklist: () => {},
+  setOpenChecklist: () => { },
 };
 
 export default withLoading(Table, RequestPlaceholder);

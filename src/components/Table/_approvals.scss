@@ -58,25 +58,55 @@ $border-color: #E4E4E4;
   padding-right: 10px;
   margin-left: 10px;
 }
-
+.tool__tip__container {
+  position: relative;
+}
 .tool__tip {
   visibility: hidden;
-  width: 120px;
+  width: 180px;
   border: 1px solid #E4E4E4;
-  background-color: #FFFFFF;
-  color: rgb(3, 0, 0);
+  background-color:  #e9e9e9;
+  color: #3f3f3f;;
   text-align: center;
-  padding: 5px 0;
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.1);
-  /* Position the tooltip */
+  font-size: 1.1em;
+  border-radius: 6px;
+  padding: 5px ;
   position: absolute;
   z-index: 1;
-  top: 10px;
-  left: 94%;
+  word-wrap: break-word;
+  display: block;
+  white-space: normal;
+  bottom: 140%;
+  left: 50%;
+  margin-left: -90px;
+  opacity: 0;
+  transition: opacity 1s;
+  
 }
-
-.table__image:hover .tool__tip {
-  visibility: visible;
+.tool__tip::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%; 
+  margin-left: -8px !important;
+  border-width: 8px !important;
+  border: solid;
+  border-color:#e9e9e9 transparent transparent transparent ;
+  border-radius: 5px;
+  
+}
+.tool__tip__container:hover .tool__tip {
+    visibility: visible;
+    opacity: 1;
+     
+}
+.home{
+  .tool__tip {
+    margin-left: -150px;
+  }
+  .tool__tip::after {
+    left: 78%;  
+  }
 }
 
 .approvals_table_body{

@@ -136,7 +136,16 @@ describe('<Requests />', () => {
     requestId.simulate('click');
     expect(wrapper.find('Modal').length).toEqual(1);
   });
-
+  it('should display a tooltip when hovering over status buttons', () => {
+    const wrapper = mount(<Table {...props} />);
+    let statusButton = wrapper
+      .find('tr.table__row')
+      .at(0)
+      .find('div')
+      .at(6);
+    statusButton.simulate('mouseover');
+    expect(wrapper.find('.tool__tip'));
+  });
   it('should spy on toggleMenu method ', () => {
     const wrapper = mount(<Table {...props} />);
     wrapper.instance().toggleMenu('xDh20btGz');
@@ -176,7 +185,7 @@ describe('<Requests />', () => {
 
     const test = (expected, requestStatus, budgetStatus) => {
       wrapper.setProps({ requests: [ request(requestStatus, budgetStatus)]});
-      expect(statusView.text()).toEqual(expected);
+      expect(statusView.childAt(0).text()).toEqual(expected);
     };
 
     it('should display the correct request status on My Requests and My Approvals', () => {

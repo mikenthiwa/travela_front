@@ -1,3 +1,4 @@
+import React from 'react';
 import { isEmpty } from 'lodash';
 import moment from 'moment';
 import jwt from 'jsonwebtoken';
@@ -175,6 +176,35 @@ class Utils {
     const pathArr = link.split('/');
     pathArr.pop();
     return pathArr.join('/');
+  }
+
+  static renderToolTip = (status ,budgetStatus) => {
+    let toolTipText;
+    switch (status) {
+    case 'Approved':
+      if (budgetStatus === 'Approved') {
+        toolTipText = 'Budget Check done. Pending Travel verification';
+        break;
+      }
+      else{
+        toolTipText = 'Manager approval done. Pending budget check approval';
+        break;
+      }
+    case 'Checked':
+      toolTipText = 'Budget Check done. Pending Travel verification';
+      break;
+    case 'Verified':
+      toolTipText =
+        'All pending approvals are done, the traveller can now travel to the destination';
+      break;
+    default:
+      toolTipText = '';
+    }
+    const toolTip =
+      status === 'Rejected' || status === 'Open' ? '' : (
+        <span className="tool__tip">{toolTipText}</span>
+      );
+    return toolTip;
   }
 }
 

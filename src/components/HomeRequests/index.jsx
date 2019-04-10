@@ -6,6 +6,16 @@ import DataRow from '../DataRow';
 import './index.scss';
 
 const HomeRequests = ({ requests, isLoading, history }) => {
+  const computeStatus = (status,budgetStatus) => {
+    let reqStatus;
+    if (budgetStatus === 'Approved' && status !== 'Verified'){
+      reqStatus = 'Checked';
+    }
+    else{
+      reqStatus = status;
+    }
+    return reqStatus;
+  };
   const renderRequests = () => {
     let data;
     if (requests) {
@@ -20,13 +30,14 @@ const HomeRequests = ({ requests, isLoading, history }) => {
           id: trip.requestId,
           destination: trip.destination.split(',')[0],
           duration: days + ' days',
-          status: req.status
+          status: computeStatus(req.status, req.budgetStatus),
+          budgetStatus: req.budgetStatus
         };
       });
     }
     return data;
   };
-
+  
   return (
     <div className="card-layout card-layout--requests">
       <div className="card-layout--requests__header">

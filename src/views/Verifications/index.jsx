@@ -40,7 +40,6 @@ export class Verifications extends Base {
     const { approvals, history, location, openModal, closeModal,
       shouldOpen, modalType, submissionInfo } = this.props;
     const {requestId, requestData } = this.state;
-
     return(
       <WithLoadingTable
         requests={approvals.approvals}
@@ -90,7 +89,6 @@ export class Verifications extends Base {
     const { activeStatus, searchQuery } = this.state;
     const { approvals } = this.props;
     const { approvedApprovalsCount, verifiedApprovalsCount } = approvals;
-
     return(
       <div className="rp-requests__header">
         <VerificationsPanelHeader

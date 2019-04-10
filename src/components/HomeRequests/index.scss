@@ -1,6 +1,5 @@
 .card--request-table {
   padding: 0 30px;
-
   & .thead {
     display: flex;
     justify-content: space-between;
@@ -17,6 +16,7 @@
   }
 
   & .tbody {
+    padding-right: 10px;
 
     & .data-row {
       display: flex;
@@ -64,6 +64,9 @@
 
         &--verified {
           background-color: #08c75e;
+        }
+        &--checked {
+          background-color: #f29000;
         }
       }
     }
