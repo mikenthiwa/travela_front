@@ -47,7 +47,7 @@ export class UserTravelReadinessDetailsTable extends Component {
       <tr>
         {
           columnNames.map(column => (
-            <th key={column} className="mdl-data-table__cell--non-numeric table__head">{column}</th>)
+            <th key={column} className="mdl-data-table__cell--non-numeric table__head table-head-rows">{column}</th>)
           )
         }
       </tr>
@@ -124,10 +124,10 @@ export class UserTravelReadinessDetailsTable extends Component {
             {passportNumber}
           </span>
         </td>
-        <td className="mdl-data-table__cell--non-numeric table__data">{dateOfBirth}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data">{dateOfIssue}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data special">{dateOfBirth}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data special">{dateOfIssue}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">{placeOfIssue}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data">{expiryDate}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data special">{expiryDate}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">{attachments}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">
           <span className={status.toLowerCase()}>{status}</span>
@@ -144,7 +144,7 @@ export class UserTravelReadinessDetailsTable extends Component {
       modalType, closeModal, openModal, deleteDocument, viewType, history  } = this.props;
     const { menuOpen } = this.state;
     return (viewType === 'self' && (
-      <td className="mdl-data-table__cell--non-numeric table__data">
+      <td className="mdl-data-table__cell--non-numeric table__data special">
         <TableMenu
           {...props} menuOpen={menuOpen} type={type} closeModal={closeModal}
           shouldOpen={shouldOpen} openModal={openModal} deleteDocument={deleteDocument}
@@ -171,9 +171,9 @@ export class UserTravelReadinessDetailsTable extends Component {
           </span>
         </td>
         <td className="mdl-data-table__cell--non-numeric table__data">{entryType}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data">{visaType}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data">{dateOfIssue}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data">{expiryDate}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data special">{visaType}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data special">{dateOfIssue}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data special">{expiryDate}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">{attachments}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">
           <span className={status.toLowerCase()}>{status}</span>
@@ -203,8 +203,8 @@ export class UserTravelReadinessDetailsTable extends Component {
           </span>
         </td>
         <td className="mdl-data-table__cell--non-numeric table__data">{documentId || 'N/A'}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data">{dateOfIssue}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data">{expiryDate}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data special">{dateOfIssue}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data special">{expiryDate}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">
           <a className="table__data--link" target="_blank" rel="noopener noreferrer" href={cloudinaryUrl}>{attachments}</a>
         </td>
