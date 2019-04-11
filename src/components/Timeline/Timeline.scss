@@ -241,6 +241,29 @@ $table-font-color: #4f4f4f !important;
   margin-top: 150px;
 }
 
+@media screen and (max-width: 490px) {
+  .delete-maintenance-modal, .change-room-modal {
+    width: 100%;
+    position: fixed;
+    .modal-title-bar {
+      height: 60px;
+    }
+  }
+  .delete-maintenance-modal {
+    .modal-content {
+      padding: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .change-room-modal{
+    .maintainance-form{
+      padding: 0;
+    }
+  }
+}
+
 .modal {
   hr {
     margin-bottom: 10px !important;
@@ -248,7 +271,7 @@ $table-font-color: #4f4f4f !important;
 }
 
 .delete-maintenance-submit-area {
-  margin-left: 207px;
+  float: right;
 
   #submit {
     background-color: rgb(255, 83, 89);

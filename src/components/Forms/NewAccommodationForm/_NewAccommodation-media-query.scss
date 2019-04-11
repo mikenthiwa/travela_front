@@ -7,6 +7,12 @@
       .aline-box {
         display: block;
 
+        @media screen and (max-width: 360px) {
+          .imgPre {
+            width: 100%;
+          }
+        }
+
         .upload-image {
           img {
             margin: 0 auto;
@@ -58,6 +64,12 @@
           .image-rectangle {
             margin-left: 0;
             width: 100%;
+          }
+        }
+        @media(max-width: 346px) {
+          .image-rectangle {
+            margin-left: 0;
+            min-width: 260px;
           }
         }
 

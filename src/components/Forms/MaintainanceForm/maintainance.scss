@@ -7,7 +7,7 @@
 .maintainence-line{
   box-sizing: border-box;
   height: 1px;
-  width: 404px;
+  width: auto;
   border: 1px solid #F8F8F8;
   margin-bottom: 30px;
   margin-top: 30px;
@@ -101,4 +101,12 @@ form.maintainance-form{
 }
 .img_error{
   margin-right: 8px;
+}
+
+@media(max-width: 450px) {
+  .room-maintanance, .change-room-modal {
+    .modal-content{
+      padding: 0 20px;
+    }
+  }
 }

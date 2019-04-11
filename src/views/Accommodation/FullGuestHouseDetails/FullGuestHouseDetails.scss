@@ -12,7 +12,10 @@
         align-items: center;
       }
       .details-wrapper-top-right {
-        justify-content: space-between;
+        align-items: center;
+        grid-template-columns: auto 1fr auto;
+        justify-items: left;
+        display: grid;
         .back-button {
           justify-content: center;
           align-items: center;
@@ -137,23 +140,11 @@
     width: 15px;
     margin: 4px 0 0 0;
   }
-  @media (max-width: 450px) {
+  @media (max-width: 460px) {
     .guesthouse-details-wrapper {
       &--top {
         display: block;
         margin: 65px 0 60px 0;
-        .details-wrapper-top-right {
-          justify-content: start;
-          .guest-house-name {
-            margin-right: 0;
-          }
-          .bed-count-label {
-            margin-left: 50%;
-          }
-          > div:not(:last-child) {
-            margin-right: 15px;
-          }
-        }
         .guest-house-action-div {
           margin: 10px 0 0 0;
           float: right;
