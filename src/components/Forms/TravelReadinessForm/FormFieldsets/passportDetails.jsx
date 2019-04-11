@@ -16,7 +16,7 @@ class PassportDetailsFieldSet extends Component{
     const { renderInput } = new InputRenderer(formMetadata);
     return(
       <fieldset>
-        <div className="input-group">
+        <div className="input-group resposive_passport">
           {renderInput('name', 'text', {className: 'fluid'})}
           {renderInput('passportNumber', 'text')}
           {renderInput('nationality', 'filter-dropdown-select',

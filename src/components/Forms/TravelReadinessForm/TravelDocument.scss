@@ -89,3 +89,23 @@
 }
 
 }
+
+@media only screen and (max-width: 600px) {
+  .resposive_passport, .resposive_visa, .resposive_other {
+    display: grid !important;
+    grid-template-columns: 1fr;
+  }
+  .travel-document-form .form-input, .travel-document-form .input-group.visa-input .form-input {
+    width: 100%;
+    font-size: 14px !important;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .resposive_passport:first-child {
+    margin-top: 100px;
+  }
+  .modal .modal-title-bar {
+    top: 20px;
+  }
+}

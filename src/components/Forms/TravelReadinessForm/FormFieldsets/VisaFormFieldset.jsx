@@ -33,7 +33,7 @@ class VisaFormFieldSet extends Component {
     let errorMessagePosition = charLength > 70 ? 'error__height-two' : 'error__height-one';
     return (
       <fieldset>
-        <div className="input-group visa-input">
+        <div className="input-group visa-input resposive_visa">
           {renderInput('country', 'filter-dropdown-select',
             { choices: this.getCountry(), size: '', value: country }
           )}
