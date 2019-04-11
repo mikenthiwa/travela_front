@@ -11,12 +11,11 @@ export class RoleTable extends PureComponent {
   renderRoles(role) {
     const { handleEditRole } = this.props;
     return (
-      <tr key={role.id} className="table__row">
-        <td 
-          className="mdl-data-table__cell--non-numeric 
-          table__requests__destination table__data freeze-role-table">
-          <Link 
-            className="table__data--link" to={`/settings/roles/${role.id}`}>
+      <tr key={role.id} className="table__row table__effects">
+        <td
+          className="mdl-data-table__cell--non-numeric table__data freeze table__data-pointer">
+          <Link
+            className="table__data--link button-outline table__id-pointer" to={`/settings/roles/${role.id}`}>
             {role.roleName}
           </Link>
         </td>
@@ -30,9 +29,9 @@ export class RoleTable extends PureComponent {
           className="mdl-data-table__cell--non-numeric table__requests__status table__data delete"
           style={testColor}
         >
-          &ensp; &ensp;  &ensp;  &ensp;  
+          &ensp; &ensp;  &ensp;  &ensp;
           <span
-            onClick={() => handleEditRole(role)} 
+            onClick={() => handleEditRole(role)}
             id="editRole" role="presentation" onKeyDown={this.key}>
             Edit
           </span>
@@ -44,7 +43,7 @@ export class RoleTable extends PureComponent {
   renderTableHeader() {
     return (
       <tr>
-        <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze freeze-head ">
+        <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze request_id">
           Role Name
         </th>
         <th className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left">
@@ -64,14 +63,14 @@ export class RoleTable extends PureComponent {
     const { roles } = this.props;
     return (
       <Fragment>
-        <div className="table__container">
+        <div className="table__container user-roles">
           {roles &&
             roles.length > 0 && (
             <table className="mdl-data-table mdl-js-data-table table__requests">
               <thead>
                 {this.renderTableHeader()}
               </thead>
-              <tbody className="table__body">
+              <tbody className="table__body approvals_table_body">
                 {roles.map(role => this.renderRoles(role))}
               </tbody>
             </table>

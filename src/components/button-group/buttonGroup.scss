@@ -84,3 +84,21 @@ $white-color: #FFF;
     }
 
 }
+
+@media only screen and (max-width: 480px) {
+    .mdl-cell--hide-desktop {
+      display: none !important;
+    }
+    .mdl-cell--hide-tablet {
+      display: none !important;
+    }
+  }
+
+   @media only screen and (max-width: 638px) {
+    .bg-btn {
+      &:first-child {
+        padding: 9px 21px;
+      }
+      padding: 0 1em 0 1em;
+    }
+  }

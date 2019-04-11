@@ -172,16 +172,3 @@
   margin: 30px;
 }
 }
-
-@media only screen and (max-width: 839px) {
-  .table__container {
-    overflow: visible;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .documents-button-group__button--active, .documents-button-group__button--inactive {
-  width: 91px !important;
-  font-size: 10px !important;
-  }
-}

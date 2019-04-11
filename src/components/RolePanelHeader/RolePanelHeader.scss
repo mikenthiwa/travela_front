@@ -13,3 +13,20 @@
     padding: 50px 0 0 0;
   }
 }
+
+@media (max-width: 479px) {
+  .role-panel-header .PageHeader {
+    margin-top: 30px !important;
+  }
+  .user-roles {
+    margin-top: 25px !important;
+
+    .modal--add-user {
+      background: red !important;
+      input {
+        max-width: 40% !important;
+      }
+      max-width: 100px;
+    }
+  }
+}

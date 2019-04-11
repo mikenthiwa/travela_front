@@ -37,7 +37,7 @@ describe('<RoleDetailsTable />', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('render the correct number of users for a role', () => {
-    expect(wrapper.find('.table__rows').length).toEqual(1);
+    expect(wrapper.find('.table__row').length).toEqual(1);
   });
   it('renders all the columns for a user', () => {
     expect(wrapper.find('.role-user__name')

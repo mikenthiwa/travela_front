@@ -1,4 +1,7 @@
 @media (max-width: 839px) and (min-width: 480px) {
+  .home-title {
+    margin-top: 35px;
+  }
   width: 100%;
   padding-left: 0;
 }
@@ -7,8 +10,18 @@
   padding: 0px;
 }
 
+@media (max-width: 1178px) and (min-width: 839px) {
+  .home-title {
+    margin-top: 95px;
+  }
+  margin-top: 35px;
+  padding: 0;
+  margin-left: 2%;
+  width: 133.5%;
+}
+
 .rp-requests__header {
-  @media (max-width: 479px) {
+  @media (max-width: 1178px) {
     height: auto;
     margin-bottom: 0;
   }

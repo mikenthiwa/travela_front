@@ -35,7 +35,7 @@ body {
   padding-left: 61px;
   width: 100%;
   padding-top: 55px;
-  
+
   .rp-requests__header {
     margin-bottom: 15.1px;
     height: 164px;
@@ -62,12 +62,3 @@ body {
 #toast-container {
   pointer-events: none !important;
 }
-
-
-@media (max-width: 479px) { 
-  .past_checkin_header{
-    margin-top: 300px
-  }
-
-}
-

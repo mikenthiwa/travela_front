@@ -124,9 +124,8 @@ describe('<RoleDetails />', () => {
       .dive()
       .find('RoleDetailsTable')
       .dive();
-    expect(roleDetailsTable.find('.table__rows').length).toEqual(2);
+    expect(roleDetailsTable.find('.table__row').length).toEqual(2);
   });
-
 
   it('should call handleEditRole', () => {
     const newProps = { ...props, deleteModalState: 'visible' };

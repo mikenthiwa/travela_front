@@ -46,9 +46,9 @@ export class RoleDetailsTable extends PureComponent {
   renderRoleUser(roleUser) {
     const { handleEditRole, deleteModalRoleId, deleteModalState, roleName } = this.props;
     return (
-      <tr key={roleUser.id} className="table__rows">
+      <tr key={roleUser.id} className="table__row table__effects">
         <td
-          className="mdl-data-table__cell--non-numeric role-user__name table__data freeze-role-table">
+          className="mdl-data-table__cell--non-numeric table__data freeze role-user__name table__data-pointer">
           {roleUser.fullName}
         </td>
         <td className="mdl-data-table__cell--non-numeric table__data pl-sm-120">
@@ -59,14 +59,14 @@ export class RoleDetailsTable extends PureComponent {
           style={testColor}>
           {
             roleName === 'Budget Checker' ?
-              ( 
+              (
                 <span
                   onClick={() => handleEditRole(roleUser)} id="editButton" role="presentation"
                   onKeyDown={this.key}>
             Edit
             &ensp;  &ensp;  &ensp; &ensp;
                 </span>
-                
+
               ): null
           }
           &ensp;
@@ -100,7 +100,7 @@ export class RoleDetailsTable extends PureComponent {
   renderTableHead(roleName) {
     return (
       <tr>
-        <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze freeze-head ">
+        <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze request_id ">
           Name
         </th>
         <th className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left">
@@ -117,7 +117,7 @@ export class RoleDetailsTable extends PureComponent {
     const { roleUsers, error, roleName } = this.props;
     return (
       <Fragment>
-        <div className="table__container">
+        <div className="table__container user-roles">
           {error && this.renderError(error)}
           {roleUsers &&
             roleUsers.length > 0 ? (
@@ -125,7 +125,7 @@ export class RoleDetailsTable extends PureComponent {
                 <thead>
                   {this.renderTableHead(roleName)}
                 </thead>
-                <tbody className="table__body">
+                <tbody className="table__body approvals_table_body">
                   {roleUsers.map(user => this.renderRoleUser(user, roleName))}
                 </tbody>
               </table>

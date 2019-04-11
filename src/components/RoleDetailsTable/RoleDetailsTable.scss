@@ -76,7 +76,7 @@ $border-color: #e4e4e4;
 }
 
 .delete-modal-overlay.position-below {
-  top: 48px;
+  top: -75px;
   left: -65px;
 }
 
@@ -102,5 +102,22 @@ $border-color: #e4e4e4;
 @media only screen and (max-width: 839px) {
   .table__resize {
     position: inherit;
+  }
+}
+
+@media only screen and (max-width: 458px) {
+  .size_in {
+    .disable_button,
+    .add_button {
+      position: absolute !important;
+      right: 30px !important;
+    }
+    .occupationInput {
+      max-width: 90%;
+    }
+  }
+
+  .modal-content .submit-area {
+    margin-top: 60px !important;
   }
 }
