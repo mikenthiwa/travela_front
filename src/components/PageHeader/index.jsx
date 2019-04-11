@@ -5,17 +5,19 @@ import './_header.scss';
 import headerIcon from '../../images/back-icon.svg';
 
 class PageHeader extends PureComponent {
-  renderActionButton= (actionBtnClickHandler,openModal, actionBtn) => {
+  renderActionButton = (actionBtnClickHandler, openModal, actionBtn) => {
     return (
       <div>
         <button
           onClick={() => {
             actionBtn === 'New Request' || actionBtnClickHandler ?
-              actionBtnClickHandler():
-              openModal(true, 'new model'); }
+              actionBtnClickHandler() :
+              openModal(true, 'new model');
+          }
           }
           type="button"
           className="action-btn btn-new-request"
+          id="actionButton"
         >
           {actionBtn}
         </button>
@@ -25,13 +27,13 @@ class PageHeader extends PureComponent {
 
   render() {
     const {
-      title, actionBtn, actionBtnClickHandler, openModal,titleClassName, location,
+      title, actionBtn, actionBtnClickHandler, openModal, titleClassName, location,
       icon, iconLink, addLink, children, isLoading
     } = this.props;
     return (
       <div className="PageHeader">
         <div>
-          { addLink && (
+          {addLink && (
             <Link to={iconLink}>
               <img src={icon} className="header__link" alt="icon" />
             </Link>
@@ -79,7 +81,7 @@ PageHeader.defaultProps = {
   addLink: false,
   isLoading: false,
   actionBtnClickHandler: null,
-  openModal: () => {},
+  openModal: () => { },
   children: '',
 };
 
