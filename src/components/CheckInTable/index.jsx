@@ -67,7 +67,7 @@ export class CheckInTable extends Component {
     const { trips, tripError } = this.props;
     return (
       <Fragment>
-        <div className="table__container table__resize padding-top">
+        <div className="table__container table__resize padding-top checkInContainer">
           {tripError && this.renderError(tripError)}
           {trips &&
             trips.length > 0 && (

@@ -62,3 +62,12 @@ body {
 #toast-container {
   pointer-events: none !important;
 }
+
+
+@media (max-width: 479px) { 
+  .past_checkin_header{
+    margin-top: 300px
+  }
+
+}
+
