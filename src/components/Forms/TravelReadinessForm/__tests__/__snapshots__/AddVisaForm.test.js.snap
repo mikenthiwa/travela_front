@@ -8,7 +8,7 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
   >
     <fieldset>
       <div
-        className="input-group visa-input"
+        className="input-group visa-input resposive_visa"
       >
         <div
           className="form-input  "

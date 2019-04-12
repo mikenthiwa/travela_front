@@ -43,26 +43,15 @@ class PersonalDetailsFiedset extends Component {
                 </button>
               </div>
               <div className="">
-                <table className="mdl-js-data-table table__requests">
-                  { values.departments.length > 0 ?
-                    (
-                      <thead>
-                        <tr>
-                          <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze">
-                      Departments
-                          </th>
-                        </tr>
-                      </thead>
-                    ) : null
-                  }
+                <table className="mdl-js-data-table table__requests" style={{ backgroundColor: 'white'}}>
                   {values.departments.map((list, i) =>
                     (
-                      <tbody key={Math.floor((Math.random() * 500) + 1)} className="table__body">
-                        <tr className="table__row">
-                          <td className="mdl-data-table__cell--non-numeric table__data" style={{ textTransform: 'capitalize'}}>
+                      <tbody key={Math.floor((Math.random() * 5000) + 1)} className="table__body">
+                        <tr className="table__row" style={{ backgroundColor: '#F8F8F8' }}>
+                          <td className="mdl-data-table__cell--non-numeric table__data" style={{ textTransform: 'capitalize', borderLeft: 'none' }}>
                             {list}
                           </td>
-                          <td>
+                          <td style={{ borderRight: 'none'}}>
                             <i
                               role="button"
                               className="remove_department"
@@ -70,7 +59,7 @@ class PersonalDetailsFiedset extends Component {
                               onKeyDown={this.handleKeyDown}
                               tabIndex="0"
                               onClick={() =>removeDepartment(i)}>
-                              remove
+                              X
                             </i>
                           </td>
                         </tr>

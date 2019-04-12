@@ -29,18 +29,15 @@
 }
 
 .remove_department{
-    font-size: 11px !important;
-    font-weight: 500 !important;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-radius: 14px;
-    color: #fff;
+    font-family: "DIN Pro";
+    font-style: normal;
+    font-size: 20px !important;
+    font-weight: 900 !important;
+    color: #FF5359;
     display: inline-block;
-    height: 22px;
-    width: 62px;
-    text-align: center;
+    outline: none;
+    width: 25px;
     cursor: pointer;
-    background-color: red;
 }
 
 .disable_button {

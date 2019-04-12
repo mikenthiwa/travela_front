@@ -9,7 +9,7 @@ exports[`<PassportForm/> renders correctly 1`] = `
     <div>
       <fieldset>
         <div
-          className="input-group"
+          className="input-group resposive_passport"
         >
           <div
             className="form-input fluid "

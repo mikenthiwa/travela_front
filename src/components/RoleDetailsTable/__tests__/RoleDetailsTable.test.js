@@ -5,6 +5,16 @@ import { RoleDetailsTable } from '..';
 const props = {
   roleUsers: [{
     id: 1,
+    budgetCheckerDepartments: [
+      {
+        id: 1,
+        name: 'Tomato'
+      },
+      {
+        id: 2,
+        name: 'Egg'
+      }
+    ],
     fullName: 'A user',
     centers: [
       {
@@ -19,6 +29,16 @@ const props = {
     centers: [
       {
         location: 'Nairobi, Kenya'
+      }
+    ],
+    budgetCheckerDepartments: [
+      {
+        id: 1,
+        name: 'Tomato'
+      },
+      {
+        id: 2,
+        name: 'Egg'
       }
     ]
   },
@@ -80,7 +100,7 @@ describe('<RoleDetailsTable />', () => {
   });
 
   it('renders edit button for budget checker role', () => {
-    wrapper = shallow (<RoleDetailsTable {...{...props, roleName: 'Budget Checker'}} />);
+    wrapper = shallow (<RoleDetailsTable {...{...props, roleName: 'Budget Checker', }} />);
     expect(wrapper.find('#editButton').length).toEqual(1);
   });
 });

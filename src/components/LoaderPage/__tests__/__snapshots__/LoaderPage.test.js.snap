@@ -968,7 +968,7 @@ exports[`<LoaderBody /> renders correctly 1`] = `
       <p
         className="loader__body-text"
       >
-        We wander for distraction, but we travel for fulfilment.
+        That awkward moment: When you walk through the metal detectors at the airport, and your abs of steel set them off
       </p>
     </div>
   </div>

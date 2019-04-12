@@ -45,17 +45,17 @@ Array [
                                     Reason
                               </th>
                               <th
-                                    className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left"
+                                    className="mdl-data-table__cell--non-numeric table__head"
                               >
                                     <span />
                               </th>
                               <th
-                                    className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left"
+                                    className="mdl-data-table__cell--non-numeric table__head"
                               >
                                     Created By
                               </th>
                               <th
-                                    className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left"
+                                    className="mdl-data-table__cell--non-numeric table__head"
                               >
                                     <span />
                               </th>

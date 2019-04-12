@@ -84,7 +84,7 @@ exports[`<Accommodation /> renders correctly 1`] = `
     </div>
   </Modal>
   <div
-    className="table__container"
+    className="table__container accommodation__container"
   >
     <WithLoading
       disabledGuestHouses={

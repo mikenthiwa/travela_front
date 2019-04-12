@@ -30,7 +30,7 @@ exports[`Render NavBar component should match snapshot 1`] = `
           />
           <img
             alt="Travela Logo"
-            className="mdl-cell--hide-desktop mdl-cell--hide-tablet navbar__travela-logo"
+            className="navbar__travela-logo"
             src="travela-mobile.svg"
           />
         </span>

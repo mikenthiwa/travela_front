@@ -3,7 +3,7 @@
 exports[`Test Suite for Accommodation Component renders as expected 1`] = `
 <Fragment>
   <div
-    className="table__container table__resize padding-top"
+    className="table__container table__resize padding-top checkInContainer"
   >
     <table
       className="mdl-data-table mdl-js-data-table checkInTable__trips"

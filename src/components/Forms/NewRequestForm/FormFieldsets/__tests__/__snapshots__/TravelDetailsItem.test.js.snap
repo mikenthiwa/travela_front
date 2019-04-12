@@ -27,6 +27,7 @@ exports[`Test Suite for <TravelDetailsItem /> should match snapshot 1`] = `
           <div
             className="travel-to"
             onChange={[Function]}
+            onFocus={[Function]}
           >
             <img
               alt="icn"
@@ -37,6 +38,7 @@ exports[`Test Suite for <TravelDetailsItem /> should match snapshot 1`] = `
           <div
             className="travel-to"
             onChange={[Function]}
+            onFocus={[Function]}
           >
             <img
               alt="icn"

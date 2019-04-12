@@ -45,14 +45,22 @@ export class RoleDetailsTable extends PureComponent {
 
   renderRoleUser(roleUser) {
     const { handleEditRole, deleteModalRoleId, deleteModalState, roleName } = this.props;
+    const showTip = roleName === 'Budget Checker' ?
+      roleUser.budgetCheckerDepartments.map((dept) => `${dept.name}, `) :
+      null;
     return (
       <tr key={roleUser.id} className="table__row table__effects">
         <td
           className="mdl-data-table__cell--non-numeric table__data freeze role-user__name table__data-pointer">
           {roleUser.fullName}
         </td>
-        <td className="mdl-data-table__cell--non-numeric table__data pl-sm-120">
-          {roleUser.location}
+        <td className="mdl-data-table__cell--non-numeric table__data pl-sm-120 tool__tip__container" style={{ position: 'relative !important' }}>
+          {
+            roleName === 'Budget Checker' ?
+              roleUser.budgetCheckerDepartments.length :
+              roleUser.location
+          }
+          <span className={roleName === 'Budget Checker' ? 'tool__tip' : ''} style={{ left: '9%' }}>{showTip}</span>
         </td>
         <td
           className="mdl-data-table__cell--non-numeric table__requests__status table__data delete"
@@ -63,11 +71,11 @@ export class RoleDetailsTable extends PureComponent {
                 <span
                   onClick={() => handleEditRole(roleUser)} id="editButton" role="presentation"
                   onKeyDown={this.key}>
-            Edit
-            &ensp;  &ensp;  &ensp; &ensp;
+                  Edit
+                  &ensp;  &ensp;  &ensp; &ensp;
                 </span>
 
-              ): null
+              ) : null
           }
           &ensp;
           <span
@@ -104,7 +112,10 @@ export class RoleDetailsTable extends PureComponent {
           Name
         </th>
         <th className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left">
-          Center
+          {
+            roleName === 'Budget Checker' ? 'Department' :
+              'Center'
+          }
         </th>
         <th className="mdl-data-table__cell--non-numeric table__head table__head--last">
           Actions
@@ -130,7 +141,7 @@ export class RoleDetailsTable extends PureComponent {
                 </tbody>
               </table>
             ) : null}
-          { !error && roleUsers.length === 0
+          {!error && roleUsers.length === 0
             && this.renderNoUsers(roleName)}
         </div>
       </Fragment>
@@ -160,12 +171,12 @@ RoleDetailsTable.defaultProps = {
   roleUsers: [],
   error: '',
   roleName: '',
-  handleEditRole: ()=> {},
+  handleEditRole: () => { },
   deleteModalState: 'invisible',
   deleteModalRoleId: 0,
-  hideDeleteRoleModal: ()=> {},
-  showDeleteRoleModal: ()=> {},
-  handleDeleteUserRole: ()=> {},
+  hideDeleteRoleModal: () => { },
+  showDeleteRoleModal: () => { },
+  handleDeleteUserRole: () => { },
 };
 
 export default withLoading(RoleDetailsTable);

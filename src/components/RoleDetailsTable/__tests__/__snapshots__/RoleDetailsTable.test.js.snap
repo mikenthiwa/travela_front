@@ -3,7 +3,7 @@
 exports[`<RoleDetailsTable /> renders correctly 1`] = `
 <Fragment>
   <div
-    className="table__container"
+    className="table__container user-roles"
   >
     <table
       className="mdl-data-table mdl-js-data-table table__requests"
@@ -11,7 +11,7 @@ exports[`<RoleDetailsTable /> renders correctly 1`] = `
       <thead>
         <tr>
           <th
-            className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze freeze-head "
+            className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze request_id "
           >
             Name
           </th>
@@ -28,20 +28,34 @@ exports[`<RoleDetailsTable /> renders correctly 1`] = `
         </tr>
       </thead>
       <tbody
-        className="table__body"
+        className="table__body approvals_table_body"
       >
         <tr
-          className="table__rows"
+          className="table__row table__effects"
           key="1"
         >
           <td
-            className="mdl-data-table__cell--non-numeric role-user__name table__data freeze-role-table"
+            className="mdl-data-table__cell--non-numeric table__data freeze role-user__name table__data-pointer"
           >
             A user
           </td>
           <td
-            className="mdl-data-table__cell--non-numeric table__data pl-sm-120"
-          />
+            className="mdl-data-table__cell--non-numeric table__data pl-sm-120 tool__tip__container"
+            style={
+              Object {
+                "position": "relative !important",
+              }
+            }
+          >
+            <span
+              className=""
+              style={
+                Object {
+                  "left": "9%",
+                }
+              }
+            />
+          </td>
           <td
             className="mdl-data-table__cell--non-numeric table__requests__status table__data delete"
             style={
