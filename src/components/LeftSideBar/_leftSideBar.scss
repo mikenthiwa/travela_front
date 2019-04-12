@@ -9,6 +9,9 @@
   &__fixed_wrapper {
     top: 65px;
     width: 100%;
+    @media (max-width: 1178px) {
+     top: 140px; 
+    }
   }
 }
 
@@ -28,7 +31,7 @@
     width: 16.666667%;
     height: 100vh;
 
-    @media (min-width: 1178px)  {
+    @media (max-width: 1178px)  {
       background: #f8f8f8;
       z-index: 10;
     }
@@ -39,7 +42,10 @@
     height: 100%;
     position: relative;
     top: 108px;
-    min-width: 200px;   
+    min-width: 200px;
+    @media (max-width: 1178px) {
+      top: 0px; 
+     }   
   }
 
   .logout-button {

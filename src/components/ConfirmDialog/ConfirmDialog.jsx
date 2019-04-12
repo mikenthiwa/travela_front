@@ -5,7 +5,8 @@ import './ConfirmDialog.scss';
 
 class ConfirmDialog extends Component {
 
-  renderModal = (id,renderDialogText, modalInvisible, closeDeleteModal,buttonSelected,handleApprove, handleReject, handleVerify) => {
+  renderModal = (id,renderDialogText, modalInvisible, closeDeleteModal,
+    buttonSelected,handleApprove, handleReject, handleVerify, documentText) => {
     return(
       <Modal
         customModalStyles="delete-comment-modal"
@@ -13,11 +14,11 @@ class ConfirmDialog extends Component {
           `${renderDialogText(buttonSelected)}-modal-overlay`}
         visibility={modalInvisible ? 'invisible' : 'visible'}
         closeDeleteModal={closeDeleteModal('')}
-        title={`${buttonSelected} Request?`}
+        title={`${buttonSelected} ${documentText}?`}
         showOverlay={false}
       >
         <p className="approval-comment-modal__text">
-          {`Confirm request ${renderDialogText(buttonSelected)}`}
+          {`Confirm ${renderDialogText(buttonSelected)}`}
         </p>
         <button
           className={`${renderDialogText(buttonSelected)}-comment-modal__btn`}
@@ -43,11 +44,12 @@ class ConfirmDialog extends Component {
       closeDeleteModal,
       handleApprove,
       handleReject,
-      handleVerify
+      handleVerify,
+      documentText
     } = this.props;
     return (
       this.renderModal(id,renderDialogText, modalInvisible, closeDeleteModal,buttonSelected,
-        handleApprove,handleReject,handleVerify)
+        handleApprove,handleReject,handleVerify, documentText)
     );
   }
 
@@ -70,14 +72,16 @@ ConfirmDialog.propTypes = {
   renderDialogText: PropTypes.func.isRequired,
   closeDeleteModal: PropTypes.func.isRequired,
   handleApprove: PropTypes.func.isRequired,
-  handleReject: PropTypes.func.isRequired
+  handleReject: PropTypes.func.isRequired,
+  documentText: PropTypes.string
 };
 
 ConfirmDialog.defaultProps = {
   id: '',
   modalInvisible: true,
   buttonSelected: null,
-  handleVerify: () => {}
+  handleVerify: () => {},
+  documentText: null
 };
 
 export default ConfirmDialog;

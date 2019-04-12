@@ -104,5 +104,5 @@ NotificationItem.propTypes = {
   timeStamp: PropTypes.string.isRequired,
   message: PropTypes.string,
   markSingleAsRead: PropTypes.func,
-  user: PropTypes.string.isRequired,
+  user: PropTypes.shape().isRequired,
 };

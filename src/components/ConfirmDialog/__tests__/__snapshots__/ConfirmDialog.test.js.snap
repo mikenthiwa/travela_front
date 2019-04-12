@@ -19,7 +19,7 @@ exports[`ConfirmDialog component should match snapshot 1`] = `
     <p
       className="approval-comment-modal__text"
     >
-      Confirm request undefined
+      Confirm undefined
     </p>
     <button
       className="undefined-comment-modal__btn"

@@ -183,7 +183,7 @@ class VerificationDetails extends Component {
 
   renderDialogText = () => {
     const { buttonSelected } = this.state;
-    if (buttonSelected === 'verify') return 'approval';
+    if (buttonSelected === 'verify') return 'request verification';
     return 'rejection';
   };
 
@@ -206,6 +206,7 @@ class VerificationDetails extends Component {
           buttonSelected={buttonSelected} closeDeleteModal={()=> {}}
           renderDialogText={this.renderDialogText} handleApprove={this.handleDecision}
           handleReject={this.handleDecision}
+          documentText="Request"
         />
       </div>
     );

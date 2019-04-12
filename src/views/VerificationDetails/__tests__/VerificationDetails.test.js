@@ -79,7 +79,7 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
       button1.simulate('click');
       expect(instance.state.buttonSelected).toBe('verify');
       expect(instance.state.modalInvisible).toBe(false);
-      const verifyButton = wrapper.find('.approval-comment-modal__btn');
+      const verifyButton = wrapper.find('#verify.request.verification-comment-modal__btn');
       verifyButton.simulate('click');
       expect(instance.state.modalInvisible).toBe(true);
     });

@@ -170,11 +170,12 @@ export class DocumentDetailsModal extends Component {
       <ConfirmDialog
         modalInvisible={modalInvisible}
         buttonSelected={buttonTextValuePair[buttonSelected]}
-        renderDialogText={() => 'verification'}
+        renderDialogText={() => ' document verification'}
         closeDeleteModal={handleConfirmModal}
         handleApprove={()=>{}}
         handleReject={()=>{}}
         handleVerify={this.verifyDocumentDetails}
+        documentText="travel document"
       />
     );
   }
@@ -198,7 +199,7 @@ export class DocumentDetailsModal extends Component {
           <UserInfo requestData={userInfo} />
           { this.checkCurrentUserStatus() && !selfOwned && !fetchingDocument  ? this.renderVerificationButton()
             : !fetchingDocument && this.renderRequesterVerificationStatus()}
-          {renderConfirmDialog(modalInvisible, buttonSelected, handleConfirmModal)}
+          {renderConfirmDialog(modalInvisible, buttonSelected, handleConfirmModal, documentType)}
         </div>
         <div className="modal__travel-doc-details">
           { fetchingDocument && <Preloader /> }

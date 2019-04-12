@@ -9,7 +9,8 @@ const props = {
   renderDialogText: jest.fn(),
   closeDeleteModal: jest.fn(),
   handleApprove: jest.fn(),
-  handleReject: jest.fn()
+  handleReject: jest.fn(),
+  documentText: 'Request'
 };
 
 

@@ -194,6 +194,7 @@ exports[`Render RequestsModal component should match snapshot 1`] = `
     <ConfirmDialog
       buttonSelected={null}
       closeDeleteModal={[Function]}
+      documentText={null}
       handleApprove={[Function]}
       handleReject={[Function]}
       handleVerify={[Function]}

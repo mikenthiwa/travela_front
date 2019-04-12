@@ -43,8 +43,8 @@ export const Approve = (type = 'manager') => {
 
     renderDialogText = () => {
       const { buttonSelected } = this.state;
-      if (buttonSelected === 'approve') return 'approval';
-      return 'rejection';
+      if (buttonSelected === 'approve') return 'request approval';
+      return 'request rejection';
     };
 
     renderButtons = (request) => {
@@ -87,6 +87,7 @@ export const Approve = (type = 'manager') => {
             renderDialogText={this.renderDialogText}
             handleApprove={this.handleDecision}
             handleReject={this.handleDecision}
+            documentText="Request"
           />
         </div>
       );

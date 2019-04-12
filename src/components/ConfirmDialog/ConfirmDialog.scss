@@ -216,7 +216,7 @@
   cursor: pointer;
 }
 
-.verification-comment-modal__btn {
+#verify.request.verification-comment-modal__btn, .verification-comment-modal__btn {
   height: 26px;
   width: 80px;
   border-radius: 1px;
