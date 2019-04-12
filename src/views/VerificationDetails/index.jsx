@@ -85,10 +85,8 @@ class VerificationDetails extends Component {
   }
 
   renderTravelCheckList = () =>{
-    const { attachments, request, email, currentUser, errors,
-      match: { params: { requestId } } } = this.props;
+    const { attachments, errors} = this.props;
     const { checklistItems, attachmentDetails } = this.getValues();
-    const { displayComments } = this.state;
     if(typeof(errors) === 'string' && errors.includes('does not exist')) {
       return <NotFound redirectLink="/requests/my-verifications" errorMessage={errors} />;
     }
@@ -136,15 +134,26 @@ class VerificationDetails extends Component {
             </div>
           </div>
         </div>
-        <CommentsSection
-          renderCommentsToggle={this.renderCommentsToggle}
-          request={request} requestId={requestId}
-          currentUser={currentUser} email={email}
-          displayComments={displayComments}
-        />
+        <div className="desktop-comment">
+          {this.renderComments()}
+        </div>
       </div>
     );
   };
+
+  renderComments = () =>{
+    const {request, email, currentUser,
+      match: { params: { requestId } } } = this.props;
+    const { displayComments } = this.state;
+    return(
+      <CommentsSection
+        renderCommentsToggle={this.renderCommentsToggle}
+        request={request} requestId={requestId}
+        currentUser={currentUser} email={email}
+        displayComments={displayComments}
+      />
+    ); 
+  }
 
   renderBottomPane() {
     return (
@@ -152,6 +161,9 @@ class VerificationDetails extends Component {
         <div className="bottom-container">
           {this.renderTravelCheckList()}
           {this.renderFlightDetails()}
+          <div className="mobile-comment left">
+            {this.renderComments()}
+          </div>
         </div>
       </div>
     );

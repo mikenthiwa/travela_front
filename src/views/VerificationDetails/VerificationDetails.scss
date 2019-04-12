@@ -1,12 +1,26 @@
 .verification-page-container {
 
     margin-bottom: 50px;
-
+    .desktop-comment{
+      @media (max-width: 1018px) {
+          display: none;
+      }
+    } 
+    .mobile-comment{
+      display: none;
+      @media (max-width: 1018px) {
+          display: block;
+      }
+    }   
     .bottom-container {
         width: 100%;
         margin-top: 1em;
         margin-bottom: 30px;
         display: flex;
+
+        @media (max-width: 1018px) {
+          display: block;
+         }
 
           .heading {
               padding: 20px 0 13px 0;
@@ -19,6 +33,9 @@
             margin: 0 1.2% 0 0;
             
             text-align: center;
+            @media (max-width: 1018px) {
+              width: 100%;
+             }
             
             .attachments {
                 background-color: #FFF;
@@ -43,7 +60,9 @@
                         width: 44%;
                         padding: 20px 0 10px 32px;
                         
-                        
+                        @media (max-width: 482px) {
+                          width: 100%;
+                        }                   
 
                         .attachment-header {
                             font-size: 12px;
@@ -82,6 +101,11 @@
                                 
                                 .bold {
                                     font-weight: 500;
+
+                                    @media (max-width: 469px) {
+                                      word-break: break-word;
+                                    }
+                                    
                                 }
                             }
                         }
@@ -201,14 +225,17 @@
           .right {            
                 width: 38%;           
 
+                @media (max-width: 1018px) {
+                  width: 100%;
+                 }
+
               .flightDetails {
                 border: 1px solid grey;
                 overflow: auto;
                 background-color: #FFF;
                 border: 1px solid #E4E4E4;
                 border-radius: 0.5em;
-                text-align: center;            
-
+                text-align: center;
                 .clearfix:after {
                     content: "";
                     display: table;
@@ -225,11 +252,20 @@
                     margin-left: 10%;
                     margin-right: 10%;
 
+                    @media (max-width: 1385px) {
+                     margin: 0 !important;
+                    }
+
                     .return {
                         border-top: 1px dotted #E4E4E4;
                         content: "";
                         display: table;
                         clear: both;
+                      
+                          @media (max-width: 1385px) {
+                            display: block;
+                           }
+                    
                     }
                 }
 
@@ -242,7 +278,13 @@
                   .detail-right { 
                         float: right;                    
                         width: 33%;
-                        padding: 20px;                      
+                        padding: 20px;  
+                        
+                        @media (max-width: 1385px) {
+                          width: 100%;
+                          float: none;
+                          padding: 20px 0;
+                         }
                   }
 
                   .detail-right p{ 
@@ -256,7 +298,13 @@
                   .detail-left { 
                         float: left;                    
                         width: 33%;
-                        padding: 20px;                      
+                        padding: 20px;  
+                        
+                        @media (max-width: 1385px) {
+                          width: 100%;
+                          float: none;
+                          padding: 20px 0;
+                         }
                 }
 
                 .flight-heading{
@@ -268,5 +316,5 @@
               } 
               
           }       
-    }
+  }
 }

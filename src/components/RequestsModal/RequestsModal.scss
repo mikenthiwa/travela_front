@@ -255,6 +255,13 @@
     font-size: 15px;
     line-height: 20px;
     text-align: right;
+
+    @media (max-width: 335px) {
+      font-size: small;
+      top: 1.2em;
+      right: 7em;
+      position: relative;
+    }
   }
   &__user-name {
     color: #3359db;
@@ -282,6 +289,9 @@
     font-size: 15px;
     line-height: 20px;
 
+    @media (max-width: 335px) {
+      margin-top: 10px;
+    }
     > p {
       display: inline;
     }
@@ -325,6 +335,11 @@
   background: none;
   margin-left: 20px;
   cursor: pointer;
+
+  @media (max-width: 335px) {
+    margin-left: 5px;
+  }
+  
 }
 .edit-button:focus,
 .edit-button.active {

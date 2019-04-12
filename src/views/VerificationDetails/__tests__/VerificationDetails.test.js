@@ -123,9 +123,9 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
       const hideCommentButton = wrapper.find('.comment-toggle-button');
       const instance = wrapper.find('VerificationDetails').instance();
       expect(instance.state.displayComments).toBe(true);
-      hideCommentButton.simulate('click');
+      hideCommentButton.at(1).simulate('click');
       expect(instance.state.displayComments).toBe(false);
-      hideCommentButton.simulate('click');
+      hideCommentButton.at(1).simulate('click');
       expect(instance.state.displayComments).toBe(true);
     });
   });  
