@@ -1,20 +1,35 @@
+@media( max-width: 1178px) and (min-width:840px){
+  .rp-requests {
+    width: 120%;
+    padding-left: 0;
+}   
+}
+
+.stipend-list{
+ margin-top: 70px;
+}
+
+
+
 .card {
-  margin: 47px 22px 22px 0px;
-  height: 198px;
   font-size: 15px;
   color: #4F4F4F;
   line-height: 20px;
   box-sizing: border-box;
   font-family: "DIN Pro";
   background-color: #FFFFFF;
-  width: 197px;
   border-radius: 6px;
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.1);
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
+  .travel_stipend_menu {
+    align-self: flex-end;
+  }
 
   &_title {
-    height: 23px;	
     width: 118px;	
     color: #3359DB;	
     font-family: "DIN Pro";	
@@ -51,7 +66,6 @@
   }
 
   &_p {
-    height: 18px;	
     width: 83px;	
     color: #4A4A4A;	
     font-family: "DIN Pro";	
@@ -160,4 +174,11 @@
 }
 
 
-
+@media( max-width: 479px){
+  .PageHeader {
+    top: 70px;
+  }
+  .card {
+    margin-left: 15%;
+  }
+}

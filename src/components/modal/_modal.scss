@@ -122,3 +122,10 @@
     width: 1200px;
   }
 }
+
+@media (max-width: 562px) {
+  .modal {
+    width: 80%;
+  }
+}
+

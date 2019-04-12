@@ -1,3 +1,6 @@
+.delete-stipends{
+  top: -20%;
+}
 form.new-request {
   .stipend-amount {
     input {
@@ -31,3 +34,113 @@ form.new-request {
   }
 
 }
+
+@media (max-width: 678px) {
+  .style-number {
+    display: grid;
+    float: right;
+    margin: -28px 80px 41px 10px;
+    margin-bottom: -33px;
+}
+}
+
+@media (max-width: 1209px) {
+  .style-number {
+    display: grid;
+    float: right;
+    margin: -27px 20px 41px 10px;
+    margin-bottom: -33px;
+}
+}
+
+@media (max-width: 562px) {
+  
+  form.new-request {
+    .stipend-amount {
+      input {
+        width: 350px;
+      }
+    }
+    .input-border-error {
+      .textarea {
+        margin-right: -100px;
+      }
+    }
+    .stipend-location {
+      width: 350px;
+  
+      .select-dropdown {
+        margin-right: -70px;
+        width: 100px;
+      }
+    }
+  }
+}
+
+@media (max-width: 474px) {
+  
+  form.new-request {
+    .stipend-amount {
+      input {
+        width: 300px;
+      }
+    }
+    .input-border-error {
+      .textarea {
+        margin-right: -90px;
+      }
+    }
+  
+    .stipend-location {
+      width: 300px;
+  
+      .select-dropdown {
+        margin-right: -90px;
+        width: 100px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 425px) {
+  
+  form.new-request {
+    .stipend-amount {
+      input {
+        width: 270px;
+      }
+    }
+    .textarea {
+      margin-right: -90px !important;
+    }
+  
+    .style-number{
+      margin: -28px 12px 10px;
+    }
+   
+    .stipend-location {
+      width: 270px;
+  
+      .select-dropdown {
+        margin-right: -90px;
+        width: 100px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 1405px){
+  form.new-request fieldset .input-group {
+    width: 0px;
+}
+}
+
+@media (max-width: 448px){
+  form.new-request fieldset .input-group {
+    width: 100%;
+}
+}
+
+

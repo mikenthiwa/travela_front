@@ -14,7 +14,7 @@ const handleAction = (action, id, openModal, fetchSingleTravelStipend) => {
 
 export const TravelStipendsCard = ({location, stipend,openModal, id, fetchSingleTravelStipend}) => {
   return  (
-    <div className="card">
+    <div className="card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--3-col-phone">
       <div className="travel_stipend_menu">
         <ContextMenu classNames="table__menu-container">
           <MenuItem
@@ -54,7 +54,9 @@ export const TravelStipendsCards = (
 ) => {
 
   return(
-    <div>
+    
+    <div className="stipend-list mdl-grid">
+    
       {
         stipends.map(stipend => {
           return (
