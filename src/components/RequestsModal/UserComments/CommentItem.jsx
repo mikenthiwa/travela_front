@@ -92,11 +92,13 @@ export default class CommentItem extends Component {
             altText="avatar"
             imageClass="modal__oval-copy"
           />
-          <span className="modal__user-name">
-            {comment.userId === currentUser.id ? currentUser.fullName : (comment.user || {}).fullName}
-          </span>
-          <span className="modal__hours-status">
-            {formatDate(comment.createdAt)}
+          <span className="modal__comment-author">
+            <span className="modal__user-name">
+              {comment.userId === currentUser.id ? currentUser.fullName : (comment.user || {}).fullName}
+            </span>
+            <span className="modal__hours-status">
+              {formatDate(comment.createdAt)}
+            </span>
           </span>
           {comment && comment.userId === currentUser.id ? (
             <span className="modal__dialog">

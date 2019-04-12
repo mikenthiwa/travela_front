@@ -42,12 +42,19 @@ export class UserTravelReadinessDetailsTable extends Component {
     });
   }
 
+  renderClassName(column) {
+    if (column === 'Country' || column === 'Passport No' || column === 'Document Name'){
+      return 'mdl-data-table__cell--non-numeric table__head table-head-rows freeze request_id';
+    }
+    return 'mdl-data-table__cell--non-numeric table__head table-head-rows';
+  }
+
   renderTableHeadRows(columnNames) {
     return (
       <tr>
         {
           columnNames.map(column => (
-            <th key={column} className="mdl-data-table__cell--non-numeric table__head table-head-rows">{column}</th>)
+            <th key={column} className={this.renderClassName(column)}>{column}</th>)
           )
         }
       </tr>
@@ -83,7 +90,7 @@ export class UserTravelReadinessDetailsTable extends Component {
   renderTableBody() {
     const { activeDocument, passports, visas, others } = this.props;
     return(
-      <tbody className="table__body">
+      <tbody className="table__body approvals_table_body">
         {
           this.renderDocuments({
             activeDocument, passports, visas, others
@@ -114,8 +121,8 @@ export class UserTravelReadinessDetailsTable extends Component {
     const attachments = `${nationality}-passport`;
     const { handleShowDocument } = this.props;
     return (
-      <tr key={id} className="table__rows">
-        <td className="mdl-data-table__cell--non-numeric table__data">
+      <tr key={id} className="table__rows table__effects">
+        <td className="mdl-data-table__cell--non-numeric table__data button-outline freeze table__data-pointer">
           <span
             onClick={() => handleShowDocument(id, 'passport')}
             role="presentation"
@@ -161,7 +168,7 @@ export class UserTravelReadinessDetailsTable extends Component {
     const { handleShowDocument } = this.props;
     return (
       <tr key={id} className="table__rows">
-        <td className="mdl-data-table__cell--non-numeric table__data">
+        <td className="mdl-data-table__cell--non-numeric table__data button-outline freeze table__data-pointer">
           <span
             onClick={() => handleShowDocument(id, 'visa')}
             role="presentation"
@@ -193,7 +200,7 @@ export class UserTravelReadinessDetailsTable extends Component {
     } = this.props;
     return (
       <tr key={id} className="table__rows">
-        <td className="mdl-data-table__cell--non-numeric table__data">
+        <td className="mdl-data-table__cell--non-numeric table__data button-outline freeze table__data-pointer">
           <span
             onClick={() => handleShowDocument(id, 'other')}
             role="presentation"
@@ -203,8 +210,8 @@ export class UserTravelReadinessDetailsTable extends Component {
           </span>
         </td>
         <td className="mdl-data-table__cell--non-numeric table__data">{documentId || 'N/A'}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data special">{dateOfIssue}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data special">{expiryDate}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data">{dateOfIssue}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data">{expiryDate}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">
           <a className="table__data--link" target="_blank" rel="noopener noreferrer" href={cloudinaryUrl}>{attachments}</a>
         </td>
@@ -265,7 +272,7 @@ export class UserTravelReadinessDetailsTable extends Component {
 
     return (
       <div className="table__container">
-        <table className="mdl-data-table mdl-js-data-table readiness-table">
+        <table className="mdl-data-table mdl-js-data-table readiness-table travel-readiness">
           {this.renderTableHead()}
           {this.renderTableBody()}
         </table>

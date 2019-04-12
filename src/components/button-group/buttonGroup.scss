@@ -49,6 +49,10 @@ $white-color: #FFF;
         margin-right: 4px;
     }
 
+    @media (max-width: 350px) {
+      font-size: 12px;
+    }
+
     &:hover {
         border-color: $primary-color;
     }

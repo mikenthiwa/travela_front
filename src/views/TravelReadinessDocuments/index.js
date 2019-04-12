@@ -49,7 +49,7 @@ class TravelReadinessDocuments extends Component {
     const { users, isLoading } = this.props;
     return (
       <Fragment>
-        <div className="readiness-header">
+        <div className="readiness-header travel-readiness-header ">
           <PageHeader
             title="TRAVEL READINESS"
           />

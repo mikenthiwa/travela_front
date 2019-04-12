@@ -7,11 +7,9 @@
 .side-drawer .left-sidebar {
 
   &__fixed_wrapper {
-    top: 65px;
     width: 100%;
-    @media (max-width: 1178px) {
-     top: 140px; 
-    }
+    top: 140px;
+    height: calc(100vh - 140px);
   }
 }
 
@@ -31,21 +29,24 @@
     width: 16.666667%;
     height: 100vh;
 
-    @media (max-width: 1178px)  {
+    @media (min-width: 1178px)  {
       background: #f8f8f8;
       z-index: 10;
     }
   }
-  
+
   &__scrollable_wrapper {
     overflow-y: scroll;
     height: 100%;
     position: relative;
     top: 108px;
     min-width: 200px;
-    @media (max-width: 1178px) {
-      top: 0px; 
-     }   
+
+    @media (max-width: 1178px)  {
+      top: 0;
+      min-width: auto;
+      overflow-x: hidden;
+    }
   }
 
   .logout-button {

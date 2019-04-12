@@ -134,6 +134,11 @@
       text-align: center;
       background-color: #3359DB;
       color: #F8F8F8;
+
+      @media (max-width: 370px) {
+        font-size: 12px;
+        width: 99px
+      }
     }
     &--inactive {
       span {
@@ -166,8 +171,12 @@
       border: 1px solid #D4D4D4;
       background-color: #F8F8F8;
       color: #999999;
-    }
 
+      @media (max-width: 370px) {
+        font-size: 12px;
+        width: 99px
+      }
+    }
   }
 
   #actionButton {

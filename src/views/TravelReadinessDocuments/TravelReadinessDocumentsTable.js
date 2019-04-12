@@ -10,8 +10,8 @@ export class UserReadiness extends Component {
     const { name, userId, department, passportsCount, visasCount, othersCount } = this.props;
     return (
       <tr className="table__rows">
-        <td className="mdl-data-table__cell--non-numeric table__data readiness__cell-name">
-          <Link className="table__data--link" to={`/travel-readiness/${userId}`}>{name}</Link>
+        <td className="mdl-data-table__cell--non-numeric table__data readiness__cell-name freeze table__data-pointer">
+          <Link className="table__data--link button-outline table__id-pointer" to={`/travel-readiness/${userId}`}>{name}</Link>
         </td>
         <td className="mdl-data-table__cell--non-numeric table__data">{department}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">{passportsCount}</td>
@@ -25,7 +25,7 @@ export class UserReadiness extends Component {
 export const TableHead = () => (
   <thead>
     <tr>
-      <th className="mdl-data-table__cell--non-numeric table__head">Name</th>
+      <th className="mdl-data-table__cell--non-numeric table__head freeze request_id">Name</th>
       <th className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left">Department</th>
       <th className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left">No. of Passports</th>
       <th className="mdl-data-table__cell--non-numeric table__head">No. of Visas</th>
@@ -35,7 +35,7 @@ export const TableHead = () => (
 );
 
 export const TableBody = ({ users }) => (
-  <tbody className="table__body">
+  <tbody className="table__body  approvals_table_body">
     {
       users.map(user => {
         const visasCount = user.travelDocuments.filter(document => document.type === 'visa').length;
