@@ -169,14 +169,6 @@ form.new-request {
     line-height: 23px;
     margin: 60px 0px 0px 0px;
   }
-  .main {
-    height: 400px;
-    width: 1080px;
-    border: 1px solid #e4e4e4;
-    border-radius: 2px;
-    background-color: #ffffff;
-    margin: 10px 60px 0px 0px;
-  }
   .main--user_profile {
     width: 550px;
     padding-left: 20px;
@@ -407,9 +399,9 @@ form.new-request {
         position: absolute;
         top:49px;
         right: 7px;
-        height: 15px;		
-        font-family: "DIN Pro";	
-        font-size: 12px;	
+        height: 15px;
+        font-family: "DIN Pro";
+        font-size: 12px;
         line-height: 15px;
     }
 }
@@ -454,24 +446,24 @@ form.new-request {
   justify-content: space-between;
 }
 .travel-checklist-line {
-  box-sizing: border-box;	
-  height: 1px;	
-  width: 100%;	
+  box-sizing: border-box;
+  height: 1px;
+  width: 100%;
   border: 1px solid #E4E4E4;
   margin-left: 30px
 }
 .pending-approvals-line {
-  box-sizing: border-box;	
-  height: 1px;	
-  width: 100%;	
+  box-sizing: border-box;
+  height: 1px;
+  width: 100%;
   border: 1px solid #E4E4E4;
   margin-left: 30px
 }
 .travel-checklist-rectangle {
   height: 353px;
   width: 594px;
-  border: 1px solid #E4E4E4;	
-  border-radius: 6px;	
+  border: 1px solid #E4E4E4;
+  border-radius: 6px;
   background-color: #FFFFFF;
   overflow-y: scroll
 }
@@ -489,39 +481,39 @@ form.new-request {
   height: 353px;
   width: 394px;
   margin-left: 9px;
-  border: 1px solid #E4E4E4;	
-  border-radius: 6px;	
+  border: 1px solid #E4E4E4;
+  border-radius: 6px;
   background-color: #FFFFFF;
   overflow-y: scroll
 }
-.travel-checklist-text {	
-  height: 14px;	
-  color: #4F4F4F;	
-  font-family: "DIN Pro";	
-  font-size: 14px;	
-  line-height: 18px;	
+.travel-checklist-text {
+  height: 14px;
+  color: #4F4F4F;
+  font-family: "DIN Pro";
+  font-size: 14px;
+  line-height: 18px;
   margin: 20px;
   text-align: center;
 }
 
-.travel-checklist-loc-title {	
-  height: 14px;	
-  width: 243px;	
-  color: #4F4F4F;	
-  font-family: "DIN Pro";	
-  font-size: 14px;	
+.travel-checklist-loc-title {
+  height: 14px;
+  width: 243px;
+  color: #4F4F4F;
+  font-family: "DIN Pro";
+  font-size: 14px;
   line-height: 18px;
   text-align: center;
   margin: 22px 176.5px 13px 174.5px
 }
 
-.pending-approvals-text {	
-  height: 18px;	
-  width: 226px;	
-  color: #4F4F4F;	
-  font-family: "DIN Pro";	
-  font-size: 14px;	
-  line-height: 18px;	
+.pending-approvals-text {
+  height: 18px;
+  width: 226px;
+  color: #4F4F4F;
+  font-family: "DIN Pro";
+  font-size: 14px;
+  line-height: 18px;
   text-align: center;
   margin: 22px 176.5px 13px 84px
 }
@@ -531,13 +523,13 @@ form.new-request {
       margin-left: 45px
   }
 }
-.pending-approvals-block {	
-  height: 90px;	
-  width: 184px;	
-  color: #4A4A4A;	
-  font-family: "DIN Pro";	
-  font-size: 14px;	
-  font-weight: 500;	
+.pending-approvals-block {
+  height: 90px;
+  width: 184px;
+  color: #4A4A4A;
+  font-family: "DIN Pro";
+  font-size: 14px;
+  font-weight: 500;
   line-height: 18px;
   .approval-list-items {
     display: flex;
@@ -555,22 +547,22 @@ form.new-request {
     }
   }
 }
-.travel-checklist-items__group {	
-  height: 126px;	
+.travel-checklist-items__group {
+  height: 126px;
 }
-.travel-checklist-items {	
-  height: 126px;	
-  color: #4A4A4A;	
-  font-family: "DIN Pro";	
-  font-size: 14px;	
-  font-weight: 500;	
+.travel-checklist-items {
+  height: 126px;
+  color: #4A4A4A;
+  font-family: "DIN Pro";
+  font-size: 14px;
+  font-weight: 500;
   line-height: 18px;
   margin: 30px 21px 180px 67px
 }
 
-.oval {	
-  height: 7px;	
-  width: 7px;	
+.oval {
+  height: 7px;
+  width: 7px;
   background-color: #3359DB;
   border-radius: 50px;
 }
@@ -593,7 +585,7 @@ form.new-request {
         background-color: rgba(0,0,0,.5);
         -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
         box-shadow: 0 0 1px rgba(255,255,255,.5);
-      }      
+      }
     }
   }
 }

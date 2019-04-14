@@ -10,10 +10,14 @@ h1 {
 }
 
 .main {
-  width: 96vw;
-  margin: 2%;
   min-height: 70vh;
   padding: 0px;
+  height: 419px;
+  width: 100%;
+  border: 1px solid #e4e4e4;
+  border-radius: 2px;
+  background-color: #ffffff;
+  margin: 10px 60px 0px 0px;
   &--user_profile {
     width: 95%;
     margin: auto;
@@ -21,7 +25,6 @@ h1 {
     height: 100%;
     .new-profile {
       width: 95%;
-      height: 100%;
       margin: 0;
       .personal-details {
         height: 80%;
@@ -55,35 +58,134 @@ h1 {
     }
   }
 }
-
-@media screen and (min-width: 360px) {
-  .main {
-    &--user_profile {
-      .new-profile {
-        margin: auto 2%;
-      }
-    }
+@media screen and (max-width: 360px) {
+  h1 {
+    margin-left: 0px;
+    padding-bottom: 10px;
   }
-}
-
-@media screen and (min-width: 700px) {
   .main {
-    min-height: 0px;
-    width: 96vw;
-    margin: 2%;
-    height: 450px;
+    margin: 0 !important;
     padding: 0px;
+    margin: 0 !important;
+    height: auto;
+    padding-bottom: 25px;
     &--user_profile {
-      width: 95%;
-      margin: auto;
       padding: 0px;
+      margin: auto;
       height: 100%;
       .new-profile {
         width: 95%;
         margin: auto 2%;
         .personal-details {
           .legend {
+            display: flex;
             width: 100%;
+            .required-field {
+              margin: 0;
+            }
+          }
+          .input-group.profile-input {
+            width: 280px;
+            border: 0px solid;
+            margin-top: 30px;
+            height: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+          }
+          .no-disable:last-child{
+            width: 98%;
+          }
+        }
+
+        .submit-area {
+          margin: 0px 0;
+          width: 100%;
+        }
+        input{
+          width: 268px;
+        }
+        .input {
+          background-color: transparent;
+          button{
+          margin: 0px;
+          width: 135px;
+
+        }}
+        .required-field {
+          margin-right: 7% !important;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 361px) and  (max-width: 700px) {
+  h1 {
+    margin-left: 0px;
+    padding-bottom: 10px;
+  }
+  .main {
+    height: auto;
+    padding-bottom: 25px;
+   height: auto;
+    &--user_profile {
+      .new-profile {
+        margin: auto 2%;
+
+         .submit-area{
+           margin: 0;
+         }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 361px) and  (max-width: 694px) {
+  h1 {
+    margin-left: 0px;
+    padding-bottom: 10px;
+  }
+  .main {
+    height: auto;
+    padding-bottom: 25px;
+    height: auto;
+    &--user_profile {
+      .new-profile {
+        margin: auto 2%;
+
+         .submit-area{
+           margin: 0;
+           padding-bottom: 10px;
+         }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 700px) {
+  h1 {
+    margin-left: 0px;
+    padding-bottom: 10px;
+  }
+  .main {
+    min-height: 0px;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0px;
+    height: auto;
+    padding-bottom: 25px;
+    &--user_profile {
+      width: 100%;
+      padding: 6px;
+      height: 100%;
+      .new-profile {
+        width: 95%;
+        margin: auto 2%;
+        .personal-details {
+          height: 80%;
+          .legend {
+            width: 90%;
             height: 40px;
             .required-field {
               margin: 0;
@@ -99,57 +201,33 @@ h1 {
             flex-wrap: wrap;
             justify-content: space-between;
           }
+
         }
         .submit-area {
           margin: 20px 0;
           width: 100%;
           justify-content: flex-start;
         }
+        .navbar__search-size {
+          margin-right: -48px !important;
+      }
       }
     }
   }
 }
 
-@media screen and (min-width: 1020px) {
-  .main {
-    width: 100%;
-    margin: 2% 0%;
-    &--user_profile {
-      padding: 0px;
-      height: 100%;
-      .new-profile {
-        width: 95%;
-        margin: auto 2%;
-        .personal-details {
-          .legend {
-            display: flex;
-            width: 100%;
-            .required-field {
-              margin: 0;
-            }
-          }
-          .input-group.profile-input {
-            width: 700px;
-            margin-top: 30px;
-            overflow-y: visible;
-          }
-        }
-        .submit-area {
-          margin: 20px 0;
-          width: 100%;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1024px) {
   h1 {
     margin-left: 0px;
-  }
+    padding-bottom: 10px;
 
+  }
   .main {
+    margin: 0 !important;
     padding: 0px;
+    margin: 0 !important;
+    padding-bottom: 25px;
+    height: 373px;
     &--user_profile {
       padding: 0px;
       margin: auto;
