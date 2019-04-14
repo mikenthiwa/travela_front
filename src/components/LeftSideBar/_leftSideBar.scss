@@ -21,9 +21,9 @@
   width: 100%;
   height: 100vh;
   font-family: 'DIN Pro';
-  border-right: 1px solid #E4E4E4;
 
   &__fixed_wrapper {
+    border-right: 1px solid #E4E4E4;
     overflow-y: scroll;
     position: fixed;
     width: 16.666667%;

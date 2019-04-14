@@ -131,10 +131,10 @@ export class UserTravelReadinessDetailsTable extends Component {
             {passportNumber}
           </span>
         </td>
-        <td className="mdl-data-table__cell--non-numeric table__data special">{dateOfBirth}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data special">{dateOfIssue}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data">{dateOfBirth}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data">{dateOfIssue}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">{placeOfIssue}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data special">{expiryDate}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data">{expiryDate}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">{attachments}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">
           <span className={status.toLowerCase()}>{status}</span>
@@ -178,9 +178,9 @@ export class UserTravelReadinessDetailsTable extends Component {
           </span>
         </td>
         <td className="mdl-data-table__cell--non-numeric table__data">{entryType}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data special">{visaType}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data special">{dateOfIssue}</td>
-        <td className="mdl-data-table__cell--non-numeric table__data special">{expiryDate}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data">{visaType}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data">{dateOfIssue}</td>
+        <td className="mdl-data-table__cell--non-numeric table__data">{expiryDate}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">{attachments}</td>
         <td className="mdl-data-table__cell--non-numeric table__data">
           <span className={status.toLowerCase()}>{status}</span>

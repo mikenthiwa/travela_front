@@ -209,7 +209,7 @@ export class TravelReadinessDocuments extends Component {
           `Add${' ' + documentContext}`,
           false,
           () => this.handleModals(documentContext), null,
-          { id: 'actionButton' }, true)}
+          { id: 'actionButton', 'data-content':'add' }, true)}
       </div> ); }
 
   render() {

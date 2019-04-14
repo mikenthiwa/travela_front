@@ -96,7 +96,12 @@ $border-color: #e4e4e4;
   .table__container {
     width: 100%;
     overflow: scroll;
+    padding-bottom: 100px;
+    &::-webkit-scrollbar{
+      display: none;
+    }
   }
+
 }
 
 @media only screen and (max-width: 839px) {

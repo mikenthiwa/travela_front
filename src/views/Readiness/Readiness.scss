@@ -84,6 +84,10 @@
   justify-content: space-between;
   padding-left: 2px;
   max-width: 96%;
+  
+  @media only screen and (max-width: 1393px) {
+    position: relative;
+  }
   div {
     display: flex;
     width: 360px;
