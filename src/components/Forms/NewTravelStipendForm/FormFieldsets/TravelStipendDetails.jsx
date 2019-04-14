@@ -28,8 +28,8 @@ class TravelStipendFieldset extends Component {
     return (
       <div>
         <div>
-          <div className="input-group">
-            <div className="spaces">
+          <div className="input-group mdl-grid">
+            <div className="spaces mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
               {
                 renderInput('center', 'dropdown-select', {
                   choices: uniq(finalCenterChoices),
@@ -39,7 +39,7 @@ class TravelStipendFieldset extends Component {
                 })
               }
             </div>
-            <div className="spaces">
+            <div className="spaces mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
               {renderInput('stipend', 'number', {
                 size: '',
                 min: '1',

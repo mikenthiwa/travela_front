@@ -30,10 +30,8 @@
 
 .request-page {
   height: 100%;
-  overflow-x: auto;
   .full-height {
     height: 100%;
-    overflow-x: auto;
     .full-height {
         height: 100%;
         width: 100%;
@@ -44,11 +42,19 @@
     }
     &__table-view {
         height: 100%;
+        background-color: yellow;
         @media (max-width: 839px) {
             padding: 0 22px;
         }
         @media (max-width: 479px) {
             padding: 0 12px;
+        }
+
+        .rp-requests{
+            .rp-table{
+                overflow: auto;
+                background-color: aqua;
+            }
         }
     }
     &__right-side-bar {

@@ -12,45 +12,9 @@ form.new-request {
         width: 100%;
         display: flex;
         justify-content: flex-start;
-        @media (max-width: 1405px) {
-          width: 1000px;
-        }
-        @media (max-width: 1320px) {
-          width: 1000px;
-        }
-        @media (max-width: 1270px) {
-          width: 950px;
-        }
-        @media (max-width: 1220px) {
-          width: 900px;
-        }
-        @media (max-width: 1150px) {
-          width: 850px;
-        }
-        @media (max-width: 1120px) {
-          width: 800px;
-        }
-        @media (max-width: 1024px) {
-          width: 700px;
-        }
-        @media (max-width: 916px) {
-          width: 600px;
-        }
-        @media (max-width: 788px) {
-          width: 500px;
-        }
-        @media (max-width: 668px) {
-          width: 400px;
-        }
-        @media (max-width: 540px) {
-          width: 300px;
-        }
-        @media (max-width: 420px) {
-          width: 200px;
-        }
       }
       .spaces {
-        margin-right: 25px;
+        margin-right: 5px;
         @media (max-width: 450px) {
           margin-right: 0;
           width: 100%;
@@ -91,10 +55,8 @@ form.new-request {
         background-color: inherit;
         margin: 7px 0px 20px 0px;
         color: gray;
-        width: 100%;
         &.multi {
           border-left: 10px solid rgb(255, 255, 255);
-          width: 98.5%;
           margin-right: 15px;
         }
       }
@@ -107,6 +69,15 @@ form.new-request {
         box-sizing: border-box;
         font-size: 14px;
         line-height: 18px;
+       
+        @media(max-width: 479px){
+          width: 80%;
+        }
+
+        @media(max-width: 444px){
+          width: 130%;
+        }
+      
         .travel__duration{
             display: flex;
             -ms-flex-wrap: wrap;
@@ -116,6 +87,11 @@ form.new-request {
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
         }
+
+        @media(max-width: 90%){
+          width: 90%;
+        }
+       
       }
 
       .travel-to {
@@ -143,14 +119,12 @@ form.new-request {
 
     .your-manager {
       input {
-        width: 260px;
+        width: 100%;
       }
-
-      margin-right: 10px;
     }
 
     .user-location {
-      width: 250px;
+      width: 100%;
 
       .select-dropdown {
         margin-right: 10px;
@@ -177,45 +151,12 @@ form.new-request {
 
   .add-multi-trip-area{
     height: 50px;
-    width: 98.5%;
+    width: 50%;
     background-color: #FFFFFF;
     outline: none;
     margin-bottom: 20px;
-    @media (max-width: 1405px) {
-      width: 1000px;
-    }
-    @media (max-width: 1320px) {
-      width: 1000px;
-    }
-    @media (max-width: 1270px) {
-      width: 950px;
-    }
-    @media (max-width: 1220px) {
-      width: 900px;
-    }
-    @media (max-width: 1150px) {
-      width: 850px;
-    }
-    @media (max-width: 1120px) {
-      width: 800px;
-    }
-    @media (max-width: 1024px) {
-      width: 700px;
-    }
-    @media (max-width: 916px) {
-      width: 600px;
-    }
-    @media (max-width: 788px) {
-      width: 500px;
-    }
-    @media (max-width: 668px) {
-      width: 400px;
-    }
-    @media (max-width: 540px) {
-      width: 300px;
-    }
-    @media (max-width: 420px) {
-      width: 200px;
+    @media(max-width: 395px){
+      width: 100%;
     }
   }
   .another-trip{
@@ -243,6 +184,12 @@ form.new-request {
     margin-top: 1px;
     outline: none;
     cursor: pointer;
+    @media(max-width: 479px){
+      margin-left: 70%;
+    }
+    @media(max-width: 450px){
+      margin-left: 100%;
+    }
   }
   .travel-input-area {
     display: flex;
@@ -273,15 +220,20 @@ form.new-request {
   }
 
   .personal-rectangle {
+    -webkit-box-shadow: 0 0 0 1px #e4e4e4;
     box-shadow: 0 0 0 1px #e4e4e4;
     border: 0.2px solid #e4e4e4;
     border-radius: 9px;
     background-color: #ffffff;
     margin: 35px 0px 20px 0px;
     color: gray;
-    padding-left: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding-left: 30px;
     padding-top: 43px;
-    padding-right: 89px;
+    padding-right: 30px;
+   
   }
   .trip__tab-body{
     box-shadow: 0 0 0 1px #e4e4e4;
@@ -290,21 +242,25 @@ form.new-request {
     background-color: #ffffff;
     margin: 35px 0px 20px 0px !important;
     color: gray;
-    padding: 18px 60px 0px 50px;
+    padding: 18px 0px 0px 10px;
     .submit__area-border {
       border-top: 1px solid #DFE3E8;
       .submit-area {
         height: inherit;
         justify-content:flex-end;
-        width: 100%!important;
+        width: 90% !important;
         justify-content: space-between;
         margin-top: 10px;
+        flex-direction: column-reverse;
         button:first-child{
           display:none;
         }
+        .bg-btn {
+          align-self: flex-end;
+        }
         .submit-area__comment {
           flex:0,0, 50%;
-          width: 46%;
+          width: 100%;
           padding: 20px 0px 20px 0px;
           .comments-box{
             padding: 20px 0px 0px 0px;
@@ -335,6 +291,11 @@ form.new-request {
               color: white;
               cursor: pointer;
             }
+            @media(max-width: 363px){
+              .editor__btn-size {
+                margin-top: 100px;
+              }
+            }
           }
           .comment-area__title {
             color: #385BD3;
@@ -345,19 +306,27 @@ form.new-request {
             }
           }
         }
+        @media(max-width: 469px){
+        button:not(:last-child) {
+          margin-right: 0px;
+        }
+        }
       }
     }
   }
   .request-submit-area {
     align-content: center;
     margin-bottom: 20px;
-    width: 79%;
+    width: 60%;
     .bg-btn--active {
-      margin-left: 111%;
+      margin-left: 150%;
     }
   }
   .width-91{
     width: 91.5%;
+    .new-request {
+      margin-right: -4%;
+    }
   }
   .trip__detail-row{
     padding: 0;
@@ -373,8 +342,10 @@ form.new-request {
     justify-content: flex-start;
   }
   .trip__detail-col{
-    flex:0,0, 50%;
-    width: 50%;
+    margin-right: 17%;
+    @media(max-width: 880px){
+      margin-right: 18%;
+    }
   }
 .reasons__dropdown{
     .select-menu{
@@ -430,7 +401,21 @@ form.new-request {
   width: 319px;
   border: 1px solid #3359DB;
   margin-left: 53px;
-  margin-top: -8px
+  margin-top: -8px;
+
+  @media(max-width: 479px){
+    width: 450%;
+  }
+  @media(max-width: 438px){
+    width: 400%;
+  }
+  @media(max-width: 390px){
+    width: 300%;
+  }
+  @media(max-width: 334px){
+    width: 250%;
+  }
+
 }
 .request-submit-area button:disabled {
   background-color: rgba(51, 89, 219, 0.3);
@@ -461,11 +446,11 @@ form.new-request {
 }
 .travel-checklist-rectangle {
   height: 353px;
-  width: 594px;
-  border: 1px solid #E4E4E4;
-  border-radius: 6px;
+  border: 1px solid #E4E4E4;	
+  border-radius: 6px;	
   background-color: #FFFFFF;
-  overflow-y: scroll
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .travel-checklist-rectangle::-webkit-scrollbar {
   -webkit-appearance: none;
@@ -479,43 +464,37 @@ form.new-request {
   }
 .pending-approvals-rectangle {
   height: 353px;
-  width: 394px;
   margin-left: 9px;
   border: 1px solid #E4E4E4;
   border-radius: 6px;
   background-color: #FFFFFF;
-  overflow-y: scroll
 }
-.travel-checklist-text {
-  height: 14px;
-  color: #4F4F4F;
-  font-family: "DIN Pro";
-  font-size: 14px;
-  line-height: 18px;
+.travel-checklist-text {	
+  color: #4F4F4F;	
+  font-family: "DIN Pro";	
+  font-size: 14px;	
+  line-height: 18px;	
   margin: 20px;
   text-align: center;
 }
 
-.travel-checklist-loc-title {
-  height: 14px;
-  width: 243px;
-  color: #4F4F4F;
-  font-family: "DIN Pro";
-  font-size: 14px;
+.travel-checklist-loc-title {	
+  height: 14px;	
+  color: #4F4F4F;	
+  font-family: "DIN Pro";	
+  font-size: 14px;	
   line-height: 18px;
   text-align: center;
-  margin: 22px 176.5px 13px 174.5px
 }
 
-.pending-approvals-text {
-  height: 18px;
-  width: 226px;
-  color: #4F4F4F;
-  font-family: "DIN Pro";
-  font-size: 14px;
-  line-height: 18px;
+.pending-approvals-text {	
+  height: 18px;	
+  color: #4F4F4F;	
+  font-family: "DIN Pro";	
+  font-size: 14px;	
+  line-height: 18px;	
   text-align: center;
-  margin: 22px 176.5px 13px 84px
+  margin-bottom: 10px;
 }
 .travel-checklist__submit-area  {
   margin-top: -30px;
@@ -523,14 +502,15 @@ form.new-request {
       margin-left: 45px
   }
 }
-.pending-approvals-block {
-  height: 90px;
-  width: 184px;
-  color: #4A4A4A;
-  font-family: "DIN Pro";
-  font-size: 14px;
-  font-weight: 500;
+.pending-approvals-block {	
+  height: 90px;	
+  color: #4A4A4A;	
+  font-family: "DIN Pro";	
+  font-size: 14px;	
+  font-weight: 500;	
   line-height: 18px;
+  display: flex;
+  flex-direction: column;
   .approval-list-items {
     display: flex;
     flex-direction: column;
@@ -594,7 +574,7 @@ form.new-request {
   margin-bottom: 78px;
 }
 .editRequest-comment__toggle{
-  width: 59%;
+  width: 90%;
 }
 .editRequest__add-comment{
   margin-bottom: 33px;
@@ -604,4 +584,30 @@ form.new-request {
   img {
     margin-right: 10px;
   }
+}
+
+
+
+@media( max-width: 588px){
+  .request-submit-area {
+    .bg-btn--active {
+      margin-left: 130%;
+    }
+  }
+}
+
+@media( max-width: 588px){
+  .request-submit-area {
+    .bg-btn--active {
+      margin-left: 130%;
+    }
+  }
+}
+
+@media( max-width: 479px){
+  .personal-rectangle {
+    padding-left: 15px;
+    padding-right: 30px;
+  }
+
 }

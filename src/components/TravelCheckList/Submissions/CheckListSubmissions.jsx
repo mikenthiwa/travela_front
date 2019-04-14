@@ -30,7 +30,7 @@ class CheckListSubmissions extends Component {
     const travelTicket =
       checklist.length && checklist.find(item => item.name === 'Travel Ticket');
     return (
-      <div key={keyIndex} className="travelCheckList__destination">
+      <div key={keyIndex} className="travelCheckList__destination mdl-grid">
         <div className="destination">
           <div className="country-flag">
             <img className="flag" src={countryFlagUrl} alt="country flag" />

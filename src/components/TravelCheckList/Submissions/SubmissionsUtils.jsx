@@ -369,7 +369,7 @@ class SubmissionsUtils extends Component {
   renderDateTimeInput = ( label, name, tripId, value, min, max) => {
     const { errors } = this.state;
     return (
-      <div className="airline-name">
+      <div className="airline-name mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet">
         <div className={`form-input ${errors[name] ? 'error': ''}`}>
           <label htmlFor={name}>{label}</label>
           <DateInput
@@ -395,15 +395,13 @@ class SubmissionsUtils extends Component {
   renderTicketInput = (type, placeholder, label, name, tripId, value, min = undefined, max = undefined) => {
     const {errors} = this.state;
     return (
-      <div className="airline-name">
-        <div>
-          <span id="label">{label}</span>
-          <input
-            id={`${name}-${tripId}`} type={type} value={value || ''}
-            onChange={this.handleInputChange} onBlur={this.handleTicketSubmit}
-            name={name} placeholder={placeholder} className={name} min={min} max={max}
-          />
-        </div>
+      <div className="airline-name mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet">
+        <span id="label">{label}</span>
+        <input
+          id={`${name}-${tripId}`} type={type} value={value || ''}
+          onChange={this.handleInputChange} onBlur={this.handleTicketSubmit}
+          name={name} placeholder={placeholder} className={name} min={min} max={max}
+        />
         {
           errors[name] && <div className="submission-progress__error">{errors[name]}</div>
         }
@@ -422,7 +420,7 @@ class SubmissionsUtils extends Component {
       (
         <form className="ticket-submission" autoComplete="off">
           <div className="ticket-submission--ticket__fieldSet">
-            <div className="travel-submission-details__return" id="departure-fields">
+            <div className="travel-submission-details__return mdl-grid" id="departure-fields">
               {this.renderDateTimeInput('Departure Time',
                 'departureTime', tripId, departureTime,
                 this.formatDateTime(trip.departureDate),

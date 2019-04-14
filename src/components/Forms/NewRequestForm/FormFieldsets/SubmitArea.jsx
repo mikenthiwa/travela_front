@@ -186,7 +186,7 @@ class SubmitArea extends Component{
      
       return(
         <fieldset className={send==='Next' ?'submit__area-border': null}>
-          <div className={selection ? `submit-area submit-area--${selection}` : 'submit-area'}>
+          <div className={selection ? `submit-area submit-area--${selection} mdl-grid` : 'submit-area'}>
             { (send==='Next' && !editing) && this.commentSession() }
             { onCancel ? this.renderCancelButton(modalType, onEditCancel, onCancel) : (<div />)}
             { this.submitButton(

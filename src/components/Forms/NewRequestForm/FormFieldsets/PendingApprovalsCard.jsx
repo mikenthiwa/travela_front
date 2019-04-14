@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class PendingApprovals extends Component {
   render() {
     return (
-      <div>
+      <div className="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
         <div className="pending-approvals-rectangle">
           <div className="pending-approvals-text">
             <p> Pending Approvals For This Request</p>

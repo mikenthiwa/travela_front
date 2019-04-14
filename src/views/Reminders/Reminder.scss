@@ -271,8 +271,10 @@
     padding-left: 20px;
     width: 100%;
   }
-  button.delete-icon {
-    margin-top: -88px;
+  .reminders-fieldset {
+    .delete-icon {
+      margin-top: -88px;
+    }
   }
   .reminder-card {
     width: initial;

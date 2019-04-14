@@ -35,19 +35,21 @@ class PersonalDetailsFieldset extends Component {
       <div>
         {!collapse ? (
           <div className="personal-rectangle">
-            <div className={`input-group ${disabled}`}>
-              <div className="spaces">
+            <div className={`input-group mdl-grid ${disabled}`}>
+              <div className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
                 {renderInput('name', 'text', { 
                   className: 'request_dropdown', disabled: false })}
               </div>
-              <div className="spaces">
+              <div className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
                 {renderInput('gender', 'button-toggler', {disabled: false})}
               </div>
-              {renderInput('department', 'text', { disabled: false, size: value,
-                className: 'request_dropdown'})}
+              <div className="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
+                {renderInput('department', 'text', { disabled: false, size: value,
+                  className: 'request_dropdown'})}
+              </div>
             </div>
-            <div className={`input-group ${disabled}`}>
-              <div className="spaces">
+            <div className={`input-group mdl-grid ${disabled}`}>
+              <div className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
                 {renderInput('role', 'text', {
                   disabled: false,
                   size: value,
@@ -55,7 +57,7 @@ class PersonalDetailsFieldset extends Component {
                   id: 'your-role'
                 })}
               </div>
-              <div className="spaces">
+              <div className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
                 {renderInput('manager', 'filter-dropdown-select', {
                   choices: managerChoices,
                   size: value,
@@ -64,7 +66,7 @@ class PersonalDetailsFieldset extends Component {
                   onChange: onChangeManager
                 })}
               </div>
-              <div className="spaces">
+              <div className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
                 {
                   renderInput('location', 'text', {
                     disabled: false,

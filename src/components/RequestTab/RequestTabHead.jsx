@@ -19,7 +19,7 @@ class RequestTabHead extends Component {
     const completed = range.indexOf(id) !== -1? 'complete' : 'incomplete'; 
     const iconColor = range.indexOf(id) !== -1? '#10A36D' : '#3359DB'; 
     return(
-      <div key={id} className={`request__tab-card ${current} ${completed}`}>
+      <div key={id} className={`request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone ${current} ${completed}`}>
         <div className="mark">
           <img src={mark} alt="" />
         </div>
@@ -72,7 +72,7 @@ class RequestTabHead extends Component {
     return (
       <div>
         {this.renderTitle()}
-        <div className="request__tab">
+        <div className="request__tab mdl-grid">
           {steps && steps.map(step => this.renderTab(step, currentTab, step.icon))}
         </div>
       </div>

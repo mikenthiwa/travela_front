@@ -89,7 +89,7 @@ class TravelCheckListPage extends Component{
       'Travel Team will review your document and advise accordingly' 
       : 'Complete the checklist to continue';
     return (
-      <div className="travelCheckList__col-5">
+      <div className="travelCheckList__col-5 mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--12-col-phone ">
         <Fragment>
           <div className={`travelCheckList--card ${checklistCardStyle}`}>
             <div className="travelCheckList--card__head">
@@ -141,9 +141,8 @@ class TravelCheckListPage extends Component{
     } = this.props;
     return (
       <div className="travelCheck-list">
-
-        <div className="travelCheckList__row">
-          <div className="travelCheckList__col-7">
+        <div className="travelCheckList__row mdl-grid">
+          <div className="travelCheckList__col-7 mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--12-col-phone">
             <div className="travelCheckList--card">
               <div className="travelCheckList--card__head">
               These are the checklist items required to be submitted for this trip
@@ -152,10 +151,7 @@ class TravelCheckListPage extends Component{
             </div>
           </div>
           { this.renderReadinessProgressBar(percentageCompleted) }
-        
         </div>
-       
-        
       </div>
       
     );
