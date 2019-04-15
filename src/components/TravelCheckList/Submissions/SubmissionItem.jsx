@@ -260,6 +260,10 @@ class SubmissionItem extends Component {
       ? 'ticketFieldset'
       : utilsType;
     const trip = request.trips.find(trip => trip.id === tripId);
+    let hasValidSubmission = true;
+    if (submissionText && typeof submissionText === 'object'){
+      hasValidSubmission = false;
+    }
     return (
       <Fragment>
         <SubmissionsUtils
@@ -272,7 +276,7 @@ class SubmissionItem extends Component {
           uploadedFileName={uploadedFileName || fileName} uploadProcess={type}
           itemsToCheck={itemsToCheck} handleInputChange={this.handleInputChange}
           handleTextAreaSubmit={this.handleTextAreaSubmit} tripType={tripType}
-          handleTicketSubmit={this.handleTicketSubmit} submissionText={submissionText}
+          handleTicketSubmit={this.handleTicketSubmit} submissionText={hasValidSubmission ? submissionText : ''}
           departureTime={departureTime} setUploadedFileName={this.setUploadedFileName}
           returnDepartureTime={returnDepartureTime} returnTime={returnTime}
           ticketNumber={ticketNumber} returnTicketNumber={returnTicketNumber}
