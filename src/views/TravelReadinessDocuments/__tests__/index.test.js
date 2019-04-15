@@ -33,7 +33,8 @@ describe('TravelReadinessDocuments', () => {
   const props = {
     users,
     location: {
-      search: 'successs'
+      search: 'successs',
+      pathname: '/trip-planner/travel-readiness'
     },
     history: {
       push: jest.fn(),
@@ -67,7 +68,7 @@ describe('TravelReadinessDocuments', () => {
     travelReadinessDocuments.find('#next-button').simulate('click');
     expect(onPageChange).toHaveBeenCalledWith(2);
     expect(props.history.push)
-      .toHaveBeenCalledWith('/trip-planner/travel-readiness?page=2');
+      .toHaveBeenCalledWith('/trip-planner/travel-readiness?page=2&withDocuments=false');
   });
 
   it('should not display pagination component when there\'s no travel readiness data', () => {
@@ -96,5 +97,32 @@ describe('TravelReadinessDocuments', () => {
     );
     const pagination = wrapper.find('Pagination');   
     expect(pagination.length).toBe(1);
+  });
+
+  it('should render Travel Readiness Buttons', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <BrowserRouter>
+          <TravelReadinessDocuments {...props} />
+        </BrowserRouter>
+      </Provider>
+    );
+    const TravelReadinessButtons = wrapper.find('TravelReadinessButtons');
+    expect(TravelReadinessButtons.length).toBe(1);
+  });
+  it('should call filter filterListOnClick function on click', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <BrowserRouter>
+          <TravelReadinessDocuments {...props} />
+        </BrowserRouter>
+      </Provider>
+    );
+    const travelReadinessDocuments = wrapper.find('TravelReadinessDocuments');
+    const filterListOnClick = jest.spyOn(travelReadinessDocuments.instance(), 'filterListOnClick');
+    wrapper.instance().forceUpdate();
+    const allButton = wrapper.find('.btn--active');
+    allButton.simulate('click');
+    expect(filterListOnClick).toHaveBeenCalledTimes(1);
   });
 });

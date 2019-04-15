@@ -1,0 +1,41 @@
+$primary-color: #3359DB;
+$white-color: #FFF;
+
+.travel-readiness-buttons {
+    width: auto;
+    display: flex;
+    height: 36px;
+    align-items: center;
+    clear:both;
+    position: relative;
+    top: 50px;
+    margin-bottom: 60px;
+
+        .btn {
+            height: 36px;
+            width: auto;
+            border: 1px solid #D4D4D4;
+            border-radius: 1px;
+            background-color: #F8F8F8;
+            color: #999999;
+            font-family: "DIN Pro";
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 14px;
+            margin-right: 10px;
+            padding: 9px 21px;
+            cursor: pointer;
+            outline:none !important;
+
+            &--active {
+                border: 1px solid $primary-color;
+                border-radius: 1px;
+                background-color: $primary-color;
+                color: $white-color;
+            }
+
+            &:hover {
+                border-color: $primary-color;
+            }
+        }
+}
