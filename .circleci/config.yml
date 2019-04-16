@@ -139,7 +139,6 @@ workflows:
           requires:
             - checkout_code
       - deployment:
-          type: approval
           requires:
             - checkout_code
             - check_vulnerabilities
