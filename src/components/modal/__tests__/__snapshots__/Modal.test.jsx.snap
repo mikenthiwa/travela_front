@@ -27,7 +27,7 @@ exports[`<Modal /> renders correctly 1`] = `
           className="modal-title-text"
         >
           <div
-            className="modal-title"
+            className="modal-title modal-title-word"
           >
             test modal
           </div>

@@ -5,10 +5,10 @@ exports[`TravelChecklist Component should render the component 1`] = `
   className="travelCheck-list"
 >
   <div
-    className="travelCheckList__row"
+    className="travelCheckList__row mdl-grid"
   >
     <div
-      className="travelCheckList__col-7"
+      className="travelCheckList__col-7 mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--12-col-phone"
     >
       <div
         className="travelCheckList--card"
@@ -21,7 +21,7 @@ exports[`TravelChecklist Component should render the component 1`] = `
       </div>
     </div>
     <div
-      className="travelCheckList__col-5"
+      className="travelCheckList__col-5 mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--12-col-phone "
     >
       <div
         className="travelCheckList--card travelCheckList--card__sticky"

@@ -2,7 +2,7 @@
 
 exports[`Render CommentBox component should match snapshot 1`] = `
 <div
-  className="editor__editor-form"
+  className="editor__editor-form mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
 >
   <Quill
     className="quill-contents"

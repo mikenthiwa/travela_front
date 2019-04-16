@@ -7,26 +7,26 @@ exports[`<TravelStipendFieldset /> should match snapshot 1`] = `
   <div>
     <div>
       <div
-        className="input-group"
+        className="input-group mdl-grid"
       >
         <div
-          className="spaces"
+          className="spaces mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
         >
           <Input
             autoComplete="off"
             choices={Array []}
             className="request{ uniq }dropdown stipend-location"
-            id="user-location"
-            label="Select Location"
+            label="Type the country"
             labelNote=""
             name="center"
             onChange={null}
+            readOnly={false}
             size=""
-            type="dropdown-select"
+            type="filter-dropdown-select"
           />
         </div>
         <div
-          className="spaces"
+          className="spaces mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
         >
           <Input
             autoComplete="off"

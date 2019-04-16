@@ -7,10 +7,10 @@ import './StipendDetails.scss';
 
 const StipendDetails = ({ travelStipends, isLoading, total }) => {
   return (
-    <div className={`${isLoading && 'stipend-container-with-loading'} stipend-container-block mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet`}> 
+    <div className={`${isLoading && 'stipend-container-with-loading'} stipend-container-block mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet`}>
       {isLoading
         ? <Preloader />
-        :  (
+        : (
           <Fragment>
             <div className="stipend-row header-tile">
               <div>Destination</div>
@@ -21,7 +21,6 @@ const StipendDetails = ({ travelStipends, isLoading, total }) => {
             {
               travelStipends.map((stipend) => StipendRow(stipend))
             }
-          
             <div className="total-stipend">
               <span className="total-title">Total</span>
               {total}

@@ -9,12 +9,12 @@ const StipendRow = ({
   subTotal,
   dailyRate,
   centerExists
-})  => {
+}) => {
   return (
     <div className="stipend-row single-trip" key={location}>
       <div className="item">
         {
-          travelStipendHelper.formatLocation(location)
+          location
         }
       </div>
       <div className="item">
@@ -29,7 +29,7 @@ const StipendRow = ({
           : 'N/A'
         }
       </div>
-    </div> 
+    </div>
   );
 };
 

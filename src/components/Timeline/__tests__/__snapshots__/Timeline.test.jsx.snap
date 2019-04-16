@@ -375,7 +375,7 @@ exports[`<Timeline /> renders correctly 1`] = `
           className="modal-title-text"
         >
           <div
-            className="modal-title"
+            className="modal-title modal-title-word"
           >
             Re-assign Room
           </div>
@@ -734,7 +734,7 @@ exports[`<Timeline /> renders the weekly view correctly 1`] = `
           className="modal-title-text"
         >
           <div
-            className="modal-title"
+            className="modal-title modal-title-word"
           >
             Re-assign Room
           </div>
@@ -1118,7 +1118,7 @@ exports[`<Timeline /> renders the year view correctly 1`] = `
           className="modal-title-text"
         >
           <div
-            className="modal-title"
+            className="modal-title modal-title-word"
           >
             Re-assign Room
           </div>

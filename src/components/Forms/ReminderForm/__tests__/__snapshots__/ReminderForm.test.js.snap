@@ -369,8 +369,15 @@ exports[`Reminder Form Create Reminder Form renders correctly 1`] = `
                 className="error"
               />
             </div>
+            <p
+              className="expiry-text-mobile"
+            >
+              To Expiry
+            </p>
           </div>
-          <p>
+          <p
+            className="expiry-text-desktop"
+          >
             To Expiry
           </p>
         </div>
@@ -703,8 +710,15 @@ exports[`Reminder Form Create Reminder Form renders correctly 1`] = `
                 className="error"
               />
             </div>
+            <p
+              className="expiry-text-mobile"
+            >
+              To Expiry
+            </p>
           </div>
-          <p>
+          <p
+            className="expiry-text-desktop"
+          >
             To Expiry
           </p>
           <button
@@ -1083,8 +1097,15 @@ exports[`Reminder Form Reminder Update Form renders correctly in edit mode 1`] =
                 className="error"
               />
             </div>
+            <p
+              className="expiry-text-mobile"
+            >
+              To Expiry
+            </p>
           </div>
-          <p>
+          <p
+            className="expiry-text-desktop"
+          >
             To Expiry
           </p>
         </div>
@@ -1363,8 +1384,15 @@ exports[`Reminder Form Reminder Update Form renders correctly in edit mode 1`] =
                 className="error"
               />
             </div>
+            <p
+              className="expiry-text-mobile"
+            >
+              To Expiry
+            </p>
           </div>
-          <p>
+          <p
+            className="expiry-text-desktop"
+          >
             To Expiry
           </p>
           <button

@@ -5,14 +5,14 @@ const trips = [
   {
     bedId: 3,
     departureDate: '2019-02-19',
-    destination: 'Nairobi, Kenya',
+    destination: 'Nairobi,Kenya',
     origin: 'Lagos, Nigeria',
     returnDate: '2019-02-28'
   },
   {
     bedId: 3,
     departureDate: '2019-02-28',
-    destination: 'Kampala, Uganda',
+    destination: 'Kampala,Uganda',
     origin: 'Nairobi, Kenya',
     returnDate: '2019-03-28'
   },
@@ -68,7 +68,7 @@ const checklistItems = [
 const nonAndelanCenterTrip = {
   bedId: 3,
   departureDate: '2019-03-29',
-  destination: 'UK, London',
+  destination: 'London,UK',
   origin: 'Kampala, Uganda',
 };
 
@@ -96,7 +96,7 @@ const stipends = [
     }
   },
   {
-    'id': 2,
+    'id': 3,
     'amount': 100,
     'creator': {
       'fullName': 'Ugwueze',
@@ -126,7 +126,7 @@ describe('Request Travel Stipend', () => {
           'centerExists': true,
           'dailyRate': 100,
           'duration': 9,
-          'location': 'Nairobi, Kenya',
+          'location': 'Kenya',
           'subTotal': 900
         }
       ]
@@ -161,14 +161,14 @@ describe('Request Travel Stipend', () => {
           centerExists: true,
           dailyRate: 100,
           'duration': 9,
-          'location': 'Nairobi, Kenya',
+          'location': 'Kenya',
           'subTotal': 900
         },
         {
           'centerExists': true,
           'dailyRate': 100,
           'duration': 1,
-          'location': 'Kampala, Uganda',
+          'location': 'Uganda',
           'subTotal': 100}
       ],
       'totalStipend': '$ 1000'
@@ -188,14 +188,14 @@ describe('Request Travel Stipend', () => {
           'centerExists': true,
           'dailyRate': 100,
           'duration': 9,
-          'location': 'Nairobi, Kenya',
+          'location': 'Kenya',
           'subTotal': 900
         },
         {
           'centerExists': true,
           'dailyRate': 100,
           'duration': 28,
-          'location': 'Kampala, Uganda',
+          'location': 'Uganda',
           'subTotal': 2800
         },
         {
@@ -253,3 +253,26 @@ describe('Request Travel Checklist', () => {
     expect(newChecklist).toMatchObject(newItems);
   });
 });
+
+describe('formatLocation', ()=> {
+  it('should return Nairobi(NBO) if Nairobi is passed to it', ()=>{
+    const  Nairobi = RequestUtils.formatLocation('Nairobi');
+    expect(Nairobi).toBe('Nairobi(NBO)');
+  });
+
+  it('should return Lagos(LOS)if Lagos is passed to it', ()=>{
+    const  Lagos = RequestUtils.formatLocation('Lagos');
+    expect(Lagos).toBe('Lagos(LOS)');
+  });
+
+   it('should return Kampala(KLA) if Kampala is passed to it', ()=>{
+    const  Kampala = RequestUtils.formatLocation('Kampala');
+    expect(Kampala).toBe('Kampala(KLA)');
+  });
+   it('should return Kigali(KGL) if Kigali is passed to it', ()=>{
+    const  Kigali = RequestUtils.formatLocation('Kigali');
+    expect(Kigali).toBe('Kigali(KGL)');
+  });
+
+  });
+

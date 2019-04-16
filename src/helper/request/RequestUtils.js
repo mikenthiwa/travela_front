@@ -2,21 +2,21 @@ import moment from 'moment';
 import _ from 'lodash';
 
 class RequestUtils {
-  static stipendData (stipends){
+  static stipendData(stipends) {
     return stipends.map(stipend => {
-      const { amount, center: { location }  } = stipend;
-      return  { location, amount };
+      const { amount, center: { location } } = stipend;
+      return { location, amount };
     });
   }
 
-  static calculateDuration (trip, tripType) {
+  static calculateDuration(trip, tripType) {
     /*
 
     condition to be applied for a one way
     request has not been decided, so we use 1 day as default
 
      */
-    if(tripType === 'oneWay') {
+    if (tripType === 'oneWay') {
       return 1;
     }
     const { departureDate, returnDate, } = trip;
@@ -26,31 +26,32 @@ class RequestUtils {
     return days === 0 ? 1 : days;
   }
 
-  static calculateSingleStipend (trip, stipends, tripType) {
+  static calculateSingleStipend(trip, stipends, tripType) {
     const stipend = [];
     const days = RequestUtils.calculateDuration(trip, tripType);
     const allStipend = RequestUtils.stipendData(stipends); // TODO
     const destinationArray = trip.destination.split(',');
-    const countryOfDestination = destinationArray.pop().trim();
+    const countryOfDestination = destinationArray[1].trim();
+
 
     allStipend.forEach((data, i) => {
-      if(data.location === countryOfDestination){
+      if (data.location === countryOfDestination) {
         const subTotal = data.amount * days;
         RequestUtils.total += subTotal;
         stipend.push({
           subTotal,
-          location: trip.destination,
+          location: data.location,
           dailyRate: data.amount,
           duration: days,
           centerExists: true,
         });
       } else {
         const isAndelaCenter = RequestUtils
-          .centerExists(allStipend, countryOfDestination);
-        if(!isAndelaCenter) {
+          .centerExists(allStipend, trip.destination);
+        if (!isAndelaCenter) {
           stipend.push({
             subTotal: 0,
-            location: destinationArray[0],
+            location: trip.destination.split(',')[1],
             dailyRate: 'N/A',
             duration: days,
             centerExists: false,
@@ -70,12 +71,12 @@ class RequestUtils {
 
   static getAllTripsStipend(trips, stipends, tripType) {
     let newTrips = trips;
-    if(trips.length > 1) {
+    if (trips.length > 1) {
       newTrips = trips.map((trip, i) => {
-        if(i + 1 === trips.length){
+        if (i + 1 === trips.length) {
           return {
             ...trip,
-            departureDate: trips[ i -1].returnDate,
+            departureDate: trips[i - 1].returnDate,
             returnDate: trip.departureDate
           };
         }
@@ -90,35 +91,36 @@ class RequestUtils {
       .map(stipend => stipend.subTotal)
       .reduce((previousStipend, nextStipend) => {
         return Math.abs(previousStipend) + Math.abs(nextStipend);
-      },0);
-    const total =totalStipend;
+      }, 0);
+    const total = totalStipend;
 
     return {
-      totalStipend:  total > 0 ? `$ ${total}`: 'N/A',
+      totalStipend: total > 0 ? `$ ${total}` : 'N/A',
       stipendSubTotals,
     };
   }
 
   static formatLocation(location) {
-    switch(location){
-    case 'Nairobi':
-      return 'Nairobi(NBO)';
-    case 'Lagos':
-      return 'Lagos(LOS)';
-    case 'Kampala':
-      return 'Kampala(KLA)';
-    case 'Kigali':
-      return 'Kigali(KGL)';
-    default:
-      return location;
+    /* eslint-disable */
+    switch (location) {
+      case 'Nairobi':
+        return 'Nairobi(NBO)';
+      case 'Lagos':
+        return 'Lagos(LOS)';
+      case 'Kampala':
+        return 'Kampala(KLA)';
+      case 'Kigali':
+        return 'Kigali(KGL)';
+      default:
+        return location;
     }
   }
 
-  static removeLocationChecklist (checklistItems, userData) {
+  static removeLocationChecklist(checklistItems, userData) {
     const newChecklist = [...checklistItems];
     newChecklist.map((checkItem, index) => {
-      if(checkItem.destinationName.includes(userData.location)) {
-        newChecklist[index].checklist.splice(0, newChecklist[index].checklist.length -1);
+      if (checkItem.destinationName.includes(userData.location)) {
+        newChecklist[index].checklist.splice(0, newChecklist[index].checklist.length - 1);
       }
     });
     return newChecklist;
@@ -143,7 +145,7 @@ class RequestUtils {
       if (checklistItems.length !== 0) {
         const checklists = checklistItems[0].checklist;
 
-        const defaultChecklists = checklists.filter(function(checklist) {
+        const defaultChecklists = checklists.filter(function (checklist) {
           return checklist.destinationName.includes('Default');
         });
 

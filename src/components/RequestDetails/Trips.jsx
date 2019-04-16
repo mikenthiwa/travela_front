@@ -8,14 +8,14 @@ export default ({ trips }) => trips.map((trip) => {
     destination, beds
   } = trip;
   const reason = RequestUtils.getTravelReason(trip);
-  const accommodation = accommodationType !== 'Residence' ? 
-    accommodationType : `${beds.bedName}, ${beds.rooms.roomName}, ${beds.rooms.guestHouses.houseName}`; 
+  const accommodation = accommodationType !== 'Residence' ?
+    accommodationType : `${beds.bedName}, ${beds.rooms.roomName}, ${beds.rooms.guestHouses.houseName}`;
   return (
     <div className="row" key={id}>
       <div className="partition">
         <p className="text--grey">Flight Route</p>
         <p className="text--black">
-          {`${origin.split(',')[0]}-${destination.split(',')[0]}`}
+          {`${origin.split(',')[1]}-${destination.split(',')[1]}`}
         </p>
       </div>
       <div className="partition">
