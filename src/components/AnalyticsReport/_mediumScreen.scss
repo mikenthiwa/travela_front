@@ -20,3 +20,11 @@
     }
   }
 }
+
+@media screen and (min-width: 481px) and (max-width: 520px){
+  .analyticsReport {
+  &__card {
+   padding: 23px 20px 23px 2px;
+  }
+}
+}

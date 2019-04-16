@@ -1,4 +1,4 @@
-@media screen and (min-width: 320px) and (max-width: 480px){
+@media screen and (min-width: 320px) and (max-width: 570px){
 .user {
   .toggle-btn {
     top: 15px;
@@ -11,6 +11,7 @@
 
   .flight {
     width: 100%;
+    min-width: 380px;
   }
 }
 }

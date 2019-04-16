@@ -69,7 +69,40 @@
       border: 1px solid #3359DB;
     }
   }
-}
+
+  .calendar{
+    top:76px;
+    .rdrDateRangePickerWrapper{
+      .rdrDefinedRangesWrapper{
+
+        @media (max-width: 951px){
+          font-size: xx-small;
+        }
+
+        @media (max-width: 520px){
+          width: 90px;
+        }
+
+        @media (max-width: 380px){
+          display: none;
+        }
+      }
+      .rdrCalendarWrapper{
+
+        @media (max-width: 951px){
+          font-size: xx-small;
+        }
+      }
+
+      .rdrMonths{
+        @media (max-width: 783px){
+          flex-direction: column;
+        }
+      }
+    }
+
+  }
+  }
 .title{
   font-family: "DIN Pro";
   font-size: 18px;

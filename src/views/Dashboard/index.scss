@@ -5,3 +5,13 @@ p.dashboard-component__error-text--style{
     color: red !important;
     text-align: center;
 }
+
+.request-page__table-view{
+  width: 99%;
+}
+
+@media (max-width: 1178px) and (min-width: 839px) {
+  #dashboard{
+    margin-right: 4%;
+  }
+}

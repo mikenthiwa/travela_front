@@ -1,27 +1,8 @@
 .analytics {
   margin-top: 85px;
-  display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 30px;
-}
-
-.analytics-card {
-  height: 225px;
-  padding: 0 30px 30px 30px;
-  font-size: 15px;
-  color: #4F4F4F;
-  line-height: 20px;
-  box-sizing: border-box;
-  font-family: "DIN Pro";
-  background-color: #FFFFFF;
-  width: 100% !important;
-  border-radius: 2px;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
-
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
 }
 
 @import 'smallScreens';

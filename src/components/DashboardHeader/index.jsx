@@ -61,7 +61,10 @@ export default class DashboardHeader extends PureComponent {
     const {isDropdownOpen, range} = this.state;
     return (
       <div className="DashboardHeader">
-        <h2 className="title">Dashboard</h2>
+        <div className="dashboard-mobile">
+          <h2 className="title">Dashboard</h2>
+          {this.renderButton(activeLocation, context.state.city)}
+        </div>
         <div className="actions">
           {this.renderButton(activeLocation, context.state.city)}
           {this.renderButton(activeCalendar, `${range.start} - ${range.end}`, this.showCalendar)}
