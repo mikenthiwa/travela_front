@@ -18,7 +18,7 @@ exports[`<RoleDetailsTable /> renders correctly 1`] = `
           <th
             className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left"
           >
-            Center
+            Centers
           </th>
           <th
             className="mdl-data-table__cell--non-numeric table__head table__head--last"
@@ -47,14 +47,17 @@ exports[`<RoleDetailsTable /> renders correctly 1`] = `
               }
             }
           >
+            1
             <span
-              className=""
+              className="tool__tip"
               style={
                 Object {
                   "left": "9%",
                 }
               }
-            />
+            >
+              Nairobi, Kenya, 
+            </span>
           </td>
           <td
             className="mdl-data-table__cell--non-numeric table__requests__status table__data delete"
@@ -64,6 +67,13 @@ exports[`<RoleDetailsTable /> renders correctly 1`] = `
               }
             }
           >
+            <span
+              id="editButton"
+              onClick={[Function]}
+              role="presentation"
+            >
+              Edit          
+            </span>
              
             <span
               id="deleteButton"

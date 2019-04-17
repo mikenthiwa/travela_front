@@ -21,6 +21,7 @@ Array [
             <div>
                 <button
                     className="action-btn btn-new-request"
+                    id="actionButton"
                     onClick={[Function]}
                     type="button"
                 >

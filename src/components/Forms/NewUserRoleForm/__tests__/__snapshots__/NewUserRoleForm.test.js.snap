@@ -29,6 +29,51 @@ exports[`<NewUserRoleForm /> <PersonalDetails /> renders correctly 1`] = `
         type="filter-dropdown-select"
       />
     </div>
+    <div>
+      <div
+        className="size_in"
+      >
+        <div
+          className="add_dept"
+        >
+          <Input
+            autoComplete="off"
+            choices={
+              Array [
+                Array [],
+              ]
+            }
+            className="department_dropdown"
+            label="Add Center"
+            labelNote=""
+            name="item"
+            onChange={null}
+            size=""
+            type="filter-dropdown-select"
+          />
+        </div>
+        <button
+          className="disable_button"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+    <div
+      className=""
+    >
+      <table
+        className="mdl-js-data-table table__requests"
+        style={
+          Object {
+            "backgroundColor": "white",
+          }
+        }
+      />
+    </div>
   </div>
 </fieldset>
 `;
@@ -111,6 +156,89 @@ exports[`<NewUserRoleForm /> renders correctly 1`] = `
             className="error"
           />
         </div>
+      </div>
+      <div>
+        <div
+          className="size_in"
+        >
+          <div
+            className="add_dept"
+          >
+            <div
+              className="form-input department_dropdown "
+            >
+              <label
+                htmlFor="item"
+              >
+                Add Center
+                <span
+                  style={
+                    Object {
+                      "color": "red",
+                    }
+                  }
+                >
+                   * 
+                </span>
+              </label>
+              <div
+                style={
+                  Object {
+                    "position": "relative",
+                  }
+                }
+              >
+                <div
+                  className="value"
+                  style={
+                    Object {
+                      "width": "",
+                    }
+                  }
+                >
+                  <input
+                    autoComplete="off"
+                    choices={
+                      Array [
+                        "Kigali, Rwanda",
+                      ]
+                    }
+                    className="occupationInput"
+                    label="Add Center"
+                    name="role"
+                    onChange={[Function]}
+                    size=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+              <span
+                className="error"
+              />
+            </div>
+          </div>
+          <button
+            className="disable_button"
+            disabled={true}
+            onClick={[Function]}
+            type="button"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+      <div
+        className=""
+      >
+        <table
+          className="mdl-js-data-table table__requests"
+          style={
+            Object {
+              "backgroundColor": "white",
+            }
+          }
+        />
       </div>
     </div>
   </fieldset>

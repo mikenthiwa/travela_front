@@ -13,6 +13,21 @@ const centersResponse = {
     location: 'Nairobi, Kenya'
   }]
 };
+
+const updateUserCenterResponse = {
+  success: true,
+  message: 'Centres updated successfully',
+  add: [
+    [
+      {
+        'userId': 1,
+        'roleId': 60000,
+        'createdAt': '2019-04-17T08:10:03.279Z',
+        'updatedAt': '2019-04-17T08:10:03.279Z'
+      }
+    ]
+  ]
+};
 describe('CentersAPI', () => {
   beforeEach(() => {
     moxios.install();
@@ -32,5 +47,21 @@ describe('CentersAPI', () => {
     expect(request.url).toEqual(`${baseUrl}/centers`);
     expect(request.config.method).toEqual('get');
     expect(response.data).toEqual(centersResponse);
+  });
+
+  it('should send a get request to center api to update the user center', async () => {
+    moxios.stubRequest(`${baseUrl}/center/user`, {
+      status: 200,
+      response: updateUserCenterResponse
+    });
+    const response = await CentersAPI.updateUserCenters({
+      email: 'tomato@andela.com',
+      roleName: 'Travel Team Member',
+      center: ['Lagos', 'New York']
+    });
+    const request = (moxios.requests.mostRecent());
+    expect(request.url).toEqual(`${baseUrl}/center/user`);
+    expect(request.config.method).toEqual('patch');
+    expect(response.data).toEqual(updateUserCenterResponse);
   });
 });

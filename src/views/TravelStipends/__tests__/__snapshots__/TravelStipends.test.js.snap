@@ -18,6 +18,7 @@ Array [
         <div>
             <button
                 className="action-btn btn-new-request"
+                id="actionButton"
                 onClick={[Function]}
                 type="button"
             >
@@ -30,9 +31,11 @@ Array [
   <div>
     <div>
         <div />
-        <div>
+        <div
+            className="stipend-list mdl-grid"
+        >
             <div
-                className="card"
+                className="card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--3-col-phone"
             >
                 <div
                     className="travel_stipend_menu"
@@ -91,7 +94,7 @@ Array [
                 </p>
             </div>
             <div
-                className="card"
+                className="card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--3-col-phone"
             >
                 <div
                     className="travel_stipend_menu"

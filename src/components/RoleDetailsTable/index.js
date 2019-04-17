@@ -47,7 +47,7 @@ export class RoleDetailsTable extends PureComponent {
     const { handleEditRole, deleteModalRoleId, deleteModalState, roleName } = this.props;
     const showTip = roleName === 'Budget Checker' ?
       roleUser.budgetCheckerDepartments.map((dept) => `${dept.name}, `) :
-      null;
+      roleUser.centers.map((centers) => `${centers.location}, `);
     return (
       <tr key={roleUser.id} className="table__row table__effects">
         <td
@@ -58,25 +58,19 @@ export class RoleDetailsTable extends PureComponent {
           {
             roleName === 'Budget Checker' ?
               roleUser.budgetCheckerDepartments.length :
-              roleUser.location
+              roleUser.centers.length
           }
-          <span className={roleName === 'Budget Checker' ? 'tool__tip' : ''} style={{ left: '9%' }}>{showTip}</span>
+          <span className={showTip.length  > 0  ? 'tool__tip' : ''} style={{ left: '9%' }}>{showTip}</span>
         </td>
         <td
           className="mdl-data-table__cell--non-numeric table__requests__status table__data delete"
           style={testColor}>
-          {
-            roleName === 'Budget Checker' ?
-              (
-                <span
-                  onClick={() => handleEditRole(roleUser)} id="editButton" role="presentation"
-                  onKeyDown={this.key}>
+          <span
+            onClick={() => handleEditRole(roleUser)} id="editButton" role="presentation"
+            onKeyDown={this.key}>
                   Edit
                   &ensp;  &ensp;  &ensp; &ensp;
-                </span>
-
-              ) : null
-          }
+          </span>
           &ensp;
           <span
             onClick={() => this.showDeleteModal(roleUser.id)}
@@ -114,7 +108,7 @@ export class RoleDetailsTable extends PureComponent {
         <th className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left">
           {
             roleName === 'Budget Checker' ? 'Department' :
-              'Center'
+              'Centers'
           }
         </th>
         <th className="mdl-data-table__cell--non-numeric table__head table__head--last">

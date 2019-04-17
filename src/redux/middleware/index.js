@@ -79,7 +79,7 @@ import {
   watchDownloadCalendarAnalytics
 } from './travelCalendarSaga';
 
-import { watchFetchCenters } from './centersSaga';
+import { watchFetchCenters, watchUpdateUserCenters } from './centersSaga';
 import { watchFetchAnalytics, watchdownloadAnalytics } from './analyticsSaga';
 import {
   watchFetchReadiness,
@@ -174,6 +174,7 @@ function* rootSaga() {
     watchDeleteChecklist(),
     watchRestoreChecklist(),
     watchFetchCenters(),
+    watchUpdateUserCenters(),
     watchFetchDeletedChecklistItems(),
     watchFetchAvailableRooms(),
     watchUpdateTripRoom(),
