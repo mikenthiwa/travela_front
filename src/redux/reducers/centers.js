@@ -2,6 +2,9 @@ import {
   FETCH_CENTERS,
   FETCH_CENTERS_SUCCESS,
   FETCH_CENTERS_FAILURE,
+  UPDATE_USER_CENTER,
+  UPDATE_USER_CENTER_SUCCESS,
+  UPDATE_USER_CENTER_FAILURE
 } from '../constants/actionTypes';
 
 const initialSate = {
@@ -20,6 +23,14 @@ const centers = (state = initialSate, action) => {
   case FETCH_CENTERS_FAILURE:
     return {
       ...state, isLoading: false, centersError: action.error };
+  case UPDATE_USER_CENTER:
+    return {...state, isLoading: true };
+  case UPDATE_USER_CENTER_SUCCESS:
+    return {
+      ...state, isLoading: false, centersUpdate: action.response };
+  case UPDATE_USER_CENTER_FAILURE:
+    return {
+      ...state, isLoading: false, centersUpdateError: action.error };
   default:
     return state;
   }

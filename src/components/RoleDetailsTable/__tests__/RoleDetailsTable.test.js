@@ -94,9 +94,9 @@ describe('<RoleDetailsTable />', () => {
       .text()).toEqual('Network error');
   });
 
-  it('does not render edit button for a role that is not budget checker', () => {
+  it('render edit button for a role that is not budget checker', () => {
     wrapper = shallow (<RoleDetailsTable {...props} />);
-    expect(wrapper.find('#editButton').length).toEqual(0);
+    expect(wrapper.find('#editButton').length).toEqual(1);
   });
 
   it('renders edit button for budget checker role', () => {

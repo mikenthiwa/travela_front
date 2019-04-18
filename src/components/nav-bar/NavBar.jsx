@@ -216,8 +216,7 @@ export class NavBar extends PureComponent {
             </div>
           </button>
           <div
-            className="navbar__search-size 
-                  mdl-cell--hide-desktop mdl-cell--hide-tablet" style={{display: `${showSearch}`}}>
+            className="navbar__onclick-search-size" style={{display: `${showSearch}`}}>
             <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} />
           </div>
         </header>

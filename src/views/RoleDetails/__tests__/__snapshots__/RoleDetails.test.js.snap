@@ -42,6 +42,7 @@ exports[`<RoleDetails /> renders correctly 1`] = `
       role="Travel team member"
       roleId="335498"
       updateBudgetChecker={[Function]}
+      updateUserCenter={[Function]}
       updatingRole={false}
       userDetail={Object {}}
     />

@@ -9,7 +9,8 @@
     }
   }
 
-  &__search input,
+  &__search input
+  ,
   &__search input:active,
   &__search input:hover,
   &__search input:focus {
@@ -25,7 +26,6 @@
       display: flex !important;
       align-items: center;
       justify-content: center;
-
       margin: 5px 0 10px !important;
     }
   }
@@ -48,6 +48,11 @@
     display: -moz-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
+
+    @media (max-width: 781px) {
+      width: 210px;
+    }
+    
   }
 
   /* Position search icon */
@@ -57,10 +62,11 @@
     height: 15.99px;
     width: 16.05px;
     margin-top: 15px;
-    @media (max-width: 320px){
-      position: absolute;
-     margin-left: -55px;
-     margin-top: 0px;
+    @media (max-width: 781px) {
+      left: 190px;
+    }
+    @media (max-width: 612px) {
+      display: none;
     }
   }
 
@@ -76,13 +82,9 @@
     font-size: 14px;
     height: 36px;
     width: 360px;
-    @media (max-width: 479px) {
-      width: auto !important;
-    }
-    
-    @media (max-width: 320px){
-      width: 95%;
-      margin: initial;
+
+    @media (max-width: 781px) {
+      font-size: xx-small;
     }
   }
 

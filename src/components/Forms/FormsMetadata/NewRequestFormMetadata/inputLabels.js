@@ -49,7 +49,7 @@ const inputLabels = {
   },
 
   bed: {
-    label: 'Accomodation Option'
+    label: 'Accommodation Option'
   },
 
   newBed: {

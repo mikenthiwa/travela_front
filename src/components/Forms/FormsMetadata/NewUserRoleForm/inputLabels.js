@@ -6,10 +6,10 @@ const inputLabels = {
     label: 'Role'
   },
   center: {
-    label: 'Center',
+    label: 'Add Center',
   },
-  department: {
-    label: 'Add Department'
+  item: {
+    label:  'Add'
   }
 };
 

@@ -16,8 +16,8 @@ import {
   showDeleteRoleModal,
   updateBudgetChecker,
 } from '../../redux/actionCreator/roleActions';
-import { fetchCenters } from '../../redux/actionCreator/centersActions';
-import { getAllUsersEmail, getAllDepartment } from '../../redux/actionCreator/userActions';
+import { fetchCenters, updateUserCenter } from '../../redux/actionCreator/centersActions';
+import { getAllUsersEmail, getAllDepartment  } from '../../redux/actionCreator/userActions';
 import './RoleDetails.scss';
 import NotFound from '../ErrorPages';
 import Utils from '../../helper/Utils';
@@ -54,11 +54,11 @@ export class RoleDetails extends Component {
   }
 
   handleEditRole = (user) => {
-    let { openModal, hideDeleteRoleModal, deleteModalState } = this.props;
+    let { openModal, hideDeleteRoleModal, deleteModalState, roleName } = this.props;
     deleteModalState === 'visible' && hideDeleteRoleModal();
     openModal(true, 'new model');
     this.setState({
-      headTitle: 'Edit Budget Checker Role',
+      headTitle: `Edit ${roleName} User`,
       userDetail: user
     });
   }
@@ -120,7 +120,7 @@ export class RoleDetails extends Component {
     const {
       error, closeModal, shouldOpen, modalType, isUpdating,
       roleName, fetchRoleUsers, fetchCenters, centers, getUsersEmail: allMails,
-      putRoleData, updateBudgetChecker, match, getAllUsersEmail, updatingRole, departments, getAllDepartment } = this.props;
+      putRoleData, updateBudgetChecker, match, getAllUsersEmail, updateUserCenter,updatingRole, departments, getAllDepartment} = this.props;
     const { headTitle, userDetail } = this.state;
     const { params: { roleId } } = match;
     const page = Utils.getCurrentPage(this);
@@ -152,6 +152,7 @@ export class RoleDetails extends Component {
           allMails={allMails}
           departments={departments}
           getAllDepartment={getAllDepartment}
+          updateUserCenter={updateUserCenter}
         />
       </Modal>
     );
@@ -238,6 +239,7 @@ RoleDetails.propTypes = {
   departments: PropTypes.array,
   getAllDepartment: PropTypes.func,
   isUpdating: PropTypes.bool,
+  updateUserCenter: PropTypes.func,
 };
 
 RoleDetails.defaultProps = {
@@ -252,7 +254,8 @@ RoleDetails.defaultProps = {
   getUsersEmail: [],
   meta: { currentPage: 1, pageCount: 0 },
   departments: [],
-  getAllDepartment: () => { }
+  getAllDepartment: () => { },
+  updateUserCenter:  () => { }
 
 };
 
@@ -268,6 +271,7 @@ const actionCreators = {
   getAllUsersEmail,
   getAllDepartment,
   updateBudgetChecker,
+  updateUserCenter
 };
 
 export default connect(

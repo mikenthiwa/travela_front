@@ -2,7 +2,7 @@
 
 exports[`TravelReadinessDocumentsTable renders TableBody 1`] = `
 <tbody
-  className="table__body"
+  className="table__body  approvals_table_body"
 >
   <UserReadiness
     department="Success"
@@ -128,7 +128,7 @@ exports[`TravelReadinessDocumentsTable renders TableHead 1`] = `
 <thead>
   <tr>
     <th
-      className="mdl-data-table__cell--non-numeric table__head"
+      className="mdl-data-table__cell--non-numeric table__head freeze request_id"
     >
       Name
     </th>
@@ -161,10 +161,10 @@ exports[`TravelReadinessDocumentsTable renders UserReadiness 1`] = `
   className="table__rows"
 >
   <td
-    className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+    className="mdl-data-table__cell--non-numeric table__data readiness__cell-name freeze table__data-pointer"
   >
     <Link
-      className="table__data--link"
+      className="table__data--link button-outline table__id-pointer"
       replace={false}
       to="/travel-readiness/xlkdsf"
     >
