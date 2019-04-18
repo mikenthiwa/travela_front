@@ -110,6 +110,12 @@ form .form-input {
         right: 15px;
         transition: transform 0.05s ease-out;
         transform-origin: center;
+        @media(max-width: 390px) {
+          margin-right: -11px;
+        }
+      }
+      @media(max-width: 340px) {
+        font-size: 11px;
       }
       @media(max-width: 450px) {
         width: 100% !important;

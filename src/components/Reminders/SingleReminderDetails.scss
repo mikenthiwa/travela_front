@@ -17,6 +17,11 @@
     font-size: 21px;	
     font-weight: 500;	
     line-height: 27px;
+    @media only screen and (max-width: 340px) {
+      .modal-title-word {
+        font-size: 17px;
+      }
+    }
   }
   .reminder_details {
     margin: 3px auto;
@@ -64,3 +69,12 @@
   }
 }
 
+@media only screen and (max-width: 571px) {
+  .delete-checklist-item {
+    .modal-title-bar {
+      .modal-title-word {
+        padding-top: 15px;
+      }
+    }
+  }
+}

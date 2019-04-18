@@ -20,7 +20,7 @@ class Modal extends PureComponent {
     return (
       <div className="modal-title-bar">
         <div className="modal-title-text">
-          <div className="modal-title">
+          <div className="modal-title modal-title-word">
             {title}
           </div>
           <div className="lable-text modal-bar">

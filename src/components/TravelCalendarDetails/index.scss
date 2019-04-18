@@ -29,6 +29,10 @@
     background-color: inherit;
     font-family: "DIN Pro";
     cursor: pointer;
+    
+    @media (max-width: 350px) {
+      color: transparent;
+    }
 
     &:focus{
       outline: none;

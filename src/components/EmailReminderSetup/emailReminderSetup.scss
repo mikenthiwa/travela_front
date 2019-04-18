@@ -15,7 +15,9 @@
 }
 
 .no-reminder-conditions{
-    img{
-      padding: 0 0 0 120px;
-    }
-  }
+  position: static;
+  transform: none;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+}
