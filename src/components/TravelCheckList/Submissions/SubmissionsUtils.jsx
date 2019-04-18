@@ -429,7 +429,8 @@ class SubmissionsUtils extends Component {
   formatDateTime = (date) => moment(date).format('YYYY-MM-DDTHH:mm');
 
   renderSubmissionsUtils = () => {
-    const {utilsType, checklistItem: {submissions: [item]}} = this.props;
+    const {utilsType, checklistItem } = this.props;
+    const { submissions: [item]} = checklistItem;
     const {showUploadedField} = this.state;
     return (
       <Fragment>
@@ -437,18 +438,22 @@ class SubmissionsUtils extends Component {
         && this.renderTicketFieldset()}
         {utilsType && utilsType.match('uploadField') && !item && !showUploadedField
         && this.renderUploadField()}
-        {(utilsType && utilsType.match('uploadField') && (item && typeof item.value !== 'object'))
+        {(utilsType && utilsType.match('uploadField') && (item && typeof item.value !== 'object') && !showUploadedField)
         && this.renderUploadField()}
         {((utilsType && utilsType.match('uploadField') && (item && typeof item.value === 'object')) || showUploadedField)
         && this.renderUploadedField()}
-        {utilsType && utilsType.match('textarea')
-        && this.renderTextarea()}
       </Fragment>
     );
   };
 
   render() {
-    return ( <Fragment>{this.renderSubmissionsUtils()}</Fragment> );
+    const { utilsType } = this.props;
+    return ( 
+      <Fragment>
+        { utilsType && utilsType.match('textarea') ?
+          this.renderTextarea()  : this.renderSubmissionsUtils() }
+      </Fragment> 
+    );
   }
 }
 
