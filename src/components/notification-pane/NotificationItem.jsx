@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import HtmlToReact from 'html-to-react';
 import './_notificationItem.scss';
 import readMessageIcon from '../../images/read-message.svg';
 import unreadMessageIcon from '../../images/unread-message.svg';
 import generateDynamicDate from '../../helper/generateDynamicDate';
 
-const HtmlToReactParser = new HtmlToReact.Parser();
 export default class NotificationItem extends PureComponent {
   state = {
     localNotificationStatus: 'unread'
@@ -38,7 +36,7 @@ export default class NotificationItem extends PureComponent {
         </span>
         <Link to={`${link}`}>
           <span
-            className="view-details" 
+            className="view-details"
             onClick={() => markSingleAsRead(id)} role="button" tabIndex="0" onKeyUp={()=>{}}>
             {isPending && 'View Details'}
             {' '}
@@ -58,11 +56,35 @@ export default class NotificationItem extends PureComponent {
     );
   };
 
+  renderNotificationMessage = (message, link) => {
+    const id = link.split('/').pop();
+    const fixedMessage = message.includes('<a href=') && message.split('<a href')[0] + id + message.split('</a>').pop();
+    const activeMessage = fixedMessage || message;
+
+    return (
+      <span>
+        {activeMessage.includes(id)
+          ? (
+            <span id="notificationWithLink">
+              {activeMessage.split(id)[0]}&nbsp;
+              <Link to={link}>
+                {id}
+              </Link>
+              {activeMessage.split(id)[1]}
+            </span>
+          ): activeMessage
+        }
+      </span>
+    );
+  }
+
   render() {
-    const { name, image, message, user } = this.props;
+    const { name, image, message, user, link } = this.props;
     const bgColorClass = this.checkMarkedAsRead() ? 'message-opened' : '';
     const userName = user.UserInfo && user.UserInfo.name;
     const handle = new RegExp(userName).test(message);
+
+
     return (
       <div className={`notification-item ${bgColorClass}`}>
         <div className="notification-item__image__container">
@@ -74,7 +96,7 @@ export default class NotificationItem extends PureComponent {
               <span className="notification--item__info__top__name">
                 {handle ? '' : `@${name} `}
               </span>
-              {HtmlToReactParser.parse(message)}
+              {this.renderNotificationMessage(message, link)}
             </div>
           </div>
           {this.renderNotificationItemMetaInfo()}
