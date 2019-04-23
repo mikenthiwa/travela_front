@@ -98,26 +98,26 @@ export class ReminderSetup extends Base {
             <PageHeader
               title="EMAIL TEMPLATES"
               actionBtn="CREATE NEW"
-              actionBtnClickHandler={() => {
-                history.push('/settings/reminder-setup/create');
-              }}
+              actionBtnClickHandler={() => {history.push('/settings/reminder-setup/create');}}
               isLoading={isLoading}
             />
           </div>
         </div>
-        <ListEmailTemplates
-          fetchTemplates={fetchTemplates}
-          fetchOneTemplate={fetchOneTemplate}
-          listEmailTemplatesReducer={listEmailTemplatesReducer}
-          location={location}
-          isLoading={isLoading}
-          setItemToDisable={this.setItemToDisable}
-          openModal={openModal}
-          closeModal={closeModal}
-          shouldOpen={shouldOpen}
-          modalType={modalType}
-          history={history}
-        />
+        <div className="setup-modal">
+          <ListEmailTemplates
+            fetchTemplates={fetchTemplates}
+            fetchOneTemplate={fetchOneTemplate}
+            listEmailTemplatesReducer={listEmailTemplatesReducer}
+            location={location}
+            isLoading={isLoading}
+            setItemToDisable={this.setItemToDisable}
+            openModal={openModal}
+            closeModal={closeModal}
+            shouldOpen={shouldOpen}
+            modalType={modalType}
+            history={history}
+          />
+        </div>
         {this.renderEnableReminderTemplateForm()}
         {this.renderDisableReminderTemplateForm()}
       </Fragment>
