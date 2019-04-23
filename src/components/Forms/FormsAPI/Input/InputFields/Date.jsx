@@ -11,47 +11,47 @@ class DateInput extends Component {
   };
 
   static getDerivedStateFromProps(nextProps, nextState) {
-    const { value } = nextProps;
-    return {
-      selectedDate: value ? moment(nextProps.value, 'MM-DD-YYYY') : null
-    };
+    const { value, showTimeSelect } = nextProps;
+    const selectedDate = value ?
+      moment(
+        nextProps.value, `MM-DD-YYYY${ showTimeSelect ? 'THH:mm' : ''}`
+      )
+      : null;
+    return { selectedDate };
   }
 
-  handleChange = (date, event) => {
-    const { onChange } = this.props;
+  handleChange = (date, event, raw = false) => {
+    const { onChange , onChangeRaw} = this.props;
     this.setState({ selectedDate: date });
     onChange(date, event);
+    raw && onChangeRaw(date, event);
   };
 
   render() {
     const {
-      error,
-      className,
-      name,
-      onBlur,
-      minimumDate,
-      maximumDate,
-      openToDate,
-      showYearDropdown
+      error, className, name, onBlur, minimumDate, maximumDate, openToDate,
+      showYearDropdown, showTimeSelect, dateFormat, minTime, maxTime, timeFormat,
     } = this.props;
     const { selectedDate } = this.state;
+    const timeClasses =  `${showTimeSelect ? 'time-wrapper': ''}  ${/HH:mm/.test(timeFormat) ? 'twenty_four_h': ''}`;
     return (
-      <div className={`date-wrapper ${className}`} id={`${name}_date`}>
+      <div className={`date-wrapper ${className} ${timeClasses}`} id={`${name}_date`}>
         <DatePicker
           className={`${error ? 'error' : ''}`}
           calendarClassName="calendar-body"
           dayClassName={() => 'calendar-day'}
           fixedHeight
-          placeholderText="MM/DD/YYYY"
+          placeholderText={`MM/DD/YYYY${showTimeSelect ? ' HH:mm': ''}`}
           selected={selectedDate}
           onChange={(date, event) => this.handleChange(date, event)}
-          name={name}
-          minDate={minimumDate}
-          maxDate={maximumDate}
-          onBlur={onBlur}
-          autoComplete="off"
-          openToDate={openToDate}
-          showYearDropdown={showYearDropdown}
+          onChangeRaw={(date, event) => this.handleChange(moment(date), event, true)}
+          onBlur={onBlur} name={name}
+          minDate={minimumDate} maxDate={maximumDate}
+          minTime={minTime} maxTime={maxTime}
+          timeFormat={timeFormat}
+          dateFormat={dateFormat}
+          showTimeSelect={showTimeSelect} autoComplete="off"
+          openToDate={minimumDate || openToDate} showYearDropdown={showYearDropdown}
         />
         <img className="calendar-icon" src={calendarIcon} alt="cal" />
       </div>
@@ -67,8 +67,14 @@ DateInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   minimumDate: PropTypes.object,
   maximumDate: PropTypes.object,
+  minTime: PropTypes.object,
+  maxTime: PropTypes.object,
   openToDate: PropTypes.object,
-  showYearDropdown: PropTypes.bool
+  showYearDropdown: PropTypes.bool,
+  showTimeSelect: PropTypes.bool,
+  dateFormat: PropTypes.string,
+  timeFormat: PropTypes.string,
+  onChangeRaw: PropTypes.func,
 };
 
 DateInput.defaultProps = {
@@ -77,8 +83,14 @@ DateInput.defaultProps = {
   name: '',
   minimumDate: undefined,
   maximumDate: undefined,
+  maxTime: undefined,
+  minTime: undefined,
+  showTimeSelect: false,
+  timeFormat: undefined,
   openToDate: moment(),
-  showYearDropdown: false
+  dateFormat: undefined,
+  showYearDropdown: false,
+  onChangeRaw: () => {}
 };
 
 export default DateInput;

@@ -12,6 +12,7 @@ import {
 } from './InputFields';
 import createEventHandlersFor from '../formEventHandlers';
 import './_input.scss';
+import './InputFields/Date.scss';
 
 class Input extends PureComponent {
 

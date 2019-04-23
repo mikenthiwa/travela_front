@@ -1,0 +1,69 @@
+.date-wrapper.time-wrapper {
+
+  &.twenty_four_h {
+    .react-datepicker{
+      &__time {
+        &-list {
+          padding-left: 15px;
+        }
+      }
+    }
+  }
+
+  .react-datepicker {
+    &__header {
+      &--time {
+        padding-top: 27px;
+        padding-bottom: 25px;
+      }
+    }
+    &__navigation {
+      &--next {
+        right: 150px;
+      }
+    }
+
+    &.calendar-body {
+      width: 400px;
+    }
+
+    &-time {
+      &__header {
+        color: #3d45e3;
+      }
+    }
+
+    &__time{
+      &-container {
+        float: left;
+        width: 138px;
+        border-left-color: rgba(0,0,0,.2);
+      }
+
+      &-box {
+        width: auto;
+      }
+
+      &-list {
+        padding-left: 30px;
+        height: 250px !important;
+
+        &-item {
+          color: #666;
+          transition: all 0.4s;
+
+          &:hover {
+            background: none !important;
+            font-size: 16px;
+            margin-left: -4px;
+          }
+
+          &--selected {
+            color: #3d45e3 !important;
+            background: none !important;
+          }
+        }
+      }
+    }
+  }
+}
