@@ -39,7 +39,22 @@ body {
   .rp-requests__header {
     margin-bottom: 15.1px;
     height: 164px;
+    @media(max-width:479px) {
+      .request-panel-header {
+        .PageHeader {
+          margin-bottom: 100px !important;
+          display: flex;
+        }
+      }
+    }
   }
+  
+  .rp-table {
+    @media (max-width: 977px ) {
+      overflow: auto
+    }
+   }
+
   @import 'responsiveness';
 };
 

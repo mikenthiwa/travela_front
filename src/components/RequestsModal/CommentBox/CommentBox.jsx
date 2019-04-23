@@ -169,7 +169,7 @@ export class CommentBox extends Component {
   render() {
     const { text } = this.state;
     return (
-      <div className="editor__editor-form">
+      <div className="editor__editor-form mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
         <ReactQuill
           value={text}
           className="quill-contents"

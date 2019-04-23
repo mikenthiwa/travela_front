@@ -710,7 +710,7 @@ class NewRequestForm extends PureComponent {
         position={position}
         line={line}
         managers={managers}
-        value="245px"
+        value="100%"
         hasBlankFields={
           !!errors.manager
         }
@@ -851,7 +851,7 @@ class NewRequestForm extends PureComponent {
       travelStipends = stipendSubTotals;
     }
     return (
-      <div className="personal-rectangle">
+      <div className="personal-rectangle mdl-grid">
         {
           <StipendDetails
             stipends={stipends}
@@ -930,7 +930,7 @@ class NewRequestForm extends PureComponent {
   ) => {
     return (
       <div>
-        <div className="travel-checklist__tab ">
+        <div className="travel-checklist__tab mdl-grid">
           <TravelChecklistsCard
             fetchTravelChecklist={fetchTravelChecklist}
             trips={trips}
