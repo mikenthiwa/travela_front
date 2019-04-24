@@ -1,3 +1,15 @@
 .reminder-email-template__container {
   width: 96%;
 }
+
+@media (max-width: 550px) {
+  .setup-modal { 
+    .input-group.template-details {
+      width: initial;
+      .subject-input, .message-input {
+        width: 100%;
+        padding-left: 10px;
+      }
+    }
+  }
+}
