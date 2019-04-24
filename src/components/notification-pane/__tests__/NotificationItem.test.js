@@ -83,4 +83,36 @@ describe('Notification Item Component', () => {
       notification.simulate('click');
       expect(props.markSingleAsRead).toHaveBeenCalledWith(12);
     });
+
+  it('should render notification without an id if id does not exist', () => {
+    const newProps = {...props, link : '/requests/budgets/Zhy23',  message: `Hi Please click on 
+      to confirm availability of budget for this trip. You will be required to take an approval 
+      decision by clicking on Approve or Reject of budget for this trip. 
+      You will be required to take an approval decision by clicking on Approve or Reject`
+    };
+    const wrapper = shallow(<NotificationItem {...newProps} />);
+    expect(wrapper.find('#notificationWithLink').exists()).toBe(false);
+  });
+
+  it('should render notification message with an id if it exists', () => {
+    const newProps = {...props, link : '/requests/budgets/Zhy23', message: `Hi Please click on 
+      Zhy23 to confirm availability of budget for this trip. You will be required to take an approval 
+      decision by clicking on Approve or Reject of budget for this trip. 
+      You will be required to take an approval decision by clicking on Approve or Reject`
+    };
+    const wrapper = shallow(<NotificationItem {...newProps} />);
+    expect(wrapper.find('#notificationWithLink').exists()).toBe(true);
+  });
+
+  it('should render notification message with clickable id if an anchor tag exists', () => {
+    const newProps = {...props, link : '/requests/budgets/Zhy23', message: `Hi Please click on  <a href="/requests/budgets/ZXytr1">ZXytr1</a> 
+    to confirm availability of budget for this trip. You will be required to take an approval 
+    decision by clicking on Approve or Rejectailability of budget for this trip. 
+    You will be required to take an approval decision by clicking on Approve or Reject`
+    };
+    const wrapper = shallow(<NotificationItem {...newProps} />);
+    expect(wrapper.find('#notificationWithLink').exists()).toBe(true);
+  });
+
+  
 });
