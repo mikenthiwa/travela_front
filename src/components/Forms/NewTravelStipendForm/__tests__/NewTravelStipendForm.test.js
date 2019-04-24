@@ -2,7 +2,6 @@ import React from 'react';
 import NewTravelStipendForm from '../NewTravelStipendForm';
 import profileMock from '../../ProfileForm/__mocks__';
 
-
 const { centers } = profileMock;
 
 describe('<NewTravelStipendForm />', () => {
@@ -11,7 +10,13 @@ describe('<NewTravelStipendForm />', () => {
 
   const props = {
     loading: false,
-    travelStipends: { isLoading: false },
+    travelStipends: {
+      isLoading: false,
+      stipends: [{
+        amount: 100,
+        center: {location: 'United Kingdom'}
+      }]
+    },
     hasBlankFields: false,
     user: {
       UserInfo: {
@@ -103,7 +108,7 @@ describe('<NewTravelStipendForm />', () => {
 
   it('renders the travel stipend amount input with validation error on `blur`', () => {
     const stipendInput = wrapper.find('input[name="stipend"]');
-  
+
     wrapper.instance().forceUpdate();
 
     stipendInput.simulate('blur', { target: { name: 'stipend', value: ''}});

@@ -1,7 +1,7 @@
 
 import RequestUtils from '../RequestUtils';
 
-const trips = [ 
+const trips = [
   {
     bedId: 3,
     departureDate: '2019-02-19',
@@ -81,7 +81,7 @@ const stipends = [
       'id': 1
     },
     'center': {
-      'location': 'Lagos, Nigeria'
+      'location': 'Nigeria'
     }
   },
   {
@@ -92,18 +92,18 @@ const stipends = [
       'id': 1
     },
     'center': {
-      'location': 'Nairobi, Kenya'
+      'location': 'Kenya'
     }
   },
   {
     'id': 2,
     'amount': 100,
     'creator': {
-      'fullName': 'Victor Ugwueze',
+      'fullName': 'Ugwueze',
       'id': 1
     },
     'center': {
-      'location':'Kampala, Uganda',
+      'location':'Uganda',
     }
   }
 ];
@@ -123,10 +123,10 @@ describe('Request Travel Stipend', () => {
     expect(stipend).toMatchObject(
       [
         {
-          'centerExists': true, 
-          'dailyRate': 100, 
-          'duration': 9, 
-          'location': 'Nairobi', 
+          'centerExists': true,
+          'dailyRate': 100,
+          'duration': 9,
+          'location': 'Nairobi, Kenya',
           'subTotal': 900
         }
       ]
@@ -137,41 +137,40 @@ describe('Request Travel Stipend', () => {
     const stipend = RequestUtils.stipendData(stipends);
     expect(stipend).toMatchObject(
       [
-        { 
-          location: 'Lagos, Nigeria',
-          amount: 100 
-        }, 
-        { 
-          location: 'Nairobi, Kenya',
-          amount: 100 
+        {
+          location: 'Nigeria',
+          amount: 100
         },
-        { 
-          location: 'Kampala, Uganda',
-          amount: 100 
+        {
+          location: 'Kenya',
+          amount: 100
+        },
+        {
+          location: 'Uganda',
+          amount: 100
         }
       ]
     );
   });
 
-
   it('should return stipend for all trips', () => {
     const stipend = RequestUtils.getAllTripsStipend(trips, stipends);
-    const expected  = { 
+    const expected  = {
       stipendSubTotals: [
         {
-          centerExists: true, 
-          dailyRate: 100, 
-          'duration': 9, 
-          'location': 'Nairobi', 
+          centerExists: true,
+          dailyRate: 100,
+          'duration': 9,
+          'location': 'Nairobi, Kenya',
           'subTotal': 900
-        }, 
+        },
         {
-          'centerExists': true, 
-          'dailyRate': 100, 
-          'duration': 1, 
-          'location': 'Kampala', 
+          'centerExists': true,
+          'dailyRate': 100,
+          'duration': 1,
+          'location': 'Kampala, Uganda',
           'subTotal': 100}
-      ], 
+      ],
       'totalStipend': '$ 1000'
     };
     expect(stipend).toMatchObject(expected);
@@ -179,34 +178,34 @@ describe('Request Travel Stipend', () => {
 
   it('should return 0 stipend for trips to Non-Andelan centers', () => {
     const updatedTrip = [
-      ...trips, 
+      ...trips,
       nonAndelanCenterTrip,
     ];
     const stipend = RequestUtils.getAllTripsStipend(updatedTrip, stipends);
-    const expected  = { 
+    const expected  = {
       stipendSubTotals: [
         {
-          'centerExists': true, 
-          'dailyRate': 100, 
-          'duration': 9, 
-          'location': 'Nairobi', 
+          'centerExists': true,
+          'dailyRate': 100,
+          'duration': 9,
+          'location': 'Nairobi, Kenya',
           'subTotal': 900
-        }, 
+        },
         {
-          'centerExists': true, 
-          'dailyRate': 100, 
-          'duration': 28, 
-          'location': 'Kampala', 
+          'centerExists': true,
+          'dailyRate': 100,
+          'duration': 28,
+          'location': 'Kampala, Uganda',
           'subTotal': 2800
         },
         {
-          'centerExists': false, 
-          'dailyRate': 'N/A', 
-          'duration': 1, 
-          'location': 'UK', 
+          'centerExists': false,
+          'dailyRate': 'N/A',
+          'duration': 1,
+          'location': 'UK',
           'subTotal': 0
         }
-      ], 
+      ],
       'totalStipend': '$ 3700'
     };
     expect(stipend).toMatchObject(expected);

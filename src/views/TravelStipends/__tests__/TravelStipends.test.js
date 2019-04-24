@@ -20,7 +20,7 @@ let props = {
         id: 3
       },
       center: {
-        location: 'Nairobi, Kenya'
+        location: 'Kenya'
       }
     },
     updatedStipend: {
@@ -33,15 +33,19 @@ let props = {
     travelStipends: {},
     errors: [],
     isLoading: false,
-    stipends
+    stipends: [{
+      amount: 100,
+      center: {location: 'United Kingdom'}
+    }]
   },
   centers: {
     center: [
       {
-        location: 'Kigali, Rwanda'
+        location: 'Rwanda'
       },
     ]
   },
+  getCountryChoices: jest.fn(() =>{}),
   handleCreateTravelStipend: jest.fn(() => {
   }),
   CreateTravelStipend: jest.fn(() => {
@@ -267,13 +271,18 @@ describe('<TravelStipends>', () => {
           errors: {
             error: 'Something went wrong'
           }
-        }
+        },
+        stipends: [{
+          amount: 100,
+          center: {location: 'United Kingdom'}
+        }]
       };
-      const { centers: { center } } = props;
+      const { centers: { center }, getCountryChoices } = props;
       const wrapper = mount(
         <NewTravelStipendForm
           {...props}
           centers={center}
+          getCountryChoices={getCountryChoices}
           travelStipends={travelStipend}
         />
       );
@@ -307,7 +316,7 @@ describe('<TravelStipends>', () => {
 
       expect(props.updateTravelStipend).toBeCalled();
       expect(props.updateTravelStipend).toBeCalledWith(
-        12, {center: 'Nairobi, Kenya', 'stipend': 300, }, props.history
+        12, {center: 'Kenya', 'stipend': 300, }, props.history
       );
     });
 
@@ -322,7 +331,8 @@ describe('<TravelStipends>', () => {
           value
         }
       });
-      const amountEvent = event(30000);
+      const amountEvent = event(300);
+      const centerEvent = event('Ghana');
 
       const wrapper = mount(
         <NewTravelStipendForm
@@ -331,10 +341,7 @@ describe('<TravelStipends>', () => {
         />
       );
 
-      const locationField = wrapper.find('DropdownSelect[name="center"]');
-      locationField.simulate('click');
-      locationField.find('DropdownOptions').find('li').find('div').simulate('click');
-      locationField.simulate('blur');
+      wrapper.find('input.occupationInput').simulate('change', centerEvent);
       wrapper.find('NumberInput').find('input[name="stipend"]').simulate('change', amountEvent);
       wrapper.find('.new-request').simulate('submit');
       expect(props.handleCreateTravelStipend).toHaveBeenCalled();

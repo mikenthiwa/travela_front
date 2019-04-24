@@ -30,25 +30,27 @@ class RequestUtils {
     const stipend = [];
     const days = RequestUtils.calculateDuration(trip, tripType);
     const allStipend = RequestUtils.stipendData(stipends); // TODO
+    const destinationArray = trip.destination.split(',');
+    const countryOfDestination = destinationArray.pop().trim();
 
     allStipend.forEach((data, i) => {
-      if(data.location === trip.destination){
+      if(data.location === countryOfDestination){
         const subTotal = data.amount * days;
         RequestUtils.total += subTotal;
         stipend.push({
           subTotal,
-          location: data.location.split(',')[0],
+          location: trip.destination,
           dailyRate: data.amount,
           duration: days,
           centerExists: true,
         });
       } else {
         const isAndelaCenter = RequestUtils
-          .centerExists(allStipend, trip.destination);
+          .centerExists(allStipend, countryOfDestination);
         if(!isAndelaCenter) {
           stipend.push({
             subTotal: 0,
-            location: trip.destination.split(',')[0],
+            location: destinationArray[0],
             dailyRate: 'N/A',
             duration: days,
             centerExists: false,
@@ -62,7 +64,7 @@ class RequestUtils {
   static centerExists(allStipend, destination) {
     const centerExists = allStipend
       .map(stipend => stipend.location)
-      .includes(destination);
+      .includes(destination.split(',').pop());
     return centerExists;
   }
 

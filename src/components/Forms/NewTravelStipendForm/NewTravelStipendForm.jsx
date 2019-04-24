@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
+import countries from 'world-countries';
+import {startCase, toLower} from 'lodash';
 import { FormContext, getDefaultBlanksValidatorFor } from '../FormsAPI';
 import TravelStipendFieldset from './FormFieldsets/TravelStipendDetails';
 import SubmitArea from './FormFieldsets/SubmitArea';
@@ -12,13 +14,14 @@ class NewTravelStipendForm extends PureComponent {
       values: {
         center: '',
         stipend: '',
+        finalCenterChoices: []
       },
       errors: {},
       hasBlankFields: true,
       isValidAmount: true
     };
     this.state = { ...this.defaultState };
-    this.validate = getDefaultBlanksValidatorFor(this);
+    this.defaultValidator = getDefaultBlanksValidatorFor(this);
   }
 
   componentDidMount() {
@@ -70,10 +73,10 @@ class NewTravelStipendForm extends PureComponent {
   handleShowEventError = (event) => {
     event.preventDefault();
     this.setState({ isValidAmount: false });
-  }
+  };
 
   handleOnchange = (event) => {
-    const { target: { value: amount } } = event;  
+    const { target: { value: amount } } = event;
     this.setState(prevSate => {
       return {
         values: {
@@ -84,7 +87,42 @@ class NewTravelStipendForm extends PureComponent {
         isValidAmount: (amount ? (amount > 0 && amount <= 1000)  : true),
       };
     }, () => this.validate());
-  }
+  };
+
+  getCountryChoices = () => {
+    const listOfCountries = countries.map(country => country.name.common);
+    const { travelStipends: { stipends } } = this.props;
+    const centersWithStipends = stipends.map(stipend => stipend.center.location);
+    return listOfCountries.filter(center => !centersWithStipends.includes(center));
+  };
+
+  validate = (field) => {
+    const { travelStipends: { stipends }, editing } = this.props;
+    const centersWithStipends = stipends.map(stipend => stipend.center.location);
+    const isValid = this.defaultValidator(field);
+    const {values: { center }} = this.state;
+    const titleCasedInput = startCase(toLower(center));
+
+    this.setState(prevState => ({
+      ...prevState,
+      errors: {
+        ...prevState.errors,
+        center: (
+          centersWithStipends.includes(titleCasedInput) && !editing?
+            `A travel stipend already exists for ${titleCasedInput}.`:
+            center.length > 1 && !editing &&
+            !this.getCountryChoices().includes(center)?
+              `${center} is not a valid country name.`:
+              null
+        )
+      }
+    }));
+
+    if(!this.getCountryChoices().includes(center) && !editing) {
+      this.setState({hasBlankFields: true});
+    }
+    return isValid;
+  };
 
   renderTravelStipendFieldset = (isEmpty) => {
     const { values, isValidAmount,  } = this.state;
@@ -100,18 +138,19 @@ class NewTravelStipendForm extends PureComponent {
         value="245px"
         editing={editing}
         stipends={travelStipends.stipends}
+        getCountryChoices={this.getCountryChoices}
       />
     );
   };
 
   renderForm = () => {
-    const { errors, values, 
-      hasBlankFields, 
-      selection, 
-      errors: { 
-        stipend 
-      }, 
-      isValidAmount 
+    const { errors, values,
+      hasBlankFields,
+      selection,
+      errors: {
+        stipend
+      },
+      isValidAmount
     } = this.state;
     const {
       closeModal,
@@ -130,7 +169,7 @@ class NewTravelStipendForm extends PureComponent {
           {this.renderTravelStipendFieldset(isEmpty)}
           <SubmitArea
             onCancel={closeModal}
-            travelStipends={travelStipends} 
+            travelStipends={travelStipends}
             hasBlankFields={hasBlankFields || !isValidAmount}
             selection={selection}
             loading={isSaving}
