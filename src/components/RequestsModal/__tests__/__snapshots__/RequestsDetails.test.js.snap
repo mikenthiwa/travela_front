@@ -8,10 +8,10 @@ exports[`<RequestDetails /> should render properly 1`] = `
     className="request-details__tab"
   >
     <div
-      className="request__tab"
+      className="request__tab mdl-grid"
     >
       <div
-        className="request__tab-card  complete"
+        className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone  complete"
         key="1"
       >
         <div
@@ -82,7 +82,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
         </div>
       </div>
       <div
-        className="request__tab-card  complete"
+        className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone  complete"
         key="2"
       >
         <div
@@ -160,7 +160,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
         </div>
       </div>
       <div
-        className="request__tab-card  complete"
+        className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone  complete"
         key="3"
       >
         <div
@@ -245,7 +245,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
         </div>
       </div>
       <div
-        className="request__tab-card current false"
+        className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone current false"
         key="4"
       >
         <div
@@ -320,69 +320,105 @@ exports[`<RequestDetails /> should render properly 1`] = `
   <div>
     <div>
       <div
-        className="request-details-container"
+        className="main-container request-details-container"
       >
-        <table
-          className="trip-details-pod"
+        <div
+          className="left-pane"
         >
-          <thead>
-            <tr>
-              <th>
-                Flight Route
-              </th>
-              <th>
-                Travel Dates
-              </th>
-              <th>
-                Accommodation
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              className="trip-detail__information-table"
+          <div
+            className="row"
+          >
+            <div
+              className="partition"
             >
-              <td>
+              <p
+                className="text--grey"
+              >
+                Flight Route
+              </p>
+              <p
+                className="text--black"
+              >
                 Lagos - Nairobi
-              </td>
-              <td>
-                01 AUG -
-                      02 AUG 2019
-              </td>
-              <td>
+              </p>
+            </div>
+            <div
+              className="partition"
+            >
+              <p
+                className="text--grey"
+              >
+                Travel Dates
+              </p>
+              <p
+                className="text--black"
+              >
+                25 APR -
+                      25 APR 2019
+              </p>
+            </div>
+            <div
+              className="partition"
+            >
+              <p
+                className="text--grey"
+              >
+                Accommodation
+              </p>
+              <p
+                className="text--black"
+              >
                 Bed 1, Kwetu, Mini flat-B
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table
-          className="reason-details-pod"
-        >
-          <thead>
-            <tr>
-              <th>
+              </p>
+            </div>
+            <div
+              className="partition mobile"
+            >
+              <p
+                className="text--grey"
+              >
                 Travel Reason
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
+              </p>
+              <p
+                className="text--black"
+              >
                 Nothing
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          className="right-pane"
+        >
+          <div
+            className="row desktop"
+          >
+            <div
+              className="partition mobile"
+            >
+              <p
+                className="text--grey"
+              >
+                Travel Reason
+              </p>
+              <p
+                className="text--black"
+              >
+                Nothing
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div
       className="travelCheck-list"
     >
       <div
-        className="travelCheckList__row"
+        className="travelCheckList__row mdl-grid"
       >
         <div
-          className="travelCheckList__col-7"
+          className="travelCheckList__col-7 mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--12-col-phone"
         >
           <div
             className="travelCheckList--card"
@@ -396,7 +432,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
               className="travelCheckList"
             >
               <div
-                className="travelCheckList__destination"
+                className="travelCheckList__destination mdl-grid"
                 key="0"
               >
                 <div
@@ -441,7 +477,11 @@ exports[`<RequestDetails /> should render properly 1`] = `
                           id="file-upload"
                           role="presentation"
                         >
-                          Passport.jpeg
+                          <p
+                            className="bold"
+                          >
+                            Passport.jpeg
+                          </p>
                         </div>
                         <div
                           className="travelSubmission--input__btn--uploadedFileDate"
@@ -488,7 +528,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
                 </div>
               </div>
               <div
-                className="travelCheckList__destination"
+                className="travelCheckList__destination mdl-grid"
                 key="1"
               >
                 <div
@@ -511,7 +551,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
           </div>
         </div>
         <div
-          className="travelCheckList__col-5"
+          className="travelCheckList__col-5 mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--12-col-phone "
         >
           <div
             className="travelCheckList--card travelCheckList--card__sticky"

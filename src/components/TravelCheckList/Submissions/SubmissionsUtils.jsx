@@ -283,7 +283,9 @@ class SubmissionsUtils extends Component {
               <img src={imageUrl} alt="document" className="travelSubmission--input__input-field__image" />}
             <div role="presentation" className="travelSubmission--input__btn--">
               <div id="file-upload" role="presentation" className="travelSubmission--input__btn--uploadedFileName">
-                {fileName}
+                <p className="bold">
+                  {fileName}
+                </p>
               </div>
               {fileDate &&(
                 <Fragment>

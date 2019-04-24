@@ -12,6 +12,7 @@ import commentIcon from '../../../images/icons/new-request-icons/Chat.svg';
 import addCommentIcon from '../../../images/icons/new-request-icons/AddComment.svg';
 import TravelCheckList from '../../TravelCheckList';
 
+
 export class RequestDetails extends Component {
   state = {
     steps: [
@@ -109,30 +110,6 @@ export class RequestDetails extends Component {
     }
   }
 
-  renderTripHeader() {
-    return (
-      <tr>
-        <th>Flight Route</th>
-        <th>Travel Dates</th>
-        <th>Accommodation</th>
-      </tr>);
-  }
-
-  renderReasonHeader() {
-    return (
-      <tr>
-        <th>Travel Reason</th>
-      </tr>);
-  }
-
-  renderReasonBody(requestData) {
-    return(
-      <tr>
-        <td>
-          {RequestUtils.getTravelReason(requestData)}
-        </td>
-      </tr>);
-  }
 
   renderTripDates(requestDetails) {
     const { requestData } = this.props;
@@ -162,46 +139,52 @@ export class RequestDetails extends Component {
     ${moment(requestData.returnDate).format('DD MMM YYYY').toUpperCase()}`);
   }
 
-  renderTripDetails(requestData) {
-    const flightRoute = `${requestData.origin.split(',')[0]} - ${requestData.destination.split(',')[0]}`;
-    const travelDates = this.renderTripDates(requestData);
-    const { accommodationType, beds} = requestData;
-    const accommodation = accommodationType !== 'Residence' ? 
-      accommodationType : `${beds.bedName}, ${beds.rooms.roomName}, ${beds.rooms.guestHouses.houseName}`; 
-    return (
-      <tr className="trip-detail__information-table">
-        <div className="check-table"><td>{flightRoute}</td></div>
-        <div className="check-table"><td>{travelDates}</td></div>
-        <div className="check-table"><td>{accommodation}</td></div>
-      </tr>);
+  renderPartitions(item, title, mobile){
+    return(
+      <div className={`partition ${mobile}`}>
+        <p className="text--grey">{title}</p>
+        <p className="text--black">
+          {item}
+        </p>
+      </div>
+    );
   }
-
+ 
   renderRequestDetails(requestData) {
     return (
       <div>
         {requestData.trips && requestData.trips.map(request => {
+          const flightRoute = `${request.origin.split(',')[0]} - ${request.destination.split(',')[0]}`;
+          const travelDates = this.renderTripDates(requestData);
+          const { accommodationType, beds} = request;
+          const flightTitle = 'Flight Route';
+          const travelTitle = 'Travel Dates'; 
+          const accommodationTitle = 'Accomodation';
+          const mobile = 'mobile';
+          const reasonTitle = 'Travel Reason';
+          const accommodation = accommodationType !== 'Residence' ? 
+            accommodationType : `${beds.bedName}, ${beds.rooms.roomName}, ${beds.rooms.guestHouses.houseName}`;
           return (
             <Fragment key={request.id}>
-              <div className="mdl-grid request-details-container">
-                <table className="trip-details-pod mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone ">
-                  <thead>
-                    {this.renderTripHeader()}
-                  </thead>
-                  <tbody>
-                    {this.renderTripDetails(request)}
-                  </tbody>
-                </table>
-                <table className="reason-details-pod mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone ">
-                  <thead>
-                    {this.renderReasonHeader()}
-                  </thead>
-                  <tbody>
-                    {this.renderReasonBody(request)}
-                  </tbody>
-                </table>
+              <div className="main-container request-details-container">
+                <div className="left-pane">
+                  <div className="row">
+                    {this.renderPartitions(flightRoute, flightTitle)}
+                    {this.renderPartitions(travelDates, travelTitle)}
+                    {this.renderPartitions(accommodation, accommodationTitle)}
+                    {this.renderPartitions(RequestUtils.getTravelReason(request), reasonTitle, mobile)}
+                  </div>
+                </div>
+                <div className="right-pane">
+                  <div className="row desktop">
+                    <p className="text--grey">Travel Reason</p>
+                    <p className="text--black">
+                      {RequestUtils.getTravelReason(request)} 
+                    </p>
+                  </div>
+                </div>
               </div>
-            </Fragment>);
-        })}
+            </Fragment>);})}
       </div>);
   }
 
