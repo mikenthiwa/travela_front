@@ -48,7 +48,7 @@ describe('<AddVisaForm />', () => {
 
   it('handles submit', () => {
     moxios.stubRequest(
-      process.env.REACT_APP_CLOUNDINARY_API, 
+      process.env.REACT_APP_CLOUNDINARY_API,
       { status: 200, data: { url: 'url' } }
     );
     wrapper.state().file = validFile;
@@ -71,7 +71,6 @@ describe('<AddVisaForm />', () => {
       expiryDate: '10/27/2019',
       otherVisaTypeDetails: '',
       visaType: 'Other',
-      imageName: 'image.jpg'
     };
 
     expect(
@@ -83,11 +82,11 @@ describe('<AddVisaForm />', () => {
       target: {
         value: 'Uganda'
       }});
-    
+
     wrapper.find('.select-dropdown').at(0).simulate('click');
     const activeEntryType = wrapper.find('.select-menu--active');
     activeEntryType.find('#choice').at(1).simulate('click');
-   
+
     wrapper.find('input[name="dateOfIssue"]').simulate('change', {target: {value: '03/01/2018'}});
     wrapper.find('input[name="expiryDate"]').simulate('change', {target: {value: '10/27/2019'}});
     wrapper.find('.select-dropdown').at(1).simulate('click');
@@ -125,7 +124,7 @@ describe('<AddVisaForm />', () => {
 
   it('changes state accordingly',  () => {
     moxios.stubRequest(
-      process.env.REACT_APP_CLOUNDINARY_API, 
+      process.env.REACT_APP_CLOUNDINARY_API,
       { status: 200, data: { url: 'url' } }
     );
     wrapper.find('#select-file').simulate('change', event);

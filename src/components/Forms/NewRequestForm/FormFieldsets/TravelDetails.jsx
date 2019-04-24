@@ -148,9 +148,10 @@ class TravelDetailsFieldset extends Component {
 
   renderForms(parentIds, selection, onChangeInput) {
     const forms = [];
+    const selectClass = selection === 'multi' ? 'mdl-cell-col--6 mdl-cell-col--12-tablet mdl-cell-col--12-phone': '';
     for (let i = 0; i < parentIds; i += 1) {
       forms.push(
-        <div className="trip__detail-col" id={i} key={i}>
+        <div className={`trip__detail-col mdl-cell mdl-cell-col--12 ${selectClass}`} id={i} key={i}>
           {this.renderTravelDetails(i, selection, onChangeInput, parentIds)}
         </div>
       );
@@ -166,7 +167,7 @@ class TravelDetailsFieldset extends Component {
     return (
       <fieldset className="travel-details">
         {this.renderRadioButton(handleRadioButtonChange)}
-        <div className="trip__detail-row">
+        <div className="trip__detail-row mdl-grid">
           {this.renderForms(parentIds, selection, onChangeInput, existingTrips)}
         </div>
         {selection === 'multi' && this.renderAddAnotherBtn()}

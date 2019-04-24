@@ -158,11 +158,43 @@ form.template-details{
     margin-bottom: 60px !important;
   }
 }
-
+@media screen and (max-width: 320px) {
+  .pagination__page {
+    margin-left: 10px;
+  }
+}
+.list-conditions {
+  table {
+    @media (max-width: 840px) {
+      margin: 0px 0 70px;
+    }
+  }
+  @media (max-width: 456px) {
+    .table__head {
+      &:first-of-type {
+          position: sticky;
+          left: 0;
+          z-index: 2 
+      }
+    }
+    .table__body {
+      .table__rows{
+        .table__data{
+          &:first-child {
+            position: sticky;
+            left: 0;
+            background-color: #fff;
+            border-right: 1px solid;
+            z-index: 2;
+          } 
+        } 
+      }
+    }  
+  }
+}
 @media only screen and (max-width: 550px) {
     .visible.template-details{
-      min-width: 280px;
-      width: 280px;
+      width: 100%;
       hr{
         width: 280px;
         margin-left: 15px;

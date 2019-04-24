@@ -9,24 +9,24 @@
 }
 .stipend-container-block {
   min-height: 192px;	
-  width: 579px;
   .stipend-row {
     display: flex;
     font-size: 12px;	
     line-height: 15px;
     align-items: center;
     justify-content: space-around;
+    @media(max-width: 325px){
+      font-size: 10px;
+    }
   }
   .header-tile {
     color: #3359DB;	
   }
   .single-trip {
-    width: 579px;	
     border-radius: 5px;	
     background-color: #F8F8F8;
     margin-top: 10px;
     .item {
-      width: 87px;	
       color: #4F4F4F;	
       font-size: 14px;	
       line-height: 18px;
@@ -35,10 +35,12 @@
       :first {
         padding-left: .2em;
       }
+      @media(max-width: 325px){
+        font-size: 12px;
+      }
     }
   }
   .total-stipend {
-    margin-left: 77%;
     margin-top: 10px;
     height: 33px;	
     width: 107px;	
@@ -46,6 +48,7 @@
     background-color: #EEF0F6;
     display: flex;
     align-items: center;
+    float: right;
     .total-title {
       height: 15px;	
       margin-right: .5em;

@@ -7,7 +7,7 @@ export default function (attachments) {
   attachments.map(item => {
     return item.checklist.filter(checklistItem => {
         
-      if (checklistItem.requiresFiles === true && checklistItem.submissions[0]) {
+      if (checklistItem.submissions[0] && checklistItem.submissions[0].value.url) {
         const result = {
           itemId: checklistItem.id,
           itemName: checklistItem.name,

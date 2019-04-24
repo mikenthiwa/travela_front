@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import SubmissionUtils from '../Submissions/SubmissionsUtils';
 import  {tripRequest } from '../../../mockData/checklistSubmissionMocks';
 
@@ -110,6 +111,17 @@ describe('SubmissionUtils Component', () => {
     expect(ticketDetailsForm.length).toBe(2);
   });
 
+  it('should display a react date picker with option to select time', () => {
+    const wrapper = setup(props);
+
+    wrapper.find('input[name="departureTime"]').simulate('click');
+    const datePicker = wrapper.find('DateInput[name="departureTime"]');
+    const timePicker = datePicker.find('Time');
+
+    expect(timePicker.length).toEqual(1);
+  });
+
+
   it('should initialize the dates based on the props', () => {
     const wrapper = setup(props);
 
@@ -119,7 +131,7 @@ describe('SubmissionUtils Component', () => {
 
   it('should call the handleInputChange', () => {
     const wrapper = setup(props);
-    const input = wrapper.find('input[name="departureTime"]');
+    const input = wrapper.find('DateInput[name="departureTime"]');
     const event = {
       target: {
         value: '2019-07-08T12:00', //foo provided is not in a recognized RFC2822 or ISO format.
@@ -127,13 +139,15 @@ describe('SubmissionUtils Component', () => {
         type: 'datetime-local'
       }
     };
-    input.simulate('change', event);
+
+    input.instance().handleChange(moment('2019-07-08T12:00'), event);
     expect(props.handleInputChange).toHaveBeenCalled();
   });
 
   it('should call the handleTicketSubmit', () => {
+    document.createRange = jest.fn();
     const wrapper = setup(props);
-    const input = wrapper.find('input[name="departureTime"]');
+    const input = wrapper.find('DateInput[name="departureTime"]');
     const handleTicketSubmitSpy = jest
       .spyOn(wrapper.instance(), 'handleTicketSubmit');
     const event = {
@@ -143,9 +157,13 @@ describe('SubmissionUtils Component', () => {
         type: 'datetime-local'// on the departureTime input
       }
     };
-    input.simulate('focus');
-    input.simulate('change', event);
-    input.simulate('blur');
+
+
+    input.instance().handleChange(moment('2019-07-08T12:00'), event);
+
+    // induce the blur
+    input.instance().props.onBlur();
+
     expect(handleTicketSubmitSpy).toHaveBeenCalled();
   });
 

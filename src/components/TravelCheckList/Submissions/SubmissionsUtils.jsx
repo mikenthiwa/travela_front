@@ -4,17 +4,14 @@ import React, {Component, Fragment} from 'react';
 import {PropTypes} from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
-import toast from 'toastr';
-import InputRender from '../../Forms/FormsAPI';
 import Modal from '../../modal/Modal';
 import RadioButton from '../../RadioButton';
 import ButtonLoadingIcon from '../../Forms/ButtonLoadingIcon';
 import check from '../../../images/check.svg';
 import downloadIcon from '../../../images/icons/download_file.svg';
-import uploadIcon from '../../../images/uploadIcon.svg';
 import documentIcon from '../../../images/document-rect.png';
 import upload_ticket from '../../../images/upload_ticket.svg';
+import DateInput from '../../Forms/FormsAPI/Input/InputFields/Date';
 
 class SubmissionsUtils extends Component {
   state = { showUploadedField: false, departureDate: null, departureTime: null, arrivalTime: null,
@@ -42,13 +39,12 @@ class SubmissionsUtils extends Component {
   }
 
   initializeDates = (props) => {
-    const {trip, departureTime, arrivalTime, returnDepartureTime, returnTime} = props;
-    this.setState({ departureDate: this.formatDateTime(trip.departureDate),
-      departureTime:  this.formatDateTime(departureTime || trip.departureDate),
-      arrivalTime: this.formatDateTime(arrivalTime || trip.departureDate),
-      returnDepartureTime: this.formatDateTime(returnDepartureTime || trip.returnDate),
-      returnTime: this.formatDateTime(returnTime || trip.returnDate),
-      arrivalDate: this.formatDateTime(trip.returnDate),
+    const {departureTime, arrivalTime, returnDepartureTime, returnTime} = props;
+    this.setState({
+      departureTime:  departureTime ? this.formatDateTime(departureTime) : null,
+      arrivalTime: arrivalTime ? this.formatDateTime(arrivalTime) : null,
+      returnDepartureTime: returnDepartureTime ? this.formatDateTime(returnDepartureTime): null,
+      returnTime: returnTime ? this.formatDateTime(returnTime) : null,
     });
   };
 
@@ -283,7 +279,7 @@ class SubmissionsUtils extends Component {
                 className="travelSubmission--input__input-field__image"
                 type="application/pdf"
               />
-            ): 
+            ):
               <img src={imageUrl} alt="document" className="travelSubmission--input__input-field__image" />}
             <div role="presentation" className="travelSubmission--input__btn--">
               <div id="file-upload" role="presentation" className="travelSubmission--input__btn--uploadedFileName">
@@ -311,6 +307,17 @@ class SubmissionsUtils extends Component {
         )}
       </div>
     );
+  };
+
+  handleDateInputChange = (date, name) => {
+    this.handleInputChange({
+      preventDefault: () => {},
+      target: {
+        name,
+        value: this.formatDateTime(date),
+        type: 'datetime-local',
+      }
+    });
   };
 
   handleInputChange = (event) => {
@@ -344,11 +351,11 @@ class SubmissionsUtils extends Component {
   };
 
   validateDate = (name, value, min, max) => {
-    const valid = (min ? moment(value).isSameOrAfter(moment(min)) : true) &&
-    (max ? moment(value).isSameOrBefore(moment(max)) : true);
+    const valid = (min ? moment(value).isAfter(moment(min)) : true) &&
+    (max ? moment(value).isBefore(moment(max)) : true);
     this.setState((prevState) => ({
       errors: { ...prevState.errors,
-        [name]: !valid ? 'Inconsistent date. Please check again!' : null
+        [name]: !valid && value ? 'Inconsistent date. Please check again!' : null
       }
     }));
     return valid;
@@ -359,10 +366,36 @@ class SubmissionsUtils extends Component {
     handleTicketSubmit();
   };
 
-  renderTicketInput = (type, placeholder, label, name, tripId, value, min = null, max = null) => {
+  renderDateTimeInput = ( label, name, tripId, value, min, max) => {
+    const { errors } = this.state;
+    return (
+      <div className="airline-name mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet">
+        <div className={`form-input ${errors[name] ? 'error': ''}`}>
+          <label htmlFor={name}>{label}</label>
+          <DateInput
+            onBlur={this.handleTicketSubmit}
+            onChange={date => this.handleDateInputChange(date, name)}
+            onChangeRaw={date => this.handleDateInputChange(date, name)}
+            showTimeSelect
+            name={name}
+            minimumDate={min !== 'Invalid date' ? moment(min) : null}
+            maximumDate={max !== 'Invalid date' ? moment(max) : null}
+            dateFormat="MMMM DD, YYYY hh:mm A"
+            timeFormat="hh:mm A"
+            value={value ? moment(value) : null}
+          />
+        </div>
+        {
+          errors[name] && <div className="submission-progress__error">{errors[name]}</div>
+        }
+      </div>
+    );
+  };
+
+  renderTicketInput = (type, placeholder, label, name, tripId, value, min = undefined, max = undefined) => {
     const {errors} = this.state;
     return (
-      <div className="airline-name">
+      <div className="airline-name mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet">
         <span id="label">{label}</span>
         <input
           id={`${name}-${tripId}`} type={type} value={value || ''}
@@ -378,23 +411,25 @@ class SubmissionsUtils extends Component {
 
   renderTicketFieldset = () => {
     const { checklistItem, itemsToCheck, tripType, airline, ticketNumber,
-      checkId, returnTicketNumber, returnAirline } = this.props;
+      checkId, returnTicketNumber, returnAirline , trip} = this.props;
     const {name, submissions: {tripId}} = checklistItem;
-    const { departureDate, departureTime, arrivalTime,
-      returnDepartureTime, returnTime, arrivalDate } = this.state;
+    const { departureTime, arrivalTime,
+      returnDepartureTime, returnTime } = this.state;
     return (
       name.toLowerCase().includes('travel ticket') &&
       (
         <form className="ticket-submission" autoComplete="off">
           <div className="ticket-submission--ticket__fieldSet">
-            <div className="travel-submission-details__return" id="departure-fields">
-              {this.renderTicketInput('datetime-local', '19:35:00', 'Departure Time',
-                'departureTime', tripId, departureTime, this.formatDateTime(departureDate),
-                this.formatDateTime(arrivalDate)
+            <div className="travel-submission-details__return mdl-grid" id="departure-fields">
+              {this.renderDateTimeInput('Departure Time',
+                'departureTime', tripId, departureTime,
+                this.formatDateTime(trip.departureDate),
+                this.formatDateTime(trip.returnDate)
               )}
-              {this.renderTicketInput('datetime-local', '19:35:00', 'Arrival Time',
-                'arrivalTime', tripId, arrivalTime, this.formatDateTime(departureTime),
-                this.formatDateTime(returnDepartureTime),
+              {this.renderDateTimeInput('Arrival Time',
+                'arrivalTime', tripId, arrivalTime,
+                this.formatDateTime(departureTime || trip.departureDate),
+                this.formatDateTime(returnDepartureTime || trip.returnDate),
               )}
               {this.renderTicketInput('text', 'e.g KQ 532', 'Flight Number',
                 'ticketNumber', tripId, ticketNumber
@@ -405,12 +440,15 @@ class SubmissionsUtils extends Component {
             </div>
             {tripType.match('return') && (
               <div className="travel-submission-details__return" id="return-fields">
-                {this.renderTicketInput('datetime-local', '19:35:00', 'Departure Time',
+                {this.renderDateTimeInput( 'Departure Time',
                   'returnDepartureTime', tripId, returnDepartureTime,
-                  this.formatDateTime(arrivalTime), this.formatDateTime(arrivalDate)
+                  this.formatDateTime(arrivalTime || trip.departureDate),
+                  this.formatDateTime(trip.returnDate)
                 )}
-                {this.renderTicketInput('datetime-local', '19:35:00', 'Arrival Time',
-                  'returnTime', tripId, returnTime, this.formatDateTime(returnDepartureTime)
+                {this.renderDateTimeInput('Arrival Time',
+                  'returnTime', tripId, returnTime,
+                  this.formatDateTime(returnDepartureTime || trip.returnDate),
+                  null
                 )}
                 {this.renderTicketInput('text', 'e.g KQ 532', 'Return Flight Number',
                   'returnTicketNumber', tripId, returnTicketNumber
@@ -429,7 +467,8 @@ class SubmissionsUtils extends Component {
   formatDateTime = (date) => moment(date).format('YYYY-MM-DDTHH:mm');
 
   renderSubmissionsUtils = () => {
-    const {utilsType, checklistItem: {submissions: [item]}} = this.props;
+    const {utilsType, checklistItem } = this.props;
+    const { submissions: [item]} = checklistItem;
     const {showUploadedField} = this.state;
     return (
       <Fragment>
@@ -437,18 +476,22 @@ class SubmissionsUtils extends Component {
         && this.renderTicketFieldset()}
         {utilsType && utilsType.match('uploadField') && !item && !showUploadedField
         && this.renderUploadField()}
-        {(utilsType && utilsType.match('uploadField') && (item && typeof item.value !== 'object'))
+        {(utilsType && utilsType.match('uploadField') && (item && typeof item.value !== 'object') && !showUploadedField)
         && this.renderUploadField()}
         {((utilsType && utilsType.match('uploadField') && (item && typeof item.value === 'object')) || showUploadedField)
         && this.renderUploadedField()}
-        {utilsType && utilsType.match('textarea')
-        && this.renderTextarea()}
       </Fragment>
     );
   };
 
   render() {
-    return ( <Fragment>{this.renderSubmissionsUtils()}</Fragment> );
+    const { utilsType } = this.props;
+    return (
+      <Fragment>
+        { utilsType && utilsType.match('textarea') ?
+          this.renderTextarea()  : this.renderSubmissionsUtils() }
+      </Fragment>
+    );
   }
 }
 
@@ -459,6 +502,7 @@ SubmissionsUtils.propTypes = {
     PropTypes.shape({}),
     PropTypes.string
   ]).isRequired,
+  trip: PropTypes.object,
   ticketNumber: PropTypes.string.isRequired,
   airline: PropTypes.string.isRequired, returnAirline: PropTypes.string.isRequired,
   handleUpload: PropTypes.func.isRequired, setTicketFields: PropTypes.func.isRequired,
@@ -474,6 +518,7 @@ SubmissionsUtils.propTypes = {
   uploadedFileUrl: PropTypes.string, setUploadedFile: PropTypes.func.isRequired
 };
 SubmissionsUtils.defaultProps = {utilsType: '', closeModal: () => {}, userReadinessDocument: {},
-  shouldOpen: false, modalType: '', handleUserDocumentUpload: () => {}, uploadedFileUrl: ''};
+  shouldOpen: false, modalType: '', handleUserDocumentUpload: () => {}, uploadedFileUrl: '',
+  trip: {}};
 
 export default SubmissionsUtils;

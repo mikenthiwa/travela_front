@@ -11,6 +11,7 @@ const props = {
     stipend: 1234
   },
   modalType: 'create travel stipend',
+  getCountryChoices: jest.fn(() =>{}),
 };
 
 const setup = (props) => shallow(<TravelStipendFieldset {...props} />);
@@ -25,7 +26,7 @@ describe('<TravelStipendFieldset />', () => {
     const wrapper = setup(props);
     expect(wrapper).toMatchSnapshot();
   });
-  
+
   it('should match snapshot', () => {
     const newProps = {
       ...props,

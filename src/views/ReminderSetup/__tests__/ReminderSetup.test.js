@@ -196,4 +196,9 @@ describe('<ConnectedReminderSetup />', () => {
     shallowWrapper.find('button#oncancel').simulate('click');
     expect(shallowWrapper.state().disableReason).toEqual('');
   });
+  it('calls actionBtnClickHandler function', () => {
+    const createButton = wrapper.find('#actionButton')
+    createButton.simulate('click')
+    expect(props.history.push).toHaveBeenCalledWith("/settings/reminder-setup/create")
+  })
 });

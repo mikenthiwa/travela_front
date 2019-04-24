@@ -7,7 +7,7 @@ import documentIcon from '../../images/document-rect.png';
 export function AttachmentItems({ attachments, attachmentDetails, handleDownloadAttachments}) {
   return (
     attachmentDetails.map((item) => {
-      const isPdf = item.itemUrl.substr(-3) ==='pdf';
+      const isPdf = item.itemUrl && item.itemUrl.substr(-3) ==='pdf';
       return (attachments.destinationName === item.itemDestination || attachments.tripId === item.itemTripId)? 
         (
           <div key={item.itemId} className="attachment-item">

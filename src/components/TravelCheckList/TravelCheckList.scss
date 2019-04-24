@@ -60,7 +60,6 @@
   }
   &__row {
     padding: 0;
-    width: 985px;
     margin: 10px 0px 20px 0px;
     list-style: none;
     display: -ms-flexbox;
@@ -73,29 +72,27 @@
       bottom: 10px;
       right: 10px;
     }
-  }
-  &__col {
-    width: 50%;
+    @media(max-width: 479px){
+      
+    }
   }
   &__col-7 {
-    width: 594px;
     margin-right: 5px;
   }
   &__col-5 {
-    width: 380px;
-    margin-left: 5px;
     position: relative;
     right: 0px;
   }
   &--card {
-    margin: 5px;
     border: 1px solid #E4E4E4;
     border-radius: 6px;
     background-color: #FFFFFF;
     margin-bottom: 60px;
+    
     &__sticky {
       top: 80px;
       position: sticky;
+      margin-left: 5px;
     }
   }
 
@@ -118,6 +115,9 @@
     font-size: 14px;
     color: #4A4A4A;
     font-weight: lighter;
+    @media(max-width: 537px){
+      font-size: 12px;
+    }
     &-head {
       position: absolute;
       top: 37.5px;
@@ -144,3 +144,16 @@
     }
   }
 }
+.travelCheck-list{
+  &__status {
+    display: none;
+  }
+  @media(max-width: 580px){
+    &__status {
+      display: block;
+      width: 100%;
+    }
+   
+  }
+}
+

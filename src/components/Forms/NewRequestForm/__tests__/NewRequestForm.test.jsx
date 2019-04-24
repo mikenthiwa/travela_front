@@ -553,8 +553,8 @@ describe('<NewRequestForm />', () => {
     };
     const spyChange = sinon.spy(wrapper.instance(), 'onChangeDate');
     wrapper.instance().onChangeDate(moment('2018-12-01'), event);
-    expect(wrapper.state().values['arrivalDate-0'].toISOString())
-      .toEqual('2018-12-01T00:00:00.000Z');
+    expect(wrapper.state().values['arrivalDate-0'])
+      .toEqual(moment('2018-12-01'));
     expect(spyChange.called).toEqual(true);
   });
 

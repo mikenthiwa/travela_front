@@ -170,9 +170,9 @@ export class RequestDetails extends Component {
       accommodationType : `${beds.bedName}, ${beds.rooms.roomName}, ${beds.rooms.guestHouses.houseName}`; 
     return (
       <tr className="trip-detail__information-table">
-        <td>{flightRoute}</td>
-        <td>{travelDates}</td>
-        <td>{accommodation}</td>
+        <div className="check-table"><td>{flightRoute}</td></div>
+        <div className="check-table"><td>{travelDates}</td></div>
+        <div className="check-table"><td>{accommodation}</td></div>
       </tr>);
   }
 
@@ -182,8 +182,8 @@ export class RequestDetails extends Component {
         {requestData.trips && requestData.trips.map(request => {
           return (
             <Fragment key={request.id}>
-              <div className="request-details-container">
-                <table className="trip-details-pod">
+              <div className="mdl-grid request-details-container">
+                <table className="trip-details-pod mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone ">
                   <thead>
                     {this.renderTripHeader()}
                   </thead>
@@ -191,7 +191,7 @@ export class RequestDetails extends Component {
                     {this.renderTripDetails(request)}
                   </tbody>
                 </table>
-                <table className="reason-details-pod">
+                <table className="reason-details-pod mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone ">
                   <thead>
                     {this.renderReasonHeader()}
                   </thead>
@@ -245,7 +245,7 @@ export class RequestDetails extends Component {
         <div className="requestDetails-comment__toggle">
           {this.renderDisplayCommentBox('Add Comment', commentIcon)}
           {showCommentBox && (
-            <div className="request-details__comments">
+            <div className="request-details__comments mdl-grid">
               <ConnectedCommentBox requestId={requestId} documentId={null} />
               {this.renderComments()}
             </div>)}

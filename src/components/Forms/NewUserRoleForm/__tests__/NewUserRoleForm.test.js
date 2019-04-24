@@ -16,22 +16,19 @@ describe('<NewUserRoleForm />', () => {
     role: 'travel team member',
     loading: false,
     errors: [],
-    removeDepartment: jest.fn(() => {}),
-    addDepartment: jest.fn(() => {}),
+    addItem: jest.fn(() => {}),
+    removeItem: jest.fn(() => {}),
     myTitle: 'Add User' ,
     getRoleData: jest.fn(() => {}),
     handleUpdateRole:  jest.fn(() => {}),
     onChange: jest.fn(),
     values: {
-      departments: [],
-      department: 'lol',
+      items: [],
+      item: 'lol',
     },
     userDetail: {
       email: 'tomato@andela.com',
-      id: 1,
-      centers: [{
-        location: 'New York, USA'
-      }]
+      id: 1
     },
     roleName: 'Budget Checker',
     centers: [{location: 'Kigali, Rwanda'}],
@@ -43,6 +40,7 @@ describe('<NewUserRoleForm />', () => {
 
   beforeEach(() => {
     wrapper = mount(<NewUserRoleForm {...props} />);
+    jest.resetAllMocks();
   });
 
   it('renders correctly', () => {
@@ -84,16 +82,21 @@ describe('<NewUserRoleForm />', () => {
         }}} />);
     expect(spy.called).toEqual(true);
     wrapper.unmount();
+    sinon.resetHistory();
+    sinon.reset();
   });
 
 
-  it('should add department button when role is budgetChecker', () => {
+  it('should add departments button when role is budgetChecker', () => {
     const wrapper = mount(
-      <NewUserRoleForm {...{...props, role: 'Budget Checker', roleId: '6000' }} />);
+      <NewUserRoleForm {...{...props, role: 'Budget Checker', roleId: '6000', departments: [] }} />);
     const spy = jest.spyOn(wrapper.instance(), 'handleSubmit');
     wrapper.find('input').at(0).simulate('change', { target: { value: 'test@andela.com'}});
     wrapper.find('input').at(1).simulate('change', { target: { value: 'test'}});
     wrapper.find('.add_button').simulate('click');
+    wrapper.find('input').at(1).simulate('change', { target: { value: 'test'}});
+    wrapper.find('.add_button').simulate('click');
+    wrapper.find('input').at(1).simulate('change', { target: { value: 'est'}});
     wrapper.find('.remove_department').simulate('click');
     wrapper.find('input').at(1).simulate('change', { target: { value: 'test'}});
     wrapper.find('.add_button').simulate('click');
@@ -105,7 +108,44 @@ describe('<NewUserRoleForm />', () => {
       roleName: 'Budget Checker',
       departments: ['test']
     });
-    spy.mockClear();
+    jest.resetAllMocks();
+    wrapper.unmount();
+  });
+
+
+  it('should add center button when role not a budgetChecker', () => {
+    const wrapper = mount(
+      <NewUserRoleForm {...{...props, role: 'Travel Administrator', roleId: '29187' }} />);
+    const spy = jest.spyOn(wrapper.instance(), 'handleSubmit');
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'test@andela.com'}});
+    wrapper.find('input').at(1).simulate('change', { target: { value: 'Lagos'}});
+    wrapper.find('.add_button').simulate('click');
+    wrapper.find('form').simulate('submit');
+    expect(spy).toHaveBeenCalled();
+    expect(props.handleUpdateRole).toHaveBeenCalledTimes(1);
+    expect(props.handleUpdateRole).toHaveBeenCalledWith({
+      email: 'test@andela.com',
+      roleName: 'Travel Administrator',
+      center: ['Lagos']
+    });
+    jest.resetAllMocks();
+    wrapper.unmount();
+  });
+
+  it('should add center button when role is not budgetChecker when center is  not provided', () => {
+    const wrapper = mount(
+      <NewUserRoleForm {...{...props, role: 'Travel Administrator', roleId: '29187' }} />);
+    const spy = jest.spyOn(wrapper.instance(), 'handleSubmit');
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'test@andela.com'}});
+    wrapper.find('form').simulate('submit');
+    expect(spy).toHaveBeenCalled();
+    expect(props.handleUpdateRole).toHaveBeenCalledTimes(1);
+    expect(props.handleUpdateRole).toHaveBeenCalledWith({
+      email: 'test@andela.com',
+      roleName: 'Travel Administrator',
+    });
+    jest.resetAllMocks();
+    wrapper.unmount();
   });
 
   describe('<PersonalDetails />', () => {
@@ -115,6 +155,10 @@ describe('<NewUserRoleForm />', () => {
         location: []
       }],
       roleName: 'travel team member',
+      values:{
+        item: '',
+        items: []
+      },
       validate: true,
       getAllUsersEmail: jest.fn(),
       allMails: [{id:'travela', text:'travela@travela.com'}],
@@ -127,7 +171,5 @@ describe('<NewUserRoleForm />', () => {
     it('renders correctly', () => {
       expect(wrapper).toMatchSnapshot();
     });
-
   });
-
 });

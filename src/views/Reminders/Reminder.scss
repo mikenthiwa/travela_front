@@ -9,7 +9,7 @@
   }
 
   .dropdown__container {
-    width: auto;
+    width: fit-content;
     margin: 60px 25px 0;
   }
 
@@ -50,6 +50,9 @@
   background-color: #FFFFFF;
   margin-top: 80px;
   padding: 44px 55px;
+  @media screen and (min-width: 840px) and (max-width: 1178px) {
+    width: initial
+  }
 }
 
 .reminders-fieldset {
@@ -61,8 +64,26 @@
   }
 
   .dropdown-input-group, .form-input {
-    width: 230px;
     margin-right: 50px;
+    width: 230px;
+    @media screen and (max-width: 1178px) and (min-width: 1107px) {
+      width: 380px;
+    }
+    @media screen and (max-width: 1106px) and (min-width: 1053px) {
+      width: 345px;
+    }
+    @media screen and (max-width: 1052px) and (min-width: 1016px) {
+      width: 330px;
+    }
+    @media screen and (max-width: 1015px) and (min-width: 964px) {
+      width: 310px;
+    }
+    @media screen and (max-width: 969px) and (min-width: 918px) {
+      width: 280px;
+    }
+    @media screen and (max-width: 918px) and (min-width: 840px) {
+      width: 250px;
+    }
   }
 
   p {
@@ -230,5 +251,88 @@
     font-size: 18px;
     transform: rotate(180deg);
     color: blue;
+  }
+}
+
+@media screen and (min-width: 791px) {
+  p.expiry-text-mobile {
+    display: none
+  }
+}
+
+@media screen and (max-width: 790px) {
+  p.expiry-text-desktop {
+    display: none
+  }
+  p.expiry-text-mobile {
+    -ms-flex-item-align: center;
+    align-self: center;
+    margin: 0;
+    padding-left: 20px;
+    width: 100%;
+  }
+  .reminders-fieldset {
+    .delete-icon {
+      margin-top: -88px;
+    }
+  }
+  .reminder-card {
+    width: initial;
+    padding: 22px 30px;
+  }
+  .reminders-fieldset {
+    display: inline-grid;
+    .form-input {
+      width: 100%;
+    }
+    .dropdown-input-group {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 506px) {
+  .PageHeader {
+    .title {
+      font-size: 11px;
+    }
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .PageHeader div:last-child {
+    margin-top: 0px;
+  }
+  .reminder-card {
+    margin-top: 120px;
+  }
+  .reminder-panel-header .dropdown__input_error {
+    width: 215px;
+    margin-left: -25px;
+    margin-top: 10px;
+  }
+  .reminders-fieldset .delete-icon {
+    margin-right: -10px;
+  }
+  .table__container {
+    margin-top: 0px;
+  }
+  p.expiry-text-mobile {
+    padding: 5px;
+    font-size: 12px;
+  }
+}
+
+@media only screen and  (max-width: 380px) {
+  .create-new {
+    width: 100%;
+  }
+  .document_header_group_button {
+    div {
+      width: 71%
+    }
+    button {
+      font-size: 11px;
+    }
   }
 }

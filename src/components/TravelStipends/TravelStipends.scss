@@ -2,6 +2,7 @@
  margin-top: 70px;
 }
 
+
 .card {
   font-size: 15px;
   color: #4F4F4F;
@@ -166,9 +167,6 @@
 
 
 @media( max-width: 479px){
-  .PageHeader {
-    top: 70px;
-  }
   .card {
     margin-left: 15%;
   }

@@ -111,7 +111,7 @@ class ReminderTable  extends Component{
           !reminders.length 
             ? <NoEmailReminder />
             : (
-              <div className="list-templates">
+              <div className="list-templates list-conditions">
                 <div className="table__container">
                   <table className="mdl-data-table mdl-js-data-table readiness-table">
                     <thead>

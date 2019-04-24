@@ -14,13 +14,17 @@ exports[`CommentItem component should match snapshot 1`] = `
       imageSrc="/path/to/image"
     />
     <span
-      className="modal__user-name"
+      className="modal__comment-author"
     >
-      Smith Allen
+      <span
+        className="modal__user-name"
+      >
+        Smith Allen
+      </span>
+      <span
+        className="modal__hours-status"
+      />
     </span>
-    <span
-      className="modal__hours-status"
-    />
     <span
       className="modal__dialog"
     >
@@ -104,13 +108,17 @@ exports[`CommentItem component should match snapshot 2`] = `
       imageSrc="/path/to/image"
     />
     <span
-      className="modal__user-name"
+      className="modal__comment-author"
     >
-      Smith Allen
+      <span
+        className="modal__user-name"
+      >
+        Smith Allen
+      </span>
+      <span
+        className="modal__hours-status"
+      />
     </span>
-    <span
-      className="modal__hours-status"
-    />
     <span
       className="modal__dialog"
     >
@@ -195,13 +203,17 @@ exports[`CommentItem component should match snapshot 3`] = `
       imageSrc="/path/to/image"
     />
     <span
-      className="modal__user-name"
+      className="modal__comment-author"
     >
-      Smith Allen
+      <span
+        className="modal__user-name"
+      >
+        Smith Allen
+      </span>
+      <span
+        className="modal__hours-status"
+      />
     </span>
-    <span
-      className="modal__hours-status"
-    />
     <span
       className="modal__dialog"
     >

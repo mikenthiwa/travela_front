@@ -3,7 +3,7 @@ const inputLabels = (editing) => ({
     label: 'Enter Amount in Dollars ($)'
   },
   center: {
-    label: editing ? 'Location' : 'Select Location'
+    label: editing ? 'Location' : 'Type the country'
   }
 });
 

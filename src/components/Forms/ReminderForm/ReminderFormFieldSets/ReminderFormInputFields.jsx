@@ -68,8 +68,9 @@ class ReminderFormInputFields extends Component {
             className: 'period',
             onChange: value => onReminderPeriodChange(value, reminderIndex),
           })}
+          <p className="expiry-text-mobile">To Expiry</p>
         </div>
-        <p>To Expiry</p>
+        <p className="expiry-text-desktop">To Expiry</p>
       </Fragment>
     );
   }
