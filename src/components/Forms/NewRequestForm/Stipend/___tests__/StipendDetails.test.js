@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import StipendDetails from '../StipendDetails';
 import travelStipendHelper from '../../../../../helper/request/RequestUtils';
 
-const trips = [ 
+const trips = [
   {
     bedId: 3,
     departureDate: '2019-02-19',
@@ -35,7 +35,7 @@ const stipends = [
       'id': 1
     },
     'center': {
-      'location': 'Lagos, Nigeria'
+      'location': 'Nigeria'
     }
   },
   {
@@ -46,7 +46,7 @@ const stipends = [
       'id': 1
     },
     'center': {
-      'location': 'Nairobi, Kenya'
+      'location': 'Kenya'
     }
   },
   {
@@ -57,7 +57,7 @@ const stipends = [
       'id': 1
     },
     'center': {
-      'location':'Kampala, Uganda',
+      'location':'Uganda',
     }
   }
 ];
@@ -66,9 +66,9 @@ const stipends = [
 describe('<StipendDetails />', () => {
 
   const { totalStipend, stipendSubTotals } = travelStipendHelper
-    .getAllTripsStipend(trips, stipends, 'multi'); 
+    .getAllTripsStipend(trips, stipends, 'multi');
 
-  const props = { 
+  const props = {
     isLoading: false,
     stipends,
     total: totalStipend,
@@ -99,7 +99,7 @@ describe('<StipendDetails />', () => {
     const wrapper = mount(<StipendDetails {...props} />);
     const stipendRows = wrapper.find('.single-trip');
     expect(stipendRows).toHaveLength(3);
-    expect(wrapper.find('.stipend-row .item').at(0).text()).toBe('Nairobi(NBO)');
+    expect(wrapper.find('.stipend-row .item').at(0).text()).toBe('Nairobi, Kenya');
   });
 
   it('should display stipend for a single to `Nairobi from Lagos`', () =>{
@@ -113,7 +113,7 @@ describe('<StipendDetails />', () => {
     expect(stipendRows).toHaveLength(1);
     const subTotal = stipendRows.at(0).find('.item').at(3).text().split(' ');
     const dailyRate = stipendRows.at(0).find('.item').at(1).text();
-    expect(wrapper.find('.stipend-row .item').at(0).text()).toBe('Nairobi(NBO)');
+    expect(wrapper.find('.stipend-row .item').at(0).text()).toBe('Nairobi, Kenya');
     expect(dailyRate).toBe('$ 100');
     const total = wrapper.find('.total-stipend').at(0);
     expect(total.text().includes(subTotal[1])).toBe(true);

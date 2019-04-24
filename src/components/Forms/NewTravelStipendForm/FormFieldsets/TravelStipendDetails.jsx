@@ -7,23 +7,16 @@ import formMetadata from '../../FormsMetadata/NewTravelStipendFormMetadata';
 class TravelStipendFieldset extends Component {
 
   renderfields = () => {
-    const { 
-      centers, 
-      handleShowEventError, isValidAmount, 
-      onChangeAmountInput, 
+    const {
+      centers,
+      editing,
+      handleShowEventError, isValidAmount,
+      onChangeAmountInput,
       isEmpty,
-      stipends,
       values,
+      getCountryChoices
     } = this.props;
-    const centersWithStipends = stipends.map(stipend => stipend.center.location);
-    const centerChoices = centers.map(center => center.location);
-    const finalCenterChoices = centerChoices.filter((center, i) => {
-      if(i > centerChoices.length -1) return false;
-      return !centersWithStipends.includes(center);
-    }
-    
-    );
-    if (values.center) finalCenterChoices.push(values.center);
+
     const { renderInput } = this.inputRenderer;
     return (
       <div>
@@ -31,11 +24,11 @@ class TravelStipendFieldset extends Component {
           <div className="input-group mdl-grid">
             <div className="spaces mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
               {
-                renderInput('center', 'dropdown-select', {
-                  choices: uniq(finalCenterChoices),
+                renderInput('center', 'filter-dropdown-select', {
+                  choices: uniq(getCountryChoices()),
                   size: '',
                   className: 'request{ uniq }dropdown stipend-location',
-                  id: 'user-location'
+                  readOnly: !!editing
                 })
               }
             </div>
@@ -52,8 +45,8 @@ class TravelStipendFieldset extends Component {
                 id: 'your-manager',
               })}
               {
-                <span 
-                  className={`${isValidAmount 
+                <span
+                  className={`${isValidAmount
                     || isEmpty ? 'hide-error': 'show-error'}`}
                 >
                   Amount should be a positive integer and not more than 1000
@@ -87,8 +80,8 @@ TravelStipendFieldset.propTypes = {
   onChangeAmountInput: PropTypes.func,
   isEmpty: PropTypes.bool,
   editing: PropTypes.bool,
-  stipends: PropTypes.array,
   values: PropTypes.object,
+  getCountryChoices: PropTypes.func.isRequired
 };
 
 TravelStipendFieldset.defaultProps = {
@@ -98,8 +91,7 @@ TravelStipendFieldset.defaultProps = {
   isEmpty: true,
   onChangeAmountInput: () => {},
   editing: false,
-  stipends: [],
-  values: {},
+  values: {}
 };
 
 export default TravelStipendFieldset;
