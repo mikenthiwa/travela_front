@@ -8,7 +8,7 @@ import deleteBtn from '../../../../images/icons/new-request-icons/deleteBtn.svg'
 class TravelDetailsItem extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       choices: [],
       bedOnEdit: null,
       gender: null,
@@ -18,7 +18,7 @@ class TravelDetailsItem extends Component {
     };
   }
 
- 
+
   componentDidMount() {
     const { itemId, editing, requestOnEdit, values } = this.props;
     this.loadState(requestOnEdit, itemId, editing, values);
