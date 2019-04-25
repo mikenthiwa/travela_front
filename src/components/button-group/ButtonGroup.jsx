@@ -130,6 +130,10 @@ class ButtonGroup extends PureComponent {
         <Button
           buttonClass={`bg-btn ${activeStatus === 'verified' ? 'bg-btn--active' : ''}`}
           responsiveText="Past"
+          badge={verifiedApprovalsCount}
+          showBadge={verifiedApprovalsCount > 0}
+          badgeClass={activeStatus === 'verified' ?
+            'bg-btn--with-badge--active' : 'bg-btn--with-badge__approvals--inactive'}
           buttonId="past-button"
           text="Past Verifications"
           disabled={verifiedApprovalsCount === 0}

@@ -21,6 +21,7 @@ const props = {
       picture: 'http://picture.com/gif'
     }
   },
+  myCenters: [],
   location: {
     search: 'search=gjg',
     pathname: 'requests'

@@ -19,10 +19,10 @@ export class Verifications extends Base {
   }
 
   componentDidMount () {
-    const { page, openModal, fetchUserApprovals, match: {params: {requestId}} } = this.props;
+    const { fetchUserApprovals, match: {params: {requestId}} } = this.props;
     const { searchQuery } = this.state;
     const prefix = (searchQuery.indexOf('?') < 0) ? '?' : '&';
-    fetchUserApprovals(`${searchQuery}${prefix}verified=true`);
+    fetchUserApprovals(`/travel-admin${searchQuery}${prefix}`);
     if(requestId){
       this.storeRequestIdApproval(requestId);
     }
@@ -63,8 +63,11 @@ export class Verifications extends Base {
 
   fetchFilteredApprovals = (query) => {
     const { history, fetchUserApprovals } = this.props;
+    history.location.search == '' ? localStorage.setItem('center', 'All Locations') : null;
+    const center = localStorage.getItem('center');
+    const centerQuery = center == 'All Locations' ? '' : '&'+'center='+center;
     const prefix = (query.indexOf('?') < 0) ? '?' : '&';
-    history.push(`/requests/my-verifications${query}`);
+    history.push(`/requests/my-verifications${query}${centerQuery}`);
     fetchUserApprovals(`${query}${prefix}verified=true`);
     this.setState(prevState => ({
       ...prevState,
@@ -107,13 +110,11 @@ export class Verifications extends Base {
 
   render() {
     const { approvals, getCurrentUserRole, history } = this.props;
-
     const { isLoading } = approvals;
     if (!isLoading && getCurrentUserRole.length > 0) {
       const allowedRoles = ['Travel Administrator', 'Super Administrator', 'Travel Team Member'];
       checkUserPermission(history, allowedRoles, getCurrentUserRole);
     }
-
     return (
       <Fragment>
         {this.renderVerificationsPaneHeader(approvals.isLoading )}

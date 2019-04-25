@@ -46,6 +46,20 @@ exports[`Render NavBar component should match snapshot 1`] = `
           onSubmit={[Function]}
         />
       </div>
+      <div
+        className="navbar__search-size mdl-cell--hide-phone"
+      >
+        <LocationDropDown
+          centers={Array []}
+          getCenter={[Function]}
+          urlLocation={
+            Object {
+              "pathname": "requests",
+              "search": "search=gjg",
+            }
+          }
+        />
+      </div>
       <nav
         className="mdl-navigation"
       >
@@ -168,7 +182,7 @@ exports[`Render NavBar component should match snapshot 1`] = `
       </div>
     </button>
     <div
-      className="navbar__search-size  mdl-cell--hide-desktop mdl-cell--hide-tablet"
+      className="navbar__onclick-search-size"
       style={
         Object {
           "display": "block",
