@@ -52,6 +52,12 @@
 
   .document-input__input-container__prompts__text > p{
     color: #3359DB;
+    @media only screen and (max-width: 700px) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    }
   }
 
   .progress-bar {

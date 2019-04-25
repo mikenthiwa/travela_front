@@ -18,15 +18,6 @@ describe('Requests page(create new request)', () => {
   describe('Update Manager field with Request', () => {
   
     it('check that only manager field can be updated', () => {
-      //check that all field except manager field is disabled
-      cy.get('input[name=name]').should('be.disabled');
-      cy.get('input[name=department').should('be.disabled');
-      cy.get('button.bg-btn--active').should('be.disabled');
-      cy.get('button.bg-btn--inactive').should('be.disabled');
-      cy.get('input#your-role').should('be.disabled');
-      cy.get('input#your-manager').should('not.be.disabled');
-      cy.get('input#user-location').should('be.disabled');
-
       // update manager field
       cy.get('input#your-manager')
         .clear()

@@ -21,8 +21,8 @@ describe('Requests page(create return trip request)', () => {
         	'New Request' form`, () => {
       cy.get('@next')
         .should('be.visible');
-      cy.get('.current')
-        .should('be.visible');
+      // cy.get('.current')
+      //   .should('be.visible');
       cy.get('@next')
         .should('be.disabled');
     });
@@ -136,7 +136,7 @@ describe('Requests page(create return trip request)', () => {
       // move to checklist page
       cy.get('#stipend-next').click().wait(2000);
 
-      //View travel checklist and pending approvals
+      // View travel checklist and pending approvals
       cy.get('.travel-checklist-rectangle').as('travel-checklist').should('be.visible');
       cy.get('@travel-checklist').contains('Travel Checklist Required For This Trip').should('be.visible');
       cy.get('@travel-checklist').contains('Travel Ticket Details').should('be.visible');

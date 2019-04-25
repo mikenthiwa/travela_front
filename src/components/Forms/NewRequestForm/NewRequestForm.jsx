@@ -100,7 +100,11 @@ class NewRequestForm extends PureComponent {
         trips: requestTrips,
         prevValues: values,
         prevTrips: requestTrips
-      }, () => this.checkSameDate());
+      }, () => {
+        this.checkLowerDate();
+        this.checkSameDate();
+        this.validate();
+      });
     }
   }
 
@@ -137,6 +141,7 @@ class NewRequestForm extends PureComponent {
       errors: {},
       hasBlankFields: true,
       isSameDate: false,
+      isLowerDate: false,
       inValidOtherReason: false,
       sameOriginDestination: true,
       checkBox: 'notClicked',
@@ -313,11 +318,14 @@ class NewRequestForm extends PureComponent {
       }),
       onPickDate
     );
-    selection !== 'oneWay' && this.checkSameDate();
+    // selection !== 'oneWay' &&
+    this.checkSameDate();
+    this.checkLowerDate();
   };
 
+  //dates for each trip cant be the same.
   checkSameDate = () => {
-    const {trips} = this.state;
+    const {trips, values} = this.state;
     const tripsLength = trips.length > 1 ? trips.length - 1 : trips.length;
     const tripsDate = [];
     for (let i = 0; i < tripsLength; i++) {
@@ -327,15 +335,31 @@ class NewRequestForm extends PureComponent {
     for (let i = 0; i < tripsDate.length; i++){
       theBool += tripsDate[i];
     }
-    if (theBool) {
+    if (theBool && trips[0].returnDate) {
       this.setState({isSameDate: true});
       const firstMatch = tripsDate.findIndex(trip => trip);
       trips[0].returnDate &&
       firstMatch !== -1 && toast
         .error(`Return date must be the greater than Departure date for Trip ${
-          tripsLength > 1 ? firstMatch + 1 : ''}`);
+          trips.length > 1 ? firstMatch + 1 : ''}`);
     } else  this.setState({isSameDate: false});
   };
+
+  //dates can be lower than the currents days date.
+  checkLowerDate = () => {
+    const {trips} = this.state;
+    const tripsLength = trips.length > 1 ? trips.length - 1 : trips.length;
+    const tripsDate = [];
+    for (let i = 0; i < tripsLength; i++) {
+      tripsDate.push(moment().isAfter(trips[i].departureDate, 'day'));
+    }
+    const firstMatch = tripsDate.findIndex(trip => trip);
+    if (firstMatch !== -1) {
+      this.setState({isLowerDate: true});
+      toast.error(`Date must be the greater than Today's Date for Trip ${
+        trips.length > 1 ? firstMatch + 1 : ''}`);
+    } else  this.setState({isLowerDate: false});
+  }
 
   resetTripArrivalDate = (id, dateName) => {
     this.setState(
@@ -384,8 +408,7 @@ class NewRequestForm extends PureComponent {
               ...prevState.values,
               [name]: places
             }
-          }),
-          this.validate
+          }), () => this.validate('bed-0')
         );
         const {selection} = this.state;
         if (selection !== 'oneWay') {
@@ -422,22 +445,19 @@ class NewRequestForm extends PureComponent {
     let {collapse, trips, values, selection, prevValues, prevTrips = []} = this.state;
     const tripType = event.target.value;
     const { requestOnEdit: { trips: nextTrips } } = this.props;
-    this.setState(
-      {
-        selection: tripType
-      },
-      this.validate
-    );
+    this.setState({selection: tripType});
     const newTrips = prevTrips.map((trip, index) => ({...trip, ...trips[index]}));
+    prevValues && prevValues['arrivalDate-0'] ? delete prevValues['arrivalDate-0'] : null;
+    values && values['arrivalDate-0'] ? delete values['arrivalDate-0'] : null;
     this.setState(
       {
         prevTrips: newTrips,
         prevValues: {...prevValues, ...values}
-      });
+      }, () => this.validate());
     if (tripType === 'multi' && !collapse) {
       let parentIds,
         secondTripStateValues = {};
-      if (editing || newTrips.length > 1) {
+      if (newTrips.length > 1) {
         parentIds = newTrips.length || nextTrips.length;
         trips = newTrips;
 
@@ -445,7 +465,7 @@ class NewRequestForm extends PureComponent {
         parentIds = 2;
         trips = [].concat([trips[0] || {}, {
           origin: trips[0].destination,
-          departureDate: trips[0].returnDate
+          departureDate: null,
         }]);
       }
       secondTripStateValues = (editing && newTrips.length > 1) ? {} : this.getDefaultTripStateValues(1, trips[1]);
@@ -453,7 +473,7 @@ class NewRequestForm extends PureComponent {
         parentIds,
         trips,
         values: {...prevState.prevValues, ...secondTripStateValues}
-      }));
+      }), () => this.validate());
     } else if (!collapse) {
       this.setState(prevState => {
         const {newValues, trips} = this.refreshValues(prevState, tripType);
@@ -461,9 +481,10 @@ class NewRequestForm extends PureComponent {
           parentIds: 1,
           values: newValues,
           isSameDate: false,
+          isLowerDate: false,
           trips: trips || [{}]
         };
-      });
+      }, () => this.validate());
     } else {
       this.setState(prevState => {
         const {newValues, trips} = this.refreshValues(prevState, tripType);
@@ -472,17 +493,29 @@ class NewRequestForm extends PureComponent {
           values: newValues,
           trips: trips || [{}]
         };
-      });
+      }, () =>this.validate());
       this.collapsible();
     }
-    selection !== 'oneWay' && this.checkSameDate();
+
+    trips[0].travelReasons &&
+      !trips[0].otherTravelReasons &&
+         this.handleReason(values['reasons-0'],0,null);
+
+    this.checkLowerDate();
+    this.checkSameDate();
+    selection !== 'oneWay'  && setTimeout(() => this.validate('reasons-0'), 100);
+    tripType === 'return'  && !values['arrivalDate-0'] ?
+      (() => {
+        setTimeout(this.setState({isSameDate: true}), 150);
+      })():
+      null;
   };
 
   getDefaultTripStateValues = (index, valueObj) => ({
     [`origin-${index}`]: valueObj && valueObj.origin || '',
     [`destination-${index}`]: '',
     [`arrivalDate-${index}`]: null,
-    [`departureDate-${index}`]: valueObj && moment(valueObj.departureDate) || null,
+    [`departureDate-${index}`]: null,
     [`otherReasons-${index}`]: '',
     [`reasons-${index}`]: '',
     [`bed-${index}`]: '',
@@ -504,6 +537,10 @@ class NewRequestForm extends PureComponent {
       return {newValues, trips: slicedTrips};
     }
     if (tripType === 'return') {
+      let newTrip = {...trips[0]};
+      delete newValues['arrivalDate-0'];
+      delete newTrip.returnDate;
+      trips[0] = newTrip;
       const slicedTrips = trips.slice(0, 1);
       return {newValues, trips: slicedTrips};
     }
@@ -881,7 +918,7 @@ class NewRequestForm extends PureComponent {
     selection, creatingRequest, disableOnChangeProfile, collapse,
     commentTitle, currentTab, editing,
   ) => {
-    const {isLoading, isSameDate, inValidOtherReason} = this.state;
+    const {isLoading, isSameDate, isLowerDate, inValidOtherReason} = this.state;
     const { requestOnEdit, userData, comments } = this.props;
     return (
       <div className="trip__tab-body">
@@ -901,6 +938,7 @@ class NewRequestForm extends PureComponent {
               ? false : true
           }
           isSameDate={isSameDate}
+          isLowerDate={isLowerDate}
           inValidOtherReason={inValidOtherReason}
           sameOriginDestination={sameOriginDestination}
           selection={selection}

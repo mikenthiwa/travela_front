@@ -18,12 +18,15 @@ describe('Requests Page(view request details)', () => {
       .clear()
       .type('Another test user');
     cy.get('button[name=gender]:last').click();
-    cy.get('div[name=department]').click();
-    cy.get('div[name=department] > ul > li#choice:first').click();
     cy.get('input#your-manager').click();
     cy.get('input#your-role')
       .clear()
       .type('Software developer');
+
+    cy.get('button.bg-btn--active#submit')
+      .should('not.be.disabled')
+      .click();
+
     cy.get('input[name=origin-0]')
       .type('Kigali')
       .wait(2000)
@@ -40,22 +43,45 @@ describe('Requests Page(view request details)', () => {
     cy.get('@today')
       .next()
       .click();
-    cy.get('div[name=bed-0]').click();
-    cy.get('div[name=bed-0] > ul > li#choice:first')
+
+    cy.get('div.value').click();
+    cy.get('ul.select-menu--active > li > div')
+      .first()
       .wait(2000)
+      .click({ force: true });
+    cy.get('textarea[name=otherReasons-0]')
+      .type('Other Travel Reasons');
+    cy.get('div[name=bed-0] > div.value').wait(2000)
       .click();
+    cy.get('div[name=bed-0] > ul > li > div#choice:first')
+      .wait(2000)
+      .click({force: true});
+
     // Submit form
     cy.get('button#submit')
       .as('submit')
       .should('not.be.disabled')
       .click();
+
+    //Click the next button
+    cy.get('button.bg-btn--active')
+      .should('not.be.disabled')
+      .click();
+
+    cy.get('button#submit')
+      .as('submit')
+      .should('not.be.disabled')
+      .click();
+
     cy.wait('@createRequest').then(createdRequest => {
       request = createdRequest.response.body.request;
     });
   });
 
-  it(`should open the request details modal when the
+  it(`should open the request details when the
   requestId is clicked`, () => {
+    cy.authenticateUser();
+    cy.visit('/requests').wait(3000);
     cy.server();
     cy.route(`${baseAPI}/requests/${request.id}`).as(
       'getRequest'
@@ -66,54 +92,47 @@ describe('Requests Page(view request details)', () => {
       .eq(0)
       .find('.button-outline')
       .click();
-    cy.get('.modal')
-      .should('be.visible')
-      .contains(`${request.id} Request Details`);
-    cy.get('.request-details').should('be.visible');
+    cy.get('.request-details-container')
+      .should('be.visible');
   });
 
   it('should display details of the request', () => {
-    cy.get('.modal').then(() => {
-      cy.get('.lable-text').contains('Manager Stage');
-      cy.get('.modal__user-info').contains('Another test user'); // user's name
-      cy.get('.modal__user-info > img').should(
-        'have.attr',
-        'src',
-        request.picture
-      ); // user's avatar
-      cy.get('.user-role').contains('Software developer, Talent & Development');
-      cy.get('.request__status--open').contains('Open');
-      cy.get('.request-type').contains('Return Trip');
-      cy.get('.modal__trip-detail')
-        .eq(0)
-        .contains('Kigali, Rwanda'); // origin
-      cy.get('.modal__trip-detail')
-        .eq(1)
-        .contains('Nairobi, Kenya'); //destination
-      cy.get('.modal__trip-detail')
-        .eq(2) // departure date
-        .contains(moment(request.trips[0].departureDate).format('DD MMM YYYY'));
-      cy.get('.modal__trip-detail')
-        .eq(3) // return date
-        .contains(moment(request.trips[0].returnDate).format('DD MMM YYYY'));
-      cy.get('.modal__add-comment')
-        .should('be.visible')
-        .contains('Add a comment');
-    });
+    cy.get('.request__tab-card')
+      .first()
+      .within((el) => {
+        cy.get('.tab-title')
+          .contains('Manager Approval');
+        cy.get('.foot-text')
+          .contains('You are currently here');
+      });
+
+    cy.get('.trip-details-pod')
+      .should('be.visible');
+
+    cy.get('.trip-details-pod > thead')
+      .as('tablehead');
+
+    cy.get('@tablehead')
+      .should('be.visible')
+      .contains('Flight Route');
+
+    cy.get('@tablehead')
+      .should('be.visible')
+      .contains('Travel Dates');
+
+    cy.get('@tablehead')
+      .should('be.visible')
+      .contains('Accommodation');
+
+    cy.get('div.request-details-container')
+      .should('be.visible');
   });
 
   it('displays the WSISWYG editor', () => {
-    cy.get('.editor__editor-form').wait(5000).within(() => {
-      cy.get('.quill').should('be.visible');
-      cy.get('.editor__btn-wrap > button#post-submit')
-        .contains('Post')
-        .should('be.disabled');
-    });
-  });
+    cy.get('.requestDetails__add-comment')
+      .click();
 
-  it(`closes the request details modal when the
-  close button is clicked`, () => {
-    cy.get('.modal-close').click();
-    cy.get('.modal').should('not.be.visible');
+    cy.get('button#post-submit')
+      .should('be.disabled');
   });
 });
