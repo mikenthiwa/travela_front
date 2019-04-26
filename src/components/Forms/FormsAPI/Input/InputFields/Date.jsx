@@ -34,6 +34,8 @@ class DateInput extends Component {
     } = this.props;
     const { selectedDate } = this.state;
     const timeClasses =  `${showTimeSelect ? 'time-wrapper': ''}  ${/HH:mm/.test(timeFormat) ? 'twenty_four_h': ''}`;
+
+    const onChangeRaw = (date, event) => this.handleChange(moment(date), event, true);
     return (
       <div className={`date-wrapper ${className} ${timeClasses}`} id={`${name}_date`}>
         <DatePicker
@@ -44,7 +46,7 @@ class DateInput extends Component {
           placeholderText={`MM/DD/YYYY${showTimeSelect ? ' HH:mm': ''}`}
           selected={selectedDate}
           onChange={(date, event) => this.handleChange(date, event)}
-          onChangeRaw={(date, event) => this.handleChange(moment(date), event, true)}
+          onChangeRaw={showTimeSelect && onChangeRaw}
           onBlur={onBlur} name={name}
           minDate={minimumDate} maxDate={maximumDate}
           minTime={minTime} maxTime={maxTime}

@@ -56,13 +56,14 @@ class SubmitArea extends Component{
     submitButton = (
       hasBlankFields, loading, isCreating,
       sameOriginDestination, disableOnChangeProfile,
-      send, nextStep, isSameDate, inValidOtherReason
+      send, nextStep, isSameDate, isLowerDate, inValidOtherReason
     ) => {
       return (
         <button 
           type="submit"
           onClick={e => this.handleSubmitButtonClick(e, nextStep)}
-          disabled={inValidOtherReason || isSameDate || hasBlankFields || loading || isCreating ||
+          disabled={isLowerDate ||inValidOtherReason || isSameDate
+           || hasBlankFields || loading || isCreating ||
            (sameOriginDestination && disableOnChangeProfile)}
           className="bg-btn bg-btn--active"
           id="submit">
@@ -182,7 +183,7 @@ class SubmitArea extends Component{
     render(){
       const { hasBlankFields,sameOriginDestination, onCancel, send, modalType, comments,
         onEditCancel, selection, loading, isCreating, disableOnChangeProfile, nextStep,
-        editing, isSameDate, inValidOtherReason } = this.props;
+        editing, isSameDate, isLowerDate, inValidOtherReason } = this.props;
      
       return(
         <fieldset className={send==='Next' ?'submit__area-border': null}>
@@ -192,7 +193,7 @@ class SubmitArea extends Component{
             { this.submitButton(
               hasBlankFields, loading, isCreating,
               sameOriginDestination, disableOnChangeProfile,
-              send, nextStep, isSameDate, inValidOtherReason
+              send, nextStep, isSameDate, isLowerDate, inValidOtherReason
             )
             }
           </div>
@@ -226,6 +227,7 @@ SubmitArea.propTypes = {
   editing: PropTypes.bool,
   comments: PropTypes.array,
   isSameDate: PropTypes.bool,
+  isLowerDate: PropTypes.bool,
   inValidOtherReason : PropTypes.bool
 };
 
@@ -248,6 +250,7 @@ SubmitArea.defaultProps = {
   editing: false,
   comments: [],
   isSameDate: false,
+  isLowerDate: false,
   inValidOtherReason: false
 };
 

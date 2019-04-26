@@ -25,6 +25,9 @@ const initialState = {
   modal: {
     modal: {}
   },
+  approvals: {
+    myCenters: []
+  },
   notifications: {
     notifications: [],
     singleNotificationRead: 0
@@ -55,7 +58,10 @@ describe('Layout component', () => {
       history: {
         push: jest.fn()
       },
-      logout: jest.fn()
+      approvals: {
+        myCenters: []
+      },
+      logout: jest.fn(),
     };
 
     let wrapper;

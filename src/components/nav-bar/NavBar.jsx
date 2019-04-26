@@ -10,6 +10,7 @@ import mobileTravel from '../../images/travela-mobile.svg';
 import icon from '../../images/drop-down-icon.svg';
 import notification from '../../images/notification.svg';
 import SearchBar from '../search-bar/SearchBar';
+import LocationDropDown from '../LocationDropDown';
 import Button from '../buttons/Buttons';
 import ImageLink from '../image-link/ImageLink';
 import { logoutUser } from '../../helper/userDetails';
@@ -20,9 +21,8 @@ export class NavBar extends PureComponent {
 
   state = {
     hideLogoutDropdown: true,
-    keyword: ''
+    keyword: '',
   };
-
   
   debouncer = debounce(
     (history, pathName, queryString) =>
@@ -52,6 +52,13 @@ export class NavBar extends PureComponent {
       this.debouncer.cancel();
       this.debouncer(history, location.pathname, queryString);
     });
+  }
+
+  getCenter = (center) => {
+    const { history, location } = this.props;
+    const queryString = Utils.buildQuery(location.search, 'center', center);
+    center === 'All Locations' ? history.push(`${location.pathname}`) 
+      : history.push(`${location.pathname}${queryString}`);
   }
 
   onSubmit = () => {
@@ -174,7 +181,7 @@ export class NavBar extends PureComponent {
   }
 
   renderHeader(handleShowDrawer){
-
+    const { myCenters, location } = this.props;
     return(
       <div className="mdl-layout__header-row">
         <div className="navbar__nav-size navbar__logo-icons">
@@ -186,6 +193,13 @@ export class NavBar extends PureComponent {
         <div className="mdl-layout-spacer" />
         <div className="navbar__search-size mdl-cell--hide-phone">
           <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} />
+        </div>
+        <div className="navbar__search-size mdl-cell--hide-phone">
+          <LocationDropDown 
+            centers={myCenters}
+            urlLocation={location}
+            getCenter={this.getCenter}
+          />
         </div>
         <nav className="mdl-navigation">
           {this.renderNotification()}
@@ -201,9 +215,7 @@ export class NavBar extends PureComponent {
   render() {
     const {handleHideSearchBar, handleShowDrawer, openSearch, shouldOpen } = this.props;
     let showSearch='none';
-    if(openSearch) {
-      showSearch='block';
-    }
+    if(openSearch) { showSearch='block';}
     return (
       <div className={shouldOpen ? '' : 'header-container'}>
         <header className="mdl-layout__header navbar__layout_header">
@@ -235,20 +247,23 @@ NavBar.propTypes = {
   openSearch: PropTypes.bool,
   shouldOpen: PropTypes.bool,
   handleShowDrawer: PropTypes.func,
-  notifications: PropTypes.array
+  notifications: PropTypes.array,
+  myCenters: PropTypes.array,
 };
 
 NavBar.defaultProps = {
   openSearch: false,
   shouldOpen: false,
   handleShowDrawer:()=>{},
-  notifications: []
+  notifications: [],
+  myCenters: []
 };
 
 const mapStateToProps = state => ({
   user: state.auth.user,
   ...state.notifications,
   ...state.modal.modal,
+  myCenters: state.approvals.myCenters
 });
 
 export default withRouter(connect(mapStateToProps)(NavBar));

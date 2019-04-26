@@ -18,16 +18,17 @@ describe('User editing request', () => {
       .clear()
       .type('Mr White');
     cy.get('button[name=gender]:last').click();
-    cy.get('div[name=department]').click();
-    cy.get('div[name=department] > ul > li#choice:first').click();
+    cy.get('input[name=department]').click();
+    // cy.get('input[name=department] > ul > li#choice:first').click();
     cy.get('input#your-manager').click();
     cy.get('input#your-role')
       .clear()
       .type('Software developer');
+    cy.get('button#submit').click();
     cy.get('input[name=origin-0]')
       .type('Kampala')
       .wait(2000)
-      .type('{downarrow}{enter}');
+      .type('{downarrow}{enter}').click({ force: true });
     cy.get('input[name=destination-0]')
       .type('Nairobi')
       .wait(2000)
@@ -41,11 +42,31 @@ describe('User editing request', () => {
       .next()
       .wait(2000)
       .click();
-    cy.get('div[name=bed-0]').wait(2000).click();
-    cy.get('div[name=bed-0] > ul > li#choice:first')
+    cy.get('div.value').click();
+    cy.get('ul.select-menu--active > li > div')
+      .first()
       .wait(2000)
+      .click({ force: true });
+    cy.get('textarea[name=otherReasons-0]')
+      .type('Other Travel Reasons');
+    cy.get('div[name=bed-0] > div.value').wait(2000)
       .click();
-    // Submit form
+    cy.get('div[name=bed-0] > ul > li > div#choice:first')
+      // .first()
+      .wait(2000)
+      .click({force: true});
+
+    // click the next button
+    cy.get('button#submit')
+      .as('submit')
+      .should('not.be.disabled')
+      .click();
+
+    // click the next button
+    cy.get('button.bg-btn--active')
+      .should('not.be.disabled')
+      .click();
+
     cy.get('button#submit')
       .as('submit')
       .should('not.be.disabled')
@@ -63,25 +84,8 @@ describe('User editing request', () => {
     cy.get('.table__menu-list').should('be.visible');
     cy.get('#iconBtn').click();
 
-    // modal is displayed
-    cy.get('.modal')
-      .wait(3000)
-      .as('request-modal')
-      .should('be.visible');
-
-    // pre-filled fields
-    cy.get('input[name=name]').should('have.value', 'Mr White');
-    cy.get('.input > .bg-btn--active').contains('Male');
-    cy.get('.request_dropdown [for=department] + div > div[name=department] > div.value').contains('Talent & Development');
-    cy.get('label[for=role] + div > div.value > input#your-role').should('have.value', 'Software developer');
-    cy.get('input[name=origin-0]').should('have.value', 'Kampala, Uganda');
-    cy.get('input[name=destination-0]').wait(2000).should('have.value', 'Nairobi, Kenya');
-    cy.get('input[name=departureDate-0]').wait(2000).should('have.value', moment().add(1, 'days').format('MM/DD/YYYY'));
-    cy.get('input[name=arrivalDate-0]').wait(2000).should('have.value', moment().add(2, 'days').format('MM/DD/YYYY'));
-
     // predefined request type selected
     cy.get('input#return').should('be.checked');
-    cy.get('.modal-close').wait(3000).click();
   });
 
   it('should display errors when fields are cleared and the submit button should be disabled', () => {
@@ -92,16 +96,11 @@ describe('User editing request', () => {
     cy.get('.table__menu-list').should('be.visible');
     cy.get('#iconBtn').click();
 
-    // modal is displayed
-    cy.get('.modal')
-      .wait(3000)
-      .as('request-modal')
-      .should('be.visible');
-
     cy.get('input[name=origin-0]').wait(3000).clear();
     cy.get('input[name=destination-0]').wait(3000).clear();
-    cy.get('input[name=name]').clear();
-    cy.get('label[for=role] + div > div.value > input.occupationInput').clear();
+    cy.get('input[name=departureDate-0]').wait(3000).clear();
+    // cy.get('input[name=name]').clear();
+    // cy.get('label[for=role] + div > div.value > input.occupationInput').clear();
     cy.get('#submit').should('be.disabled');
     cy.get('input[name=origin-0] ~ span.error')
       .should('be.visible')
@@ -109,13 +108,6 @@ describe('User editing request', () => {
     cy.get('input[name=destination-0] ~ span.error')
       .should('be.visible')
       .contains('This field is required');
-    cy.get('input[name=name] ~ span.error')
-      .should('be.visible')
-      .contains('This field is required');
-    cy.get('label[for=role] ~ span')
-      .should('be.visible')
-      .contains('This field is required');
-    cy.get('.modal-close').click();
   });
 
   it('should allow the user to edit the request and see a success message', () => {
@@ -139,13 +131,24 @@ describe('User editing request', () => {
       .wait(3000)
       .type('{downarrow}{enter}');
 
+    //click the next button
+    cy.get('button.bg-btn--active')
+      .should('not.be.disabled')
+      .click();
+
+    //Update the request
+    cy.get('button#submit')
+      .as('submit')
+      .should('not.be.disabled')
+      .click();
+
     // Toast success should be visible
     cy.get('.toast-success:contains("Request updated")')
       .should('be.visible');
 
     // confirm that the edit shows on the tabl
     cy.get('.table__body > :nth-child(1) > .pl-sm-100').contains('One-way');
-    cy.get('td:nth-child(3):first').contains('Lagos, Nigeria');
+    cy.get('td:nth-child(3):first').contains('Lagos');
   });
 
   it('should only allow one to edit an open request', () => {

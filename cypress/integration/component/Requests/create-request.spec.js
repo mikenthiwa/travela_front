@@ -113,6 +113,15 @@ describe('Requests page(create new request)', () => {
       cy.get('.total-title').contains('Total')
         .as('Total').should('be.visible');
 
+      cy.get('button.bg-btn--active')
+        .should('not.be.disabled')
+        .click();
+
+      cy.get('button#submit')
+        .as('submit')
+        .should('not.be.disabled')
+        .click();
+
       cy.wait('@getStipends').then(stipends => {
         allStipends = stipends.response.body.stipends;
         calculatedSipend = RequestUtils.calculateSingleStipend(
@@ -161,7 +170,8 @@ describe('Requests page(create new request)', () => {
           .contains('Travel request created successfully. Please follow up with your line manager for approval');
       });
 
-      //delete the request from the list of created requests
+    });
+    it('should delete the request from the list of created requests', () => {
       cy.authenticateUser();
       cy.visit('/requests').wait(3000);
       cy.get('i.fa.fa-ellipsis-v').first().click();

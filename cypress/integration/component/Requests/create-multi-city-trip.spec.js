@@ -58,7 +58,7 @@ describe('Should create multiple trips', () => {
       .click();
     cy.get('textarea').first().type('Boot Camp');
     cy.get('input[name=origin-1]')
-      .should('have.value', 'Lagos, Nigeria');
+      .should('have.value', 'Lagos, Portugal');
     cy.get('input[name=destination-1]').as('destination-1')
       .type('Kampala')
       .wait(2000)
@@ -194,6 +194,14 @@ describe('Should create multiple trips', () => {
       .as('DailyRate').should('be.visible');
     cy.get('.total-title').contains('Total')
       .as('Total').should('be.visible');
+
+    // Click the next button
+    cy.get('button.bg-btn--active')
+      .click();
+
+    //Click on the submit button
+    cy.get('button#submit')
+      .click();
 
     cy.wait('@getStipends').then(stipends => {
       allStipends = stipends.response.body.stipends;

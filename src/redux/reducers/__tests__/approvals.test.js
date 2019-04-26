@@ -70,6 +70,7 @@ describe('Approvals Reducer', () => {
       budgetapprovals: [],
       isLoading: false,
       message: '',
+      myCenters: [],
       openApprovalsCount: 0,
       pastApprovalsCount: 0,
       pagination: '',

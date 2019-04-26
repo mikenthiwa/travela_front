@@ -23,12 +23,9 @@
     font-size: 15px;
     line-height: 20px;
     margin: 0;
-    padding: 20px 0;
+    padding: 20px 0 10px;
     font-family: "DIN Pro";
-    
-    @media (max-width: 661px) and (min-width: 565px) {
-      font-size: smaller;
-    }
+    height: 40px;
   }
 
   &__stats {
