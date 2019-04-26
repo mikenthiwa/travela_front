@@ -1,6 +1,33 @@
-@media screen and (min-width: 320px) and (max-width: 787px){
+@media screen and (min-width: 320px) and (max-width: 787px) {
   .analytics{
     margin: 0 4px 0 4px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
+
+@media screen and (min-width: 1024px) {
+  .analytics{
+    grid-template-columns: repeat( auto-fit, minmax(31%, 1fr) ); 
+  }
+
+}
+
+@media screen and (max-width: 1024px) and (min-width: 568px) { 
+  .analytics{
+      grid-template-columns: repeat( 2, minmax(250px, 1fr) ); 
+      grid-template-areas:
+        "area1 area2"
+        "area3 area4"
+        "area5 area6";
+
+      .visiting-card {
+        grid-area: area3;
+      }
+
+      .leaving-card {
+        grid-area: area4;
+        
+      }
+  }
+
+}
+
