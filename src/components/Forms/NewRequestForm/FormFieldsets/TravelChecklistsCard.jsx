@@ -26,7 +26,7 @@ class TravelChecklistsCard extends Component {
     const allChecklistItems = RequestUtils.getDefaultChecklist(checklistItems, trips);
     const newChecklist = RequestUtils.removeLocationChecklist(allChecklistItems, userData);
     return (
-      <div className="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-phone">
+      <div className="mdl-cell mdl-cell--7-col mdl-cell--12-col-tablet mdl-cell--12-phone">
         <div className="travel-checklist-rectangle">
           <div className="travel-checklist-text">
             <p> These are the checklist items that you will be required to submit for this trip </p> 
