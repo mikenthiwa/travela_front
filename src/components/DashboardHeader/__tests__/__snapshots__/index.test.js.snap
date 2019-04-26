@@ -262,7 +262,7 @@ exports[`<DashboardHeader /> renders as expected 1`] = `
             >
               <input
                 readOnly={true}
-                value="Apr 16, 2019"
+                value="Apr 24, 2019"
               />
             </span>
             <span
@@ -271,7 +271,7 @@ exports[`<DashboardHeader /> renders as expected 1`] = `
             >
               <input
                 readOnly={true}
-                value="Apr 16, 2019"
+                value="Apr 24, 2019"
               />
             </span>
           </div>
@@ -893,7 +893,7 @@ exports[`<DashboardHeader /> renders as expected 1`] = `
                 </span>
               </button>
               <button
-                className="rdrDay rdrDayToday"
+                className="rdrDay"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
@@ -910,15 +910,6 @@ exports[`<DashboardHeader /> renders as expected 1`] = `
                 }
                 type="button"
               >
-                <span
-                  className="rdrStartEdge rdrEndEdge"
-                  key="0"
-                  style={
-                    Object {
-                      "color": "#3d91ff",
-                    }
-                  }
-                />
                 <span
                   className="rdrDayNumber"
                 >
@@ -1110,7 +1101,7 @@ exports[`<DashboardHeader /> renders as expected 1`] = `
                 </span>
               </button>
               <button
-                className="rdrDay"
+                className="rdrDay rdrDayToday"
                 onBlur={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
@@ -1127,6 +1118,15 @@ exports[`<DashboardHeader /> renders as expected 1`] = `
                 }
                 type="button"
               >
+                <span
+                  className="rdrStartEdge rdrEndEdge"
+                  key="0"
+                  style={
+                    Object {
+                      "color": "#3d91ff",
+                    }
+                  }
+                />
                 <span
                   className="rdrDayNumber"
                 >

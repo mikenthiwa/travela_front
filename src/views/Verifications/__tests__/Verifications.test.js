@@ -40,7 +40,10 @@ const props = {
     isLoading: false
   },
   history: {
-    push: jest.fn()
+    push: jest.fn(),
+    location: {
+      search: ''
+    },
   },
   location: {
     search: ''
@@ -69,94 +72,93 @@ const initialState = {
 
 const store = mockStore(initialState);
 
-describe('<VerificationsPage>', () => {
-  it('should render the Verifications page without crashing', () => {
-    const wrapper = shallow(
+it('should render the Verifications page without crashing', () => {
+  const wrapper = shallow(
+    <MemoryRouter>
+      <Verifications {...props} />
+    </MemoryRouter>
+  );
+  expect(wrapper.find('Verifications').length).toBe(1);
+  wrapper.unmount();
+}); 
+
+it('calls the onPageChange method', () => {
+  const wrapper = mount(
+    <Provider store={store}>
       <MemoryRouter>
         <Verifications {...props} />
       </MemoryRouter>
-    );
-    expect(wrapper.find('Verifications').length).toBe(1);
-    wrapper.unmount();
-  }); 
+    </Provider>
+  );
+  const spy = sinon.spy(
+    wrapper.find(Verifications).instance(),
+    'fetchFilteredApprovals'
+  );
+  wrapper.find('#next-button').simulate('click');
+  expect(spy.calledOnce).toEqual(true);
+  wrapper.find('#previous-button').simulate('click');
+  wrapper.unmount();
+});
 
-  it('calls the onPageChange method', () => {
-    const wrapper = mount(
+it('calls get entries with limit on select items per page', () => {
+  const wrapper = mount(
+    <Provider store={store}>
+      <MemoryRouter>
+        <Verifications {...props} />
+      </MemoryRouter>
+    </Provider>
+  );
+  const spy = sinon.spy(
+    wrapper.find(Verifications).instance(),
+    'getEntriesWithLimit'
+  );
+  wrapper
+    .find('.dropdown__list__item')
+    .first()
+    .simulate('click');
+  expect(spy.calledOnce).toEqual(true);
+  wrapper.unmount();
+});
+
+describe('Verifications page filters', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
           <Verifications {...props} />
         </MemoryRouter>
       </Provider>
     );
-    const spy = sinon.spy(
-      wrapper.find(Verifications).instance(),
-      'fetchFilteredApprovals'
-    );
-    wrapper.find('#next-button').simulate('click');
-    expect(spy.calledOnce).toEqual(true);
-    wrapper.find('#previous-button').simulate('click');
+  });
+
+  afterEach(() => {
     wrapper.unmount();
   });
 
-  it('calls get entries with limit on select items per page', () => {
-    const wrapper = mount(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Verifications {...props} />
-        </MemoryRouter>
-      </Provider>
-    );
-    const spy = sinon.spy(
-      wrapper.find(Verifications).instance(),
-      'getEntriesWithLimit'
-    );
-    wrapper
-      .find('.dropdown__list__item')
-      .first()
-      .simulate('click');
-    expect(spy.calledOnce).toEqual(true);
-    wrapper.unmount();
+  it('it filters Verifications by status=open', () => {
+    const openButton = wrapper.find('#open-button');
+    openButton.simulate('click');
+    expect(props.history.push).toHaveBeenCalledWith('/requests/my-verifications?page=1&status=approved');
   });
 
-  describe('Verifications page filters', () => {
-    let wrapper;
+  it('it filters Verifications by status=past', () => {
+    const openButton = wrapper.find('#past-button');
+    openButton.simulate('click');
+    expect(props.history.push).toHaveBeenCalledWith('/requests/my-verifications?page=1&status=verified');
+  });
 
-    beforeEach(() => {
-      wrapper = mount(
-        <Provider store={store}>
-          <MemoryRouter>
-            <Verifications {...props} />
-          </MemoryRouter>
-        </Provider>
-      );
-    });
+  it('it fetches all Verifications by clicking all', () => {
+    const openButton = wrapper.find('#all-button');
+    openButton.simulate('click');
+    expect(props.history.push).toHaveBeenCalledWith('/requests/my-verifications?page=1');
+  });
 
-    afterEach(() => {
-      wrapper.unmount();
-    });
-
-    it('it filters Verifications by status=open', () => {
-      const openButton = wrapper.find('#open-button');
-      openButton.simulate('click');
-      expect(props.history.push).toHaveBeenCalledWith('/requests/my-verifications?page=1&status=approved');
-    });
-
-    // it('it filters Verifications by status=past', () => {
-    //   const openButton = wrapper.find('#past-button');
-    //   openButton.simulate('click');
-    //   expect(props.history.push).toHaveBeenCalledWith('/requests/my-verifications?page=1&status=verified');
-    // });
-
-    it('it fetches all Verifications by clicking all', () => {
-      const openButton = wrapper.find('#all-button');
-      openButton.simulate('click');
-      expect(props.history.push).toHaveBeenCalledWith('/requests/my-verifications?page=1');
-    });
-
-    it('updates searchQuery on receiving receiving location props', () => {
-      const approvals = wrapper.find(Verifications);
-      approvals.instance().fetchFilteredApprovals('?status=open');
-      expect(approvals.instance().state.searchQuery).toEqual('?status=open');
-    });
+  it('updates searchQuery on receiving receiving location props', () => {
+    const approvals = wrapper.find(Verifications);
+    approvals.instance().fetchFilteredApprovals('?status=open');
+    expect(approvals.instance().state.searchQuery).toEqual('?status=open');
   });
 });
+

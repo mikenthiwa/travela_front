@@ -1,6 +1,6 @@
 .searchbar {
   &__search {
-    margin: 0 100px;
+    margin: 0 4px;
     align-items: center;
     justify-content: center;
     @media(max-width: 479px) {
@@ -48,7 +48,7 @@
     display: -moz-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
-
+ 
     @media (max-width: 781px) {
       width: 210px;
     }

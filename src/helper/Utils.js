@@ -9,7 +9,7 @@ import definedRanges from './constants';
 class Utils {
   static getRegex(query) {
     let regex = new RegExp(`${query}=[0-9]+`);
-    if (query === 'search') {
+    if (query === 'search' || 'center') {
       regex = new RegExp(`${query}=([^&]*)`);
     }
     return regex;
