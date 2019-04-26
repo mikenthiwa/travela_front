@@ -34,7 +34,7 @@ export class CommentBox extends Component {
   };
 
   urlDetector = (html) => {
-    const pattern = /(http[s]?:\/\/)?[^\s(["<,>]*\.[^\s[",><]*/gim;
+    const pattern = /(http[s]?:\/\/)?[^\s(["<,>]*\.[^\s[",><]+/gim;
     return html.replace(pattern, url => `<a href=${url} target=_blank>${url}</a>`);
   };
 
