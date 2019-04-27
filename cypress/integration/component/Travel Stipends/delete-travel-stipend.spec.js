@@ -4,7 +4,7 @@ describe('Delete Travel Stipend', () => {
   before(() => {
     cy.authenticateUser();
     cy.server();
-    cy.visit('/settings/travel-stipends').wait(3000);
+    cy.visit('/travel-cost/travel-stipends').wait(3000);
   });
 
   it('creates a country allocation stipend', () => {
