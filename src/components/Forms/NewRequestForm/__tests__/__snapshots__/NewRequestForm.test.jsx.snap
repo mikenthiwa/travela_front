@@ -18,10 +18,10 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="request__tab"
+        className="request__tab mdl-grid"
       >
         <div
-          className="request__tab-card current_request incomplete"
+          className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone current_request incomplete"
           key="1"
         >
           <div
@@ -87,7 +87,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
           </div>
         </div>
         <div
-          className="request__tab-card  incomplete"
+          className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone  incomplete"
           key="2"
         >
           <div
@@ -150,7 +150,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
           />
         </div>
         <div
-          className="request__tab-card  incomplete"
+          className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone  incomplete"
           key="3"
         >
           <div
@@ -229,7 +229,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
           />
         </div>
         <div
-          className="request__tab-card  incomplete"
+          className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone  incomplete"
           key="4"
         >
           <div
@@ -322,10 +322,10 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
             className="personal-rectangle"
           >
             <div
-              className="input-group "
+              className="input-group mdl-grid "
             >
               <div
-                className="spaces"
+                className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
               >
                 <div
                   className="form-input request_dropdown "
@@ -361,7 +361,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                 </div>
               </div>
               <div
-                className="spaces"
+                className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
               >
                 <div
                   className="form-input  "
@@ -412,44 +412,48 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                 </div>
               </div>
               <div
-                className="form-input request_dropdown "
+                className="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
               >
-                <label
-                  htmlFor="department"
+                <div
+                  className="form-input request_dropdown "
                 >
-                  Your Department
-                  <span
-                    style={
-                      Object {
-                        "color": "red",
-                      }
-                    }
+                  <label
+                    htmlFor="department"
                   >
-                     * 
-                  </span>
-                </label>
-                <input
-                  autoComplete="off"
-                  className=" request_dropdown"
-                  disabled={false}
-                  label="Your Department"
-                  name="department"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  size="245px"
-                  type="text"
-                  value="Talent & Development"
-                />
-                <span
-                  className="error"
-                />
+                    Your Department
+                    <span
+                      style={
+                        Object {
+                          "color": "red",
+                        }
+                      }
+                    >
+                       * 
+                    </span>
+                  </label>
+                  <input
+                    autoComplete="off"
+                    className=" request_dropdown"
+                    disabled={false}
+                    label="Your Department"
+                    name="department"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    size="100%"
+                    type="text"
+                    value="Talent & Development"
+                  />
+                  <span
+                    className="error"
+                  />
+                </div>
               </div>
             </div>
             <div
-              className="input-group "
+              className="input-group mdl-grid "
             >
               <div
-                className="spaces"
+                className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
               >
                 <div
                   className="form-input request_dropdown "
@@ -477,7 +481,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                     name="role"
                     onBlur={[Function]}
                     onChange={[Function]}
-                    size="245px"
+                    size="100%"
                     type="text"
                     value="Software Developer"
                   />
@@ -487,7 +491,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                 </div>
               </div>
               <div
-                className="spaces"
+                className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
               >
                 <div
                   className="form-input request_dropdown your-manager "
@@ -517,7 +521,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                       className="value"
                       style={
                         Object {
-                          "width": "245px",
+                          "width": "100%",
                         }
                       }
                     >
@@ -534,7 +538,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                         label="Line Manager"
                         name="role"
                         onChange={[Function]}
-                        size="245px"
+                        size="100%"
                         type="text"
                         value="Collins"
                       />
@@ -554,7 +558,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                 </div>
               </div>
               <div
-                className="spaces"
+                className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
               >
                 <div
                   className="form-input request_dropdown user-location "
@@ -582,7 +586,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                     name="location"
                     onBlur={[Function]}
                     onChange={[Function]}
-                    size="245px"
+                    size="100%"
                     type="text"
                     value="Kigali"
                   />

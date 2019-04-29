@@ -2,7 +2,7 @@
 
 exports[`<StipendDetails /> renders without crashing 1`] = `
 <div
-  className="false stipend-container-block"
+  className="false stipend-container-block mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet"
 >
   <div
     className="stipend-row header-tile"
@@ -22,12 +22,12 @@ exports[`<StipendDetails /> renders without crashing 1`] = `
   </div>
   <div
     className="stipend-row single-trip"
-    key="Nairobi"
+    key="Kenya"
   >
     <div
       className="item"
     >
-      Nairobi(NBO)
+      Kenya
     </div>
     <div
       className="item"
@@ -47,12 +47,12 @@ exports[`<StipendDetails /> renders without crashing 1`] = `
   </div>
   <div
     className="stipend-row single-trip"
-    key="Kampala"
+    key="Uganda"
   >
     <div
       className="item"
     >
-      Kampala(KLA)
+      Uganda
     </div>
     <div
       className="item"

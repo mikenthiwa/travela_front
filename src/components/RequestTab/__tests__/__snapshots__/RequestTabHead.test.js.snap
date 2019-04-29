@@ -14,10 +14,10 @@ exports[`<RequestTabHead /> should render properly 1`] = `
     </div>
   </div>
   <div
-    className="request__tab"
+    className="request__tab mdl-grid"
   >
     <div
-      className="request__tab-card  complete"
+      className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone  complete"
       key="1"
     >
       <div
@@ -45,7 +45,7 @@ exports[`<RequestTabHead /> should render properly 1`] = `
       />
     </div>
     <div
-      className="request__tab-card  complete"
+      className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone  complete"
       key="2"
     >
       <div
@@ -73,7 +73,7 @@ exports[`<RequestTabHead /> should render properly 1`] = `
       />
     </div>
     <div
-      className="request__tab-card current_request incomplete"
+      className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone current_request incomplete"
       key="3"
     >
       <div
@@ -101,7 +101,7 @@ exports[`<RequestTabHead /> should render properly 1`] = `
       />
     </div>
     <div
-      className="request__tab-card  incomplete"
+      className="request__tab-card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-phone  incomplete"
       key="4"
     >
       <div

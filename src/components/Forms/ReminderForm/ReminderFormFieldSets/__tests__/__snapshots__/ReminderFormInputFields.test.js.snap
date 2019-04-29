@@ -68,8 +68,15 @@ exports[`ReminderFormInputFields should render correctly 1`] = `
         onChange={[Function]}
         type="dropdown-select"
       />
+      <p
+        className="expiry-text-mobile"
+      >
+        To Expiry
+      </p>
     </div>
-    <p>
+    <p
+      className="expiry-text-desktop"
+    >
       To Expiry
     </p>
   </div>
@@ -130,8 +137,15 @@ exports[`ReminderFormInputFields should render correctly 1`] = `
         onChange={[Function]}
         type="dropdown-select"
       />
+      <p
+        className="expiry-text-mobile"
+      >
+        To Expiry
+      </p>
     </div>
-    <p>
+    <p
+      className="expiry-text-desktop"
+    >
       To Expiry
     </p>
     <button
@@ -203,8 +217,15 @@ exports[`ReminderFormInputFields should render correctly 1`] = `
         onChange={[Function]}
         type="dropdown-select"
       />
+      <p
+        className="expiry-text-mobile"
+      >
+        To Expiry
+      </p>
     </div>
-    <p>
+    <p
+      className="expiry-text-desktop"
+    >
       To Expiry
     </p>
     <button

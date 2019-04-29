@@ -53,7 +53,7 @@ Array [
   <div>
      
     <div
-        className="list-templates"
+        className="list-templates list-conditions"
     >
         <div
             className="table__container"
@@ -266,7 +266,7 @@ Array [
                 className="modal-title-text"
             >
                 <div
-                    className="modal-title"
+                    className="modal-title modal-title-word"
                 >
                     Disable Reminder Condition
                 </div>

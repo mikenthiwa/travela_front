@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PendingApprovalsCard /> renders without crashing 1`] = `
-<div>
+<div
+  className="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+>
   <div
     className="pending-approvals-rectangle"
   >

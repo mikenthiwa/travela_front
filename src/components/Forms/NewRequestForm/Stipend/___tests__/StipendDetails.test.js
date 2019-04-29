@@ -7,22 +7,22 @@ const trips = [
   {
     bedId: 3,
     departureDate: '2019-02-19',
-    destination: 'Nairobi, Kenya',
-    origin: 'Lagos, Nigeria',
+    destination: 'Nairobi,Kenya',
+    origin: 'Lagos,Nigeria',
     returnDate: '2019-02-28'
   },
   {
     bedId: 3,
     departureDate: '2019-02-28',
-    destination: 'Kampala, Uganda',
-    origin: 'Nairobi, Kenya',
+    destination: 'Kampala,Uganda',
+    origin: 'Nairobi,Kenya',
     returnDate: '2019-03-29'
   },
   {
     bedId: 3,
     departureDate: '2019-03-29',
-    destination: 'UK, London',
-    origin: 'Kampala, Uganda',
+    destination: 'London,UK',
+    origin: 'Kampala,Uganda',
   }
 ];
 
@@ -57,14 +57,13 @@ const stipends = [
       'id': 1
     },
     'center': {
-      'location':'Uganda',
+      'location': 'Uganda',
     }
   }
 ];
 
 
 describe('<StipendDetails />', () => {
-
   const { totalStipend, stipendSubTotals } = travelStipendHelper
     .getAllTripsStipend(trips, stipends, 'multi');
 
@@ -90,19 +89,19 @@ describe('<StipendDetails />', () => {
     expect(wrapper.find('Preloader')).toHaveLength(1);
   });
 
-  it('should stop showing the loader when stipend is fetched', () =>{
+  it('should stop showing the loader when stipend is fetched', () => {
     const wrapper = mount(<StipendDetails {...props} />);
     expect(wrapper.find('Preloader')).toHaveLength(0);
   });
 
-  it('should render all trips stipend rows', () =>{
+  it('should render all trips stipend rows', () => {
     const wrapper = mount(<StipendDetails {...props} />);
     const stipendRows = wrapper.find('.single-trip');
     expect(stipendRows).toHaveLength(3);
-    expect(wrapper.find('.stipend-row .item').at(0).text()).toBe('Nairobi, Kenya');
+    expect(wrapper.find('.stipend-row .item').at(0).text()).toBe('Kenya');
   });
 
-  it('should display stipend for a single to `Nairobi from Lagos`', () =>{
+  it('should display stipend for a single to `Nairobi from Lagos`', () => {
     const newProps = {
       ...props,
       travelStipends: [stipendSubTotals[0]],
@@ -113,13 +112,13 @@ describe('<StipendDetails />', () => {
     expect(stipendRows).toHaveLength(1);
     const subTotal = stipendRows.at(0).find('.item').at(3).text().split(' ');
     const dailyRate = stipendRows.at(0).find('.item').at(1).text();
-    expect(wrapper.find('.stipend-row .item').at(0).text()).toBe('Nairobi, Kenya');
+    expect(wrapper.find('.stipend-row .item').at(0).text()).toBe('Kenya');
     expect(dailyRate).toBe('$ 100');
     const total = wrapper.find('.total-stipend').at(0);
     expect(total.text().includes(subTotal[1])).toBe(true);
   });
 
-  it('should display `N/A subTotal and DailyRate for a trip to Non-Andelan center`', () =>{
+  it('should display `N/A subTotal and DailyRate for a trip to Non-Andelan center`', () => {
     const wrapper = mount(<StipendDetails {...props} />);
     const stipendRows = wrapper.find('.single-trip');
     const center = stipendRows.at(2).find('.item').at(0).text();
@@ -132,7 +131,7 @@ describe('<StipendDetails />', () => {
     expect(total.text().includes('$ 3800')).toBe(true);
   });
 
-  it('should render correct multi-city trips stipend', () =>{
+  it('should render correct multi-city trips stipend', () => {
     const wrapper = mount(<StipendDetails {...props} />);
     const stipendRows = wrapper.find('.single-trip');
     const subTotalOne = stipendRows.at(0).find('.item').at(3).text();

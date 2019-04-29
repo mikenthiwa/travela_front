@@ -8,7 +8,7 @@ exports[`<TemplateDetailsForm /> renders without crashing 1`] = `
   <div
     className="item"
   >
-    Lagos(LOS)
+    Lagos
   </div>
   <div
     className="item"

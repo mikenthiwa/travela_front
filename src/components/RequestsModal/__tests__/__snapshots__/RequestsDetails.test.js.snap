@@ -329,7 +329,7 @@ exports[`<RequestDetails /> should render properly 1`] = `
             className="row"
           >
             <div
-              className="partition"
+              className="partition undefined"
             >
               <p
                 className="text--grey"
@@ -339,11 +339,11 @@ exports[`<RequestDetails /> should render properly 1`] = `
               <p
                 className="text--black"
               >
-                Lagos - Nairobi
+                 Nigeria -  Kenya
               </p>
             </div>
             <div
-              className="partition"
+              className="partition undefined"
             >
               <p
                 className="text--grey"
@@ -353,17 +353,17 @@ exports[`<RequestDetails /> should render properly 1`] = `
               <p
                 className="text--black"
               >
-                25 APR -
-                      25 APR 2019
+                28 APR -
+                      28 APR 2019
               </p>
             </div>
             <div
-              className="partition"
+              className="partition undefined"
             >
               <p
                 className="text--grey"
               >
-                Accommodation
+                Accomodation
               </p>
               <p
                 className="text--black"
@@ -393,20 +393,16 @@ exports[`<RequestDetails /> should render properly 1`] = `
           <div
             className="row desktop"
           >
-            <div
-              className="partition mobile"
+            <p
+              className="text--grey"
             >
-              <p
-                className="text--grey"
-              >
-                Travel Reason
-              </p>
-              <p
-                className="text--black"
-              >
-                Nothing
-              </p>
-            </div>
+              Travel Reason
+            </p>
+            <p
+              className="text--black"
+            >
+              Nothing
+            </p>
           </div>
         </div>
       </div>
