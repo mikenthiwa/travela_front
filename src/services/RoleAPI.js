@@ -13,9 +13,10 @@ class RoleAPI {
     return axios.get(`${baseUrl}/user/roles`);
   }
 
-  static getRoleUsers(roleId, page) {
-    let  currentPage = page ? `page=${page}`: 'allPage=true';
-    return axios.get(`${baseUrl}/user/roles/${roleId}?${currentPage}`);
+  static getRoleUsers(roleId, page, query) {
+    let currentPage = page ? `page=${page}` : 'allPage=true';
+    let search = query ? `search=${query}` : '';
+    return axios.get(`${baseUrl}/user/roles/${roleId}?${search}&${currentPage}`);
   }
 
   static deleteUserRole(userId, roleId) {

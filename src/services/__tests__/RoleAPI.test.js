@@ -109,13 +109,14 @@ describe('RoleAPI', () => {
     it('should send a GET request to get users with a particular role', async () => {
       const roleId = 53908;
       const page = 1;
-      moxios.stubRequest(`${baseUrl}/user/roles/${roleId}?page=${page}`, {
+      const search = '';
+      moxios.stubRequest(`${baseUrl}/user/roles/${roleId}?${search}&page=${page}`, {
         status: 200,
         response: { ...expectedResponse }
       });
       const response = await RoleAPI.getRoleUsers(53908, page);
       const request = moxios.requests.mostRecent();
-      expect(request.url).toEqual(`${baseUrl}/user/roles/${roleId}?page=${page}`);
+      expect(request.url).toEqual(`${baseUrl}/user/roles/${roleId}?${search}&page=${page}`);
       expect(request.config.method).toEqual('get');
       expect(response.data).toEqual(expectedResponse);
     });
