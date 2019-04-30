@@ -77,73 +77,14 @@ Array [
                 <div
                     className="card_title"
                 >
-                    Nairobi, Kenya
+                    United Kingdom
                      
                 </div>
                 <div
                     className="card_stipend"
                 >
                     $
-                    345
-                     
-                </div>
-                <p
-                    className="card_p"
-                >
-                    Daily Stipend
-                </p>
-            </div>
-            <div
-                className="card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--3-col-phone"
-            >
-                <div
-                    className="travel_stipend_menu"
-                >
-                    <span>
-                        <i
-                            className="fa fa-ellipsis-v on"
-                            onClick={[Function]}
-                            role="presentation"
-                        />
-                        <div
-                            className="context-menu table__menu-container false"
-                        >
-                            <ul
-                                className="table__menu-list"
-                            >
-                                <li
-                                    className="edit"
-                                    onClick={[Function]}
-                                    role="presentation"
-                                >
-                                    <span>
-                                        Edit
-                                    </span>
-                                </li>
-                                <li
-                                    className="delete"
-                                    onClick={[Function]}
-                                    role="presentation"
-                                >
-                                    <span>
-                                        Delete
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </span>
-                </div>
-                <div
-                    className="card_title"
-                >
-                    Kampala, Uganda
-                     
-                </div>
-                <div
-                    className="card_stipend"
-                >
-                    $
-                    345
+                    100
                      
                 </div>
                 <p

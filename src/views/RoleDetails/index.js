@@ -22,21 +22,24 @@ import './RoleDetails.scss';
 import NotFound from '../ErrorPages';
 import Utils from '../../helper/Utils';
 
+
 export class RoleDetails extends Component {
   state = {
     headTitle: 'Add User',
-    userDetail: {}
+    userDetail: {},
   }
 
   componentDidMount() {
     const page = Utils.getCurrentPage(this);
     const {
       fetchRoleUsers, match: { params }, hideDeleteRoleModal,
-      deleteModalState,
+      deleteModalState, location
     } = this.props;
+    const {search} = location;
+    const values = new URLSearchParams(search);
     getAllUsersEmail();
     deleteModalState === 'visible' && hideDeleteRoleModal();
-    fetchRoleUsers(params.roleId, page);
+    fetchRoleUsers(params.roleId, page, values.get('search'));
   }
 
   handleDeleteUserRole = (user) => {
@@ -63,9 +66,9 @@ export class RoleDetails extends Component {
     });
   }
 
-  handlePageChange = (page) => {
+  handlePageChange = (page, search) => {
     const { location: { pathname }, history } = this.props;
-    history.push(`${pathname}?page=${page}`);
+    search ? history.push(`${pathname}?search=${search}&page=${page}`) : history.push(`${pathname}?page=${page}`);
   }
 
   renderUserRolePanelHeader() {
@@ -161,7 +164,7 @@ export class RoleDetails extends Component {
   renderUserRolePage() {
     const {
       roleUsers,
-      meta: { currentPage, pageCount }
+      meta: { currentPage, pageCount, search }
     } = this.props;
 
     return (
@@ -173,7 +176,7 @@ export class RoleDetails extends Component {
             <Pagination
               currentPage={currentPage}
               pageCount={pageCount}
-              onPageChange={(page) => this.handlePageChange(page)}
+              onPageChange={(page) => this.handlePageChange(page, search)}
             />
           )
         }
@@ -185,14 +188,30 @@ export class RoleDetails extends Component {
     const {
       isFetching,
       roleName,
-      error
+      error,
+      roleUsers,
+      meta
     } = this.props;
     return (
-      <Fragment>
-        {!isFetching && !roleName && error && <NotFound redirectLink="/settings/roles" />}
-        {this.renderRoleForm()}
-        {this.renderUserRolePage()}
-      </Fragment>
+      <div>
+        { meta.search && isEmpty(roleUsers) ? (
+          <Fragment>
+            {this.renderUserRolePanelHeader()}
+            <div className="table__requests--empty">
+              {
+                'No Record found'
+              }
+            </div>
+          </Fragment>
+        )
+          : (
+            <Fragment>
+              {!isFetching && !roleName && error && <NotFound redirectLink="/settings/roles" />}
+              {this.renderRoleForm()}
+              {this.renderUserRolePage()}
+            </Fragment>
+          )        }
+      </div>
     );
   }
 }
@@ -252,7 +271,7 @@ RoleDetails.defaultProps = {
   isUpdating: false,
   centers: [],
   getUsersEmail: [],
-  meta: { currentPage: 1, pageCount: 0 },
+  meta: { currentPage: 1, pageCount: 0, search:'' },
   departments: [],
   getAllDepartment: () => { },
   updateUserCenter:  () => { }

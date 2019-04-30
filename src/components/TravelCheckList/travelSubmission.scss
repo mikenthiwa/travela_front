@@ -559,23 +559,43 @@
       }
     }
     &__btn-- {
+      margin: 0 0 0 10px;
       display: block;
-      width: max-content;
+      width: auto;
       justify-content: space-between;
       align-items: center;
       padding: 10px;
-      position: absolute;
+      position:relative;
       left: 110%;
       color: #323232;
       font-size: 12px;
+      @media (max-width: 899px){
+        position: relative;
+        left:20%;
+      }
+      @media(max-width: 781px){
+        width: 180% !important; 
+          
+      }
+
       &uploadedFileName {
         font-weight: 900;
         cursor: default;
+        @media (max-width: 813px){
+          .bold {
+            overflow-wrap: break-word;
+            font-size: 10px;
+            width: 130px;
+          }
+        }
       }
       &uploadedFileDate {
         font-weight: lighter;
         font-size: 12px;
         cursor: default;
+        @media(max-width: 781px){
+          font-size: xx-small;
+        }
       }
       span {
         color: #385bd3;
@@ -640,6 +660,7 @@
   font-size: 1.2em;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .country-flag {

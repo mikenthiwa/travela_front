@@ -379,7 +379,7 @@ exports[`<PassportForm/> renders correctly 1`] = `
               </span>
             </label>
             <div
-              className="date-wrapper "
+              className="date-wrapper    "
               id="dateOfBirth_date"
             >
               <div>
@@ -435,7 +435,7 @@ exports[`<PassportForm/> renders correctly 1`] = `
               </span>
             </label>
             <div
-              className="date-wrapper "
+              className="date-wrapper    "
               id="dateOfIssue_date"
             >
               <div>
@@ -522,7 +522,7 @@ exports[`<PassportForm/> renders correctly 1`] = `
               </span>
             </label>
             <div
-              className="date-wrapper "
+              className="date-wrapper    "
               id="expiryDate_date"
             >
               <div>

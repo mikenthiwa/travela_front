@@ -11,9 +11,6 @@ class ProfileDetailsFieldSets extends Component {
         <span className="personal-details-text">
           Personal Details
         </span>
-        <span className="required-field">
-          * Required Field
-        </span>
       </div>
       <div className="input-group profile-input">
         <div>

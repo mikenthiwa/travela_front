@@ -12,6 +12,7 @@ import commentIcon from '../../../images/icons/new-request-icons/Chat.svg';
 import addCommentIcon from '../../../images/icons/new-request-icons/AddComment.svg';
 import TravelCheckList from '../../TravelCheckList';
 
+
 export class RequestDetails extends Component {
   state = {
     steps: [
@@ -31,14 +32,14 @@ export class RequestDetails extends Component {
   componentWillReceiveProps(nextProp){
     const { submissionInfo: {percentageCompleted: prevPercent} } = this.props;
     const { submissionInfo: {percentageCompleted: nextPercent}, submissionInfo } = nextProp;
- 
+
     if( prevPercent !== nextPercent ){
       this.setSteps(nextPercent, submissionInfo.submissions);
-    } 
+    }
   }
 
   setSteps(percent, submission) {
-    
+
     const { requestData } = this.props;
     const { steps, currentTab } = this.state;
     const newSteps = steps;
@@ -48,14 +49,14 @@ export class RequestDetails extends Component {
         steps: newSteps,
         currentTab: 5
       });
-    } 
+    }
     else if (percent === 100) {
       this.loadStatus(3, submission);
       this.setState({
         steps: newSteps,
         currentTab: 4
       });
-    } 
+    }
     else if (requestData.budgetStatus === 'Approved') {
       this.loadStatus(2);
       this.setState({
@@ -74,13 +75,13 @@ export class RequestDetails extends Component {
 
   checklistCompletionDate = (submissions) => {
     const datesArray = [];
-    submissions.map(submission => 
-      submission.checklist.map(checklist => 
-        checklist.submissions.map(updated => 
+    submissions.map(submission =>
+      submission.checklist.map(checklist =>
+        checklist.submissions.map(updated =>
           datesArray.push(updated.updatedAt))));
     const latestDate = _.sortBy(datesArray, recent => recent).reverse()[0];
     return moment(latestDate).format('DD/MM/YY');
-    
+
   }
 
   loadStatus(tab, submission) {
@@ -93,8 +94,8 @@ export class RequestDetails extends Component {
     newSteps[1].status = `Approved by ${requestData.budgetApprovedBy}`;
     newSteps[1].statusDate = `Completed on ${moment(requestData.budgetApprovedAt).format('DD/MM/YY')}`;
     newSteps[2].statusDate = completionTime;
-    newSteps[tab].statusDate = requestData.status === 'Verified' ? 
-      `Completed on ${moment(requestData.updatedAt).format('DD/MM/YY')}` : 
+    newSteps[tab].statusDate = requestData.status === 'Verified' ?
+      `Completed on ${moment(requestData.updatedAt).format('DD/MM/YY')}` :
       'You are currently here';
   }
 
@@ -109,30 +110,6 @@ export class RequestDetails extends Component {
     }
   }
 
-  renderTripHeader() {
-    return (
-      <tr>
-        <th>Flight Route</th>
-        <th>Travel Dates</th>
-        <th>Accommodation</th>
-      </tr>);
-  }
-
-  renderReasonHeader() {
-    return (
-      <tr>
-        <th>Travel Reason</th>
-      </tr>);
-  }
-
-  renderReasonBody(requestData) {
-    return(
-      <tr>
-        <td>
-          {RequestUtils.getTravelReason(requestData)}
-        </td>
-      </tr>);
-  }
 
   renderTripDates(requestDetails) {
     const { requestData } = this.props;
@@ -162,46 +139,52 @@ export class RequestDetails extends Component {
     ${moment(requestData.returnDate).format('DD MMM YYYY').toUpperCase()}`);
   }
 
-  renderTripDetails(requestData) {
-    const flightRoute = `${requestData.origin.split(',')[0]} - ${requestData.destination.split(',')[0]}`;
-    const travelDates = this.renderTripDates(requestData);
-    const { accommodationType, beds} = requestData;
-    const accommodation = accommodationType !== 'Residence' ? 
-      accommodationType : `${beds.bedName}, ${beds.rooms.roomName}, ${beds.rooms.guestHouses.houseName}`; 
-    return (
-      <tr className="trip-detail__information-table">
-        <div className="check-table"><td>{flightRoute}</td></div>
-        <div className="check-table"><td>{travelDates}</td></div>
-        <div className="check-table"><td>{accommodation}</td></div>
-      </tr>);
+  renderPartitions(item, title, mobile){
+    return(
+      <div className={`partition ${mobile}`}>
+        <p className="text--grey">{title}</p>
+        <p className="text--black">
+          {item}
+        </p>
+      </div>
+    );
   }
 
   renderRequestDetails(requestData) {
     return (
       <div>
         {requestData.trips && requestData.trips.map(request => {
+          const flightRoute = `${request.origin.split(',')[1]} - ${request.destination.split(',')[1]}`;
+          const travelDates = this.renderTripDates(requestData);
+          const { accommodationType, beds} = request;
+          const flightTitle = 'Flight Route';
+          const travelTitle = 'Travel Dates';
+          const accommodationTitle = 'Accomodation';
+          const mobile = 'mobile';
+          const reasonTitle = 'Travel Reason';
+          const accommodation = accommodationType !== 'Residence' ?
+            accommodationType : `${beds.bedName}, ${beds.rooms.roomName}, ${beds.rooms.guestHouses.houseName}`;
           return (
             <Fragment key={request.id}>
-              <div className="mdl-grid request-details-container">
-                <table className="trip-details-pod mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone ">
-                  <thead>
-                    {this.renderTripHeader()}
-                  </thead>
-                  <tbody>
-                    {this.renderTripDetails(request)}
-                  </tbody>
-                </table>
-                <table className="reason-details-pod mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone ">
-                  <thead>
-                    {this.renderReasonHeader()}
-                  </thead>
-                  <tbody>
-                    {this.renderReasonBody(request)}
-                  </tbody>
-                </table>
+              <div className="main-container request-details-container">
+                <div className="left-pane">
+                  <div className="row">
+                    {this.renderPartitions(flightRoute, flightTitle)}
+                    {this.renderPartitions(travelDates, travelTitle)}
+                    {this.renderPartitions(accommodation, accommodationTitle)}
+                    {this.renderPartitions(RequestUtils.getTravelReason(request), reasonTitle, mobile)}
+                  </div>
+                </div>
+                <div className="right-pane">
+                  <div className="row desktop">
+                    <p className="text--grey">Travel Reason</p>
+                    <p className="text--black">
+                      {RequestUtils.getTravelReason(request)}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </Fragment>);
-        })}
+            </Fragment>);})}
       </div>);
   }
 
@@ -267,17 +250,17 @@ export class RequestDetails extends Component {
 
   renderCheckListSubmission(hideButton) {
     const { requestData, travelChecklists, closeModal, openModal, showTravelChecklist, modalType,
-      fileUploads, fetchSubmission, postSubmission, submissionInfo, uploadFile, shouldOpen, 
+      fileUploads, fetchSubmission, postSubmission, submissionInfo, uploadFile, shouldOpen,
       userReadinessDocument, history } = this.props;
     return (
       <Fragment>
         {
           requestData.id && (
-            <TravelCheckList 
-              request={requestData} requestId={requestData.id} 
+            <TravelCheckList
+              request={requestData} requestId={requestData.id}
               travelChecklists={travelChecklists}
               submissionInfo={submissionInfo}
-              uploadFile={uploadFile} 
+              uploadFile={uploadFile}
               postSubmission={postSubmission}
               fetchSubmission={fetchSubmission}
               closeModal={closeModal}
@@ -288,12 +271,12 @@ export class RequestDetails extends Component {
               userReadinessDocument={userReadinessDocument} />
           )}
       </Fragment>
-      
+
     );
   }
 
   renderComment = (requestData) => {
-    const { comments } = requestData; 
+    const { comments } = requestData;
     return (
       <Fragment>
         {requestData.comments && comments.length < 1 ? (
@@ -309,7 +292,7 @@ export class RequestDetails extends Component {
     );
   }
 
-  
+
 
   render() {
     const { requestData, travelChecklists, user } = this.props;
@@ -334,7 +317,7 @@ export class RequestDetails extends Component {
             </div>
           )}
           {currentTab === 5 && this.renderRequestDetails(requestData)}
-          {this.renderComment(requestData)}   
+          {this.renderComment(requestData)}
         </div>
       </Fragment>
     );

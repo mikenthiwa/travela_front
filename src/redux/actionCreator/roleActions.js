@@ -53,10 +53,11 @@ export const putRoleDataFailure = error => ({
   error,
 });
 
-export const fetchRoleUsers = (roleId, page) => ({
+export const fetchRoleUsers = (roleId, page, query) => ({
   type: FETCH_ROLE_USERS,
   roleId,
   page,
+  query
 });
 
 export const fetchRoleUsersSuccess = ({roleName, users, meta}) => ({

@@ -2,7 +2,7 @@
 
 exports[`<Date /> renders as expected 1`] = `
 <div
-  className="date-wrapper "
+  className="date-wrapper    "
   id="_date"
 >
   <DatePicker
@@ -22,6 +22,7 @@ exports[`<Date /> renders as expected 1`] = `
     nextMonthButtonLabel="Next month"
     onBlur={[Function]}
     onChange={[Function]}
+    onChangeRaw={[Function]}
     onClickOutside={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}

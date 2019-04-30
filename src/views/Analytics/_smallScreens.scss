@@ -1,5 +1,19 @@
-@media screen and (min-width: 320px) and (max-width: 800px){
+@media screen and (min-width: 320px) and (max-width: 567px){
   .analytics{
     grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    grid-template-areas:
+    "area1"
+    "area2"
+    "area3"
+    "area4";
+
+  .visiting-card{
+    grid-area: area3;
+  }
+
+  .leaving-card{
+    grid-area: area4;
+  }
+
   }
 }

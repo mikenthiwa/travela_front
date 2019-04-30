@@ -98,23 +98,27 @@ export class Analytics extends Component {
             error
           }
         )}
-        {this.renderCards(`No. of People visiting ${context.state.city} Center`,
-          {
-            stats: peopleVisiting, 
-            icon: flightLand, 
-            color: 'green', 
-            error 
-          }
-        )}
-        {this.renderCards(
-          `No. of People leaving ${context.state.city} Center`,
-          {
-            stats: peopleLeaving, 
-            icon: flightTakeoff, 
-            color: 'brown-orange', 
-            error 
-          }
-        )}
+        <div className="visiting-card">
+          {this.renderCards(`No. of People visiting ${context.state.city} Center`,
+            {
+              stats: peopleVisiting, 
+              icon: flightLand, 
+              color: 'green', 
+              error 
+            }
+          )}
+        </div>
+        <div className="leaving-card">
+          {this.renderCards(
+            `No. of People leaving ${context.state.city} Center`,
+            {
+              stats: peopleLeaving, 
+              icon: flightTakeoff, 
+              color: 'brown-orange', 
+              error 
+            }
+          )}
+        </div>
         {this.renderCards(
           'Average Travel Request Lead Time', 
           {

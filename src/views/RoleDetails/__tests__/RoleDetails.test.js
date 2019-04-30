@@ -200,7 +200,7 @@ describe('<RoleDetails />', () => {
     const onPageChange = jest.spyOn(wrapper.instance(), 'handlePageChange');
 
     wrapper.find('#next-button').simulate('click');
-    expect(onPageChange).toHaveBeenCalledWith(2);
+    expect(onPageChange).toHaveBeenCalledWith(2, undefined);
     expect(props.history.push)
       .toHaveBeenCalledWith('/settings/roles/10948?page=2');
   });

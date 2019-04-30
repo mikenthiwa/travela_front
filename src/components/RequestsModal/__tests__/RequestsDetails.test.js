@@ -160,10 +160,8 @@ describe('<RequestDetails />', () => {
           updatedAt: '2019-03-12T13:18:30.109Z'}]
       }
     });
-    expect(wrapper.find('.trip-detail__information-table').find('td').at(2).text()).toEqual('Hotel Bookings');
+    expect(wrapper.find('.partition').find('p').at(5).text()).toEqual('Hotel Bookings');
   
   });
-
-
 
 });

@@ -43,9 +43,10 @@ describe('Role Saga', () => {
 
     it('fetches users with a particular role', () => {
       const page = 1;
+      const query = '';
       return expectSaga(watchFetchRoleUsers, RoleAPI)
         .provide([
-          [call(RoleAPI.getRoleUsers, 53098, page), response]
+          [call(RoleAPI.getRoleUsers, 53098, page, query), response]
         ])
         .put({
           type: 'FETCH_ROLE_USERS_SUCCESS',
@@ -57,15 +58,17 @@ describe('Role Saga', () => {
           type: 'FETCH_ROLE_USERS',
           roleId: 53098,
           page,
+          query
         })
         .silentRun();
     });
 
     it('throws error if there is an error fetching user\'s of a role', () => {
       const page = 1;
+      const query = '';
       return expectSaga(watchFetchRoleUsers, RoleAPI)
         .provide([
-          [call(RoleAPI.getRoleUsers, 53098, page), throwError(errorResponse)]
+          [call(RoleAPI.getRoleUsers, 53098, page, query), throwError(errorResponse)]
         ])
         .put({
           type: 'FETCH_ROLE_USERS_FAILURE',
@@ -74,7 +77,8 @@ describe('Role Saga', () => {
         .dispatch({
           type: 'FETCH_ROLE_USERS',
           roleId: 53098,
-          page
+          page,
+          query
         })
         .silentRun();
     });

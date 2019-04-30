@@ -111,7 +111,7 @@ NotificationItem.defaultProps = {
   general: false,
   name: '',
   image: '',
-  markSingleAsRead: () => {},
+  markSingleAsRead: () => { },
   message: '',
 };
 
