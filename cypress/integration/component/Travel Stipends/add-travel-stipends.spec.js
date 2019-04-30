@@ -1,7 +1,7 @@
 describe('Travel Stipends Page', () => {
   before(() => {
     cy.authenticateUser();
-    cy.visit('/settings/travel-stipends');
+    cy.visit('/travel-cost/travel-stipends');
   });
   it('should display add-stipend modal', () => {
     cy.get('.action-btn').click();
@@ -45,7 +45,7 @@ describe('Travel Stipends Page', () => {
   describe('Add Stipend that Exists', () => {
     before(() => {
       cy.authenticateUser();
-      cy.visit('/settings/travel-stipends');
+      cy.visit('/travel-cost/travel-stipends');
     });
     it('should not add a stipend that already exists', () => {
       cy.get('.action-btn').click();
@@ -72,7 +72,7 @@ describe('Travel Stipends Page', () => {
   describe('Delete Stipend', () => {
     before(() => {
       cy.authenticateUser();
-      cy.visit('/settings/travel-stipends');
+      cy.visit('/travel-cost/travel-stipends');
     });
     it('should delete a stipend successfully', () => {
       cy.get('.card')

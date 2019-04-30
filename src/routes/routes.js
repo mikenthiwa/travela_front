@@ -45,6 +45,7 @@ const routes = {
   '/requests/new-request': [ConnectedNewRequests()],
   '/requests/edit-request/:request_id': [ConnectedNewRequests(true)],
   '/travel_readiness': [ConnectedReadiness],
+  '/travel-cost/travel-stipends': [ConnectedTravelStipend, TRAVEL_MANAGERS],
   '/settings/roles': [ConnectedRole, [SUPER_ADMINISTRATOR]],
   '/requests/:requestId': [ConnectedRequestDetailsPage],
   '/requests/:requestId/checklist': [ConnectedRequestDetailsPage],
@@ -63,7 +64,6 @@ const routes = {
   '/settings/reminders/edit/:conditionId': [ConnectedCreateReminder, TRAVEL_MANAGERS],
   '/settings/reminders': [ConnectedReminders,TRAVEL_MANAGERS],
   '/settings/travel-reason': [ConnectedTravelReasons, TRAVEL_MANAGERS],
-  '/settings/travel-stipends': [ConnectedTravelStipend, TRAVEL_MANAGERS],
 };
 
 export default routes;

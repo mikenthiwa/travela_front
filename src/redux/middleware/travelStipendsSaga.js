@@ -30,7 +30,7 @@ export function* createTravelStipendSagaAsync(action) {
     yield put(createTravelStipendSuccess(response.data));
     toast.success(response.data.message);
     yield put(closeModal());
-    history.push('/settings/travel-stipends');
+    history.push('/travel-cost/travel-stipends');
   } catch (error) {
     const errorMessage = apiErrorHandler(error);
     yield put(createTravelStipendFailure(errorMessage));
@@ -89,7 +89,7 @@ export function* updateTravelStipendSaga(action){
 
     toast.success('Travel stipend successfully updated');
     yield put(closeModal());
-    history.push('/settings/travel-stipends');
+    history.push('/travel-cost/travel-stipends');
   } catch (error){
 
     let errors = {};

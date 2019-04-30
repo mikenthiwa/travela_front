@@ -1,7 +1,7 @@
 describe('Travel Stipends Page', () => {
   before(() => {
     cy.authenticateUser();
-    cy.visit('/settings/travel-stipends');
+    cy.visit('/travel-cost/travel-stipends');
   });
   
   it('Should edit a Travel Stipend', () => {

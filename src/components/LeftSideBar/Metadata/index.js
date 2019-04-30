@@ -13,6 +13,8 @@ import activeDocumentsIcon from '../../../images/icons/documents-blue.svg';
 import inactiveDocumentsIcon from '../../../images/icons/documents-grey.svg';
 import activeHome from '../../../images/icons/home.svg';
 import inactiveHome from '../../../images/icons/home_grey.svg';
+import activeTravelCostIcon from '../../../images/icons/travelCost_active.svg';
+import inactiveTravelCostIcon from '../../../images/icons/travelCost_inactive.svg';
 
 const NavItemsMetadata = [
   // Home`
@@ -93,6 +95,26 @@ const NavItemsMetadata = [
       inactive: inactiveAccommodationIcon
     }
   },
+  // Travel Cost
+  {
+    text: 'Travel Cost',
+    link_to: '/travel-cost',
+    activateOnLogin: false,
+    isDropdown: true,
+    dropdownItems: [
+      {
+        link_to: '/travel-cost/travel-stipends',
+        text: 'Travel Stipend',
+        onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member'],
+        exact: true
+      }
+    ],
+    icons: {
+      active: activeTravelCostIcon,
+      inactive: inactiveTravelCostIcon
+    },
+    onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member']
+  },
   // Travel Readiness
   {
     text: 'Documents',
@@ -169,12 +191,6 @@ const NavItemsMetadata = [
         link_to: '/settings/travel-reason',
         exact: true,
         text: 'Travel Reason',
-        onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member']
-      },
-      {
-        link_to: '/settings/travel-stipends',
-        exact: true,
-        text: 'Travel Stipend',
         onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member']
       },
     ],
