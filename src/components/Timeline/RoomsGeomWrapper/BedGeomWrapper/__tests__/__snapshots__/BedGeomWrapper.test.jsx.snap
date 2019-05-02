@@ -7,7 +7,7 @@ exports[`<BedGeomWrapper /> renders properly 1`] = `
   <TripGeometry
     handleChangeRoomModal={[Function]}
     key="trip-id-1"
-    timelineStartDate={"2019-03-31T21:00:00.000Z"}
+    timelineStartDate={"2019-04-30T21:00:00.000Z"}
     timelineViewType="month"
     trip={
       Object {

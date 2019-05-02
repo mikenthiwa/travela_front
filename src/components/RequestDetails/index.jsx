@@ -8,6 +8,7 @@ import LeftPane from './LeftPane';
 import RightPane from './RightPane';
 import Preloader from '../Preloader/Preloader';
 import Utils from '../../helper/Utils';
+import HeaderTags from './HeaderTags';
 
 class RequestDetails extends Component {
 
@@ -33,7 +34,7 @@ class RequestDetails extends Component {
   render() {
     const {
       request, requestId,
-      isLoading, pathname, headerTags, history
+      isLoading, pathname, history, submissionInfo,
     } = this.props;
     const body = isLoading
       ? this.renderLoader() : (isEmpty(request)
@@ -42,13 +43,20 @@ class RequestDetails extends Component {
     const url = Utils.renderLink(pathname);
     return (
       <div className="approval">
-        <h1 className="header text--black">
-          <span role="presentation" onClick={()=> history.goBack()}>
-            <img src={backButton} className="header__link" alt="back icon" />
-          </span>
-          {`REQUEST #${requestId}`}
-          {headerTags.map(tag => <span className="stage" key={tag}>{tag}</span>)}
-        </h1>
+        <div className="header-container">
+          <h1 className="header text--black">
+            <span role="presentation" onClick={() => history.goBack()}>
+              <img src={backButton} className="header__link" alt="back icon" />
+            </span>
+          </h1>
+          <div className="progress-tags">
+            <div>{`REQUEST #${requestId}`}</div>
+            <HeaderTags
+              request={request}
+              submissionInfo={submissionInfo}
+            />
+          </div>
+        </div>
         {body}
       </div>
     );
@@ -62,8 +70,8 @@ RequestDetails.propTypes = {
   requestId: PropTypes.string.isRequired,
   renderRightPaneQuestion: PropTypes.func.isRequired,
   pathname: PropTypes.string.isRequired,
-  headerTags: PropTypes.array.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  submissionInfo: PropTypes.object.isRequired,
 };
 
 RequestDetails.defaultProps = {

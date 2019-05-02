@@ -9,12 +9,12 @@
       .ql-snow {
         background-color: #FFF;
       }
-    
+
       .ql-toolbar {
         border-top-left-radius: 0.1em;
         border-top-right-radius: 0.1em;
       }
-    
+
       .ql-container {
         border-bottom-left-radius: 0.1em;
         border-bottom-right-radius: 0.1em;
@@ -24,7 +24,7 @@
     .editor__btn-size {
 
       .editor__btn-wrap {
-        
+
         .editor__post-btn {
           border-radius: 0.1em;
         }
@@ -73,3 +73,42 @@
   }
 }
 
+.current_approval{
+  background-color: #dfe3e8;
+  border-radius: 0.4em;
+  color: #4a4a4a;
+  font-size: 0.6em;
+  font-weight: 100;
+  margin: 0 0 0 1.4em;
+  padding: 0.3em 1.2em;
+  position: relative;
+  top: -0.3em;
+  border: 1px solid #5A6577;
+  background-color: #FFFFFF;
+}
+
+.complete{
+  background-color: #dfe3e8;
+  border-radius: 0.4em;
+  color: #4a4a4a;
+  font-size: 0.6em;
+  font-weight: 100;
+  margin: 0 0 0 1.4em;
+  padding: 0.3em 1.2em;
+  position: relative;
+  top: -0.3em;
+  border: 1px solid #E4E4E4;
+  background-color: #FFFFFF;
+}
+
+.mark {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  height: 24px;
+  width: 24px;
+  background-color: #10A36D;
+  border-radius: 50%;
+  text-align: center;
+}

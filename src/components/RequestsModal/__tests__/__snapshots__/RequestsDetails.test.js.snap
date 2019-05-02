@@ -353,8 +353,8 @@ exports[`<RequestDetails /> should render properly 1`] = `
               <p
                 className="text--black"
               >
-                28 APR -
-                      28 APR 2019
+                01 AUG -
+                      02 AUG 2019
               </p>
             </div>
             <div
@@ -443,7 +443,6 @@ exports[`<RequestDetails /> should render properly 1`] = `
                       src="https://www.countryflags.io/KE/flat/64.png"
                     />
                   </div>
-                  Nairobi, Kenya
                 </div>
                 <div
                   className="travelSubmission--item false"
@@ -539,7 +538,6 @@ exports[`<RequestDetails /> should render properly 1`] = `
                       src="https://www.countryflags.io/NG/flat/64.png"
                     />
                   </div>
-                  Lagos, Nigeria
                 </div>
                 0
               </div>

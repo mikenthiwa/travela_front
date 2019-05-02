@@ -4,27 +4,55 @@ exports[`TEST REQUEST DETAILS COMPONENT TEST COMPONENT WHEN REQUEST IS LOADING s
 <div
   className="approval"
 >
-  <h1
-    className="header text--black"
+  <div
+    className="header-container"
   >
-    <span
-      onClick={[Function]}
-      role="presentation"
+    <h1
+      className="header text--black"
     >
-      <img
-        alt="back icon"
-        className="header__link"
-        src="back-icon.svg"
-      />
-    </span>
-    REQUEST #nXCj4U57J
-    <span
-      className="stage"
-      key="Managers Approval"
+      <span
+        onClick={[Function]}
+        role="presentation"
+      >
+        <img
+          alt="back icon"
+          className="header__link"
+          src="back-icon.svg"
+        />
+      </span>
+    </h1>
+    <div
+      className="progress-tags"
     >
-      Managers Approval
-    </span>
-  </h1>
+      <div>
+        REQUEST #nXCj4U57J
+      </div>
+      <div
+        className="stage-container"
+      >
+        <div
+          className="stage "
+        >
+          Managers Approval
+        </div>
+        <div
+          className="stage incomplete"
+        >
+          Budget Check
+        </div>
+        <div
+          className="stage incomplete"
+        >
+          Travel Checklist Submission
+        </div>
+        <div
+          className="stage incomplete"
+        >
+          Travel Verification
+        </div>
+      </div>
+    </div>
+  </div>
   <div
     className="preloader"
   >

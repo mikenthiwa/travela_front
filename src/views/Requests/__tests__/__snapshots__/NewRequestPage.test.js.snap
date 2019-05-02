@@ -177,7 +177,7 @@ Array [
                 <div
                     className="foot-text"
                 >
-                    Completed on 24/04/19
+                    Completed on 07/05/19
                 </div>
             </div>
             <div
@@ -333,76 +333,96 @@ Array [
                 <div
                     className="foot-text"
                 >
-                    Completed on 24/04/19
+                    Completed on 07/05/19
                 </div>
             </div>
         </div>
     </div>
     <div>
         <div
-            className="mdl-grid request-details-container"
+            className="main-container request-details-container"
         >
-            <table
-                className="trip-details-pod mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone "
+            <div
+                className="left-pane"
             >
-                <thead>
-                    <tr>
-                        <th>
-                            Flight Route
-                        </th>
-                        <th>
-                            Travel Dates
-                        </th>
-                        <th>
-                            Accommodation
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        className="trip-detail__information-table"
+                <div
+                    className="row"
+                >
+                    <div
+                        className="partition undefined"
                     >
-                        <div
-                            className="check-table"
+                        <p
+                            className="text--grey"
                         >
-                            <td>
-                                undefined - undefined
-                            </td>
-                        </div>
-                        <div
-                            className="check-table"
+                            Flight Route
+                        </p>
+                        <p
+                            className="text--black"
                         >
-                            <td>
-                                20 SEP 2018 -
-                                    22 SEP 2019
-                            </td>
-                        </div>
-                        <div
-                            className="check-table"
+                            undefined - undefined
+                        </p>
+                    </div>
+                    <div
+                        className="partition undefined"
+                    >
+                        <p
+                            className="text--grey"
                         >
-                            <td />
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
-            <table
-                className="reason-details-pod mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone "
-            >
-                <thead>
-                    <tr>
-                        <th>
+                            Travel Dates
+                        </p>
+                        <p
+                            className="text--black"
+                        >
+                            20 SEP 2018 -
+                                22 SEP 2019
+                        </p>
+                    </div>
+                    <div
+                        className="partition undefined"
+                    >
+                        <p
+                            className="text--grey"
+                        >
+                            Accomodation
+                        </p>
+                        <p
+                            className="text--black"
+                        />
+                    </div>
+                    <div
+                        className="partition mobile"
+                    >
+                        <p
+                            className="text--grey"
+                        >
                             Travel Reason
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
+                        </p>
+                        <p
+                            className="text--black"
+                        >
                             N/A
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                className="right-pane"
+            >
+                <div
+                    className="row desktop"
+                >
+                    <p
+                        className="text--grey"
+                    >
+                        Travel Reason
+                    </p>
+                    <p
+                        className="text--black"
+                    >
+                        N/A
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
     <div
@@ -764,134 +784,173 @@ Array [
     </div>
     <div>
         <div
-            className="mdl-grid request-details-container"
+            className="main-container request-details-container"
         >
-            <table
-                className="trip-details-pod mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone "
+            <div
+                className="left-pane"
             >
-                <thead>
-                    <tr>
-                        <th>
-                            Flight Route
-                        </th>
-                        <th>
-                            Travel Dates
-                        </th>
-                        <th>
-                            Accommodation
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        className="trip-detail__information-table"
+                <div
+                    className="row"
+                >
+                    <div
+                        className="partition undefined"
                     >
-                        <div
-                            className="check-table"
+                        <p
+                            className="text--grey"
                         >
-                            <td>
-                                 Nigeria -  Kenya
-                            </td>
-                        </div>
-                        <div
-                            className="check-table"
+                            Flight Route
+                        </p>
+                        <p
+                            className="text--black"
                         >
-                            <td>
-                                20 SEP -
-                                      22 SEP 2018
-                            </td>
-                        </div>
-                        <div
-                            className="check-table"
+                             Nigeria -  Kenya
+                        </p>
+                    </div>
+                    <div
+                        className="partition undefined"
+                    >
+                        <p
+                            className="text--grey"
                         >
-                            <td />
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
-            <table
-                className="reason-details-pod mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone "
-            >
-                <thead>
-                    <tr>
-                        <th>
+                            Travel Dates
+                        </p>
+                        <p
+                            className="text--black"
+                        >
+                            20 SEP -
+                                  22 SEP 2018
+                        </p>
+                    </div>
+                    <div
+                        className="partition undefined"
+                    >
+                        <p
+                            className="text--grey"
+                        >
+                            Accomodation
+                        </p>
+                        <p
+                            className="text--black"
+                        />
+                    </div>
+                    <div
+                        className="partition mobile"
+                    >
+                        <p
+                            className="text--grey"
+                        >
                             Travel Reason
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
+                        </p>
+                        <p
+                            className="text--black"
+                        >
                             Reason
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                className="right-pane"
+            >
+                <div
+                    className="row desktop"
+                >
+                    <p
+                        className="text--grey"
+                    >
+                        Travel Reason
+                    </p>
+                    <p
+                        className="text--black"
+                    >
+                        Reason
+                    </p>
+                </div>
+            </div>
         </div>
         <div
-            className="mdl-grid request-details-container"
+            className="main-container request-details-container"
         >
-            <table
-                className="trip-details-pod mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone "
+            <div
+                className="left-pane"
             >
-                <thead>
-                    <tr>
-                        <th>
-                            Flight Route
-                        </th>
-                        <th>
-                            Travel Dates
-                        </th>
-                        <th>
-                            Accommodation
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        className="trip-detail__information-table"
+                <div
+                    className="row"
+                >
+                    <div
+                        className="partition undefined"
                     >
-                        <div
-                            className="check-table"
+                        <p
+                            className="text--grey"
                         >
-                            <td>
-                                 Kenya -  Nigeria
-                            </td>
-                        </div>
-                        <div
-                            className="check-table"
+                            Flight Route
+                        </p>
+                        <p
+                            className="text--black"
                         >
-                            <td>
-                                22 SEP 2018 -
-                                      24 SEP 2019
-                            </td>
-                        </div>
-                        <div
-                            className="check-table"
+                             Kenya -  Nigeria
+                        </p>
+                    </div>
+                    <div
+                        className="partition undefined"
+                    >
+                        <p
+                            className="text--grey"
                         >
-                            <td />
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
-            <table
-                className="reason-details-pod mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone "
-            >
-                <thead>
-                    <tr>
-                        <th>
+                            Travel Dates
+                        </p>
+                        <p
+                            className="text--black"
+                        >
+                            24 SEP 2019
+                        </p>
+                    </div>
+                    <div
+                        className="partition undefined"
+                    >
+                        <p
+                            className="text--grey"
+                        >
+                            Accomodation
+                        </p>
+                        <p
+                            className="text--black"
+                        />
+                    </div>
+                    <div
+                        className="partition mobile"
+                    >
+                        <p
+                            className="text--grey"
+                        >
                             Travel Reason
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
+                        </p>
+                        <p
+                            className="text--black"
+                        >
                             Another reason
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                className="right-pane"
+            >
+                <div
+                    className="row desktop"
+                >
+                    <p
+                        className="text--grey"
+                    >
+                        Travel Reason
+                    </p>
+                    <p
+                        className="text--black"
+                    >
+                        Another reason
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
     <div
@@ -1249,134 +1308,173 @@ Array [
     </div>
     <div>
         <div
-            className="mdl-grid request-details-container"
+            className="main-container request-details-container"
         >
-            <table
-                className="trip-details-pod mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone "
+            <div
+                className="left-pane"
             >
-                <thead>
-                    <tr>
-                        <th>
-                            Flight Route
-                        </th>
-                        <th>
-                            Travel Dates
-                        </th>
-                        <th>
-                            Accommodation
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        className="trip-detail__information-table"
+                <div
+                    className="row"
+                >
+                    <div
+                        className="partition undefined"
                     >
-                        <div
-                            className="check-table"
+                        <p
+                            className="text--grey"
                         >
-                            <td>
-                                 Nigeria -  Kenya
-                            </td>
-                        </div>
-                        <div
-                            className="check-table"
+                            Flight Route
+                        </p>
+                        <p
+                            className="text--black"
                         >
-                            <td>
-                                20 SEP -
-                                      22 SEP 2018
-                            </td>
-                        </div>
-                        <div
-                            className="check-table"
+                             Nigeria -  Kenya
+                        </p>
+                    </div>
+                    <div
+                        className="partition undefined"
+                    >
+                        <p
+                            className="text--grey"
                         >
-                            <td />
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
-            <table
-                className="reason-details-pod mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone "
-            >
-                <thead>
-                    <tr>
-                        <th>
+                            Travel Dates
+                        </p>
+                        <p
+                            className="text--black"
+                        >
+                            20 SEP -
+                                  22 SEP 2018
+                        </p>
+                    </div>
+                    <div
+                        className="partition undefined"
+                    >
+                        <p
+                            className="text--grey"
+                        >
+                            Accomodation
+                        </p>
+                        <p
+                            className="text--black"
+                        />
+                    </div>
+                    <div
+                        className="partition mobile"
+                    >
+                        <p
+                            className="text--grey"
+                        >
                             Travel Reason
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
+                        </p>
+                        <p
+                            className="text--black"
+                        >
                             Reason
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                className="right-pane"
+            >
+                <div
+                    className="row desktop"
+                >
+                    <p
+                        className="text--grey"
+                    >
+                        Travel Reason
+                    </p>
+                    <p
+                        className="text--black"
+                    >
+                        Reason
+                    </p>
+                </div>
+            </div>
         </div>
         <div
-            className="mdl-grid request-details-container"
+            className="main-container request-details-container"
         >
-            <table
-                className="trip-details-pod mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone "
+            <div
+                className="left-pane"
             >
-                <thead>
-                    <tr>
-                        <th>
-                            Flight Route
-                        </th>
-                        <th>
-                            Travel Dates
-                        </th>
-                        <th>
-                            Accommodation
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        className="trip-detail__information-table"
+                <div
+                    className="row"
+                >
+                    <div
+                        className="partition undefined"
                     >
-                        <div
-                            className="check-table"
+                        <p
+                            className="text--grey"
                         >
-                            <td>
-                                 Kenya -  Nigeria
-                            </td>
-                        </div>
-                        <div
-                            className="check-table"
+                            Flight Route
+                        </p>
+                        <p
+                            className="text--black"
                         >
-                            <td>
-                                22 SEP 2018 -
-                                      24 SEP 2019
-                            </td>
-                        </div>
-                        <div
-                            className="check-table"
+                             Kenya -  Nigeria
+                        </p>
+                    </div>
+                    <div
+                        className="partition undefined"
+                    >
+                        <p
+                            className="text--grey"
                         >
-                            <td />
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
-            <table
-                className="reason-details-pod mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet mdl-cell--12-col-phone "
-            >
-                <thead>
-                    <tr>
-                        <th>
+                            Travel Dates
+                        </p>
+                        <p
+                            className="text--black"
+                        >
+                            24 SEP 2019
+                        </p>
+                    </div>
+                    <div
+                        className="partition undefined"
+                    >
+                        <p
+                            className="text--grey"
+                        >
+                            Accomodation
+                        </p>
+                        <p
+                            className="text--black"
+                        />
+                    </div>
+                    <div
+                        className="partition mobile"
+                    >
+                        <p
+                            className="text--grey"
+                        >
                             Travel Reason
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
+                        </p>
+                        <p
+                            className="text--black"
+                        >
                             Another reason
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div
+                className="right-pane"
+            >
+                <div
+                    className="row desktop"
+                >
+                    <p
+                        className="text--grey"
+                    >
+                        Travel Reason
+                    </p>
+                    <p
+                        className="text--black"
+                    >
+                        Another reason
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
     <div

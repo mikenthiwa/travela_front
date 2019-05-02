@@ -44,7 +44,7 @@ exports[`<NewUserRoleForm /> <PersonalDetails /> renders correctly 1`] = `
               ]
             }
             className="department_dropdown"
-            label="Add Center"
+            label="Country"
             labelNote=""
             name="item"
             onChange={null}
@@ -170,7 +170,7 @@ exports[`<NewUserRoleForm /> renders correctly 1`] = `
               <label
                 htmlFor="item"
               >
-                Add Center
+                Country
                 <span
                   style={
                     Object {
@@ -204,7 +204,7 @@ exports[`<NewUserRoleForm /> renders correctly 1`] = `
                       ]
                     }
                     className="occupationInput"
-                    label="Add Center"
+                    label="Country"
                     name="role"
                     onChange={[Function]}
                     size=""

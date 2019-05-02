@@ -1,9 +1,10 @@
-import React, { Component, Fragment}  from  'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { fetchUserRequestDetails } from '../../redux/actionCreator/requestActions';
 import { fetchAttachments, downloadAttachments } from '../../redux/actionCreator/attachmentActions';
 import { updateRequestStatus } from '../../redux/actionCreator/approvalActions';
+import { fetchSubmission } from '../../redux/actionCreator/checkListSubmissionActions';
 import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import RequestDetails from '../../components/RequestDetails';
 import CommentsSection from './CommentsSection';
@@ -24,10 +25,11 @@ class VerificationDetails extends Component {
 
   componentDidMount() {
     const {
-      fetchUserRequestDetails, fetchAttachments,
+      fetchUserRequestDetails, fetchAttachments, fetchSubmission, request: { tripType },
       match: { params: { requestId } } } = this.props;
     fetchUserRequestDetails(requestId);
     fetchAttachments(requestId);
+    fetchSubmission({ requestId, tripType });
   }
 
   getValues() {
@@ -53,8 +55,8 @@ class VerificationDetails extends Component {
 
   toggleComments = () => {
     const { displayComments } = this.state;
-    if (displayComments) return this.setState({ displayComments: false});
-    return this.setState({displayComments: true});
+    if (displayComments) return this.setState({ displayComments: false });
+    return this.setState({ displayComments: true });
   };
 
   renderRightPaneQuestion = (name) => {
@@ -72,7 +74,7 @@ class VerificationDetails extends Component {
       <div className="rectangle right">
         <div className="flightDetails">
           <p className="flight-heading">Flight Details</p>
-          { ticketDetails.length
+          {ticketDetails.length
             ? <TicketDetails ticketDetails={ticketDetails} />
             : (
               <div className="no-flightDetails">
@@ -84,10 +86,10 @@ class VerificationDetails extends Component {
     );
   }
 
-  renderTravelCheckList = () =>{
-    const { attachments, errors} = this.props;
+  renderTravelCheckList = () => {
+    const { attachments, errors } = this.props;
     const { checklistItems, attachmentDetails } = this.getValues();
-    if(typeof(errors) === 'string' && errors.includes('does not exist')) {
+    if (typeof (errors) === 'string' && errors.includes('does not exist')) {
       return <NotFound redirectLink="/requests/my-verifications" errorMessage={errors} />;
     }
     return (
@@ -96,7 +98,7 @@ class VerificationDetails extends Component {
           <p className="heading">Travel Checklist For This Trip</p>
           <div>
             <div>
-              { attachments.length ? (attachments.map(item => {
+              {attachments.length ? (attachments.map(item => {
                 return (
                   <div key={item.destinationName} className="location-items">
                     <div className="destination">
@@ -105,7 +107,7 @@ class VerificationDetails extends Component {
                           className="flag"
                           src={countryUtils.getCountryFlagUrl(item.destinationName)} alt="country flag" />
                       </span>
-                      <span><strong>{ item.tripLocation }</strong></span>
+                      <span><strong>{item.tripLocation}</strong></span>
                     </div>
                     <div className="attachment-items">
                       {(attachmentDetails.length)
@@ -115,7 +117,7 @@ class VerificationDetails extends Component {
                             attachmentDetails={attachmentDetails}
                             handleDownloadAttachments={this.handleDownloadAttachments}
                           />
-                        ): (
+                        ) : (
                           <div className="no-attachments">
                             <p>No Uploaded Attachments.</p>
                           </div>
@@ -126,7 +128,8 @@ class VerificationDetails extends Component {
                       : null
                     }
                   </div>
-                ); })) :
+                );
+              })) :
                 (
                   <div className="no-attachments">
                     <p>No Uploaded Attachments.</p>
@@ -143,18 +146,18 @@ class VerificationDetails extends Component {
     );
   };
 
-  renderComments = () =>{
-    const {request, email, currentUser,
+  renderComments = () => {
+    const { request, email, currentUser,
       match: { params: { requestId } } } = this.props;
     const { displayComments } = this.state;
-    return(
+    return (
       <CommentsSection
         renderCommentsToggle={this.renderCommentsToggle}
         request={request} requestId={requestId}
         currentUser={currentUser} email={email}
         displayComments={displayComments}
       />
-    ); 
+    );
   }
 
   renderBottomPane() {
@@ -171,7 +174,7 @@ class VerificationDetails extends Component {
     );
   }
 
-  renderCommentsToggle = () =>{
+  renderCommentsToggle = () => {
     const { displayComments } = this.state;
     return (
       <div>
@@ -189,10 +192,10 @@ class VerificationDetails extends Component {
     return 'rejection';
   };
 
-  renderButtons  = (request) => {
+  renderButtons = (request) => {
     const { modalInvisible, buttonSelected } = this.state;
     const { status, trips } = request;
-    const { currentUser: { roles } } = this.props; 
+    const { currentUser: { roles } } = this.props;
     const [{centers}] = roles.filter(role=>role.roleName === 'Travel Administrator');
     const locations = centers.length && centers.map(center => center.location);
     const origin = trips.length && trips[0].origin.split(', ').pop();
@@ -211,7 +214,7 @@ class VerificationDetails extends Component {
         </button>
         <ConfirmDialog
           id={request.id} modalInvisible={modalInvisible}
-          buttonSelected={buttonSelected} closeDeleteModal={()=> {}}
+          buttonSelected={buttonSelected} closeDeleteModal={() => { }}
           renderDialogText={this.renderDialogText} handleApprove={this.handleDecision}
           handleReject={this.handleDecision}
           documentText="Request"
@@ -222,7 +225,7 @@ class VerificationDetails extends Component {
 
   render() {
     const {
-      request, isLoading,
+      request, isLoading, submissionInfo,
       match: { params: { requestId } }, location: { pathname }, history
     } = this.props;
     const headerTags = ['Manager\'s Approval', 'Budget Check', 'Travel Verification'];
@@ -235,7 +238,9 @@ class VerificationDetails extends Component {
               <RequestDetails
                 request={request} requestId={requestId} renderButtons={this.renderButtons} history={history}
                 renderRightPaneQuestion={this.renderRightPaneQuestion} isLoading={isLoading}
+                type={headerTags}
                 headerTags={headerTags} pathname={pathname}
+                submissionInfo={submissionInfo}
               />
               {this.renderBottomPane()}
             </div>
@@ -261,7 +266,9 @@ VerificationDetails.propTypes = {
   fetchAttachments: PropTypes.func.isRequired, downloadAttachments: PropTypes.func.isRequired,
   updateRequestStatus: PropTypes.func.isRequired, match: PropTypes.object.isRequired,
   attachments: PropTypes.array.isRequired, location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired, errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  history: PropTypes.object.isRequired, errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  submissionInfo: PropTypes.object.isRequired,
+  fetchSubmission: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -271,8 +278,9 @@ const mapStateToProps = (state) => {
     checklist: state.attachments,
     isLoading: state.requests.fetchingRequest,
     currentUser: state.user.currentUser,
-    email:state.user.getUserData,
+    email: state.user.getUserData,
     attachments: state.attachments.submissions,
+    submissionInfo: state.submissions,
   };
 };
 
@@ -280,6 +288,8 @@ const actionCreators = {
   fetchUserRequestDetails,
   fetchAttachments,
   updateRequestStatus,
-  downloadAttachments
+  downloadAttachments,
+  fetchSubmission
 };
+
 export default connect(mapStateToProps, actionCreators)(VerificationDetails);

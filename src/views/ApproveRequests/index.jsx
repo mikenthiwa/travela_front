@@ -10,6 +10,7 @@ import ConnectedCommentBox from '../../components/RequestsModal/CommentBox/Comme
 import ConnectedUserComments from '../../components/RequestsModal/UserComments/UserComments';
 import NotFound from '../ErrorPages/NotFound';
 import './ApproveRequests.scss';
+import { fetchSubmission } from '../../redux/actionCreator/checkListSubmissionActions';
 
 export const Approve = (type = 'manager') => {
   class ApproveRequests extends Component {
@@ -20,10 +21,11 @@ export const Approve = (type = 'manager') => {
 
     componentDidMount() {
       const {
-        fetchUserRequestDetails,
+        fetchUserRequestDetails,fetchSubmission, request: {tripType},
         match: { params: { requestId } },
       } = this.props;
       fetchUserRequestDetails(requestId);
+      fetchSubmission({requestId, tripType});
     }
 
     handleButtonSelected = (e) => {
@@ -35,8 +37,8 @@ export const Approve = (type = 'manager') => {
       const { buttonSelected } = this.state;
       const newStatus = buttonSelected === 'approve'
         ? 'Approved' : 'Rejected';
-      const action = () => type === 'budget'?
-        updateBudgetStatus(requestId, { budgetStatus: newStatus }): updateRequestStatus({ requestId, newStatus });
+      const action = () => type === 'budget' ?
+        updateBudgetStatus(requestId, { budgetStatus: newStatus }) : updateRequestStatus({ requestId, newStatus });
       action();
       this.setState({ modalInvisible: true });
     };
@@ -48,9 +50,9 @@ export const Approve = (type = 'manager') => {
     };
 
     renderButtons = (request) => {
-      const {modalInvisible, buttonSelected} = this.state;
-      const {status, budgetStatus} = request;
-      const disabled = type === 'budget' ? budgetStatus!== 'Open': status !== 'Open';
+      const { modalInvisible, buttonSelected } = this.state;
+      const { status, budgetStatus } = request;
+      const disabled = type === 'budget' ? budgetStatus !== 'Open' : status !== 'Open';
       const approvedStatus = status === 'Approved' || status === 'Verified'
         ? 'approved' : (status === 'Open' ? 'approve' : 'disabled');
       const rejectedStatus = status === 'Rejected'
@@ -60,7 +62,7 @@ export const Approve = (type = 'manager') => {
       const rejectedBudgetStatus = budgetStatus === 'Rejected'
         ? 'rejected' : (budgetStatus === 'Open' ? 'reject' : 'disabled');
       const appStatus = type === 'budget' ? approvedBudgetStatus : approvedStatus;
-      const rejected  = type === 'budget' ? rejectedBudgetStatus : rejectedStatus;
+      const rejected = type === 'budget' ? rejectedBudgetStatus : rejectedStatus;
       return (
         <div className="btn-group">
           <button
@@ -83,7 +85,7 @@ export const Approve = (type = 'manager') => {
             id={request.id}
             modalInvisible={modalInvisible}
             buttonSelected={buttonSelected}
-            closeDeleteModal={() => {}}
+            closeDeleteModal={() => { }}
             renderDialogText={this.renderDialogText}
             handleApprove={this.handleDecision}
             handleReject={this.handleDecision}
@@ -107,10 +109,12 @@ export const Approve = (type = 'manager') => {
     render() {
       const {
         request, isLoading, match: { params: { requestId } },
-        currentUser, email, location: { pathname }, errors, history
+        currentUser, email, location: { pathname }, errors, history, submissionInfo
       } = this.props;
-      const headerTags = type === 'budget' ? ['Manager\'s Approval','Budget Check'] : ['Manager\'s Stage'];
-      if(typeof(errors) === 'string' && errors.includes('does not exist')) {
+
+      const headerTags =  ['Manager\'s Approval', 'Budget Check', 'Travel verifications'];
+
+      if (typeof (errors) === 'string' && errors.includes('does not exist')) {
         return <NotFound redirectLink="/requests/my-approvals" errorMessage={errors} />;
       }
       return (
@@ -123,7 +127,9 @@ export const Approve = (type = 'manager') => {
             renderRightPaneQuestion={this.renderRightPaneQuestion}
             isLoading={isLoading}
             headerTags={headerTags}
+            type={headerTags}
             pathname={pathname}
+            submissionInfo={submissionInfo}
           />
           {
             !isEmpty(request) ? (
@@ -151,6 +157,8 @@ export const Approve = (type = 'manager') => {
     isLoading: PropTypes.bool,
     currentUser: PropTypes.object,
     email: PropTypes.object,
+    submissionInfo:PropTypes.object.isRequired,
+    fetchSubmission: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -172,12 +180,14 @@ const mapStateToProps = (state) => ({
   isLoading: state.requests.fetchingRequest,
   currentUser: state.user.currentUser,
   email: state.user.getUserData,
+  submissionInfo: state.submissions
 });
 
 const actionCreators = {
   fetchUserRequestDetails,
   updateRequestStatus,
-  updateBudgetStatus
+  updateBudgetStatus,
+  fetchSubmission
 };
 
 export default (type = 'manager') => connect(mapStateToProps, actionCreators)(Approve(type));
