@@ -33,32 +33,33 @@ class RequestUtils {
     const destinationArray = trip.destination.split(',');
     const countryOfDestination = destinationArray[1].trim();
 
-
-    allStipend.forEach((data, i) => {
-      if (data.location === countryOfDestination) {
-        const subTotal = data.amount * days;
-        RequestUtils.total += subTotal;
-        stipend.push({
-          subTotal,
-          location: data.location,
-          dailyRate: data.amount,
-          duration: days,
-          centerExists: true,
-        });
-      } else {
-        const isAndelaCenter = RequestUtils
-          .centerExists(allStipend, trip.destination);
-        if (!isAndelaCenter) {
-          stipend.push({
-            subTotal: 0,
-            location: trip.destination.split(',')[1],
-            dailyRate: 'N/A',
-            duration: days,
-            centerExists: false,
-          });
-        }
-      }
+    const selectedStipend =  allStipend.filter((each) => {
+      return each.location === countryOfDestination;
     });
+
+    if (selectedStipend[0]) {
+      const subTotal = selectedStipend[0].amount * days;
+      RequestUtils.total += subTotal;
+      stipend.push({
+        subTotal,
+        location: selectedStipend[0].location,
+        dailyRate: selectedStipend[0].amount,
+        duration: days,
+        centerExists: true,
+      });
+    } else {
+      const isAndelaCenter = RequestUtils
+        .centerExists(allStipend, trip.destination);
+      if (!isAndelaCenter) {
+        stipend.push({
+          subTotal: 0,
+          location: trip.destination.split(',')[1],
+          dailyRate: 'N/A',
+          duration: days,
+          centerExists: false,
+        });
+      }
+    }
     return stipend;
   }
 
