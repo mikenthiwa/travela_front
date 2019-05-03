@@ -206,6 +206,12 @@ class Utils {
       );
     return toolTip;
   }
+
+  static returnTip(data, property) {
+    return data.map((item, index) => {
+      return index === (data.length - 1) ? `${item[property]}` : `${item[property]}, `;
+    });
+  }
 }
 
 export default Utils;

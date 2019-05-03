@@ -21,8 +21,8 @@ class PersonalDetailsFiedset extends Component {
         <div className="add_dept">
           {renderInput('item', 'filter-dropdown-select',
             {
-              className: 'department_dropdown', 
-              size: '', 
+              className: 'department_dropdown',
+              size: '',
               label: label
             })
           }
@@ -46,11 +46,11 @@ class PersonalDetailsFiedset extends Component {
               })
             }
           </div>
-   
+
           <div>
-            {roleName === 'Budget Checker' ?  
-              displayInput('Add Department') :  
-              displayInput('Add Center')
+            {roleName === 'Budget Checker' ?
+              displayInput('Departments') :
+              displayInput('Country')
             }
           </div>
           <div className="">

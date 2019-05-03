@@ -20,6 +20,7 @@ export class Layout extends Component {
     openSearch: false,
     hideOverlay: true,
     delay: false,
+    clearNav: false
   };
 
   componentDidMount = () => {
@@ -32,6 +33,14 @@ export class Layout extends Component {
       }, 20000);
     }
   };
+
+  componentWillReceiveProps({ location }) {
+    const searchParam = new URLSearchParams(location.search).get('search');
+    const clearNav = searchParam ? false : true;
+    this.setState({
+      clearNav
+    });
+  }
 
   onNotificationToggle = () => {
     this.setState(prevState => ({
@@ -56,7 +65,7 @@ export class Layout extends Component {
     this.setState({ hideOverlay: false });
   };
 
-  renderNavBar = openSearch => {
+  renderNavBar = (openSearch, clearNav) => {
     return (
       <ConnectedNavBar
         className=""
@@ -65,6 +74,7 @@ export class Layout extends Component {
         handleHideSearchBar={this.handleHideSearchBar}
         openSearch={openSearch}
         handleShowDrawer={this.handleShowDrawer}
+        clearNav={clearNav}
       />
     );
   };
@@ -148,7 +158,7 @@ export class Layout extends Component {
   render () {
     const { isLoaded, location: { pathname } } = this.props;
     const token = Cookies.get('jwt-token');
-    const { delay } = this.state;
+    const { delay, clearNav } = this.state;
     if(delay || !isLoaded && token && pathname === '/home'){
       return <LoaderPage />;
     }
@@ -160,7 +170,7 @@ export class Layout extends Component {
         <div className="mdl-layout mdl-js-layout request-page mdl-layout--no-desktop-drawer-button">
           {this.renderOverlay(overlayClass)}
           {this.renderSideDrawer(overlayClass)}
-          {this.renderNavBar(openSearch)}
+          {this.renderNavBar(openSearch, clearNav)}
           {this.renderContent()}
         </div>
       </div>

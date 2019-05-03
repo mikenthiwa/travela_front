@@ -21,19 +21,20 @@ const props = {
       picture: 'http://picture.com/gif'
     }
   },
-  myCenters: [],
+  myCenters: ['Nigeria', 'Kenya'],
   location: {
-    search: 'search=gjg',
-    pathname: 'requests'
-  }
+    search: '?search=gjg',
+    pathname: '/requests'
+  },
+  clearNav: false,
 };
 
 
 
 const setup = () => shallow(<NavBar {...props} />);
-const navBarSetup = () => mount(
+const navBarSetup = (customProps = props) => mount(
   <MemoryRouter>
-    <NavBar {...props} />
+    <NavBar {...customProps} />
   </MemoryRouter>
 );
 
@@ -129,4 +130,65 @@ describe('Render NavBar component', () => {
     expect(props.history.push).toHaveBeenCalled();
   });
 
+  it ('should update url when input is provided in the search bar', () => {
+    const clock = sinon.useFakeTimers();
+    const wrapper = navBarSetup();
+    const event = {
+      target: {
+        value: 'kampala'
+      }
+    };
+    wrapper.find('input#search').at(0).simulate('change', event);
+    clock.tick(2000);
+    expect(props.history.push).toBeCalledWith('/requests?search=kampala');
+    clock.restore();
+  });
+
+  it('renders the location dropdown for only allowed routes', () => {
+    let wrapper = navBarSetup();
+    expect((wrapper).find('SelectDropDown').length).toEqual(0);
+    const customProps = { ...props, location: {pathname: '/requests/my-verifications',
+      search: ''}};
+    wrapper = navBarSetup(customProps);
+    expect((wrapper).find('SelectDropDown').length).toEqual(1);
+  });
+
+  it('should update the url with a selected center when a center is clicked', () => {
+    const customProps = { ...props, location: {pathname: '/requests/my-verifications',
+      search: ''}};
+    const wrapper = navBarSetup(customProps);
+    wrapper.find('.dropdown__container').simulate('click');
+    wrapper.find('.dropdown__list__item').at(1).simulate('click');
+    expect(props.history.push).toBeCalledWith('/requests/my-verifications?page=1&center=Nigeria');
+  });
+
+  it('should remove the center query from the url when a all locations is clicked', () => {
+    const customProps = { ...props, location: {pathname: '/requests/my-verifications',
+      search: ''}};
+    const wrapper = navBarSetup(customProps);
+    wrapper.find('.dropdown__container').simulate('click');
+    wrapper.find('.dropdown__list__item').at(0).simulate('click');
+    expect(props.history.push).toBeCalledWith('/requests/my-verifications?page=1');
+  });
+
+  it('clears the search bar if clearNav props is true', () => {
+    const wrapper = navBarSetup();
+    const event = {
+      target: {
+        value: 'test value'
+      }
+    };
+    wrapper.find('input#search').at(0).simulate('change', event);
+    expect(wrapper.find('input#search').at(0).prop('value')).toEqual('test value');
+    wrapper.setProps({
+      children: (
+        <NavBar
+          {...props}
+          clearNav
+        />
+      )
+    });
+    expect(wrapper.find('input#search').at(0).prop('value')).toEqual('');
+    wrapper.unmount();
+  });
 });

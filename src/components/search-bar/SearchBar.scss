@@ -48,11 +48,12 @@
     display: -moz-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
- 
-    @media (max-width: 781px) {
+
+    @media (max-width: 839px) {
       width: 210px;
+      margin-right: 10px;
     }
-    
+
   }
 
   /* Position search icon */
@@ -62,7 +63,7 @@
     height: 15.99px;
     width: 16.05px;
     margin-top: 15px;
-    @media (max-width: 781px) {
+    @media (max-width: 791px) {
       left: 190px;
     }
     @media (max-width: 612px) {
@@ -83,7 +84,7 @@
     height: 36px;
     width: 360px;
 
-    @media (max-width: 781px) {
+    @media (max-width: 839px) {
       font-size: xx-small;
     }
   }

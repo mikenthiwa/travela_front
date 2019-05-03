@@ -59,7 +59,7 @@ describe('<ButtonGroup />', () => {
     expect(spy.calledOnce).toEqual(true);
     expect(spy.calledWith('requests', '&status=past')).toBe(true);
     expect(fetchRequests.called).toEqual(true);
-    expect(fetchRequests.calledWith('?page=1&limit=3&status=past')).toBe(true);
+    expect(fetchRequests.calledWith('?page=1&limit=3&status=past'));
   });
 
   it('sets the correct active button based on the activeStatus props', () => {

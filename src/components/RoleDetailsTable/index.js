@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../modal/Modal';
+import Utils from '../../helper/Utils';
 import withLoading from '../Hoc/withLoading';
 import './RoleDetailsTable.scss';
 
@@ -45,11 +46,10 @@ export class RoleDetailsTable extends PureComponent {
 
   renderRoleUser(roleUser) {
     const { handleEditRole, deleteModalRoleId, deleteModalState, roleName } = this.props;
-    const showTip = roleName === 'Budget Checker' ?
-      roleUser.budgetCheckerDepartments.map((dept) => `${dept.name}, `) :
-      roleUser.centers.map((centers) => `${centers.location}, `);
+    const showTip = roleName === 'Budget Checker' ? Utils.returnTip(roleUser.budgetCheckerDepartments, 'name')
+      : Utils.returnTip(roleUser.centers, 'location');
     return (
-      <tr key={roleUser.id} className="table__row table__effects">
+      <tr key={roleUser.id} className="table__row">
         <td
           className="mdl-data-table__cell--non-numeric table__data freeze role-user__name table__data-pointer">
           {roleUser.fullName}

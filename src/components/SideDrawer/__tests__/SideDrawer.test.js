@@ -41,7 +41,7 @@ describe('<SideDrawer>', () => {
     const wrapper = shallow(
       <ConnectedSideDrawer
         handleShowDrawer={jest.fn()}
-        store={store} 
+        store={store}
       />);
     expect(wrapper.length).toBe(1);
   });

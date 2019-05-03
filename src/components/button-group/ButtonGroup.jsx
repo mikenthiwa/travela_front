@@ -1,23 +1,19 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Utils from '../../helper/Utils';
 import Button from '../buttons/Buttons';
 import './buttonGroup.scss';
 
 class ButtonGroup extends PureComponent {
   filterEntries = (entriesType, statusQuery) => {
     const { fetchRequests, fetchApprovals, url } = this.props;
-    const limit = Utils.getCurrentLimit(url);
-    const search = Utils.getQueryValue(url, 'search');
-    const paginationQuery = limit === '' ?
-      '?page=1' : `?page=1&limit=${limit}`;
-
-    const searchQuery = (search) ? `&search=${search}` : '';
-
+    const urlSearch = new URLSearchParams(url);
+    urlSearch.set('page', 1);
+    urlSearch.delete('status');
+    const urlSearchString = `?${urlSearch.toString()}${statusQuery}`;
     if(entriesType === 'requests')
-      fetchRequests(`${paginationQuery}${statusQuery}${searchQuery}`);
+      fetchRequests(urlSearchString);
     else
-      fetchApprovals(`${paginationQuery}${statusQuery}${searchQuery}`);
+      fetchApprovals(urlSearchString);
   };
 
   renderPendingApprovalsButton(){
@@ -128,7 +124,7 @@ class ButtonGroup extends PureComponent {
           text="Pending Verifications"
         />
         <Button
-          buttonClass={`bg-btn ${activeStatus === 'verified' ? 'bg-btn--active' : ''}`}
+          buttonClass={`bg-btn bg-btn--with-badge ${activeStatus === 'verified' ? 'bg-btn--active' : ''}`}
           responsiveText="Past"
           badge={verifiedApprovalsCount}
           showBadge={verifiedApprovalsCount > 0}

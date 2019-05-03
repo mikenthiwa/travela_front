@@ -80,7 +80,7 @@ it('should render the Verifications page without crashing', () => {
   );
   expect(wrapper.find('Verifications').length).toBe(1);
   wrapper.unmount();
-}); 
+});
 
 it('calls the onPageChange method', () => {
   const wrapper = mount(
@@ -159,6 +159,18 @@ describe('Verifications page filters', () => {
     const approvals = wrapper.find(Verifications);
     approvals.instance().fetchFilteredApprovals('?status=open');
     expect(approvals.instance().state.searchQuery).toEqual('?status=open');
+  });
+
+  it('fetches verifications based on inflow', () => {
+    const inflowButton = wrapper.find('#inflow');
+    inflowButton.simulate('click');
+    expect(props.fetchUserApprovals).toBeCalledWith('?flow=destination&page=1&verified=true');
+  });
+
+  it('fetches verifications based on outflow', () => {
+    const outflowButton = wrapper.find('#outflow');
+    outflowButton.simulate('click');
+    expect(props.fetchUserApprovals).toBeCalledWith('?flow=origin&page=1&verified=true');
   });
 });
 

@@ -211,7 +211,7 @@ describe('<Requests />', () => {
     });
 
     it('should display the correct status on My Verifications', () => {
-      wrapper.setProps({ type: 'verifications'});
+      wrapper.setProps({ type: 'verifications', location: { search: '?flow=destination'}});
 
       test('Checked', 'Approved', 'Approved');
       test('Verified', 'Verified', 'Approved');
