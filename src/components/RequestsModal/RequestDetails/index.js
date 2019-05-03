@@ -121,6 +121,10 @@ export class RequestDetails extends Component {
   }
 
   renderMultiTripDates(requestData, previousTrip) {
+    if (requestData.returnDate === null) {
+      return `${moment(requestData.departureDate).format('DD MMM YYYY').toUpperCase()}`;
+    }
+   
     if (moment(previousTrip.returnDate).year() === moment(requestData.departureDate).year()) {
       return (`${moment(previousTrip.returnDate).format('DD MMM').toUpperCase()} -
       ${moment(requestData.departureDate).format('DD MMM YYYY').toUpperCase()}`);
@@ -155,7 +159,7 @@ export class RequestDetails extends Component {
       <div>
         {requestData.trips && requestData.trips.map(request => {
           const flightRoute = `${request.origin.split(',')[1]} - ${request.destination.split(',')[1]}`;
-          const travelDates = this.renderTripDates(requestData);
+          const travelDates = this.renderTripDates(request);
           const { accommodationType, beds} = request;
           const flightTitle = 'Flight Route';
           const travelTitle = 'Travel Dates';
