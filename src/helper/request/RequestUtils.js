@@ -117,7 +117,7 @@ class RequestUtils {
     }
   }
 
-  static removeLocationChecklist(checklistItems, userData) {
+  static removeLocationChecklist (checklistItems, userData) {
     const newChecklist = [...checklistItems];
     newChecklist.map((checkItem, index) => {
       if (checkItem.destinationName.includes(userData.location)) {
@@ -137,7 +137,7 @@ class RequestUtils {
         ...new Set(checklistItems.map(checklistItem => checklistItem.destinationName))
       ];
 
-      const tripsValues = [...new Set(trips.map(trip => trip.destination))];
+      const tripsValues = [...new Set(trips.map(trip => trip.destination.split(', ')[1]))];
 
       const differenceDestinations = tripsValues.filter(
         destination => !checklistItemsValues.includes(destination)
@@ -158,6 +158,15 @@ class RequestUtils {
           checklistItems.push(newItems);
         });
       }
+    }
+
+    else if(checklistItems.length === 1 && trips.length === 1 && checklistItems[0].destinationName === 'Default'){
+      const newItems = {
+        destinationName: trips[0].destination.split(', ')[1],
+        checklist: checklistItems[0].checklist
+      };
+      checklistItems.splice(0, 1, newItems);
+
     }
     return checklistItems;
   }

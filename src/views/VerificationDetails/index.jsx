@@ -101,9 +101,11 @@ class VerificationDetails extends Component {
                   <div key={item.destinationName} className="location-items">
                     <div className="destination">
                       <span className="country-flag">
-                        <img className="flag" src={countryUtils.getCountryFlagUrl(item.destinationName)} alt="country flag" />
+                        <img
+                          className="flag"
+                          src={countryUtils.getCountryFlagUrl(item.destinationName)} alt="country flag" />
                       </span>
-                      <span><strong>{ item.destinationName }</strong></span>
+                      <span><strong>{ item.tripLocation }</strong></span>
                     </div>
                     <div className="attachment-items">
                       {(attachmentDetails.length)

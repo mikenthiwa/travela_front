@@ -8,7 +8,7 @@ class countryUtils {
   }
 
   static getCountryFlagUrl(location) {
-    const country = location.split(', ')[1];
+    const country = location.split(', ')[1] ? location.split(', ')[1] : location;
     const countryCode = this.getCountryCode(country);
     return countryCode ? `https://www.countryflags.io/${countryCode.alpha2}/flat/64.png` : placeholderFlag;
   }

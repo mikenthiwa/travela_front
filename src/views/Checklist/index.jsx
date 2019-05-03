@@ -13,7 +13,6 @@ import RestoreChecklistItem from '../../components/modal/RestoreChecklistModal';
 import DeleteRequestForm from '../../components/Forms/DeleteRequestForm/DeleteRequestForm';
 import Preloader from '../../components/Preloader/Preloader';
 
-
 export class Checklist extends Component {
   state = {itemToEdit: null, deleteReason: '', checklistItemId: '',
     restoreItemData: {}, checklistItemName: '' }

@@ -20,7 +20,7 @@ export default function (attachments) {
         attachmentDetails.push(result);
       } else if (checklistItem.name === 'Travel Ticket Details' && checklistItem.submissions.length) {
         const result = {
-          destination: item.destinationName,
+          destination: item.tripLocation,
           airline: checklistItem.submissions[0].value.airline,
           departureTime: formatDateString(new Date(checklistItem.submissions[0].value.departureTime)),
           arrivalTime: formatDateString(new Date (checklistItem.submissions[0].value.arrivalTime)),
