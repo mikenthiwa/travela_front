@@ -27,9 +27,11 @@ export default class NewTravelReasonForm extends Component {
   setEditValues = ({ editing, travelReason : { editReason }}) => {
     if (editing) {
       const { title, description } = editReason;
+      const descriptionLength = description.length;
       this.setState(
         {
-          values: { title: _.capitalize(title), description }
+          values: { title: _.capitalize(title), description },
+          ofMinLength: descriptionLength < 10
         });
     }
   };
