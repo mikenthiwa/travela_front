@@ -18,6 +18,16 @@ const trips = [
   },
 ];
 
+const trips2 = [
+  {
+    bedId: 3,
+    departureDate: '2019-02-19',
+    destination: 'Nairobi, Kenya',
+    origin: 'Lagos, Nigeria',
+    returnDate: '2019-02-28'
+  }
+];
+
 const checklistItems = [
   {
     destinationName: 'Kampala, Uganda',
@@ -63,7 +73,38 @@ const checklistItems = [
       }
     ]
   }
-]
+];
+
+const checklistItems2 = [
+  {
+    destinationName: 'Default',
+    checklist: [
+      {
+        id: 2,
+        name: 'Travel Ticket Details',
+        requiresFiles: false,
+        destinationName: 'Default',
+        deleteReason: null,
+        resources: [
+          {
+            id: '1',
+            label: 'Flight Application Guide',
+            link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
+            checklistItemId: '2'
+          }
+        ]
+      },
+      {
+        id: '1',
+        name: 'Travel Ticket',
+        requiresFiles: true,
+        destinationName: 'Default',
+        deleteReason: null,
+        resources: []
+      }
+    ]
+  }
+];
 
 const nonAndelanCenterTrip = {
   bedId: 3,
@@ -252,6 +293,46 @@ describe('Request Travel Checklist', () => {
     newItems.push(expected);
     expect(newChecklist).toMatchObject(newItems);
   });
+
+  it('should return default checklist items', () => {
+    const newItems2 = checklistItems2;
+    const newChecklist = RequestUtils.getDefaultChecklist(
+      checklistItems2,
+      trips2
+    );
+
+    const expected = {
+      destinationName: 'Kenya',
+      checklist: [
+        {
+          id: 2,
+          name: 'Travel Ticket Details',
+          requiresFiles: false,
+          destinationName: 'Default',
+          deleteReason: null,
+          resources: [
+            {
+              id: '1',
+              label: 'Flight Application Guide',
+              link:
+                  'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
+              checklistItemId: '2'
+            }
+          ]
+        },
+        {
+          id: '1',
+          name: 'Travel Ticket',
+          requiresFiles: true,
+          destinationName: 'Default',
+          deleteReason: null,
+          resources: []
+        }
+      ]
+    };
+    newItems2.push(expected);
+    expect(newChecklist).toMatchObject(newItems2);
+  });
 });
 
 describe('formatLocation', ()=> {
@@ -265,14 +346,13 @@ describe('formatLocation', ()=> {
     expect(Lagos).toBe('Lagos(LOS)');
   });
 
-   it('should return Kampala(KLA) if Kampala is passed to it', ()=>{
+  it('should return Kampala(KLA) if Kampala is passed to it', ()=>{
     const  Kampala = RequestUtils.formatLocation('Kampala');
     expect(Kampala).toBe('Kampala(KLA)');
   });
-   it('should return Kigali(KGL) if Kigali is passed to it', ()=>{
+  it('should return Kigali(KGL) if Kigali is passed to it', ()=>{
     const  Kigali = RequestUtils.formatLocation('Kigali');
     expect(Kigali).toBe('Kigali(KGL)');
   });
 
-  });
-
+});

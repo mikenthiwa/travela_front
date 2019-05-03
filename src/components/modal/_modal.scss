@@ -129,3 +129,10 @@
   }
 }
 
+@media (max-width: 568px) {
+  .guesthouse-details-wrapper, .guesthouse-modal{
+    .modal {
+      width: 100%;
+    }
+  }
+}

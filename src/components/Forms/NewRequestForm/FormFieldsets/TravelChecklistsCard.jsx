@@ -2,13 +2,14 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Preloader from '../../../Preloader/Preloader';
 import RequestUtils from '../../../../helper/request/RequestUtils';
+import countryUtils from '../../../../helper/countryUtils';
 
 class TravelChecklistsCard extends Component {
   componentDidMount() {
     const { fetchTravelChecklist, trips } = this.props;
     const tripDestinations = {};
     trips.map(trip => {
-      tripDestinations[trip.destination.split(',', 1)] = trip.destination;
+      tripDestinations[trip.destination.split(', ')[1]] = trip.destination;
     });
     fetchTravelChecklist(null, Object.keys(tripDestinations));
   }
@@ -40,9 +41,17 @@ class TravelChecklistsCard extends Component {
                   return (
                     <Fragment key={checklist.destinationName}>
                       <div className="travel-checklist-loc-title">
-                        <p> 
-                          {checklist.destinationName}
-                        </p>
+                        <div className="destination checklist-destination">
+                          <span className="country-flag checklist-flag">
+                            <img
+                              className="flag"
+                              src={countryUtils.getCountryFlagUrl(checklist.destinationName)}
+                              alt="country flag" />
+                          </span>
+                          <p>
+                            {checklist.destinationName}
+                          </p>
+                        </div>
                       </div>
                       <ul className="approval-list-items">
                         {checklistItems.map(item => 

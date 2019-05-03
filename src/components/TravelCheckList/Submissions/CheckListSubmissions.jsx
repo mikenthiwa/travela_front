@@ -25,7 +25,7 @@ class CheckListSubmissions extends Component {
       userReadinessDocument,
       closeModal
     } = this.props;
-    const { checklist, destinationName, tripId } = list;
+    const { checklist, destinationName, tripId, tripLocation } = list;
     const countryFlagUrl = countryUtils.getCountryFlagUrl(destinationName);
     const travelTicket =
       checklist.length && checklist.find(item => item.name === 'Travel Ticket');
@@ -35,7 +35,7 @@ class CheckListSubmissions extends Component {
           <div className="country-flag">
             <img className="flag" src={countryFlagUrl} alt="country flag" />
           </div>
-          {destinationName}
+          { tripLocation }
         </div>
         {
           checklist.length &&
