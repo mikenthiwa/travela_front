@@ -15,12 +15,17 @@ class SelectDropDown extends PureComponent {
     };
   }
 
-  componentWillMount() {
-    const { defaultSelected, dropDownItems } = this.props;
+  componentWillUnmount() {
+    document.removeEventListener('click', this.hideDropdownItems);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { defaultSelected, dropDownItems } = nextProps;
     const selectedItem = dropDownItems.find(item => item.value == defaultSelected)
       || dropDownItems[0];
-    this.setState(state => ({...state, selectedItem}));
+    return { selectedItem };
   }
+
 
   selectItem = item => {
     this.setState({
@@ -109,14 +114,12 @@ SelectDropDown.propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   })).isRequired,
-  defaultSelected: PropTypes.string,
   dropDownClass: PropTypes.string,
   placeHolder: PropTypes.string,
 };
 
 SelectDropDown.defaultProps = {
   dropDownIcon: icon,
-  defaultSelected: '',
   dropDownClass: '',
   onClickItem: null,
   placeHolder: '',

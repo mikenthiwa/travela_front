@@ -156,12 +156,6 @@ th.request_id{
       background-color: $white-color !important;
     }
   }
-  &__effects{
-    &:hover {
-      box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
-      background-color: $white-color !important;
-    }
-  }
   &__data-pointer{
     cursor: default;
   }
@@ -313,6 +307,12 @@ th.request_id{
 }
 .fa.fa-ellipsis-v{
   cursor: pointer;
+}
+
+.verifications-container {
+  @media (max-width: 885px) {
+    margin-top: 30px !important;
+  }
 }
 
 @media (max-width: 845px) {

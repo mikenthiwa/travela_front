@@ -1123,8 +1123,8 @@ describe('<NewRequestForm />', () => {
       currentTab: 3,
       trips: [{
         id: '1',
-        origin: 'Nairobi,Kenya',
-        destination: 'Lagos,Nigeria',
+        origin: 'Nairobi, Kenya',
+        destination: 'Lagos, Nigeria',
         departureDate: '2018-09-30',
         returnDate: '2018-09-30',
         createdAt: '2018-09-27T18:49:03.626Z',
@@ -1207,8 +1207,8 @@ describe('<NewRequestForm />', () => {
       errors: {manager: ''},
       trips: [{
         id: '1',
-        origin: 'Nairobi,Kenya',
-        destination: 'Lagos,Nigeria',
+        origin: 'Nairobi, Kenya',
+        destination: 'Lagos, Nigeria',
         departureDate: '2018-09-30',
         returnDate: '2018-09-30',
         createdAt: '2018-09-27T18:49:03.626Z',

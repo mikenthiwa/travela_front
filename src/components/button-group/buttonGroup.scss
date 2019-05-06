@@ -2,9 +2,10 @@ $primary-color: #3359DB;
 $white-color: #FFF;
 
 @mixin badge($color, $backgroundColor) {
+    display: inline-flex;
     height: 15px;
-    width: 15px;
-    padding: 1.8px;
+    min-width: 15px;
+    padding: 2.5px;
     background-color: $backgroundColor;
     border-radius: 50%;
     color: $color;
@@ -25,12 +26,12 @@ $white-color: #FFF;
 .button-group {
     width: auto;
     display: flex;
-    height: 36px;
+    height: auto;
     align-items: center;
 }
 
 .bg-btn {
-    height: 36px;
+    min-height: 36px;
     width: auto;
     border: 1px solid #D4D4D4;
     border-radius: 1px;
@@ -64,26 +65,26 @@ $white-color: #FFF;
         }
     }
 
-  &--active {
+&--active {
         border: 1px solid $primary-color;
         border-radius: 1px;
         background-color: $primary-color;
         color: $white-color;
     }
 
-  &--with-badge {
+&--with-badge {
         display: flex;
         justify-content: space-around;
         align-items: center;
-      &__approvals--inactive {
-          @include badge($white-color, #49AAAF);
-      }
-      &--inactive {
+    &__approvals--inactive {
+        @include badge($white-color, #49AAAF);
+    }
+    &--inactive {
         @include badge($white-color, $primary-color);
         }
-      &--active {
-          @include badge($primary-color, $white-color);
-      }
+    &--active {
+        @include badge($primary-color, $white-color);
+    }
 
     }
 

@@ -127,7 +127,7 @@ export class Table extends Component {
       </div>
     );
   }
-  
+
   renderRequestStatus(request) {
     const {
       editRequest, type, uploadTripSubmissions, deleteRequest,
@@ -195,14 +195,27 @@ export class Table extends Component {
     );
   }
   renderTravelDuration(type) {
-    return type === 'verifications' ? '' : (
+    return type !== 'verifications' && (
       <th className="mdl-data-table__cell--non-numeric table__head">
       Duration
       </th>
     );
   }
 
-  renderRequest(request, type) {
+  renderLocation(type, search, trips) {
+    return type === 'verifications' && search.includes('destination') ?
+      (
+        <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer">
+          {trips.length > 0 && trips[0].destination}
+        </td>
+      ) : (
+        <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer">
+          {trips.length > 0 && trips[0].origin}
+        </td>
+      );
+  }
+
+  renderRequest(request, type, search) {
     const { trips, travelCompletion } = request;
     const tripTypeFormatted = formatTripType(request.tripType);
     const travelDuration =
@@ -218,10 +231,8 @@ export class Table extends Component {
         >
           {tripTypeFormatted}
         </td>
-        <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer">
-          {trips.length > 0 && trips[0].origin}
-        </td>
-        {type === 'verifications' ? '' : (
+        {this.renderLocation(type, search, trips)}
+        {type !== 'verifications' && (
           <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer">
             {travelDuration}
           </td>
@@ -237,7 +248,21 @@ export class Table extends Component {
     );
   }
 
-  renderTableHead(type) {
+  renderLocationHeader(type, search) {
+    const location = type === 'verifications' && search.includes('destination') ?
+      (
+        <th className="mdl-data-table__cell--non-numeric table__head">
+              Destination
+        </th>
+      ) : (
+        <th className="mdl-data-table__cell--non-numeric table__head">
+              Origin
+        </th>
+      );
+    return location;
+  }
+
+  renderTableHead(type, search) {
     return (
       <tr>
         <th className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze request_id">
@@ -255,9 +280,7 @@ export class Table extends Component {
         >
           Trip Type
         </th>
-        <th className="mdl-data-table__cell--non-numeric table__head">
-          Origin
-        </th>
+        {this.renderLocationHeader(type, search)}
         {this.renderTravelDuration(type)}
         <th className="mdl-data-table__cell--non-numeric table__head">
           Date Created
@@ -306,17 +329,18 @@ export class Table extends Component {
   }
 
   render() {
-    const { requests, type, fetchRequestsError, message, requestId } = this.props;
+    const { requests, type, fetchRequestsError, message, requestId, location } = this.props;
+    const { search } = location;
     return (
       <Fragment>
-        <div className="table__container">
+        <div className={`table__container ${type === 'verifications' ? 'verifications-container': ''} `}>
           {fetchRequestsError && this.renderError(fetchRequestsError)}
           {requests &&
             requests.length > 0 && (
             <table className="mdl-data-table mdl-js-data-table table__requests">
-              <thead>{this.renderTableHead(type)}</thead>
+              <thead>{this.renderTableHead(type, search)}</thead>
               <tbody className="table__body approvals_table_body">
-                {requests.map(request => this.renderRequest(request, type))}
+                {requests.map(request => this.renderRequest(request, type, search))}
               </tbody>
             </table>
           )}

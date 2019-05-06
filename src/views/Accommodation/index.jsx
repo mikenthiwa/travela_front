@@ -63,27 +63,29 @@ export class Accommodation extends Component {
       isSaving,
     } = this.props;
     return (
-      <Modal
-        closeModal={closeModal}
-        width="800px"
-        visibility={
-          shouldOpen && modalType === 'new model' ? 'visible' : 'invisible'
-        }
-        title="Add Guest House"
-      >
-        <NewAccommodationForm
+      <div className="guesthouse-modal">
+        <Modal
           closeModal={closeModal}
-          modalType={modalType || ''}
-          createAccommodation={createAccommodation}
-          fetchAccommodation={fetchAccommodation}
-          editAccommodation={editAccommodation}
-          createAccommodationLoading={createAccommodationLoading}
-          initFetchTimelineData={initFetchTimelineData}
-          savingAccommodation={savingAccommodation}
-          isSaving={isSaving}
-          guestHouse={{}}
-        />
-      </Modal>
+          width="800px"
+          visibility={
+            shouldOpen && modalType === 'new model' ? 'visible' : 'invisible'
+          }
+          title="Add Guest House"
+        >
+          <NewAccommodationForm
+            closeModal={closeModal}
+            modalType={modalType || ''}
+            createAccommodation={createAccommodation}
+            fetchAccommodation={fetchAccommodation}
+            editAccommodation={editAccommodation}
+            createAccommodationLoading={createAccommodationLoading}
+            initFetchTimelineData={initFetchTimelineData}
+            savingAccommodation={savingAccommodation}
+            isSaving={isSaving}
+            guestHouse={{}}
+          />
+        </Modal>
+      </div>
     );
   }
 

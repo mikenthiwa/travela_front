@@ -31,7 +31,8 @@ const initialState = {
   notifications: {
     notifications: [],
     singleNotificationRead: 0
-  }
+  },
+  clearNav: false
 };
 
 const store = mockStore(initialState);
@@ -126,7 +127,8 @@ describe('Layout component', () => {
         location: {
           search: 'search=gjg',
           pathname: 'requests'
-        }
+        },
+        clearNav: false
       };
       const navBarSetup = () => mount(
         <MemoryRouter>

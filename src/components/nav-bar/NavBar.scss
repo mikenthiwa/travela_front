@@ -21,6 +21,33 @@
         height: 70%;
         padding: 0 40px 0px 51px;
     }
+    .center-dropdown {
+        max-width: 160px;
+        border-radius: 3px;
+        max-height: 70px;
+        position: relative;
+        top: 26px;
+        margin: 0 5px 0 5px;
+        @media (max-width: 612px) {
+            left: -90px;
+            top: 15px;
+        }
+        &__container {
+            display: flex;
+            .location_circle_container {
+                height: 36px;
+                background-color: #f8f8f8;
+                padding: 5px 8px;
+                box-sizing: border-box;
+            }
+        }
+        .dropdown__input {
+            width: 100%;
+            border: none;
+            border-left: 1px solid #d4d4d4;
+            background-color: #f8f8f8;
+        }
+    }
 }
 
 .hamburger {
@@ -96,14 +123,19 @@
         }
     }
     &__travela-logo {
-        @media (max-width: 480px) {
+        &-text {
+            @media (max-width: 698px) {
+                display: none;
+            }
+        }
+        @media (max-width: 699px) {
             top: 2.2%;
             position: fixed;
             height: 36px;
             width: 36px;
         }
 
-        @media (min-width: 480px) {
+        @media (min-width: 699px) {
             display: none;
         }
     }
@@ -169,6 +201,12 @@
         @media (max-width: 612px) {
             margin-right: -80px;
             display:none;
+        }
+        .search-responsive {
+            @media (max-width: 840px) {
+                width: 210px;
+                margin: 5px;
+            }
         }
     }
     &__onclick-search-size {

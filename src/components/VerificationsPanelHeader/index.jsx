@@ -2,10 +2,18 @@ import React, { PureComponent } from 'react';
 import { PropTypes } from 'prop-types';
 import PageHeader from '../PageHeader';
 import ButtonGroup from '../button-group/ButtonGroup';
+import Button from '../buttons/Buttons';
 import HeaderPagination from '../Pagination/HeaderPagination';
 import '../RequestPanelHeader/Request.scss';
+import './VerificationsPanelHeader.scss';
 
 class ApprovalsPanelHeader extends PureComponent {
+  getUrl (url, flow) {
+    const urlSearch = new URLSearchParams(url);
+    urlSearch.set('flow', flow);
+    urlSearch.set('page', 1);
+    return urlSearch.toString();
+  }
   renderButtonGroup = () => {
     const {
       openApprovalsCount,
@@ -14,7 +22,6 @@ class ApprovalsPanelHeader extends PureComponent {
       verifiedApprovalsCount,
       fetchApprovals,
       activeStatus,
-      approvalsLength,
       url
     } = this.props;
     return (
@@ -31,16 +38,41 @@ class ApprovalsPanelHeader extends PureComponent {
     );
   };
 
+
+
   render() {
-    const { url, approvalsLength, getApprovalsWithLimit, loading } = this.props;
+    const { url, approvalsLength, getApprovalsWithLimit, loading, fetchApprovals } = this.props;
+    const originURl = this.getUrl(url, 'origin');
+    const destinationURl = this.getUrl(url, 'destination');
+    const inflowActive = url.includes('destination');
+
     return (
       <div className="request-panel-header">
         <PageHeader title="VERIFICATIONS" />
         {
           approvalsLength > 0 && !loading && (
-            <div className="open-requests">
+            <div className="open-requests wrap-buttons">
               {this.renderButtonGroup()}
-              <HeaderPagination getRequestsWithLimit={getApprovalsWithLimit} url={url} />
+              <div className="other-buttons">
+                <div className="flow-button">
+                  <Button
+                    text="INFLOW"
+                    buttonId="inflow"
+                    onClick={() => fetchApprovals(`?${destinationURl}`)}
+                    buttonClass={`bg-btn ${inflowActive ? 'bg-btn--active' : ''}`}
+                  />
+                  <Button
+                    text="OUTFLOW"
+                    buttonId="outflow"
+                    onClick={() => fetchApprovals(`?${originURl}`)}
+                    buttonClass={`bg-btn ${!inflowActive ? 'bg-btn--active' : ''}`}
+                  />
+                </div>
+                <HeaderPagination
+                  getRequestsWithLimit={getApprovalsWithLimit}
+                  url={url}
+                />
+              </div>
             </div>
           )}
       </div>

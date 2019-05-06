@@ -22,7 +22,7 @@ const props = {
 };
 
 describe('<SelectDropDown>', () => {
-  it('should set the correct state on ComponentWillMount', () => {
+  it('should set the correct state when the component mounts', () => {
     const wrapper = shallow(<SelectDropDown
       {...{...props, defaultSelected: '2'}}
     />);
@@ -58,9 +58,12 @@ describe('<SelectDropDown>', () => {
   it('renders the correct value of a list item when the item is selected', () => {
     const wrapper = shallow(<SelectDropDown {...props} />);
     wrapper.simulate('click');
-    const selectedItem = wrapper.find('.dropdown__list__item').last();
+    const selectedItem = wrapper.find('.dropdown__list__item').at(1);
     selectedItem.simulate('click');
-    expect(wrapper.find('.dropdown__input__value').text()).toBe('3');
+    wrapper.setProps({
+      defaultSelected: '2'
+    });
+    expect(wrapper.find('.dropdown__input__value').text()).toBe('2');
   });
 
   it('closes when there is a click outside the component', () => {

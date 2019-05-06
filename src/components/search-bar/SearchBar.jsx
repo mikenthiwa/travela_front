@@ -28,6 +28,7 @@ class SearchBar extends PureComponent {
     onSubmit();
   }
   render() {
+    const { value } = this.props;
     return (
       <div className="mdl-search searchbar__search">
         <img src={Loupe} alt="Search Icon" className="searchbar__search-icon" />
@@ -38,6 +39,7 @@ class SearchBar extends PureComponent {
             type="text"
             placeholder="Search requests, team members, etc"
             size="1"
+            value={value}
             onChange={this.onChange}
           />
         </form>
@@ -49,5 +51,11 @@ class SearchBar extends PureComponent {
 SearchBar.propTypes = {
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  value: PropTypes.string,
 };
+
+SearchBar.defaultProps = {
+  value: '',
+};
+
 export default SearchBar;

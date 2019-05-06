@@ -30,13 +30,31 @@ class URLSearchParams {
     const params = search.split('&');
     this.map = {};
     params.forEach((param) => {
-      const tokens = param.split('=');
-      this.map[tokens[0]] = tokens[1];
+      if (param.length) {
+        const tokens = param.split('=');
+        this.map[tokens[0]] = tokens[1];
+      }
     });
   }
 
   get(key){
     return this.map[key];
+  }
+
+  set(key, value) {
+    this.map[key] = value;
+  }
+
+  delete(key) {
+    delete this.map[key];
+  }
+
+  toString() {
+    const allKeys = Object.keys(this.map).map((key) => {
+      const keyValue = `${key}=${this.map[key]}`;
+      return keyValue;
+    });
+    return(allKeys.join('&'));
   }
 }
 

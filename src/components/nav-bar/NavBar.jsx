@@ -10,7 +10,9 @@ import mobileTravel from '../../images/travela-mobile.svg';
 import icon from '../../images/drop-down-icon.svg';
 import notification from '../../images/notification.svg';
 import SearchBar from '../search-bar/SearchBar';
-import LocationDropDown from '../LocationDropDown';
+import centerIcon from '../../images/icons/circle.svg';
+import SelectDropDown from '../SelectDropDown/SelectDropDown';
+import selectDropDownIcon from '../../images/icons/form_select_dropdown.svg';
 import Button from '../buttons/Buttons';
 import ImageLink from '../image-link/ImageLink';
 import { logoutUser } from '../../helper/userDetails';
@@ -23,7 +25,7 @@ export class NavBar extends PureComponent {
     hideLogoutDropdown: true,
     keyword: '',
   };
-  
+
   debouncer = debounce(
     (history, pathName, queryString) =>
       (history.push(`${pathName}${queryString}`)),
@@ -31,10 +33,24 @@ export class NavBar extends PureComponent {
     { trailing: true }
   );
 
+  componentWillMount() {
+    const { location } = this.props;
+    const locationUrl = new URLSearchParams(location.search).get('search');
+    this.setState({ keyword: locationUrl || '' });
+  }
+
+  componentWillReceiveProps({ clearNav }) {
+    if (clearNav) {
+      this.setState({
+        keyword: ''
+      });
+    }
+  }
+
   componentWillUnmount() {
     document.removeEventListener('click', this.hideDropdown);
   }
-  
+
   getUnreadNotificationsCount = () => {
     const { notifications } = this.props;
     let count = 0;
@@ -56,9 +72,10 @@ export class NavBar extends PureComponent {
 
   getCenter = (center) => {
     const { history, location } = this.props;
-    const queryString = Utils.buildQuery(location.search, 'center', center);
-    center === 'All Locations' ? history.push(`${location.pathname}`) 
-      : history.push(`${location.pathname}${queryString}`);
+    const locationUrl = new URLSearchParams(location.search);
+    locationUrl.set('page', 1);
+    center === 'All Locations' ? locationUrl.delete('center') : locationUrl.set('center', center);
+    history.push(`${location.pathname}?${locationUrl.toString()}`);
   }
 
   onSubmit = () => {
@@ -152,10 +169,10 @@ export class NavBar extends PureComponent {
   renderLogo() {
     return (
       <span className="navbar__logo-icons">
-        <img src={travela} alt="Andela Logo" className="mdl-cell--hide-phone" />
+        <img src={travela} alt="Andela Logo" className="mdl-cell--hide-phone navbar__travela-logo-text" />
         <img
-          src={mobileTravel} 
-          alt="Travela Logo" 
+          src={mobileTravel}
+          alt="Travela Logo"
           className="navbar__travela-logo" />
       </span>
     );
@@ -180,8 +197,30 @@ export class NavBar extends PureComponent {
     );
   }
 
-  renderHeader(handleShowDrawer){
+  renderLocationDropdown(allowedRoutes, centers, centerSelected) {
+    const { location } = this.props;
+    return allowedRoutes.includes(location.pathname) && (
+      <div className="center-dropdown__container">
+        <div className="location_circle_container">
+          <img src={centerIcon} alt="location-icon" />
+        </div>
+        <SelectDropDown
+          onClickItem={this.getCenter}
+          dropDownItems={centers}
+          defaultSelected={centerSelected || 'All Locations'}
+          dropDownIcon={selectDropDownIcon}
+        />
+      </div>
+    );
+  }
+
+  renderHeader(handleShowDrawer, keyword){
     const { myCenters, location } = this.props;
+    const locationUrl = new URLSearchParams(location.search);
+    const centerSelected = locationUrl.get('center');
+    const centers = ['All Locations', ...myCenters];
+    const allCenters = centers.map(center => ({ value: center, name: center }));
+    const allowedRoutes = ['/requests/my-verifications', '/dashboard', '/trip-planner/checklists'];
     return(
       <div className="mdl-layout__header-row">
         <div className="navbar__nav-size navbar__logo-icons">
@@ -192,18 +231,14 @@ export class NavBar extends PureComponent {
         </div>
         <div className="mdl-layout-spacer" />
         <div className="navbar__search-size mdl-cell--hide-phone">
-          <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} />
+          <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} value={keyword} />
         </div>
-        <div className="navbar__search-size mdl-cell--hide-phone">
-          <LocationDropDown 
-            centers={myCenters}
-            urlLocation={location}
-            getCenter={this.getCenter}
-          />
+        <div className="center-dropdown">
+          {myCenters.length && this.renderLocationDropdown(allowedRoutes, allCenters, centerSelected)}
         </div>
         <nav className="mdl-navigation">
           {this.renderNotification()}
-          <div className="navbar__user-icon navbar__nav-size 
+          <div className="navbar__user-icon navbar__nav-size
             mdl-cell--hide-tablet mdl-cell--hide-phone">
             {this.renderUserIcons()}
           </div>
@@ -214,12 +249,13 @@ export class NavBar extends PureComponent {
 
   render() {
     const {handleHideSearchBar, handleShowDrawer, openSearch, shouldOpen } = this.props;
+    const { keyword } = this.state;
     let showSearch='none';
-    if(openSearch) { showSearch='block';}
+    if (openSearch) { showSearch='block';}
     return (
       <div className={shouldOpen ? '' : 'header-container'}>
         <header className="mdl-layout__header navbar__layout_header">
-          {this.renderHeader(handleShowDrawer)}
+          {this.renderHeader(handleShowDrawer, keyword)}
           <button type="button" className="navbar__search-icon--btn" onClick={handleHideSearchBar}>
             <div>
               <i className="material-icons navbar__search-icon">
@@ -229,7 +265,7 @@ export class NavBar extends PureComponent {
           </button>
           <div
             className="navbar__onclick-search-size" style={{display: `${showSearch}`}}>
-            <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} />
+            <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} value={keyword} />
           </div>
         </header>
       </div>
@@ -249,6 +285,7 @@ NavBar.propTypes = {
   handleShowDrawer: PropTypes.func,
   notifications: PropTypes.array,
   myCenters: PropTypes.array,
+  clearNav: PropTypes.bool.isRequired
 };
 
 NavBar.defaultProps = {
@@ -256,7 +293,7 @@ NavBar.defaultProps = {
   shouldOpen: false,
   handleShowDrawer:()=>{},
   notifications: [],
-  myCenters: []
+  myCenters: [],
 };
 
 const mapStateToProps = state => ({
