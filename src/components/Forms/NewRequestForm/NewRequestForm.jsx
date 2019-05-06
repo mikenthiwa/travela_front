@@ -19,6 +19,7 @@ import newSteps from '../../../helper/newSteps';
 import TravelChecklistsCard from './FormFieldsets/TravelChecklistsCard';
 import PendingApprovals from './FormFieldsets/PendingApprovalsCard';
 import setDropdownLocation from '../../../scripts/dropdownLocation';
+import BackButton from '../BackButton';
 
 class NewRequestForm extends PureComponent {
   constructor(props) {
@@ -733,6 +734,23 @@ class NewRequestForm extends PureComponent {
     }
   };
 
+  backStep = (e) => {
+    e.preventDefault();
+    const { steps, currentTab, trips } = this.state;
+    if (currentTab === 2) {
+      this.setState({
+        steps: newSteps(steps, currentTab - 1),
+        currentTab: currentTab - 1
+      });
+    }
+    if (currentTab !==2) {
+      this.setState({
+        steps: newSteps(steps, currentTab - 1),
+        currentTab: currentTab - 1
+      });
+    }
+  };
+
   renderPersonalDetailsFieldset = () => {
     const {collapse, title, position, line, values, errors} = this.state;
     const {managers, creatingRequest} = this.props;
@@ -895,7 +913,7 @@ class NewRequestForm extends PureComponent {
             trips={trips}
             total={total}
             travelStipends={travelStipends}
-            isLoading={isLoading}
+            isLoading={isLoading}           
           />
         }
         {!isLoading && (
@@ -910,6 +928,11 @@ class NewRequestForm extends PureComponent {
           </div>
         )
         }
+        <div className="back-btn-stipend">
+          <BackButton 
+            backStep={this.backStep}
+          />
+        </div>
       </div>
     );
   };
@@ -932,6 +955,11 @@ class NewRequestForm extends PureComponent {
           onCreate={this.handleScriptCreate}
           onError={this.handleScriptError}
           onLoad={this.handleScriptLoad} />
+        <div className="back-btn-request">
+          <BackButton 
+            backStep={this.backStep}
+          />
+        </div>
         <SubmitArea
           hasBlankFields={
             !hasBlankFields && !errors.manager
@@ -979,6 +1007,11 @@ class NewRequestForm extends PureComponent {
           <PendingApprovals />
         </div>
         <div className="travel-checklist__submit-area submit-area">
+          <div className="back-btn-checklist">
+            <BackButton 
+              backStep={this.backStep}
+            />
+          </div>
           <SubmitArea
             hasBlankFields={false}
             selection={selection}

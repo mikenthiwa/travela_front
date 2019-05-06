@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BackButton /> renders correctly 1`] = `
+<div>
+  <div
+    className="back-btn"
+  >
+    <button
+      className="bg-btn bg-btn--active"
+      id="back-submit"
+      onClick={[Function]}
+      type="button"
+    >
+      Back
+    </button>
+  </div>
+</div>
+`;

@@ -60,4 +60,10 @@ describe('<Checkbox />', ()=> {
     expect(wrapper.find('.notClicked').exists()).toBe(false);
   });
 
+  it('should change state on keydown', () => {
+    const wrapper = createWrapper('clicked', 'clicked');
+    wrapper.find('.checkbox').simulate('keyDown');
+    expect(wrapper.find('.clicked').exists()).toBe(true);
+  });
+
 });

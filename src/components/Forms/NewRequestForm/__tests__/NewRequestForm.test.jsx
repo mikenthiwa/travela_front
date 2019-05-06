@@ -1474,8 +1474,8 @@ describe('<NewRequestForm />', () => {
       const clickEvent = {
         preventDefault: jest.fn()
       };
-      nextButton.simulate('click', clickEvent);
 
+      nextButton.at(1).simulate('click', clickEvent);
       const { travelStipends } = props;
 
       mountedWrapper.setProps({

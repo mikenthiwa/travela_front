@@ -243,8 +243,15 @@ form.new-request {
     background-color: #ffffff;
     margin: 35px 0px 20px 0px !important;
     color: gray;
-    padding: 18px 0px 0px 30px;
-    width: 93%;
+    padding: 18px 0px 0px 10px;
+    .back-btn-request{
+      .bg-btn{
+        margin: 1.35em 0 0 0;
+        @media (max-width: 343px){
+          margin-top: 2.1em;
+        }
+      }
+    }
     .submit__area-border {
       border-top: 1px solid #DFE3E8;
       .submit-area {
@@ -314,6 +321,16 @@ form.new-request {
         }
         }
       }
+    }
+  }
+  .back-btn-stipend{
+    .back-btn{
+      margin-top: -4em
+    }
+  }
+  .back-btn-checklist{
+    .back-btn{
+      margin: 1.85em 0 0 1.2em
     }
   }
   .request-submit-area {
@@ -579,7 +596,8 @@ form.new-request {
   width: 90%;
 }
 .editRequest__add-comment{
-  margin-bottom: 33px;
+  margin: 33px 0;
+  
   span:hover {
     cursor: pointer;
   }
