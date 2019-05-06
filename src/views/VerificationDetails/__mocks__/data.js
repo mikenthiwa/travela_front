@@ -81,7 +81,17 @@ const user = {
     picture: 'https://lh3.googleusercontent.com/-0IiIxTNUkIY/AAAAAAAAAAI/AAAAAAAAAAc/bjqhX-Jagqc/photo.jpg?sz=50',
     location: 'Lagos',
     createdAt: '2019-02-25T10:54:30.214Z',
-    updatedAt: '2019-02-27T12:44:18.033Z'
+    updatedAt: '2019-02-27T12:44:18.033Z',
+    roles: [
+      { 
+        roleName: 'Travel Administrator',
+        centers: [
+          {
+            location: 'Nigeria',
+          }
+        ]
+      },
+    ]
   },
   getUserData: {
     success: true,
