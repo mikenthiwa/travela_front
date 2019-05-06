@@ -391,8 +391,8 @@ class TravelDetailsItem extends Component {
                   {selection !== 'oneWay' ? this.renderArrival() : null}
 
                 </div>
-                {this.renderTravelReasons()}
                 {this.renderBedDropdown()}
+                {this.renderTravelReasons()}
                 {this.renderOtherTravelReasons()}
               </div>
             </div>
