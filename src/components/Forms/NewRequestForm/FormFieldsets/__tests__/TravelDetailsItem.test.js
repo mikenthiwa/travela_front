@@ -94,7 +94,7 @@ describe('Test Suite for <TravelDetailsItem />', () => {
       accommodationType: 'Hotel Booking',
       bedOnEdit: []
     });
-    wrapper.instance().setBedChoices(false, '', []);
+    wrapper.instance().setBedChoices(false, [], []);
     expect(wrapper.state().choices[1].value).toEqual(-1);
   });
 
@@ -104,7 +104,7 @@ describe('Test Suite for <TravelDetailsItem />', () => {
       accommodationType: 'Not Required',
       bedOnEdit: []
     });
-    wrapper.instance().setBedChoices(false, '', []);
+    wrapper.instance().setBedChoices(false, [], []);
     expect(wrapper.state().choices[1].value).toEqual(-2);
     
   });

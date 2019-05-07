@@ -24,11 +24,7 @@ export function* watchPostUserDataSagaAsync() {
 export function* postUserDataSagaAsync(action) {
   try {
     const postUser = yield call(UserAPI.postNewUsers, action.userData);
-    const { data: { result: { location: userLocation, userId }}} = postUser;
-    const response = yield call(UserAPI.getUserData, userId);
-    yield put(postUserDataSuccess(response.data));
-    yield put(getUserDataSuccess(response.data));
-    localStorage.setItem('location', userLocation);
+    yield put(postUserDataSuccess(postUser.data));
   } catch (error) {
     const errorMessage = apiErrorHandler(error);
     yield put(postUserDataFailure(errorMessage));
@@ -59,13 +55,6 @@ export function* watchGetUserDataSagaAsync() {
 export function* fetchUserDataSaga(action) {
   try {
     const response = yield call(UserAPI.getUserData, action.id);
-    const dataFromStagingApi = yield call(UserAPI.getUserDataFromStagingApi,
-      response.data.result.email,
-    );
-    const { data: { result: { location : userLocation }}} = response;
-    const location = (dataFromStagingApi.data.values[0].location)
-      ? dataFromStagingApi.data.values[0].location.name : process.env.REACT_APP_DEFAULT_LOCATION;
-    response.data.result.location = userLocation || location;
     yield put(getUserDataSuccess(response.data));
   } catch (error) {
     const errorMessage = apiErrorHandler(error);

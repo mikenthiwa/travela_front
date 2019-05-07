@@ -1,21 +1,25 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Cookies from 'cookies-js';
+import { GoogleLogin } from 'react-google-login';
 import { setCurrentUser } from '../../redux/actionCreator';
-import { postUserData } from '../../redux/actionCreator/userActions';
+import { postUserData, resetErrors } from '../../redux/actionCreator/userActions';
 import travelaLogo from '../../images/travela-logo.svg';
 import cover from '../../images/cover.svg';
 import symbolG from '../../images/Google-white.svg';
-import videoSymbol from '../../images/video.svg';
 import fileSymbol from '../../images/file.svg';
 import './Login.scss';
 import TextLink from '../../components/TextLink/TextLink';
 import { loginStatus } from '../../helper/userDetails';
 import Utils from '../../helper/Utils';
-import Button from '../../components/buttons/Buttons';
+import ButtonLoadingIcon from '../../components/Forms/ButtonLoadingIcon';
 
 export class Login extends Component {
+
+  state = {
+    isLoading: false
+  };
+
   componentDidMount() {
     const {match:{params}, isAuthenticated} = this.props;
     if(params[0]){
@@ -25,49 +29,61 @@ export class Login extends Component {
     this.authenticated();
   }
 
+  componentDidUpdate(prevProps) {
+    this.updated();
+  }
+
+  updated = () =>  {
+    const { postUserData, errors } = this.props;
+    if (errors !== 'Only Andela Email address allowed' && typeof postUserData.token === 'string') {
+      localStorage.setItem('jwt-token', postUserData.token);
+      this.redirect();
+    }
+    const { isLoading } =  this.state;
+    if ( isLoading && typeof errors === 'string' )
+      this.setState({ isLoading: false });
+  };
+
   /* istanbul ignore next */
-  authenticated() {
-    const {  history, setCurrentUser, user, postUserData } = this.props;
-    const token = Cookies.get('jwt-token');
+  authenticated = () => {
+    const {  history, setUser } = this.props;
+    const token = localStorage.getItem('jwt-token');
     if (token) {
       const decodedToken = Utils.verifyToken(token);
       if(!decodedToken) return history.push('/');
       const { exp } = decodedToken;
       this.checkTokenExpiration(exp);
     }
-    setCurrentUser();
-  }
+    setUser();
+  };
 
-  checkTokenExpiration(exp) {
-    const { user, postUserData } = this.props;
+
+
+  checkTokenExpiration = (exp) => {
+    const { user } = this.props;
     if(exp && !Utils.isExpired(exp)) {
-      const users = {
-        email: user.UserInfo.email,
-      };
       loginStatus();
-      postUserData(users);
       this.redirect();
     }
   }
 
   /* istanbul ignore next */
-  redirect() {
+  redirect =() => {
     const {  history } = this.props;
     const url = localStorage.getItem('url');
     if(url) {
       history.push(url);
       localStorage.removeItem('url');
     } else {
-      history.push('/home');
+      window.location.replace('/home');
     }
   }
 
-  login() {
-    const url = `${process.env.REACT_APP_ANDELA_AUTH_HOST}/login?redirect_url=${
-      process.env.REACT_APP_AUTH_REDIRECT_URL
-    }`;
-    window.location.replace(url);
-  }
+  login = (GoogleAuth) => {
+    const { postData } = this.props;
+    const token = GoogleAuth.tokenId;
+    postData({token});
+  };
 
   renderLandPageImage() {
     return (
@@ -105,6 +121,33 @@ export class Login extends Component {
     );
   }
 
+  renderGoogleLogin() {
+    const { isLoading } = this.state;
+    const { resetErrors } = this.props;
+    return (
+      <GoogleLogin
+        clientId={process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID}
+        id="login"
+        render={renderProps => (
+          <button
+            type="button"
+            className="mdl-button mdl-js-button mdl-button--raised
+                      mdl-button--colored login-page__login-btn"
+            onClick={() => {this.setState({ isLoading: true}); renderProps.onClick(); resetErrors();}}
+            disabled={renderProps.disabled}>
+            <img src={symbolG} alt="google-logo" className="login-page__google-white" />
+                      Login to Get Started
+            <ButtonLoadingIcon isLoading={isLoading} />
+          </button>
+        )}
+        cookiePolicy="single_host_origin"
+        onSuccess={this.login}
+        onFailure={this.login}
+        textClass="login-page__login-to-get-started-text"
+      />
+    );
+  }
+
   render() {
     return (
       <div className="mdl-layout mdl-js-layout login-page">
@@ -119,17 +162,7 @@ export class Login extends Component {
                 <p className="login-page__travel-request-text">
                   Travel Requests Made Easier
                 </p>
-                <Button
-                  id="login"
-                  onClick={this.login}
-                  textClass="login-page__login-to-get-started-text"
-                  text="Login to Get Started"
-                  imageSrc={symbolG}
-                  altText="Google Symbol"
-                  imageClass="login-page__google-white"
-                  buttonType="button"
-                  buttonClass="mdl-button mdl-js-button mdl-button--raised
-                   mdl-button--colored login-page__login-btn" />
+                {this.renderGoogleLogin()}
               </div>
               <div className="hero__links">
                 {this.renderLinks()}
@@ -146,22 +179,27 @@ export class Login extends Component {
 Login.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   history: PropTypes.shape({}).isRequired,
-  setCurrentUser: PropTypes.func.isRequired,
-  postUserData: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
+  postData: PropTypes.func.isRequired,
+  postUserData: PropTypes.array,
+  errors: PropTypes.shape({}),
   user: PropTypes.shape({}),
-  match: PropTypes.object
+  match: PropTypes.object,
+  resetErrors: PropTypes.func.isRequired
 };
 
 Login.defaultProps = {
   user: [],
-  match:{}
+  match:{},
+  errors: {},
+  postUserData: []
 };
 
-export const mapStateToProps = ({ auth }) => ({
-  ...auth
+export const mapStateToProps = ({ auth, user }) => ({
+  ...auth, ...user
 });
 
 export default connect(
   mapStateToProps,
-  { setCurrentUser, postUserData }, null, {pure: false}
+  { setUser: setCurrentUser, postData: postUserData, resetErrors }, null, {pure: false}
 )(Login);

@@ -106,6 +106,97 @@ const checklistItems2 = [
   }
 ];
 
+const travelChecklistItems = [
+  {
+    destinationName: 'Kampala, Uganda',
+    checklist: [
+      {
+        id: 'yuVpBVtjr',
+        name: 'Kampala Passport',
+        requiresFiles: false,
+        destinationName: 'Kampala, Uganda',
+        deleteReason: null,
+        resources: []
+      },
+      {
+        id: 'b3klCohox',
+        name: 'Kigali Visa',
+        requiresFiles: false,
+        destinationName: 'Kampala, Uganda',
+        deleteReason: null,
+        resources: []
+      },
+      {
+        id: 2,
+        name: 'Travel Ticket Details',
+        requiresFiles: false,
+        destinationName: 'Default',
+        deleteReason: null,
+        resources: [
+          {
+            id: '1',
+            label: 'Flight Application Guide',
+            link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
+            checklistItemId: '2'
+          }
+        ]
+      },
+      {
+        id: '1',
+        name: 'Travel Ticket',
+        requiresFiles: true,
+        destinationName: 'Default',
+        deleteReason: null,
+        resources: []
+      }
+    ]
+  },
+    {
+      destinationName: 'Nairobi, Kenya',
+      checklist: [
+        {
+          id: 'yuVpBVtjr',
+          name: 'Nairobi Passport',
+          requiresFiles: false,
+          destinationName: 'Nairobi, Kenya',
+          deleteReason: null,
+          resources: []
+        },
+        {
+          id: 'b3klCohox',
+          name: 'Nairobi Visa',
+          requiresFiles: false,
+          destinationName: 'Nairobi, Kenyaa',
+          deleteReason: null,
+          resources: []
+        },
+        {
+          id: 2,
+          name: 'Travel Ticket Details',
+          requiresFiles: false,
+          destinationName: 'Default',
+          deleteReason: null,
+          resources: [
+            {
+              id: '1',
+              label: 'Flight Application Guide',
+              link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
+              checklistItemId: '2'
+            }
+          ]
+        },
+        {
+          id: '1',
+          name: 'Travel Ticket',
+          requiresFiles: true,
+          destinationName: 'Default',
+          deleteReason: null,
+          resources: []
+        }
+      ]
+    }
+]
+
 const nonAndelanCenterTrip = {
   bedId: 3,
   departureDate: '2019-03-29',
@@ -156,6 +247,12 @@ describe('Request Travel Stipend', () => {
     const trip = trips[0];
     const days = RequestUtils.calculateDuration(trip);
     expect(days).toBe(9);
+  });
+
+  it('should return 1 duration trip for one way trip', () => {
+    const trip = trips[0];
+    const duration = RequestUtils.calculateDuration(trip, 'oneWay');
+    expect(duration).toBe(1);
   });
 
   it('should return stipend with center for a single trip', () => {
@@ -354,5 +451,25 @@ describe('formatLocation', ()=> {
     const  Kigali = RequestUtils.formatLocation('Kigali');
     expect(Kigali).toBe('Kigali(KGL)');
   });
+  it('should return Congo if Congo is passed to it', ()=>{
+    const  Kigali = RequestUtils.formatLocation('Congo');
+    expect(Kigali).toBe('Congo');
+  });
 
+});
+
+describe('removeLocationChecklist', ()=> {
+  it('should remove users location checklistItems' , ()=>{
+    const userData = {
+      email: "sylvia.mbugua@andela.com",
+      fullName: "Sylvia Mbugua",
+      gender: "Female",
+      id: 4,
+      location: "Kampala, Uganda"
+      }
+
+    const  response = RequestUtils.removeLocationChecklist(travelChecklistItems, userData);
+    expect(response[0].destinationName).toBe('Kampala, Uganda');
+    expect(response[0].checklist.length).toBe(1);
+  });
 });

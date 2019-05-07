@@ -13,7 +13,7 @@ class TravelDetailsItem extends Component {
       bedOnEdit: null,
       gender: null,
       trip: null,
-      missingRequiredFields: true,
+      missingRequiredFields: false,
       accommodationType: null
     };
   }
@@ -64,7 +64,8 @@ class TravelDetailsItem extends Component {
   loadState = (request = [], itemId, editing, values) => {
     const trip = request.trips && request.trips[itemId];
     const pendingState = { itemId };
-    if (trip && editing) {
+    const { availableRooms: { beds = [] }} = this.props;
+    if (trip) {
       pendingState.bedOnEdit = trip.beds;
       pendingState.trip = { ...trip };
       pendingState.gender = request.gender;
@@ -72,18 +73,16 @@ class TravelDetailsItem extends Component {
       pendingState.accommodationType = trip.accommodationType;
     }
     this.setState({ ...pendingState }, () =>
-      this.setBedChoices(editing, values, [])
+      this.setBedChoices(true, values, beds)
     );
   };
 
-  setValues = (values, itemId, id, editing) => {
-    if (editing) {
-      values[`bed-${itemId}`] = values[`bed-${itemId}`] || id || null;
-    }
+  setValues = (values, itemId, id) => {
+    values[`bed-${itemId}`] = values[`bed-${itemId}`] || id || null;
   };
 
   setBedChoices = (editing, values, beds) => {
-    const { itemId, selection } = this.props;
+    const { itemId } = this.props;
     const { accommodationType } = this.state;
     let bedChoices = this.getRawBedChoices(editing, values, beds);
     if (bedChoices.length < 1) {
@@ -391,8 +390,8 @@ class TravelDetailsItem extends Component {
                   {selection !== 'oneWay' ? this.renderArrival() : null}
 
                 </div>
-                {this.renderBedDropdown()}
                 {this.renderTravelReasons()}
+                {this.renderBedDropdown()}
                 {this.renderOtherTravelReasons()}
               </div>
             </div>

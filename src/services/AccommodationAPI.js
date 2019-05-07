@@ -15,7 +15,7 @@ class AccommodationAPI {
     return axios.put(`${baseUrl}/guesthouses/${guestHouseId}`, accommodationData);
   }
   static setToken () {
-    const token = Cookies.get('jwt-token');
+    const token = localStorage.getItem('jwt-token');
     axios.defaults.headers.common['Authorization'] = token;
   }
   static fetchTimelineData(guestHouseId, startDate, endDate) {

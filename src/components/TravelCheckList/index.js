@@ -30,11 +30,11 @@ class TravelCheckListPage extends Component{
   }
 
     handleFileUpload = async (file, checklistItemId, tripId, checkId, requestId) => {
-      const cookie = Cookie.get('jwt-token');
+      const token = localStorage.getItem('jwt-token');
       const { uploadFile, history } = this.props;
       delete axios.defaults.headers.common['Authorization'];
       uploadFile(file.files[0], { checklistItemId, tripId}, checkId, requestId);
-      axios.defaults.headers.common['Authorization'] = cookie;
+      axios.defaults.headers.common['Authorization'] = token;
     }
 
     handleUserDocumentUpload = (modalType) => {

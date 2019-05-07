@@ -39,8 +39,13 @@
     margin: 0px 0px 250px 80px;
     text-transform: none;
     box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.2);
+
+    .loading-icon {
+    margin-left: 1em;
+  }
   }
 
+  
   &__login-to-get-started-text {
     height: 41px;
     width: 162px;

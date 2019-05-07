@@ -4,6 +4,7 @@ import moment from 'moment';
 import jwt from 'jsonwebtoken';
 import  {format, isEqual} from 'date-fns';
 
+
 import definedRanges from './constants';
 
 class Utils {
@@ -135,7 +136,7 @@ class Utils {
   static verifyToken(token) {
     return jwt.verify(
       token,
-      Buffer.from(process.env.REACT_APP_JWT_PUBLIC_KEY, 'base64'),
+      process.env.REACT_APP_JWT_PUBLIC_KEY,
       (error, decodedToken) => {
         if(error) {
           return false;

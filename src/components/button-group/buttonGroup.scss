@@ -51,7 +51,7 @@ $white-color: #FFF;
     }
 
     @media (max-width: 350px) {
-      font-size: 12px;
+      font-size: xx-small;
     }
 
     &:hover {
@@ -104,6 +104,5 @@ $white-color: #FFF;
       &:first-child {
         padding: 9px 21px;
       }
-      padding: 0 1em 0 1em;
     }
   }
