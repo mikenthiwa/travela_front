@@ -20,7 +20,7 @@ class DocumentAPI {
     return axios.post(`${baseUrl}/documents`, documentData);
   }
   static setToken () {
-    const token = Cookies.get('jwt-token');
+    const token = localStorage.getItem('jwt-token');
     axios.defaults.headers.common['Authorization'] = token;
   } 
 }

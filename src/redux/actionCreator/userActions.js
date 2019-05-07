@@ -10,12 +10,18 @@ import {
   GET_ALL_EMAILS_FAILURE,
   GET_ALL_DEPARTMENT,
   GET_ALL_DEPARTMENT_SUCCESS,
-  GET_ALL_DEPARTMENT_FAILURE
+  GET_ALL_DEPARTMENT_FAILURE,
+  RESET_ERROR_MESSAGES
 } from '../constants/actionTypes';
 
 export const postUserData = userData => ({
   type: POST_USER_DATA,
   userData
+});
+
+
+export const resetErrors = () => ({
+  type: RESET_ERROR_MESSAGES,
 });
 
 export const postUserDataSuccess = userData => ({

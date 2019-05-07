@@ -11,7 +11,7 @@ const composeEnhancers = tool;
 const middleware = composeEnhancers(applyMiddleware(sagaMiddleware));
 const store = createStore(rootReducer, middleware);
 
-const token = Cookies.get('jwt-token');
+const token = localStorage.getItem('jwt-token');
 axios.defaults.headers.common['Authorization'] = token;
 
 sagaMiddleware.run(rootSaga);

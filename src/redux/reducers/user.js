@@ -13,6 +13,7 @@ import {
   GET_ALL_DEPARTMENT,
   GET_ALL_DEPARTMENT_SUCCESS,
   GET_ALL_DEPARTMENT_FAILURE,
+  RESET_ERROR_MESSAGES,
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -56,8 +57,13 @@ const user = (state = initialState, action) => {
       errors: action.error,
       isLoaded: false
     };
+  case RESET_ERROR_MESSAGES:
+    return {
+      ...state,
+      errors: {}
+    };
   case POST_USER_DATA:
-    return { ...state };
+    return { ...state, errors: {}, postUserData: [] };
   case POST_USER_DATA_SUCCESS:
     return {
       ...state,

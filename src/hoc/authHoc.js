@@ -16,7 +16,7 @@ export default function(ComposedComponent, ...allowedRoles) {
   /* istanbul ignore next */
   class Authenticate extends Component {
     componentDidMount() {
-      const token = Cookies.get('jwt-token');
+      const token = localStorage.getItem('jwt-token');
       const { history } = this.props;
       if(token) {
         API.setToken();
