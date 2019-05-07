@@ -191,10 +191,16 @@ class VerificationDetails extends Component {
 
   renderButtons  = (request) => {
     const { modalInvisible, buttonSelected } = this.state;
-    const { status } = request;
-    const disabled = status !== 'Approved';
-    const verifiedStatus = status === 'Verified'
-      ? 'verified' : (status === 'Approved' ? 'verify' : 'disabled');
+    const { status, trips } = request;
+    const { currentUser: { roles } } = this.props; 
+    const [{centers}] = roles.filter(role=>role.roleName === 'Travel Administrator');
+    const locations = centers.length && centers.map(center => center.location);
+    const origin = trips.length && trips[0].origin.split(', ').pop();
+
+    const disabled = status !== 'Approved' || !locations.includes(origin);
+    const verifiedStatus = !locations.includes(origin) ? 'disabled' : (status === 'Verified'
+      ? 'verified' : (status === 'Approved' ? 'verify' : 'disabled'));
+
     return (
       <div className="btn-group">
         <button
