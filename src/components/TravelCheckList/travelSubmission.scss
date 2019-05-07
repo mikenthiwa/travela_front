@@ -189,6 +189,7 @@
     margin: 0px 0;
     text-transform: capitalize;
     border-bottom: 1px solid #e4e4e4;
+    width: 100%;
     &:last-child {
       border-bottom: 1px #e4e4e4;
     }
@@ -581,6 +582,12 @@
       &uploadedFileName {
         font-weight: 900;
         cursor: default;
+        width: 500%;
+        .bold {
+          overflow-wrap: break-word;
+          width: 300px;
+        }
+
         @media (max-width: 813px){
           .bold {
             overflow-wrap: break-word;

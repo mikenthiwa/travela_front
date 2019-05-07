@@ -3,7 +3,7 @@
   background-color: #FFFFFF;
   box-shadow: 0 0 20px 0 rgba(0,0,0,0.15);
   position: absolute;
-  top: 80%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) !important;
   -ms-transform: translate(-50%, -50%);
@@ -11,6 +11,12 @@
   .container {
     display: block !important;
     margin-left: 0 !important;
+  }
+  @media(max-width: 1024px){
+    top: 58%;
+  }
+  @media(max-width: 600px){
+    top: 75%
   }
 }
 
