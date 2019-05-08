@@ -9,33 +9,37 @@ exports[`<Accommodation /> renders correctly 1`] = `
       openModal={[Function]}
     />
   </div>
-  <Modal
-    closeDeleteModal={null}
-    closeModal={[Function]}
-    customModalStyles=""
-    customOverlayStyle=""
-    modalBar={<div />}
-    modalContentId=""
-    modalId=""
-    requestId=""
-    showOverlay={true}
-    title="Add Guest House"
-    visibility="invisible"
-    width="800px"
+  <div
+    className="guesthouse-modal"
   >
-    <NewAccommodation
+    <Modal
+      closeDeleteModal={null}
       closeModal={[Function]}
-      createAccommodation={[Function]}
-      createAccommodationLoading={false}
-      editAccommodation={[Function]}
-      fetchAccommodation={[Function]}
-      guestHouse={Object {}}
-      initFetchTimelineData={[Function]}
-      isSaving={false}
-      modalType=""
-      savingAccommodation={[Function]}
-    />
-  </Modal>
+      customModalStyles=""
+      customOverlayStyle=""
+      modalBar={<div />}
+      modalContentId=""
+      modalId=""
+      requestId=""
+      showOverlay={true}
+      title="Add Guest House"
+      visibility="invisible"
+      width="800px"
+    >
+      <NewAccommodation
+        closeModal={[Function]}
+        createAccommodation={[Function]}
+        createAccommodationLoading={false}
+        editAccommodation={[Function]}
+        fetchAccommodation={[Function]}
+        guestHouse={Object {}}
+        initFetchTimelineData={[Function]}
+        isSaving={false}
+        modalType=""
+        savingAccommodation={[Function]}
+      />
+    </Modal>
+  </div>
   <Modal
     closeDeleteModal={null}
     closeModal={[Function]}

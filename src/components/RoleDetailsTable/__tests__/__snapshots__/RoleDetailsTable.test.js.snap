@@ -31,7 +31,7 @@ exports[`<RoleDetailsTable /> renders correctly 1`] = `
         className="table__body approvals_table_body"
       >
         <tr
-          className="table__row table__effects"
+          className="table__row"
           key="1"
         >
           <td
@@ -56,7 +56,7 @@ exports[`<RoleDetailsTable /> renders correctly 1`] = `
                 }
               }
             >
-              Nairobi, Kenya, 
+              Nairobi, Kenya
             </span>
           </td>
           <td

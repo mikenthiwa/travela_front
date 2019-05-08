@@ -25,6 +25,7 @@ exports[`Layout component Layout Shallow should render layout component correctl
     <withRouter(Connect(NavBar))
       avatar="upic.svg"
       className=""
+      clearNav={false}
       handleHideSearchBar={[Function]}
       handleShowDrawer={[Function]}
       onNotificationToggle={[Function]}

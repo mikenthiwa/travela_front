@@ -15,7 +15,7 @@ exports[`<RoomGeomWrapper /> renders properly 1`] = `
         Object {
           "length": 1,
           "stayPercentage": "100%",
-          "tripTimelineOffsetLeft": -84320,
+          "tripTimelineOffsetLeft": -85250,
         }
       }
     >
@@ -30,7 +30,7 @@ exports[`<RoomGeomWrapper /> renders properly 1`] = `
           Object {
             "length": 1,
             "stayPercentage": "100%",
-            "tripTimelineOffsetLeft": -84320,
+            "tripTimelineOffsetLeft": -85250,
           }
         }
       >
@@ -63,7 +63,7 @@ exports[`<RoomGeomWrapper /> renders properly 1`] = `
   <BedGeomWrapper
     handleChangeRoomModal={[Function]}
     key="1"
-    timelineStartDate={"2019-03-31T21:00:00.000Z"}
+    timelineStartDate={"2019-04-30T21:00:00.000Z"}
     timelineViewType="month"
     tripDayWidth={31}
     trips={Array []}

@@ -50,6 +50,7 @@ export const props = {
   renderRightPaneQuestion:  jest.fn(),
   approvalPage: true,
   headerTags: ['Managers Approval'],
+  submissionInfo: { percentageCompleted: 0 },
   requestId: 'nXCj4U57J',
   request,
   pathname: '/requests/my-approvals/requestId'

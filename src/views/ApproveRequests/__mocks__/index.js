@@ -140,7 +140,9 @@ const comments = {
 export const initialState = {
   requests,
   user,
-  comments
+  comments,
+  submissions: {percentageCompleted: 0}
+
 };
 
 export const props = {
@@ -156,5 +158,6 @@ export const props = {
   },
   history: {
     goBack: jest.fn()
-  }
+  },
+  submissionInfo: { percentageCompleted: 0 },
 };

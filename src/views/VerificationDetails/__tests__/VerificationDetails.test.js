@@ -60,7 +60,7 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
       const wrapper = setupConnectedComponent(props, store);
       expect(wrapper.find('.main-container')).toHaveLength(1);
     });
-    
+
   });
 
   describe('TEST COMPONENT FUNCTIONS', () => {
@@ -106,7 +106,7 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
       const wrapper = setupConnectedComponent(props, store);
       const ticketNumber = wrapper.find('[data-test="ticketNumber"]');
       expect(ticketNumber.length).toBe(1);
-    });    
+    });
   });
 
   describe('TEST RENDERING TRAVEL CHECKLIST ITEMS', () => {
@@ -128,5 +128,5 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
       hideCommentButton.at(1).simulate('click');
       expect(instance.state.displayComments).toBe(true);
     });
-  });  
+  });
 });

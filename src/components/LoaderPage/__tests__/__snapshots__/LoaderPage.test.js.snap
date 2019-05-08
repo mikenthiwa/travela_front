@@ -704,7 +704,7 @@ exports[`<LoaderBody /> renders correctly 1`] = `
       <p
         className="loader__body-text"
       >
-        That awkward moment: When you walk through the metal detectors at the airport, and your abs of steel set them off
+        When preparing to travel, lay out all your clothes and all your money. Then take half the clothes and twice the money.
       </p>
     </div>
   </div>

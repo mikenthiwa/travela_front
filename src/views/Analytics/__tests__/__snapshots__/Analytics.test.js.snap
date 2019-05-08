@@ -89,58 +89,66 @@ exports[`<Analytics /> should render the connected component without crashing 1`
     </div>
   </div>
   <div
-    className="analytics-card"
+    className="visiting-card"
   >
-    <h3
-      className="analytics-card__title"
-    >
-      No. of People visiting Nairobi Center
-    </h3>
     <div
-      className="analytics-card__stats green"
+      className="analytics-card"
     >
-      <div
-        className="analytics-card__icon"
+      <h3
+        className="analytics-card__title"
       >
-        <img
-          alt=""
-          src="flight_land.svg"
-        />
-      </div>
+        No. of People visiting Nairobi Center
+      </h3>
       <div
-        className="analytics-card__stat"
+        className="analytics-card__stats green"
       >
-        <h4>
-          0
-        </h4>
+        <div
+          className="analytics-card__icon"
+        >
+          <img
+            alt=""
+            src="flight_land.svg"
+          />
+        </div>
+        <div
+          className="analytics-card__stat"
+        >
+          <h4>
+            0
+          </h4>
+        </div>
       </div>
     </div>
   </div>
   <div
-    className="analytics-card"
+    className="leaving-card"
   >
-    <h3
-      className="analytics-card__title"
-    >
-      No. of People leaving Nairobi Center
-    </h3>
     <div
-      className="analytics-card__stats brown-orange"
+      className="analytics-card"
     >
-      <div
-        className="analytics-card__icon"
+      <h3
+        className="analytics-card__title"
       >
-        <img
-          alt=""
-          src="flight_takeoff.svg"
-        />
-      </div>
+        No. of People leaving Nairobi Center
+      </h3>
       <div
-        className="analytics-card__stat"
+        className="analytics-card__stats brown-orange"
       >
-        <h4>
-          0
-        </h4>
+        <div
+          className="analytics-card__icon"
+        >
+          <img
+            alt=""
+            src="flight_takeoff.svg"
+          />
+        </div>
+        <div
+          className="analytics-card__stat"
+        >
+          <h4>
+            0
+          </h4>
+        </div>
       </div>
     </div>
   </div>

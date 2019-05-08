@@ -2,7 +2,7 @@
 
 exports[`<TravelChecklistsCard /> renders without crashing 1`] = `
 <div
-  className="mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-cell--12-phone"
+  className="mdl-cell mdl-cell--7-col mdl-cell--12-col-tablet mdl-cell--12-phone"
 >
   <div
     className="travel-checklist-rectangle"
@@ -23,9 +23,22 @@ exports[`<TravelChecklistsCard /> renders without crashing 1`] = `
       <div
         className="travel-checklist-loc-title"
       >
-        <p>
-          Kampala, Uganda
-        </p>
+        <div
+          className="destination checklist-destination"
+        >
+          <span
+            className="country-flag checklist-flag"
+          >
+            <img
+              alt="country flag"
+              className="flag"
+              src="https://www.countryflags.io/UG/flat/64.png"
+            />
+          </span>
+          <p>
+            Kampala, Uganda
+          </p>
+        </div>
       </div>
       <ul
         className="approval-list-items"
@@ -99,9 +112,22 @@ exports[`<TravelChecklistsCard /> renders without crashing 1`] = `
       <div
         className="travel-checklist-loc-title"
       >
-        <p>
-          Nairobi, Kenya
-        </p>
+        <div
+          className="destination checklist-destination"
+        >
+          <span
+            className="country-flag checklist-flag"
+          >
+            <img
+              alt="country flag"
+              className="flag"
+              src="https://www.countryflags.io/KE/flat/64.png"
+            />
+          </span>
+          <p>
+            Nairobi, Kenya
+          </p>
+        </div>
       </div>
       <ul
         className="approval-list-items"
