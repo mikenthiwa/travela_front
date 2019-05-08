@@ -45,6 +45,9 @@ require PRODUCTION_COMPUTE_ZONE $PRODUCTION_COMPUTE_ZONE
 require PRODUCTION_CLUSTER_NAME $PRODUCTION_CLUSTER_NAME
 require PRODUCTION_STATIC_IP $PRODUCTION_STATIC_IP
 
+require QA_CLUSTER_NAME $QA_CLUSTER_NAME
+require QA_STATIC_IP $QA_STATIC_IP
+
 require STAGING_COMPUTE_ZONE $STAGING_COMPUTE_ZONE
 require STAGING_CLUSTER_NAME $STAGING_CLUSTER_NAME
 require STAGING_STATIC_IP $STAGING_STATIC_IP
@@ -64,3 +67,11 @@ else
 fi
 
 export NAMESPACE=$ENVIRONMENT
+
+# inherit some environment variables from production and change some that are
+# needed to be changed
+if [ "$CIRCLE_JOB" == 'deployment-qa' ]; then
+    export ENVIRONMENT=qa
+    export CLUSTER_NAME=$QA_CLUSTER_NAME
+    export STATIC_IP=$QA_STATIC_IP
+fi
