@@ -18,6 +18,7 @@ import ImageLink from '../image-link/ImageLink';
 import { logoutUser } from '../../helper/userDetails';
 import Utils from '../../helper/Utils';
 import './NavBar.scss';
+import searchBarAllowedRoutes from '../search-bar/SearchBarRoutes';
 
 export class NavBar extends PureComponent {
 
@@ -230,9 +231,14 @@ export class NavBar extends PureComponent {
           {this.renderLogo()}
         </div>
         <div className="mdl-layout-spacer" />
-        <div className="navbar__search-size mdl-cell--hide-phone">
-          <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} value={keyword} />
-        </div>
+        { ( searchBarAllowedRoutes.find(route => route.test(location.pathname))) && 
+          (
+            <div className="navbar__search-size mdl-cell--hide-phone">
+              <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} value={keyword} />
+            </div>
+          ) 
+        }
+        
         <div className="center-dropdown">
           {myCenters.length && this.renderLocationDropdown(allowedRoutes, allCenters, centerSelected)}
         </div>
