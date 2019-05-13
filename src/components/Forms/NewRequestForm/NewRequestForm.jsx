@@ -138,6 +138,7 @@ class NewRequestForm extends PureComponent {
         ...defaultTripStateValues
       },
       trips: [{}],
+      prevTrips: [{}],
       comments: {},
       errors: {},
       hasBlankFields: true,
@@ -443,7 +444,7 @@ class NewRequestForm extends PureComponent {
 
   handleRadioButton = event => {
     const { editing } = this.props;
-    let {collapse, trips, values, selection, prevValues, prevTrips = []} = this.state;
+    let {collapse, trips, values, selection, prevValues, prevTrips} = this.state;
     const tripType = event.target.value;
     const { requestOnEdit: { trips: nextTrips } } = this.props;
     this.setState({selection: tripType});
@@ -529,15 +530,7 @@ class NewRequestForm extends PureComponent {
     Object.keys(newValues).map(
       inputName => (newValues[inputName] = values[inputName])
     );
-    if (tripType === 'oneWay') {
-      let newTrip = {...trips[0]};
-      delete newValues['arrivalDate-0'];
-      delete newTrip.returnDate;
-      trips[0] = newTrip;
-      const slicedTrips = trips.slice(0, 1);
-      return {newValues, trips: slicedTrips};
-    }
-    if (tripType === 'return') {
+    if (tripType !== 'multi') {
       let newTrip = {...trips[0]};
       delete newValues['arrivalDate-0'];
       delete newTrip.returnDate;

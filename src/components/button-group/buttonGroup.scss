@@ -2,10 +2,7 @@ $primary-color: #3359DB;
 $white-color: #FFF;
 
 @mixin badge($color, $backgroundColor) {
-    display: inline-flex;
-    height: 15px;
-    min-width: 15px;
-    padding: 2.5px;
+    padding: 0.2em 0.6em;
     background-color: $backgroundColor;
     border-radius: 50%;
     color: $color;
@@ -13,7 +10,6 @@ $white-color: #FFF;
     font-size: 12px;
     font-weight: 500;
     line-height: 15px;
-    text-align: center;
     margin-left: 4px;
 }
 
