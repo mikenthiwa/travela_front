@@ -30,7 +30,10 @@ const initialState = {
     modalType: null
   },
   getCurrentUserRole: 'tomato',
-  travelChecklist: { checklistItems: travelChecklistMockData }
+  travelChecklist: {
+    checklistItems: travelChecklistMockData,
+    userCenters: ['Nigeria', 'Kenya', 'Uganda']
+  }
 };
 let shallowWrapper, mountWrapper, parentWrapper;
 
@@ -51,6 +54,11 @@ const props = {
   deletedCheckListItems: [
     travelChecklistMockData[0].checklist[0]
   ],
+  location: {
+    pathname: '/trip-planner/checklists',
+    search: '?page=1&center=Kenya',
+    hash: '', state: undefined, key: 'idctnr'
+  },
   currentUser: {
     location: 'Nairobi'
   },
@@ -143,7 +151,8 @@ describe('<Checklist> component', () => {
       deleteReason: '',
       checklistItemId: '',
       restoreItemData: {},
-      checklistItemName: ''
+      checklistItemName: '',
+      'location': 'Kenya',
     };
     const wrapper = shallowWrapper;
     const wrapperInstance = wrapper.instance();

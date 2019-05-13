@@ -59,7 +59,8 @@ export const fetchTravelChecklist = (requestId, destinationName) => ({
 
 export const fetchTravelChecklistSuccess = (response) => ({
   type: FETCH_TRAVEL_CHECKLIST_SUCCESS,
-  travelChecklists: response.travelChecklists
+  travelChecklists: response.travelChecklists,
+  userCenters: response.userCenters
 });
 
 export const deleteTravelChecklist = (checklistItemId, deleteReason) => ({

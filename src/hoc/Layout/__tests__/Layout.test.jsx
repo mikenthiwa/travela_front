@@ -22,11 +22,19 @@ const initialState = {
       }
     }
   },
+  user: {
+    currentUser: {
+      location: 'Nigeria'
+    }
+  },
   modal: {
     modal: {}
   },
   approvals: {
     myCenters: []
+  },
+  travelChecklist: {
+    userCenters: []
   },
   notifications: {
     notifications: [],
@@ -61,6 +69,9 @@ describe('Layout component', () => {
       },
       approvals: {
         myCenters: []
+      },
+      travelChecklist: {
+        userCenters: []
       },
       logout: jest.fn(),
     };

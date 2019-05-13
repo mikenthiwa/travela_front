@@ -21,7 +21,7 @@ const props = {
       picture: 'http://picture.com/gif'
     }
   },
-  myCenters: ['Nigeria', 'Kenya'],
+  userCenters: ['Nigeria', 'Kenya'],
   location: {
     search: '?search=gjg',
     pathname: '/requests'

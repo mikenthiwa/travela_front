@@ -36,13 +36,19 @@ const traveChecklist = (state = initialState, action) => {
   case FETCH_TRAVEL_CHECKLIST:
     return { ...state, isLoading: true };
   case FETCH_TRAVEL_CHECKLIST_SUCCESS:
-    return { ...state, isLoading: false, checklistItems: action.travelChecklists, error: '' };
+    return {
+      ...state,
+      isLoading: false,
+      checklistItems: action.travelChecklists,
+      userCenters: action.userCenters,
+      error: ''
+    };
   case FETCH_TRAVEL_CHECKLIST_FAILURE:
     return { ...state, isLoading: false, error: action.error, checklistItems: [] };
   case CREATE_TRAVEL_CHECKLIST:
     return { ...state, creatingChecklist: true };
   case CREATE_TRAVEL_CHECKLIST_SUCCESS:
-    checklistUpdate = state.checklistItems.length 
+    checklistUpdate = state.checklistItems.length
       ? [{ ...action.checklistItem }, ...state.checklistItems[0].checklist]
       : [{ ...action.checklistItem }];
     return {
@@ -85,10 +91,10 @@ const traveChecklist = (state = initialState, action) => {
   case DELETE_TRAVEL_CHECKLIST_SUCCESS:
     action.disabledChecklistItem.resources = [];
 
-    disabledListsUpdate = state.deletedCheckListItems.length 
+    disabledListsUpdate = state.deletedCheckListItems.length
       ? [{ ...action.disabledChecklistItem }, ...state.deletedCheckListItems]
       : [{ ...action.disabledChecklistItem }];
-  
+
     checklistUpdate = state.checklistItems[0].checklist
       .filter(list => action.checklistItemId !== list.id);
     return {
@@ -131,10 +137,10 @@ const traveChecklist = (state = initialState, action) => {
     return { ...state, updatingChecklist: true };
   case RESTORE_TRAVEL_CHECKLIST_SUCCESS:
     action.updatedChecklistItem.id = action.checklistItemId;
-    checklistUpdate = state.checklistItems.length 
+    checklistUpdate = state.checklistItems.length
       ? [{ ...action.updatedChecklistItem }, ...state.checklistItems[0].checklist]
       : [{ ...action.updatedChecklistItem }];
-  
+
     disabledListsUpdate = state.deletedCheckListItems
       .filter(list => action.checklistItemId !== list.id);
 

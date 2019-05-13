@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import _ from  'lodash';
 import { withRouter, Link } from 'react-router-dom';
 import debounce from 'lodash/debounce';
 import travela from '../../images/travela.svg';
@@ -16,6 +17,7 @@ import selectDropDownIcon from '../../images/icons/form_select_dropdown.svg';
 import Button from '../buttons/Buttons';
 import ImageLink from '../image-link/ImageLink';
 import { logoutUser } from '../../helper/userDetails';
+import LocationDropdownRoutes from '../../helper/LocationDropdownRoutes';
 import Utils from '../../helper/Utils';
 import './NavBar.scss';
 import searchBarAllowedRoutes from '../search-bar/SearchBarRoutes';
@@ -72,6 +74,7 @@ export class NavBar extends PureComponent {
   }
 
   getCenter = (center) => {
+
     const { history, location } = this.props;
     const locationUrl = new URLSearchParams(location.search);
     locationUrl.set('page', 1);
@@ -198,9 +201,10 @@ export class NavBar extends PureComponent {
     );
   }
 
-  renderLocationDropdown(allowedRoutes, centers, centerSelected) {
+  renderLocationDropdown(centers, centerSelected) {
     const { location } = this.props;
-    return allowedRoutes.includes(location.pathname) && (
+    return ( LocationDropdownRoutes
+      .find(route => route.test(location.pathname))) &&(
       <div className="center-dropdown__container">
         <div className="location_circle_container">
           <img src={centerIcon} alt="location-icon" />
@@ -216,12 +220,13 @@ export class NavBar extends PureComponent {
   }
 
   renderHeader(handleShowDrawer, keyword){
-    const { myCenters, location } = this.props;
+    const { userCenters, location, userLocation } = this.props;
     const locationUrl = new URLSearchParams(location.search);
     const centerSelected = locationUrl.get('center');
-    const centers = ['All Locations', ...myCenters];
+    const defaultCenters = Array.from(new Set([ userLocation, ...userCenters]).values());
+    const centers = location.pathname === '/trip-planner/checklists' ? defaultCenters :
+      ['All Locations', ...userCenters];
     const allCenters = centers.map(center => ({ value: center, name: center }));
-    const allowedRoutes = ['/requests/my-verifications', '/dashboard', '/trip-planner/checklists'];
     return(
       <div className="mdl-layout__header-row">
         <div className="navbar__nav-size navbar__logo-icons">
@@ -240,7 +245,7 @@ export class NavBar extends PureComponent {
         }
         
         <div className="center-dropdown">
-          {myCenters.length && this.renderLocationDropdown(allowedRoutes, allCenters, centerSelected)}
+          {allCenters.length > 1 && this.renderLocationDropdown(allCenters, centerSelected)}
         </div>
         <nav className="mdl-navigation">
           {this.renderNotification()}
@@ -283,6 +288,7 @@ NavBar.propTypes = {
   onNotificationToggle: PropTypes.func.isRequired,
   history: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({}).isRequired,
+  userLocation: PropTypes.string,
   user: PropTypes.shape({}).isRequired,
   avatar: PropTypes.string.isRequired,
   handleHideSearchBar: PropTypes.func.isRequired,
@@ -290,7 +296,7 @@ NavBar.propTypes = {
   shouldOpen: PropTypes.bool,
   handleShowDrawer: PropTypes.func,
   notifications: PropTypes.array,
-  myCenters: PropTypes.array,
+  userCenters: PropTypes.array,
   clearNav: PropTypes.bool.isRequired
 };
 
@@ -299,14 +305,23 @@ NavBar.defaultProps = {
   shouldOpen: false,
   handleShowDrawer:()=>{},
   notifications: [],
-  myCenters: [],
+  userCenters: [],
+  userLocation: ''
 };
 
-const mapStateToProps = state => ({
-  user: state.auth.user,
-  ...state.notifications,
-  ...state.modal.modal,
-  myCenters: state.approvals.myCenters
-});
+const mapStateToProps = state => {
+  const userCenters = _.maxBy([
+    state.approvals.myCenters,
+    state.travelChecklist.userCenters
+  ],
+  _.size);
+  return {
+    user: state.auth.user,
+    ...state.notifications,
+    ...state.modal.modal,
+    userLocation: state.user.currentUser.location,
+    userCenters
+  };
+};
 
 export default withRouter(connect(mapStateToProps)(NavBar));

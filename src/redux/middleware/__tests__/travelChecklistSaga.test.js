@@ -42,6 +42,7 @@ describe('Travel Checklist Saga test', () => {
   describe('Delete travel checklist item', () => {
     const checklistItemId = '23ErGDS6';
     const deleteReason = 'Hello world';
+    const location = 'Nigeria';
     const response = {
       data: {
         checklistItem: {name: 'My new visa and green card'}
@@ -52,7 +53,7 @@ describe('Travel Checklist Saga test', () => {
       return expectSaga(watchDeleteChecklist)
         .provide([[
           call(TravelChecklistAPI.deleteChecklistItem, {
-            checklistItemId, deleteReason
+            checklistItemId, deleteReason, location
           }),
           response
         ]])
@@ -64,7 +65,8 @@ describe('Travel Checklist Saga test', () => {
         .dispatch({
           type: DELETE_TRAVEL_CHECKLIST,
           checklistItemId,
-          deleteReason
+          deleteReason,
+          location
         })
         .silentRun();
     });
@@ -75,7 +77,7 @@ describe('Travel Checklist Saga test', () => {
       return expectSaga(watchDeleteChecklist)
         .provide([[
           call(TravelChecklistAPI.deleteChecklistItem, {
-            checklistItemId, deleteReason
+            checklistItemId, deleteReason, location
           }),
           throwError(error)
         ]])
@@ -86,7 +88,8 @@ describe('Travel Checklist Saga test', () => {
         .dispatch({
           type: DELETE_TRAVEL_CHECKLIST,
           checklistItemId,
-          deleteReason
+          deleteReason,
+          location
         })
         .silentRun();
     });
@@ -95,6 +98,7 @@ describe('Travel Checklist Saga test', () => {
   describe('Fetch travel checklist', () => {
     const response = {
       data: {
+        userCenters: ['Lagos', 'Nairobi', 'Kenya', 'Uganda'],
         travelChecklists: travelChecklistMockData
       }
     };
@@ -109,7 +113,8 @@ describe('Travel Checklist Saga test', () => {
         ]])
         .put({
           type: FETCH_TRAVEL_CHECKLIST_SUCCESS,
-          travelChecklists: response.data.travelChecklists
+          travelChecklists: response.data.travelChecklists,
+          userCenters: response.data.userCenters
         })
         .dispatch({
           type: FETCH_TRAVEL_CHECKLIST,
@@ -126,7 +131,8 @@ describe('Travel Checklist Saga test', () => {
         ]])
         .put({
           type: FETCH_TRAVEL_CHECKLIST_SUCCESS,
-          travelChecklists: response.data.travelChecklists
+          travelChecklists: response.data.travelChecklists,
+          userCenters: response.data.userCenters
         })
         .dispatch({
           type: FETCH_TRAVEL_CHECKLIST,

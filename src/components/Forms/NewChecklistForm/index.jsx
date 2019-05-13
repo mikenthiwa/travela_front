@@ -47,13 +47,15 @@ export default class NewChecklistForm extends PureComponent {
       createTravelChecklist,
       updateTravelChecklist,
       checklistItem,
-      modalType
+      modalType,
+      selectedCenter
     } = this.props;
 
     const { values } = this.state;
     const checklistItemData = {
       name: values.itemName,
       requiresFiles: values.requiresFiles,
+      location: selectedCenter,
       resources: [{
         link: values.link,
         label: values.label
@@ -128,6 +130,7 @@ NewChecklistForm.propTypes = {
   createTravelChecklist: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
   updateTravelChecklist: PropTypes.func.isRequired,
+  selectedCenter: PropTypes.string.isRequired,
   modalType: PropTypes.string,
   checklistItem: PropTypes.object,
   creatingChecklist: PropTypes.bool,

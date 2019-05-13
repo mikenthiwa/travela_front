@@ -5,7 +5,7 @@ import Modal from '../../components/modal/Modal';
 import ChecklistPanelHeader from '../../components/ChecklistPanelHeader';
 import { NewChecklistForm, } from '../../components/Forms';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
-import { createTravelChecklist, fetchTravelChecklist, updateTravelChecklist, 
+import { createTravelChecklist, fetchTravelChecklist, updateTravelChecklist,
   deleteTravelChecklist, fetchDeletedChecklistItems, restoreChecklist
 } from '../../redux/actionCreator/travelChecklistActions';
 import './index.scss';
@@ -17,9 +17,11 @@ export class Checklist extends Component {
   state = {itemToEdit: null, deleteReason: '', checklistItemId: '',
     restoreItemData: {}, checklistItemName: '' }
   componentDidMount() {
-    const { fetchTravelChecklist, fetchDeletedChecklistItems } = this.props;
-    fetchTravelChecklist(null, localStorage.getItem('location'));
-    fetchDeletedChecklistItems(localStorage.getItem('location'));
+    const { fetchTravelChecklist, fetchDeletedChecklistItems, location, currentUser } = this.props;
+    const locationUrl = new URLSearchParams(location.search);
+    const selectedCenter = locationUrl.get('center');
+    fetchTravelChecklist(null, selectedCenter || currentUser.location);
+    fetchDeletedChecklistItems(selectedCenter || currentUser.location);
   }
   setItemToDelete = (checklistItemId) => () => {
     const { openModal } = this.props;
@@ -46,7 +48,10 @@ export class Checklist extends Component {
   }
   deleteChecklistItem = (event) => {
     event.preventDefault();
-    const { deleteTravelChecklist } = this.props;
+    const { deleteTravelChecklist, location } = this.props;
+    const locationUrl = new URLSearchParams(location.search);
+    const selectedCenter = locationUrl.get('center');
+    this.setState({location: selectedCenter});
     const { checklistItemId } = this.state;
     deleteTravelChecklist(checklistItemId, this.state);
     this.setState({ deleteReason: null });
@@ -61,7 +66,7 @@ export class Checklist extends Component {
 
   separateChecklistItems = () => {
     const { checklistItems: [thisLocationChecklists] } = this.props;
-    const defaultChecklistItems = thisLocationChecklists ? 
+    const defaultChecklistItems = thisLocationChecklists ?
       thisLocationChecklists.checklist.filter(
         checklist => checklist.destinationName.toLowerCase().match('default')) : [];
     const addedChecklistItems = thisLocationChecklists ?
@@ -72,10 +77,15 @@ export class Checklist extends Component {
   }
 
   renderChecklistPanelHeader() {
-    const { currentUser } = this.props;
+    const { currentUser, location } = this.props;
+    const locationUrl = new URLSearchParams(location.search);
+    const selectedCenter = locationUrl.get('center');
     return (
       <div className="rp-role__header">
-        <ChecklistPanelHeader openModal={this.manageModal('add')} location={currentUser.location} />
+        <ChecklistPanelHeader
+          openModal={this.manageModal('add')}
+          location={selectedCenter || currentUser.location}
+        />
       </div>
     );
   }
@@ -98,7 +108,7 @@ export class Checklist extends Component {
         <div id="deleted-item">{deletedChecklistItem.name}</div>
         <div id="deleted-item">{deletedChecklistItem.deleteReason}</div>
         <button
-          type="button" id="restore-btn" 
+          type="button" id="restore-btn"
           onClick={this.setItemToRestore(deletedChecklistItem.id)}>
 Restore
 
@@ -134,10 +144,12 @@ Restore
   renderChecklistForm() {
     const { closeModal, shouldOpen, modalType, createTravelChecklist,
       updateTravelChecklist, currentUser, fetchTravelChecklist,
-      creatingChecklist, updatingChecklist
+      creatingChecklist, updatingChecklist, location
     } = this.props;
     const { itemToEdit } = this.state;
     const modalToRender = modalType === 'edit cheklistItem' || modalType === 'add cheklistItem';
+    const locationUrl = new URLSearchParams(location.search);
+    const selectedCenter = locationUrl.get('center');
     return (
       <Modal
         customModalStyles="add-checklist-item" closeModal={closeModal} width="480px"
@@ -152,7 +164,9 @@ Restore
           createTravelChecklist={createTravelChecklist}
           fetchTravelChecklist={fetchTravelChecklist}
           updateTravelChecklist={updateTravelChecklist}
-          checklistItem={itemToEdit} currentUser={currentUser}
+          checklistItem={itemToEdit}
+          currentUser={currentUser}
+          selectedCenter={selectedCenter || currentUser.location}
         />
       </Modal>
     );
@@ -174,9 +188,9 @@ Restore
         <div className="checklist-page">
           <div id="default-item-header">Default item</div>
           {
-            isLoading 
-              ? <Preloader spinnerClass="loader" /> 
-              : defaultChecklistItem 
+            isLoading
+              ? <Preloader spinnerClass="loader" />
+              : defaultChecklistItem
           }
           <div id="added-item-header">Added Items</div>
           {isLoading ? <Preloader spinnerClass="loader" /> : currentChecklistItems }
@@ -209,7 +223,7 @@ Restore
       <div>
         {
           defaultChecklistItems.length
-            ? defaultChecklistItems.map((item, i) => this.renderChecklistItem(item, i)) 
+            ? defaultChecklistItems.map((item, i) => this.renderChecklistItem(item, i))
             : this.renderNoMessage('No default checklist item added yet')
         }
       </div>
@@ -272,6 +286,7 @@ Checklist.propTypes = {
   creatingChecklist: PropTypes.bool,
   updateTravelChecklist: PropTypes.func, restoreChecklist: PropTypes.func,
   fetchDeletedChecklistItems: PropTypes.func.isRequired, shouldOpen: PropTypes.bool.isRequired,
+  location: PropTypes.object,
   modalType: PropTypes.string, checklistItems: PropTypes.array.isRequired,
   deletedCheckListItems: PropTypes.array, currentUser: PropTypes.object.isRequired,
   isLoading: PropTypes.bool.isRequired,
@@ -283,6 +298,7 @@ Checklist.defaultProps = {
   deletingChecklist: false,
   creatingChecklist: false,
   updatingChecklist: false,
+  location: {}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checklist);

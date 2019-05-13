@@ -29,13 +29,14 @@ import { closeModal } from '../actionCreator/modalActions';
 
 export function* createChecklistAsync(action) {
   try {
-    const { requiresFiles, label, link, name, resources } = action.checklistItemData;
+    const { requiresFiles, name, resources, location } = action.checklistItemData;
     // restructure data from CREATE_TRAVEL_CHECKLIST action
     // to match what the api is expecting
     const checklistItemData = {
       name,
       requiresFiles: requiresFiles === 'true',// convert to boolean
-      resources
+      resources,
+      location
     };
     const response = yield call(TravelChecklistAPI.createChecklist, checklistItemData);
     yield put(createChecklistSuccess(response.data.checklistItem));
@@ -74,7 +75,7 @@ export function* updateChecklistAsync(action) {
   try {
     const { checklistItemId, checklistItemData } = action;
     const response = yield call(TravelChecklistAPI.updateChecklistItem,
-      checklistItemId, checklistItemData);
+      checklistItemId, checklistItemData, location);
     yield put(updateChecklistSuccess(response.data.updatedChecklistItem, checklistItemId));
     yield put(closeModal());
     toast.success(response.data.message);
@@ -92,9 +93,9 @@ export function* watchUpdateChecklist() {
 
 export function* deleteChecklistAsync(action) {
   try {
-    const { checklistItemId, deleteReason } = action;
+    const { checklistItemId, deleteReason, location } = action;
     const response = yield call(TravelChecklistAPI.deleteChecklistItem,
-      {checklistItemId, deleteReason});
+      {checklistItemId, deleteReason, location});
     yield put(deleteChecklistSuccess(response.data.checklistItem, checklistItemId));
     toast.success(response.data.message);
     yield put(closeModal());
@@ -109,6 +110,7 @@ export function* deleteChecklistAsync(action) {
 export function* watchDeleteChecklist() {
   yield takeLatest(DELETE_TRAVEL_CHECKLIST, deleteChecklistAsync);
 }
+
 export function* fetchDeletedChecklistItemsAsync(action) {
   try {
     const response = yield call(TravelChecklistAPI.getDeletedCheckListItems,
