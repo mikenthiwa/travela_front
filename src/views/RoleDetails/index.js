@@ -197,6 +197,7 @@ export class RoleDetails extends Component {
         { meta.search && isEmpty(roleUsers) ? (
           <Fragment>
             {this.renderUserRolePanelHeader()}
+            {this.renderRoleForm()}
             <div className="table__requests--empty">
               {
                 'No Record found'

@@ -3,7 +3,8 @@ const searchBarAllowedRoutes = [
   /requests\/my-approvals(\/*)$/,
   /requests\/budgets(\/*)$/,
   /requests\/my-verifications(\/*)$/,
-  /settings\/roles\/\d+/
+  /settings\/roles\/\d+/,
+  /trip-planner\/travel-readiness/
 ];
 
 export default searchBarAllowedRoutes;

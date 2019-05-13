@@ -4,6 +4,7 @@ import AddRoleForm from '..';
 const propsFactory = (overrides) => ({
   addRole: jest.fn(),
   updateRole: jest.fn(),
+  closeModal: jest.fn(),
   addingRole: false,
   roleDetail: {
     description: '',
@@ -88,41 +89,15 @@ describe('<AddRoleForm />', () => {
     expect(props.addRole.mock.calls.length).toBe(0);
   });
 
-  it('resets the input values to empty when cancel button is clicked', () => {
+  it('closes modal when cancel button is clicked', ()=>{
     const props = propsFactory();
     const wrapper = mount(<AddRoleForm {...props} />);
-    const roleNameInput = wrapper.find('input#add-role-name');
-    const descriptionInput = wrapper.find('textarea#add-role-description');
     const cancelButton = wrapper.find('button#cancel');
-    const handleCancel = jest.spyOn(wrapper.instance(), 'handleCancel');
-    const roleEvent = {
-      target: {
-        value: 'test role'
-      }
-    };
-
-    roleNameInput.simulate('change', roleEvent);
-
-    const descriptionEvent = {
-      target: {
-        value: 'test role description'
-      }
-    };
-
-    descriptionInput.simulate('change', descriptionEvent);
-    expect(wrapper.state().values).toEqual({
-      roleName: 'test role',
-      description: 'test role description'
-    });
 
     cancelButton.simulate('click', {
       preventDefault: jest.fn()
     });
-    expect(handleCancel).toBeCalled();
-    expect(wrapper.state().values).toEqual({
-      roleName: '',
-      description: ''
-    });
+    expect(props.closeModal).toBeCalled();
   });
 
   it('displays button with loading icon when role is being added', () => {

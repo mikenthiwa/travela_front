@@ -32,7 +32,9 @@ class AddRoleForm extends PureComponent {
   };
 
   handleCancel = () => {
+    const { closeModal } = this.props;
     this.setState({ ...this.defaultState });
+    closeModal();
   };
 
   validate = field => {
@@ -60,7 +62,7 @@ class AddRoleForm extends PureComponent {
           <AddRoleFields
             values={values}
           />
-          <hr />
+          
           <SubmitArea
             isCreating={addingRole || updatingRole}
             onCancel={this.handleCancel}
@@ -79,7 +81,8 @@ AddRoleForm.propTypes = {
   updatingRole: PropTypes.bool,
   myTitle: PropTypes.string,
   roleDetail: PropTypes.object,
-  updateRole: PropTypes.func
+  updateRole: PropTypes.func,
+  closeModal: PropTypes.func.isRequired,
 };
 
 AddRoleForm.defaultProps = {
