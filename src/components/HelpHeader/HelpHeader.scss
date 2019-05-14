@@ -1,0 +1,9 @@
+.help-panel-header {
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    height: 100px;
+    width: 96.3%;
+    @media (max-width: 479px) {
+      width: 94%;
+    }
+  }

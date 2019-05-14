@@ -104,7 +104,7 @@ class TravelReadiness extends PureComponent {
       };
 
       if( /(Next)|(Previous)/.test(direction) && dataCount > limit && fetchPage[direction]){
-        fetchReadiness({page: fetch[direction], limit, type:'json', travelFlow, range, center});
+        fetchReadiness({page: fetchPage[direction], limit, type:'json', travelFlow, range, center});
       }
     }
   };

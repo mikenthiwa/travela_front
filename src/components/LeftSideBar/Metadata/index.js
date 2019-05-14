@@ -16,6 +16,7 @@ import inactiveHome from '../../../images/icons/home_grey.svg';
 import activeTravelCostIcon from '../../../images/icons/travelCost_active.svg';
 import inactiveTravelCostIcon from '../../../images/icons/travelCost_inactive.svg';
 
+
 const NavItemsMetadata = [
   // Home`
   {
@@ -199,6 +200,7 @@ const NavItemsMetadata = [
       inactive: inactiveSettingsIcon
     }
   },
+
   // Logout
   {
     text: 'Logout',
