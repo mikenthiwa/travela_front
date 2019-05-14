@@ -48,12 +48,12 @@ class NewUserRoleForm extends PureComponent {
       email: values.email,
       roleName: values.roleName,
     };
-    role === 'Budget Checker' ? 
+    role === 'Budget Checker' ?
       dataValue = { ...dataValue, departments: values.items }:
       values.items.length < 1 ?
         dataValue :
         dataValue = { ...dataValue, center: values.items };
-      
+
     if (this.validate()) {
       myTitle === 'Add User' ?
         handleUpdateRole(dataValue) :
@@ -117,11 +117,12 @@ class NewUserRoleForm extends PureComponent {
       return { ...prevState, errors, hasBlankFields };
     });
 
-    if (role === 'Budget Checker' && values.items.length < 1) {
+    if (role === 'Budget Checker' || 'Travel Administrator' && values.items.length < 1) {
       this.setState({
         hasBlankFields: true
       });
     }
+
     return !hasBlankFields;
   };
 
