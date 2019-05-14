@@ -85,7 +85,7 @@ export const Approve = (type = 'manager') => {
             id={request.id}
             modalInvisible={modalInvisible}
             buttonSelected={buttonSelected}
-            closeDeleteModal={() => { }}
+            closeDeleteModal={() => this.setState({modalInvisible: true})}
             renderDialogText={this.renderDialogText}
             handleApprove={this.handleDecision}
             handleReject={this.handleDecision}

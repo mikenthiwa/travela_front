@@ -13,7 +13,7 @@ class ConfirmDialog extends Component {
         customOverlayStyle={
           `${renderDialogText(buttonSelected)}-modal-overlay`}
         visibility={modalInvisible ? 'invisible' : 'visible'}
-        closeDeleteModal={closeDeleteModal('')}
+        closeDeleteModal={closeDeleteModal}
         title={`${buttonSelected} ${documentText}?`}
         showOverlay={false}
       >

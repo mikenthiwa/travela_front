@@ -215,7 +215,7 @@ class VerificationDetails extends Component {
         </button>
         <ConfirmDialog
           id={request.id} modalInvisible={modalInvisible}
-          buttonSelected={buttonSelected} closeDeleteModal={() => { }}
+          buttonSelected={buttonSelected} closeDeleteModal={()=> this.setState({modalInvisible: true})}
           renderDialogText={this.renderDialogText} handleApprove={this.handleDecision}
           handleReject={this.handleDecision}
           documentText="Request"

@@ -29,6 +29,20 @@ const setupConnectedComponent = (props, store) => {
 
 describe('TEST ConnectedVerificationDetails COMPONENT', () => {
 
+  describe('Test close modal button', () => {
+    it('should test the modal close button', () => {
+      const wrapperPage = setupConnectedComponent(props, store);
+      const wrapperInstance = wrapperPage.find('VerificationDetails').instance();
+      const pageButtons = wrapperPage.find('button');
+      const pageVerifyButton = pageButtons.at(1);
+      pageVerifyButton.simulate('click');
+      expect(wrapperInstance.state.modalInvisible).toBe(false);
+      const closeButton = wrapperPage.find('.modal-close');
+      closeButton.simulate('click');
+      expect(wrapperInstance.state.modalInvisible).toBe(true);
+    });
+  });
+
   describe('TEST COMPONENT WITH AND WITHOUT REQUESTS', () => {
     it('tests component if request is fetching', () => {
       const state = { ...initialState, requests: { fetchingRequest: true } };
@@ -69,7 +83,6 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
     const instance = wrapper.find('VerificationDetails').instance();
     const buttons = wrapper.find('button');
     const button1 = buttons.at(1);
-
     it('buttons disabled status should be false if request status is Open', () => {
       expect(button1.props().disabled).toBe(false);
     });
@@ -129,4 +142,5 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
       expect(instance.state.displayComments).toBe(true);
     });
   });
-});
+})
+

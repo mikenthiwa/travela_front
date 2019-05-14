@@ -70,12 +70,20 @@ describe('TEST ConnectedApproveRequests COMPONENT', () => {
     });
 
     it('should test behavior of approve button', () => {
-      expect(instance.state.buttonSelected).toBe('');
       button1.simulate('click');
       expect(instance.state.buttonSelected).toBe('approve');
       expect(instance.state.modalInvisible).toBe(false);
       const approveButton = wrapper.find('.approval-comment-modal__btn');
       approveButton.simulate('click');
+      expect(instance.state.modalInvisible).toBe(true);
+    });
+
+    it('should test the modal close button', () => {
+      button1.simulate('click');
+      expect(instance.state.buttonSelected).toBe('approve');
+      expect(instance.state.modalInvisible).toBe(false);
+      const closeButton = wrapper.find('.modal-close');
+      closeButton.simulate('click');
       expect(instance.state.modalInvisible).toBe(true);
     });
 
