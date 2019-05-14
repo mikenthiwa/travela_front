@@ -5,13 +5,30 @@ const props = {
   children: [],
   user: {
     location: 'Lagos, Nigeria'
+  },
+  history: {
+    location:{
+      search: ''
+    }
+  }
+};
+
+const props2 = {
+  children: [],
+  user: {
+    location: 'Lagos, Nigeria'
+  },
+  history: {
+    location:{
+      search: '?page=1&center=Rwanda'
+    }
   }
 };
 
 describe('<FilterContext />', () => {
   const wrapper = shallow(<FilterContext {...props} />);
+  const wrapper2 = shallow(<FilterContext {...props2} />);
   it('should render without crashing', () => {
-    localStorage.setItem('location', 'Nairobi, Kenya');
     wrapper.instance().setState = jest.fn();
     const input = {start: '2018-12-02', end: '2018-12-10'};
     wrapper.instance().handleFilter(input);
@@ -20,7 +37,10 @@ describe('<FilterContext />', () => {
     expect(wrapper.instance().setState).toHaveBeenCalledWith({ range: input});
     localStorage.clear();
   });
-  it('should use the user`s location if location is not in Localstorage', () => {
-    expect(wrapper.state('city')).toEqual('Lagos');
+  it('should use All Locations if search is null', () => {
+    expect(wrapper.state('center')).toEqual('All Locations');
+  });
+  it('should return center if search is not null', () => {
+    expect(wrapper2.state('center')).toEqual('Rwanda');
   });
 });

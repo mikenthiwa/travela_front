@@ -20,12 +20,14 @@ describe('Readiness API', () => {
       limit: '5',
       type: 'json',
       travelFlow: 'inflow',
-      range: { start: '2018-05-20', end: '2018-07-22'}
+      range: { start: '2018-05-20', end: '2018-07-22'},
+      center: 'Kenya'
     };
     moxios.stubRequest(
       `${baseUrl}/analytics/readiness?page=${query.page}&limit=${
         query.limit
-      }&type=${query.type}&travelFlow=${query.travelFlow}&dateFrom=${query.range.start}&dateTo=${query.range.end}`,
+      }&type=${query.type}&travelFlow=${query.travelFlow}&dateFrom=${query.range.start}&dateTo=${
+        query.range.end}&center=${query.center}`,
       {
         status: 200,
         response: fetchReadinessResponse
@@ -35,7 +37,8 @@ describe('Readiness API', () => {
     expect(moxios.requests.mostRecent().url).toEqual(
       `${baseUrl}/analytics/readiness?page=${query.page}&limit=${
         query.limit
-      }&type=${query.type}&travelFlow=${query.travelFlow}&dateFrom=${query.range.start}&dateTo=${query.range.end}`
+      }&type=${query.type}&travelFlow=${query.travelFlow}&dateFrom=${query.range.start}&dateTo=${
+        query.range.end}&center=${query.center}`
     );
     expect(response.data).toEqual(fetchReadinessResponse);
   });

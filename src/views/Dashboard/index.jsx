@@ -20,10 +20,10 @@ export class Dashboard extends Component {
   render() {
     const { fetchDepartmentTrips, departmentTrips, fetchReadiness,readiness,
       exportReadiness, travelCalendar, fetchCalendarAnalytics,
-      downloadCalendarAnalytics, downloadAnalytics, currentUser } = this.props;
+      downloadCalendarAnalytics, downloadAnalytics, currentUser, history } = this.props;
     return (
       <div id="dashboard">
-        <FilterContext user={currentUser}>
+        <FilterContext history={history} user={currentUser}>
           <Consumer>
             {(context) => (
               <Fragment>
@@ -46,6 +46,7 @@ export class Dashboard extends Component {
           downloadCalendarAnalytics={downloadCalendarAnalytics}
           travelCalendar={travelCalendar}
           user={currentUser}
+          history={history}
         />
       </div>
     );

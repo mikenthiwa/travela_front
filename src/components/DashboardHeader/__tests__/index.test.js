@@ -7,7 +7,7 @@ const props = {
   downloadCsv: jest.fn(),
   context: {
     state: {
-      city: 'Nairobi'
+      center: 'Kenya'
     }
   }
 };

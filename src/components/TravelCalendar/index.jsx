@@ -22,16 +22,16 @@ class TravelCalendar extends PureComponent {
   }
 
   componentDidMount(){
-    const {fetchCalendarAnalytics} = this.props;
+    const {fetchCalendarAnalytics, history} = this.props;
     const {filter, page} = this.state;
     if(filter) {
       const query = Utils.manageRangeFilter(filter);
-      fetchCalendarAnalytics({type: 'json', filter: query, page});
+      fetchCalendarAnalytics({type: 'json', filter: query, page, history});
     }
   }
 
   handleChange = (range) => {
-    const {fetchCalendarAnalytics} = this.props;
+    const {fetchCalendarAnalytics, history} = this.props;
     const {filter} = this.state;
     const query = Utils.manageRangeFilter(range);
     if(query !== filter){
@@ -40,7 +40,7 @@ class TravelCalendar extends PureComponent {
         filter: range,
         page: 1
       }));
-      fetchCalendarAnalytics({type:'json', filter:query, page: 1});
+      fetchCalendarAnalytics({type:'json', filter:query, page: 1, history});
     }
     (range.start !== range.end) && this.handleCalendar();
   }
@@ -53,17 +53,20 @@ class TravelCalendar extends PureComponent {
   }
 
   handlePagination = (direction) => {
-    const { travelCalendar:{ travelCalendarData }, fetchCalendarAnalytics } = this.props;
+    const { travelCalendar:{ travelCalendarData }, fetchCalendarAnalytics, history } = this.props;
     const { filter } = this.state;
     const query = Utils.manageRangeFilter(filter);
     if(travelCalendarData) {
       const { pagination: { prevPage, nextPage, currentPage, pageCount } } = travelCalendarData;
-      if(direction === 'Previous' && prevPage > 0) {
-        this.setState(prevState => ({ ...prevState, page: prevPage }));
-        fetchCalendarAnalytics({type: 'json', filter: query, page: prevPage});
-      } else if(direction === 'Next' && (currentPage + 1) <= pageCount) {
-        this.setState(prevState => ({ ...prevState, page: nextPage }));
-        fetchCalendarAnalytics({type: 'json', filter: query, page: nextPage});
+
+      const fetchPage = {
+        Next: (currentPage + 1) <= pageCount ? nextPage : null,
+        Previous: prevPage > 0 ? prevPage : null
+      };
+
+      if( /(Next)|(Previous)/.test(direction) && fetchPage[direction]){
+        this.setState(prevState => ({ ...prevState, page: fetchPage[direction]}));
+        fetchCalendarAnalytics({type: 'json', filter: query, page: fetchPage[direction], history});
       }
     }
   }
@@ -195,6 +198,7 @@ TravelCalendar.propTypes = {
   downloadCalendarAnalytics: PropTypes.func.isRequired,
   travelCalendar: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default TravelCalendar;

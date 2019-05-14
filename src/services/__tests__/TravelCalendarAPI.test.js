@@ -9,7 +9,6 @@ const baseUrl = resolveBaseUrl();
 describe('Travel Calendar API', () => {
   beforeEach(() => {
     moxios.install();
-    localStorage.setItem('location', 'Nairobi');
   });
 
   afterEach(() => {
@@ -18,8 +17,11 @@ describe('Travel Calendar API', () => {
 
 
   it('should make get request to get travel calendar analytics', async () => {
-    const query = {type: 'json', filter: '', page: 1};
-    const location = localStorage.getItem('location')
+    const history = {
+      location: { search: 'page=1&center=Kenya'}
+    };
+    const query = {type: 'json', filter: '', page: 1, history };
+    const location = 'Kenya';
 
     moxios.stubRequest(`${baseUrl}/analytics/calendar?type=${query.type}&location=${location}&${query.filter}&limit=3&page=${query.page}`, {
       status: 200,

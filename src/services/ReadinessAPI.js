@@ -10,7 +10,7 @@ class ReadinessAPI {
         query.limit
       }&type=${query.type}&travelFlow=${query.travelFlow}&dateFrom=${
         query.range.start
-      }&dateTo=${query.range.end}`
+      }&dateTo=${query.range.end}&center=${query.center}`
     );
   }
 

@@ -21,11 +21,13 @@ describe('Analytics API', () => {
     const query = {
       filterBy: 'month',
       type: 'json',
+      center: 'All Locations',
       firstDate: date.toISOString(),
       lastDate: new Date(date.getTime() + 86400000).toISOString()
     };
 
-    moxios.stubRequest(`${baseUrl}/analytics/trips/departments?filterBy=${query.filterBy}&type=${query.type}&firstDate=${query.firstDate}&lastDate=${query.lastDate}`, {
+    moxios.stubRequest(`${baseUrl}/analytics/trips/departments?filterBy=${query.filterBy}&center=${
+      query.center}&type=${query.type}&firstDate=${query.firstDate}&lastDate=${query.lastDate}`, {
       status: 200,
       response: fetchDepartmentsTripsResponse
     });
@@ -33,7 +35,8 @@ describe('Analytics API', () => {
     const response = await AnalyticsAPI.getDepartmentTrips(query);
 
     expect(moxios.requests.mostRecent().url)
-      .toEqual(`${baseUrl}/analytics/trips/departments?filterBy=${query.filterBy}&type=${query.type}&firstDate=${query.firstDate}&lastDate=${query.lastDate}`);
+      .toEqual(`${baseUrl}/analytics/trips/departments?filterBy=${query.filterBy}&center=${
+        query.center}&type=${query.type}&firstDate=${query.firstDate}&lastDate=${query.lastDate}`);
     expect(response.data).toEqual(fetchDepartmentsTripsResponse);
   });
 

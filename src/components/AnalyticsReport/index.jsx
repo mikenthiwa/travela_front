@@ -11,28 +11,31 @@ export default class AnalyticsReport extends Component {
       fetchDepartmentTrips,
       fetchReadiness,
       context: {
-        state: { range }
+        state: { range, center }
       }
     } = this.props;
     const { start, end } = range;
+
     fetchReadiness({
       page: '1',
       limit: '9',
       type: 'json',
       travelFlow: 'inflow',
-      range
+      range,
+      center
     });
     fetchDepartmentTrips({
       filterBy: 'month',
       type: 'json',
       firstDate: start,
-      lastDate: end
+      lastDate: end,
+      center
     });
   }
 
   componentWillReceiveProps(nextProps) {
     const { context, fetchDepartmentTrips } = this.props;
-    const { range } = nextProps.context.state;
+    const { range, center } = nextProps.context.state;
     if (
       range.start !== context.state.range.start ||
       range.end !== context.state.range.end
@@ -42,7 +45,8 @@ export default class AnalyticsReport extends Component {
         filterBy: 'month',
         type: 'json',
         firstDate: start,
-        lastDate: end
+        lastDate: end,
+        center,
       });
     }
   }
@@ -50,18 +54,15 @@ export default class AnalyticsReport extends Component {
   getDepartmentTripsCSV = () => {
     const { fetchDepartmentTrips, context } = this.props;
     const { start, end } = context.state.range;
-    fetchDepartmentTrips({
-      filterBy: 'month',
-      type: 'file',
-      firstDate: start,
-      lastDate: end
-    });
-    fetchDepartmentTrips({
-      filterBy: 'month',
-      type: 'json',
-      firstDate: start,
-      lastDate: end
-    });
+    const { center } = context.state;
+    ['file', 'json'].forEach( type =>
+      fetchDepartmentTrips({
+        filterBy: 'month',
+        type,
+        firstDate: start,
+        lastDate: end,
+        center
+      }));
   };
 
   renderButton = (name, icon, text, onclickFunction) => (
@@ -135,7 +136,7 @@ export default class AnalyticsReport extends Component {
       fetchReadiness,
       exportReadiness,
       context: {
-        state: { range }
+        state: { range, center }
       }
     } = this.props;
     const { report, loading, error } = departmentTrips;
@@ -148,6 +149,7 @@ export default class AnalyticsReport extends Component {
           fetchReadiness={fetchReadiness}
           exportReadiness={exportReadiness}
           range={range}
+          center={center}
         />
         <div className="analyticsReport__card">
           {loading ? (

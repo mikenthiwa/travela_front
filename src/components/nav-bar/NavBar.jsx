@@ -17,8 +17,8 @@ import selectDropDownIcon from '../../images/icons/form_select_dropdown.svg';
 import Button from '../buttons/Buttons';
 import ImageLink from '../image-link/ImageLink';
 import { logoutUser } from '../../helper/userDetails';
-import LocationDropdownRoutes from '../../helper/LocationDropdownRoutes';
 import Utils from '../../helper/Utils';
+import LocationDropdownRoutes from '../../helper/LocationDropdownRoutes';
 import './NavBar.scss';
 import searchBarAllowedRoutes from '../search-bar/SearchBarRoutes';
 
@@ -74,7 +74,6 @@ export class NavBar extends PureComponent {
   }
 
   getCenter = (center) => {
-
     const { history, location } = this.props;
     const locationUrl = new URLSearchParams(location.search);
     locationUrl.set('page', 1);
@@ -203,8 +202,7 @@ export class NavBar extends PureComponent {
 
   renderLocationDropdown(centers, centerSelected) {
     const { location } = this.props;
-    return ( LocationDropdownRoutes
-      .find(route => route.test(location.pathname))) &&(
+    return ( LocationDropdownRoutes.find(route => route.test(location.pathname))) &&(
       <div className="center-dropdown__container">
         <div className="location_circle_container">
           <img src={centerIcon} alt="location-icon" />
@@ -241,9 +239,9 @@ export class NavBar extends PureComponent {
             <div className="navbar__search-size mdl-cell--hide-phone">
               <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} value={keyword} />
             </div>
-          ) 
+          )
         }
-        
+
         <div className="center-dropdown">
           {allCenters.length > 1 && this.renderLocationDropdown(allCenters, centerSelected)}
         </div>
@@ -312,7 +310,8 @@ NavBar.defaultProps = {
 const mapStateToProps = state => {
   const userCenters = _.maxBy([
     state.approvals.myCenters,
-    state.travelChecklist.userCenters
+    state.travelChecklist.userCenters,
+    state.analytics ? state.analytics.payload.userCenters : [],
   ],
   _.size);
   return {

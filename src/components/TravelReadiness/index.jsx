@@ -16,15 +16,15 @@ class TravelReadiness extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {range: prevRange, fetchReadiness} = this.props;
+    const {range: prevRange, fetchReadiness, center} = this.props;
     const {range: newRange } = nextProps;
     const { travelFlow } = this.state;
     if(JSON.stringify(prevRange) !== JSON.stringify(newRange)) {
-      fetchReadiness({page: '1', limit: '9', type:'json', travelFlow, range:newRange });
+      fetchReadiness({page: '1', limit: '9', type:'json', travelFlow, range:newRange, center });
     }
   }
   renderReadinessDetails = (item, index) => {
-    const { departureDate } = item; 
+    const { departureDate } = item;
     return (
       <div className="analyticsReport__row analyticsReport__report-details" key={`item${index}`}>
         <div>
@@ -59,11 +59,11 @@ class TravelReadiness extends PureComponent {
   };
 
   getTravelFlow = travelArgument => {
-    const { fetchReadiness, range } = this.props;
+    const { fetchReadiness, range , center } = this.props;
     this.setState({
       travelFlow: travelArgument
     });
-    fetchReadiness({page: '1', limit, type:'json', travelFlow: travelArgument, range});
+    fetchReadiness({page: '1', limit, type:'json', travelFlow: travelArgument, range, center});
   };
 
   travelFlowButton = () => {
@@ -80,7 +80,7 @@ class TravelReadiness extends PureComponent {
           className="travel-readiness-toggle-button-1" type="button"
           id={travelFlow === 'outflow' ? 'active-travel-flow-button' : null}
           onClick={() => this.getTravelFlow('outflow')}>
-        Ouflow
+        Outflow
         </button>
       </Fragment>
     );
@@ -94,16 +94,18 @@ class TravelReadiness extends PureComponent {
     return {};
   };
   handlePagination = direction => {
-    const { readiness, fetchReadiness, range } = this.props;
+    const { readiness, fetchReadiness, range, center } = this.props;
     const { travelFlow } = this.state;
     if(readiness){
       const { currentPage, pageCount, limit, prevPage, nextPage, dataCount } = readiness.pagination;
-      if(direction==='Next' && currentPage <= pageCount && dataCount > limit){
-        fetchReadiness({page: nextPage, limit, type:'json', travelFlow, range});
-      }else if(direction === 'Previous' && prevPage > 0 && dataCount > limit){
-        fetchReadiness({page: prevPage, limit, type:'json', travelFlow, range});
-      }
+      const fetchPage = {
+        Next: currentPage <= pageCount ? nextPage : null,
+        Previous: prevPage > 0 ? prevPage : null
+      };
 
+      if( /(Next)|(Previous)/.test(direction) && dataCount > limit && fetchPage[direction]){
+        fetchReadiness({page: fetch[direction], limit, type:'json', travelFlow, range, center});
+      }
     }
   };
 
@@ -173,7 +175,8 @@ TravelReadiness.propTypes = {
   readiness: PropTypes.object.isRequired,
   exportReadiness:PropTypes.func.isRequired,
   renderNotFound: PropTypes.func.isRequired,
-  range: PropTypes.shape().isRequired
+  range: PropTypes.shape().isRequired,
+  center: PropTypes.string.isRequired
 };
 
 export default TravelReadiness;

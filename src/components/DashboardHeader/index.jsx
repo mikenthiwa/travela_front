@@ -49,7 +49,7 @@ export default class DashboardHeader extends PureComponent {
     return (
       <button
         type="button" className="action-btn" id={!text ? 'download' : ''} onClick={
-          !text ? (() => downloadCsv(`?location=${context.state.city}&type=file`)) : method}>
+          !text ? (() => downloadCsv(`?location=${context.state.center}&type=file`)) : method}>
         {text}
         <img src={icon} alt={text} />
       </button>
@@ -63,10 +63,10 @@ export default class DashboardHeader extends PureComponent {
       <div className="DashboardHeader">
         <div className="dashboard-mobile">
           <h2 className="title">Dashboard</h2>
-          {this.renderButton(activeLocation, context.state.city)}
+          {this.renderButton(activeLocation, context.state.center)}
         </div>
         <div className="actions">
-          {this.renderButton(activeLocation, context.state.city)}
+          {this.renderButton(activeLocation, context.state.center)}
           {this.renderButton(activeCalendar, `${range.start} - ${range.end}`, this.showCalendar)}
           {this.renderButton(download)}
         </div>

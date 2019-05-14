@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {resolveBaseUrl} from '.';
+import { resolveBaseUrl } from '.';
 
 const baseUrl = resolveBaseUrl();
 
@@ -15,7 +15,7 @@ export default class AnalyticsAPI {
   static getDepartmentTrips(query) {
     const responseType = (query.type === 'file') ? 'blob' : 'json';
     return axios.get(
-      `${baseUrl}/analytics/trips/departments?filterBy=${query.filterBy}&type=${query.type}&firstDate=${query.firstDate}&lastDate=${query.lastDate}`,
+      `${baseUrl}/analytics/trips/departments?filterBy=${query.filterBy}&center=${query.center}&type=${query.type}&firstDate=${query.firstDate}&lastDate=${query.lastDate}`,
       {
         responseType,
       }

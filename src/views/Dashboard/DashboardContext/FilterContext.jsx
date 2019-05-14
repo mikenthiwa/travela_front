@@ -7,13 +7,17 @@ export const { Consumer, Provider } = React.createContext();
 export default class FilterContext extends Component {
   constructor(props) {
     super(props);
-    const { user } = props;
+    const { user, history } = props;
     const start = moment().startOf('month').format('YYYY-MM-DD');
     const end = moment().endOf('month').format('YYYY-MM-DD');
-    const [city] = (localStorage.getItem('location') || user.location).split(',');
+    const locationUrl = new URLSearchParams(history.location.search);
+    const selectedCenter = locationUrl.get('center');
+    const center = !selectedCenter ? 'All Locations' : selectedCenter;
+    const title = center === 'All Locations' ? '' : `${center} Center`;
     this.state = {
       range: {start, end},
-      city
+      center,
+      title
     };
   }
 
@@ -40,7 +44,8 @@ FilterContext.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]).isRequired
+  ]).isRequired,
+  history: PropTypes.object.isRequired
 };
 
 FilterContext.defaultProps = {

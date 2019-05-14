@@ -19,7 +19,7 @@ export class Analytics extends Component {
   componentDidMount() {
     const { fetchAnalytics, context } = this.props;
     const { start, end } = context.state.range;
-    const query = `?location=${context.state.city}&dateFrom=${start}&dateTo=${end}`;
+    const query = `?center=${context.state.center}&dateFrom=${start}&dateTo=${end}`;
     fetchAnalytics(query);
   }
 
@@ -28,7 +28,7 @@ export class Analytics extends Component {
     const {range} = nextProps.context.state;
     if(range.start !== context.state.range.start || range.end !== context.state.range.end) {
       const { start, end } = range;
-      const query = `?location=${context.state.city}&dateFrom=${start}&dateTo=${end}`;
+      const query = `?center=${context.state.center}&dateFrom=${start}&dateTo=${end}`;
       fetchAnalytics(query);
     }
   }
@@ -99,7 +99,7 @@ export class Analytics extends Component {
           }
         )}
         <div className="visiting-card">
-          {this.renderCards(`No. of People visiting ${context.state.city} Center`,
+          {this.renderCards(`No. of People visiting ${context.state.title}`,
             {
               stats: peopleVisiting, 
               icon: flightLand, 
@@ -110,7 +110,7 @@ export class Analytics extends Component {
         </div>
         <div className="leaving-card">
           {this.renderCards(
-            `No. of People leaving ${context.state.city} Center`,
+            `No. of People leaving ${context.state.title}`,
             {
               stats: peopleLeaving, 
               icon: flightTakeoff, 
