@@ -117,7 +117,8 @@ class NewUserRoleForm extends PureComponent {
       return { ...prevState, errors, hasBlankFields };
     });
 
-    if (role === 'Budget Checker' || 'Travel Administrator' && values.items.length < 1) {
+    if (['Budget Checker', 'Travel Administrator' ].includes(role) &&
+        values.items.length < 1 ) {
       this.setState({
         hasBlankFields: true
       });
