@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import HtmlToReact from 'html-to-react';
 import './_notificationItem.scss';
 import readMessageIcon from '../../images/read-message.svg';
 import unreadMessageIcon from '../../images/unread-message.svg';
 import generateDynamicDate from '../../helper/generateDynamicDate';
 
+const HtmlToReactParser = new HtmlToReact.Parser();
 export default class NotificationItem extends PureComponent {
   state = {
     localNotificationStatus: 'unread'
@@ -66,13 +68,13 @@ export default class NotificationItem extends PureComponent {
         {activeMessage.includes(id)
           ? (
             <span id="notificationWithLink">
-              {activeMessage.split(id)[0]}&nbsp;
+              {HtmlToReactParser.parse(activeMessage.split(id)[0])}&nbsp;
               <Link to={link}>
                 {id}
               </Link>
-              {activeMessage.split(id)[1]}
+              {HtmlToReactParser.parse(activeMessage.split(id)[1])}
             </span>
-          ): activeMessage
+          ): HtmlToReactParser.parse(activeMessage)
         }
       </span>
     );
