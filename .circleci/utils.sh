@@ -71,6 +71,7 @@ export NAMESPACE=$ENVIRONMENT
 # inherit some environment variables from production and change some that are
 # needed to be changed
 if [ "$CIRCLE_JOB" == 'deployment-qa' ]; then
+    IMAGE_TAG=qa-$(git rev-parse --short HEAD)
     export ENVIRONMENT=qa
     export CLUSTER_NAME=$QA_CLUSTER_NAME
     export STATIC_IP=$QA_STATIC_IP
