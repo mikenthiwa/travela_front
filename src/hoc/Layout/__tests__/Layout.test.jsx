@@ -57,7 +57,8 @@ const props = {
     }
   },
   getUserData: jest.fn(),
-  isLoaded: true
+  isLoaded: true,
+  isAuthenticated: true,
 };
 
 describe('Layout component', () => {

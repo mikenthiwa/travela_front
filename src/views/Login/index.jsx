@@ -24,7 +24,6 @@ export class Login extends Component {
     const {match:{params}, isAuthenticated} = this.props;
     if(params[0]){
       localStorage.setItem('url', `/${params[0]}`);
-      !isAuthenticated && this.login();
     }
     this.authenticated();
   }
@@ -72,6 +71,7 @@ export class Login extends Component {
     const {  history } = this.props;
     const url = localStorage.getItem('url');
     if(url) {
+      window.location.replace(url);
       history.push(url);
       localStorage.removeItem('url');
     } else {

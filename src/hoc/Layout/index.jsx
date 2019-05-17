@@ -108,7 +108,8 @@ export class Layout extends Component {
 
   renderNotificationPane = (hideClass, hideSideBar) => {
     const hideClass3 = hideSideBar ? '' : 'hide mdl-cell--hide-desktop';
-    return (
+    const { isAuthenticated } = this.props;
+    return isAuthenticated && (
       <div
         className={`mdl-cell mdl-cell--3-col-desktop ${hideClass3}
         request-page__right-side-bar mdl-cell--3-col-tablet mdl-cell--4-col-phone`}
@@ -182,6 +183,7 @@ Layout.propTypes = {
   location: PropTypes.object.isRequired,
   children: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.object.isRequired,
   isLoaded: PropTypes.bool.isRequired,
   getUserData: PropTypes.func.isRequired,
 };
