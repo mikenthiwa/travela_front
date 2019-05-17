@@ -152,12 +152,13 @@ jobs:
           name: Build and Deploy Application
           command: .circleci/build_deploy.sh main
       - *send_failure_notification
-      
+
 workflows:
   version: 2
   test-build-deploy:
     jobs:
-      - checkout_code
+      - checkout_code:
+          type: approval
       - check_vulnerabilities:
           requires:
             - checkout_code
