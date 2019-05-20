@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<AddRoleForm /> renders correctly 1`] = `
+exports[`<AddRegionForm /> renders correctly 1`] = `
 <form
   className="new-request"
-  id="add-role-form"
+  id="add-region-form"
   onSubmit={[Function]}
 >
   <fieldset
@@ -21,9 +21,9 @@ exports[`<AddRoleForm /> renders correctly 1`] = `
           className="form-input  "
         >
           <label
-            htmlFor="roleName"
+            htmlFor="region"
           >
-            Role Name
+            Region
             <span
               style={
                 Object {
@@ -37,9 +37,9 @@ exports[`<AddRoleForm /> renders correctly 1`] = `
           <input
             autoComplete="off"
             className=" "
-            id="add-role-name"
-            label="Role Name"
-            name="roleName"
+            id="add-region-name"
+            label="Region"
+            name="region"
             onBlur={[Function]}
             onChange={[Function]}
             type="text"
@@ -72,7 +72,7 @@ exports[`<AddRoleForm /> renders correctly 1`] = `
             autoComplete="off"
             className=" textarea-box "
             data-gramm_editor="false"
-            id="add-role-description"
+            id="add-region-description"
             label="Description"
             name="description"
             onBlur={[Function]}
@@ -87,10 +87,11 @@ exports[`<AddRoleForm /> renders correctly 1`] = `
         </div>
       </div>
       <span
-        className="role-description--margin"
+        className="region-description--margin"
       />
     </div>
   </fieldset>
+  <hr />
   <fieldset
     className={null}
   >

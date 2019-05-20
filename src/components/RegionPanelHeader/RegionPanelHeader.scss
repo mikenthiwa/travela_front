@@ -1,0 +1,32 @@
+.role-panel-header {
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    height: 100px;
+    width: 100%;
+    padding: 0 40px 0 0;
+    @import "responsiveness";
+  }
+  
+.checklist-header {
+  @media(max-width: 479px) {
+    height: 100px;
+    padding: 50px 0 0 0;
+  }
+}
+
+@media (max-width: 479px) {
+  .role-panel-header .PageHeader {
+    margin-top: 30px !important;
+  }
+  .user-roles {
+    margin-top: 25px !important;
+
+    .modal--add-user {
+      background: red !important;
+      input {
+        max-width: 40% !important;
+      }
+      max-width: 100px;
+    }
+  }
+}

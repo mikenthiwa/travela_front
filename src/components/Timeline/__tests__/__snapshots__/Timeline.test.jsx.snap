@@ -213,7 +213,7 @@ exports[`<Timeline /> renders correctly 1`] = `
         key="5"
       />
       <div
-        className="timeline__segment current month-view"
+        className="timeline__segment  month-view"
         data-segment-label="7"
         key="6"
       />
@@ -278,7 +278,7 @@ exports[`<Timeline /> renders correctly 1`] = `
         key="18"
       />
       <div
-        className="timeline__segment  month-view"
+        className="timeline__segment current month-view"
         data-segment-label="20"
         key="19"
       />
@@ -692,7 +692,7 @@ exports[`<Timeline /> renders the weekly view correctly 1`] = `
         key="5"
       />
       <div
-        className="timeline__segment current week-view"
+        className="timeline__segment  week-view"
         data-segment-label="Tue 5/7"
         key="6"
       />

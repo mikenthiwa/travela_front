@@ -7,6 +7,7 @@ import NewChecklistForm from './NewChecklistForm';
 import ProfileForm from './ProfileForm';
 import AddRoleForm from './AddRoleForm';
 import NewTravelStipendForm from './NewTravelStipendForm/NewTravelStipendForm';
+import AddRegionForm from './AddRegionForm';
 import './index.scss';
 
 
@@ -17,5 +18,6 @@ export {
   NewAccommodationForm,
   NewChecklistForm,
   AddRoleForm,
-  NewTravelStipendForm
+  NewTravelStipendForm,
+  AddRegionForm
 };

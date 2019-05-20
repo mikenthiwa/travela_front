@@ -9,7 +9,26 @@ exports[`<LeftSideBar /> renders correctly 1`] = `
   >
     <div
       className="left-sidebar__scrollable_wrapper"
-    />
+    >
+      <div
+        className="helpIcon"
+      >
+        <Link
+          replace={false}
+          to="/help"
+        >
+          <span>
+            <p>
+              Click to access Help Page
+            </p>
+          </span>
+          <img
+            alt="HelpIcon"
+            src="helpIcon_inactive.svg"
+          />
+        </Link>
+      </div>
+    </div>
   </div>
 </div>
 `;

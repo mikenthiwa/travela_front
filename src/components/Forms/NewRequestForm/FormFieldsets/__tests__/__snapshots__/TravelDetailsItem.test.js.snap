@@ -59,10 +59,10 @@ exports[`Test Suite for <TravelDetailsItem /> should match snapshot 1`] = `
             />
           </div>
           <div
-            className="travel-to bed__option"
+            className="travel-to reasons__option"
           />
           <div
-            className="travel-to reasons__option"
+            className="travel-to bed__option"
           />
           <div
             className="other__reason"

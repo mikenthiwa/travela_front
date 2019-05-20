@@ -3,7 +3,7 @@
 exports[`ConfirmDialog component should match snapshot 1`] = `
 <Fragment>
   <Modal
-    closeDeleteModal={null}
+    closeDeleteModal={[Function]}
     closeModal={null}
     customModalStyles="delete-comment-modal"
     customOverlayStyle="undefined-modal-overlay"

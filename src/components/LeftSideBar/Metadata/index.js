@@ -194,6 +194,12 @@ const NavItemsMetadata = [
         text: 'Travel Reason',
         onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member']
       },
+      {
+        link_to: '/settings/travel-region',
+        exact: true,
+        text: 'Travel Region',
+        onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member']
+      },
     ],
     icons: {
       active: activeSettingsIcon,

@@ -199,7 +199,7 @@ exports[`<ButtonGroup /> should render successfully 1`] = `
         >
           <input
             readOnly={true}
-            value="May 7, 2019"
+            value="May 20, 2019"
           />
         </span>
         <span
@@ -208,7 +208,7 @@ exports[`<ButtonGroup /> should render successfully 1`] = `
         >
           <input
             readOnly={true}
-            value="May 7, 2019"
+            value="May 20, 2019"
           />
         </span>
       </div>
@@ -650,7 +650,7 @@ exports[`<ButtonGroup /> should render successfully 1`] = `
             </span>
           </button>
           <button
-            className="rdrDay rdrDayToday"
+            className="rdrDay"
             onBlur={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -667,15 +667,6 @@ exports[`<ButtonGroup /> should render successfully 1`] = `
             }
             type="button"
           >
-            <span
-              className="rdrStartEdge rdrEndEdge"
-              key="0"
-              style={
-                Object {
-                  "color": "#3d91ff",
-                }
-              }
-            />
             <span
               className="rdrDayNumber"
             >
@@ -997,7 +988,7 @@ exports[`<ButtonGroup /> should render successfully 1`] = `
             </span>
           </button>
           <button
-            className="rdrDay"
+            className="rdrDay rdrDayToday"
             onBlur={[Function]}
             onFocus={[Function]}
             onKeyDown={[Function]}
@@ -1014,6 +1005,15 @@ exports[`<ButtonGroup /> should render successfully 1`] = `
             }
             type="button"
           >
+            <span
+              className="rdrStartEdge rdrEndEdge"
+              key="0"
+              style={
+                Object {
+                  "color": "#3d91ff",
+                }
+              }
+            />
             <span
               className="rdrDayNumber"
             >

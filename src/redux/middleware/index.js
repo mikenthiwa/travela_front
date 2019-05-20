@@ -137,7 +137,7 @@ import {
   watchUpdateTravelStipend
 } from './travelStipendsSaga';
 import {watchCreateTravelReason, watchEditTravelReason, watchDeleteTravelReason, watchViewTravelReasonDetails} from './travelReasonsSaga';
-
+import { watchAddRegionSagaAsync, watchFetchRegionDataSagaAsync } from './travelRegionSaga';
 function* rootSaga() {
   yield all([
     userAuth(),
@@ -240,7 +240,9 @@ function* rootSaga() {
     watchValidateTrips(),
     watchUpdateBudgetStatus(),
     watchFetchEditRequest(),
-    watchUpdateBudgetCheckerAsync()
+    watchUpdateBudgetCheckerAsync(),
+    watchAddRegionSagaAsync(),
+    watchFetchRegionDataSagaAsync()
   ]);
 }
 

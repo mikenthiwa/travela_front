@@ -5,6 +5,11 @@ exports[`<Dashboard /> renders correctly 1`] = `
   id="dashboard"
 >
   <FilterContext
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
     user={
       Object {
         "email": "william.sserubiri@andela.com",
@@ -19,6 +24,11 @@ exports[`<Dashboard /> renders correctly 1`] = `
   <TravelCalendar
     downloadCalendarAnalytics={[Function]}
     fetchCalendarAnalytics={[Function]}
+    history={
+      Object {
+        "push": [Function],
+      }
+    }
     travelCalendar={
       Object {
         "isLoading": false,

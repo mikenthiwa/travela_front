@@ -26,6 +26,7 @@ import ConnectedTravelStipend from '../views/TravelStipends';
 import ConnectedApproveRequests from '../views/ApproveRequests';
 import ConnectedVerificationDetails from '../views/VerificationDetails';
 import ConnectedHelpers from '../views/HelpLinks';
+import ConnectedTravelRegion from '../views/TravelRegion';
 
 
 import {
@@ -66,6 +67,7 @@ const routes = {
   '/settings/reminders': [ConnectedReminders,TRAVEL_MANAGERS],
   '/settings/travel-reason': [ConnectedTravelReasons, TRAVEL_MANAGERS],
   '/help': [ConnectedHelpers],
+  '/settings/travel-region': [ConnectedTravelRegion, TRAVEL_MANAGERS],
 };
 
 export default routes;
