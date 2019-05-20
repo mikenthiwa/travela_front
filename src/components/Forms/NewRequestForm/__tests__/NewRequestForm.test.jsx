@@ -12,7 +12,7 @@ import NewRequestForm from '../NewRequestForm';
 import beds from '../../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
 import profileMock from '../../ProfileForm/__mocks__';
 import tabIcons from '../../../../images/icons/new-request-icons';
-import travelStipendHelper from '../../../../helper/request/RequestUtils';
+import travelStipendHelper from '../../../../helper/request/RequestUtils'; 
 
 
 global.MutationObserver = MutationObserver;
@@ -74,6 +74,8 @@ describe('<NewRequestForm />', () => {
       roleId: 401938,
       location: 'Kigali'
     },
+
+
     userDataUpdate: [],
     requestOnEdit: {
       id: '1',
@@ -135,6 +137,8 @@ describe('<NewRequestForm />', () => {
     fetchAvailableRoomsSuccess: jest.fn(() => {
     }),
     fetchAllTravelStipends: jest.fn(),
+    onChangeAutoSuggestion: jest.fn(),
+  
     closeModal: jest.fn(),
     choices: ['director', 'chef'],
     managers: [{
@@ -810,25 +814,60 @@ describe('<NewRequestForm />', () => {
         gender: 'male',
         department: 'Success',
         role: 'Software Developer',
-        manager: 'dont exist',
+        manager: 'Samuel Kubai',
       },
       trips: [],
       selection: 'return',
       stipendBreakDown: []
     });
-    const inputField = shallowWrapper.find('.occupationInput');
-
-    inputField.simulate('change', {target: {value: 'Samuel Kubai'}});
+    const inputField = shallowWrapper.find('.occupationInput').at(0);
+    const params = ['manager', 'David Ssalli'];
+    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params))
+    inputField.simulate('change');
     const {manager} = shallowWrapper.state('values');
-    const {manager: firstManagerError} = shallowWrapper.state('errors');
-    expect(manager).toEqual('Samuel Kubai');
-    expect(firstManagerError).toEqual('');
+    expect(manager).toEqual('David Ssalli');
 
-    inputField.simulate('change', {target: {value: 'will fail'}});
+    const params2 = ["manager", "will fail"]
+    inputField.simulate('change');
+    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params2))
     const {manager: newManager} = shallowWrapper.state('values');
     const {manager: secondManagerError} = shallowWrapper.state('errors');
     expect(newManager).toEqual('will fail');
-    expect(secondManagerError).toEqual('That manager does not exist.');
+    expect(secondManagerError).toEqual(" No manager with the name exists");
+    
+  });
+
+  it('should test onChangeOccupation()', () => {
+    const shallowWrapper = mount(<NewRequestForm {...props}  />);
+    localStorage.setItem('checkBox', 'clicked');
+    shallowWrapper.setState({
+      values: {
+        name: 'Kevin Munene',
+        gender: 'male',
+        department: 'Success',
+        role: 'Software Developer',
+        manager: 'David Ssali',
+      },
+      trips: [],
+      selection: 'return',
+      stipendBreakDown: []
+    });
+
+    const inputField = shallowWrapper.find('.occupationInput').at(1)
+    const params = ["role", "Software Developers"]
+    inputField.simulate('change');
+    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params))
+    const {role} = shallowWrapper.state('values');
+    expect(role).toEqual('Software Developers');
+
+    const params2 = ['role','Journalist']
+    inputField.simulate('change');
+    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params2))
+    const {role: newRole} = shallowWrapper.state('values');
+    const {role: secondRoleError} = shallowWrapper.state('errors');
+    expect(newRole).toEqual('Journalist');
+    expect(secondRoleError).toEqual(" No role with the name exists");
+    
   });
 
   it('should add new trip field for multi trip  ', () => {

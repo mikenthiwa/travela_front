@@ -5,7 +5,7 @@ import * as formMetadata from '../../FormsMetadata/NewProfileMetadata';
 
 class ProfileDetailsFieldSets extends Component {
 
-  renderFieldSet = (renderInput, onChangeManager) =>  (
+  renderFieldSet = (renderInput, onChangeAutoSuggestion) =>  (
     <fieldset className="personal-details">
       <div className="legend">
         <span className="personal-details-text">
@@ -18,8 +18,10 @@ class ProfileDetailsFieldSets extends Component {
         </div>
         {renderInput('gender', 'button-toggler')}
         <div>
-          {renderInput('role', 'text', {
-            className: 'no-disable' })}
+          {renderInput('role', 'filter-dropdown-select', {
+            className: 'profile_dropdown no-disable role',
+            onChange: (e) => onChangeAutoSuggestion('role', e),
+            size: '' })}
         </div>
         <div>
           {renderInput('department', 'text', {
@@ -27,7 +29,7 @@ class ProfileDetailsFieldSets extends Component {
         </div>
         {renderInput('manager', 'filter-dropdown-select', {
           className: 'profile_dropdown no-disable manager',
-          onChange: onChangeManager,
+          onChange: (e) => onChangeAutoSuggestion('manager', e),
           size: '' })}
         {renderInput('location', 'dropdown-select', {
           className: 'profile_dropdown no-disable', size: ''
@@ -37,7 +39,7 @@ class ProfileDetailsFieldSets extends Component {
   );
 
   render() {
-    const { managers, centers, onChangeManager} = this.props;
+    const { managers, centers, onChangeAutoSuggestion} = this.props;
 
     const managerNames = managers.map(manager => manager.fullName);
     const centerNames = centers.map(center => center.location.split(',')[0]);
@@ -49,18 +51,18 @@ class ProfileDetailsFieldSets extends Component {
     this.inputRenderer = new InputRenderer(formMetadata);
     const { renderInput } = this.inputRenderer;
 
-    return (this.renderFieldSet(renderInput, onChangeManager) );
+    return (this.renderFieldSet(renderInput, onChangeAutoSuggestion) );
   }
 }
 ProfileDetailsFieldSets.propTypes = {
   managers: PropTypes.array,
   centers: PropTypes.array,
-  onChangeManager: PropTypes.func
+  onChangeAutoSuggestion: PropTypes.func
 };
 
 ProfileDetailsFieldSets.defaultProps = {
   managers: [],
   centers: [],
-  onChangeManager: () => {}
+  onChangeAutoSuggestion: () => {}
 };
 export default ProfileDetailsFieldSets;

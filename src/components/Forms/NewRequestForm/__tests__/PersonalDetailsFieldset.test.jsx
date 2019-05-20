@@ -4,6 +4,7 @@ import PersonalDetailsFieldset from '../FormFieldsets/PersonalDetails';
 describe('<PersonalDetailsFieldset/>',()=> {
   const props = {
     managers:['Mananger1', 'Manager2'],
+    occupations:['Software Developer', 'Technical Team Telad'],
     collapsible: jest.fn(),
     title: 'Personal',
     collapse:true,
@@ -11,7 +12,7 @@ describe('<PersonalDetailsFieldset/>',()=> {
     line: '',
     values: {},
     savePersonalDetails: jest.fn(),
-    onChangeManager: jest.fn(),
+    onChangeAutoSuggestion: jest.fn(),
     hasBlankFields: true
   };
   it('tests handleDisableInputs', ()=>{
@@ -20,4 +21,8 @@ describe('<PersonalDetailsFieldset/>',()=> {
     instance.handleDisableInputs('clicked');
     expect(wrapper.state('disableInputs')).toBe('disable-details');
   });
+  
 });
+
+
+

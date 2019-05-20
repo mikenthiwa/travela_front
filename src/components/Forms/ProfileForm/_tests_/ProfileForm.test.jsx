@@ -32,7 +32,9 @@ describe('<ProfileForm />', () => {
     userData: {
       ...values,
     },
-    userDataUpdate: []
+    userDataUpdate: [],
+    managers:['Mananger1', 'Manager2'],
+    occupations:['Software Developer', 'Technical Team Telad'],
   };
 
   beforeEach(() => {
@@ -82,13 +84,14 @@ describe('<ProfileForm />', () => {
 
   it('should set manager error when manager input is changed to a non existing manager', () => {
     wrapper.setProps({ userData: values });
-    const event = {
-      target: {
-        value: 'Joy'
-      }
-    };
-    wrapper.find('.manager').at(0).simulate('change', event);
-    expect(wrapper.state().errors.manager).toEqual('Please select a manager from the dropdown');
+    const inputField = wrapper.find('.occupationInput').at(0);
+    const params = ["manager", "Joy"]
+    inputField.simulate('change');
+    expect(wrapper.instance().onChangeAutoSuggestion(...params))
+    const {manager: newManager} = wrapper.state('values');
+    const {manager: secondManagerError} = wrapper.state('errors');
+    expect(newManager).toEqual('Joy');
+    expect(secondManagerError).toEqual(" No manager with the name exists");
   });
 
   it('should ensure the location has AutoComplete feature with only the city names', () => {

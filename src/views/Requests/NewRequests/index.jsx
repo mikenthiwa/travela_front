@@ -34,9 +34,10 @@ export const RequestPage = (editing = false) => {
     componentDidMount() {
       const {
         fetchRoleUsers, fetchAllTravelReasons,
-        match, fetchEditRequest
+        match, fetchEditRequest, getOccupation
       } = this.props;
       const {params: {request_id}} = match;
+      getOccupation();
       fetchRoleUsers(53019);
       fetchAllTravelReasons('');
       if (editing) {

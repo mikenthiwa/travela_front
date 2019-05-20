@@ -55,7 +55,6 @@ class ProfileForm extends PureComponent {
           location: Validator.databaseValueValidator(location)
         }
       }));
-      this.checkManager(managers);
       this.setState((prevState => ({
         userProfile: prevState.values,
         hasBlankFields: true
@@ -63,31 +62,47 @@ class ProfileForm extends PureComponent {
     }
   }
 
-  checkManager = (managers, value) => {
-    const { values } = this.state;
-    const managerChoices = managers.map(manager => manager.fullName);
-    const manager = value ? value : values.manager;
-
-    // if manager in manager input box is not in database
-    if (managerChoices.length && managerChoices.indexOf(manager) === -1) {
-      this.setManagerError();
-    } else {
-      this.setState((prevState) => {
-        const newError = { ...prevState.errors, manager: '' };
-        return { ...prevState, errors: { ...newError }, hasBlankFields: false };
-      });
-    }
-  }
-
-  onChangeManager = value => {
-    const { managers } = this.props;
-    // save input
+  changeState = (InputState, ErrorMessageState, errorMessage, value) => {
+    const {occupations, managers} = this.props;
     this.setState((prevState) => {
-      const newState = { ...prevState.values, manager: value };
-      return { ...prevState, values: { ...newState } };
+      const newState = {...prevState.values, ...InputState };
+      return {...prevState, values: {...newState}};
     });
-    this.checkManager(managers, value);
+    const suggestionChoices = 'manager' in InputState ? managers.map(manager => manager.fullName):
+      occupations.map(occupation => occupation.occupationName);
+    // if typed manager is not in the database return error
+    if (suggestionChoices.indexOf(value) === -1) return this.setError(errorMessage);
+    // clear out error message
+    return this.setState((prevState) => {
+      const newError = {...prevState.errors, ...ErrorMessageState};
+      return {...prevState, errors: {...newError}, hasBlankFields:false };
+    });
   }
+
+  onChangeAutoSuggestion = (type, value) => {
+    let errorMessage = {manager: ' No manager with the name exists'};
+    const managerInputState = {'manager': value};
+    const managerErrorMessageState = {'manager': ''};
+    const occupationErrorMessageState ={'role':''};
+    let occupationInputState = {'role': value};
+    if ( type === 'manager' ){
+      this.changeState(managerInputState, managerErrorMessageState, errorMessage, value);
+    }
+    errorMessage = {role: ' No role with the name exists'};
+    if (type === 'role'){
+      this.changeState(occupationInputState, occupationErrorMessageState, errorMessage, value); 
+    }
+  };
+
+  setError = (errorMessage) => {
+    return this.setState((prevState) => {
+      const newError = {
+        ...prevState.errors,
+        ...errorMessage
+      };
+      return {...prevState, errors: {...newError}};
+    });
+  };
 
   submitProfileForm = event => {
     event.preventDefault();
@@ -99,21 +114,10 @@ class ProfileForm extends PureComponent {
       let data = { ...values };
       data.passportName = data.name;
       data.occupation = data.role;
-
       updateUserProfile(data, userId, true);
       this.setState({ hasBlankFields: true });
       localStorage.setItem('location', values.location);
     }
-  };
-
-  setManagerError = () => {
-    return this.setState((prevState) => {
-      const newError = {
-        ...prevState.errors,
-        manager: 'Please select a manager from the dropdown'
-      };
-      return { ...prevState, errors: { ...newError } };
-    });
   };
 
   handleClearForm = () => {
@@ -146,16 +150,17 @@ class ProfileForm extends PureComponent {
 
   render() {
     const { values, errors, hasBlankFields } = this.state;
+    console.log(values)
     const { managers, centers, isUpdating } = this.props;
     return (
       <FormContext targetForm={this} validatorName="validate" values={values} errors={errors}>
         <form onSubmit={this.submitProfileForm} className="new-profile">
           <ProfileDetails
             values={values}
-            onChangeManager={this.onChangeManager}
+            onChangeAutoSuggestion={this.onChangeAutoSuggestion}
             managers={managers}
             centers={centers} />
-          {hasBlankFields || errors.manager || isUpdating ? (
+          {hasBlankFields || errors.manager || errors.role || isUpdating ? (
             <div className="submit-area">
               <button
                 type="submit"
@@ -177,6 +182,7 @@ class ProfileForm extends PureComponent {
 ProfileForm.propTypes = {
   updateUserProfile: PropTypes.func.isRequired,
   managers: PropTypes.array,
+  occupations: PropTypes.array,
   user: PropTypes.object.isRequired,
   userData: PropTypes.object.isRequired,
   centers: PropTypes.array,
@@ -189,6 +195,7 @@ ProfileForm.propTypes = {
 ProfileForm.defaultProps = {
   userDataUpdate: [],
   managers: [],
+  occupations: [],
   centers: [],
   isUpdating: false
 };

@@ -21,6 +21,7 @@ import PendingApprovals from './FormFieldsets/PendingApprovalsCard';
 import setDropdownLocation from '../../../scripts/dropdownLocation';
 import BackButton from '../BackButton';
 
+
 class NewRequestForm extends PureComponent {
   constructor(props) {
     super(props);
@@ -595,32 +596,48 @@ class NewRequestForm extends PureComponent {
     }
   };
 
-  onChangeManager = value => {
-    const {managers} = this.props;
-    // save input
+  changeState = (InputState, ErrorMessageState, errorMessage, value) => {
+    const {occupations, managers} = this.props; 
     this.setState((prevState) => {
-      const newState = {...prevState.values, manager: value};
+      const newState = {...prevState.values, ...InputState };
       return {...prevState, values: {...newState}};
     });
-    const managerChoices = managers.map(manager => manager.fullName);
+    const suggestionChoices = 'manager' in InputState ? managers.map(manager => manager.fullName):
+      occupations.map(occupation => occupation.occupationName);
     // if typed manager is not in the database return error
-    if (managerChoices.indexOf(value) === -1) return this.setManagerError();
+    if (suggestionChoices.indexOf(value) === -1) return this.setError(errorMessage);
     // clear out error message
     return this.setState((prevState) => {
-      const newError = {...prevState.errors, manager: ''};
+      const newError = {...prevState.errors, ...ErrorMessageState};
       return {...prevState, errors: {...newError}};
     });
+  }
+
+  onChangeAutoSuggestion = (type, value) => {
+    let errorMessage = {manager: ' No manager with the name exists'};
+    const managerInputState = {'manager': value};
+    const managerErrorMessageState = {'manager': ''};
+    const occupationErrorMessageState ={'role':''};
+    let occupationInputState = {'role': value};
+    if ( type === 'manager' ){
+      this.changeState(managerInputState, managerErrorMessageState, errorMessage, value);
+    }
+    errorMessage = {role: ' No role with the name exists'};
+    if (type === 'role'){
+      this.changeState(occupationInputState, occupationErrorMessageState, errorMessage, value); 
+    }
   };
 
-  setManagerError = () => {
+  setError = (errorMessage) => {
     return this.setState((prevState) => {
       const newError = {
         ...prevState.errors,
-        manager: 'That manager does not exist.'
+        ...errorMessage
       };
       return {...prevState, errors: {...newError}};
     });
   };
+
 
   addNewTrip = () => {
     return this.setState(prevState => {
@@ -746,18 +763,19 @@ class NewRequestForm extends PureComponent {
 
   renderPersonalDetailsFieldset = () => {
     const {collapse, title, position, line, values, errors} = this.state;
-    const {managers, creatingRequest} = this.props;
+    const {managers, occupations, creatingRequest} = this.props;
     return (
       <PersonalDetailsFieldset
         values={values}
         savePersonalDetails={this.savePersonalDetails}
-        onChangeManager={this.onChangeManager}
+        onChangeAutoSuggestion={this.onChangeAutoSuggestion}
         collapsible={this.collapsible}
         collapse={collapse}
         title={title}
         position={position}
         line={line}
         managers={managers}
+        occupations={occupations}
         value="100%"
         hasBlankFields={
           !!errors.manager
@@ -1081,6 +1099,7 @@ NewRequestForm.propTypes = {
   updateUserProfile: PropTypes.func.isRequired,
   handleEditRequest: PropTypes.func.isRequired,
   managers: PropTypes.array,
+  occupations: PropTypes.array,
   creatingRequest: PropTypes.bool,
   editing: PropTypes.bool,
   requestOnEdit: PropTypes.object,
@@ -1107,6 +1126,7 @@ NewRequestForm.defaultProps = {
   creatingRequest: false,
   editing: false,
   managers: [],
+  occupations: [],
   userData: {},
   userDataUpdate: [],
   requestOnEdit: {

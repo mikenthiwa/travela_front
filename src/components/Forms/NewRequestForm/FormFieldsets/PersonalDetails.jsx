@@ -26,9 +26,10 @@ class PersonalDetailsFieldset extends Component {
 
   renderfields = collapse => {
     const { disableInputs } = this.state;
-    const { value, managers, onChangeManager,
+    const { value, managers, occupations, onChangeAutoSuggestion,
       hasBlankFields, loading, send, completePersonalDetails } = this.props;
     const managerChoices = managers.map(manager => manager.fullName);
+    const occupationChoices = occupations.map(occupation => occupation.occupationName);
     const { renderInput } = this.inputRenderer;
     const disabled = disableInputs;
     return (
@@ -48,13 +49,14 @@ class PersonalDetailsFieldset extends Component {
                   className: 'request_dropdown'})}
               </div>
             </div>
-            <div className={`input-group mdl-grid ${disabled}`}>
+            <div className="input-group mdl-grid">
               <div className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
-                {renderInput('role', 'text', {
-                  disabled: false,
+                {renderInput('role', 'filter-dropdown-select', {
+                  choices: occupationChoices,
                   size: value,
-                  className: 'request_dropdown',
-                  id: 'your-role'
+                  className: 'request_dropdown  your-role',
+                  id: 'your-role', 
+                  onChange: (e) => onChangeAutoSuggestion('role', e)
                 })}
               </div>
               <div className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
@@ -63,7 +65,7 @@ class PersonalDetailsFieldset extends Component {
                   size: value,
                   className: 'request_dropdown your-manager',
                   id: 'your-manager',
-                  onChange: onChangeManager
+                  onChange: (e) => onChangeAutoSuggestion('manager', e)
                 })}
               </div>
               <div className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone">
@@ -113,16 +115,18 @@ const collapse = PropTypes.bool;
 const title = PropTypes.string;
 const position = PropTypes.string;
 const values = PropTypes.object;
-const onChangeManager = PropTypes.func;
+const onChangeAutoSuggestion = PropTypes.func; 
+const occupations = PropTypes.array;
 
 PersonalDetailsFieldset.propTypes = {
+  occupations: occupations.isRequired,
   managers: managers.isRequired,
   collapsible: collapsible.isRequired,
   collapse: collapse.isRequired,
   title: title.isRequired,
   position: position.isRequired,
   line: position.isRequired,
-  onChangeManager: onChangeManager.isRequired,
+  onChangeAutoSuggestion: onChangeAutoSuggestion.isRequired,
   values: values,
   value: PropTypes.string,
   hasBlankFields: PropTypes.bool.isRequired,

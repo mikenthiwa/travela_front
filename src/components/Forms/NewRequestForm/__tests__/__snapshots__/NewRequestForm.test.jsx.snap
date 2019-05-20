@@ -450,13 +450,13 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
               </div>
             </div>
             <div
-              className="input-group mdl-grid "
+              className="input-group mdl-grid"
             >
               <div
                 className="spaces mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
               >
                 <div
-                  className="form-input request_dropdown "
+                  className="form-input request_dropdown  your-role "
                 >
                   <label
                     htmlFor="role"
@@ -472,19 +472,43 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                        * 
                     </span>
                   </label>
-                  <input
-                    autoComplete="off"
-                    className=" request_dropdown"
-                    disabled={false}
-                    id="your-role"
-                    label="Your Role"
-                    name="role"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    size="100%"
-                    type="text"
-                    value="Software Developer"
-                  />
+                  <div
+                    style={
+                      Object {
+                        "position": "relative",
+                      }
+                    }
+                  >
+                    <div
+                      className="value"
+                      style={
+                        Object {
+                          "width": "100%",
+                        }
+                      }
+                    >
+                      <input
+                        autoComplete="off"
+                        choices={Array []}
+                        className="occupationInput"
+                        id="your-role"
+                        label="Your Role"
+                        name="role"
+                        onChange={[Function]}
+                        size="100%"
+                        type="text"
+                        value="Software Developer"
+                      />
+                      <div
+                        className="hide"
+                      >
+                        <ul
+                          className="select-menu select-menu--inactive"
+                          onScroll={[Function]}
+                        />
+                      </div>
+                    </div>
+                  </div>
                   <span
                     className="error"
                   />
