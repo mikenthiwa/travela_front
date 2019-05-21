@@ -54,8 +54,8 @@ describe('Render CommentBox component', () => {
   it('it should return comment box content as expected', () => {
     const event = {
       target: {
-        innerText: 'We are travelling',
-        innerHTML: 'We are travelling'
+        innerText: 'We are travelling to google office california google.com @oluebube.egbuna@andela.com is tagging along',
+        innerHTML: 'We are travelling to google office california google.com @oluebube.egbuna@andela.com is tagging along'
       }
     };
     const wrapper = shallow(<CommentBox {...props} />);
@@ -64,11 +64,11 @@ describe('Render CommentBox component', () => {
     wrapper.instance().handleKeyUp(event);
 
     text = wrapper.instance().state.text;
-    expect(text).toEqual('We are travelling');
+    expect(text).toEqual('We are travelling to google office california google.com @oluebube.egbuna@andela.com is tagging along');
 
     wrapper.instance().handleKeyUp(event);
     text = wrapper.instance().state.text;
-    expect(text).toEqual('We are travelling');
+    expect(text).toEqual('We are travelling to google office california google.com @oluebube.egbuna@andela.com is tagging along');
   });
 
   it('it should handle onfocus as expected', () => {
@@ -96,7 +96,7 @@ describe('Render CommentBox component', () => {
     const event = { preventDefault: jest.fn(), value: 'VALUE' };
 
     const wrapper = shallow(<CommentBox {...props} />);
-    wrapper.state().text = 'comment';
+    wrapper.state().text = 'We are travelling to google office california google.com @oluebube.egbuna@andela.com is tagging along';
     const button = wrapper.find('#post-submit').at(0);
     button.simulate('click', event);
     expect(event.preventDefault).toHaveBeenCalled();
@@ -105,7 +105,7 @@ describe('Render CommentBox component', () => {
   it('should submit comment on a new request', () => {
     const event = { preventDefault: jest.fn(), value: 'VALUE' };
     const wrapper = shallow(<CommentBox {...props} handleComment={handleComment} />);
-    wrapper.state().text = 'comment';
+    wrapper.state().text = 'We are travelling to google office california google.com @oluebube.egbuna@andela.com is tagging along';
     wrapper.state().newRequest = true;
     const button = wrapper.find('#post-submit').at(0);
     button.simulate('click', event);
@@ -117,7 +117,7 @@ describe('Render CommentBox component', () => {
 
   it('should handle handleChange', () => {
     const spy = handles('handleChange');
-    wrapperInstance.handleChange('this is a test comment');
+    wrapperInstance.handleChange('We are travelling to google office california google.com @oluebube.egbuna@andela.com is tagging along');
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
@@ -125,7 +125,7 @@ describe('Render CommentBox component', () => {
     const event = { preventDefault: jest.fn(), value: 'VALUE' };
     const wrapper = shallow(<CommentBox {...props} />);
     wrapper.setProps({
-      comment: 'Can you clarify why'
+      comment: 'We are travelling to google office california google.com @oluebube.egbuna@andela.com is tagging along'
     });
     wrapper.setState({ submitReady: true });
     const button = wrapper.find('.edit-buttons');
@@ -134,13 +134,13 @@ describe('Render CommentBox component', () => {
   });
 
   it('should handle submit when comment has not been edited', () => {
-    localStorage.setItem('comment', 'Can you clarify why');
+    localStorage.setItem('comment', 'We are travelling to google office california google.com @oluebube.egbuna@andela.com is tagging along');
     const event = { preventDefault: jest.fn(), value: 'VALUE' };
     const wrapper = shallow(<CommentBox {...props} />);
     wrapper.setProps({
-      comment: 'Can you clarify why'
+      comment: 'We are travelling to google office california google.com @oluebube.egbuna@andela.com is tagging along'
     });
-    wrapper.setState({ submitReady: true, text: 'Can you clarify why' });
+    wrapper.setState({ submitReady: true, text: 'We are travelling to google office california google.com @oluebube.egbuna@andela.com is tagging along' });
     const button = wrapper.find('.edit-buttons');
     button.simulate('click', event);
     expect(event.preventDefault).toHaveBeenCalled();

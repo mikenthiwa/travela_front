@@ -34,8 +34,12 @@ export class CommentBox extends Component {
   };
 
   urlDetector = (html) => {
-    const pattern = /(http[s]?:\/\/)?[^\s(["<,>]*\.[^\s[",><]+/gim;
-    return html.replace(pattern, url => `<a href=${url} target=_blank>${url}</a>`);
+    const processedHtml = html.replace(/(<a.*>)?(https?:\/\/)*([\w-@]+\.)+[a-zA-Z]{2,4}(\/[\w-]*)*(<\/a.*>)?\.?[\w-]*(<\/a.*>)?/g, (match) => {
+      if (/([a-zA-Z0-9]@|<\/a.*>)/.test(match)) return `<code class="email-text" style="color: blue;">${match}</code>`;
+      const url = /(https?:\/\/[^ ]*)/.test(match) ? match : `http://${match}`;
+      return `<a href="${url}" target="_blank">${match}</a>`;
+    });
+    return processedHtml; 
   };
 
   handleKeyUp = event => {
@@ -103,8 +107,9 @@ export class CommentBox extends Component {
     const cleanHtml = sanitizeHtml(dirtyHtml, {
       allowedTags: sanitizeHtml.defaults.allowedTags.concat(['u']),
       allowedAttributes: {
-        a: ['href', 'target']
-      }
+        a: ['href', 'target'],
+        code: ['class']
+      },   
     });
     return cleanHtml;
   };
