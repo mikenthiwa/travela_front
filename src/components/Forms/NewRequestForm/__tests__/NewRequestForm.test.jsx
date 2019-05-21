@@ -282,13 +282,10 @@ describe('<NewRequestForm />', () => {
       stipends: [
         {
           'id': 1,
-          'amount': 100,
+          'country': 'Nigeria',
           'creator': {
             'fullName': 'Victor Ugwueze',
             'id': 1
-          },
-          'center': {
-            'location': 'Lagos, Nigeria'
           }
         }
       ],
@@ -298,12 +295,10 @@ describe('<NewRequestForm />', () => {
       {
         'id': 1,
         'amount': 100,
+        'country': 'Nigeria',
         'creator': {
           'fullName': 'Victor Ugwueze',
           'id': 1
-        },
-        'center': {
-          'location': 'Lagos, Nigeria'
         }
       }
     ],
@@ -1149,9 +1144,11 @@ describe('<NewRequestForm />', () => {
         stipends: [
           {
             'amount': 100,
-            'center': {
-              'location': 'Lagos, Nigeria'
-            }
+            'country': 'Nigeria'
+          },
+          {
+            'amount': 30,
+            'country': 'Default'
           }
         ],
         isLoading: false

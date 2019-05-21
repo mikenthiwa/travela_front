@@ -21,7 +21,7 @@ class ConfirmDeleteModal extends Component {
 
   render = () => {
     const { closeModal, modalType, shouldOpen,
-      isDeleting, selectedStipend: {center} } = this.props;
+      isDeleting, selectedStipend: { country } } = this.props;
     return (
       <div>
         <Modal
@@ -38,7 +38,7 @@ class ConfirmDeleteModal extends Component {
           <div className="content">
             <p>
               {'Are you sure you want to delete stipend for '}
-              {center && center.location}
+              { country }
               ?
             </p>
           </div>

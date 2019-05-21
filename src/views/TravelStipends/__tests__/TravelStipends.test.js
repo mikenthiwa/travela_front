@@ -15,12 +15,10 @@ let props = {
     selectedStipend: {
       id: 12,
       amount: 1000,
+      country: 'Kenya',
       creator: {
         fullName: 'Super Modo',
         id: 3
-      },
-      center: {
-        location: 'Kenya'
       }
     },
     updatedStipend: {
@@ -35,7 +33,7 @@ let props = {
     isLoading: false,
     stipends: [{
       amount: 100,
-      center: {location: 'United Kingdom'}
+      country: 'United Kingdom'
     }]
   },
   centers: {
@@ -246,7 +244,7 @@ describe('<TravelStipends>', () => {
 
     it('should update the state with stipend details when editing=true', () => {
       const { centers: { andelaCenters } } = props;
-      const { travelStipends: { selectedStipend: { amount, center } } } = props;
+      const { travelStipends: { selectedStipend: { amount, country } } } = props;
       const wrapper = mount(
         <NewTravelStipendForm
           {...props}
@@ -261,7 +259,7 @@ describe('<TravelStipends>', () => {
       const wrapperState = wrapper.state();
       const { values } = wrapperState;
 
-      expect(values.center).toEqual(center.location);
+      expect(values.center).toEqual(country);
       expect(values.stipend).toEqual(amount);
     });
 

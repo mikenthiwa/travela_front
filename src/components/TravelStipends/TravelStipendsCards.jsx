@@ -13,6 +13,7 @@ const handleAction = (action, id, openModal, fetchSingleTravelStipend) => {
 };
 
 export const TravelStipendsCard = ({location, stipend,openModal, id, fetchSingleTravelStipend}) => {
+  const displayDelete = !(location === 'Default') ? 'Delete' : '';
   return  (
     <div className="card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--3-col-phone">
       <div className="travel_stipend_menu">
@@ -29,7 +30,7 @@ export const TravelStipendsCard = ({location, stipend,openModal, id, fetchSingle
             onClick={
               () => handleAction('delete', id, openModal, fetchSingleTravelStipend)
             }>
-          Delete
+            { displayDelete }
           </MenuItem>
         </ContextMenu>
       </div>
@@ -63,7 +64,7 @@ export const TravelStipendsCards = (
             <TravelStipendsCard
               key={stipend.id}
               id={stipend.id}
-              location={stipend.center.location}
+              location={stipend.country}
               stipend={stipend.amount}
               openModal={openModal}
               fetchSingleTravelStipend={fetchSingleTravelStipend}

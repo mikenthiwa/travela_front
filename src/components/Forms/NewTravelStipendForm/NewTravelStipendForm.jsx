@@ -40,10 +40,10 @@ class NewTravelStipendForm extends PureComponent {
 
   updateStateData = ({ editing, travelStipends: { selectedStipend } }) => {
     if(editing && selectedStipend ){
-      const { amount:  stipend, center: { location } } = selectedStipend;
+      const { amount:  stipend, country } = selectedStipend;
       this.setState({
         values: {
-          center: location,
+          center: country,
           stipend
         }
       });
@@ -92,13 +92,13 @@ class NewTravelStipendForm extends PureComponent {
   getCountryChoices = () => {
     const listOfCountries = countries.map(country => country.name.common);
     const { travelStipends: { stipends } } = this.props;
-    const centersWithStipends = stipends.map(stipend => stipend.center.location);
+    const centersWithStipends = stipends.map(stipend => stipend.country);
     return listOfCountries.filter(center => !centersWithStipends.includes(center));
   };
 
   validate = (field) => {
     const { travelStipends: { stipends }, editing } = this.props;
-    const centersWithStipends = stipends.map(stipend => stipend.center.location);
+    const centersWithStipends = stipends.map(stipend => stipend.country);
     const isValid = this.defaultValidator(field);
     const {values: { center }} = this.state;
     const titleCasedInput = startCase(toLower(center));

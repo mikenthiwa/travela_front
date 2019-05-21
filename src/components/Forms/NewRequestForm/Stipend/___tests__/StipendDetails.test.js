@@ -29,35 +29,38 @@ const trips = [
 const stipends = [
   {
     'id': 1,
-    'amount': 100,
+    'amount': 30,
+    'country': 'Default',
     'creator': {
       'fullName': 'Victor Ugwueze',
       'id': 1
-    },
-    'center': {
-      'location': 'Nigeria'
+    }
+  },
+  {
+    'id': 3,
+    'amount': 100,
+    'country': 'Nigeria',
+    'creator': {
+      'fullName': 'Victor Ugwueze',
+      'id': 1
     }
   },
   {
     'id': 2,
     'amount': 100,
+    'country': 'Kenya',
     'creator': {
       'fullName': 'Victor Ugwueze',
       'id': 1
-    },
-    'center': {
-      'location': 'Kenya'
     }
   },
   {
     'id': 2,
     'amount': 100,
+    'country': 'Uganda',
     'creator': {
       'fullName': 'Victor Ugwueze',
       'id': 1
-    },
-    'center': {
-      'location': 'Uganda',
     }
   }
 ];
@@ -118,17 +121,17 @@ describe('<StipendDetails />', () => {
     expect(total.text().includes(subTotal[1])).toBe(true);
   });
 
-  it('should display `N/A subTotal and DailyRate for a trip to Non-Andelan center`', () => {
+  it('should display `$ 30 subTotal and DailyRate for a trip to Non-Andelan center`', () => {
     const wrapper = mount(<StipendDetails {...props} />);
     const stipendRows = wrapper.find('.single-trip');
     const center = stipendRows.at(2).find('.item').at(0).text();
     const dailyRate = stipendRows.at(2).find('.item').at(1).text();
     const subTotal = stipendRows.at(2).find('.item').at(3).text();
-    expect(subTotal).toBe('N/A');
-    expect(dailyRate).toBe('N/A');
+    expect(subTotal).toBe('$ 30');
+    expect(dailyRate).toBe('$ 30');
     expect(center).toBe('UK');
     const total = wrapper.find('.total-stipend').at(0);
-    expect(total.text().includes('$ 3800')).toBe(true);
+    expect(total.text().includes('$ 3830')).toBe(true);
   });
 
   it('should render correct multi-city trips stipend', () => {
@@ -139,6 +142,6 @@ describe('<StipendDetails />', () => {
     const total = wrapper.find('.total-stipend').at(0);
     expect(subTotalOne).toBe('$ 900');
     expect(subTotalTwo).toBe('$ 2900');
-    expect(total.text().includes('$ 3800')).toBe(true);
+    expect(total.text().includes('$ 3830')).toBe(true);
   });
 });

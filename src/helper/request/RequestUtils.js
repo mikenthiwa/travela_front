@@ -4,8 +4,8 @@ import _ from 'lodash';
 class RequestUtils {
   static stipendData(stipends) {
     return stipends.map(stipend => {
-      const { amount, center: { location } } = stipend;
-      return { location, amount };
+      const { amount, country } = stipend;
+      return { country , amount };
     });
   }
 
@@ -30,11 +30,12 @@ class RequestUtils {
     const stipend = [];
     const days = RequestUtils.calculateDuration(trip, tripType);
     const allStipend = RequestUtils.stipendData(stipends); // TODO
+    const defaultStipend = allStipend.filter(stipend => stipend.country === 'Default');
     const destinationArray = trip.destination.split(',');
     const countryOfDestination = destinationArray[1].trim();
 
     const selectedStipend =  allStipend.filter((each) => {
-      return each.location === countryOfDestination;
+      return each.country === countryOfDestination;
     });
 
     if (selectedStipend[0]) {
@@ -42,7 +43,7 @@ class RequestUtils {
       RequestUtils.total += subTotal;
       stipend.push({
         subTotal,
-        location: selectedStipend[0].location,
+        location: selectedStipend[0].country,
         dailyRate: selectedStipend[0].amount,
         duration: days,
         centerExists: true,
@@ -50,11 +51,13 @@ class RequestUtils {
     } else {
       const isAndelaCenter = RequestUtils
         .centerExists(allStipend, trip.destination);
+      const subTotal = defaultStipend[0].amount * days;
+      RequestUtils.total += subTotal;
       if (!isAndelaCenter) {
         stipend.push({
-          subTotal: 0,
+          subTotal,
           location: trip.destination.split(',')[1],
-          dailyRate: 'N/A',
+          dailyRate: defaultStipend[0].amount,
           duration: days,
           centerExists: false,
         });

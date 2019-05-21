@@ -151,51 +151,51 @@ const travelChecklistItems = [
       }
     ]
   },
-    {
-      destinationName: 'Nairobi, Kenya',
-      checklist: [
-        {
-          id: 'yuVpBVtjr',
-          name: 'Nairobi Passport',
-          requiresFiles: false,
-          destinationName: 'Nairobi, Kenya',
-          deleteReason: null,
-          resources: []
-        },
-        {
-          id: 'b3klCohox',
-          name: 'Nairobi Visa',
-          requiresFiles: false,
-          destinationName: 'Nairobi, Kenyaa',
-          deleteReason: null,
-          resources: []
-        },
-        {
-          id: 2,
-          name: 'Travel Ticket Details',
-          requiresFiles: false,
-          destinationName: 'Default',
-          deleteReason: null,
-          resources: [
-            {
-              id: '1',
-              label: 'Flight Application Guide',
-              link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
-              checklistItemId: '2'
-            }
-          ]
-        },
-        {
-          id: '1',
-          name: 'Travel Ticket',
-          requiresFiles: true,
-          destinationName: 'Default',
-          deleteReason: null,
-          resources: []
-        }
-      ]
-    }
-]
+  {
+    destinationName: 'Nairobi, Kenya',
+    checklist: [
+      {
+        id: 'yuVpBVtjr',
+        name: 'Nairobi Passport',
+        requiresFiles: false,
+        destinationName: 'Nairobi, Kenya',
+        deleteReason: null,
+        resources: []
+      },
+      {
+        id: 'b3klCohox',
+        name: 'Nairobi Visa',
+        requiresFiles: false,
+        destinationName: 'Nairobi, Kenyaa',
+        deleteReason: null,
+        resources: []
+      },
+      {
+        id: 2,
+        name: 'Travel Ticket Details',
+        requiresFiles: false,
+        destinationName: 'Default',
+        deleteReason: null,
+        resources: [
+          {
+            id: '1',
+            label: 'Flight Application Guide',
+            link: 'https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk',
+            checklistItemId: '2'
+          }
+        ]
+      },
+      {
+        id: '1',
+        name: 'Travel Ticket',
+        requiresFiles: true,
+        destinationName: 'Default',
+        deleteReason: null,
+        resources: []
+      }
+    ]
+  }
+];
 
 const nonAndelanCenterTrip = {
   bedId: 3,
@@ -206,36 +206,39 @@ const nonAndelanCenterTrip = {
 
 const stipends = [
   {
-    'id': 1,
-    'amount': 100,
+    'id': 4,
+    'amount': 30,
+    'country': 'Default',
     'creator': {
       'fullName': 'Victor Ugwueze',
       'id': 1
-    },
-    'center': {
-      'location': 'Nigeria'
+    }
+  },
+  {
+    'id': 1,
+    'amount': 100,
+    'country': 'Nigeria',
+    'creator': {
+      'fullName': 'Victor Ugwueze',
+      'id': 1
     }
   },
   {
     'id': 2,
     'amount': 100,
+    'country': 'Kenya',
     'creator': {
       'fullName': 'Victor Ugwueze',
       'id': 1
-    },
-    'center': {
-      'location': 'Kenya'
     }
   },
   {
     'id': 3,
     'amount': 100,
+    'country': 'Uganda',
     'creator': {
       'fullName': 'Ugwueze',
       'id': 1
-    },
-    'center': {
-      'location':'Uganda',
     }
   }
 ];
@@ -276,15 +279,19 @@ describe('Request Travel Stipend', () => {
     expect(stipend).toMatchObject(
       [
         {
-          location: 'Nigeria',
+          country: 'Default',
+          amount: 30
+        },
+        {
+          country: 'Nigeria',
           amount: 100
         },
         {
-          location: 'Kenya',
+          country: 'Kenya',
           amount: 100
         },
         {
-          location: 'Uganda',
+          country: 'Uganda',
           amount: 100
         }
       ]
@@ -314,7 +321,7 @@ describe('Request Travel Stipend', () => {
     expect(stipend).toMatchObject(expected);
   });
 
-  it('should return 0 stipend for trips to Non-Andelan centers', () => {
+  it('should return  $ 30 stipend for trips to Non-Andelan centers', () => {
     const updatedTrip = [
       ...trips,
       nonAndelanCenterTrip,
@@ -338,13 +345,13 @@ describe('Request Travel Stipend', () => {
         },
         {
           'centerExists': false,
-          'dailyRate': 'N/A',
+          'dailyRate': 30,
           'duration': 1,
           'location': 'UK',
-          'subTotal': 0
+          'subTotal': 30
         }
       ],
-      'totalStipend': '$ 3700'
+      'totalStipend': '$ 3730'
     };
     expect(stipend).toMatchObject(expected);
   });
@@ -461,12 +468,12 @@ describe('formatLocation', ()=> {
 describe('removeLocationChecklist', ()=> {
   it('should remove users location checklistItems' , ()=>{
     const userData = {
-      email: "sylvia.mbugua@andela.com",
-      fullName: "Sylvia Mbugua",
-      gender: "Female",
+      email: 'sylvia.mbugua@andela.com',
+      fullName: 'Sylvia Mbugua',
+      gender: 'Female',
       id: 4,
-      location: "Kampala, Uganda"
-      }
+      location: 'Kampala, Uganda'
+    };
 
     const  response = RequestUtils.removeLocationChecklist(travelChecklistItems, userData);
     expect(response[0].destinationName).toBe('Kampala, Uganda');
