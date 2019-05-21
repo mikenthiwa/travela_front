@@ -150,7 +150,6 @@ class ProfileForm extends PureComponent {
 
   render() {
     const { values, errors, hasBlankFields } = this.state;
-    console.log(values)
     const { managers, centers, isUpdating } = this.props;
     return (
       <FormContext targetForm={this} validatorName="validate" values={values} errors={errors}>
