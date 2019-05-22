@@ -5,23 +5,20 @@ import StipendDetails from '../Forms/NewRequestForm/Stipend/StipendDetails';
 import Modal from '../modal/Modal';
 
 class InfoCenter extends Component {
-  state = {
-    visibility: 'invisible'
-  }
+
 
   showModal = () => {
-    const { visibility } = this.state;
-    if (visibility === 'invisible') return this.setState({ visibility: 'visible' });
-    return this.setState({ visibility: 'invisible' });
+    const { openModal } = this.props;
+    openModal(true);
   }
 
-  renderStipendModal = (visibility, total, stipend) => (
+  renderStipendModal = (shouldOpen, closeModal, total, stipend) => (
     <Modal
       customModalStyles="travel-stipend-modal"
-      closeDeleteModal={this.showModal}
+      closeDeleteModal={closeModal}
       width="580px"
       height="600px"
-      visibility={visibility}
+      visibility={shouldOpen? 'visible':'invisible'}
       title="Travel Stipend Breakdown"
     >
       <StipendDetails
@@ -71,8 +68,7 @@ class InfoCenter extends Component {
   }
 
   render () {
-    const { request } = this.props;
-    const { visibility } = this.state;
+    const { request, shouldOpen, closeModal } = this.props;
     const {
       name, tripType, picture, stipend
     } = request;
@@ -90,14 +86,17 @@ class InfoCenter extends Component {
     return (
       <div className="row">
         {this.renderPartitions(name, total, tripType, picture, stipend)}
-        {this.renderStipendModal(visibility, total, stipend)}
+        {this.renderStipendModal(shouldOpen, closeModal, total, stipend)}
       </div>
     );
   }
 }
 
 InfoCenter.propTypes = {
-  request: PropTypes.object.isRequired
+  request: PropTypes.object.isRequired,
+  shouldOpen: PropTypes.bool.isRequired,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired
 };
 
 export default InfoCenter;

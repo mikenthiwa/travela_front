@@ -15,6 +15,7 @@ import chatIcon from '../../images/icons/Chat.svg';
 import Preloader from '../../components/Preloader/Preloader';
 import NotFound from '../ErrorPages/NotFound';
 import './VerificationDetails.scss';
+import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 
 class VerificationDetails extends Component {
   state = {
@@ -227,7 +228,7 @@ class VerificationDetails extends Component {
   render() {
     const {
       request, isLoading, submissionInfo,
-      match: { params: { requestId } }, location: { pathname }, history
+      match: { params: { requestId } }, location: { pathname }, history, shouldOpen, openModal, closeModal
     } = this.props;
     const headerTags = ['Manager\'s Approval', 'Budget Check', 'Travel Verification'];
     return (
@@ -242,6 +243,9 @@ class VerificationDetails extends Component {
                 type={headerTags}
                 headerTags={headerTags} pathname={pathname}
                 submissionInfo={submissionInfo}
+                shouldOpen={shouldOpen}
+                openModal={openModal}
+                closeModal={closeModal}
               />
               {this.renderBottomPane()}
             </div>
@@ -270,6 +274,9 @@ VerificationDetails.propTypes = {
   history: PropTypes.object.isRequired, errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   submissionInfo: PropTypes.object.isRequired,
   fetchSubmission: PropTypes.func.isRequired,
+  shouldOpen: PropTypes.bool.isRequired,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -282,6 +289,7 @@ const mapStateToProps = (state) => {
     email: state.user.getUserData,
     attachments: state.attachments.submissions,
     submissionInfo: state.submissions,
+    shouldOpen: state.modal.modal.shouldOpen
   };
 };
 
@@ -290,7 +298,9 @@ const actionCreators = {
   fetchAttachments,
   updateRequestStatus,
   downloadAttachments,
-  fetchSubmission
+  fetchSubmission,
+  openModal,
+  closeModal
 };
 
 export default connect(mapStateToProps, actionCreators)(VerificationDetails);

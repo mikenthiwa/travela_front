@@ -167,6 +167,10 @@ const comments = {
   ]
 };
 
+const modal = {
+  modal: { shouldOpen: false }
+}
+
 export const props = {
   fetchUserRequestDetails: jest.fn(),
   fetchAttachments: jest.fn(),
@@ -190,6 +194,7 @@ export const initialState = {
   requests,
   user,
   comments,
+  modal,
   attachments: {
     submissions: [
       {

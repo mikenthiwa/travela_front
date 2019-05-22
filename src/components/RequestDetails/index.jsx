@@ -19,10 +19,15 @@ class RequestDetails extends Component {
   }
 
   renderRequest = (request) => {
-    const { renderButtons, renderRightPaneQuestion } = this.props;
+    const { renderButtons, renderRightPaneQuestion, shouldOpen, openModal, closeModal } = this.props;
     return (
       <div className="main-container">
-        <LeftPane request={request} />
+        <LeftPane 
+          request={request}
+          shouldOpen={shouldOpen}
+          openModal={openModal}
+          closeModal={closeModal}
+        />
         <RightPane
           request={request} renderButtons={renderButtons}
           renderRightPaneQuestion={renderRightPaneQuestion}
@@ -72,6 +77,9 @@ RequestDetails.propTypes = {
   pathname: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
   submissionInfo: PropTypes.object.isRequired,
+  shouldOpen: PropTypes.bool.isRequired,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired
 };
 
 RequestDetails.defaultProps = {

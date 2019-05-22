@@ -11,6 +11,7 @@ import ConnectedUserComments from '../../components/RequestsModal/UserComments/U
 import NotFound from '../ErrorPages/NotFound';
 import './ApproveRequests.scss';
 import { fetchSubmission } from '../../redux/actionCreator/checkListSubmissionActions';
+import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 
 export const Approve = (type = 'manager') => {
   class ApproveRequests extends Component {
@@ -109,7 +110,7 @@ export const Approve = (type = 'manager') => {
     render() {
       const {
         request, isLoading, match: { params: { requestId } },
-        currentUser, email, location: { pathname }, errors, history, submissionInfo
+        currentUser, email, location: { pathname }, errors, history, submissionInfo, shouldOpen, openModal, closeModal
       } = this.props;
 
       const headerTags =  ['Manager\'s Approval', 'Budget Check', 'Travel verifications'];
@@ -130,6 +131,9 @@ export const Approve = (type = 'manager') => {
             type={headerTags}
             pathname={pathname}
             submissionInfo={submissionInfo}
+            shouldOpen={shouldOpen}
+            openModal={openModal}
+            closeModal={closeModal}
           />
           {
             !isEmpty(request) ? (
@@ -162,6 +166,9 @@ export const Approve = (type = 'manager') => {
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    shouldOpen: PropTypes.bool.isRequired,
+    openModal: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired
   };
 
   ApproveRequests.defaultProps = {
@@ -180,14 +187,17 @@ const mapStateToProps = (state) => ({
   isLoading: state.requests.fetchingRequest,
   currentUser: state.user.currentUser,
   email: state.user.getUserData,
-  submissionInfo: state.submissions
+  submissionInfo: state.submissions,
+  shouldOpen: state.modal.modal.shouldOpen
 });
 
 const actionCreators = {
   fetchUserRequestDetails,
   updateRequestStatus,
   updateBudgetStatus,
-  fetchSubmission
+  fetchSubmission,
+  openModal,
+  closeModal
 };
 
 export default (type = 'manager') => connect(mapStateToProps, actionCreators)(Approve(type));

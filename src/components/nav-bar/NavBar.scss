@@ -2,7 +2,15 @@
     position: sticky;
     width: 100%;
     top: 0px;
+    z-index:4;
 }
+
+.header-container-modal-open{
+    position: sticky;
+    width: 100%;
+    top: 0px;
+}
+
 
 .mdl-layout__header {
     height: 78px;

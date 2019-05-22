@@ -1,17 +1,17 @@
 import React from 'react';
 import configureStore from 'redux-mock-store';
-import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MutationObserver from 'mutation-observer';
 import ApproveRequests from '..';
 import { initialState, props } from '../__mocks__';
+import modal from '../../../redux/reducers/modal'
 
 const ConnectedApproveRequests = ApproveRequests();
 global.MutationObserver = MutationObserver;
 window.document.getSelection = () => {};
 
-const middleware = [createSagaMiddleware];
+const middleware = [];
 const mockStore = configureStore(middleware);
 let store;
 
@@ -129,14 +129,20 @@ describe('TEST ConnectedApproveRequests COMPONENT', () => {
 
   describe('TEST TRAVEL STIPEND POP UP MODAL', () => {
     it('should make modal appear', () => {
-      store = mockStore(initialState);
+      store = mockStore((actions) => {
+        const newState = {...initialState};
+        if( actions.slice(-1).pop()){
+          newState.modal =  { ...modal(initialState.modal, actions.slice(-1).pop()) };
+        }
+        return newState;
+      });
       const wrapper = setupConnectedComponent(props, store);
       const button = wrapper.find('button').at(0);
       expect(wrapper.find('.modal')).toHaveLength(0);// check that modal is hidden
       button.simulate('click');
-      expect(wrapper.find('.modal')).toHaveLength(1); // check that modal is now visible
-      button.simulate('click');
-      expect(wrapper.find('.modal')).toHaveLength(0); // check that modal has gone back into hiding
+      expect(wrapper.find('.modal')).toHaveLength(1);// check that modal is hidden
+      wrapper.find('button.modal-close').simulate('click');
+      expect(wrapper.find('.modal')).toHaveLength(0);// check that modal is hidden
     });
   });
 });

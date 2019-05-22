@@ -137,11 +137,16 @@ const comments = {
   }]
 };
 
+const modal = {
+  modal: { shouldOpen: false }
+}
+
 export const initialState = {
   requests,
   user,
   comments,
-  submissions: {percentageCompleted: 0}
+  submissions: {percentageCompleted: 0},
+  modal
 
 };
 

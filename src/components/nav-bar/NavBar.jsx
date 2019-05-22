@@ -257,12 +257,12 @@ export class NavBar extends PureComponent {
   }
 
   render() {
-    const {handleHideSearchBar, handleShowDrawer, openSearch} = this.props;
+    const {handleHideSearchBar, handleShowDrawer, openSearch, shouldOpen} = this.props;
     const { keyword } = this.state;
     let showSearch='none';
     if (openSearch) { showSearch='block';}
     return (
-      <div className="header-container">
+      <div className={shouldOpen? 'header-container-modal-open' :'header-container'}>
         <header className="mdl-layout__header navbar__layout_header">
           {this.renderHeader(handleShowDrawer, keyword)}
           <button type="button" className="navbar__search-icon--btn" onClick={handleHideSearchBar}>
@@ -294,7 +294,8 @@ NavBar.propTypes = {
   handleShowDrawer: PropTypes.func,
   notifications: PropTypes.array,
   userCenters: PropTypes.array,
-  clearNav: PropTypes.bool.isRequired
+  clearNav: PropTypes.bool.isRequired,
+  shouldOpen: PropTypes.bool.isRequired
 };
 
 NavBar.defaultProps = {
