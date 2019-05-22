@@ -4,7 +4,7 @@ $white-color: #FFF;
 @mixin badge($color, $backgroundColor) {
     padding: 0.2em 0.6em;
     background-color: $backgroundColor;
-    border-radius: 50%;
+    border-radius: 14px;
     color: $color;
     font-family: "DIN Pro";
     font-size: 12px;

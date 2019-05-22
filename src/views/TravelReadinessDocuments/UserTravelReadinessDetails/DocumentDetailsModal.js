@@ -210,7 +210,9 @@ export class DocumentDetailsModal extends Component {
           !fetchingDocument && <ConnectedDocumentDetailsAttachment documentData={document} />
         }
         <AddComment image={picture} />
-        <ConnectedCommentBox requestId={null} documentId={document.id} />
+        <div className="modal__travel-doc-editor">
+          <ConnectedCommentBox requestId={null} documentId={document.id} />
+        </div>
         <div id="comments">
           <ConnectedUserComments comments={document.comments ? document.comments.slice(0).reverse(): []} email={email.result && email.result.email} currentUser={currentUser} />
         </div>

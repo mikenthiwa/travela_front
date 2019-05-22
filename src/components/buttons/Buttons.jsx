@@ -13,8 +13,9 @@ import PropTypes from 'prop-types';
 class Button extends PureComponent {
   renderButtonBadge(badge, badgeClass) {
     return (
-      <span className={badgeClass}>
-        {badge}
+      <span className={badgeClass + ' btn__tool__tip tool__tip__container'}>
+        {badge > 99 ? '99+' : badge}
+        {badge > 99 && <span className="tool__tip">{badge}</span>}
       </span>
     );
   }
