@@ -1,0 +1,101 @@
+.add_button{
+    border: 1px solid #3359DB;
+    border-radius: 1px;
+    background-color: #3359DB;
+    height: 36px;
+    width: auto;
+    border: 1px solid #D4D4D4;
+    border-radius: 1px;
+    color: white;
+    font-family: "DIN Pro";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 14px;
+    margin: 28px 1px 0pc 352px;
+    padding: 9px 21px;
+    cursor: pointer;
+    outline: none !important;
+}
+
+.size_in{
+    padding-top: 14px;
+    display: flex;
+    margin-bottom: 17px;
+}
+
+
+.back{
+    background-color: white !important;
+}
+
+.remove_department{
+    font-family: "DIN Pro";
+    font-style: normal;
+    font-size: 20px !important;
+    font-weight: 900 !important;
+    color: #FF5359;
+    display: inline-block;
+    outline: none;
+    width: 25px;
+    cursor: pointer;
+}
+
+.disable_button {
+    background-color: rgba(51, 89, 219, 0.3);
+    border: none;
+    color: #FFFFFF;
+    cursor: not-allowed;
+    height: 36px;
+    width: auto;
+    font-family: "DIN Pro";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 14px;
+    margin: 28px 1px 0pc 352px;
+    padding: 9px 21px;
+}
+
+.add_dept {
+    position: fixed;
+    width: 65%;
+}
+
+
+@media only screen and (max-width: 564px) {
+    .countries_size_in {
+        margin-bottom: 70px;
+    }
+}
+
+@media only screen and (max-width: 564px) {
+    .size_in {
+      .disable_button,
+      .add_button {
+        position: absolute !important;
+        right: 30px !important;
+      }
+      .occupationInput {
+        max-width: 90%;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 839px) {
+    .table__container {
+      width: 100%;
+      overflow: scroll;
+      &::-webkit-scrollbar{
+        display: none;
+      }
+    }
+  
+  }
+  
+  @media only screen and (max-width: 839px) {
+    .table__resize {
+      position: inherit;
+    }
+  }
+
+
+

@@ -33,6 +33,7 @@ import enableReminderEmailTemplateReducer from './enableReminderEmailTemplate';
 import travelReason from './travelReason';
 import travelStipends from './travelStipends';
 import travelRegion from './travelRegion';
+import country from './countries';
 
 const rootReducer = combineReducers({
   auth,
@@ -68,7 +69,8 @@ const rootReducer = combineReducers({
   reminderTemplateDisableReducer,
   travelReason,
   travelStipends,
-  travelRegion
+  travelRegion,
+  country
 });
 
 export default rootReducer;

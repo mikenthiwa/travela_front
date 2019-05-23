@@ -27,6 +27,7 @@ import ConnectedApproveRequests from '../views/ApproveRequests';
 import ConnectedVerificationDetails from '../views/VerificationDetails';
 import ConnectedHelpers from '../views/HelpLinks';
 import ConnectedTravelRegion from '../views/TravelRegion';
+import ConnectedCountries from '../views/Countries';
 
 
 import {
@@ -68,6 +69,7 @@ const routes = {
   '/settings/travel-reason': [ConnectedTravelReasons, TRAVEL_MANAGERS],
   '/help': [ConnectedHelpers],
   '/settings/travel-region': [ConnectedTravelRegion, TRAVEL_MANAGERS],
+  '/settings/travel-region/:regionId': [ConnectedCountries, TRAVEL_MANAGERS],
 };
 
 export default routes;

@@ -1,0 +1,59 @@
+$primary-color: #3359db;
+$border-color: #e4e4e4;
+
+.text_color {
+  color: blue;
+  width: 40px;
+}
+.pl-sm-120 {
+  @media (max-width: 479px) {
+    padding-left: 183px !important;
+  }
+}
+
+.table__data--link {
+  color: $primary-color;
+}
+
+.delete {
+  @media (max-width: 479px) {
+    padding-right: 26px !important;
+  }
+}
+
+.description-left {
+  @media (max-width: 479px) {
+    padding-left: 186px !important;
+  }
+}
+
+.freeze-role-table {
+  @media (max-width: 479px) {
+    position: absolute !important;
+    background-color: #ffffff;
+    width: 41vw !important;
+    z-index: 99;
+    border-right: 1px solid #e4e4e4;
+  }
+  @media (max-width: 320px) {
+    width: 45vw !important;
+  }
+}
+
+.freeze-head {
+  @media (max-width: 479px) {
+    width: 41vw !important;
+  }
+  @media (max-width: 320px) {
+    width: 45vw !important;
+  }
+}
+
+.role-user__name {
+  color: $primary-color;
+  border-left: 1px solid $border-color;
+  width: 60%;
+    @media (max-width: 839px) {
+    width: 40%;
+  }
+}

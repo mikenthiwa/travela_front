@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import withLoading from '../Hoc/withLoading';
 import './RegionTable.scss';
@@ -9,11 +10,10 @@ export class RegionTable extends PureComponent {
       <tr key={region.id} className="table__row table__effects">
         <td
           className="mdl-data-table__cell--non-numeric table__data freeze table__data-pointer">
-          <button 
-            type="button"
-            className="table__data--link button-outline table__id-pointer">
+          <Link
+            className="table__data--link button-outline table__id-pointer" to={`/settings/travel-region/${region.id}`}>
             {region.region}
-          </button>
+          </Link>
         </td>
         <td className="mdl-data-table__cell--non-numeric table__data pl-sm-120">
           {region.description}
