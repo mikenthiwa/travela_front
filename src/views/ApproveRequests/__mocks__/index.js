@@ -139,14 +139,19 @@ const comments = {
 
 const modal = {
   modal: { shouldOpen: false }
-}
+};
+const approvals = {
+  updatedStatus: false,
+  updatingStatus: false
+};
 
 export const initialState = {
   requests,
   user,
   comments,
   submissions: {percentageCompleted: 0},
-  modal
+  modal,
+  approvals
 
 };
 
@@ -164,5 +169,5 @@ export const props = {
   history: {
     goBack: jest.fn()
   },
-  submissionInfo: { percentageCompleted: 0 },
+  submissionInfo: { percentageCompleted: 0 }
 };

@@ -29,20 +29,32 @@ export const Approve = (type = 'manager') => {
       fetchSubmission({requestId, tripType});
     }
 
+    componentWillReceiveProps(nextProps){
+      const {isConfirmDialogLoading, isUpdatedStatus} = nextProps;
+
+      if(isUpdatedStatus) {
+        this.setState({modalInvisible: isUpdatedStatus && !isConfirmDialogLoading});
+      }
+    }
+
     handleButtonSelected = (e) => {
       this.setState({ buttonSelected: e.target.textContent, modalInvisible: false });
     };
 
     handleDecision = (requestId) => {
-      const { updateRequestStatus, updateBudgetStatus } = this.props;
+      const { updateRequestStatus, updateBudgetStatus} = this.props;
       const { buttonSelected } = this.state;
       const newStatus = buttonSelected === 'approve'
         ? 'Approved' : 'Rejected';
       const action = () => type === 'budget' ?
         updateBudgetStatus(requestId, { budgetStatus: newStatus }) : updateRequestStatus({ requestId, newStatus });
       action();
-      this.setState({ modalInvisible: true });
     };
+
+    hideModal = () =>{
+      const {modalInvisible} = this.state;
+      this.setState({ modalInvisible: !modalInvisible });
+    }
 
     renderDialogText = () => {
       const { buttonSelected } = this.state;
@@ -51,6 +63,7 @@ export const Approve = (type = 'manager') => {
     };
 
     renderButtons = (request) => {
+      const {isConfirmDialogLoading} = this.props;
       const { modalInvisible, buttonSelected } = this.state;
       const { status, budgetStatus } = request;
       const disabled = type === 'budget' ? budgetStatus !== 'Open' : status !== 'Open';
@@ -64,6 +77,7 @@ export const Approve = (type = 'manager') => {
         ? 'rejected' : (budgetStatus === 'Open' ? 'reject' : 'disabled');
       const appStatus = type === 'budget' ? approvedBudgetStatus : approvedStatus;
       const rejected = type === 'budget' ? rejectedBudgetStatus : rejectedStatus;
+      
       return (
         <div className="btn-group">
           <button
@@ -86,11 +100,12 @@ export const Approve = (type = 'manager') => {
             id={request.id}
             modalInvisible={modalInvisible}
             buttonSelected={buttonSelected}
-            closeDeleteModal={() => this.setState({modalInvisible: true})}
+            closeDeleteModal={this.hideModal}
             renderDialogText={this.renderDialogText}
             handleApprove={this.handleDecision}
             handleReject={this.handleDecision}
             documentText="Request"
+            isConfirmDialogLoading={isConfirmDialogLoading}
           />
         </div>
       );
@@ -118,6 +133,7 @@ export const Approve = (type = 'manager') => {
       if (typeof (errors) === 'string' && errors.includes('does not exist')) {
         return <NotFound redirectLink="/requests/my-approvals" errorMessage={errors} />;
       }
+ 
       return (
         <Fragment>
           <RequestDetails
@@ -168,7 +184,9 @@ export const Approve = (type = 'manager') => {
     errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     shouldOpen: PropTypes.bool.isRequired,
     openModal: PropTypes.func.isRequired,
-    closeModal: PropTypes.func.isRequired
+    closeModal: PropTypes.func.isRequired,
+    isConfirmDialogLoading: PropTypes.bool,
+    isUpdatedStatus: PropTypes.bool
   };
 
   ApproveRequests.defaultProps = {
@@ -176,7 +194,9 @@ export const Approve = (type = 'manager') => {
     isLoading: true,
     currentUser: {},
     email: {},
-    errors: {}
+    errors: {},
+    isConfirmDialogLoading:false,
+    isUpdatedStatus:false
   };
   return ApproveRequests;
 };
@@ -188,7 +208,9 @@ const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
   email: state.user.getUserData,
   submissionInfo: state.submissions,
-  shouldOpen: state.modal.modal.shouldOpen
+  shouldOpen: state.modal.modal.shouldOpen,
+  isConfirmDialogLoading: state.approvals.updatingStatus,
+  isUpdatedStatus: state.approvals.updatedStatus,
 });
 
 const actionCreators = {

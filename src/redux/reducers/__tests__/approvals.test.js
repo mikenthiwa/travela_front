@@ -74,7 +74,9 @@ describe('Approvals Reducer', () => {
       openApprovalsCount: 0,
       pastApprovalsCount: 0,
       pagination: '',
-      fetchApprovalError: ''
+      fetchApprovalError: '',
+      updatingStatus: false,
+      updatedStatus: false,
     };
 
     let action, newState, receivedState, error;
@@ -128,6 +130,7 @@ describe('Approvals Reducer', () => {
       receivedState = {
         ...initialState,
         updatingStatus: false,
+        updatedStatus: true,
         approvals: [
           {
             id: 1,
@@ -156,6 +159,7 @@ describe('Approvals Reducer', () => {
       receivedState = {
         ...initialState,
         updatingStatus: false,
+        updatedStatus: true,
         error: 'permission denied, you are not requesters manager'
       };
       expect(newState).toEqual(receivedState);
@@ -201,6 +205,7 @@ describe('Approvals Reducer', () => {
       receivedState = {
         ...initialState,
         updatingStatus: false,
+        updatedStatus: true,
         budgetapprovals: [{
           id:1,
           status:'Approved',
@@ -222,6 +227,7 @@ describe('Approvals Reducer', () => {
       receivedState = {
         ...initialState,
         updatingStatus: false,
+        updatedStatus: true,
         error: 'Only budget checker approves the budget'
       };
       expect(newState).toEqual(receivedState);

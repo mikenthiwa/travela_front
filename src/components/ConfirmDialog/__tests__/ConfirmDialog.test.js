@@ -10,7 +10,8 @@ const props = {
   closeDeleteModal: jest.fn(),
   handleApprove: jest.fn(),
   handleReject: jest.fn(),
-  documentText: 'Request'
+  documentText: 'Request',
+  isConfirmDialogLoading:false
 };
 
 
@@ -59,10 +60,11 @@ describe('ConfirmDialog component', () => {
     expect(props.handleApprove).toHaveBeenCalledTimes(1);
   });
 
-  it('should call handleApprove method when approve button is clicked', () => {
+  it('should call handleApprove method when Reject button is clicked', () => {
     wrapper.setProps({ buttonSelected: 'Reject' });
     const button = wrapper.find('#Reject');
     button.simulate('click');
     expect(props.handleApprove).toHaveBeenCalledTimes(1);
   });
+
 });

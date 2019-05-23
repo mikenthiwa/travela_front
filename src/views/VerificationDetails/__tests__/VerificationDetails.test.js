@@ -1,4 +1,5 @@
 import React from 'react';
+import sinon from 'sinon';
 import configureStore from 'redux-mock-store';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
@@ -77,6 +78,40 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
 
   });
 
+  describe('Updates after props are received', ()=>{
+    let wrapper;
+    beforeEach(() => {
+      wrapper = setupConnectedComponent(props, store);
+    });
+
+    it('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should test components if props are received', ()=>{
+      const instance = wrapper.find('VerificationDetails').instance();
+      initialState.approvals.updatedStatus = true;
+      initialState.approvals.updatingStatus = false;
+      const newState = {...initialState};
+      store = mockStore(newState);
+      let nextProps = {
+        ...props,
+        isUpdatedStatus: true,
+        isConfirmDialogLoading: false
+      };
+      instance.componentWillReceiveProps(nextProps);
+      expect(instance.state.modalInvisible).toBe(true);
+      instance.state.modalInvisible = false;
+      nextProps = {
+        ...props,
+        isUpdatedStatus: false,
+        isConfirmDialogLoading: false
+      };
+      instance.componentWillReceiveProps(nextProps);
+      expect(instance.state.modalInvisible).toBe(false);
+    });
+  });
+
   describe('TEST COMPONENT FUNCTIONS', () => {
     store = mockStore(initialState);
     const wrapper = setupConnectedComponent(props, store);
@@ -94,13 +129,24 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
       expect(instance.state.modalInvisible).toBe(false);
       const verifyButton = wrapper.find('#verify.request.verification-comment-modal__btn');
       verifyButton.simulate('click');
-      expect(instance.state.modalInvisible).toBe(true);
+      expect(instance.state.modalInvisible).toBe(false);
     });
 
     it('should test behaviour of back button', () => {
       const wrapper = setupConnectedComponent(props, store);
       wrapper.find('span[role="presentation"]').simulate('click');
       expect(props.history.goBack).toHaveBeenCalled();
+    });
+
+
+
+    it('should test behaviour of close button', () => {
+      button1.simulate('click');
+      expect(instance.state.buttonSelected).toBe('verify');
+      expect(instance.state.modalInvisible).toBe(false);
+      const closeButton = wrapper.find('.modal-close');
+      closeButton.simulate('click');
+      expect(instance.state.modalInvisible).toBe(true);
     });
   });
 
@@ -142,5 +188,5 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
       expect(instance.state.displayComments).toBe(true);
     });
   });
-})
+});
 

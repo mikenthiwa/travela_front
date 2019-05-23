@@ -199,6 +199,7 @@ exports[`Render RequestsModal component should match snapshot 1`] = `
       handleReject={[Function]}
       handleVerify={[Function]}
       id="xDh20cuGx"
+      isConfirmDialogLoading={false}
       modalInvisible={true}
       renderDialogText={[Function]}
     />

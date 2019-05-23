@@ -29,6 +29,43 @@ const setupConnectedComponent = (props, store) => {
 
 describe('TEST ConnectedApproveRequests COMPONENT', () => {
 
+
+
+  describe('Updates after props are received', ()=>{
+    let wrapper;
+    beforeEach(() => {
+      wrapper = setupConnectedComponent(props, store);
+    });
+
+    it('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should test components if props are received', ()=>{
+      const instance = wrapper.find('ApproveRequests').instance();
+      initialState.approvals.updatedStatus = true;
+      initialState.approvals.updatingStatus = false;
+      const newState = {...initialState};
+      store = mockStore(newState);
+      let nextProps = {
+        ...props,
+        isUpdatedStatus: true,
+        isConfirmDialogLoading: false
+      };
+      instance.componentWillReceiveProps(nextProps);
+      expect(instance.state.modalInvisible).toBe(true);
+      instance.state.modalInvisible = false;
+      nextProps = {
+        ...props,
+        isUpdatedStatus: false,
+        isConfirmDialogLoading: false
+      };
+      instance.componentWillReceiveProps(nextProps);
+      expect(instance.state.modalInvisible).toBe(false);
+    });
+  });
+
+
   describe('TEST COMPONENT WITH AND WITHOUT REQUESTS', () => {
 
     it('should tests component if request is fetching', () => {
@@ -75,7 +112,7 @@ describe('TEST ConnectedApproveRequests COMPONENT', () => {
       expect(instance.state.modalInvisible).toBe(false);
       const approveButton = wrapper.find('.approval-comment-modal__btn');
       approveButton.simulate('click');
-      expect(instance.state.modalInvisible).toBe(true);
+      expect(instance.state.modalInvisible).toBe(false);
     });
 
     it('should test the modal close button', () => {
@@ -94,7 +131,7 @@ describe('TEST ConnectedApproveRequests COMPONENT', () => {
       expect(instance.state.modalInvisible).toBe(false);
       const rejectButton = wrapper.find('.rejection-comment-modal__btn');
       rejectButton.simulate('click');
-      expect(instance.state.modalInvisible).toBe(true);
+      expect(instance.state.modalInvisible).toBe(false);
     });
 
     it('should test behaviour of back button', () => {

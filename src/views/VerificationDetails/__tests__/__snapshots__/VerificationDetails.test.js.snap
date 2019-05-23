@@ -9,3 +9,537 @@ exports[`TEST ConnectedVerificationDetails COMPONENT TEST COMPONENT WITH AND WIT
   />
 </div>
 `;
+
+exports[`TEST ConnectedVerificationDetails COMPONENT Updates after props are received renders correctly 1`] = `
+<div
+  className="verification-page-container"
+>
+  <div
+    className="approval"
+  >
+    <div
+      className="header-container"
+    >
+      <h1
+        className="header text--black"
+      >
+        <span
+          onClick={[Function]}
+          role="presentation"
+        >
+          <img
+            alt="back icon"
+            className="header__link"
+            src="back-icon.svg"
+          />
+        </span>
+      </h1>
+      <div
+        className="progress-tags"
+      >
+        <div>
+          REQUEST #nXCj4U57J
+        </div>
+        <div
+          className="stage-container"
+        >
+          <div
+            className="stage "
+          >
+            Managers Approval
+          </div>
+          <div
+            className="stage incomplete"
+          >
+            Budget Check
+          </div>
+          <div
+            className="stage incomplete"
+          >
+            Travel Checklist Submission
+          </div>
+          <div
+            className="stage incomplete"
+          >
+            Travel Verification
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="main-container"
+    >
+      <div
+        className="left-pane"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="partition"
+          >
+            <p
+              className="text--grey"
+            >
+              Requested By
+            </p>
+            <p
+              className="text--blue with-image"
+            >
+              <span
+                className="user-image"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://lh3.googleusercontent.com/-0IiIxTNUkIY/AAAAAAAAAAI/AAAAAAAAAAc/bjqhX-Jagqc/photo.jpg?sz=50)",
+                  }
+                }
+              />
+              Christopher Akanmu
+            </p>
+          </div>
+          <div
+            className="partition"
+          >
+            <p
+              className="text--grey"
+            >
+              Request Type
+            </p>
+            <p
+              className="text--blue"
+            >
+              One-way Trip
+            </p>
+          </div>
+          <div
+            className="partition"
+          >
+            <p
+              className="text--grey"
+            >
+              Total Stipend
+              <button
+                className="info-button--false"
+                disabled={false}
+                onClick={[Function]}
+                type="button"
+              >
+                i
+                <span>
+                  Click for Travel Stipend Breakdown
+                </span>
+              </button>
+            </p>
+            <p
+              className="text--blue"
+            >
+              $600
+            </p>
+          </div>
+        </div>
+        <div
+          className="row"
+          key="M8M9iehHfO"
+        >
+          <div
+            className="partition"
+          >
+            <p
+              className="text--grey"
+            >
+              Flight Route
+            </p>
+            <p
+              className="text--black"
+            >
+               Nigeria- United States
+            </p>
+          </div>
+          <div
+            className="partition"
+          >
+            <p
+              className="text--grey"
+            >
+              Travel Dates
+            </p>
+            <p
+              className="text--black"
+            >
+              25 Feb - 25 Mar 2019
+            </p>
+          </div>
+          <div
+            className="partition"
+          >
+            <p
+              className="text--grey"
+            >
+              Accommodation
+            </p>
+            <p
+              className="text--black"
+            >
+              Hotel Booking
+            </p>
+          </div>
+          <div
+            className="partition mobile"
+          >
+            <p
+              className="text--grey"
+            >
+              Travel Reason
+            </p>
+            <p
+              className="text--black"
+            >
+              Travelling for fun
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="right-pane"
+      >
+        <div
+          className="row"
+        >
+          <p
+            className="text--grey"
+          >
+            You have open Christopher Akanmu's travel request
+          </p>
+          <div
+            className="btn-group"
+          >
+            <button
+              className="action-button--disabled"
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+            >
+              verify
+            </button>
+          </div>
+        </div>
+        <div
+          className="row desktop"
+          key="M8M9iehHfO"
+        >
+          <p
+            className="text--grey"
+          >
+            Travel Reason
+          </p>
+          <p
+            className="text--black"
+          >
+            Travelling for fun
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className=""
+  >
+    <div
+      className="bottom-container"
+    >
+      <div
+        className="rectangle left"
+      >
+        <div
+          className="attachments"
+        >
+          <p
+            className="heading"
+          >
+            Travel Checklist For This Trip
+          </p>
+          <div>
+            <div>
+              <div
+                className="no-attachments"
+              >
+                <p>
+                  No Uploaded Attachments.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="desktop-comment"
+        >
+          <div
+            className="comments-section"
+          >
+            <div
+              className="request-comment"
+            >
+              <div>
+                <button
+                  className="comment-toggle-button"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <img
+                    alt="chat-icon"
+                    className="chat image"
+                    src="Chat.svg"
+                  />
+                  <p
+                    className="comment-button-text"
+                  >
+                    Hide Comments
+                  </p>
+                </button>
+              </div>
+              <div
+                className="true"
+              >
+                <div
+                  className="editor__editor-form mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+                >
+                  <div
+                    className="quill quill-contents"
+                    key="0"
+                    onKeyUp={[Function]}
+                  >
+                    <div
+                      key="0"
+                    />
+                  </div>
+                  <div
+                    className="editor__btn-size"
+                  >
+                    <span
+                      className="editor__btn-wrap"
+                    >
+                      <button
+                        className="editor__post-btn editor__post-btn post-btn-text"
+                        disabled={true}
+                        id="post-submit"
+                        onClick={[Function]}
+                        type="submit"
+                      >
+                        <undefined />
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="modal__modal1"
+                  key="b-PDWlDkm"
+                >
+                  <div
+                    className="modal__mdl-icons"
+                  >
+                    <img
+                      alt="avatar"
+                      className="modal__oval-copy"
+                      src="https://lh3.googleusercontent.com/-0IiIxTNUkIY/AAAAAAAAAAI/AAAAAAAAAAc/bjqhX-Jagqc/photo.jpg?sz=50"
+                    />
+                    <span
+                      className="modal__comment-author"
+                    >
+                      <span
+                        className="modal__user-name"
+                      >
+                        Christopher Akanmu
+                      </span>
+                      <span
+                        className="modal__hours-status"
+                      >
+                        3 months ago
+                      </span>
+                    </span>
+                    <span
+                      className="modal__dialog"
+                    >
+                      <button
+                        className="edit-button "
+                        disabled={false}
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        <undefined />
+                      </button>
+                      <button
+                        className="modal__delete-btn "
+                        disabled={false}
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        <undefined />
+                      </button>
+                    </span>
+                    <div
+                      className="modal__modal2"
+                    >
+                      <div
+                        className="modal__status-update"
+                        dangerouslySetInnerHTML={
+                          Object {
+                            "__html": "<p>testing <strong>#b5tdJCef7 #b5tdJCef7 #b5tdJCef7 #b5tdJCef7 #b5tdJCef7</strong></p> ",
+                          }
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="rectangle right"
+      >
+        <div
+          className="flightDetails"
+        >
+          <p
+            className="flight-heading"
+          >
+            Flight Details
+          </p>
+          <div
+            className="no-flightDetails"
+          >
+            <p>
+              No Flight Details
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="mobile-comment left"
+      >
+        <div
+          className="comments-section"
+        >
+          <div
+            className="request-comment"
+          >
+            <div>
+              <button
+                className="comment-toggle-button"
+                onClick={[Function]}
+                type="button"
+              >
+                <img
+                  alt="chat-icon"
+                  className="chat image"
+                  src="Chat.svg"
+                />
+                <p
+                  className="comment-button-text"
+                >
+                  Hide Comments
+                </p>
+              </button>
+            </div>
+            <div
+              className="true"
+            >
+              <div
+                className="editor__editor-form mdl-cell mdl-cell--8-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+              >
+                <div
+                  className="quill quill-contents"
+                  key="0"
+                  onKeyUp={[Function]}
+                >
+                  <div
+                    key="0"
+                  />
+                </div>
+                <div
+                  className="editor__btn-size"
+                >
+                  <span
+                    className="editor__btn-wrap"
+                  >
+                    <button
+                      className="editor__post-btn editor__post-btn post-btn-text"
+                      disabled={true}
+                      id="post-submit"
+                      onClick={[Function]}
+                      type="submit"
+                    >
+                      <undefined />
+                    </button>
+                  </span>
+                </div>
+              </div>
+              <div
+                className="modal__modal1"
+                key="b-PDWlDkm"
+              >
+                <div
+                  className="modal__mdl-icons"
+                >
+                  <img
+                    alt="avatar"
+                    className="modal__oval-copy"
+                    src="https://lh3.googleusercontent.com/-0IiIxTNUkIY/AAAAAAAAAAI/AAAAAAAAAAc/bjqhX-Jagqc/photo.jpg?sz=50"
+                  />
+                  <span
+                    className="modal__comment-author"
+                  >
+                    <span
+                      className="modal__user-name"
+                    >
+                      Christopher Akanmu
+                    </span>
+                    <span
+                      className="modal__hours-status"
+                    >
+                      3 months ago
+                    </span>
+                  </span>
+                  <span
+                    className="modal__dialog"
+                  >
+                    <button
+                      className="edit-button "
+                      disabled={false}
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <undefined />
+                    </button>
+                    <button
+                      className="modal__delete-btn "
+                      disabled={false}
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <undefined />
+                    </button>
+                  </span>
+                  <div
+                    className="modal__modal2"
+                  >
+                    <div
+                      className="modal__status-update"
+                      dangerouslySetInnerHTML={
+                        Object {
+                          "__html": "<p>testing <strong>#b5tdJCef7 #b5tdJCef7 #b5tdJCef7 #b5tdJCef7 #b5tdJCef7</strong></p> ",
+                        }
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

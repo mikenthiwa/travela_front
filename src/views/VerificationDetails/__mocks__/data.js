@@ -169,7 +169,11 @@ const comments = {
 
 const modal = {
   modal: { shouldOpen: false }
-}
+};
+const approvals = {
+  updatedStatus: false,
+  updatingStatus: false
+};
 
 export const props = {
   fetchUserRequestDetails: jest.fn(),
@@ -255,5 +259,6 @@ export const initialState = {
       }
     ]
   },
-  submissions: props.submissionInfo
+  submissions: props.submissionInfo,
+  approvals
 };

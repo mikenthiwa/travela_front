@@ -2,11 +2,12 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../modal/Modal';
 import './ConfirmDialog.scss';
+import ButtonLoadingIcon from '../Forms/ButtonLoadingIcon';
 
 class ConfirmDialog extends Component {
 
   renderModal = (id,renderDialogText, modalInvisible, closeDeleteModal,
-    buttonSelected,handleApprove, handleReject, handleVerify, documentText) => {
+    buttonSelected,handleApprove, handleReject, handleVerify, documentText, isConfirmDialogLoading) => {
     return(
       <Modal
         customModalStyles="delete-comment-modal"
@@ -24,12 +25,13 @@ class ConfirmDialog extends Component {
           className={`${renderDialogText(buttonSelected)}-comment-modal__btn`}
           type="button"
           id={buttonSelected}
+          disabled={isConfirmDialogLoading}
           onClick={
             (['Approve', 'Verify', 'approve'].includes(buttonSelected))
               ? () => handleApprove(id) || handleVerify(id) : () => handleReject(id)
           }
         >
-          {buttonSelected}
+          <ButtonLoadingIcon isLoading={isConfirmDialogLoading} buttonText={buttonSelected} />
         </button>
       </Modal>
     );
@@ -45,11 +47,12 @@ class ConfirmDialog extends Component {
       handleApprove,
       handleReject,
       handleVerify,
-      documentText
+      documentText,
+      isConfirmDialogLoading
     } = this.props;
     return (
       this.renderModal(id,renderDialogText, modalInvisible, closeDeleteModal,buttonSelected,
-        handleApprove,handleReject,handleVerify, documentText)
+        handleApprove,handleReject,handleVerify, documentText, isConfirmDialogLoading)
     );
   }
 
@@ -71,9 +74,10 @@ ConfirmDialog.propTypes = {
   handleVerify: PropTypes.func,
   renderDialogText: PropTypes.func.isRequired,
   closeDeleteModal: PropTypes.func.isRequired,
-  handleApprove: PropTypes.func.isRequired,
+  handleApprove: PropTypes.func,
   handleReject: PropTypes.func.isRequired,
-  documentText: PropTypes.string
+  documentText: PropTypes.string,
+  isConfirmDialogLoading: PropTypes.bool
 };
 
 ConfirmDialog.defaultProps = {
@@ -81,7 +85,9 @@ ConfirmDialog.defaultProps = {
   modalInvisible: true,
   buttonSelected: null,
   handleVerify: () => {},
-  documentText: null
+  handleApprove: () => {},
+  documentText: null,
+  isConfirmDialogLoading: false
 };
 
 export default ConfirmDialog;

@@ -33,6 +33,15 @@ class VerificationDetails extends Component {
     fetchSubmission({ requestId, tripType });
   }
 
+
+  componentWillReceiveProps(nextProps){
+    const {isConfirmDialogLoading, isUpdatedStatus} = nextProps;
+
+    if(isUpdatedStatus) {
+      this.setState({modalInvisible: isUpdatedStatus && !isConfirmDialogLoading});
+    }
+  }
+
   getValues() {
     const { attachments } = this.props;
     return getValues(attachments);
@@ -46,7 +55,6 @@ class VerificationDetails extends Component {
     const { updateRequestStatus } = this.props;
     const newStatus = 'Verified';
     updateRequestStatus({ requestId, newStatus });
-    this.setState({ modalInvisible: true });
   };
 
   handleDownloadAttachments = (url, fileName) => {
@@ -196,7 +204,7 @@ class VerificationDetails extends Component {
   renderButtons = (request) => {
     const { modalInvisible, buttonSelected } = this.state;
     const { status, trips } = request;
-    const { currentUser: { roles } } = this.props;
+    const { currentUser: { roles }, isConfirmDialogLoading } = this.props;
     const allowedRoles = ['Travel Administrator', 'Super Administrator'];
     const [{centers}] = roles.filter(role => allowedRoles.includes(role.roleName));
     const locations = centers.length && centers.map(center => center.location);
@@ -217,9 +225,11 @@ class VerificationDetails extends Component {
         <ConfirmDialog
           id={request.id} modalInvisible={modalInvisible}
           buttonSelected={buttonSelected} closeDeleteModal={()=> this.setState({modalInvisible: true})}
-          renderDialogText={this.renderDialogText} handleApprove={this.handleDecision}
+          renderDialogText={this.renderDialogText}
+          handleVerify={this.handleDecision}
           handleReject={this.handleDecision}
           documentText="Request"
+          isConfirmDialogLoading={isConfirmDialogLoading}
         />
       </div>
     );
@@ -261,7 +271,9 @@ VerificationDetails.defaultProps = {
   isLoading: true,
   currentUser: {},
   email: {},
-  errors: {}
+  errors: {},
+  isConfirmDialogLoading:false,
+  isUpdatedStatus:false
 };
 
 VerificationDetails.propTypes = {
@@ -276,7 +288,9 @@ VerificationDetails.propTypes = {
   fetchSubmission: PropTypes.func.isRequired,
   shouldOpen: PropTypes.bool.isRequired,
   openModal: PropTypes.func.isRequired,
-  closeModal: PropTypes.func.isRequired
+  closeModal: PropTypes.func.isRequired,
+  isConfirmDialogLoading: PropTypes.bool,
+  isUpdatedStatus: PropTypes.bool
 };
 
 const mapStateToProps = (state) => {
@@ -289,7 +303,9 @@ const mapStateToProps = (state) => {
     email: state.user.getUserData,
     attachments: state.attachments.submissions,
     submissionInfo: state.submissions,
-    shouldOpen: state.modal.modal.shouldOpen
+    shouldOpen: state.modal.modal.shouldOpen,
+    isConfirmDialogLoading: state.approvals.updatingStatus,
+    isUpdatedStatus: state.approvals.updatedStatus,
   };
 };
 

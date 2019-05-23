@@ -19,7 +19,9 @@ const initState = {
   pastApprovalsCount: 0,
   pagination: '',
   myCenters: [],
-  fetchApprovalError: ''
+  fetchApprovalError: '',
+  updatedStatus: false,
+  updatingStatus: false
 };
 
 const approvals = (state = initState, action) => {
@@ -59,6 +61,7 @@ const approvals = (state = initState, action) => {
     return {
       ...state,
       updatingStatus: false,
+      updatedStatus: true,
       approvals: state.approvals.map((approval) => {
         if (approval.id === action.updatedRequest.request.id) {
           approval.status = action.updatedRequest.request.status;
@@ -75,6 +78,7 @@ const approvals = (state = initState, action) => {
     return {
       ...state,
       updatingStatus: false,
+      updatedStatus: true,
       error: action.error
     };
   case UPDATE_BUDGET_STATUS:
@@ -88,6 +92,7 @@ const approvals = (state = initState, action) => {
     return {
       ...state,
       updatingStatus: false,
+      updatedStatus: true,
       budgetapprovals: state.budgetapprovals ? state.budgetapprovals.map((budgetapproval) => {
         if (budgetapproval.id === action.updatedBudgetRequest.id) {
           budgetapproval.budgetStatus = action.updatedBudgetRequest.budgetStatus;
@@ -100,6 +105,7 @@ const approvals = (state = initState, action) => {
     return {
       ...state,
       updatingStatus: false,
+      updatedStatus: true,
       error: action.error
     };
   default:
