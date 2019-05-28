@@ -7,19 +7,22 @@ import RequestDetailsPage from '../../../components/RequestsModal/RequestDetails
 import backButton from '../../../images/back-icon.svg';
 import './NewRequestPage.scss';
 import { fetchTravelChecklist } from '../../../redux/actionCreator/travelChecklistActions';
+import { fetchRoleUsers } from '../../../redux/actionCreator/roleActions';
 import { fetchSubmission, postSubmission } from '../../../redux/actionCreator/checkListSubmissionActions';
 import { uploadFile } from '../../../redux/actionCreator/fileUploadActions';
 import { openModal, closeModal } from '../../../redux/actionCreator/modalActions';
 import {
   fetchUserReadinessDocuments } from '../../../redux/actionCreator/travelReadinessDocumentsActions';
 import NotFound from '../../ErrorPages/NotFound';
+import RequestUtils from '../../../helper/request/RequestUtils';
 
 export class NewRequestPage extends Component {
   componentDidMount() {
     const { fetchUserRequestDetails, match: { params: { requestId } },
-      fetchTravelChecklist,  fetchUserReadinessDocuments, user } = this.props;
+      fetchTravelChecklist,  fetchUserReadinessDocuments, user, fetchRoleUsers } = this.props;
     fetchUserRequestDetails(requestId);
     fetchTravelChecklist(requestId);
+    fetchRoleUsers(53019);
     fetchUserReadinessDocuments(user.currentUser.userId);
   }
 
@@ -33,8 +36,12 @@ export class NewRequestPage extends Component {
     const { match:{ params: { requestId } },
       requestData, fetchingRequest, currentUser, user, shouldOpen, modalType,
       userReadinessDocument, fetchSubmission, postSubmission, travelChecklists,
-      submissionInfo, fileUploads, uploadFile, openModal, closeModal, history
+      submissionInfo, fileUploads, uploadFile, openModal, closeModal, history, managers
     } = this.props;
+
+    const managerName = RequestUtils.getManagerNameOrId(managers, requestData.approver);
+    requestData.approver = managerName;
+    requestData.manager = managerName;
 
     return (
       <RequestDetailsPage
@@ -101,6 +108,8 @@ NewRequestPage.propTypes = {
   fetchUserReadinessDocuments: PropTypes.func.isRequired,
   fetchSubmission: PropTypes.func.isRequired,
   errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  fetchRoleUsers: PropTypes.func.isRequired,
+  managers: PropTypes.array.isRequired,
 };
 
 NewRequestPage.defaultProps = {
@@ -111,10 +120,10 @@ NewRequestPage.defaultProps = {
   user: {},
   travelChecklists: {},
   modalType: '', userReadinessDocument: {},
-  errors: {}
+  errors: {},
 };
 
-const mapStateToProps = ({ requests, travelChecklist,
+const mapStateToProps = ({ requests, travelChecklist, role,
   submissions, modal, fileUploads, travelReadinessDocuments, user }) => {
   return {
     ...requests,
@@ -124,7 +133,8 @@ const mapStateToProps = ({ requests, travelChecklist,
     fetchingRequest: requests.fetchingRequest,
     travelChecklists: travelChecklist,
     submissionInfo: submissions,
-    fileUploads, user
+    fileUploads, user,
+    managers: role.roleUsers
   };
 };
 
@@ -136,7 +146,8 @@ const actionCreators = {
   uploadFile,
   openModal,
   closeModal,
-  fetchUserReadinessDocuments
+  fetchUserReadinessDocuments,
+  fetchRoleUsers
 };
 
 export default connect(mapStateToProps, actionCreators)(NewRequestPage);

@@ -173,6 +173,17 @@ class RequestUtils {
     }
     return checklistItems;
   }
+
+  static getManagerNameOrId(managers, manager){
+    const fieldType = {
+      number: "id",
+      string: "fullName"
+    };
+    const field = fieldType[typeof(manager)];
+    const fieldResult = field === "id" ? "fullName": "id";
+    const [managerResult] = managers.filter(userManager => userManager[field] === manager);
+    return managerResult ? managerResult[fieldResult] : null;
+  }
 }
 
 export default RequestUtils;

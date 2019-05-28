@@ -9,15 +9,15 @@ import NewRequestPageView, { NewRequestPage } from '../NewRequestPage';
 
 
 global.MutationObserver = MutationObserver;
-window.document.getSelection = () => {};
+window.document.getSelection = () => { };
 
 let props1 = {
   requestData: {
     id: 'xDh20btGz',
     name: 'Adeniyi Funmbi',
     tripType: 'oneWay',
-    approver: 'Samuel Kubai',
-    manager: 'Samuel Kubai',
+    approver: 1,
+    manager: 1,
     timeApproved: '2018-09-20',
     gender: 'male',
     status: 'Verified',
@@ -30,12 +30,16 @@ let props1 = {
         returnDate: '2019-09-22'
       }
     ],
-    comments:[],
+    comments: [],
     department: 'TDD',
     role: 'Software Developer'
   },
+  managers: [
+    { id: 1, fullName: 'Samuel Kubai' },
+    { id: 2, fullName: 'Bolton Otieno' }
+  ],
   fetchingRequest: false,
-  fetchUserRequestDetails:jest.fn(),
+  fetchUserRequestDetails: jest.fn(),
   user: {
     UserInfo: {
       name: 'John Doe',
@@ -69,8 +73,11 @@ let props1 = {
         id: '1',
         name: 'Travel Ticket Details',
         requiresFiles: false,
-        resources: [{id: '1', label: 'Flight Application Guide', 
-          link: 'http://andela.com', checklistItemId: '1'}]}],
+        resources: [{
+          id: '1', label: 'Flight Application Guide',
+          link: 'http://andela.com', checklistItemId: '1'
+        }]
+      }],
       destinationName: 'Angola',
       tripId: 'fhafi'
     }],
@@ -93,7 +100,8 @@ let props1 = {
     postSuccess: [],
     requestId: 'xDh20btGz',
     submissions: [
-      {destinationName: 'Nairobi, Kenya', 
+      {
+        destinationName: 'Nairobi, Kenya',
         checklist: [{
           deleteReason: null,
           destinationName: 'Nairobi, Kenya',
@@ -103,18 +111,22 @@ let props1 = {
           resources: [],
           submissions: [{
             checklistItemId: 'Hji1FU7q9',
-            checklistSubmissions: {id: 'Hji1FU7q9'},
+            checklistSubmissions: { id: 'Hji1FU7q9' },
             createdAt: '2019-03-12T23:40:53.694Z',
             deletedAt: null,
             id: 'B523ka3vN',
             tripId: 'GCpkv0WQpg',
             updatedAt: '2019-03-12T23:40:53.694Z',
-            value: {url: 'http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg', fileName: 'Passport.jpeg', documentId: 'zu6sKphUj'}}]
-        }], 
-        tripId: 'GCpkv0WQpg'},
-      {destinationName: 'Lagos, Nigeria', 
-        checklist: Array(1), 
-        tripId: '3OIntw-g9F'}],
+            value: { url: 'http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg', fileName: 'Passport.jpeg', documentId: 'zu6sKphUj' }
+          }]
+        }],
+        tripId: 'GCpkv0WQpg'
+      },
+      {
+        destinationName: 'Lagos, Nigeria',
+        checklist: Array(1),
+        tripId: '3OIntw-g9F'
+      }],
     successMessage: '',
     successStatus: false,
     tripType: 'oneWay',
@@ -124,7 +136,6 @@ let props1 = {
     uploadSuccess: '',
     cloudinaryUrl: '',
     error: ''
-    
   },
   modalType: null,
   shouldOpen: false,
@@ -134,6 +145,7 @@ let props1 = {
   userReadinessDocument: {},
   uploadFile: jest.fn(),
   fetchTravelChecklist: jest.fn(),
+  fetchRoleUsers: jest.fn(),
   fetchUserReadinessDocuments: jest.fn(),
   fetchSubmission: jest.fn(),
   history: {
@@ -147,8 +159,8 @@ let props2 = {
     id: 'xDh20btGz',
     name: 'Adeniyi Funmbi',
     tripType: 'oneWay',
-    manager: 'SamuelKubai',
-    approver: 'Samuel Kubai',
+    manager: 1,
+    approver: 1,
     timeApproved: '2018-09-20',
     gender: 'Male',
     status: 'Approved',
@@ -166,7 +178,10 @@ let props2 = {
     department: 'TDD',
     role: 'Software Developer'
   },
-  
+  managers: [
+    { id: 1, fullName: 'Samuel Kubai' },
+    { id: 2, fullName: 'Bolton Otieno' }
+  ],
   fetchingRequest: true,
   fetchUserRequestDetails: jest.fn(),
   user: {
@@ -202,8 +217,11 @@ let props2 = {
         id: '1',
         name: 'Travel Ticket Details',
         requiresFiles: false,
-        resources: [{id: '1', label: 'Flight Application Guide', 
-          link: 'http://andela.com', checklistItemId: '1'}]}],
+        resources: [{
+          id: '1', label: 'Flight Application Guide',
+          link: 'http://andela.com', checklistItemId: '1'
+        }]
+      }],
       destinationName: 'Angola',
       tripId: 'fhafi'
     }],
@@ -226,7 +244,8 @@ let props2 = {
     postSuccess: [],
     requestId: 'xDh20btGz',
     submissions: [
-      {destinationName: 'Nairobi, Kenya', 
+      {
+        destinationName: 'Nairobi, Kenya',
         checklist: [{
           deleteReason: null,
           destinationName: 'Nairobi, Kenya',
@@ -236,18 +255,22 @@ let props2 = {
           resources: [],
           submissions: [{
             checklistItemId: 'Hji1FU7q9',
-            checklistSubmissions: {id: 'Hji1FU7q9'},
+            checklistSubmissions: { id: 'Hji1FU7q9' },
             createdAt: '2019-03-12T23:40:53.694Z',
             deletedAt: null,
             id: 'B523ka3vN',
             tripId: 'GCpkv0WQpg',
             updatedAt: '2019-03-12T23:40:53.694Z',
-            value: {url: 'http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg', fileName: 'Passport.jpeg', documentId: 'zu6sKphUj'}}]
-        }], 
-        tripId: 'GCpkv0WQpg'},
-      {destinationName: 'Lagos, Nigeria', 
-        checklist: Array(1), 
-        tripId: '3OIntw-g9F'}],
+            value: { url: 'http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg', fileName: 'Passport.jpeg', documentId: 'zu6sKphUj' }
+          }]
+        }],
+        tripId: 'GCpkv0WQpg'
+      },
+      {
+        destinationName: 'Lagos, Nigeria',
+        checklist: Array(1),
+        tripId: '3OIntw-g9F'
+      }],
     successMessage: '',
     successStatus: false,
     tripType: 'oneWay',
@@ -260,13 +283,14 @@ let props2 = {
   },
   modalType: '',
   shouldOpen: false,
-  history: {push: jest.fn()},
+  history: { push: jest.fn() },
   closeModal: jest.fn(),
   openModal: jest.fn(),
   postSubmission: jest.fn(),
   userReadinessDocument: {},
   uploadFile: jest.fn(),
   fetchTravelChecklist: jest.fn(),
+  fetchRoleUsers: jest.fn(),
   fetchUserReadinessDocuments: jest.fn(),
   fetchSubmission: jest.fn()
 };
@@ -276,8 +300,8 @@ let props3 = {
     id: 'xDh20btGz',
     name: 'Adeniyi Funmbi',
     tripType: 'multi',
-    manager: 'SamuelKubai',
-    approver: 'Samuel Kubai',
+    manager: 1,
+    approver: 1,
     timeApproved: '2018-09-20',
     gender: 'Male',
     status: 'Approved',
@@ -322,6 +346,10 @@ let props3 = {
     department: 'TDD',
     role: 'Software Developer'
   },
+  managers: [
+    { id: 1, fullName: 'Samuel Kubai' },
+    { id: 2, fullName: 'Bolton Otieno' }
+  ],
   fetchingRequest: false,
   fetchUserRequestDetails: jest.fn(),
   user: {
@@ -359,8 +387,11 @@ let props3 = {
           id: '1',
           name: 'Travel Ticket Details',
           requiresFiles: false,
-          resources: [{id: '1', label: 'Flight Application Guide', 
-            link: 'http://andela.com', checklistItemId: '1'}]}],
+          resources: [{
+            id: '1', label: 'Flight Application Guide',
+            link: 'http://andela.com', checklistItemId: '1'
+          }]
+        }],
         destinationName: 'Nairobi, Kenya',
         tripId: '47uy32'
       },
@@ -371,8 +402,11 @@ let props3 = {
           id: '1',
           name: 'Travel Ticket Details',
           requiresFiles: false,
-          resources: [{id: '1', label: 'Flight Application Guide', 
-            link: 'http://andela.com', checklistItemId: '1'}]}],
+          resources: [{
+            id: '1', label: 'Flight Application Guide',
+            link: 'http://andela.com', checklistItemId: '1'
+          }]
+        }],
         destinationName: 'Lagos, Nigeria',
         tripId: '47y73'
       }],
@@ -395,7 +429,8 @@ let props3 = {
     postSuccess: [],
     requestId: 'xDh20btGz',
     submissions: [
-      {destinationName: 'Nairobi, Kenya', 
+      {
+        destinationName: 'Nairobi, Kenya',
         checklist: [{
           deleteReason: null,
           destinationName: 'Nairobi, Kenya',
@@ -405,18 +440,22 @@ let props3 = {
           resources: [],
           submissions: [{
             checklistItemId: 'Hji1FU7q9',
-            checklistSubmissions: {id: 'Hji1FU7q9'},
+            checklistSubmissions: { id: 'Hji1FU7q9' },
             createdAt: '2019-03-12T23:40:53.694Z',
             deletedAt: null,
             id: 'B523ka3vN',
             tripId: 'GCpkv0WQpg',
             updatedAt: '2019-03-12T23:40:53.694Z',
-            value: {url: 'http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg', fileName: 'Passport.jpeg', documentId: 'zu6sKphUj'}}]
-        }], 
-        tripId: 'GCpkv0WQpg'},
-      {destinationName: 'Lagos, Nigeria', 
-        checklist: Array(1), 
-        tripId: '3OIntw-g9F'}],
+            value: { url: 'http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg', fileName: 'Passport.jpeg', documentId: 'zu6sKphUj' }
+          }]
+        }],
+        tripId: 'GCpkv0WQpg'
+      },
+      {
+        destinationName: 'Lagos, Nigeria',
+        checklist: Array(1),
+        tripId: '3OIntw-g9F'
+      }],
     successMessage: '',
     successStatus: false,
     tripType: 'oneWay',
@@ -424,13 +463,14 @@ let props3 = {
   fileUploads: {},
   modalType: '',
   shouldOpen: false,
-  history: {push: jest.fn()},
+  history: { push: jest.fn() },
   closeModal: jest.fn(),
   openModal: jest.fn(),
   postSubmission: jest.fn(),
   userReadinessDocument: {},
   uploadFile: jest.fn(),
   fetchTravelChecklist: jest.fn(),
+  fetchRoleUsers: jest.fn(),
   fetchUserReadinessDocuments: jest.fn(),
   fetchSubmission: jest.fn()
 };
@@ -440,8 +480,8 @@ let props4 = {
     id: 'xDh20btGz',
     name: 'Adeniyi Funmbi',
     tripType: 'multi',
-    manager: 'SamuelKubai',
-    approver: 'Samuel Kubai',
+    manager: 1,
+    approver: 1,
     timeApproved: '2018-09-20',
     gender: 'Male',
     status: 'Approved',
@@ -472,7 +512,10 @@ let props4 = {
     department: 'TDD',
     role: 'Software Developer'
   },
-  
+  managers: [
+    { id: 1, fullName: 'Samuel Kubai' },
+    { id: 2, fullName: 'Bolton Otieno' }
+  ],
   fetchingRequest: false,
   fetchUserRequestDetails: jest.fn(),
   user: {
@@ -509,8 +552,11 @@ let props4 = {
           id: '1',
           name: 'Travel Ticket Details',
           requiresFiles: false,
-          resources: [{id: '1', label: 'Flight Application Guide', 
-            link: 'http://andela.com', checklistItemId: '1'}]}],
+          resources: [{
+            id: '1', label: 'Flight Application Guide',
+            link: 'http://andela.com', checklistItemId: '1'
+          }]
+        }],
         destinationName: 'Nairobi, Kenya',
         tripId: '47uy32'
       },
@@ -521,8 +567,11 @@ let props4 = {
           id: '1',
           name: 'Travel Ticket Details',
           requiresFiles: false,
-          resources: [{id: '1', label: 'Flight Application Guide', 
-            link: 'http://andela.com', checklistItemId: '1'}]}],
+          resources: [{
+            id: '1', label: 'Flight Application Guide',
+            link: 'http://andela.com', checklistItemId: '1'
+          }]
+        }],
         destinationName: 'Lagos, Nigeria',
         tripId: '47y73'
       }],
@@ -545,7 +594,8 @@ let props4 = {
     postSuccess: [],
     requestId: 'xDh20btGz',
     submissions: [
-      {destinationName: 'Nairobi, Kenya', 
+      {
+        destinationName: 'Nairobi, Kenya',
         checklist: [{
           deleteReason: null,
           destinationName: 'Nairobi, Kenya',
@@ -555,18 +605,22 @@ let props4 = {
           resources: [],
           submissions: [{
             checklistItemId: 'Hji1FU7q9',
-            checklistSubmissions: {id: 'Hji1FU7q9'},
+            checklistSubmissions: { id: 'Hji1FU7q9' },
             createdAt: '2019-03-12T23:40:53.694Z',
             deletedAt: null,
             id: 'B523ka3vN',
             tripId: 'GCpkv0WQpg',
             updatedAt: '2019-03-12T23:40:53.694Z',
-            value: {url: 'http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg', fileName: 'Passport.jpeg', documentId: 'zu6sKphUj'}}]
-        }], 
-        tripId: 'GCpkv0WQpg'},
-      {destinationName: 'Lagos, Nigeria', 
-        checklist: Array(1), 
-        tripId: '3OIntw-g9F'}],
+            value: { url: 'http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg', fileName: 'Passport.jpeg', documentId: 'zu6sKphUj' }
+          }]
+        }],
+        tripId: 'GCpkv0WQpg'
+      },
+      {
+        destinationName: 'Lagos, Nigeria',
+        checklist: Array(1),
+        tripId: '3OIntw-g9F'
+      }],
     successMessage: '',
     successStatus: false,
     tripType: 'oneWay',
@@ -574,13 +628,14 @@ let props4 = {
   fileUploads: jest.fn(),
   modalType: '',
   shouldOpen: false,
-  history: {push: jest.fn()},
+  history: { push: jest.fn() },
   closeModal: jest.fn(),
   openModal: jest.fn(),
   postSubmission: jest.fn(),
   userReadinessDocument: {},
   uploadFile: jest.fn(),
   fetchTravelChecklist: jest.fn(),
+  fetchRoleUsers: jest.fn(),
   fetchUserReadinessDocuments: jest.fn(),
   fetchSubmission: jest.fn()
 };
@@ -593,15 +648,22 @@ const initialState1 = {
     requestData: props1.requestData,
     fetchingRequest: false
   },
+  role: {
+    roleUsers: props1.managers
+  },
   showCommentBox: true,
-  comments:{
+  comments: {
     creatingComments: false
   },
-  modal: {modal : {shouldOpen: false,
-    modalType: null,
-    page: null}},
+  modal: {
+    modal: {
+      shouldOpen: false,
+      modalType: null,
+      page: null
+    }
+  },
   travelReadinessDocuments: {
-    userReadiness: { 
+    userReadiness: {
       id: '2',
       fullName: 'Collins Muru',
       email: 'collins.muru@andela.com',
@@ -614,7 +676,8 @@ const initialState1 = {
       location: 'Lagos',
       createdAt: '2019-02-07T10:43:20.083Z',
       updatedAt: '2019-03-11T12:49:42.045Z',
-      travelDocuments:{}}
+      travelDocuments: {}
+    }
   },
   submissions: props1.submissionInfo
   ,
@@ -624,26 +687,31 @@ const initialState1 = {
     cloudinaryUrl: '',
     error: ''
   }
-
-    
 };
 
 const initialState2 = {
-  user: { currentUser: { ...props2.currentUser }},
+  user: { currentUser: { ...props2.currentUser } },
   fetchUserRequestDetails: jest.fn(),
   requests: {
     requestData: props2.requestData,
     fetchingRequest: true
   },
+  role: {
+    roleUsers: props2.managers
+  },
   showCommentBox: false,
   comments: {
     creatingComments: false
   },
-  modal: {modal : {shouldOpen: false,
-    modalType: null,
-    page: null}},
+  modal: {
+    modal: {
+      shouldOpen: false,
+      modalType: null,
+      page: null
+    }
+  },
   travelReadinessDocuments: {
-    userReadiness: { 
+    userReadiness: {
       id: '2',
       fullName: 'Collins Muru',
       email: 'collins.muru@andela.com',
@@ -656,7 +724,8 @@ const initialState2 = {
       location: 'Lagos',
       createdAt: '2019-02-07T10:43:20.083Z',
       updatedAt: '2019-03-11T12:49:42.045Z',
-      travelDocuments:{}}
+      travelDocuments: {}
+    }
   },
   submissions: props2.submissionInfo
   ,
@@ -675,15 +744,22 @@ const initialState3 = {
     requestData: props3.requestData,
     fetchingRequest: false
   },
+  role: {
+    roleUsers: props3.managers
+  },
   showCommentBox: false,
   comments: {
     creatingComments: false
   },
-  modal: {modal : {shouldOpen: false,
-    modalType: null,
-    page: null}},
+  modal: {
+    modal: {
+      shouldOpen: false,
+      modalType: null,
+      page: null
+    }
+  },
   travelReadinessDocuments: {
-    userReadiness: { 
+    userReadiness: {
       id: '2',
       fullName: 'Collins Muru',
       email: 'collins.muru@andela.com',
@@ -696,7 +772,8 @@ const initialState3 = {
       location: 'Lagos',
       createdAt: '2019-02-07T10:43:20.083Z',
       updatedAt: '2019-03-11T12:49:42.045Z',
-      travelDocuments:{}}
+      travelDocuments: {}
+    }
   },
   submissions: props3.submissionInfo,
   fileUploads: {
@@ -714,15 +791,22 @@ const initialState4 = {
     requestData: props3.requestData,
     fetchingRequest: false
   },
+  role: {
+    roleUsers: props3.managers
+  },
   showCommentBox: false,
   comments: {
     creatingComments: false
   },
-  modal: {modal : {shouldOpen: false,
-    modalType: null,
-    page: null}},
+  modal: {
+    modal: {
+      shouldOpen: false,
+      modalType: null,
+      page: null
+    }
+  },
   travelReadinessDocuments: {
-    userReadiness: { 
+    userReadiness: {
       id: '2',
       fullName: 'Collins Muru',
       email: 'collins.muru@andela.com',
@@ -735,7 +819,8 @@ const initialState4 = {
       location: 'Lagos',
       createdAt: '2019-02-07T10:43:20.083Z',
       updatedAt: '2019-03-11T12:49:42.045Z',
-      travelDocuments:{}}
+      travelDocuments: {}
+    }
   },
   submissions: props4.submissionInfo,
   fileUploads: {
@@ -744,7 +829,6 @@ const initialState4 = {
     cloudinaryUrl: '',
     error: ''
   }
-    
 };
 
 const mockStore = configureStore();
@@ -832,7 +916,7 @@ describe('<Request Page>', () => {
 
     wrapper = shallow(<NewRequestPage {...props1} />);
 
-    const request = { id: 1, tripType: 'return', requestId: 1};
+    const request = { id: 1, tripType: 'return', requestId: 1 };
     let fetchSubmission = jest.spyOn(
       wrapper.instance().props,
       'fetchSubmission'
@@ -840,9 +924,9 @@ describe('<Request Page>', () => {
 
     wrapper.instance().handleShowTravelChecklist(request);
     expect(fetchSubmission).toHaveBeenCalled();
-     
+
   });
-  
+
   it('should go to the previous page when back button is clicked', () => {
     wrapper = shallow(<NewRequestPage {...props1} />);
     wrapper.find('span.goback').simulate('click');

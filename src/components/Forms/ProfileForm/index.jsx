@@ -7,6 +7,7 @@ import InputRenderer, {
 import ProfileDetails from './FormFieldsets/ProfileDetails';
 import './ProfileForm.scss';
 import Validator from '../../../validator';
+import RequestUtils from '../../../helper/request/RequestUtils';
 
 // TODO: Create your own meta data.
 import * as formMetadata from '../FormsMetadata/NewProfileMetadata/index';
@@ -40,9 +41,9 @@ class ProfileForm extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { userData, userDataUpdate: { result }, managers, isUpdating } = nextProps;
-
     if (userData !== undefined && !isUpdating) {
       const { fullName, gender, department, occupation, manager, location } = userData;
+      const managerName = RequestUtils.getManagerNameOrId(managers, manager);
       const userGender = result ? result.gender : gender;
       this.setState((prevState) => ({
         ...prevState,
@@ -51,7 +52,7 @@ class ProfileForm extends PureComponent {
           gender: Validator.databaseValueValidator(userGender),
           department: Validator.databaseValueValidator(department),
           role: Validator.databaseValueValidator(occupation),
-          manager: Validator.databaseValueValidator(manager),
+          manager: Validator.databaseValueValidator(managerName),
           location: Validator.databaseValueValidator(location)
         }
       }));
@@ -106,14 +107,16 @@ class ProfileForm extends PureComponent {
 
   submitProfileForm = event => {
     event.preventDefault();
-    const { updateUserProfile, user } = this.props;
+    const { updateUserProfile, user, managers } = this.props;
 
     const userId = user.UserInfo.id;
     const { values } = this.state;
     if (this.validate) {
       let data = { ...values };
+      const managerId = RequestUtils.getManagerNameOrId(managers, data.manager);
       data.passportName = data.name;
       data.occupation = data.role;
+      data.manager = managerId;
       updateUserProfile(data, userId, true);
       this.setState({ hasBlankFields: true });
       localStorage.setItem('location', values.location);

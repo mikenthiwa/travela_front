@@ -17,6 +17,7 @@ import { fetchAllTravelStipends } from '../../../redux/actionCreator/travelStipe
 import { fetchTravelChecklist } from '../../../redux/actionCreator/travelChecklistActions';
 import { validateTrips } from '../../../redux/actionCreator/tripActions';
 import Preloader from '../../../components/Preloader/Preloader';
+import RequestUtils from '../../../helper/request/RequestUtils';
 import '../Requests.scss';
 
 export const RequestPage = (editing = false) => {
@@ -54,8 +55,11 @@ export const RequestPage = (editing = false) => {
         fetchAllTravelStipends, travelStipends, validateTrips, fetchingRequest, editingRequest, comments
       } = this.props;
       const { url } = this.state;
+      const manager = requestOnEdit && requestOnEdit.manager;
+      const managerName = RequestUtils.getManagerNameOrId(roleUsers, manager);
+      if(requestOnEdit) requestOnEdit.manager = managerName;
       return (
-        fetchingRequest ? (
+        fetchingRequest || roleUsers.length === 0 || !userData.result ? (
           <div className="request-page__preloader">
             <Preloader />
           </div>

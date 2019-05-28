@@ -74,7 +74,7 @@ let props = {
     id: '1',
     name: 'Seun Undefined',
     tripType: 'multi',
-    manager: 'Faluyi Seun',
+    manager: 1,
     gender: 'Male',
     department: 'Talent & Development',
     role: 'Software Developer',
@@ -115,6 +115,10 @@ let props = {
       roleId: 401938
     }
   },
+  roleUsers: [
+    { id: 1, fullName: 'Samuel Kubai', email: 'samuel@andela.com' },
+    { id: 2, fullName: 'Chris Akanmu', email: 'chris@andela.com' }
+  ],
   pagination: {
     currentPage: 1,
     pageCount: 4,
@@ -185,8 +189,8 @@ const initialState = {
     modalType: null
   },
   roleUsers: [
-    { fullName: 'Samuel Kubai', email: 'samuel@andela.com' },
-    { fullName: 'Chris Akanmu', email: 'chris@andela.com' }
+    { id: 1, fullName: 'Samuel Kubai', email: 'samuel@andela.com' },
+    { id: 2, fullName: 'Chris Akanmu', email: 'chris@andela.com' }
   ],
   getCurrentUserRole: 'tomato',
   travelChecklist: { checklistItems: travelChecklistMockData },

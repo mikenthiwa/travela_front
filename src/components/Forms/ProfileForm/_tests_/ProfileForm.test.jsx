@@ -27,13 +27,15 @@ describe('<ProfileForm />', () => {
     onChange: jest.fn(() => { }),
     getCenters: jest.fn(),
     size: 10,
-    managers,
     centers,
     userData: {
       ...values,
     },
     userDataUpdate: [],
-    managers:['Mananger1', 'Manager2'],
+    managers: [
+      {id: 1, fullName: 'Samuel Kubai'},
+      {id: 2, fullName: 'Bolton Otieno'}
+    ],
     occupations:['Software Developer', 'Technical Team Telad'],
   };
 
@@ -67,7 +69,7 @@ describe('<ProfileForm />', () => {
         gender: 'Male',
         department: 'Success',
         role: 'Technical Team Lead',
-        manager: 'Samuel Kubai',
+        manager: 'Bolton Otieno',
         location: 'Nairobi'
       }, hasBlankFields: false, errors: { manager: '' }
     });
@@ -78,6 +80,7 @@ describe('<ProfileForm />', () => {
     const expected = values;
     delete expected.passportName;
     delete expected.fullName;
+    expected.manager = 1;
 
     expect(wrapper.state('values')).toEqual(expected);
   });
@@ -85,13 +88,13 @@ describe('<ProfileForm />', () => {
   it('should set manager error when manager input is changed to a non existing manager', () => {
     wrapper.setProps({ userData: values });
     const inputField = wrapper.find('.occupationInput').at(0);
-    const params = ["manager", "Joy"]
+    const params = ['manager', 'Joy']
     inputField.simulate('change');
     expect(wrapper.instance().onChangeAutoSuggestion(...params))
     const {manager: newManager} = wrapper.state('values');
     const {manager: secondManagerError} = wrapper.state('errors');
     expect(newManager).toEqual('Joy');
-    expect(secondManagerError).toEqual(" No manager with the name exists");
+    expect(secondManagerError).toEqual(' No manager with the name exists');
   });
 
   it('should ensure the location has AutoComplete feature with only the city names', () => {

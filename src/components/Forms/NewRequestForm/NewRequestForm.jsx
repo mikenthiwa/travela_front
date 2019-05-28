@@ -121,11 +121,12 @@ class NewRequestForm extends PureComponent {
 
   setUp = () => {
     const status = 'You are currently here';
-    const {editing, requestOnEdit} = this.props;
+    const {editing, requestOnEdit, managers } = this.props;
     const {name, gender, department, role, manager, location} = this.getPersonalDetails(
       editing,
       requestOnEdit
     );
+    const managerName = travelStipendHelper.getManagerNameOrId(managers, manager);
     const defaultTripStateValues = this.getDefaultTripStateValues(0);
     this.defaultState = {
       optionalFields: ['bedId'],
@@ -135,7 +136,7 @@ class NewRequestForm extends PureComponent {
         department,
         role,
         location,
-        manager,
+        manager: managerName,
         ...defaultTripStateValues
       },
       trips: [{}],
@@ -552,17 +553,20 @@ class NewRequestForm extends PureComponent {
       updateUserProfile,
       userData,
       user,
-      history
+      history,
+      managers
     } = this.props;
     const {values, selection, trips, stipend, stipendBreakdown, comments} = this.state;
     userData.name = userData.passportName;
     userData.role = userData.occupation;
 
     const attrb = ['name', 'gender', 'role', 'department', 'manager', 'location'];
+    const managerId = travelStipendHelper.getManagerNameOrId(managers, values.manager);
     const defaultUserData = pick(userData, attrb);
     const newUserData = pick(values, attrb);
     const newData = {
       ...newUserData,
+      manager: managerId,
       trips,
       tripType: selection,
       stipend,
