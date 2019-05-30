@@ -1,0 +1,133 @@
+.trip-modification-reason-modal {
+  .modal {
+    top: 30%;
+  }
+
+  .modal-content {
+    padding: 0;
+  }
+  &__content {
+    &__body {
+      padding: 1em 2em;
+      .form-input {
+        height: 120px;
+
+        &.error {
+          height: 130px;
+        }
+      }
+
+      .character-counter {
+        display: grid;
+        text-align: right;
+        font-size: 12px;
+        margin-top: -25px;
+        margin-right: 10px;
+        color: rgba(0,0,0,.4);
+      }
+
+      textarea {
+        width: calc(100% - 20px);
+        border: 1px solid #c2c2c2;
+        resize: none;
+        font-size: 1em;
+        padding: 10px;
+        height: 100px !important;
+        outline: none;
+        transition: 0.5s all;
+
+        &:focus, &:active {
+          border: 1px solid #2f56e3;
+        }
+      }
+    }
+
+    .submit-area {
+      padding: 0 2em;
+      background: rgba(238, 238, 238, 0.56);
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-content: right;
+    }
+  }
+}
+
+
+.trip-modifications {
+  background: #fff;
+  margin-top: 15px;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 0.5em;
+
+  .title {
+    margin: 0 0 10px;
+    padding: 0;
+  }
+
+  &__header {
+    height: 50px;
+    display: flex;
+    padding: 0 20px;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    justify-content: center;
+
+    &__title {
+      margin: 0;
+    }
+  }
+
+  &__list {
+
+    .trip-modification {
+      position: relative;
+      padding: 1em 0;
+      height: auto !important;
+      border: none !important;
+
+      .btn-group {
+        margin-top: 1em;
+      }
+
+      &__title {
+        padding: 0 1em;
+      }
+
+      h6 {
+        padding: 0;
+        margin: 0;
+      }
+
+      &__status {
+        display: grid;
+        grid-template-columns: auto;
+        align-items: center;
+        justify-items: center;
+
+        span{
+          padding: 0.7em 1em;
+          margin-top: 10px;
+          cursor: not-allowed;
+          border: 1px solid black;
+        }
+
+        &--Approved {
+          span {
+            border: 1px solid #00009f;
+            color: white;
+            background: #3d45e3;
+          }
+        }
+
+        &--Rejected {
+          span{
+            border: 1px solid #f40019;
+            color: white;
+            background: #e30019;
+          }
+        }
+      }
+    }
+  }
+}

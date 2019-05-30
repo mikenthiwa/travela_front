@@ -14,8 +14,21 @@
   font-family: "DIN Pro";
   color: #4F4F4F;
   outline: none;
+  transition: transform 0.2s linear, opacity 0.2s linear;
+
   &#request-details-modal {
     max-width: 710px;
+  }
+
+  &.invisible {
+    transform: scale(0.9);
+    visibility: visible;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.visible {
+    transform: scale(1);
   }
 
   &-title {

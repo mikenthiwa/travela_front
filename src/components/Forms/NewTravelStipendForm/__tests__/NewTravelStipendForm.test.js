@@ -1,6 +1,6 @@
 import React from 'react';
 import NewTravelStipendForm from '../NewTravelStipendForm';
-import profileMock from '../../ProfileForm/__mocks__';
+import profileMock from '../../ProfileForm/__mocks__/ProfileForm';
 
 const { centers } = profileMock;
 

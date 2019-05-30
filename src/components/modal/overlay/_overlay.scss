@@ -9,21 +9,27 @@
   height: 100vh;
   width: 100vw;
   overflow-y: auto;
-  background: rgba(0,0,0,.72);
-  transition: transform .1s ease-out;
-  transform-origin: top left;
+  transition: all .2s ease-out;
+  transform-origin: center center;
 
-  .invisible {
-    visibility: visible;
-    transform: scale(0);
+  &.invisible {
+    visibility: visible !important;
+    pointer-events: none;
+    border: none;
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0);
   }
 
+  &.visible {
+    background: rgba(0,0,0,.72);
+    border: none;
+ }
+
   .visible {
-    visibility: visible;
     transform: scale(1);
   }
 
-  .overlayBackground {
+  &.overlayBackground {
     background: none;
   }
 }

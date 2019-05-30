@@ -60,11 +60,12 @@ FileUploadField.propTypes = {
   documentUpload: Proptypes.string.isRequired,
   handleUpload: Proptypes.func.isRequired,
   document: Proptypes.object.isRequired,
-  modalType: Proptypes.string.isRequired,
+  modalType: Proptypes.string,
 };
 
 FileUploadField.defaultProps = {
   name: '',
+  modalType: ''
 };
 
 export default FileUploadField;

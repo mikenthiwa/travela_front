@@ -183,7 +183,7 @@ Layout.propTypes = {
   location: PropTypes.object.isRequired,
   children: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
-  isAuthenticated: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   isLoaded: PropTypes.bool.isRequired,
   getUserData: PropTypes.func.isRequired,
 };

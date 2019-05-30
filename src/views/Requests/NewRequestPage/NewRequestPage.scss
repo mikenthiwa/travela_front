@@ -3,4 +3,68 @@
   justify-content: space-between;
   align-items: center;
   width: 220px;
+
+  &__action-btns {
+    .action-btn__wrapper {
+
+      .buttons {
+        display: flex;
+
+        button {
+          margin: 0 0.5em;
+        }
+      }
+      .rap-popover-content{
+        border-radius: 5px;
+        padding: 0.3em 0.5em;
+        height: auto;
+        width: 250px;
+      }
+
+      .pending__notification {
+        background: white;
+        padding: 0.3em 0.8em;
+        display: grid;
+        cursor: default;
+        align-items: center;
+        border-radius: 2px;
+        border: 1px solid #2f56e3;
+
+        .pending__message {
+          color: #2f56e3;
+        }
+      }
+    }
+  }
 }
+.requests__page-header {
+  display: inline-grid;
+  width: 90%;
+  align-items: end;
+  grid-template-columns: 1fr auto;
+
+  .action-btn {
+    background: white;
+    border: 1px solid #3d45e3;
+    padding: 0.5em 1.2em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    img {
+      height: 1.3em;
+      margin: 0 0.2em;
+    }
+
+    &.btn-delete-request {
+      border: 1px solid #d0021b;
+      color: #d0021b;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+  }
+}
+

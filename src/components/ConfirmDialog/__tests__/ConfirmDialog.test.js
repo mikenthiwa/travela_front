@@ -5,7 +5,7 @@ import ConfirmDialog from '../ConfirmDialog';
 const props = {
   id: '1',
   modalInvisible: true,
-  buttonSelected: false,
+  buttonSelected: 'Approve',
   renderDialogText: jest.fn(),
   closeDeleteModal: jest.fn(),
   handleApprove: jest.fn(),

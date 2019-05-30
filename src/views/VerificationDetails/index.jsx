@@ -16,281 +16,304 @@ import Preloader from '../../components/Preloader/Preloader';
 import NotFound from '../ErrorPages/NotFound';
 import './VerificationDetails.scss';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
-
-class VerificationDetails extends Component {
-  state = {
-    modalInvisible: true,
-    buttonSelected: '',
-    displayComments: true
-  };
-
-  componentDidMount() {
-    const {
-      fetchUserRequestDetails, fetchAttachments, fetchSubmission, request: { tripType },
-      match: { params: { requestId } } } = this.props;
-    fetchUserRequestDetails(requestId);
-    fetchAttachments(requestId);
-    fetchSubmission({ requestId, tripType });
-  }
+import {updateModification} from '../../redux/actionCreator/tripModificationActions';
 
 
-  componentWillReceiveProps(nextProps){
-    const {isConfirmDialogLoading, isUpdatedStatus} = nextProps;
+const VerificationDetails = (type = 'verifications') => {
+  class Verifications extends Component {
+    state = {
+      modalInvisible: true,
+      buttonSelected: '',
+      displayComments: true,
+    };
 
-    if(isUpdatedStatus) {
-      this.setState({modalInvisible: isUpdatedStatus && !isConfirmDialogLoading});
+    componentDidMount() {
+      const {
+        fetchUserRequestDetails, fetchAttachments, fetchSubmission, request: {tripType},
+        match: {params: {requestId}}
+      } = this.props;
+      fetchUserRequestDetails(requestId);
+      fetchAttachments(requestId);
+      fetchSubmission({requestId, tripType});
     }
-  }
 
-  getValues() {
-    const { attachments } = this.props;
-    return getValues(attachments);
-  }
 
-  handleButtonSelected = (e) => {
-    this.setState({ buttonSelected: e.target.textContent, modalInvisible: false });
-  };
+    componentWillReceiveProps(nextProps) {
+      const {isConfirmDialogLoading, isUpdatedStatus} = nextProps;
 
-  handleDecision = (requestId) => {
-    const { updateRequestStatus } = this.props;
-    const newStatus = 'Verified';
-    updateRequestStatus({ requestId, newStatus });
-  };
-
-  handleDownloadAttachments = (url, fileName) => {
-    const { downloadAttachments } = this.props;
-    downloadAttachments(url, fileName);
-  };
-
-  toggleComments = () => {
-    const { displayComments } = this.state;
-    if (displayComments) return this.setState({ displayComments: false });
-    return this.setState({ displayComments: true });
-  };
-
-  renderRightPaneQuestion = (name) => {
-    const { request: { status } } = this.props;
-    const pluralizedName = name && name[name.length - 1] === 's' ?
-      `${name}'` : `${name}'s`;
-    return status === 'Approved'
-      ? `Do you want to Verify ${pluralizedName} travel request?`
-      : `You have ${status && status.toLowerCase()} ${pluralizedName} travel request`;
-  };
-
-  renderFlightDetails() {
-    const { ticketDetails } = this.getValues();
-    return (
-      <div className="rectangle right">
-        <div className="flightDetails">
-          <p className="flight-heading">Flight Details</p>
-          {ticketDetails.length
-            ? <TicketDetails ticketDetails={ticketDetails} />
-            : (
-              <div className="no-flightDetails">
-                <p>No Flight Details</p>
-              </div>
-            )}
-        </div>
-      </div>
-    );
-  }
-
-  renderTravelCheckList = () => {
-    const { attachments, errors } = this.props;
-    const { checklistItems, attachmentDetails } = this.getValues();
-    if (typeof (errors) === 'string' && errors.includes('does not exist')) {
-      return <NotFound redirectLink="/requests/my-verifications" errorMessage={errors} />;
+      if (isUpdatedStatus) {
+        this.setState({modalInvisible: isUpdatedStatus && !isConfirmDialogLoading});
+      }
     }
-    return (
-      <div className="rectangle left">
-        <div className="attachments">
-          <p className="heading">Travel Checklist For This Trip</p>
-          <div>
-            <div>
-              {attachments.length ? (attachments.map(item => {
-                return (
-                  <div key={item.destinationName} className="location-items">
-                    <div className="destination">
-                      <span className="country-flag">
-                        <img
-                          className="flag"
-                          src={countryUtils.getCountryFlagUrl(item.destinationName)} alt="country flag" />
-                      </span>
-                      <span><strong>{item.tripLocation}</strong></span>
-                    </div>
-                    <div className="attachment-items">
-                      {(attachmentDetails.length)
-                        ? (
-                          <AttachmentItems
-                            attachments={item}
-                            attachmentDetails={attachmentDetails}
-                            handleDownloadAttachments={this.handleDownloadAttachments}
-                          />
-                        ) : (
-                          <div className="no-attachments">
-                            <p>No Uploaded Attachments.</p>
-                          </div>
-                        )}
-                    </div>
-                    {checklistItems.length
-                      ? <ChecklistItems checklistItems={checklistItems} destination={item.destinationName} />
-                      : null
-                    }
-                  </div>
-                );
-              })) :
-                (
-                  <div className="no-attachments">
-                    <p>No Uploaded Attachments.</p>
-                  </div>
-                )
-              }
-            </div>
+
+    getValues() {
+      const {attachments} = this.props;
+      return getValues(attachments);
+    }
+
+    handleButtonSelected = (e) => {
+      const newState= {buttonSelected: e.target.textContent, modalInvisible: false};
+      this.setState( newState);
+    };
+
+    handleDecision = (requestId) => {
+      const {updateRequestStatus} = this.props;
+      const newStatus = 'Verified';
+      updateRequestStatus({requestId, newStatus});
+    };
+
+    handleDownloadAttachments = (url, fileName) => {
+      const {downloadAttachments} = this.props;
+      downloadAttachments(url, fileName);
+    };
+
+    toggleComments = () => {
+      const {displayComments} = this.state;
+      if (displayComments) return this.setState({displayComments: false});
+      return this.setState({displayComments: true});
+    };
+
+    renderRightPaneQuestion = (name) => {
+      const {request: {status}} = this.props;
+
+      const pluralizedName = name && name[name.length - 1] === 's' ?
+        `${name}'` : `${name}'s`;
+
+      return status === 'Approved'
+        ? `Do you want to Verify ${pluralizedName} travel request?`
+        : `You have ${status && status.toLowerCase()} ${pluralizedName} travel request`;
+    };
+
+    renderFlightDetails() {
+      const {ticketDetails} = this.getValues();
+      return (
+        <div className="rectangle right">
+          <div className="flightDetails">
+            <p className="flight-heading">Flight Details</p>
+            {ticketDetails.length
+              ? <TicketDetails ticketDetails={ticketDetails} />
+              : (
+                <div className="no-flightDetails">
+                  <p>No Flight Details</p>
+                </div>
+              )}
           </div>
         </div>
-        <div className="desktop-comment">
-          {this.renderComments()}
-        </div>
-      </div>
-    );
-  };
+      );
+    }
 
-  renderComments = () => {
-    const { request, email, currentUser,
-      match: { params: { requestId } } } = this.props;
-    const { displayComments } = this.state;
-    return (
-      <CommentsSection
-        renderCommentsToggle={this.renderCommentsToggle}
-        request={request} requestId={requestId}
-        currentUser={currentUser} email={email}
-        displayComments={displayComments}
-      />
-    );
-  }
-
-  renderBottomPane() {
-    return (
-      <div className="">
-        <div className="bottom-container">
-          {this.renderTravelCheckList()}
-          {this.renderFlightDetails()}
-          <div className="mobile-comment left">
+    renderTravelCheckList = () => {
+      const {attachments, errors} = this.props;
+      const {checklistItems, attachmentDetails} = this.getValues();
+      if (typeof (errors) === 'string' && errors.includes('does not exist')) {
+        return <NotFound redirectLink="/requests/my-verifications" errorMessage={errors} />;
+      }
+      return (
+        <div className="rectangle left">
+          <div className="attachments">
+            <p className="heading">Travel Checklist For This Trip</p>
+            <div>
+              <div>
+                {attachments.length ? (attachments.map(item => {
+                  return (
+                    <div key={item.destinationName} className="location-items">
+                      <div className="destination">
+                        <span className="country-flag">
+                          <img
+                            className="flag"
+                            src={countryUtils.getCountryFlagUrl(item.destinationName)} alt="country flag" />
+                        </span>
+                        <span><strong>{item.tripLocation}</strong></span>
+                      </div>
+                      <div className="attachment-items">
+                        {(attachmentDetails.length)
+                          ? (
+                            <AttachmentItems
+                              attachments={item}
+                              attachmentDetails={attachmentDetails}
+                              handleDownloadAttachments={this.handleDownloadAttachments}
+                            />
+                          ) : (
+                            <div className="no-attachments">
+                              <p>No Uploaded Attachments.</p>
+                            </div>
+                          )}
+                      </div>
+                      {checklistItems.length
+                        ? <ChecklistItems checklistItems={checklistItems} destination={item.destinationName} />
+                        : null
+                      }
+                    </div>
+                  );
+                })) :
+                  (
+                    <div className="no-attachments">
+                      <p>No Uploaded Attachments.</p>
+                    </div>
+                  )
+                }
+              </div>
+            </div>
+          </div>
+          <div className="desktop-comment">
             {this.renderComments()}
           </div>
         </div>
-      </div>
-    );
-  }
+      );
+    };
 
-  renderCommentsToggle = () => {
-    const { displayComments } = this.state;
-    return (
-      <div>
-        <button onClick={this.toggleComments} type="button" className="comment-toggle-button">
-          <img className="chat image" src={chatIcon} alt="chat-icon" />
-          <p className="comment-button-text">{displayComments ? 'Hide Comments' : 'Show Comments'}</p>
-        </button>
-      </div>
-    );
-  };
-
-  renderDialogText = () => {
-    const { buttonSelected } = this.state;
-    if (buttonSelected === 'verify') return 'request verification';
-    return 'rejection';
-  };
-
-  renderButtons = (request) => {
-    const { modalInvisible, buttonSelected } = this.state;
-    const { status, trips } = request;
-    const { currentUser: { roles }, isConfirmDialogLoading } = this.props;
-    const allowedRoles = ['Travel Administrator', 'Super Administrator'];
-    const [{centers}] = roles.filter(role => allowedRoles.includes(role.roleName));
-    const locations = centers.length && centers.map(center => center.location);
-    const origin = trips.length && trips[0].origin.split(', ').pop();
-
-    const disabled = status !== 'Approved' || !locations.includes(origin);
-    const verifiedStatus = !locations.includes(origin) ? 'disabled' : (status === 'Verified'
-      ? 'verified' : (status === 'Approved' ? 'verify' : 'disabled'));
-
-    return (
-      <div className="btn-group">
-        <button
-          type="button" className={`action-button--${verifiedStatus}`}
-          disabled={disabled} onClick={this.handleButtonSelected}
-        >
-          {verifiedStatus === 'disabled' ? 'verify' : verifiedStatus}
-        </button>
-        <ConfirmDialog
-          id={request.id} modalInvisible={modalInvisible}
-          buttonSelected={buttonSelected} closeDeleteModal={()=> this.setState({modalInvisible: true})}
-          renderDialogText={this.renderDialogText}
-          handleVerify={this.handleDecision}
-          handleReject={this.handleDecision}
-          documentText="Request"
-          isConfirmDialogLoading={isConfirmDialogLoading}
+    renderComments = () => {
+      const {
+        request, email, currentUser,
+        match: {params: {requestId}}
+      } = this.props;
+      const {displayComments} = this.state;
+      return (
+        <CommentsSection
+          renderCommentsToggle={this.renderCommentsToggle}
+          request={request} requestId={requestId}
+          currentUser={currentUser} email={email}
+          displayComments={displayComments}
         />
-      </div>
-    );
+      );
+    };
+
+    renderBottomPane() {
+      return (
+        <div className="">
+          <div className="bottom-container">
+            {this.renderTravelCheckList()}
+            {this.renderFlightDetails()}
+            <div className="mobile-comment left">
+              {this.renderComments()}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    renderCommentsToggle = () => {
+      const {displayComments} = this.state;
+      return (
+        <div>
+          <button onClick={this.toggleComments} type="button" className="comment-toggle-button">
+            <img className="chat image" src={chatIcon} alt="chat-icon" />
+            <p className="comment-button-text">{displayComments ? 'Hide Comments' : 'Show Comments'}</p>
+          </button>
+        </div>
+      );
+    };
+
+    renderDialogText = () => {
+      const {buttonSelected} = this.state;
+
+      if (buttonSelected === 'verify') return 'request verification';
+      return 'rejection';
+    };
+
+    renderButtons = (request) => {
+      const {modalInvisible, buttonSelected} = this.state;
+      const {status, trips} = request;
+      const {currentUser: {roles}, isConfirmDialogLoading} = this.props;
+      const allowedRoles = ['Travel Administrator', 'Super Administrator'];
+      const [{centers}] = roles.filter(role => allowedRoles.includes(role.roleName));
+      const locations = centers.length && centers.map(center => center.location);
+      const origin = trips.length && trips[0].origin.split(', ').pop();
+
+      const disabled = status !== 'Approved' || !locations.includes(origin);
+      const verifiedStatus = !locations.includes(origin) ? 'disabled' : (status === 'Verified'
+        ? 'verified' : (status === 'Approved' ? 'verify' : 'disabled'));
+
+      return (
+        <div className="btn-group">
+          <button
+            type="button" className={`action-button--${verifiedStatus}`}
+            disabled={disabled} onClick={this.handleButtonSelected}
+          >
+            {verifiedStatus === 'disabled' ? 'verify' : verifiedStatus}
+          </button>
+          <ConfirmDialog
+            id={request.id} modalInvisible={modalInvisible}
+            buttonSelected={buttonSelected}
+            closeDeleteModal={() => this.setState({modalInvisible: true})}
+            renderDialogText={this.renderDialogText}
+            handleVerify={this.handleDecision}
+            handleReject={this.handleDecision}
+            documentText="Request"
+            isConfirmDialogLoading={isConfirmDialogLoading}
+          />
+        </div>
+      );
+    };
+
+    render() {
+      const {
+        request, isLoading, submissionInfo,
+        match: {params: {requestId}}, location: {pathname},
+        history, shouldOpen, openModal, closeModal,
+        updateModification, tripModification
+      } = this.props;
+      const headerTags = ['Manager\'s Approval', 'Budget Check', 'Travel Verification'];
+      return (
+        <Fragment>
+          {isLoading
+            ? <Preloader />
+            : (
+              <div className="verification-page-container">
+                <RequestDetails
+                  request={request} requestId={requestId}
+                  renderButtons={this.renderButtons}
+                  history={history}
+                  renderRightPaneQuestion={this.renderRightPaneQuestion} isLoading={isLoading}
+                  type={headerTags}
+                  tripModification={tripModification}
+                  updateModification={updateModification}
+                  showModifications={type === 'modifications'}
+                  headerTags={headerTags} pathname={pathname}
+                  submissionInfo={submissionInfo}
+                  shouldOpen={shouldOpen}
+                  openModal={openModal}
+                  closeModal={closeModal}
+                />
+                {this.renderBottomPane()}
+              </div>
+            )
+          }
+        </Fragment>
+      );
+    }
+  }
+
+  Verifications.defaultProps = {
+    request: {},
+    isLoading: true,
+    currentUser: {},
+    email: {},
+    errors: {},
+    isConfirmDialogLoading: false,
+    isUpdatedStatus: false,
+    tripModification: {}
   };
 
-  render() {
-    const {
-      request, isLoading, submissionInfo,
-      match: { params: { requestId } }, location: { pathname }, history, shouldOpen, openModal, closeModal
-    } = this.props;
-    const headerTags = ['Manager\'s Approval', 'Budget Check', 'Travel Verification'];
-    return (
-      <Fragment>
-        {isLoading
-          ? <Preloader />
-          : (
-            <div className="verification-page-container">
-              <RequestDetails
-                request={request} requestId={requestId} renderButtons={this.renderButtons} history={history}
-                renderRightPaneQuestion={this.renderRightPaneQuestion} isLoading={isLoading}
-                type={headerTags}
-                headerTags={headerTags} pathname={pathname}
-                submissionInfo={submissionInfo}
-                shouldOpen={shouldOpen}
-                openModal={openModal}
-                closeModal={closeModal}
-              />
-              {this.renderBottomPane()}
-            </div>
-          )
-        }
-      </Fragment>
-    );
-  }
-}
-
-VerificationDetails.defaultProps = {
-  request: {},
-  isLoading: true,
-  currentUser: {},
-  email: {},
-  errors: {},
-  isConfirmDialogLoading:false,
-  isUpdatedStatus:false
-};
-
-VerificationDetails.propTypes = {
-  request: PropTypes.object,
-  isLoading: PropTypes.bool, currentUser: PropTypes.object,
-  email: PropTypes.object, fetchUserRequestDetails: PropTypes.func.isRequired,
-  fetchAttachments: PropTypes.func.isRequired, downloadAttachments: PropTypes.func.isRequired,
-  updateRequestStatus: PropTypes.func.isRequired, match: PropTypes.object.isRequired,
-  attachments: PropTypes.array.isRequired, location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired, errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  submissionInfo: PropTypes.object.isRequired,
-  fetchSubmission: PropTypes.func.isRequired,
-  shouldOpen: PropTypes.bool.isRequired,
-  openModal: PropTypes.func.isRequired,
-  closeModal: PropTypes.func.isRequired,
-  isConfirmDialogLoading: PropTypes.bool,
-  isUpdatedStatus: PropTypes.bool
+  Verifications.propTypes = {
+    request: PropTypes.object,
+    isLoading: PropTypes.bool, currentUser: PropTypes.object,
+    email: PropTypes.object, fetchUserRequestDetails: PropTypes.func.isRequired,
+    fetchAttachments: PropTypes.func.isRequired, downloadAttachments: PropTypes.func.isRequired,
+    updateRequestStatus: PropTypes.func.isRequired, match: PropTypes.object.isRequired,
+    attachments: PropTypes.array.isRequired, location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired, errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    submissionInfo: PropTypes.object.isRequired,
+    fetchSubmission: PropTypes.func.isRequired,
+    shouldOpen: PropTypes.bool.isRequired,
+    openModal: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
+    isConfirmDialogLoading: PropTypes.bool,
+    isUpdatedStatus: PropTypes.bool,
+    updateModification: PropTypes.func.isRequired,
+    tripModification: PropTypes.object
+  };
+  return Verifications;
 };
 
 const mapStateToProps = (state) => {
@@ -301,6 +324,7 @@ const mapStateToProps = (state) => {
     isLoading: state.requests.fetchingRequest,
     currentUser: state.user.currentUser,
     email: state.user.getUserData,
+    tripModification: state.tripModifications.updateRequest,
     attachments: state.attachments.submissions,
     submissionInfo: state.submissions,
     shouldOpen: state.modal.modal.shouldOpen,
@@ -313,10 +337,11 @@ const actionCreators = {
   fetchUserRequestDetails,
   fetchAttachments,
   updateRequestStatus,
+  updateModification,
   downloadAttachments,
   fetchSubmission,
   openModal,
   closeModal
 };
 
-export default connect(mapStateToProps, actionCreators)(VerificationDetails);
+export default (type = 'verifications') => connect(mapStateToProps, actionCreators)(VerificationDetails(type));

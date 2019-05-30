@@ -174,7 +174,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
                 <div className="travel-document-select-file">
                   <p className="attach-document-text">
                     {
-                      `Attach the image or PDF of your ${modalType.split(' ').splice(-1)} document`
+                      `Attach the image or PDF of your ${modalType && modalType.split(' ').splice(-1)} document`
                     }
                   </p>
                   <FileUploadField
@@ -191,7 +191,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
                   <SubmitArea
                     onCancel={this.onCancel} hasBlankFields={hasBlankFields || !imageChanged}
                     send={
-                      (modalType.startsWith('edit')) ? 'Save Changes' :
+                      (modalType && modalType.startsWith('edit')) ? 'Save Changes' :
                         submitButton[documentType]}
                     loading={uploadingDocument}
                     updatingDocument={updatingDocument}

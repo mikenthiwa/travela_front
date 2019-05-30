@@ -6,6 +6,7 @@ const searchBarAllowedRoutes = [
   /settings\/roles\/\d+/,
   /trip-planner\/travel-readiness/,
   /settings\/travel-region\/\d+/,
+  /requests\/modifications(\/*)$/
 ];
 
 export default searchBarAllowedRoutes;

@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileForm from '../index';
-import mocks from '../__mocks__';
+import mocks from '../__mocks__/ProfileForm';
 
 const { values, managers, centers } = mocks;
 describe('<ProfileForm />', () => {
@@ -26,7 +26,7 @@ describe('<ProfileForm />', () => {
     getUserData: jest.fn(() => { }),
     onChange: jest.fn(() => { }),
     getCenters: jest.fn(),
-    size: 10,
+    size: '10px',
     centers,
     userData: {
       ...values,

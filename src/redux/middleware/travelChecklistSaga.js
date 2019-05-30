@@ -75,7 +75,7 @@ export function* updateChecklistAsync(action) {
   try {
     const { checklistItemId, checklistItemData } = action;
     const response = yield call(TravelChecklistAPI.updateChecklistItem,
-      checklistItemId, checklistItemData, location);
+      checklistItemId, checklistItemData);
     yield put(updateChecklistSuccess(response.data.updatedChecklistItem, checklistItemId));
     yield put(closeModal());
     toast.success(response.data.message);

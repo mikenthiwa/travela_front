@@ -32,6 +32,7 @@ let props = {
     errors: [],
     isLoading: false,
     stipends: [{
+      id: 1,
       amount: 100,
       country: 'United Kingdom'
     }]

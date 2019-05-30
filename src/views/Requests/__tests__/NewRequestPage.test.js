@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { MemoryRouter, Link } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import MutationObserver from 'mutation-observer';
-import { props } from 'bluebird';
 import NewRequestPageView, { NewRequestPage } from '../NewRequestPage';
 
 
@@ -38,8 +37,18 @@ let props1 = {
     { id: 1, fullName: 'Samuel Kubai' },
     { id: 2, fullName: 'Bolton Otieno' }
   ],
+  tripModifications: {
+    viewRequest: {
+      fetchingModifications: true,
+      pendingModification: {
+
+      }
+    }
+  },
+  fetchModificationRequest: jest.fn(),
   fetchingRequest: false,
   fetchUserRequestDetails: jest.fn(),
+  submitModificationRequest: jest.fn(),
   user: {
     UserInfo: {
       name: 'John Doe',
@@ -182,6 +191,15 @@ let props2 = {
     { id: 1, fullName: 'Samuel Kubai' },
     { id: 2, fullName: 'Bolton Otieno' }
   ],
+  fetchModificationRequest: jest.fn(),
+  tripModifications: {
+    viewRequest: {
+      fetchingModifications: true,
+      pendingModification: {
+
+      }
+    }
+  },
   fetchingRequest: true,
   fetchUserRequestDetails: jest.fn(),
   user: {
@@ -350,6 +368,15 @@ let props3 = {
     { id: 1, fullName: 'Samuel Kubai' },
     { id: 2, fullName: 'Bolton Otieno' }
   ],
+  tripModifications: {
+    viewRequest: {
+      fetchingModifications: true,
+      pendingModification: {
+
+      }
+    }
+  },
+  fetchModificationRequest: jest.fn(),
   fetchingRequest: false,
   fetchUserRequestDetails: jest.fn(),
   user: {
@@ -516,6 +543,16 @@ let props4 = {
     { id: 1, fullName: 'Samuel Kubai' },
     { id: 2, fullName: 'Bolton Otieno' }
   ],
+
+  fetchModificationRequest: jest.fn(),
+  tripModifications: {
+    viewRequest: {
+      fetchingModifications: true,
+      pendingModification: {
+
+      }
+    }
+  },
   fetchingRequest: false,
   fetchUserRequestDetails: jest.fn(),
   user: {
@@ -655,13 +692,17 @@ const initialState1 = {
   comments: {
     creatingComments: false
   },
-  modal: {
-    modal: {
-      shouldOpen: false,
-      modalType: null,
-      page: null
+  tripModifications: {
+    viewRequest: {
+      fetchingModifications: true,
+      pendingModification: {
+
+      }
     }
   },
+  modal: {modal : {shouldOpen: false,
+    modalType: null,
+    page: null}},
   travelReadinessDocuments: {
     userReadiness: {
       id: '2',
@@ -703,8 +744,16 @@ const initialState2 = {
   comments: {
     creatingComments: false
   },
+  tripModifications: {
+    viewRequest: {
+      fetchingModifications: true,
+      pendingModification: {
+
+      }
+    }
+  },
   modal: {
-    modal: {
+    modal : {
       shouldOpen: false,
       modalType: null,
       page: null
@@ -751,13 +800,17 @@ const initialState3 = {
   comments: {
     creatingComments: false
   },
-  modal: {
-    modal: {
-      shouldOpen: false,
-      modalType: null,
-      page: null
+  tripModifications: {
+    viewRequest: {
+      fetchingModifications: true,
+      pendingModification: {
+
+      }
     }
   },
+  modal: {modal : {shouldOpen: false,
+    modalType: null,
+    page: null}},
   travelReadinessDocuments: {
     userReadiness: {
       id: '2',
@@ -798,13 +851,17 @@ const initialState4 = {
   comments: {
     creatingComments: false
   },
-  modal: {
-    modal: {
-      shouldOpen: false,
-      modalType: null,
-      page: null
+  tripModifications: {
+    viewRequest: {
+      fetchingModifications: true,
+      pendingModification: {
+
+      }
     }
   },
+  modal: {modal : {shouldOpen: false,
+    modalType: null,
+    page: null}},
   travelReadinessDocuments: {
     userReadiness: {
       id: '2',
@@ -931,5 +988,93 @@ describe('<Request Page>', () => {
     wrapper = shallow(<NewRequestPage {...props1} />);
     wrapper.find('span.goback').simulate('click');
     expect(props1.history.goBack).toHaveBeenCalled();
+  });
+
+  describe('trip modifications', () => {
+    const store = (overrides) =>  mockStore({...initialState1, ...overrides});
+    const props = {...props1};
+
+    let currentStore;
+
+    const init = (overrides = {}, storeOverrides = {}) => mount(
+      <Provider store={currentStore = store({
+        tripModifications: {
+          viewRequest: {
+            fetchingModifications: false,
+            pendingModification: {
+              type: 'Cancel Trip'
+            },
+            ...overrides
+          },
+        },
+        ...storeOverrides
+      }
+      )}>
+        <MemoryRouter>
+          <NewRequestPageView {...props} />
+        </MemoryRouter>
+      </Provider>
+    );
+
+
+    it('should display the cancel trip info and popover if the modification is created', () => {
+      const wrapper = init();
+      const popover = wrapper.find('Popover');
+      expect(popover.find('.pending__message').text())
+        .toEqual('Pending Cancellation');
+    });
+
+    it('should display the buttons to modify the trip', () => {
+      wrapper = init({ pendingModification: null});
+      const cancelButton = wrapper.find('.action-btn__wrapper').find('.buttons').find('button').first();
+      expect(cancelButton.find('ButtonLoadingIcon').props().buttonText).toEqual('Cancel Trip');
+    });
+
+    it('should display the modal to submit a reason', () => {
+      wrapper = init({pendingModification: null});
+      const cancelButton = wrapper.find('.action-btn__wrapper').find('.buttons').find('button').first();
+      cancelButton.simulate('click');
+
+      expect(currentStore.getActions()).toContainEqual({
+        type: 'OPEN_MODAL',
+        modal: {
+          shouldOpen: true,
+          modalType: 'Cancel Trip request modification',
+          page: undefined
+        }
+      });
+    });
+
+    it('should submit a trip modification request', () => {
+      wrapper = init({pendingModification: null}, {
+        modal: {
+          modal: {
+            shouldOpen: true,
+            modalType: 'Cancel Trip request modification'
+          }
+        }
+      });
+      const cancelButton = wrapper.find('.action-btn__wrapper').find('.buttons').find('button').first();
+      cancelButton.simulate('click');
+
+      const reasonModal = wrapper.find('TripModificationReasonModal');
+      reasonModal.find('textarea[name="reason"]').simulate('change', {
+        target: {
+          value: 'This is the travel reason'
+        }
+      });
+      reasonModal.find('form').simulate('submit', { preventDefault: () => {}});
+
+      expect(currentStore.getActions()).toContainEqual({
+        type: 'SUBMIT_MODIFICATION_REQUEST',
+        requestId: 'xDh20btGz',
+        modificationType: 'Cancel Trip',
+        reason: 'This is the travel reason'
+      });
+
+      expect(currentStore.getActions()).toContainEqual({
+        type: 'CLOSE_MODAL'
+      });
+    });
   });
 });

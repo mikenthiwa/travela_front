@@ -40,6 +40,9 @@ const props = {
       }
     }
   },
+  history: {
+    push: jest.fn()
+  },
   fetchCalendarAnalytics: jest.fn(),
   downloadCalendarAnalytics: jest.fn(),
   handleFilterBtn: jest.fn(),
@@ -57,9 +60,7 @@ const wrapper = shallow(
 
 describe('Travel Calendar', () => {
   afterEach(() => {
-    props.fetchCalendarAnalytics.mockReset();
-    props.downloadCalendarAnalytics.mockReset();
-    props.handleFilterBtn.mockReset();
+    jest.resetAllMocks();
   });
 
   it('should render Travel Calendar Correctly', async () => {
@@ -111,7 +112,7 @@ describe('Travel Calendar', () => {
     });
     it('should change page in state to nextPage', () => {
       wrapper.find('#Next').simulate('click');
-      expect(props.fetchCalendarAnalytics).toHaveBeenCalledWith({type: 'json', filter, page: 2});
+      expect(props.fetchCalendarAnalytics).toHaveBeenCalledWith({type: 'json',history: props.history, filter, page: 2});
       expect(wrapper.state().page).toEqual(2);
     });
     it('should change page in state to prevPage', () => {
@@ -132,7 +133,7 @@ describe('Travel Calendar', () => {
       };
       wrapper.setProps(newProps, () => {
         wrapper.find('#Previous').simulate('click');
-        expect(props.fetchCalendarAnalytics).toHaveBeenCalledWith({type: 'json', filter, page: 1});
+        expect(props.fetchCalendarAnalytics).toHaveBeenCalledWith({type: 'json', history: props.history, filter, page: 1});
       });
     });
   });

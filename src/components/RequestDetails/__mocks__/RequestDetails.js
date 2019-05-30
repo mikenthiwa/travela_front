@@ -51,6 +51,14 @@ export const props = {
   approvalPage: true,
   headerTags: ['Managers Approval'],
   submissionInfo: { percentageCompleted: 0 },
+  history: {
+    push: jest.fn()
+  },
+  shouldOpen: false,
+  openModal: jest.fn(),
+  closeModal: jest.fn(),
+  updateModification: jest.fn(),
+  tripModification: {},
   requestId: 'nXCj4U57J',
   request,
   pathname: '/requests/my-approvals/requestId'

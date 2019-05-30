@@ -181,7 +181,7 @@ Login.propTypes = {
   history: PropTypes.shape({}).isRequired,
   setUser: PropTypes.func.isRequired,
   postData: PropTypes.func.isRequired,
-  postUserData: PropTypes.array,
+  postUserData: PropTypes.object,
   errors: PropTypes.shape({}),
   user: PropTypes.shape({}),
   match: PropTypes.object,
@@ -192,7 +192,7 @@ Login.defaultProps = {
   user: [],
   match:{},
   errors: {},
-  postUserData: []
+  postUserData: {}
 };
 
 export const mapStateToProps = ({ auth, user }) => ({

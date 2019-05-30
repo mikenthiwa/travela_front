@@ -12,7 +12,7 @@
     height: 120px !important;
   }
 
-  .verification-modal-overlay {
+  .verification-modal-overlay, .cancellation-modal-overlay {
     left: 343px !important;
     top: 145px !important;
     outline: none !important;
@@ -33,7 +33,7 @@
     height: 120px !important;
   }
 
-  .verification-modal-overlay {
+  .verification-modal-overlay , .cancellation-modal-overlay{
     left: 366px !important;
     top: 145px !important;
     outline: none !important;
@@ -54,7 +54,7 @@
     height: 120px !important;
   }
 
-  .verification-modal-overlay {
+  .verification-modal-overlay , .cancellation-modal-overlay{
     left: 30px !important;
     outline: none !important;
     height: 120px !important;
@@ -74,7 +74,7 @@
     height: 120px !important;
   }
 
-  .verification-modal-overlay {
+  .verification-modal-overlay, .cancellation-modal-overlay{
     left: 260px !important;
     top: 140px !important;
     outline: none !important;
@@ -93,7 +93,7 @@
     outline: none !important;
   }
 
-  .verification-modal-overlay {
+  .verification-modal-overlay , .cancellation-modal-overlay{
     left: 260px !important;
     top: 140px !important;
     outline: none !important;
@@ -105,6 +105,7 @@
   width: 243px !important;
   top: 140px;
   left: 477px;
+  border: 1px solid #ddd;
   outline: none;
   overflow: hidden;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15);
@@ -141,6 +142,7 @@
   top: 140px;
   left: 577px;
   outline: none;
+  border: 1px solid #ddd;
   overflow: hidden;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15);
 
@@ -165,6 +167,31 @@
   left: 440px;
   outline: none;
   overflow: hidden;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15);
+
+  .modal {
+    top: 0;
+  }
+
+  .modal-close {
+    margin-right: 26px;
+  }
+
+  .modal-title-bar .modal-title-text {
+    margin-left: 26px;
+  }
+}
+
+.trip-modification-modal-overlay{
+  position: absolute !important;
+  height: 120px;
+  width: 270px !important;
+  top: 60px;
+  left: 100px;
+  outline: none;
+  overflow: hidden;
+  border: 1px solid #ddd;
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15);
 
   .modal {
@@ -204,7 +231,8 @@
   }
 }
 
-.rejection-comment-modal__btn {
+.rejection-comment-modal__btn,
+#Reject.trip-modification-Reject-comment-modal__btn{
   height: 26px;
   width: 80px;
   border-radius: 1px;
@@ -215,7 +243,9 @@
   cursor: pointer;
 }
 
-#verify.request.verification-comment-modal__btn, .verification-comment-modal__btn {
+#verify.request.verification-comment-modal__btn,
+.verification-comment-modal__btn ,
+#Approve.trip-modification-Approve-comment-modal__btn{
   height: 26px;
   width: 90px;
   border-radius: 1px;

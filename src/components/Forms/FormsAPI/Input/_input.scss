@@ -517,3 +517,23 @@ input[type="number"]::-webkit-inner-spin-button {
     }
   }
 }
+
+.form-input{
+  &__textarea {
+    position: relative;
+    &__character-counter {
+      position: absolute;
+      bottom: -15px;
+      text-align: right;
+      font-size: 10px;
+      right: 3px;
+      color: rgba(0,0,0,.6)
+    }
+
+    &--error {
+      .form-input__textarea__character-counter {
+        display: none;
+      }
+    }
+  }
+}

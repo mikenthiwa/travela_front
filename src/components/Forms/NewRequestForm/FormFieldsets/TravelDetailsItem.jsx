@@ -314,8 +314,6 @@ class TravelDetailsItem extends Component {
     });
     const reason = !isThere && editing ? 'Other..' : values[`reasons-${itemId}`];
     const characters = values[`otherReasons-${itemId}`];
-    let charLength = characters ? characters.trim().length : '';
-    let reasonsLimit =  reasonsWarningColor(charLength, 140);
 
     return (
       <div className="other__reason" onChange={typedReason => handleReason(typedReason.target.value, itemId, 'other')}>
@@ -328,9 +326,6 @@ class TravelDetailsItem extends Component {
               rows:'20',
               parentid: itemId,
             })}
-            <div className="character__conditions" style={{ color: `${reasonsLimit.color}`, top: `${reasonsLimit.top}` }}>
-              {reasonsLimit.charLeft}
-            </div>
           </Fragment>)
           : ''
         }
@@ -411,21 +406,6 @@ class TravelDetailsItem extends Component {
   }
 }
 
-export const reasonsWarningColor = (length, max) =>{
-  const charLeft = max - length;
-  switch(true){
-  case (charLeft > 132):
-    return { color:'red', charLeft: `A minimum of ${8} Characters is required`};
-  case (charLeft===0):
-    return { color:'red', charLeft: `You have reached a maximum of ${140} Characters`};
-  case (charLeft < 11):
-    return {color:'red', charLeft };
-  case (charLeft < 20):
-    return {color:'#E67373', charLeft };
-  default:
-    return {color: '#3359db', charLeft};
-  }
-};
 
 export default TravelDetailsItem;
 

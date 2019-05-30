@@ -34,8 +34,9 @@ const defaultProps = {
   exportReadiness: jest.fn(),
   getReadinessCSV: jest.fn(),
   renderNotFound: jest.fn(),
-
+  center: 'Nairobi, Kenya'
 };
+
 const setup = (props) => {
   const actualProps = props || defaultProps;
   return shallow(<TravelReadiness {...actualProps} />);

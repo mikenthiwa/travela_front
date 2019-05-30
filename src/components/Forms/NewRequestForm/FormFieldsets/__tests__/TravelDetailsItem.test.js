@@ -1,8 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import _ from 'lodash';
 import { mount } from 'enzyme';
-import TravelDetailsItem, { reasonsWarningColor } from '../TravelDetailsItem';
+import TravelDetailsItem from '../TravelDetailsItem';
 import beds from '../../../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
 
 
@@ -50,12 +49,13 @@ let props = {
   availableRooms: { beds },
   modalType: 'edit request',
   requestOnEdit,
-  listTravelReasons: { 
+  listTravelReasons: {
     travelReasons: [
       {id:1,title:'Bootcamp'}
     ]
   },
-  handleReason : jest.fn()
+  handleReason : jest.fn(),
+  setCurrentOrigin: jest.fn()
 };
 
 const setup = (props) => shallow(<TravelDetailsItem {...props} />);
@@ -106,9 +106,9 @@ describe('Test Suite for <TravelDetailsItem />', () => {
     });
     wrapper.instance().setBedChoices(false, [], []);
     expect(wrapper.state().choices[1].value).toEqual(-2);
-    
+
   });
-  
+
 
   it('should call handleDate prop function when handleDate is called and trip type is oneWay', () => {
     const newProps = {...props};
@@ -137,12 +137,6 @@ describe('Test Suite for <TravelDetailsItem />', () => {
     newProps.selection = 'multi';
     const wrapper = setup(newProps);
     expect(props.renderInput).toHaveBeenCalled();
-  });
-
-  it('should change reason text color to red', () => {
-    expect(reasonsWarningColor(140, 140)).toEqual({ color:'red', charLeft: `You have reached a maximum of ${140} Characters`});
-    expect(reasonsWarningColor(137, 140)).toEqual({ color:'red', charLeft: 3});
-    expect(reasonsWarningColor(117, 140)).toEqual({charLeft: 23, color: '#3359db'});
   });
 
   it('sets the correct travelReason in state when editing requests', () => {

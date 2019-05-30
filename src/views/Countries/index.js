@@ -1,20 +1,15 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { isEmpty } from 'lodash';
-import { PropTypes } from 'prop-types';
+import React, {Component, Fragment} from 'react';
+import {connect} from 'react-redux';
+import {isEmpty} from 'lodash';
+import {PropTypes} from 'prop-types';
 import WithLoadingCountryTable from '../../components/CountriesTable';
 import PageHeader from '../../components/PageHeader';
 import Pagination from '../../components/Pagination/Pagination';
 import Modal from '../../components/modal/Modal';
-import { AddCountryForm } from '../../components/Forms';
-import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
-import {
-  createCountry,
-  getCountries
-} from '../../redux/actionCreator/countryActions';
-import {
-  fetchRegions
-} from '../../redux/actionCreator/travelRegionActions';
+import {AddCountryForm} from '../../components/Forms';
+import {closeModal, openModal} from '../../redux/actionCreator/modalActions';
+import {createCountry, getCountries} from '../../redux/actionCreator/countryActions';
+import {fetchRegions} from '../../redux/actionCreator/travelRegionActions';
 import './countries.scss';
 
 export class Countries extends Component {
@@ -44,7 +39,7 @@ export class Countries extends Component {
     } else {
       history.push(`${pathname}?page=${page}`);
     }
-  } 
+  };
 
   createSearchQuery = () => {
     const { location: { search } } = this.props;
@@ -52,8 +47,18 @@ export class Countries extends Component {
     let searchParams = parameters.get('search');
     const page = parameters.get('page') || 1;
     if(!searchParams) searchParams = '';
-    const withPagination = `${searchParams}&page=${page}`;
-    return withPagination;
+    return `${searchParams}&page=${page}`;
+  };
+
+  determineHeaderTitle(regionName) {
+    switch(regionName) {
+    case 'default':
+      return 'default countries';
+    case 'europe':
+      return 'european countries';
+    default:
+      return `${regionName}n countries`;
+    }
   }
 
   renderCountryForm() {
@@ -96,24 +101,13 @@ export class Countries extends Component {
     return (
       <div className="rp-table">
         <WithLoadingCountryTable
-          searched={searchParams ? true : false}
+          searched={!!searchParams}
           isLoading={isLoading}
           countries={countries}
           fetchError={countryErrors}
         />
       </div>
     );
-  }
-  
-  determineHeaderTitle(regionName) {
-    switch(regionName) {
-    case 'default':
-      return 'default countries';
-    case 'europe':
-      return 'european countries';
-    default:
-      return `${regionName}n countries`;
-    }
   }
 
   renderPanelHeader() {

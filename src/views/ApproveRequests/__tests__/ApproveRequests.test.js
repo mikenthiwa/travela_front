@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MutationObserver from 'mutation-observer';
 import ApproveRequests from '..';
-import { initialState, props } from '../__mocks__';
+import { initialState, props } from '../__mocks__/ApproveRequests';
 import modal from '../../../redux/reducers/modal'
 
 const ConnectedApproveRequests = ApproveRequests();

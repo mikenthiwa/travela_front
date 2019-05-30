@@ -7,8 +7,11 @@ import ButtonGroup from '../ButtonGroup';
 const props = {
   openRequestsCount: 1,
   pastRequestsCount: 1,
+  cancelledTripsCount: 1,
+  modifiedTripsCount: 1,
   url: '?page=2',
   fetchRequests: sinon.spy(() => Promise.resolve()),
+  fetchApprovals: jest.fn(),
   buttonsType: 'requests',
   activeStatus: 'all',
 };
@@ -78,5 +81,31 @@ describe('<ButtonGroup />', () => {
     const wrapper = mount(<ButtonGroup {...{...props, activeStatus: 'past' }} />);
     const pastButton = wrapper.find('#past-button');
     expect(pastButton.hasClass('bg-btn--active')).toEqual(true);
+  });
+  describe('Trip modifications', () => {
+    const wrapper = mount(<ButtonGroup {...{...props, modificationType: 'all', buttonsType: 'modifications' }} />);
+
+    afterEach(() => {
+      jest.resetAllMocks();
+    });
+
+    it('should display the trip modification buttons', () => {
+      expect(wrapper.find('Button[text="Trip Cancellation"]').length).toEqual(1);
+    });
+
+    it('should fetch all the trip modifications', () => {
+      wrapper.find('#all-button').simulate('click');
+      expect(props.fetchApprovals).toHaveBeenCalledWith('??page=2&page=1');
+    });
+
+    it('should filter the cancelled trips', () => {
+      wrapper.find('#open-button').simulate('click');
+      expect(props.fetchApprovals).toHaveBeenCalledWith('??page=2&page=1&status=open&type=Cancel Trip');
+    });
+
+    it('should filter the modified date trips', () => {
+      wrapper.find('#past-button').simulate('click');
+      expect(props.fetchApprovals).toHaveBeenCalledWith('??page=2&page=1&status=open&type=Modify Dates');
+    });
   });
 });

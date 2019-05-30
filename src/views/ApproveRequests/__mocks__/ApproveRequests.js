@@ -158,6 +158,8 @@ export const initialState = {
 export const props = {
   fetchUserRequestDetails: jest.fn(),
   updateRequestStatus: jest.fn(),
+  updateModification: jest.fn(),
+  tripModification: {},
   match: {
     params: {
       requestId: 'nXCj4U57J'

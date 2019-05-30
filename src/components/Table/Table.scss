@@ -74,6 +74,10 @@ $font-normal: 'DIN Pro';
   &--checked {
     @include request__status(#f29000);
   }
+  &--cancelTrip{
+    @include request__status(#ff5359);
+    width: 70px;
+  }
 }
 .freeze {
   @media (max-width: 839px) {

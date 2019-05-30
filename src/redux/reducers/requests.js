@@ -20,7 +20,7 @@ import {
   DELETE_REQUEST_FAILURE,
   UPDATE_REQUEST_STATUS_SUCCESS,
   FETCH_EDIT_REQUEST_SUCCESS,
-  FETCH_EDIT_REQUEST_FAILURE
+  FETCH_EDIT_REQUEST_FAILURE, UPDATE_MODIFICATION_REQUEST
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -218,6 +218,17 @@ const requests = (state = initialState, action) => {
       requestData: {
         ...state.requestData,
         status: action.updatedRequest.request.status },
+    };
+  case `${UPDATE_MODIFICATION_REQUEST}_SUCCESS`:
+    return {
+      ...state,
+      requestData: {
+        ...state.requestData,
+        modifications: [
+          action.response.modification,
+          ...state.requestData.modifications
+        ]
+      }
     };
   default:
     return state;

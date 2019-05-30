@@ -12,8 +12,10 @@ class ApprovalsPanelHeader extends PureComponent {
       pastApprovalsCount,
       fetchApprovals,
       activeStatus,
-      approvalsLength,
       type,
+      modificationType,
+      cancelledTrips,
+      modifiedTrips,
       url
     } = this.props;
     return (
@@ -21,19 +23,28 @@ class ApprovalsPanelHeader extends PureComponent {
         openApprovalsCount={openApprovalsCount}
         fetchApprovals={fetchApprovals}
         pastApprovalsCount={pastApprovalsCount}
+        cancelledTripsCount={cancelledTrips}
+        modifiedTripsCount={modifiedTrips}
+        modificationType={modificationType}
         url={url}
+        type={type}
         budgetChecker={/budget/.test(type)}
         activeStatus={activeStatus}
-        buttonsType="approvals"
+        buttonsType={type === 'modifications' ? 'modifications': 'approvals'}
       />
     );
   };
 
   render() {
     const { url, approvalsLength, getApprovalsWithLimit, loading, type } = this.props;
+    const title = {
+      manager: 'MANAGER APPROVALS',
+      budget: 'BUDGET APPROVALS',
+      modifications: 'TRIP MODIFICATIONS'
+    };
     return (
       <div className="request-panel-header">
-        <PageHeader title={`${ /manager/.test(type) ? 'MANAGER APPROVALS': 'BUDGET APPROVALS'}`} />
+        <PageHeader title={title[type]} />
         {
           approvalsLength > 0 && !loading && (
             <div className="open-requests">
@@ -54,7 +65,10 @@ ApprovalsPanelHeader.propTypes = {
   approvalsLength: PropTypes.number,
   url: PropTypes.string.isRequired,
   loading: PropTypes.bool,
+  cancelledTrips: PropTypes.number,
+  modifiedTrips: PropTypes.number,
   type: PropTypes.string.isRequired,
+  modificationType: PropTypes.string,
   getApprovalsWithLimit: PropTypes.func.isRequired
 };
 
@@ -62,8 +76,11 @@ ApprovalsPanelHeader.defaultProps = {
   activeStatus: 'all',
   openApprovalsCount: null,
   pastApprovalsCount: null,
+  cancelledTrips: 0,
+  modifiedTrips: 0,
   loading: false,
   approvalsLength: null,
+  modificationType: 'all'
 };
 
 export default ApprovalsPanelHeader;

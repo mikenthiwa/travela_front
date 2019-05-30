@@ -115,6 +115,7 @@ NotificationItem.defaultProps = {
   image: '',
   markSingleAsRead: () => { },
   message: '',
+  user: {}
 };
 
 NotificationItem.propTypes = {
@@ -128,5 +129,5 @@ NotificationItem.propTypes = {
   timeStamp: PropTypes.string.isRequired,
   message: PropTypes.string,
   markSingleAsRead: PropTypes.func,
-  user: PropTypes.shape().isRequired,
+  user: PropTypes.shape(),
 };

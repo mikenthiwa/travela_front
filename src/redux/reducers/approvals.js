@@ -17,6 +17,8 @@ const initState = {
   message: '',
   openApprovalsCount: 0,
   pastApprovalsCount: 0,
+  cancelledTrips: 0,
+  modifiedTrips: 0,
   pagination: '',
   myCenters: [],
   fetchApprovalError: '',
@@ -40,6 +42,8 @@ const approvals = (state = initState, action) => {
       myCenters: action.meta.centers,
       openApprovalsCount: action.meta.count.open,
       pastApprovalsCount: action.meta.count.past,
+      cancelledTrips: action.meta.count.cancelled,
+      modifiedTrips: action.meta.count.modified,
       approvedApprovalsCount: action.meta.count.approved,
       verifiedApprovalsCount: action.meta.count.verified,
       pagination: action.meta.pagination

@@ -10,6 +10,7 @@ describe('<NewChecklistForm />', () => {
     updateTravelChecklist: jest.fn(),
     modalType: 'new checklist',
     checklistItem: {},
+    selectedCenter: 'Nairobi',
     currentUser: {}
   };
   const defaultState = {

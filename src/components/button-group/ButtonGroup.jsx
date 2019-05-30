@@ -9,6 +9,8 @@ class ButtonGroup extends PureComponent {
     const urlSearch = new URLSearchParams(url);
     urlSearch.set('page', 1);
     urlSearch.delete('status');
+    urlSearch.delete('type');
+    urlSearch.delete('budgetStatus');
     const urlSearchString = `?${urlSearch.toString()}${statusQuery}`;
     if(entriesType === 'requests')
       fetchRequests(urlSearchString);
@@ -29,13 +31,14 @@ class ButtonGroup extends PureComponent {
         badgeClass={activeStatus === 'open' ?
           'bg-btn--with-badge--active' : 'bg-btn--with-badge__approvals--inactive'}
         buttonId="open-button"
-        onClick={() => this.filterEntries(
-          'approvals',
+        onClick={() => this.filterEntries( 'approvals',
           `${budgetChecker ? '&budgetStatus=open' : '&status=open'}`)}
         text="Pending Approvals"
       />
     );
   }
+
+
   renderApprovalsButton () {
     const {  pastApprovalsCount, activeStatus, budgetChecker } = this.props;
     return (
@@ -59,7 +62,47 @@ class ButtonGroup extends PureComponent {
           disabled={pastApprovalsCount === 0}
           onClick={() => this.filterEntries(
             'approvals',
-            `${ budgetChecker ? '&budgetStatus=past': '&status=past'}`)}
+            `${ budgetChecker ? '&budgetStatus=past' : '&status=past'}`)}
+        />
+      </Fragment>
+    );
+  }
+
+  renderTripModificationButtons = () => {
+    const {  cancelledTripsCount, modifiedTripsCount, modificationType } = this.props;
+    return (
+      <Fragment>
+        <Button
+          buttonClass={`bg-btn ${modificationType === 'all' ? 'bg-btn--active' : ''}`}
+          text="All"
+          buttonId="all-button"
+          onClick={() => this.filterEntries('approvals', '')}
+        />
+        <Button
+          buttonClass={`bg-btn bg-btn--with-badge ${modificationType === 'Cancel Trip' ?
+            'bg-btn--active' : ''}`}
+          responsiveText="Open"
+          disabled={cancelledTripsCount === 0}
+          badge={cancelledTripsCount}
+          showBadge={cancelledTripsCount > 0}
+          badgeClass={modificationType === 'Cancel Trip' ?
+            'bg-btn--with-badge--active' : 'bg-btn--with-badge__approvals--inactive'}
+          buttonId="open-button"
+          onClick={() => this.filterEntries( 'approvals','&status=open&type=Cancel Trip')}
+          text="Trip Cancellation"
+        />
+        <Button
+          buttonClass={`bg-btn bg-btn--with-badge ${modificationType === 'Modify Dates' ? 'bg-btn--active' : ''}`}
+          responsiveText="Past"
+          buttonId="past-button"
+          showBadge={modifiedTripsCount > 0}
+          badge={modifiedTripsCount}
+          badgeClass={modificationType === 'Modify Dates' ?
+            'bg-btn--with-badge--active' : 'bg-btn--with-badge__approvals--inactive'}
+          text="Date Modification"
+          disabled={modifiedTripsCount === 0}
+          onClick={() => this.filterEntries(
+            'approvals', '&status=open&type=Modify Dates')}
         />
       </Fragment>
     );
@@ -139,6 +182,7 @@ class ButtonGroup extends PureComponent {
     );
   }
 
+
   render() {
     const { buttonsType, openRequestsCount, pastRequestsCount } = this.props;
     return (
@@ -147,6 +191,7 @@ class ButtonGroup extends PureComponent {
         { buttonsType === 'requests' &&
           this.renderRequestsButton(openRequestsCount, pastRequestsCount) }
         { buttonsType === 'verifications' && this.renderVerificationButton()}
+        { buttonsType === 'modifications' && this.renderTripModificationButtons()}
       </div>
     );
   }
@@ -165,11 +210,16 @@ ButtonGroup.propTypes = {
   budgetChecker: PropTypes.bool,
   buttonsType: PropTypes.string.isRequired,
   activeStatus: PropTypes.string,
+  modifiedTripsCount: PropTypes.number,
+  cancelledTripsCount: PropTypes.number,
+  modificationType: PropTypes.string
 };
 
 ButtonGroup.defaultProps = {
   openRequestsCount: null,
   pastRequestsCount: null,
+  modifiedTripsCount: 0,
+  cancelledTripsCount: 0,
   pastApprovalsCount: null,
   openApprovalsCount: null,
   approvedApprovalsCount: null,
@@ -178,7 +228,8 @@ ButtonGroup.defaultProps = {
   fetchRequests: null,
   budgetChecker: false,
   url: '',
-  activeStatus: 'all'
+  activeStatus: 'all',
+  modificationType: 'all'
 };
 
 

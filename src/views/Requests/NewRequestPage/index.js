@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import Popover from 'react-awesome-popover';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchUserRequestDetails } from '../../../redux/actionCreator/requestActions';
+import {deleteRequest, fetchUserRequestDetails} from '../../../redux/actionCreator/requestActions';
 import Preloader from '../../../components/Preloader/Preloader';
 import RequestDetailsPage from '../../../components/RequestsModal/RequestDetails';
 import backButton from '../../../images/back-icon.svg';
@@ -15,14 +16,30 @@ import {
   fetchUserReadinessDocuments } from '../../../redux/actionCreator/travelReadinessDocumentsActions';
 import NotFound from '../../ErrorPages/NotFound';
 import RequestUtils from '../../../helper/request/RequestUtils';
+import TripModificationReasonModal from '../../../components/TripModifications/TripModificationReasonModal';
+import ButtonLoadingIcon from '../../../components/Forms/ButtonLoadingIcon';
+import {
+  fetchModificationRequest,
+  submitModificationRequest
+} from '../../../redux/actionCreator/tripModificationActions';
 
 export class NewRequestPage extends Component {
+  state = {
+    modificationReason : {
+      title: '',
+      type: '',
+      message: ''
+    }
+  };
+
   componentDidMount() {
     const { fetchUserRequestDetails, match: { params: { requestId } },
-      fetchTravelChecklist,  fetchUserReadinessDocuments, user, fetchRoleUsers } = this.props;
+      fetchTravelChecklist, fetchModificationRequest,
+      fetchUserReadinessDocuments, user, fetchRoleUsers } = this.props;
     fetchUserRequestDetails(requestId);
     fetchTravelChecklist(requestId);
     fetchRoleUsers(53019);
+    fetchModificationRequest(requestId);
     fetchUserReadinessDocuments(user.currentUser.userId);
   }
 
@@ -58,15 +75,136 @@ export class NewRequestPage extends Component {
     );
   };
 
+  renderModificationReasonDialog = () => {
+    const {
+      shouldOpen, modalType, closeModal,
+      requestData: {
+        id: requestId
+      },
+      submitModificationRequest,
+      tripModifications: {
+        viewRequest : {
+          submittingRequest
+        }
+      }
+    } = this.props;
+    const { modificationReason, modificationReason: { type } } = this.state;
+    return (
+      <TripModificationReasonModal
+        closeModal={closeModal}
+        shouldOpen={shouldOpen}
+        onSubmit={(reason) => submitModificationRequest(
+          requestId,
+          type,
+          reason
+        )}
+        submittingReason={submittingRequest}
+        modalType={modalType}
+        {...modificationReason}
+      />
+    );
+  };
+
+  showModificationReasonDialog = (type, title, message) => {
+    const { openModal, requestData: { status } } = this.props;
+    this.setState({ modificationReason : { title, message, type }});
+    const modalType = (type === 'Delete' && status === 'Open')
+      ? 'delete document'
+      : `${type} request modification`;
+    openModal(true, modalType);
+  };
+
+  renderModificationButton = ({type,modalTitle, modalMessage, classNames = ''}) => {
+    const { modificationReason: { type: modificationType }} = this.state;
+    const { tripModifications : { viewRequest: { submittingRequest }} } = this.props;
+    return (
+      <button
+        type="button"
+        onClick={() => this.showModificationReasonDialog(type, modalTitle, modalMessage)}
+        className={`action-btn ${classNames}`}>
+        <ButtonLoadingIcon buttonText={type} isLoading={type === modificationType && submittingRequest} />
+      </button>
+    );
+  };
+
+
+  renderModificationMessage = ({type}) => {
+    const message = {
+      'Cancel Trip': {
+        title: 'Pending Cancellation',
+        info: 'This request has been submitted for cancellation to the Travel Team. ' +
+          'A notification will be sent upon approval.'
+      }
+    };
+    const {title, info} = message[type];
+    return (
+      <Popover action="hover" placement="bottom">
+        <div className="pending__notification">
+          <span className="pending__message">
+            {title}
+          </span>
+        </div>
+        <div className="pending__notification__info">
+          {info}
+        </div>
+      </Popover>
+    );
+  };
+
+  displayModificationButtons = (pending, status) => (
+    <div className="action-btn__wrapper">
+      {
+        !pending ? (
+          <div className="buttons">
+            {
+              this.renderModificationButton(
+                {
+                  type: 'Cancel Trip',
+                  modalTitle: `Cancel this ${status} trip`,
+                  modalMessage: 'Please provide a comprehensive reason for cancelling this trip',
+                  classNames: 'btn-delete-request'
+                }
+              )
+            }
+          </div>
+        ) : (
+          this.renderModificationMessage(pending)
+        )
+      }
+    </div>
+  );
+
+  renderModificationButtons = () => {
+    const { requestData: { status } } = this.props;
+    const {
+      tripModifications: {
+        viewRequest: {
+          fetchingModifications,
+          pendingModification: pending
+        }
+      }
+    } = this.props;
+    return (
+      <div className="page-header__request__action-btns">
+        { !fetchingModifications && this.displayModificationButtons(pending, status)}
+      </div>
+    );
+  };
+
   render() {
-    const { match:{ params: { requestId } }, fetchingRequest, history, errors
+    const { match:
+      { params: { requestId } },
+    requestData : {
+      status
+    },
+    fetchingRequest, history, errors,
     } = this.props;
     if(typeof(errors) === 'string' && errors.includes('does not exist')) {
       return <NotFound redirectLink="/requests" errorMessage={errors} />;
     }
     return (
       <Fragment>
-        <div>
+        <div className="requests__page-header">
           <h1 className="page-header__request">
             <span
               className="goback"
@@ -79,7 +217,9 @@ export class NewRequestPage extends Component {
               {`REQUEST #${requestId}`}
             </span>
           </h1>
+          {status !== 'Open' && this.renderModificationButtons()}
         </div>
+        {this.renderModificationReasonDialog()}
         {fetchingRequest ? <Preloader /> : this.renderRequestDetailsPage() }
       </Fragment>
     );
@@ -103,13 +243,16 @@ NewRequestPage.propTypes = {
   openModal: PropTypes.func.isRequired,
   postSubmission: PropTypes.func.isRequired,
   userReadinessDocument: PropTypes.object,
+  deleteRequest: PropTypes.func,
   uploadFile: PropTypes.func.isRequired,
   fetchTravelChecklist: PropTypes.func.isRequired,
   fetchUserReadinessDocuments: PropTypes.func.isRequired,
   fetchSubmission: PropTypes.func.isRequired,
+  fetchModificationRequest: PropTypes.func.isRequired,
   errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   fetchRoleUsers: PropTypes.func.isRequired,
   managers: PropTypes.array.isRequired,
+  submitModificationRequest: PropTypes.func.isRequired
 };
 
 NewRequestPage.defaultProps = {
@@ -118,13 +261,14 @@ NewRequestPage.defaultProps = {
   fetchingRequest: false,
   currentUser: {},
   user: {},
+  deleteRequest: () => {},
   travelChecklists: {},
   modalType: '', userReadinessDocument: {},
   errors: {},
 };
 
 const mapStateToProps = ({ requests, travelChecklist, role,
-  submissions, modal, fileUploads, travelReadinessDocuments, user }) => {
+  submissions, modal, fileUploads, travelReadinessDocuments, user, tripModifications}) => {
   return {
     ...requests,
     ...modal.modal,
@@ -134,7 +278,8 @@ const mapStateToProps = ({ requests, travelChecklist, role,
     travelChecklists: travelChecklist,
     submissionInfo: submissions,
     fileUploads, user,
-    managers: role.roleUsers
+    managers: role.roleUsers,
+    tripModifications
   };
 };
 
@@ -143,6 +288,9 @@ const actionCreators = {
   fetchTravelChecklist,
   fetchSubmission,
   postSubmission,
+  deleteRequest,
+  fetchModificationRequest,
+  submitModificationRequest,
   uploadFile,
   openModal,
   closeModal,

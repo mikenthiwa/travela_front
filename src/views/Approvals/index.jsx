@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
+import querystring from 'querystring';
 import ApprovalsPanelHeader from '../../components/ApprovalsPanelHeader';
 import {fetchUserApprovals} from '../../redux/actionCreator/approvalActions';
 import {closeModal, openModal} from '../../redux/actionCreator/modalActions';
@@ -13,6 +14,7 @@ export const Approvals = ( type = 'manager') => {
     state = {
       clickPage: true,
       activeStatus: Utils.getActiveStatus(this.props.location.search),
+      modificationType: querystring.parse(this.props.location.search).type,
       searchQuery: this.props.location.search,
       requestId: ''
     };
@@ -20,7 +22,7 @@ export const Approvals = ( type = 'manager') => {
     componentDidMount() {
       const {page, openModal, fetchUserApprovals, match: {params: {requestId}}} = this.props;
       const {searchQuery} = this.state;
-      fetchUserApprovals(searchQuery, /budget/.test(type));
+      fetchUserApprovals(searchQuery, type);
       if (requestId) {
         this.storeRequestIdApproval(requestId);
         openModal(true, 'request details', page);
@@ -62,15 +64,15 @@ export const Approvals = ( type = 'manager') => {
     }
 
     fetchFilteredApprovals = (query) => {
-      const { history } = this.props;
-      history.push(`/requests/${ /manager/.test(type) ? 'my-approvals' : 'budgets/'}${query}`);
+      const { history , location : { pathname }} = this.props;
+      history.push(`${pathname}${query}`);
     };
 
     onPageChange = (page) => {
       const {searchQuery} = this.state;
       const query = Utils.buildQuery(searchQuery, 'page', page);
       this.fetchFilteredApprovals(query);
-    }
+    };
 
     getApprovalsWithLimit = (limit) => {
       const {searchQuery} = this.state;
@@ -79,9 +81,9 @@ export const Approvals = ( type = 'manager') => {
     };
 
     renderApprovalsPanelHeader(loading) {
-      const {activeStatus, searchQuery} = this.state;
+      const {activeStatus, searchQuery, modificationType} = this.state;
       const {approvals} = this.props;
-      const {openApprovalsCount, pastApprovalsCount} = approvals;
+      const {openApprovalsCount, pastApprovalsCount, cancelledTrips, modifiedTrips } = approvals;
 
       return (
         <div className="rp-requests__header">
@@ -89,10 +91,13 @@ export const Approvals = ( type = 'manager') => {
             url={searchQuery}
             openApprovalsCount={openApprovalsCount}
             pastApprovalsCount={pastApprovalsCount}
+            cancelledTrips={cancelledTrips}
+            modifiedTrips={modifiedTrips}
             fetchApprovals={this.fetchFilteredApprovals}
             getApprovalsWithLimit={this.getApprovalsWithLimit}
             activeStatus={activeStatus}
             type={type}
+            modificationType={modificationType || 'all'}
             approvalsLength={approvals.approvals.length}
             loading={loading}
           />

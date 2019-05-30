@@ -9,6 +9,7 @@ import RightPane from './RightPane';
 import Preloader from '../Preloader/Preloader';
 import Utils from '../../helper/Utils';
 import HeaderTags from './HeaderTags';
+import {updateModification} from '../../redux/actionCreator/tripModificationActions';
 
 class RequestDetails extends Component {
 
@@ -19,7 +20,8 @@ class RequestDetails extends Component {
   }
 
   renderRequest = (request) => {
-    const { renderButtons, renderRightPaneQuestion, shouldOpen, openModal, closeModal } = this.props;
+    const { renderButtons, renderRightPaneQuestion, shouldOpen, openModal, closeModal,
+      showModifications, updateModification, tripModification} = this.props;
     return (
       <div className="main-container">
         <LeftPane 
@@ -29,6 +31,9 @@ class RequestDetails extends Component {
           closeModal={closeModal}
         />
         <RightPane
+          showModifications={showModifications}
+          updateModification={updateModification}
+          tripModification={tripModification}
           request={request} renderButtons={renderButtons}
           renderRightPaneQuestion={renderRightPaneQuestion}
         />
@@ -79,12 +84,18 @@ RequestDetails.propTypes = {
   submissionInfo: PropTypes.object.isRequired,
   shouldOpen: PropTypes.bool.isRequired,
   openModal: PropTypes.func.isRequired,
-  closeModal: PropTypes.func.isRequired
+  closeModal: PropTypes.func.isRequired,
+  showModifications: PropTypes.bool,
+  updateModification: PropTypes.func,
+  tripModification: PropTypes.object
 };
 
 RequestDetails.defaultProps = {
   request: {},
-  isLoading: true
+  updateModification: () => {},
+  tripModification: {},
+  isLoading: true,
+  showModifications: false
 };
 
 

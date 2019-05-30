@@ -8,12 +8,14 @@ describe('<ListTravelStipends />',() => {
   const { stipends }  = mockData;
   const props = {
     fetchAllTravelStipends: jest.fn(),
-    travelStipends: {stipends},
+    travelStipends: {stipends: stipends.map(stipend => ({
+      ...stipend, country: 'Kenya'
+    }))},
     deleteTravelStipend: jest.fn(),
     fetchSingleTravelStipend: jest.fn(),
     openModal: jest.fn(),
     closeModal: jest.fn(),
-    location: '',
+    location: 'Nairobi',
     stipend: 2
   };
   const props2 = {
@@ -45,6 +47,7 @@ describe('<ListTravelStipends />',() => {
           center: {
             location: 'Nairobi, Kenya'
           },
+          country: 'Kenya',
           createdBy: '-LWBka6hN3UcNgL5WQs2',
           updatedAt: '2019-02-26T09:56:29.246Z',
           createdAt: '2019-02-26T09:56:29.246Z',

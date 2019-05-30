@@ -19,6 +19,8 @@ const props = {
   history: {
     push: jest.fn()
   },
+  resetErrors: jest.fn(),
+  postUserData: {},
   postData: jest.fn(),
   match: {
     params: [{}]

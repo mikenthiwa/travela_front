@@ -137,10 +137,11 @@ NotificationContainer.propTypes = {
   generalNotifications: NOTIFICATIONS_PROPTYPES,
   markSingleNotificationAsRead: PropTypes.func.isRequired,
   singleNotificationRead: PropTypes.number.isRequired,
-  user: PropTypes.shape().isRequired,
+  user: PropTypes.shape(),
 };
 
 NotificationContainer.defaultProps = {
   pendingNotifications: [],
   generalNotifications: [],
+  user: {}
 };

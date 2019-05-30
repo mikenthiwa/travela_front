@@ -21,6 +21,7 @@
 
   &--grey,
   &--black {
+    word-break: break-all;
     color: #4f4f4f;
   }
 
@@ -312,7 +313,7 @@
         }
 
         &--black {
-          padding-left: 1.6em;
+          padding: 0 1.6em;
         }
       }
     }
@@ -425,4 +426,3 @@
         }
       }
   }
-  

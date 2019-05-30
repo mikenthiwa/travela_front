@@ -176,7 +176,11 @@ TravelReadiness.propTypes = {
   exportReadiness:PropTypes.func.isRequired,
   renderNotFound: PropTypes.func.isRequired,
   range: PropTypes.shape().isRequired,
-  center: PropTypes.string.isRequired
+  center: PropTypes.string
+};
+
+TravelReadiness.defaultProps = {
+  center: 'Kenya'
 };
 
 export default TravelReadiness;

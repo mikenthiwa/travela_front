@@ -52,6 +52,7 @@ const props = {
     push: jest.fn()
   },
   location: {
+    pathname: '/requests/',
     search: ''
   },
   fetchRequestsError: jest.fn(),
@@ -136,7 +137,7 @@ describe('<ApprovalsPage>', () => {
       wrapper = mount(
         <Provider store={store}>
           <MemoryRouter>
-            <Approvals {...props} />
+            <Approvals {...props} location={{...props.location, pathname: '/requests/my-approvals'}} />
           </MemoryRouter>
         </Provider>
       );
@@ -144,7 +145,7 @@ describe('<ApprovalsPage>', () => {
       budgetWrapper = mount(
         <Provider store={store}>
           <MemoryRouter>
-            <BudgetApprovals {...props} />
+            <BudgetApprovals {...props} location={{...props.location, pathname: '/requests/budgets/'}} />
           </MemoryRouter>
         </Provider>
       );
@@ -196,7 +197,7 @@ describe('<ApprovalsPage>', () => {
           wrapper.update();
         })};
 
-      const wrapper = mount( <Approvals {...props} history={history} /> );
+      const wrapper = mount( <Approvals {...props} history={history} location={{...props.location, pathname: '/requests/my-approvals'}} /> );
       wrapper.find('#past-button').simulate('click');
 
       expect(history.push).toHaveBeenCalledWith('/requests/my-approvals?page=1&status=past');

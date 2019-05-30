@@ -19,6 +19,7 @@ const props = {
   handlePickBed: jest.fn(() => {props.bed = 'bed-0';}),
   removeTrip: jest.fn(),
   availableRooms:{ beds },
+  setCurrentOrigin: jest.fn(),
   handleRadioButtonChange: jest.fn(),
   onChangeInput: jest.fn(),
   listTravelReasons: { 

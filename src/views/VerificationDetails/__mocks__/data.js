@@ -199,6 +199,11 @@ export const initialState = {
   user,
   comments,
   modal,
+  tripModifications: {
+    updateRequest: {
+
+    }
+  },
   attachments: {
     submissions: [
       {

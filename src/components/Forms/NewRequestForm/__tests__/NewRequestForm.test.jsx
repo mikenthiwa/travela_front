@@ -10,7 +10,7 @@ import createSagaMiddleware from 'redux-saga';
 import { PropTypes } from 'prop-types';
 import NewRequestForm from '../NewRequestForm';
 import beds from '../../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
-import profileMock from '../../ProfileForm/__mocks__';
+import profileMock from '../../ProfileForm/__mocks__/ProfileForm';
 import tabIcons from '../../../../images/icons/new-request-icons';
 import travelStipendHelper from '../../../../helper/request/RequestUtils'; 
 

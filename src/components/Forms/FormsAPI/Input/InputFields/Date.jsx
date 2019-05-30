@@ -46,7 +46,7 @@ class DateInput extends Component {
           placeholderText={`MM/DD/YYYY${showTimeSelect ? ' HH:mm': ''}`}
           selected={selectedDate}
           onChange={(date, event) => this.handleChange(date, event)}
-          onChangeRaw={showTimeSelect && onChangeRaw}
+          onChangeRaw={showTimeSelect ? onChangeRaw : () => {}}
           onBlur={onBlur} name={name}
           minDate={minimumDate} maxDate={maximumDate}
           minTime={minTime} maxTime={maxTime}

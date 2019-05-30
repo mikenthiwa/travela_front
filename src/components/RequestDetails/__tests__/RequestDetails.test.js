@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { props } from '../__mocks__';
+import { props } from '../__mocks__/RequestDetails';
 import RequestDetails from '..';
 
 const setupConnectedComponent = (props) => {

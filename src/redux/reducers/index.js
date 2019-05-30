@@ -34,6 +34,7 @@ import travelReason from './travelReason';
 import travelStipends from './travelStipends';
 import travelRegion from './travelRegion';
 import country from './countries';
+import tripModifications from './tripModifications';
 
 const rootReducer = combineReducers({
   auth,
@@ -70,6 +71,7 @@ const rootReducer = combineReducers({
   travelReason,
   travelStipends,
   travelRegion,
+  tripModifications,
   country
 });
 

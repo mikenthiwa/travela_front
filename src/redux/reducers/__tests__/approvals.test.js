@@ -68,8 +68,10 @@ describe('Approvals Reducer', () => {
     let initialState = {
       approvals: [],
       budgetapprovals: [],
+      cancelledTrips: 0,
       isLoading: false,
       message: '',
+      modifiedTrips: 0,
       myCenters: [],
       openApprovalsCount: 0,
       pastApprovalsCount: 0,

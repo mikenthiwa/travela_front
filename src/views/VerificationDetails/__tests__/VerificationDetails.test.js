@@ -5,8 +5,10 @@ import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MutationObserver from 'mutation-observer';
-import ConnectedVerificationDetails from '..';
+import HOCVerificationDetails from '..';
 import { initialState, props } from '../__mocks__/data';
+
+const ConnectedVerificationDetails = HOCVerificationDetails();
 
 
 global.MutationObserver = MutationObserver;
@@ -33,7 +35,7 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
   describe('Test close modal button', () => {
     it('should test the modal close button', () => {
       const wrapperPage = setupConnectedComponent(props, store);
-      const wrapperInstance = wrapperPage.find('VerificationDetails').instance();
+      const wrapperInstance = wrapperPage.find('Verifications').instance();
       const pageButtons = wrapperPage.find('button');
       const pageVerifyButton = pageButtons.at(1);
       pageVerifyButton.simulate('click');
@@ -89,7 +91,7 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
     });
 
     it('should test components if props are received', ()=>{
-      const instance = wrapper.find('VerificationDetails').instance();
+      const instance = wrapper.find('Verifications').instance();
       initialState.approvals.updatedStatus = true;
       initialState.approvals.updatingStatus = false;
       const newState = {...initialState};
@@ -115,7 +117,7 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
   describe('TEST COMPONENT FUNCTIONS', () => {
     store = mockStore(initialState);
     const wrapper = setupConnectedComponent(props, store);
-    const instance = wrapper.find('VerificationDetails').instance();
+    const instance = wrapper.find('Verifications').instance();
     const buttons = wrapper.find('button');
     const button1 = buttons.at(1);
     it('buttons disabled status should be false if request status is Open', () => {
@@ -180,7 +182,7 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
     it('should change displayComments state', () => {
       const wrapper = setupConnectedComponent(props, store);
       const hideCommentButton = wrapper.find('.comment-toggle-button');
-      const instance = wrapper.find('VerificationDetails').instance();
+      const instance = wrapper.find('Verifications').instance();
       expect(instance.state.displayComments).toBe(true);
       hideCommentButton.at(1).simulate('click');
       expect(instance.state.displayComments).toBe(false);

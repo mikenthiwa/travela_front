@@ -10,10 +10,10 @@ import {
   UPDATE_BUDGET_STATUS_FAILURE
 } from '../constants/actionTypes';
 
-export const fetchUserApprovals = (url, budgetChecker = false) => ({ //eslint-disable-line
+export const fetchUserApprovals = (url, type) => ({ //eslint-disable-line
   type: FETCH_USER_APPROVALS,
   url,
-  budgetChecker
+  approvalsType: type
 });
 
 

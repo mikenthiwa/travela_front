@@ -13,12 +13,16 @@ import {
   updateBudgetStatusFailure,
 } from '../actionCreator';
 
-import { fetchUserRequestDetailsSuccess, fetchUserRequestDetails } from '../actionCreator/requestActions';
+import { fetchUserRequestDetails } from '../actionCreator/requestActions';
 import apiErrorHandler from '../../services/apiErrorHandler';
+import TripModificationsAPI from '../../services/TripModificationsAPI';
 
 export function* fetchUserApprovalsSaga(action) {
   try {
-    const approvals = yield call(ApprovalsApi.getUserApprovals, action.url, action.budgetChecker);
+    const approvals = yield (action.approvalsType === 'modifications'
+      ? call(TripModificationsAPI.getModifications, action.url)
+      : call(ApprovalsApi.getUserApprovals, action.url, action.approvalsType === 'budget'));
+
     yield put(fetchUserApprovalsSuccess(approvals.data));
   } catch (error) {
     const errorMessage = apiErrorHandler(error);

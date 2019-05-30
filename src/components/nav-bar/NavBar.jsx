@@ -27,6 +27,7 @@ export class NavBar extends PureComponent {
   state = {
     hideLogoutDropdown: true,
     keyword: '',
+    shouldOpen: false
   };
 
   debouncer = debounce(
@@ -42,12 +43,15 @@ export class NavBar extends PureComponent {
     this.setState({ keyword: locationUrl || '' });
   }
 
-  componentWillReceiveProps({ clearNav }) {
+  componentWillReceiveProps({ clearNav, shouldOpen }) {
     if (clearNav) {
       this.setState({
         keyword: ''
       });
     }
+    setTimeout(() => {
+      this.setState({ shouldOpen });
+    }, shouldOpen ? 0 : 500);
   }
 
   componentWillUnmount() {
@@ -234,7 +238,7 @@ export class NavBar extends PureComponent {
           {this.renderLogo()}
         </div>
         <div className="mdl-layout-spacer" />
-        { ( searchBarAllowedRoutes.find(route => route.test(location.pathname))) && 
+        { ( searchBarAllowedRoutes.find(route => route.test(location.pathname))) &&
           (
             <div className="navbar__search-size mdl-cell--hide-phone">
               <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} value={keyword} />
@@ -257,12 +261,12 @@ export class NavBar extends PureComponent {
   }
 
   render() {
-    const {handleHideSearchBar, handleShowDrawer, openSearch, shouldOpen} = this.props;
-    const { keyword } = this.state;
+    const {handleHideSearchBar, handleShowDrawer, openSearch } = this.props;
+    const { keyword, shouldOpen } = this.state;
     let showSearch='none';
     if (openSearch) { showSearch='block';}
     return (
-      <div className={shouldOpen? 'header-container-modal-open' :'header-container'}>
+      <div className={shouldOpen ? 'header-container-modal-open' :'header-container'}>
         <header className="mdl-layout__header navbar__layout_header">
           {this.renderHeader(handleShowDrawer, keyword)}
           <button type="button" className="navbar__search-icon--btn" onClick={handleHideSearchBar}>
@@ -295,7 +299,7 @@ NavBar.propTypes = {
   notifications: PropTypes.array,
   userCenters: PropTypes.array,
   clearNav: PropTypes.bool.isRequired,
-  shouldOpen: PropTypes.bool.isRequired
+  shouldOpen: PropTypes.bool
 };
 
 NavBar.defaultProps = {
@@ -303,7 +307,8 @@ NavBar.defaultProps = {
   handleShowDrawer:()=>{},
   notifications: [],
   userCenters: [],
-  userLocation: ''
+  userLocation: '',
+  shouldOpen: false
 };
 
 const mapStateToProps = state => {

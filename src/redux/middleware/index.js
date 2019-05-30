@@ -138,6 +138,11 @@ import {
 } from './travelStipendsSaga';
 import {watchCreateTravelReason, watchEditTravelReason, watchDeleteTravelReason, watchViewTravelReasonDetails} from './travelReasonsSaga';
 import { watchAddRegionSagaAsync, watchFetchRegionDataSagaAsync } from './travelRegionSaga';
+import {
+  watchFetchModificationForRequest,
+  watchSubmitModificationRequest,
+  watchUpdateTripModification
+} from "./tripModificationSaga";
 import {watchCreateCountrySagaAsync, watchGetCountriesSagaAsync} from './countriesSaga';
 function* rootSaga() {
   yield all([
@@ -245,7 +250,10 @@ function* rootSaga() {
     watchAddRegionSagaAsync(),
     watchFetchRegionDataSagaAsync(),
     watchCreateCountrySagaAsync(),
-    watchGetCountriesSagaAsync()
+    watchGetCountriesSagaAsync(),
+    watchSubmitModificationRequest(),
+    watchFetchModificationForRequest(),
+    watchUpdateTripModification()
   ]);
 }
 

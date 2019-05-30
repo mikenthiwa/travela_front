@@ -137,7 +137,7 @@ export default class filterDropdownSelect extends Component  {
             autoComplete="off"
             name="role"
             type="text"
-            value={value}
+            value={value || ''}
             onChange={this.changeText}
           />
           {role || manager ? (
@@ -156,7 +156,10 @@ export default class filterDropdownSelect extends Component  {
 filterDropdownSelect.propTypes = {
   onChange: PropTypes.func.isRequired,
   choices: PropTypes.arrayOf(PropTypes.string),
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   size:  PropTypes.string.isRequired,
 };
 

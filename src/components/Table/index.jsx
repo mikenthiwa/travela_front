@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import axios from 'axios';
 import toast from 'toastr';
 import { isEqual } from 'lodash';
 import RequestsModal from '../RequestsModal/RequestsModal';
@@ -43,6 +42,7 @@ export class Table extends Component {
     newStatus = (status === 'Rejected') ? 'request__status--rejected' : newStatus;
     newStatus = (status === 'Verified') ? 'request__status--verified' : newStatus;
     newStatus = (status === 'Checked') ? 'request__status--checked' : newStatus;
+    newStatus = (status === 'Cancel Trip') ? 'request__status--cancelTrip': newStatus;
     return `${newStatus} tool__tip__container`;
   }
 
@@ -103,7 +103,6 @@ export class Table extends Component {
 
   computeRequestStatus({ status, budgetStatus }) {
     const { approvalsType } = this.props;
-
     if (approvalsType === 'budget') {
       return budgetStatus;
     }
@@ -131,7 +130,7 @@ export class Table extends Component {
   renderRequestStatus(request) {
     const {
       editRequest, type, uploadTripSubmissions, deleteRequest,
-      openModal, closeModal, shouldOpen, modalType, history
+      openModal, closeModal, shouldOpen, modalType, history,
     } = this.props;
     const { menuOpen } = this.state;
     const requestStatus = this.computeRequestStatus(request);
@@ -140,10 +139,10 @@ export class Table extends Component {
         <div className="table__menu">
           <div
             id={`status-${request.id}`}
-            className={this.getRequestStatusClassName(this.computeRequestStatus(request))}
+            className={this.getRequestStatusClassName(requestStatus)}
           >
             <span>{requestStatus}</span>
-            {Utils.renderToolTip(requestStatus, request.budgetStatus)}
+            { Utils.renderToolTip(requestStatus, request.budgetStatus)}
           </div>
           {
             type !== 'approvals' && (
@@ -329,7 +328,7 @@ export class Table extends Component {
   }
 
   render() {
-    const { requests, type, fetchRequestsError, message, requestId, location } = this.props;
+    const { requests, type, fetchRequestsError, message, requestId, location, approvalsType } = this.props;
     const { search } = location;
     return (
       <Fragment>
@@ -338,7 +337,7 @@ export class Table extends Component {
           {requests &&
             requests.length > 0 && (
             <table className="mdl-data-table mdl-js-data-table table__requests">
-              <thead>{this.renderTableHead(type, search)}</thead>
+              <thead>{this.renderTableHead(type, search, approvalsType)}</thead>
               <tbody className="table__body approvals_table_body">
                 {requests.map(request => this.renderRequest(request, type, search))}
               </tbody>

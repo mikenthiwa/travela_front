@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Trip Modifications should render correctly 1`] = `
+<div
+  className="trip-modifications"
+>
+  <div
+    className="trip-modifications__header"
+  >
+    <p
+      className="trip-modifications__header__title"
+    >
+      Modification Request
+    </p>
+  </div>
+  <div
+    className="trip-modifications__list"
+  >
+    <div
+      className="trip-modification row"
+    >
+      <p
+        className="trip-modification__title"
+      >
+        <b>
+          Moses Gitau 
+        </b>
+        would like to cancel this request do the the following reason
+      </p>
+      <h6 />
+      <div
+        className="btn-group"
+      >
+        <button
+          className="action-button--approve"
+          onClick={[Function]}
+          type="button"
+        >
+          Cancel Trip
+        </button>
+        <button
+          className="action-button--reject"
+          onClick={[Function]}
+          type="button"
+        >
+          Decline
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
