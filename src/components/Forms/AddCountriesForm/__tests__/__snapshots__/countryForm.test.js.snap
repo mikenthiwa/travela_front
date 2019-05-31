@@ -5,7 +5,7 @@ exports[`< AddCountryForm/> <AddCountryFields /> renders correctly 1`] = `
   className="personal-details"
 >
   <div
-    className="size_in"
+    className="size_in countries_size_in"
   >
     <div
       className="add_dept"
@@ -64,7 +64,7 @@ exports[`< AddCountryForm/> renders correctly 1`] = `
     className="personal-details"
   >
     <div
-      className="size_in"
+      className="size_in countries_size_in"
     >
       <div
         className="add_dept"

@@ -14,6 +14,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
       guestHouse={
         Object {
           "bathRooms": 5,
+          "genderPolicy": "unisex",
           "houseName": "Guest House 1",
           "id": "wrtiuy56_u",
           "imageUrl": "http://images/guest-house.jpg",
@@ -52,6 +53,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
       guestHouse={
         Object {
           "bathRooms": 3,
+          "genderPolicy": "unisex",
           "houseName": "Guest House 2",
           "id": "wrtnytom_9",
           "imageUrl": "http://images/guest-house.jpg",
@@ -90,6 +92,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
       guestHouse={
         Object {
           "bathRooms": 4,
+          "genderPolicy": "unisex",
           "houseName": "Guest House 3",
           "id": "bytrwqjk9",
           "imageUrl": "http://images/guest-house.jpg",
@@ -128,6 +131,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
       guestHouse={
         Object {
           "bathRooms": 1,
+          "genderPolicy": "unisex",
           "houseName": "Guest House 4",
           "id": "requntm0",
           "imageUrl": "http://images/guest-house.jpg",
@@ -170,6 +174,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
           Object {
             "bathRooms": 5,
             "disabled": true,
+            "genderPolicy": "unisex",
             "houseName": "Guest House A",
             "id": "juhiuhoji0",
             "imageUrl": "http://images/guest-house.jpg",
@@ -196,6 +201,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
           Object {
             "bathRooms": 5,
             "disabled": true,
+            "genderPolicy": "unisex",
             "houseName": "Guest House A",
             "id": "juhiuhoji0",
             "imageUrl": "http://images/guest-house.jpg",
@@ -234,6 +240,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
           Object {
             "bathRooms": 3,
             "disabled": true,
+            "genderPolicy": "unisex",
             "houseName": "Guest House B",
             "id": "jbg8oijjolp",
             "imageUrl": "http://images/guest-house.jpg",
@@ -260,6 +267,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
           Object {
             "bathRooms": 3,
             "disabled": true,
+            "genderPolicy": "unisex",
             "houseName": "Guest House B",
             "id": "jbg8oijjolp",
             "imageUrl": "http://images/guest-house.jpg",
@@ -298,6 +306,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
           Object {
             "bathRooms": 4,
             "disabled": true,
+            "genderPolicy": "unisex",
             "houseName": "Guest House C",
             "id": "nbuiojkpl",
             "imageUrl": "http://images/guest-house.jpg",
@@ -317,6 +326,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
           Object {
             "bathRooms": 4,
             "disabled": true,
+            "genderPolicy": "unisex",
             "houseName": "Guest House C",
             "id": "nbuiojkpl",
             "imageUrl": "http://images/guest-house.jpg",
@@ -348,6 +358,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
           Object {
             "bathRooms": 1,
             "disabled": true,
+            "genderPolicy": "unisex",
             "houseName": "Guest House D",
             "id": "nmbkihjokko",
             "imageUrl": "http://images/guest-house.jpg",
@@ -367,6 +378,7 @@ exports[`<CentreGrid /> renders correctly 1`] = `
           Object {
             "bathRooms": 1,
             "disabled": true,
+            "genderPolicy": "unisex",
             "houseName": "Guest House D",
             "id": "nmbkihjokko",
             "imageUrl": "http://images/guest-house.jpg",

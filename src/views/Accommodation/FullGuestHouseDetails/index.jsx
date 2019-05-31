@@ -12,6 +12,9 @@ import {
   savingAccommodation
 } from '../../../redux/actionCreator/accommodationActions';
 import greyBedIcon from '../../../images/icons/accomodation_inactive.svg';
+import FemaleIcon from '../../../images/icons/Female.svg';
+import MaleIcon from '../../../images/icons/Male.svg';
+import UnisexIcon from '../../../images/icons/Unisex.svg';
 import Modal from '../../../components/modal/Modal';
 import { NewAccommodationForm } from '../../../components/Forms';
 import  MaintainceForm  from '../../../components/Forms/MaintainanceForm';
@@ -37,6 +40,12 @@ export class GuestHouseDetails extends PureComponent {
     startDate: moment().startOf('month'),
     timelineViewType: 'month',
     disableGustHouseButtonState: false,
+  }
+
+  genderPolicy = {
+    Unisex: UnisexIcon,
+    Female: FemaleIcon,
+    Male: MaleIcon
   }
 
   handleOnEdit = () => {
@@ -80,6 +89,9 @@ export class GuestHouseDetails extends PureComponent {
               <img src={greyBedIcon} alt="ic" />
             </div>
             <div>{this.getBedCount(guestHouse.rooms)}</div>
+          </div>
+          <div className="genderIcon">
+            <img src={`${this.genderPolicy[guestHouse.genderPolicy]}`} alt={guestHouse.genderPolicy} title={guestHouse.genderPolicy} />
           </div>
         </div>
         <div className="guest-house-action-div">

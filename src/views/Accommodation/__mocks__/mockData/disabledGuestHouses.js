@@ -6,6 +6,7 @@ const disabledGuestHouses = [
     bathRooms: 5,
     disabled: true,
     imageUrl: 'http://images/guest-house.jpg',
+    genderPolicy: 'unisex',
     rooms: [
       {
         id: 'bvuh9iei8bh',
@@ -30,6 +31,7 @@ const disabledGuestHouses = [
     bathRooms: 3,
     disabled: true,
     imageUrl: 'http://images/guest-house.jpg',
+    genderPolicy: 'unisex',
     rooms: [
       {
         id: 'bnvjhijkpj',
@@ -53,6 +55,7 @@ const disabledGuestHouses = [
     bathRooms: 4,
     disabled: true,
     imageUrl: 'http://images/guest-house.jpg',
+    genderPolicy: 'unisex',
     location: 'Lagos, Nigeria',
     rooms: [
       {
@@ -70,6 +73,7 @@ const disabledGuestHouses = [
     bathRooms: 1,
     disabled: true,
     imageUrl: 'http://images/guest-house.jpg',
+    genderPolicy: 'unisex',
     location: 'Kigali, Rwanda',
     rooms: [
       {

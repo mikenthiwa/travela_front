@@ -175,6 +175,126 @@ exports[`<NewAccommodation /> renders correctly 1`] = `
           />
         </div>
       </div>
+      <div
+        className="guest-house-input"
+      >
+        <div
+          className="form-input  "
+        >
+          <label
+            htmlFor="genderPolicy"
+          >
+            Gender policy
+            <span
+              style={
+                Object {
+                  "color": "red",
+                }
+              }
+            >
+               * 
+            </span>
+          </label>
+          <div
+            style={
+              Object {
+                "position": "relative",
+              }
+            }
+          >
+            <div
+              autoComplete="off"
+              choices={
+                Array [
+                  "Unisex",
+                  "Female",
+                  "Male",
+                ]
+              }
+              className="input select  "
+              label="Gender policy"
+              name="genderPolicy"
+              onChange={[Function]}
+              onClick={[Function]}
+              onKeyPress={[Function]}
+              role="button"
+              size=""
+              tabIndex="0"
+              type="dropdown-select"
+              value=""
+            >
+              <div
+                className="value"
+                style={
+                  Object {
+                    "width": "",
+                  }
+                }
+              >
+                 
+                <div
+                  className="select-dropdown inactive"
+                >
+                  <img
+                    alt="icn"
+                    src="form_select_dropdown.svg"
+                  />
+                </div>
+              </div>
+              <ul
+                className="select-menu select-menu--inactive"
+                onScroll={[Function]}
+              >
+                <li
+                  id="choice"
+                  key="Unisex"
+                >
+                  <div
+                    id="choice"
+                    onClick={[Function]}
+                    onKeyPress={[Function]}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    Unisex
+                  </div>
+                </li>
+                <li
+                  id="choice"
+                  key="Female"
+                >
+                  <div
+                    id="choice"
+                    onClick={[Function]}
+                    onKeyPress={[Function]}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    Female
+                  </div>
+                </li>
+                <li
+                  id="choice"
+                  key="Male"
+                >
+                  <div
+                    id="choice"
+                    onClick={[Function]}
+                    onKeyPress={[Function]}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    Male
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <span
+            className="error"
+          />
+        </div>
+      </div>
     </div>
     <h4
       className="add-rooms"

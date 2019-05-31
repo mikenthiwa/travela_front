@@ -113,7 +113,7 @@ Array [
                     </div>
                     <div>
                         <div
-                            className="form-input no-disable "
+                            className="form-input profile_dropdown no-disable role "
                         >
                             <label
                                 htmlFor="role"
@@ -129,16 +129,43 @@ Array [
                                      * 
                                 </span>
                             </label>
-                            <input
-                                autoComplete="off"
-                                className=" no-disable"
-                                label="Role"
-                                name="role"
-                                onBlur={[Function]}
-                                onChange={[Function]}
-                                type="text"
-                                value=""
-                            />
+                            <div
+                                style={
+                                    Object {
+                                        "position": "relative",
+                                      }
+                                }
+                            >
+                                <div
+                                    className="value"
+                                    style={
+                                        Object {
+                                            "width": "",
+                                          }
+                                    }
+                                >
+                                    <input
+                                        autoComplete="off"
+                                        choices={
+                                            Array [
+                                                "Software Developer",
+                                                "Technical Team Lead",
+                                                "Product Engineer",
+                                                "Product Coordinator",
+                                                "Travel Coordinator",
+                                                "Country Director",
+                                              ]
+                                        }
+                                        className="occupationInput"
+                                        label="Role"
+                                        name="role"
+                                        onChange={[Function]}
+                                        size=""
+                                        type="text"
+                                        value=""
+                                    />
+                                </div>
+                            </div>
                             <span
                                 className="error"
                             />

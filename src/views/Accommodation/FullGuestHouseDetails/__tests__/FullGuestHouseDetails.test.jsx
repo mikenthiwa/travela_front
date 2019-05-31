@@ -21,6 +21,7 @@ const props = {
   guestHouse: {
     id: 'guest-house-1',
     houseName: 'Ndovu',
+    genderPolicy: 'Unisex',
     rooms: [{
       id: '1',
       roomName: 'Presidential suite',
@@ -85,7 +86,7 @@ const props = {
   handleOnEdit: jest.fn(),
   editAccommodation: jest.fn(),
   disableAccommodation: jest.fn(),
-  fetchAccommodation: jest.fn(),
+  fetchAccommodation: jest.fn()
 };
 
 const newProps = {

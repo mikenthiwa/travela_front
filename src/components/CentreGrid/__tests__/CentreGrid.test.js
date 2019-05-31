@@ -70,6 +70,7 @@ describe('<CentreGrid />', () => {
         houseName: 'Guest House 2',
         id: 'wrtnytom_9',
         imageUrl: 'http://images/guest-house.jpg',
+        genderPolicy: 'unisex',
         location: 'Nairobi, Kenya',
         rooms: [{
           bedCount: 1,
@@ -100,6 +101,7 @@ describe('<CentreGrid />', () => {
         houseName: 'Guest House 3',
         id: 'bytrwqjk9',
         imageUrl: 'http://images/guest-house.jpg',
+        genderPolicy: 'unisex',
         location: 'Lagos, Nigeria',
         rooms: [{
           bedCount: 2,

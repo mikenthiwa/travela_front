@@ -53,6 +53,7 @@ describe('AccommodationAPI', () => {
       'location': 'Kampala',
       'bathRooms': '4',
       'imageUrl': 'https://www.lol.com',
+      'genderPolicy': 'male',
       'rooms': [
         {
           'roomName': 'Rwenzori',
@@ -72,6 +73,7 @@ describe('AccommodationAPI', () => {
         'location': 'Kampala',
         'bathRooms': '4',
         'imageUrl': 'https://www.lol.com',
+        'genderPolicy': 'unisex',
         'createdAt': '2018-10-05T00:07:22.276Z',
         'updatedAt': '2018-10-07T03:17:09.928Z',
         'userId': '-LJNzPWupJiiToLowHq9',
@@ -112,6 +114,7 @@ describe('AccommodationAPI', () => {
       'location': 'Kampala',
       'bathRooms': '4',
       'imageUrl': 'https://www.lol.com',
+      'genderPolicy': 'unisex',
       'createdAt': '2018-10-05T00:07:22.276Z',
       'updatedAt': '2018-10-07T03:17:09.928Z',
       'userId': '-LJNzPWupJiiToLowHq9',
@@ -141,6 +144,112 @@ describe('AccommodationAPI', () => {
 
       ]
     });
+  });
+
+  it('should send a POST request to create guest house', async () =>{
+    const accommodationData = {
+      'houseName': 'Lion heights',
+      'location': 'Kampala',
+      'bathRooms': '4',
+      'imageUrl': 'https://www.lol.com',
+      'genderPolicy': 'male',
+      'rooms': [
+        {
+          'roomName': 'Rwenzori',
+          'roomType': 'non-ensuite',
+          'bedCount': '1',
+          'id': 'dtnJtaRE7Y'
+        }
+      ]
+    };
+    moxios.stubRequest(`${baseUrl}/guesthouses`, {
+      status: 201,
+      response: {
+        "success": true,
+        "message": "Guest House created successfully",
+        "guestHouse": {
+            "disabled": false,
+            "houseName": "Lion heights",
+            "location": "Kampala",
+            "bathRooms": 4,
+            "imageUrl": "https://www.lol.com",
+            "genderPolicy": "male",
+            "userId": "2180",
+            "id": "cchD3BSnF",
+            "updatedAt": "2019-05-24T15:02:33.742Z",
+            "createdAt": "2019-05-24T15:02:33.742Z"
+        },
+        "rooms": [
+            {
+                "id": "1SSUJRV2H5",
+                "roomName": "Rwenzori",
+                "roomType": "non-ensuite",
+                "bedCount": 1,
+                "isDeleted": false,
+                "faulty": false,
+                "createdAt": "2019-05-24T15:02:33.903Z",
+                "updatedAt": "2019-05-24T15:02:33.903Z",
+                "guestHouseId": "cchD3BSnF"
+            }
+        ],
+        "bed": [
+            [
+                {
+                    "booked": false,
+                    "id": 28,
+                    "roomId": "1SSUJRV2H5",
+                    "bedName": "bed 1",
+                    "updatedAt": "2019-05-24T15:02:33.919Z",
+                    "createdAt": "2019-05-24T15:02:33.919Z"
+                }
+            ]
+        ]
+    },
+    });
+
+    const response = await AccommodationAPI.postAccommodation(accommodationData)
+    expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/guesthouses`);
+    expect(response.data).toEqual({
+      "success": true,
+      "message": "Guest House created successfully",
+      "guestHouse": {
+          "disabled": false,
+          "houseName": "Lion heights",
+          "location": "Kampala",
+          "bathRooms": 4,
+          "imageUrl": "https://www.lol.com",
+          "genderPolicy": "male",
+          "userId": "2180",
+          "id": "cchD3BSnF",
+          "updatedAt": "2019-05-24T15:02:33.742Z",
+          "createdAt": "2019-05-24T15:02:33.742Z"
+      },
+      "rooms": [
+          {
+              "id": "1SSUJRV2H5",
+              "roomName": "Rwenzori",
+              "roomType": "non-ensuite",
+              "bedCount": 1,
+              "isDeleted": false,
+              "faulty": false,
+              "createdAt": "2019-05-24T15:02:33.903Z",
+              "updatedAt": "2019-05-24T15:02:33.903Z",
+              "guestHouseId": "cchD3BSnF"
+          }
+      ],
+      "bed": [
+          [
+              {
+                  "booked": false,
+                  "id": 28,
+                  "roomId": "1SSUJRV2H5",
+                  "bedName": "bed 1",
+                  "updatedAt": "2019-05-24T15:02:33.919Z",
+                  "createdAt": "2019-05-24T15:02:33.919Z"
+              }
+          ]
+      ]
+  });
   });
 
   it('should send a GET request to fetch full guest house details', async () => {

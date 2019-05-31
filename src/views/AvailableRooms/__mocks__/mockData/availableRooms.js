@@ -22,6 +22,7 @@ const availableRooms = [
         bathRooms: 1,
         imageUrl:
           'https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1',
+        genderPolicy: 'unisex',
         createdAt: '2018-08-16T11:11:52.181Z',
         updatedAt: '2018-08-16T11:11:52.181Z',
         userId: '-LJV4b1QTCYewOtk5F63'
@@ -51,6 +52,7 @@ const availableRooms = [
         bathRooms: 1,
         imageUrl:
           'https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1',
+        genderPolicy: 'unisex',
         createdAt: '2018-08-16T11:11:52.181Z',
         updatedAt: '2018-08-16T11:11:52.181Z',
         userId: '-LJV4b1QTCYewOtk5F63'
@@ -80,6 +82,7 @@ const availableRooms = [
         bathRooms: 1,
         imageUrl:
           'https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1',
+        genderPolicy: 'unisex',
         createdAt: '2018-08-16T11:11:52.181Z',
         updatedAt: '2018-08-16T11:11:52.181Z',
         userId: '-LJV4b1QTCYewOtk5F63'
@@ -109,6 +112,7 @@ const availableRooms = [
         bathRooms: 1,
         imageUrl:
           'https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1',
+        genderPolicy: 'unisex',
         createdAt: '2018-08-16T11:11:52.181Z',
         updatedAt: '2018-08-16T11:11:52.181Z',
         userId: '-LJV4b1QTCYewOtk5F63'
@@ -138,6 +142,7 @@ const availableRooms = [
         bathRooms: 1,
         imageUrl:
           'https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1',
+        genderPolicy: 'unisex',
         createdAt: '2018-08-16T11:11:52.181Z',
         updatedAt: '2018-08-16T11:11:52.181Z',
         userId: '-LJV4b1QTCYewOtk5F63'

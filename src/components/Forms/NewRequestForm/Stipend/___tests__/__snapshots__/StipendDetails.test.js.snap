@@ -82,7 +82,7 @@ exports[`<StipendDetails /> renders without crashing 1`] = `
     <div
       className="item"
     >
-      N/A
+      $ 30
     </div>
     <div
       className="item"
@@ -92,7 +92,7 @@ exports[`<StipendDetails /> renders without crashing 1`] = `
     <div
       className="item"
     >
-      N/A
+      $ 30
     </div>
   </div>
   <div
@@ -103,7 +103,7 @@ exports[`<StipendDetails /> renders without crashing 1`] = `
     >
       Total
     </span>
-    $ 3800
+    $ 3830
   </div>
 </div>
 `;

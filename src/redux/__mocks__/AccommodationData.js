@@ -6,6 +6,7 @@ export const response =  {
     'location': 'Lagos Nigeria',
     'bathRooms': 5,
     'imageUrl': 'https://res.cloudinary.com/jpg',
+    'genderPolicy': 'unisex',
     'userId': '-LHJlGhZ9HiNldVt-jB-',
     'id': '8gsGdpeON',
     'updatedAt': '2018-10-03T12:02:01.359Z',
@@ -60,6 +61,7 @@ export const guestHouse = {
   'location': 'Lagos Nigeria',
   'bathRooms': '5',
   'imageUrl': 'https://res.cloudinary.com/jpg',
+  'genderPolicy': 'unisex',
   'rooms': [
     {
       'roomName': 'big cutter',

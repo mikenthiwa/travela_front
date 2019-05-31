@@ -5,6 +5,7 @@ const guestHouses = [
     location: 'Nairobi, Kenya',
     bathRooms: 5,
     imageUrl: 'http://images/guest-house.jpg',
+    genderPolicy: 'unisex',
     rooms: [
       {
         id: 'tryuompl0',
@@ -28,6 +29,7 @@ const guestHouses = [
     location: 'Nairobi, Kenya',
     bathRooms: 3,
     imageUrl: 'http://images/guest-house.jpg',
+    genderPolicy: 'unisex',
     rooms: [
       {
         id: 'plmyt0pol',
@@ -50,6 +52,7 @@ const guestHouses = [
     houseName: 'Guest House 3',
     bathRooms: 4,
     imageUrl: 'http://images/guest-house.jpg',
+    genderPolicy: 'unisex',
     location: 'Lagos, Nigeria',
     rooms: [
       {
@@ -73,6 +76,7 @@ const guestHouses = [
     houseName: 'Guest House 4',
     bathRooms: 1,
     imageUrl: 'http://images/guest-house.jpg',
+    genderPolicy: 'unisex',
     location: 'Kigali, Rwanda',
     rooms: [
       {

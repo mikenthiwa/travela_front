@@ -9,6 +9,7 @@ const guestHouses = {
   'location': 'Lagos Nigeria',
   'bathRooms': '5',
   'imageUrl': 'https://res.cloudinary.com/s.jpg.jpg.jpg',
+  'genderPolicy': 'unisex',
   'rooms': [
     {
       'roomName': 'big cutter',

@@ -33,6 +33,7 @@ export const tripRequest = {
               houseName: 'Guest House B',
               id: 10948,
               imageUrl: 'guest.com',
+              genderPolicy: 'unisex',
               location: 'Nairobi, Kenya',
               updatedAt: '2018-08-16T11:11:52.181Z',
               userId: '-LTMfmwvXO0D9BQ8fXgl',

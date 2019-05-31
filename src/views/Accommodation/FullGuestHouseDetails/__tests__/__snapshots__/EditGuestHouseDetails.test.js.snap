@@ -40,6 +40,7 @@ exports[`<Accommodation /> should render correctly 1`] = `
             ],
           ],
           "createdAt": "2018-10-05T00:07:22.276Z",
+          "genderPolicy": "unisex",
           "houseName": "Bukoto heights",
           "id": "zNnGJAJH5",
           "imageUrl": "https://www.lol.com",
@@ -155,6 +156,9 @@ exports[`<Accommodation /> should render correctly 1`] = `
             1
           </div>
         </div>
+        <div
+          className="genderIcon"
+        />
       </div>
       <div
         className="guest-house-action-div"

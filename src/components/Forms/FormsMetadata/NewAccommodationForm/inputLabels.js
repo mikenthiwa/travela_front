@@ -16,6 +16,9 @@ const inputLabels = {
   },
   bedCount: {
     label: 'No. of Beds'
+  },
+  genderPolicy: {
+    label: 'Gender policy'
   }
 };
 

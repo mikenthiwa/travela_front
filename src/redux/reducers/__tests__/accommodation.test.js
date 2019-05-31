@@ -34,6 +34,7 @@ describe('Accommodation Reducer', () => {
         'location': 'Kampala',
         'bathRooms': '4',
         'imageUrl': 'https://www.lol.com',
+        'genderPolicy': 'unisex',
         'rooms': [
           {
             'roomName': 'Rwenzori',
@@ -107,6 +108,7 @@ describe('Accommodation Reducer', () => {
           'location': 'Kampala',
           'bathRooms': '4',
           'imageUrl': 'https://www.lol.com',
+          'genderPolicy': 'unisex',
           'rooms': [
             {
               'roomName': 'Rwenzori',
@@ -138,6 +140,7 @@ describe('Accommodation Reducer', () => {
           'location': 'Kampala',
           'bathRooms': '4',
           'imageUrl': 'https://www.lol.com',
+          'genderPolicy': 'unisex',
           'rooms': [
             {
               'roomName': 'Rwenzori',
@@ -162,6 +165,7 @@ describe('Accommodation Reducer', () => {
           'location': 'Kampala',
           'bathRooms': '4',
           'imageUrl': 'https://www.lol.com',
+          'genderPolicy': 'unisex',
           'rooms': [
             {
               'roomName': 'Rwenzori',
@@ -192,6 +196,7 @@ describe('Accommodation Reducer', () => {
           'location': 'Kampala',
           'bathRooms': '4',
           'imageUrl': 'https://www.lol.com',
+          'genderPolicy': 'unisex',
           'rooms': [
             {
               'roomName': 'Rwenzori',
@@ -288,6 +293,7 @@ describe('Accommodation Reducer', () => {
           'location': 'Kampala',
           'bathRooms': '4',
           'imageUrl': 'https://www.lol.com',
+          'genderPolicy': 'unisex',
           'rooms': [
             {
               'roomName': 'Rwenzori',
@@ -314,6 +320,7 @@ describe('Accommodation Reducer', () => {
           bathRooms: '2',
           disabled: true,
           imageUrl: 'https://www.lol.com',
+          genderPolicy: 'unisex',
           rooms: [
             {
               id: 'tryuompl0',
@@ -359,6 +366,7 @@ describe('Accommodation Reducer', () => {
           bathRooms: '2',
           disabled: true,
           imageUrl: 'https://www.lol.com',
+          genderPolicy: 'unisex',
           rooms: [
             {
               id: 'tryuompl0',
@@ -472,6 +480,7 @@ describe('Accommodation Reducer', () => {
           location: 'Nairobi, Kenya',
           bathRooms: 5,
           imageUrl: 'http://images/guest-house.jpg',
+          genderPolicy: 'unisex',
           disabled: false,
           rooms: [
             {

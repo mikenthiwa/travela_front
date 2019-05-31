@@ -117,6 +117,7 @@ describe('Accommodation actions test', () => {
           location: 'Nairobi, Kenya',
           bathRooms: 5,
           imageUrl: 'http://images/guest-house.jpg',
+          genderPolicy: 'unisex',
           rooms: [
             {
               id: 'tryuompl0',
@@ -172,6 +173,7 @@ describe('Accommodation actions test', () => {
           location: 'Nairobi, Kenya',
           bathRooms: 5,
           imageUrl: 'http://images/guest-house.jpg',
+          genderPolicy: 'unisex',
         }
         const response = {
           data: {
@@ -262,6 +264,7 @@ describe('Accommodation actions test', () => {
           location: 'Nairobi, Kenya',
           bathRooms: 5,
           imageUrl: 'http://images/guest-house.jpg',
+          genderPolicy: 'unisex',
         }
         const response = {
           data: {

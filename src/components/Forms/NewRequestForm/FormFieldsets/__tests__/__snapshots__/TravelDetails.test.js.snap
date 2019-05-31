@@ -53,6 +53,7 @@ exports[`<TravelDetails /> should match snapshot 1`] = `
                   "guestHouses": Object {
                     "bathRooms": 1,
                     "createdAt": "2018-08-16T11:11:52.181Z",
+                    "genderPolicy": "unisex",
                     "houseName": "Mini flat-B",
                     "id": "guest-house-1",
                     "imageUrl": "https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1",
@@ -81,6 +82,7 @@ exports[`<TravelDetails /> should match snapshot 1`] = `
                   "guestHouses": Object {
                     "bathRooms": 1,
                     "createdAt": "2018-08-16T11:11:52.181Z",
+                    "genderPolicy": "unisex",
                     "houseName": "Mini flat-B",
                     "id": "guest-house-1",
                     "imageUrl": "https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1",
@@ -109,6 +111,7 @@ exports[`<TravelDetails /> should match snapshot 1`] = `
                   "guestHouses": Object {
                     "bathRooms": 1,
                     "createdAt": "2018-08-16T11:11:52.181Z",
+                    "genderPolicy": "unisex",
                     "houseName": "Mini flat-B",
                     "id": "guest-house-1",
                     "imageUrl": "https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1",
@@ -137,6 +140,7 @@ exports[`<TravelDetails /> should match snapshot 1`] = `
                   "guestHouses": Object {
                     "bathRooms": 1,
                     "createdAt": "2018-08-16T11:11:52.181Z",
+                    "genderPolicy": "unisex",
                     "houseName": "Mini flat-B",
                     "id": "guest-house-1",
                     "imageUrl": "https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1",
@@ -165,6 +169,7 @@ exports[`<TravelDetails /> should match snapshot 1`] = `
                   "guestHouses": Object {
                     "bathRooms": 1,
                     "createdAt": "2018-08-16T11:11:52.181Z",
+                    "genderPolicy": "unisex",
                     "houseName": "Mini flat-B",
                     "id": "guest-house-1",
                     "imageUrl": "https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1",

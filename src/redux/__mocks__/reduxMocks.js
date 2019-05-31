@@ -182,6 +182,7 @@ export const tripsResponse = {
             location: 'Lagos Nigeria',
             bathRooms: 1,
             imageUrl: 'https://www.lol.com',
+            genderPolicy: 'unisex',
             createdAt: '2018-09-30T21:46:35.003Z',
             updatedAt: '2018-09-30T21:46:35.003Z',
             userId: '-MUyHJmKrxA90lPNQ1FOLNm'
@@ -245,6 +246,7 @@ export const notCheckInTrips = {
             location: 'Lagos Nigeria',
             bathRooms: 1,
             imageUrl: 'https://www.lol.com',
+            genderPolicy: 'unisex',
             createdAt: '2018-09-30T21:46:35.003Z',
             updatedAt: '2018-09-30T21:46:35.003Z',
             userId: '-MUyHJmKrxA90lPNQ1FOLNm'

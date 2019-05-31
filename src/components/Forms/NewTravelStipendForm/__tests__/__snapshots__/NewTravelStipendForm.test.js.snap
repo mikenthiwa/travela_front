@@ -133,6 +133,7 @@ exports[`<NewTravelStipendForm /> renders correctly 1`] = `
                           "Faroe Islands",
                           "Micronesia",
                           "Gabon",
+                          "United Kingdom",
                           "Georgia",
                           "Guernsey",
                           "Ghana",

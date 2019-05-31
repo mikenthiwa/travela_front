@@ -42,7 +42,7 @@ const props = {
           createdAt: '2018-08-16T11:11:52.181Z',
           faulty: true,
           guestHouseId: 'guest-house-1',
-          guestHouses: {id: 'guest-house-1', houseName: 'Mini flat-B', location: 'Lagos, Nigeria', bathRooms: 1, imageUrl: 'https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1'},
+          guestHouses: {id: 'guest-house-1', houseName: 'Mini flat-B', location: 'Lagos, Nigeria', bathRooms: 1, imageUrl: 'https://www.dropbox.com/s/c2n63x2jamh3ndv/guesthouse2.jpg?raw=1', genderPolicy: 'unisex'},
           id: 'room-id-1',
           isDeleted: false,
           roomName: 'Kwetu',

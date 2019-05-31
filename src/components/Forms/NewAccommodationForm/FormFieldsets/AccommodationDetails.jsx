@@ -41,6 +41,7 @@ class AccommodationDetails extends Component {
     );
   };
 
+
   renderForms(documentId, handleInputChange, handleDropDown) {
     let roomForm = [];
     for (let i = 0; i < documentId; i++) {
@@ -90,7 +91,7 @@ class AccommodationDetails extends Component {
     );
   };
 
-  renderGuestHouseInput = (renderInput, handleLocation) => {
+  renderGuestHouseInput = (renderInput, handleLocation, handleDropDown) => {
     return (
       <div className="input-group reduce-margin">
         <div className="guest-house-input">
@@ -101,6 +102,13 @@ class AccommodationDetails extends Component {
         </div>
         <div className="guest-house-input">
           {renderInput('bathRooms', 'number')}
+        </div>
+        <div className="guest-house-input">
+          {renderInput('genderPolicy', 'dropdown-select', {
+            handleDropDown,
+            choices: ['Unisex', 'Female', 'Male'],
+            size: ''
+          })}
         </div>
       </div>
     );
@@ -145,7 +153,7 @@ class AccommodationDetails extends Component {
     return (
       <fieldset>
         {this.renderImageDisplay(displayImage, handleImageChange)}
-        {this.renderGuestHouseInput(renderInput, handleLocation)}
+        {this.renderGuestHouseInput(renderInput, handleLocation, handleDropDown)}
         <h4 className="add-rooms">Add Rooms</h4>
         {this.renderForms(documentId, handleInputChange, handleDropDown)}
         {this.renderAddRoomBtn()}

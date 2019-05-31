@@ -11,6 +11,7 @@ const props = {
     'location': 'Kampala',
     'bathRooms': '4',
     'imageUrl': 'https://www.lol.com',
+    'genderPolicy': 'unisex',
     'createdAt': '2018-10-05T00:07:22.276Z',
     'updatedAt': '2018-10-07T03:17:09.928Z',
     'userId': '-LJNzPWupJiiToLowHq9',

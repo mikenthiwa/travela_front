@@ -15,7 +15,7 @@
         align-items: center;
         grid-template-columns: auto 1fr auto;
         justify-items: left;
-        display: grid;
+        display: flex;
         .back-button {
           justify-content: center;
           align-items: center;
@@ -83,6 +83,11 @@
         }
         > div:not(:last-child) {
           margin-right: 15px;
+        }
+      }
+      .genderIcon{
+        img{
+          height: 30px;
         }
       }
 

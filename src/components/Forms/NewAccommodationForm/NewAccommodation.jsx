@@ -16,11 +16,11 @@ class NewAccommodation extends PureComponent {
     super(props);
     const { modalType, guestHouse } = this.props;
     const isEdit = modalType === 'edit accommodation';
-    const { houseName, location, bathRooms, imageUrl, rooms
+    const { houseName, location, bathRooms, imageUrl, genderPolicy, rooms
     } = this.getHouseDetails(modalType, guestHouse);
     const defaultRoom = this.defaultRoom(0);
     this.defaultState = {
-      values: { houseName, location, bathRooms, image: imageUrl,
+      values: { houseName, location, bathRooms, image: imageUrl, genderPolicy,
         preview: imageUrl, ...defaultRoom, ...this.populateRoomsDefaultStateValues(rooms)},
       guestHouseCenter: location,
       rooms: isEdit ? guestHouse.rooms : [{}],
@@ -49,7 +49,7 @@ class NewAccommodation extends PureComponent {
 
   getHouseDetails = (modalType, detailsSource) => {
     const houseDetails = {};
-    const houseAttribs = ['houseName', 'location', 'bathRooms', 'imageUrl', 'rooms'];
+    const houseAttribs = ['houseName', 'location', 'bathRooms', 'imageUrl', 'genderPolicy', 'rooms'];
     houseAttribs.map(attrb => {
       if(!(modalType === 'edit accommodation'))
         return houseDetails[attrb] = '';
@@ -141,7 +141,11 @@ class NewAccommodation extends PureComponent {
         rooms.push({ [name.split('-')[0]]: choice });}
       this.setState(prevState => ({
         values: { ...prevState.values, [rooms]: choice } }), this.validate);
-    }};
+    } else {
+      this.setState(prevState => ({
+        values: { ...prevState.values } }), this.validate);
+    }
+  };
   handleFormCancel = () => {
     this.setState({ ...this.defaultState });
     let { closeModal } = this.props;
@@ -212,6 +216,7 @@ class NewAccommodation extends PureComponent {
         location: values.location,
         bathRooms: values.bathRooms,
         imageUrl: imageUrl,
+        genderPolicy: values.genderPolicy,
         rooms: rooms
       };
       if (this.validate() && modalType === 'edit accommodation') {
