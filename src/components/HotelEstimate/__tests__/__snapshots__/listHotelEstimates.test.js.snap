@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListHotelEstimates /> renders HotelEstimates page without crashing 1`] = `
+<div>
+  <div>
+    <div
+      className="stipend-list mdl-grid"
+    >
+      <div
+        className="card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--3-col-phone"
+      >
+        <a
+          href="/travel-cost/hotel-estimates?region=1001&country=true"
+          onClick={[Function]}
+          style={
+            Object {
+              "pointerEvents": "auto",
+            }
+          }
+        >
+          <div
+            className="card_title"
+          >
+            East Africa
+             
+          </div>
+          <div
+            className="card_stipend"
+          >
+            $
+            1000
+             
+          </div>
+          <p
+            className="card_p"
+          >
+            Hotel Estimate
+          </p>
+        </a>
+      </div>
+      <div
+        className="card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--3-col-phone"
+      >
+        <a
+          href="/travel-cost/hotel-estimates?region=1&country=true"
+          onClick={[Function]}
+          style={
+            Object {
+              "pointerEvents": "auto",
+            }
+          }
+        >
+          <div
+            className="card_title"
+          >
+            UK
+             
+          </div>
+          <div
+            className="card_stipend"
+          >
+            $
+            550
+             
+          </div>
+          <p
+            className="card_p"
+          >
+            Hotel Estimate
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<NoHotelEstimates /> renders NoHotelEstimates page without crashing 1`] = `
+<div
+  className="no-templates list-templates"
+>
+  <div
+    className="content"
+  >
+    <img
+      alt=""
+      src="no-document.svg"
+    />
+    <p>
+      No Hotel Estimates have been created
+    </p>
+  </div>
+</div>
+`;

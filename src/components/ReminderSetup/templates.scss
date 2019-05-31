@@ -102,6 +102,13 @@
       opacity: 0.8;
     }
   }
+  .no-estimates {
+    margin-top: 100px;
+    padding-right: 100px;
+    p {
+      opacity: 0.2;
+    }
+  }
   @media (max-width: 840px) {
     left: 40%;
     }

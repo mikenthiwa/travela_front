@@ -113,6 +113,12 @@ const NavItemsMetadata = [
         text: 'Travel Stipend',
         onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member'],
         exact: true
+      },
+      {
+        link_to: '/travel-cost/hotel-estimates',
+        text: 'Hotel Estimate',
+        onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member'],
+        exact: true
       }
     ],
     icons: {

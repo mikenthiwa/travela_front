@@ -6,23 +6,31 @@ import './_modal.scss';
 
 
 class Modal extends PureComponent {
+  _isMounted = false;
 
   state = {
     showing: false
   };
 
   componentDidMount() {
+    this._isMounted = true;
     document.addEventListener('keydown', this.hideModal);
   }
 
   componentWillReceiveProps( { visibility }, nextContext) {
-    setTimeout(() => {
-      this.setState({ showing: visibility === 'visible'});
+    this.timeout = setTimeout(() => {
+      if (this._isMounted) {
+        this.setState({ showing: visibility === 'visible'});
+      }
     }, visibility === 'visible' ? 0 : 200);
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
     document.removeEventListener('keydown', this.hideModal);
+    if( this.timeout ){
+      clearTimeout(this.timeout);
+    }
   }
 
   hideModal = (e) => {

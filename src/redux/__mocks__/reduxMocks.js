@@ -45,6 +45,13 @@ export const createStipendMock = {
   }
 };
 
+export const createHotelEstimateMock = {
+  requestObj: {
+    country: 'Rwanda',
+    estimate: 100
+  }
+}
+
 export const fetchRoleUsersResponse = {
   id: 53019,
   roleName: 'Manager',

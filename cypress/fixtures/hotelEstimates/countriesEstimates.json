@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "message": "Hotel Estimates retrieved successfully",
+  "estimates": [
+    {
+      "id": 2,
+      "amount": 200,
+      "createdBy": { "id": 593, "name": "Andrew Hinga" },
+      "country": "Kenya"
+    },
+    {
+      "id": 5,
+      "amount": 100,
+      "createdBy": { "id": 593, "name": "Andrew Hinga" },
+      "country": "Burkina Faso"
+    },
+    {
+      "id": 7,
+      "amount": 120,
+      "createdBy": { "id": 593, "name": "Andrew Hinga" },
+      "country": "Azerbaijan"
+    },
+    {
+      "id": 9,
+      "amount": 120,
+      "createdBy": { "id": 593, "name": "Andrew Hinga" },
+      "country": "Finland"
+    },
+    {
+      "id": 10,
+      "amount": 333,
+      "createdBy": { "id": 593, "name": "Andrew Hinga" },
+      "country": "Bhutan"
+    },
+    {
+      "id": 11,
+      "amount": 77,
+      "createdBy": { "id": 593, "name": "Andrew Hinga" },
+      "country": "Argentina"
+    }
+  ]
+}

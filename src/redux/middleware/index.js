@@ -144,6 +144,11 @@ import {
   watchUpdateTripModification
 } from "./tripModificationSaga";
 import {watchCreateCountrySagaAsync, watchGetCountriesSagaAsync} from './countriesSaga';
+import {
+  watchCreateHotelEstimateAsync,
+  watchgetAllHotelEstimates
+} from './hotelEstimateSaga';
+
 function* rootSaga() {
   yield all([
     userAuth(),
@@ -253,7 +258,9 @@ function* rootSaga() {
     watchGetCountriesSagaAsync(),
     watchSubmitModificationRequest(),
     watchFetchModificationForRequest(),
-    watchUpdateTripModification()
+    watchUpdateTripModification(),
+    watchgetAllHotelEstimates(),
+    watchCreateHotelEstimateAsync()
   ]);
 }
 

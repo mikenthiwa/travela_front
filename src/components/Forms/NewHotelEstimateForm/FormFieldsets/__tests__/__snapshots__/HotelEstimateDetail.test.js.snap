@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HotelEstimateFieldset /> should match snapshot 1`] = `
+<fieldset
+  className="personal-details"
+>
+  <div>
+    <div>
+      <div
+        className="input-group mdl-grid"
+      >
+        <div
+          className="spaces mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+        >
+          <Input
+            autoComplete="off"
+            choices={Array []}
+            className="request{ uniq }dropdown estimate-location"
+            label="Type the country"
+            labelNote=""
+            name="country"
+            onChange={null}
+            readOnly={false}
+            size=""
+            type="filter-dropdown-select"
+          />
+        </div>
+        <div
+          className="spaces mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone"
+        >
+          <Input
+            autoComplete="off"
+            className="request{ uniq }dropdown estimate-amount "
+            id="your-manager"
+            label="Enter Amount in Dollars ($)"
+            labelNote=""
+            max="1000"
+            min="1"
+            name="estimate"
+            onChange={[Function]}
+            onInvalid={[Function]}
+            placeholder="1000"
+            size=""
+            type="number"
+          />
+          <span
+            className="hide-error"
+          >
+            Amount should be a positive integer and not more than 1000
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+`;
