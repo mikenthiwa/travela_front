@@ -147,20 +147,50 @@ describe('<NewUserRoleForm />', () => {
     jest.resetAllMocks();
     wrapper.unmount();
   });
+  it('should assign all centers to superadmin by default', () => {
+    const wrapper = mount(
+      <NewUserRoleForm {...{...props, role: 'Super Administrator', roleId: '45678', centers: [{
+        id: '1',
+        location: 'Kenya'
+      },
+      {
+        id: '2',
+        location: 'Nigeria'
+      }] }} />);
+    const spy = jest.spyOn(wrapper.instance(), 'handleSubmit');
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'test@andela.com'}});
+    wrapper.find('form').simulate('submit');
+    expect(spy).toHaveBeenCalled();
+    expect(props.handleUpdateRole).toHaveBeenCalledTimes(1);
+    expect(props.handleUpdateRole).toHaveBeenCalledWith({
+      email: 'test@andela.com',
+      roleName: 'Super Administrator',
+      center: ['Kenya', 'Nigeria']
+    });
+    jest.resetAllMocks();
+    wrapper.unmount();
+  });
 
   describe('<PersonalDetails />', () => {
     const props = {
       myTitle: 'Change Center',
       centers: [{
-        location: []
+        id: '1',
+        location: 'Kenya'
+      },
+      {
+        id: '2',
+        location: 'Nigeria'
       }],
       roleName: 'travel team member',
       values:{
         item: '',
         items: []
       },
-      validate: true,
-      getAllUsersEmail: jest.fn(),
+      addItem: jest.fn(() => {}),
+      hasBlankFields: false,
+      removeItem: jest.fn(() => {}),
+      departments: [{id:'dept', text:'finance'}],
       allMails: [{id:'travela', text:'travela@travela.com'}],
     };
 
@@ -170,6 +200,13 @@ describe('<NewUserRoleForm />', () => {
 
     it('renders correctly', () => {
       expect(wrapper).toMatchSnapshot();
+    });
+    
+    it('should render all centers when role is super admin', () => {
+      const wrapper = shallow(
+      <PersonalDetails {...{...props, roleName: 'Super Administrator', myTitle: 'Add User',}} />);
+      const centerButtons = wrapper.find('.center-button-group');
+      expect(centerButtons).toHaveLength(1);
     });
   });
 });

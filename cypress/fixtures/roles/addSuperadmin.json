@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "message": "Role updated successfully",
+  "result": {
+    "name": "Bolton Otieno",
+    "email": "bolton.opondo@andela.com",
+    "id": 772,
+    "userId": "1444",
+    "roleName": "Super Administrator",
+    "center": ["United States", "Uganda", "Nigeria", "Kenya", "Rwanda"]
+  },
+  "token": null
+}

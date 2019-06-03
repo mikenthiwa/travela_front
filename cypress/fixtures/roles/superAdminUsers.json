@@ -1,0 +1,87 @@
+{
+  "success": true,
+  "message": "data",
+  "result": {
+    "id": 10948,
+    "description": "Can perform all task on travela",
+    "roleName": "Super Administrator",
+    "createdAt": "2018-08-16T11:11:52.181Z",
+    "updatedAt": "2018-08-16T11:11:52.181Z",
+    "users": [
+      {
+        "email": "Diana.Ombati@andela.com",
+        "fullName": "Diana Ombati",
+        "userId": "2119",
+        "id": 1511,
+        "location": "Nairobi",
+        "centers": [
+          { "id": 23456, "location": "Kenya" },
+          { "id": 45678, "location": "United States" },
+          { "id": 56789, "location": "Uganda" }
+        ],
+        "budgetCheckerDepartments": []
+      },
+      {
+        "email": "eze.kevin@andela.com",
+        "fullName": "Eze Kevin",
+        "userId": "1444",
+        "id": 772,
+        "location": "Lagos",
+        "centers": [
+          { "id": 34567, "location": "Rwanda" },
+          { "id": 45678, "location": "United States" },
+          { "id": 56789, "location": "Uganda" },
+          { "id": 12345, "location": "Nigeria" },
+          { "id": 23456, "location": "Kenya" }
+        ],
+        "budgetCheckerDepartments": []
+      },
+      {
+        "email": "john.mutuma@andela.com",
+        "fullName": "John Mutuma",
+        "userId": "-LJV4b1QTCYewOtk5F63",
+        "id": 1000,
+        "location": "Nairobi",
+        "centers": [{ "id": 23456, "location": "Kenya" }],
+        "budgetCheckerDepartments": []
+      },
+      {
+        "email": "kevin.bett@andela.com",
+        "fullName": "Kevin Bett",
+        "userId": "1276",
+        "id": 319,
+        "location": "Nairobi",
+        "centers": [{ "id": 56789, "location": "Uganda" }],
+        "budgetCheckerDepartments": []
+      },
+      {
+        "email": "kevin.lagat@andela.com",
+        "fullName": "Kevin Lagat",
+        "userId": "2091",
+        "id": 882,
+        "location": "Nairobi",
+        "centers": [
+          { "id": 23456, "location": "Kenya" },
+          { "id": 56789, "location": "Uganda" },
+          { "id": 34567, "location": "Rwanda" }
+        ],
+        "budgetCheckerDepartments": []
+      },
+      {
+        "email": "Ruth.Marani@andela.com",
+        "fullName": "Ruth Marani",
+        "userId": "2234",
+        "id": 953,
+        "location": "Nairobi",
+        "centers": [
+          { "id": 34567, "location": "Rwanda" },
+          { "id": 23456, "location": "Kenya" },
+          { "id": 56789, "location": "Uganda" }
+        ],
+        "budgetCheckerDepartments": [{ "id": 1, "name": "Technology" }]
+      }
+    ],
+    "meta": { "count": 7, "currentPage": 1, "pageCount": 1 }
+  },
+  "token": null
+}

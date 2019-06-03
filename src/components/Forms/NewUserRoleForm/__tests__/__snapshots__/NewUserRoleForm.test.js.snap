@@ -40,7 +40,8 @@ exports[`<NewUserRoleForm /> <PersonalDetails /> renders correctly 1`] = `
             autoComplete="off"
             choices={
               Array [
-                Array [],
+                "Kenya",
+                "Nigeria",
               ]
             }
             className="department_dropdown"

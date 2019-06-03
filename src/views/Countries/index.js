@@ -52,13 +52,29 @@ export class Countries extends Component {
 
   determineHeaderTitle(regionName) {
     switch(regionName) {
-    case 'default':
+    case 'default region':
       return 'default countries';
     case 'europe':
       return 'european countries';
     default:
       return `${regionName}n countries`;
     }
+  }
+
+  renderCountries() {
+    const { isLoading, countryErrors, countries, location: { search } } = this.props;
+    const parameters = new URLSearchParams(search);
+    let searchParams = parameters.get('search');
+    return (
+      <div className="rp-table">
+        <WithLoadingCountryTable
+          searched={searchParams ? true : false}
+          isLoading={isLoading}
+          countries={countries}
+          fetchError={countryErrors}
+        />
+      </div>
+    );
   }
 
   renderCountryForm() {
@@ -92,21 +108,6 @@ export class Countries extends Component {
           addingCountries={isAddingCountry}
         />
       </Modal>
-    );
-  }
-  renderCountries() {
-    const { isLoading, countryErrors, countries, location: { search } } = this.props;
-    const parameters = new URLSearchParams(search);
-    let searchParams = parameters.get('search');
-    return (
-      <div className="rp-table">
-        <WithLoadingCountryTable
-          searched={!!searchParams}
-          isLoading={isLoading}
-          countries={countries}
-          fetchError={countryErrors}
-        />
-      </div>
     );
   }
 

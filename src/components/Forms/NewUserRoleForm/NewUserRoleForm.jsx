@@ -42,23 +42,25 @@ class NewUserRoleForm extends PureComponent {
 
   handleSubmit = event => {
     event.preventDefault();
-    const { handleUpdateRole, updateBudgetChecker, myTitle, role, updateUserCenter } = this.props;
+    const { handleUpdateRole, updateBudgetChecker, myTitle, role, updateUserCenter, centers } = this.props;
     const { values } = this.state;
     let dataValue = {
       email: values.email,
       roleName: values.roleName,
     };
+    const allcenters = centers.map(center => center.location);
+    const items = role === 'Super Administrator' && myTitle === 'Add User' ? allcenters : values.items;
     role === 'Budget Checker' ?
-      dataValue = { ...dataValue, departments: values.items }:
-      values.items.length < 1 ?
+      dataValue = { ...dataValue, departments: items }:
+      items.length < 1 ?
         dataValue :
-        dataValue = { ...dataValue, center: values.items };
+        dataValue = { ...dataValue, center: items };
 
     if (this.validate()) {
       myTitle === 'Add User' ?
         handleUpdateRole(dataValue) :
         myTitle === 'Edit Budget Checker User' ?
-          updateBudgetChecker({email: dataValue.email, departments: values.items}):
+          updateBudgetChecker({email: dataValue.email, departments: items}):
           updateUserCenter(dataValue);
     }
   };

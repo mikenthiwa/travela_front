@@ -36,6 +36,23 @@ class PersonalDetailsFiedset extends Component {
         </button>
       </div>
     );
+
+    const displayDefaultCenters = () => (
+      <div>
+        Centers
+        <div className="btn-group center-button-group">
+          {allCenters.map(center => (
+            <button 
+              key={Math.floor((Math.random() * 5000) + 1)}
+              type="button"
+              className="center_buttons">
+              {center}
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+
     return (
       <fieldset className="personal-details">
         <div>
@@ -49,8 +66,10 @@ class PersonalDetailsFiedset extends Component {
 
           <div>
             {roleName === 'Budget Checker' ?
-              displayInput('Departments') :
-              displayInput('Country')
+              displayInput('Departments') : 
+              roleName === 'Super Administrator' && myTitle === 'Add User' ?
+                displayDefaultCenters() :
+                displayInput('Country')
             }
           </div>
           <div className="">
