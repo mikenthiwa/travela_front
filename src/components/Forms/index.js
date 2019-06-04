@@ -7,7 +7,7 @@ import NewChecklistForm from './NewChecklistForm';
 import ProfileForm from './ProfileForm';
 import AddRoleForm from './AddRoleForm';
 import NewTravelStipendForm from './NewTravelStipendForm/NewTravelStipendForm';
-import NewHotelEstimateForm from './NewHotelEstimateForm/NewHotelEstimateForm';
+import NewHotelEstimateForm from './NewHotelEstimateForm';
 import AddRegionForm from './AddRegionForm';
 import AddCountryForm from './AddCountriesForm/AddCountriesForm';
 import './index.scss';

@@ -181,7 +181,10 @@ Login.propTypes = {
   history: PropTypes.shape({}).isRequired,
   setUser: PropTypes.func.isRequired,
   postData: PropTypes.func.isRequired,
-  postUserData: PropTypes.object,
+  postUserData: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]),
   errors: PropTypes.shape({}),
   user: PropTypes.shape({}),
   match: PropTypes.object,

@@ -2,13 +2,19 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import toast from 'toastr';
 import {
   CREATE_HOTEL_ESTIMATE,
-  FETCH_ALL_HOTEL_ESTIMATES
+  FETCH_ALL_HOTEL_ESTIMATES,
+  UPDATE_HOTEL_ESTIMATE,
+  DELETE_HOTEL_ESTIMATE
 } from '../constants/actionTypes';
 import {
   createHotelEstimateSuccess,
   createHotelEstimateFailure,
   fetchAllHotelEstimatesSuccess,
-  fetchAllHotelEstimatesFailure
+  fetchAllHotelEstimatesFailure,
+  updateHotelEstimateSuccess,
+  updateHotelEstimateFailure,
+  deleteHotelEstimateSuccess,
+  deleteHotelEstimateFailure
 } from '../actionCreator/hotelEstimateAction';
 import HotelEstimateAPI from '../../services/HotelEstimateAPI';
 import { closeModal } from '../actionCreator/modalActions';
@@ -51,4 +57,50 @@ export function* getAllHotelEstimatesSaga(action) {
 
 export function* watchgetAllHotelEstimates() {
   yield takeLatest(FETCH_ALL_HOTEL_ESTIMATES, getAllHotelEstimatesSaga);
+}
+
+export function* updateHotelEstimateSaga(action) {
+  const { estimateId, payload, history } = action;
+  try {
+    const response = yield call(
+      HotelEstimateAPI.updateHotelEstimate,
+      estimateId,
+      payload
+    );
+
+    yield put(updateHotelEstimateSuccess(response.data));
+    toast.success('Hotel Estimate successfully updated');
+    yield put(closeModal());
+    history.push(`/travel-cost/hotel-estimates${history.location.search}`);
+  } catch (errors) {
+    let errorMessage = apiErrorHandler(errors);
+
+    yield put(updateHotelEstimateFailure(errors));
+    toast.error(errorMessage);
+  }
+}
+
+export function* watchUpdateHotelEstimate() {
+  yield takeLatest(UPDATE_HOTEL_ESTIMATE, updateHotelEstimateSaga);
+}
+
+export function* deleteHotelEstimateSaga(action) {
+  const { estimateId } = action;
+  try {
+    const response = yield call(
+      HotelEstimateAPI.deleteHotelEstimate,
+      estimateId
+    );
+    yield put(deleteHotelEstimateSuccess(response.data.message, estimateId));
+    yield put(closeModal());
+    toast.success(response.data.message);
+  } catch (errors) {
+    const errorMessage = apiErrorHandler(errors);
+    yield put(deleteHotelEstimateFailure(errorMessage));
+    toast.error(errorMessage);
+  }
+}
+
+export function* watchDeleteHotelEstimate() {
+  yield takeLatest(DELETE_HOTEL_ESTIMATE, deleteHotelEstimateSaga);
 }

@@ -4,10 +4,10 @@ import ButtonLoadingIcon from '../../ButtonLoadingIcon';
 
 const SubmitArea = props => {
   const {
-    hasBlankFields,
     onCancel,
     send,
     loading,
+    hasBlankFields,
     hotelEstimates: { isLoading }
   } = props;
   return (

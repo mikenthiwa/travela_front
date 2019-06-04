@@ -1,13 +1,14 @@
 import React from 'react';
-import NewHotelEstimateForm from '../NewHotelEstimateForm';
+import NewHotelEstimateForm from '..';
 
 describe('<NewHotelEstimateForm />', () => {
-  let wrapper, onSubmit;
+  let wrapper, onSubmit, shallowwrapper;
   onSubmit = jest.fn();
 
   const props = {
     loading: false,
     hotelEstimates: {
+      selectedEstimate: { id: 4 },
       isLoading: false,
       estimates: [
         {
@@ -135,5 +136,27 @@ describe('<NewHotelEstimateForm />', () => {
     expect(wrapper.find('.estimate-amount span.error').text()).toBe(
       'This field is required'
     );
+  });
+
+  it('should prefill form input fields on editing', () => {
+    beforeEach(() => {
+      const newProps = {
+        ...props,
+        editing: true,
+        selectedEstimate: {
+          id: 5,
+          amount: 5,
+          region: 'West Africa',
+          regionId: 1002
+        }
+      };
+      const wrapper = mount(<NewHotelEstimateForm {...newProps} />);
+      jest.resetAllMocks();
+    });
+    const estimate = wrapper.find('input[name="estimate"]');
+    const changeValue = { target: { name: 'estimate', value: '50' } };
+    estimate.simulate('change', changeValue);
+    const { estimate: estimateValue } = wrapper.state('values');
+    expect(estimateValue).toEqual('50');
   });
 });

@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { Provider } from 'react-redux';
 import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
-import mockData from '../../../mockData/hotelEstimate';
+import mockData from '../../../mockData/hotelEstimateMockData';
 import { HotelEstimates, mapStateToProps } from '..';
 
 const { estimates } = mockData;
@@ -52,7 +52,10 @@ let props = {
   openModal: sinon.spy(() => Promise.resolve()),
   closeModal: sinon.spy(() => Promise.resolve()),
   fetchAllHotelEstimates: jest.fn(),
-  fetchSingleHotelEstimate: jest.fn()
+  fetchSingleHotelEstimate: jest.fn(),
+  history: {
+    push: jest.fn()
+  }
 };
 
 const initialState = {
@@ -94,6 +97,24 @@ describe('HotelEstimate', () => {
     );
     expect(wrapper.length).toBe(1);
     wrapper.unmount();
+  });
+  it('should test that region and country button toggle when clicked', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <HotelEstimates {...props} />
+        </MemoryRouter>
+      </Provider>
+    );
+    wrapper.find('#passportButton').simulate('click');
+    const passportButton = wrapper.find('#passportButton');
+    const { className: classNamePassport } = passportButton.props();
+    expect(classNamePassport).toEqual('document-button_group__active');
+
+    wrapper.find('#visaButton').simulate('click');
+    const visaButton = wrapper.find('#visaButton');
+    const { className: classNameVisa } = visaButton.props();
+    expect(classNameVisa).toEqual('document-button_group__inactive');
   });
   it('should test for presence of regions and countries toggle buttons', () => {
     const wrapper = mount(

@@ -1,0 +1,68 @@
+{
+    "success": true,
+    "message": "Hotel Estimates retrieved successfully",
+    "estimates": [{
+        "id": 44,
+        "amount": 150,
+        "createdBy": {"id": 992,"name": "Sylvia Mbugua"},
+        "region": "North Africa"
+    },
+      {
+        "id": 1,
+        "amount": 250,
+        "createdBy": { "id": 593, "name": "Andrew Hinga" },
+        "region": "West Africa",
+        "regionId": 1002
+      },
+      {
+        "id": 3,
+        "amount": 555,
+        "createdBy": { "id": 593, "name": "Andrew Hinga" },
+        "region": "Mars",
+        "regionId": 1
+      },
+      {
+        "id": 4,
+        "amount": 100,
+        "createdBy": { "id": 593, "name": "Andrew Hinga" },
+        "region": "East Africa",
+        "regionId": 1001
+      },
+      {
+        "id": 6,
+        "amount": 1000,
+        "createdBy": { "id": 593, "name": "Andrew Hinga" },
+        "region": "Venus",
+        "regionId": 2
+      },
+      {
+        "id": 8,
+        "amount": 120,
+        "createdBy": { "id": 593, "name": "Andrew Hinga" },
+        "region": "Arctic Circle",
+        "regionId": 3
+      },
+      {
+        "id": 12,
+        "amount": 30,
+        "createdBy": { "id": 593, "name": "Andrew Hinga" },
+        "region": "Halloween",
+        "regionId": 4
+      },
+      {
+        "id": 13,
+        "amount": 111,
+        "createdBy": { "id": 593, "name": "Andrew Hinga" },
+        "region": "Western",
+        "regionId": 5
+      },
+      {
+        "id": 15,
+        "amount": 200,
+        "createdBy": { "id": 593, "name": "Andrew Hinga" },
+        "region": "West Nigeria",
+        "regionId": 6
+      }
+    ]
+  }
+  

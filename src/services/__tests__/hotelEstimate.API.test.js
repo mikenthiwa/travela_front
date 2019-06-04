@@ -78,3 +78,55 @@ describe('HotelEstimateApi', () => {
     expect(response.data).toEqual(fetchData);
   });
 });
+
+describe('HotelEstimate Api', () => {
+  beforeEach(() => {
+    moxios.install();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+  it('should send a DELETE request to the API', async () => {
+    const estimateId = '1';
+    moxios.stubRequest(`${baseUrl}/hotelEstimate/${estimateId}`, {
+      status: 200,
+      response: {
+        success: true,
+        message: 'Hotel Estimates deleted successfully'
+      }
+    });
+    const response = await HotelEstimateApi.deleteHotelEstimate(estimateId);
+    expect(moxios.requests.mostRecent().url).toEqual(
+      `${baseUrl}/hotelEstimate/${estimateId}`
+    );
+    expect(moxios.requests.mostRecent().config.method).toEqual('delete');
+    expect(response.data).toEqual({
+      message: 'Hotel Estimates deleted successfully',
+      success: true
+    });
+  });
+  it('should send a PUT api/v1/hotelEstimate/:id', async () => {
+    const estimateId = '3';
+    const updateURL = `${baseUrl}/hotelEstimate/${estimateId}`;
+    const updateData = {
+      estimate: 50
+    };
+    moxios.stubRequest(updateURL, {
+      status: 200,
+      success: true,
+      response: {
+        message: 'Hotel estimate updated successfully'
+      }
+    });
+    const response = await HotelEstimateApi.updateHotelEstimate(
+      estimateId,
+      updateData
+    );
+    expect(moxios.requests.mostRecent().url).toEqual(updateURL);
+    expect(moxios.requests.mostRecent().config.method).toEqual('put');
+    expect(response.data).toEqual({
+      message: 'Hotel estimate updated successfully'
+    });
+  });
+});

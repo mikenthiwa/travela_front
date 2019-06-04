@@ -4,7 +4,9 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import {
   watchgetAllHotelEstimates,
-  watchCreateHotelEstimateAsync
+  watchCreateHotelEstimateAsync,
+  watchUpdateHotelEstimate,
+  watchDeleteHotelEstimate
 } from '../hotelEstimateSaga';
 import HotelEstimateAPI from '../../../services/HotelEstimateAPI';
 import {
@@ -13,9 +15,15 @@ import {
   FETCH_ALL_HOTEL_ESTIMATES_SUCCESS,
   CREATE_HOTEL_ESTIMATE,
   CREATE_HOTEL_ESTIMATE_SUCCESS,
-  CREATE_HOTEL_ESTIMATE_FAILURE
+  CREATE_HOTEL_ESTIMATE_FAILURE,
+  UPDATE_HOTEL_ESTIMATE,
+  UPDATE_HOTEL_ESTIMATE_SUCCESS,
+  UPDATE_HOTEL_ESTIMATE_FAILURE,
+  DELETE_HOTEL_ESTIMATE,
+  DELETE_HOTEL_ESTIMATE_SUCCESS,
+  DELETE_HOTEL_ESTIMATE_FAILURE
 } from '../../constants/actionTypes';
-import mockData from '../../../mockData/hotelEstimate';
+import mockData from '../../../mockData/hotelEstimateMockData';
 
 describe('Hotel estimate Saga', () => {
   const { estimates } = mockData;
@@ -41,7 +49,6 @@ describe('Hotel estimate Saga', () => {
       })
       .silentRun();
   });
-
   it('handles an error', () => {
     const error = new Error('Server error, try again');
     error.response = { status: 500 };
@@ -62,7 +69,6 @@ describe('Hotel estimate Saga', () => {
       .silentRun();
   });
 });
-
 describe('Create Hotel Estimate Saga', () => {
   const action = {
     requestData: {
@@ -132,6 +138,127 @@ describe('Create Hotel Estimate Saga', () => {
       .dispatch({
         type: CREATE_HOTEL_ESTIMATE,
         requestData: action.requestData
+      })
+      .silentRun();
+  });
+});
+describe('Delete Hotel Estimate Saga', () => {
+  const action = {
+    estimateId: 5
+  };
+  const response = {
+    data: {
+      message: 'Hotel Estimates deleted successfully',
+      estimateId: 5
+    }
+  };
+  const estimateId = 5;
+
+  const error = 'Possible network error, please reload the page';
+
+  it('deletes a hotel estimate', () => {
+    return expectSaga(watchDeleteHotelEstimate, HotelEstimateAPI)
+      .provide([
+        [
+          matchers.call.fn(
+            HotelEstimateAPI.deleteHotelEstimate,
+            action.estimateId
+          ),
+          response
+        ]
+      ])
+      .put({
+        type: DELETE_HOTEL_ESTIMATE_SUCCESS,
+        deleteMessage: response.data.message,
+        estimateId: response.data.estimateId
+      })
+      .dispatch({
+        type: DELETE_HOTEL_ESTIMATE,
+        estimateId
+      })
+      .silentRun();
+  });
+
+  it('throws error if delete hotel estimate fails', () => {
+    return expectSaga(watchDeleteHotelEstimate, HotelEstimateAPI)
+      .provide([
+        [
+          matchers.call.fn(
+            HotelEstimateAPI.deleteHotelEstimate,
+            action.estimateId
+          ),
+          throwError(error)
+        ]
+      ])
+      .put({
+        type: DELETE_HOTEL_ESTIMATE_FAILURE,
+        error
+      })
+      .dispatch({
+        type: DELETE_HOTEL_ESTIMATE,
+        estimateId
+      })
+      .silentRun();
+  });
+});
+
+describe('Update Hotel Estimate', () => {
+  const { action, response, validationError } = mockData;
+  const { estimateId, payload } = action;
+  const {
+    response: {
+      data: { errors }
+    }
+  } = validationError;
+
+  it('renders validation errors on editing a hotel estimate', () => {
+    return expectSaga(watchUpdateHotelEstimate, HotelEstimateAPI)
+      .provide([
+        [
+          matchers.call.fn(
+            HotelEstimateAPI.updateHotelEstimate,
+            estimateId,
+            payload
+          ),
+          throwError(errors)
+        ]
+      ])
+      .put({
+        type: UPDATE_HOTEL_ESTIMATE_FAILURE,
+        error: errors
+      })
+      .dispatch({
+        type: UPDATE_HOTEL_ESTIMATE,
+        estimateId,
+        payload
+      })
+      .silentRun();
+  });
+
+  it('should update a hotel estimate', () => {
+    const history = {
+      push: jest.fn()
+    };
+    return expectSaga(watchUpdateHotelEstimate, HotelEstimateAPI)
+      .provide([
+        [
+          matchers.call.fn(
+            HotelEstimateAPI.updateHotelEstimate,
+            estimateId,
+            payload
+          ),
+          response
+        ]
+      ])
+      .put({
+        type: UPDATE_HOTEL_ESTIMATE_SUCCESS,
+        response: response.data
+      })
+      .dispatch({
+        type: UPDATE_HOTEL_ESTIMATE,
+        estimateId,
+        payload,
+        history
       })
       .silentRun();
   });

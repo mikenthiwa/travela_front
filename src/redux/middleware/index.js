@@ -146,7 +146,9 @@ import {
 import {watchCreateCountrySagaAsync, watchGetCountriesSagaAsync} from './countriesSaga';
 import {
   watchCreateHotelEstimateAsync,
-  watchgetAllHotelEstimates
+  watchgetAllHotelEstimates,
+  watchDeleteHotelEstimate,
+  watchUpdateHotelEstimate
 } from './hotelEstimateSaga';
 
 function* rootSaga() {
@@ -260,7 +262,9 @@ function* rootSaga() {
     watchFetchModificationForRequest(),
     watchUpdateTripModification(),
     watchgetAllHotelEstimates(),
-    watchCreateHotelEstimateAsync()
+    watchCreateHotelEstimateAsync(),
+    watchDeleteHotelEstimate(),
+    watchUpdateHotelEstimate()
   ]);
 }
 

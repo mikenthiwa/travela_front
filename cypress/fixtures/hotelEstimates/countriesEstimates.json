@@ -3,10 +3,16 @@
   "message": "Hotel Estimates retrieved successfully",
   "estimates": [
     {
+      "id": 45,
+      "amount": 10,
+      "createdBy": {"id": 992,"name": "Sylvia Mbugua"},
+      "country": "Kenya"
+    },
+    {
       "id": 2,
       "amount": 200,
       "createdBy": { "id": 593, "name": "Andrew Hinga" },
-      "country": "Kenya"
+      "country": "Algeria"
     },
     {
       "id": 5,

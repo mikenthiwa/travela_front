@@ -6,7 +6,9 @@ import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 import {
   createHotelEstimate,
   fetchAllHotelEstimates,
-  fetchSingleHotelEstimate
+  fetchSingleHotelEstimate,
+  deleteHotelEstimate,
+  updateHotelEstimate
 } from '../../redux/actionCreator/hotelEstimateAction';
 import { NewHotelEstimateForm } from '../../components/Forms';
 import PageHeader from '../../components/PageHeader';
@@ -21,19 +23,16 @@ export class HotelEstimates extends Component {
   }
 
   componentDidMount() {
-    const {
-      fetchAllHotelEstimates,
-      location
-    } = this.props;
+    const { fetchAllHotelEstimates, location } = this.props;
     const params = new URLSearchParams(location.search);
     const regionId = params.get('region') || null;
-    
-    if(regionId){
+
+    if (regionId) {
       fetchAllHotelEstimates(`/region/${regionId}`);
-    } else{
+    } else {
       fetchAllHotelEstimates(location.search);
     }
-    
+
     const locationType = params.get('country') || 'false';
     this.setCurrentLocation(locationType);
   }
@@ -110,7 +109,8 @@ export class HotelEstimates extends Component {
       createHotelEstimate,
       listAllhotelEstimates,
       history,
-      fetchSingleHotelEstimate
+      fetchSingleHotelEstimate,
+      updateHotelEstimate
     } = this.props;
     const editing = /edit hotel estimate/.test(modalType);
     return (
@@ -132,27 +132,26 @@ export class HotelEstimates extends Component {
           hotelEstimates={listAllhotelEstimates}
           editing={editing}
           fetchSingleEstimate={fetchSingleHotelEstimate}
+          updateHotelEstimate={updateHotelEstimate}
         />
       </Modal>
     );
   }
   render() {
     const {
-      fetchAllHotelEstimates,
-      listAllhotelEstimates,
-      fetchSingleHotelEstimate,
-      openModal,
-      closeModal,
-      shouldOpen,
-      modalType,
-      location
+      fetchAllHotelEstimates, listAllhotelEstimates,
+      fetchSingleHotelEstimate, deleteHotelEstimate,
+      estimates, openModal, closeModal, shouldOpen,
+      modalType, location
     } = this.props;
     const params = new URLSearchParams(location.search);
     const regionId = params.get('region') || null;
     let title = '';
 
-    if(regionId){
-      const [region] = listAllhotelEstimates.estimates.filter(estimate => estimate.regionId === regionId);
+    if (regionId) {
+      const [region] = listAllhotelEstimates.estimates.filter(
+        estimate => estimate.regionId == regionId
+      );
       title = region ? region.regionName : '';
     }
     return (
@@ -161,10 +160,11 @@ export class HotelEstimates extends Component {
         {this.renderButtonGroup()}
         {this.renderNewHotelEstimateForm()}
         <ListHotelEstimates
-          history={history}
           listAllhotelEstimates={listAllhotelEstimates}
           fetchAllHotelEstimates={fetchAllHotelEstimates}
           fetchSingleHotelEstimate={fetchSingleHotelEstimate}
+          deleteHotelEstimate={deleteHotelEstimate}
+          estimates={estimates}
           openModal={openModal}
           closeModal={closeModal}
           shouldOpen={shouldOpen}
@@ -176,10 +176,7 @@ export class HotelEstimates extends Component {
   }
 }
 
-export const mapStateToProps = ({
-  modal,
-  listAllhotelEstimates
-}) => ({
+export const mapStateToProps = ({ modal, listAllhotelEstimates }) => ({
   ...modal.modal,
   listAllhotelEstimates
 });
@@ -188,8 +185,10 @@ const actionCreators = {
   openModal,
   closeModal,
   createHotelEstimate,
+  updateHotelEstimate,
   fetchAllHotelEstimates,
-  fetchSingleHotelEstimate
+  fetchSingleHotelEstimate,
+  deleteHotelEstimate
 };
 
 HotelEstimates.propTypes = {
@@ -201,20 +200,30 @@ HotelEstimates.propTypes = {
   listAllhotelEstimates: PropTypes.object,
   fetchSingleHotelEstimate: PropTypes.func.isRequired,
   createHotelEstimate: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
+  deleteHotelEstimate: PropTypes.func,
+  estimates: PropTypes.object,
+  updateHotelEstimate: PropTypes.func,
+  fetchRegions: PropTypes.func,
+  location: PropTypes.object
 };
 
 HotelEstimates.defaultProps = {
   listAllhotelEstimates: {
-    estimates:[]
+    estimates: []
   },
   openModal: null,
   closeModal: null,
+  location: {},
   modalType: '',
   createHotelEstimate: () => {},
   history: {
     push: () => {}
-  }
+  },
+  estimates: {},
+  updateHotelEstimate: () => {},
+  deleteHotelEstimate: () => {},
+  fetchRegions: () => {}
 };
 
 export default connect(

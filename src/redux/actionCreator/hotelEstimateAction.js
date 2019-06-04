@@ -5,10 +5,16 @@ import {
   FETCH_SINGLE_HOTEL_ESTIMATE,
   CREATE_HOTEL_ESTIMATE,
   CREATE_HOTEL_ESTIMATE_SUCCESS,
-  CREATE_HOTEL_ESTIMATE_FAILURE
+  CREATE_HOTEL_ESTIMATE_FAILURE,
+  UPDATE_HOTEL_ESTIMATE,
+  UPDATE_HOTEL_ESTIMATE_SUCCESS,
+  UPDATE_HOTEL_ESTIMATE_FAILURE,
+  DELETE_HOTEL_ESTIMATE,
+  DELETE_HOTEL_ESTIMATE_SUCCESS,
+  DELETE_HOTEL_ESTIMATE_FAILURE
 } from '../constants/actionTypes';
 
-export const fetchAllHotelEstimates = (url) => {
+export const fetchAllHotelEstimates = url => {
   return {
     type: FETCH_ALL_HOTEL_ESTIMATES,
     url
@@ -25,7 +31,7 @@ export const fetchAllHotelEstimatesFailure = error => ({
   error
 });
 
-export const fetchSingleHotelEstimate = (estimateId) => ({
+export const fetchSingleHotelEstimate = estimateId => ({
   type: FETCH_SINGLE_HOTEL_ESTIMATE,
   estimateId
 });
@@ -43,5 +49,33 @@ export const createHotelEstimateSuccess = newEstimate => ({
 
 export const createHotelEstimateFailure = error => ({
   type: CREATE_HOTEL_ESTIMATE_FAILURE,
+  error
+});
+
+export const updateHotelEstimate = (estimateId, payload, history) => ({
+  type: UPDATE_HOTEL_ESTIMATE,
+  estimateId,
+  payload,
+  history
+});
+export const updateHotelEstimateSuccess = response => ({
+  type: UPDATE_HOTEL_ESTIMATE_SUCCESS,
+  response
+});
+export const updateHotelEstimateFailure = error => ({
+  type: UPDATE_HOTEL_ESTIMATE_FAILURE,
+  error
+});
+export const deleteHotelEstimate = estimateId => ({
+  type: DELETE_HOTEL_ESTIMATE,
+  estimateId
+});
+export const deleteHotelEstimateSuccess = (deleteMessage, estimateId) => ({
+  type: DELETE_HOTEL_ESTIMATE_SUCCESS,
+  deleteMessage,
+  estimateId
+});
+export const deleteHotelEstimateFailure = error => ({
+  type: DELETE_HOTEL_ESTIMATE_FAILURE,
   error
 });

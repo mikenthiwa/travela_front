@@ -1,0 +1,18 @@
+{
+    "success": true,
+    "message": "Hotel estimate updated successfully",
+    "hotelEstimate": {
+        "id": 44,
+        "amount": "150",
+        "countryId": null,
+        "regionId": 9,
+        "createdBy": 992,
+        "deletedAt": null,
+        "createdAt": "2019-05-26T15:28:29.534Z",
+        "updatedAt": "2019-05-26T15:28:43.718Z",
+        "creator": {
+            "id": 992,
+            "fullName": "Sylvia Mbugua"
+        }
+    }
+}

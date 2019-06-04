@@ -10,6 +10,12 @@ class HotelEstimateAPI {
   static getAllHotelEstimates(url){
     return axios.get(`${baseUrl}/hotelEstimate${url}`);
   }
+  static updateHotelEstimate(estimateId, requestData) {
+    return axios.put(`${baseUrl}/hotelEstimate/${estimateId}`, requestData);
+  }
+  static deleteHotelEstimate(estimateId) {
+    return axios.delete(`${baseUrl}/hotelEstimate/${estimateId}`);
+  } 
 }
 
 export default HotelEstimateAPI;

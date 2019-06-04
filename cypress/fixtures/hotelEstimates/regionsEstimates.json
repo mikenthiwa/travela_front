@@ -1,12 +1,18 @@
 {
   "success": true,
   "message": "Hotel Estimates retrieved successfully",
-  "estimates": [
+  "estimates": [{
+    "id": 44,
+    "amount": 10,
+    "createdBy": {"id": 992,"name": "Sylvia Mbugua"},
+    "region": "West Africa",
+    "regionId": 1007
+    },
     {
       "id": 1,
       "amount": 250,
       "createdBy": { "id": 593, "name": "Andrew Hinga" },
-      "region": "West Africa",
+      "region": "North Africa",
       "regionId": 1002
     },
     {
