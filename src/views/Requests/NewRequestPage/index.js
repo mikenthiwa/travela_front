@@ -86,7 +86,8 @@ export class NewRequestPage extends Component {
         viewRequest : {
           submittingRequest
         }
-      }
+      },
+      history
     } = this.props;
     const { modificationReason, modificationReason: { type } } = this.state;
     return (
@@ -96,7 +97,8 @@ export class NewRequestPage extends Component {
         onSubmit={(reason) => submitModificationRequest(
           requestId,
           type,
-          reason
+          reason,
+          history
         )}
         submittingReason={submittingRequest}
         modalType={modalType}
@@ -132,7 +134,12 @@ export class NewRequestPage extends Component {
     const message = {
       'Cancel Trip': {
         title: 'Pending Cancellation',
-        info: 'This request has been submitted for cancellation to the Travel Team. ' +
+        info: 'This request has been submitted for modification to the Travel Team. ' +
+          'A notification will be sent upon approval.'
+      },
+      'Modify Dates': {
+        title: 'Pending Modification',
+        info: 'This request has been submitted for modification to the Travel Team. ' +
           'A notification will be sent upon approval.'
       }
     };
@@ -156,6 +163,16 @@ export class NewRequestPage extends Component {
       {
         !pending ? (
           <div className="buttons">
+            {
+              this.renderModificationButton(
+                {
+                  type: 'Modify Dates',
+                  modalTitle: `Modify this ${status} trip`,
+                  modalMessage: 'Please provide a comprehensive reason for modifying this trip',
+                  classNames: 'btn-modify-request'
+                }
+              )
+            }
             {
               this.renderModificationButton(
                 {

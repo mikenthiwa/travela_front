@@ -38,7 +38,7 @@ class TripModifications extends Component{
       <button
         onClick={() => this.setState({buttonSelected: 'Approve', modalInvisible: false})}
         type="button" className="action-button--approve">
-        Cancel Trip
+        {modification.type === 'Cancel Trip' ? 'Cancel Trip' : 'Modify Dates' }
       </button>
       <button
         onClick={() => this.setState({buttonSelected: 'Reject', modalInvisible: false})}
@@ -86,10 +86,38 @@ class TripModifications extends Component{
     }
   };
 
+  renderModifyTripMessage = (status, name) => {
+    switch(status){
+    case 'Open':
+      return (
+        <React.Fragment>
+          <b>{`${name} `}</b>
+          would like to modify this request due to the following reason
+        </React.Fragment>
+      );
+    case 'Approved':
+      return (
+        <React.Fragment>
+          This trip was modified due to the following reason:
+        </React.Fragment>
+      );
+    case 'Rejected':
+      return (
+        <React.Fragment>
+          This trip was submitted for modification due to the following reason.
+          However, the modification request was declined.
+        </React.Fragment>
+      );
+    }
+  };
+
   getModificationText = (status, type) => {
     switch(type){
     case 'Cancel Trip':{
       return status === 'Approved' ? 'Trip Cancelled' : 'Declined';
+    }
+    case 'Modify Dates':{
+      return status === 'Approved' ? 'Trip Modified' : 'Declined';
     }
     }
   };
@@ -98,6 +126,9 @@ class TripModifications extends Component{
     switch(type) {
     case 'Cancel Trip': {
       return this.renderCancelTripMessage(status, name);
+    }
+    case 'Modify Dates': {
+      return this.renderModifyTripMessage(status, name);
     }
     }
   };

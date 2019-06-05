@@ -46,7 +46,7 @@ class VisaFormFieldSet extends Component {
   }
 }
 
-VisaFormFieldSet.propTypes={
+VisaFormFieldSet.propTypes = {
   visaType: PropTypes.string,
   onChangeVisa: PropTypes.func.isRequired,
   values: PropTypes.object

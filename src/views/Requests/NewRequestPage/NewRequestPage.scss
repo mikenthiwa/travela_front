@@ -61,6 +61,11 @@
       color: #d0021b;
     }
 
+    &.btn-modify-request {
+      border: 1px solid #3d45e3;
+      color: #3d45e3;
+    }
+
     &:disabled {
       opacity: 0.3;
       pointer-events: none;

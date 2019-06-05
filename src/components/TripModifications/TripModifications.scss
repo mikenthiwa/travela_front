@@ -48,6 +48,18 @@
       display: grid;
       grid-template-columns: auto auto;
       justify-content: right;
+      &__modifyTrip{
+        height: 36px;
+        width: 110px;
+        border-radius: 1px;
+        background-color: #2f56e3;
+        border: none;
+        color: #FFF;
+        font-weight: 500;
+        line-height: 18px;
+        text-align: center;
+        cursor: pointer;
+      }
     }
   }
 }

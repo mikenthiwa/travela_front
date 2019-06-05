@@ -64,7 +64,7 @@ class TravelDetailsItem extends Component {
   loadState = (request = [], itemId, editing, values) => {
     const trip = request.trips && request.trips[itemId];
     const pendingState = { itemId };
-    const { availableRooms: { beds = [] }} = this.props;
+    const { availableRooms: { beds = [] } } = this.props;
     if (trip) {
       pendingState.bedOnEdit = trip.beds;
       pendingState.trip = { ...trip };
@@ -180,7 +180,7 @@ class TravelDetailsItem extends Component {
       delete values[`arrivalDate-${parentIds - 1}`];
       return null;
     }
-    return(
+    return (
       <div className="others-width" role="presentation">
         {renderInput(`arrivalDate-${itemId}`, 'date', {
           ...customPropsForArrival(values, `departureDate-${itemId}`),
@@ -211,8 +211,8 @@ class TravelDetailsItem extends Component {
           <div className="travel-input-area__spinner" />
         ) : null}
         {selection === 'multi' &&
-        values['origin-0'] === values[`destination-${itemId}`] &&
-        values['origin-0'].trim() !== '' ? (
+          values['origin-0'] === values[`destination-${itemId}`] &&
+          values['origin-0'].trim() !== '' ? (
             missingRequiredFields ? (
               <div>
                 {renderInput(`bed-${itemId}`, 'text', {
@@ -276,7 +276,7 @@ class TravelDetailsItem extends Component {
     } = this.props;
     const reasonChoices = (reasons) => {
       const reasonsList = ['Other..'];
-      if(reasons) {
+      if (reasons) {
         reasons.map((reason) => {
           reasonsList.push(reason.title);
         });
@@ -299,8 +299,8 @@ class TravelDetailsItem extends Component {
     );
   };
 
-  renderOtherTravelReasons =()=>{
-    const{ itemId,
+  renderOtherTravelReasons = () => {
+    const { itemId,
       selection,
       values,
       renderInput,
@@ -317,13 +317,13 @@ class TravelDetailsItem extends Component {
 
     return (
       <div className="other__reason" onChange={typedReason => handleReason(typedReason.target.value, itemId, 'other')}>
-        { reason === 'Other..' ? (
+        {reason === 'Other..' ? (
           <Fragment>
-            <div style={{ display: 'none' }}>{ values[`otherReasons-${itemId}`]  = '' || characters }</div>
+            <div style={{ display: 'none' }}>{values[`otherReasons-${itemId}`] = '' || characters}</div>
             {renderInput(`otherReasons-${itemId}`, 'textarea', {
-              maxLength:'140',
-              placeholder:'describe other reason',
-              rows:'20',
+              maxLength: '140',
+              placeholder: 'describe other reason',
+              rows: '20',
               parentid: itemId,
             })}
           </Fragment>)
@@ -335,10 +335,10 @@ class TravelDetailsItem extends Component {
 
   validateTripDetails(values, i, selection) {
     const isValid =
-    values.gender &&
-    values[`destination-${i}`] &&
-    values[`departureDate-${i}`] &&
-    values[`reasons-${i}`];
+      values.gender &&
+      values[`destination-${i}`] &&
+      values[`departureDate-${i}`] &&
+      values[`reasons-${i}`];
 
     if (isValid && selection === 'oneWay') {
       this.setState({ missingRequiredFields: false });
@@ -348,7 +348,7 @@ class TravelDetailsItem extends Component {
       this.setState({ missingRequiredFields: false });
     }
 
-    if (isValid && selection === 'multi' && values[`arrivalDate-${i-1}`]) {
+    if (isValid && selection === 'multi' && values[`arrivalDate-${i - 1}`]) {
       this.setState({ missingRequiredFields: false });
     }
   }

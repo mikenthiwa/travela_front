@@ -3,11 +3,12 @@ import {
   SUBMIT_MODIFICATION_REQUEST, UPDATE_MODIFICATION_REQUEST
 } from '../constants/actionTypes';
 
-export const submitModificationRequest = (requestId, modificationType, reason) => ({
+export const submitModificationRequest = (requestId, modificationType, reason, history) => ({
   type: SUBMIT_MODIFICATION_REQUEST,
   requestId,
   modificationType,
-  reason
+  reason,
+  history
 });
 
 export const submitModificationRequestSuccess = (response) => ({

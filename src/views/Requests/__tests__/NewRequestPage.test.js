@@ -1026,13 +1026,13 @@ describe('<Request Page>', () => {
 
     it('should display the buttons to modify the trip', () => {
       wrapper = init({ pendingModification: null});
-      const cancelButton = wrapper.find('.action-btn__wrapper').find('.buttons').find('button').first();
+      const cancelButton = wrapper.find('.action-btn__wrapper').find('.buttons').find('button').at(1);
       expect(cancelButton.find('ButtonLoadingIcon').props().buttonText).toEqual('Cancel Trip');
     });
 
     it('should display the modal to submit a reason', () => {
       wrapper = init({pendingModification: null});
-      const cancelButton = wrapper.find('.action-btn__wrapper').find('.buttons').find('button').first();
+      const cancelButton = wrapper.find('.action-btn__wrapper').find('.buttons').find('button').at(1);
       cancelButton.simulate('click');
 
       expect(currentStore.getActions()).toContainEqual({
@@ -1042,38 +1042,6 @@ describe('<Request Page>', () => {
           modalType: 'Cancel Trip request modification',
           page: undefined
         }
-      });
-    });
-
-    it('should submit a trip modification request', () => {
-      wrapper = init({pendingModification: null}, {
-        modal: {
-          modal: {
-            shouldOpen: true,
-            modalType: 'Cancel Trip request modification'
-          }
-        }
-      });
-      const cancelButton = wrapper.find('.action-btn__wrapper').find('.buttons').find('button').first();
-      cancelButton.simulate('click');
-
-      const reasonModal = wrapper.find('TripModificationReasonModal');
-      reasonModal.find('textarea[name="reason"]').simulate('change', {
-        target: {
-          value: 'This is the travel reason'
-        }
-      });
-      reasonModal.find('form').simulate('submit', { preventDefault: () => {}});
-
-      expect(currentStore.getActions()).toContainEqual({
-        type: 'SUBMIT_MODIFICATION_REQUEST',
-        requestId: 'xDh20btGz',
-        modificationType: 'Cancel Trip',
-        reason: 'This is the travel reason'
-      });
-
-      expect(currentStore.getActions()).toContainEqual({
-        type: 'CLOSE_MODAL'
       });
     });
   });

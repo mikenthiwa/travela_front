@@ -56,7 +56,7 @@ class TripModificationReasonModal extends Component {
           <button
             type="submit"
             disabled={hasBlankFields}
-            className="restore-checklist-items__footer--delete"
+            className={type === 'Cancel Trip' ? 'restore-checklist-items__footer--delete' : 'submit-area__modifyTrip'}
             id="oncancel"
           >
             <ButtonLoadingIcon isLoading={submittingReason} buttonText={type} />
