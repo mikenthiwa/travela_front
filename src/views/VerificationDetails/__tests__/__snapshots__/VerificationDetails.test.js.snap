@@ -54,9 +54,14 @@ exports[`TEST ConnectedVerificationDetails COMPONENT Updates after props are rec
             Budget Check
           </div>
           <div
-            className="stage incomplete"
+            className="stage "
           >
             Travel Checklist Submission
+            <img
+              alt="green-tick"
+              className="green-tick"
+              src="green_tick.svg"
+            />
           </div>
           <div
             className="stage incomplete"

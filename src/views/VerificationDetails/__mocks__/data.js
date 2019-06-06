@@ -180,7 +180,7 @@ export const props = {
   fetchAttachments: jest.fn(),
   updateRequestStatus: jest.fn(),
   downloadAttachments: jest.fn(),
-  submissionInfo: { percentageCompleted: 0 },
+  submissionInfo: { percentageCompleted: 100 },
   match: {
     params: {
       requestId: 'nXCj4U57J'

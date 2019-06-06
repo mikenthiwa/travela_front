@@ -214,15 +214,17 @@ const VerificationDetails = (type = 'verifications') => {
     renderButtons = (request) => {
       const {modalInvisible, buttonSelected} = this.state;
       const {status, trips} = request;
-      const {currentUser: {roles}, isConfirmDialogLoading} = this.props;
+      const {currentUser: {roles}, isConfirmDialogLoading, 
+        submissionInfo: { percentageCompleted } } = this.props;
+
       const allowedRoles = ['Travel Administrator', 'Super Administrator'];
       const [{centers}] = roles.filter(role => allowedRoles.includes(role.roleName));
       const locations = centers.length && centers.map(center => center.location);
       const origin = trips.length && trips[0].origin.split(', ').pop();
 
-      const disabled = status !== 'Approved' || !locations.includes(origin);
+      const disabled = percentageCompleted !== 100 || status !== 'Approved' || !locations.includes(origin);
       const verifiedStatus = !locations.includes(origin) ? 'disabled' : (status === 'Verified'
-        ? 'verified' : (status === 'Approved' ? 'verify' : 'disabled'));
+        ? 'verified' : ((status === 'Approved' &&  percentageCompleted === 100) ? 'verify' : 'disabled'));
 
       return (
         <div className="btn-group">
