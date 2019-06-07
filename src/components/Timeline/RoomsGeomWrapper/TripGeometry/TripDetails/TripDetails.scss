@@ -98,9 +98,9 @@
     .trip-booking-details {
       transform-origin: bottom;
       &.details-visible {
-        transform: translateY(-110%) scaleY(1);
+        transform: translateY(-10%) scaleY(1);
         &.translateX {
-          transform: translateY(-110%) scaleY(1) translateX(-100%);
+          transform: translateY(-10%) scaleY(1) translateX(-90%);
         }
       }
       &.details-hidden {
