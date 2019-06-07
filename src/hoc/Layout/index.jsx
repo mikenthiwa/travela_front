@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import Cookies from 'cookies-js';
 import ConnectedNavBar from '../../components/nav-bar/NavBar';
 import ConnectedLeftSideBar from '../../components/LeftSideBar/LeftSideBar';
 import ConnectedNotificationPane from '../../components/notification-pane/NotificationPane';
@@ -10,7 +9,6 @@ import ConnectedSideDrawer from '../../components/SideDrawer/SideDrawer';
 import upic from '../../images/upic.svg';
 import './Layout.scss';
 import {getUserData} from '../../redux/actionCreator/userActions';
-import LoaderPage from '../../components/LoaderPage';
 
 export class Layout extends Component {
 
@@ -24,14 +22,8 @@ export class Layout extends Component {
   };
 
   componentDidMount = () => {
-    const { user, getUserData, isLoaded, location: { pathname } } = this.props;
+    const { user, getUserData } = this.props;
     user && getUserData(user.UserInfo.id);
-    if(!isLoaded && pathname === '/home') {
-      this.setState({ delay: true});
-      setTimeout(() => {
-        this.setState({ delay: false});
-      }, 20000);
-    }
   };
 
   componentWillReceiveProps({ location }) {
@@ -157,14 +149,7 @@ export class Layout extends Component {
   }
 
   render () {
-    const { isLoaded, location: { pathname } } = this.props;
-    const token = Cookies.get('jwt-token');
-    const { delay, clearNav } = this.state;
-    if(delay || !isLoaded && token && pathname === '/home'){
-      return <LoaderPage />;
-    }
-
-    const { hideOverlay, openSearch } = this.state;
+    const { hideOverlay, openSearch, clearNav } = this.state;
     const overlayClass = hideOverlay ? 'none': 'block';
     return (
       <div>
