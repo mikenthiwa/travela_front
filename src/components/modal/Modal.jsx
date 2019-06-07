@@ -8,21 +8,9 @@ import './_modal.scss';
 class Modal extends PureComponent {
   _isMounted = false;
 
-  state = {
-    showing: false
-  };
-
   componentDidMount() {
     this._isMounted = true;
     document.addEventListener('keydown', this.hideModal);
-  }
-
-  componentWillReceiveProps( { visibility }, nextContext) {
-    this.timeout = setTimeout(() => {
-      if (this._isMounted) {
-        this.setState({ showing: visibility === 'visible'});
-      }
-    }, visibility === 'visible' ? 0 : 200);
   }
 
   componentWillUnmount() {
@@ -98,10 +86,9 @@ class Modal extends PureComponent {
       customModalStyles,
       closeModal
     } = this.props;
-    const { showing } = this.state;
-    const overlayStyle = `${showing ? visibility : 'invisible'} ${customOverlayStyle}`;
+    const overlayStyle = `${ visibility } ${customOverlayStyle}`;
 
-    const showModal = showing || visibility === 'visible';
+    const showModal = visibility === 'visible';
     return showModal ? (
       <Fragment>
         <Overlay
@@ -109,7 +96,7 @@ class Modal extends PureComponent {
           className={`${overlayStyle}`}
           overlayBackground={!showOverlay ? 'overlayBackground' : ''}>
           <div
-            className={`modal ${showing ? visibility: 'invisible'} ${customModalStyles}`}
+            className={`modal ${ visibility } ${customModalStyles}`}
             style={{maxWidth: width}}
             onClick={e => {e.stopPropagation();}} onKeyPress={() => {}}
             id={modalId}

@@ -82,13 +82,4 @@ describe('<Modal />', () => {
     wrapper.unmount();
     expect(document.removeEventListener).toHaveBeenCalled();
   });
-
-  it('should set the state upon receiving the visibility prop', () => {
-    window.setTimeout = jest.fn((callback, time) => {
-      callback();
-    });
-    wrapper.setProps({ visibility: 'invisible'});
-    expect(window.setTimeout.mock.calls[0][1]).toEqual(200);
-    expect(wrapper.state().showing).toEqual(false);
-  });
 });
