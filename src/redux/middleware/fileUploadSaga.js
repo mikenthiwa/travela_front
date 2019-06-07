@@ -5,6 +5,7 @@ import FileUploadAPI from '../../services/FileUploadAPI';
 import API from '../../services/AccommodationAPI';
 import { UPLOAD_FILE } from '../constants/actionTypes';
 import { postSubmission } from '../actionCreator/checkListSubmissionActions';
+import extractText from '../../helper/extractText';
 import {
   uploadFileFailure,
   uploadFileSuccess
@@ -12,13 +13,14 @@ import {
 
 export function* uploadFileAsync(action) {
   try {
-    const { 
+    const {
       file, submissionData: { tripId, checklistItemId }, checkId, requestId
     } = action;
     const response = yield call(FileUploadAPI.uploadFile, file);
     const { secure_url } = response.data;
     const fileData = { url: secure_url, fileName: file.name };
     API.setToken();
+    yield(extractText(file, response));
     yield put(postSubmission(
       { formData: { tripId, file: fileData }, checklistItemId },
       checkId, requestId

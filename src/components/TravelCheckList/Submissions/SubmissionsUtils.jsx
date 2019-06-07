@@ -244,7 +244,7 @@ class SubmissionsUtils extends Component {
         {this.selectDocumentDropdowndown()}
         <input
           type="file" name="file" ref="fileUploader" className="uploadFile"
-          onChange={handleUpload} disabled={fileUploadData.isUploading} accept="image/x-png,image/gif,image/jpeg,application/pdf"
+          onChange={handleUpload} disabled={fileUploadData.isUploading} accept="image/x-png,image/gif,image/jpeg"
         />
         {
           itemsToCheck.includes(checkId) && name !== 'Travel Ticket' && (
@@ -413,7 +413,9 @@ class SubmissionsUtils extends Component {
 
   renderTicketFieldset = () => {
     const { checklistItem, itemsToCheck, tripType, airline, ticketNumber,
-      checkId, returnTicketNumber, returnAirline , trip} = this.props;
+      checkId, returnTicketNumber, returnAirline , trip,
+      fileUploadData: { firstFlightDate, returnFlightDate, flightTicketNumber, flightAirline }
+    } = this.props;
     const {name, submissions: {tripId}} = checklistItem;
     const { departureTime, arrivalTime,
       returnDepartureTime, returnTime } = this.state;
@@ -424,12 +426,12 @@ class SubmissionsUtils extends Component {
           <div className="ticket-submission--ticket__fieldSet">
             <div className="travel-submission-details__return mdl-grid" id="departure-fields">
               {this.renderDateTimeInput('Departure Time',
-                'departureTime', tripId, departureTime,
+                'departureTime', tripId, departureTime || firstFlightDate,
                 this.formatDateTime(trip.departureDate),
                 this.formatDateTime(trip.returnDate)
               )}
               {this.renderDateTimeInput('Arrival Time',
-                'arrivalTime', tripId, arrivalTime,
+                'arrivalTime', tripId, arrivalTime || firstFlightDate,
                 this.formatDateTime(departureTime || trip.departureDate),
                 this.formatDateTime(returnDepartureTime || trip.returnDate),
               )}
@@ -437,18 +439,18 @@ class SubmissionsUtils extends Component {
                 'ticketNumber', tripId, ticketNumber
               )}
               {this.renderTicketInput('text', 'e.g Kenya Airways', 'Airline',
-                'airline', tripId, airline
+                'airline', tripId, airline || flightAirline
               )}
             </div>
             {tripType.match('return') && (
               <div className="travel-submission-details__return" id="return-fields">
                 {this.renderDateTimeInput( 'Departure Time',
-                  'returnDepartureTime', tripId, returnDepartureTime,
+                  'returnDepartureTime', tripId, returnDepartureTime || returnFlightDate,
                   this.formatDateTime(arrivalTime || trip.departureDate),
                   this.formatDateTime(trip.returnDate)
                 )}
                 {this.renderDateTimeInput('Arrival Time',
-                  'returnTime', tripId, returnTime,
+                  'returnTime', tripId, returnTime || returnFlightDate,
                   this.formatDateTime(returnDepartureTime || trip.returnDate),
                   null
                 )}
@@ -456,7 +458,7 @@ class SubmissionsUtils extends Component {
                   'returnTicketNumber', tripId, returnTicketNumber
                 )}
                 {this.renderTicketInput('text', 'e.g Kenya Airways', 'Airline',
-                  'returnAirline', tripId, returnAirline
+                  'returnAirline', tripId, returnAirline || flightAirline
                 )}
               </div>
             )}
@@ -496,6 +498,7 @@ class SubmissionsUtils extends Component {
     );
   }
 }
+
 
 SubmissionsUtils.propTypes = {
   checklistItem: PropTypes.object.isRequired, utilsType: PropTypes.string,

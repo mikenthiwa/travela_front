@@ -12,9 +12,15 @@ export const uploadFile = (file, { checklistItemId, tripId }, checkId, requestId
   requestId
 });
 
-export const uploadFileSuccess = ({ secure_url }, checkId) => ({
+export const uploadFileSuccess = (
+  {secure_url, firstFlightDate, returnFlightDate, flightTicketNumber, flightAirline },
+  checkId) => ({
   type: UPLOAD_FILE_SUCCESS,
   cloudinaryUrl: secure_url,
+  firstFlightDate,
+  returnFlightDate,
+  flightTicketNumber,
+  flightAirline,
   checkId
 });
 

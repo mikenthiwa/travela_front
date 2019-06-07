@@ -23,12 +23,13 @@ describe('File Upload saga', () => {
   const checklistItemId = '1';
   const tripId = '345';
   const file = { name: 'test.png' };
+  let firstFlightDate, returnFlightDate, flightTicketNumber, flightAirline;
   const data = {
     file, checkId, requestId,
     submissionData: { checklistItemId, tripId }
   };
   const data2 = {
-    
+
   };
 
   it('successfully uploads file to cloudinary', () => {
@@ -45,6 +46,10 @@ describe('File Upload saga', () => {
       .put({
         type: UPLOAD_FILE_SUCCESS,
         cloudinaryUrl: uploadResponse.data.secure_url,
+        firstFlightDate,
+        returnFlightDate,
+        flightTicketNumber,
+        flightAirline,
         checkId
       }).dispatch({
         type: UPLOAD_FILE,

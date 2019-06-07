@@ -36,9 +36,11 @@ class SubmissionItem extends Component {
       airline, returnTicketNumber,
       returnAirline, ticketNumber
     } = this.state;
-    const datesEmpty = [departureTime, arrivalTime, returnDepartureTime, returnTime]
+    const { fileUploadData: { firstFlightDate, returnFlightDate, flightAirline } } = this.props;
+    const datesEmpty = [departureTime || firstFlightDate, arrivalTime || firstFlightDate,
+      returnDepartureTime || returnFlightDate, returnTime || returnFlightDate]
       .some(date => date === '');
-    const otherFieldsEmpty = [airline, returnTicketNumber, ticketNumber, returnAirline]
+    const otherFieldsEmpty = [airline || flightAirline, returnTicketNumber, ticketNumber, returnAirline]
       .some(field => field === '');
     return otherFieldsEmpty ? 'All Fields are required' :
       (datesEmpty ? 'The trip time details are required' : '');
@@ -131,14 +133,21 @@ class SubmissionItem extends Component {
   };
 
   validateTicketFields = () => {
-    const {tripType} = this.props;
+    const {
+      tripType, fileUploadData: { firstFlightDate, returnFlightDate, flightAirline }
+    } = this.props;
     const {
       departureTime, arrivalTime, airline, ticketNumber,
       returnDepartureTime, returnTime, returnTicketNumber, returnAirline
     } = this.state;
-    const defaultVals = [departureTime, arrivalTime, airline, ticketNumber];
-    const returnVals = [returnDepartureTime, returnTime,
-      returnTicketNumber, returnAirline];
+    const defaultVals = [
+      departureTime || firstFlightDate, arrivalTime || firstFlightDate,
+      airline || flightAirline, ticketNumber
+    ];
+    const returnVals = [
+      returnDepartureTime || returnFlightDate, returnTime || returnFlightDate,
+      returnTicketNumber, returnAirline || flightAirline
+    ];
     const valuesArr = tripType.match('return')
       ? [...defaultVals, ...returnVals] : defaultVals;
 

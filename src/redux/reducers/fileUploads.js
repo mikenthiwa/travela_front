@@ -31,9 +31,14 @@ const fileUploads = (state = initialState, action) => {
       ...state, isUploading: '', uploadSuccess: '',
     };
   case UPLOAD_FILE_SUCCESS:
-    return { 
+    return {
       ...state, uploadSuccess: action.checkId, isUploading: '',
-      cloudinaryUrl: action.cloudinaryUrl, error: '',
+      cloudinaryUrl: action.cloudinaryUrl,
+      firstFlightDate: action.firstFlightDate,
+      returnFlightDate: action.returnFlightDate,
+      flightTicketNumber: action.flightTicketNumber,
+      flightAirline: action.flightAirline,
+      error: '',
     };
   case UPLOAD_FILE_FAILURE:
     return {

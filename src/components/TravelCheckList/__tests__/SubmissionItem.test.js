@@ -92,18 +92,18 @@ describe('SubmissionItem Component', () => {
     props.checklistItem = LagosSubmission.checklist[3];
     const wrapper = setup(props);
     const event = {
-      target: {value: '', name: 'returnAirline'}
+      target: {value: '', name: 'returnTicketNumber'}
     };
 
-    const returnAirlineInput = wrapper.find('.returnAirline');
+    const returnTicketNumberInput = wrapper.find('.returnTicketNumber');
 
     const handleTicketSubmitSpy = jest
       .spyOn(wrapper.instance(), 'handleTicketSubmit');
 
-    expect(returnAirlineInput.length).toBe(1);
-    returnAirlineInput.simulate('focus');
-    returnAirlineInput.simulate('change', event);
-    returnAirlineInput.simulate('blur');
+    expect(returnTicketNumberInput.length).toBe(1);
+    returnTicketNumberInput.simulate('focus');
+    returnTicketNumberInput.simulate('change', event);
+    returnTicketNumberInput.simulate('blur');
     expect(handleTicketSubmitSpy).toHaveBeenCalled();
     const error = wrapper.find('.submission-progress__error').last();
     expect(error.length).toBe(1);
@@ -115,18 +115,18 @@ describe('SubmissionItem Component', () => {
     props.tripType = 'multi';
     const wrapper = setup(props);
     const event = {
-      target: {value: '', name: 'airline'}
+      target: {value: '', name: 'ticketNumber'}
     };
 
-    const airlineInput = wrapper.find('.airline');
+    const ticketNumberInput = wrapper.find('.ticketNumber');
 
     const handleTicketSubmitSpy = jest
       .spyOn(wrapper.instance(), 'handleTicketSubmit');
 
-    expect(airlineInput.length).toBe(1);
-    airlineInput.simulate('focus');
-    airlineInput.simulate('change', event);
-    airlineInput.simulate('blur');
+    expect(ticketNumberInput.length).toBe(1);
+    ticketNumberInput.simulate('focus');
+    ticketNumberInput.simulate('change', event);
+    ticketNumberInput.simulate('blur');
     expect(handleTicketSubmitSpy).toHaveBeenCalled();
     const error = wrapper.find('.submission-progress__error');
     expect(error.length).toBe(1);
@@ -222,7 +222,7 @@ describe('SubmissionItem Component', () => {
     expect(error.text()).toBe('File must not exceed 1.5mb');
   });
 
-  it(`should render uploaded file input if 
+  it(`should render uploaded file input if
     checklistItem is file and is already uploaded`, () => {
     props.checklistItem = LagosSubmission.checklist[1];
     const wrapper = setup(props);
