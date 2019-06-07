@@ -61,7 +61,7 @@ export class RoleDetails extends Component {
     deleteModalState === 'visible' && hideDeleteRoleModal();
     openModal(true, 'new model');
     this.setState({
-      headTitle: `Edit ${roleName} User`,
+      headTitle: `Edit ${roleName}`,
       userDetail: user
     });
   }

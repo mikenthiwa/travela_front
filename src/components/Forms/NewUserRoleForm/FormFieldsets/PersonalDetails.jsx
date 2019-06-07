@@ -69,7 +69,7 @@ class PersonalDetailsFiedset extends Component {
               displayInput('Departments') : 
               roleName === 'Super Administrator' && myTitle === 'Add User' ?
                 displayDefaultCenters() :
-                displayInput('Country')
+                !(/Manager|Requester/.test(roleName)) && displayInput('Country')
             }
           </div>
           <div className="">
