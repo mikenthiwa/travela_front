@@ -36,7 +36,8 @@ const listAllhotelEstimates = (state = initialState, action) => {
     return {
       ...state,
       isLoading: false,
-      estimates: action.estimates
+      estimates: action.estimates,
+      countriesWithEstimates: action.countriesWithEstimates
     };
   case FETCH_ALL_HOTEL_ESTIMATES_FAILURE:
     return { ...state, isLoading: false, error: action.error };
@@ -66,10 +67,14 @@ const deleteSingleHotelEstimate = (state = initialState, action) => {
     const estimates = state.estimates.filter(
       estimate => estimate.id !== action.estimateId
     );
+    const countriesWithEstimates = state.countriesWithEstimates.filter(
+      estimate => estimate !== state.selectedEstimate.country
+    );
     return {
       ...state,
       isDeleting: false,
-      estimates: estimates
+      estimates: estimates,
+      countriesWithEstimates: countriesWithEstimates
     };
   }
 

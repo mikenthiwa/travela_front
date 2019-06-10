@@ -15,6 +15,8 @@ describe('Hotel estimates reducer delete', () => {
   const initialState = {
     isDeleting: false,
     estimates: [],
+    countriesWithEstimates: [],
+    selectedEstimate: { country: ''},
     error: {}
   };
   it('returns initial state on an undefined action', () => {

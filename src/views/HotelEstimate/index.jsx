@@ -32,7 +32,6 @@ export class HotelEstimates extends Component {
     } else {
       fetchAllHotelEstimates(location.search);
     }
-
     const locationType = params.get('country') || 'false';
     this.setCurrentLocation(locationType);
   }
@@ -72,7 +71,6 @@ export class HotelEstimates extends Component {
   };
 
   renderButtonGroup = () => {
-    const { meta, history } = this.props;
     return (
       <div className="document_header_group_button">
         <div>
@@ -103,14 +101,12 @@ export class HotelEstimates extends Component {
 
   renderNewHotelEstimateForm() {
     const {
-      closeModal,
-      shouldOpen,
-      modalType,
+      closeModal, shouldOpen, modalType,
       createHotelEstimate,
       listAllhotelEstimates,
-      history,
+      history, location,
       fetchSingleHotelEstimate,
-      updateHotelEstimate
+      updateHotelEstimate,
     } = this.props;
     const editing = /edit hotel estimate/.test(modalType);
     return (
@@ -126,6 +122,7 @@ export class HotelEstimates extends Component {
         closeModal={closeModal}
       >
         <NewHotelEstimateForm
+          location={location}
           history={history}
           closeModal={closeModal}
           handleCreateHotelEstimate={createHotelEstimate}
@@ -210,7 +207,8 @@ HotelEstimates.propTypes = {
 
 HotelEstimates.defaultProps = {
   listAllhotelEstimates: {
-    estimates: []
+    estimates: [],
+    countriesWithEstimates: []
   },
   openModal: null,
   closeModal: null,

@@ -2,10 +2,14 @@ import React from 'react';
 import NewHotelEstimateForm from '..';
 
 describe('<NewHotelEstimateForm />', () => {
-  let wrapper, onSubmit, shallowwrapper;
+  let wrapper, onSubmit;
   onSubmit = jest.fn();
 
   const props = {
+    location: {
+      search: '?country=true',
+      pathname: '/travel-cost/hotel-estimates'
+    },
     loading: false,
     hotelEstimates: {
       selectedEstimate: { id: 4 },
@@ -15,7 +19,8 @@ describe('<NewHotelEstimateForm />', () => {
           amount: 100,
           country: 'United Kingdom'
         }
-      ]
+      ],
+      countriesWithEstimates: ['Kenya', 'Nigeria'],
     },
     hasBlankFields: false,
     user: {

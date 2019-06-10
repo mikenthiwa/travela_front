@@ -21,9 +21,10 @@ export const fetchAllHotelEstimates = url => {
   };
 };
 
-export const fetchAllHotelEstimatesSuccess = ({ estimates }) => ({
+export const fetchAllHotelEstimatesSuccess = ({ estimates, countriesWithEstimates }) => ({
   type: FETCH_ALL_HOTEL_ESTIMATES_SUCCESS,
-  estimates
+  estimates,
+  countriesWithEstimates
 });
 
 export const fetchAllHotelEstimatesFailure = error => ({

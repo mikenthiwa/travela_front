@@ -26,14 +26,15 @@ import {
 import mockData from '../../../mockData/hotelEstimateMockData';
 
 describe('Hotel estimate Saga', () => {
-  const { estimates } = mockData;
+  const { estimates, countriesWithEstimates } = mockData;
   const url = '?country=true';
   it('gets a response with hotel estimates and dispatches FETCH_ALL_HOTEL_ESTIMATES_SUCCESS', () => {
     const response = {
       data: {
         success: true,
         message: 'Hotel Estimates retrieved successfully',
-        estimates: estimates
+        estimates,
+        countriesWithEstimates
       }
     };
     return expectSaga(watchgetAllHotelEstimates)
@@ -42,7 +43,8 @@ describe('Hotel estimate Saga', () => {
       ])
       .put({
         type: FETCH_ALL_HOTEL_ESTIMATES_SUCCESS,
-        estimates: response.data.estimates
+        estimates: response.data.estimates,
+        countriesWithEstimates: response.data.countriesWithEstimates
       })
       .dispatch({
         type: FETCH_ALL_HOTEL_ESTIMATES

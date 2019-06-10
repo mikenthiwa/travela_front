@@ -37,7 +37,7 @@ const mockData = {
       region: 'East Africa'
     }
   ],
-
+  countriesWithEstimates: ['Uganda'],
   selectedEstimate: {
     success: true,
     hotelEstimate: {

@@ -68,6 +68,7 @@ class NewHotelEstimateForm extends PureComponent {
       closeModal,
       updateHotelEstimate,
       editing,
+      location,
       hotelEstimates: {
         selectedEstimate: { id }
       }
@@ -75,6 +76,11 @@ class NewHotelEstimateForm extends PureComponent {
     const fieldToRemove =
       values.travelRegion === '' ? 'travelRegion' : 'country';
     delete values[fieldToRemove];
+
+    const params = new URLSearchParams(location.search);
+    const travelRegionId = params.get('region');
+    values['travelRegionId'] = travelRegionId;
+
     if (editing) {
       updateHotelEstimate(id, values, history);
     } else {
@@ -111,9 +117,8 @@ class NewHotelEstimateForm extends PureComponent {
   getCountryChoices = () => {
     const listOfCountries = countries.map(country => country.name.common);
     const {
-      hotelEstimates: { estimates }
+      hotelEstimates: { estimates, countriesWithEstimates }
     } = this.props;
-    const countriesWithEstimates = estimates.map(estimate => estimate.country);
     return listOfCountries.filter(
       country => !countriesWithEstimates.includes(country)
     );
@@ -121,11 +126,10 @@ class NewHotelEstimateForm extends PureComponent {
 
   validate = field => {
     const {
-      hotelEstimates: { estimates },
+      hotelEstimates: { estimates, countriesWithEstimates },
       editing
     } = this.props;
 
-    const countriesWithEstimates = estimates.map(estimate => estimate.country);
     const regionsWithEstimates = estimates.map(estimate => estimate.region);
     const isValid = this.defaultValidator(field);
     const {
@@ -235,11 +239,13 @@ NewHotelEstimateForm.propTypes = {
   history: PropTypes.object,
   editing: PropTypes.bool,
   updateHotelEstimate: PropTypes.func,
-  updatedEstimate: PropTypes.object
+  updatedEstimate: PropTypes.object,
+  location: PropTypes.object
 };
 
 NewHotelEstimateForm.defaultProps = {
   closeModal: () => {},
+  location: {},
   hotelEstimates: {},
   history: {
     push: () => {}
