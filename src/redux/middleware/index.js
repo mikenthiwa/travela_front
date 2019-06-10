@@ -136,6 +136,9 @@ import {
   watchgetAllTravelStipends,
   watchUpdateTravelStipend
 } from './travelStipendsSaga';
+import {
+  watchgetTravelCostsByLocation
+} from './travelCostsSaga';
 import {watchCreateTravelReason, watchEditTravelReason, watchDeleteTravelReason, watchViewTravelReasonDetails} from './travelReasonsSaga';
 import { watchAddRegionSagaAsync, watchFetchRegionDataSagaAsync } from './travelRegionSaga';
 import {
@@ -264,7 +267,8 @@ function* rootSaga() {
     watchgetAllHotelEstimates(),
     watchCreateHotelEstimateAsync(),
     watchDeleteHotelEstimate(),
-    watchUpdateHotelEstimate()
+    watchUpdateHotelEstimate(),
+    watchgetTravelCostsByLocation()
   ]);
 }
 

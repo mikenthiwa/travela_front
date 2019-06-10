@@ -14,7 +14,7 @@ import {
   fetchAllTravelStipendsSuccess,
   deleteTravelStipendFailure,
   updateTravelStipendSuccess,
-  updateTravelStipendFailure
+  updateTravelStipendFailure,
 } from '../actionCreator/travelStipendsActions';
 import apiErrorHandler from '../../services/apiErrorHandler';
 import TravelStipendsAPI from '../../services/TravelStipendsAPI';
@@ -103,7 +103,3 @@ export function* updateTravelStipendSaga(action){
     yield put(updateTravelStipendFailure(errors));
   }
 }
-
-
-
-

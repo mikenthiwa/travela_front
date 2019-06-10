@@ -191,6 +191,9 @@ export const props = {
   },
   history: {
     goBack: jest.fn()
+  },
+  travelCosts: {
+    stipends: []
   }
 };
 

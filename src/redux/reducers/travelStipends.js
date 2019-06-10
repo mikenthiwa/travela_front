@@ -132,7 +132,7 @@ const travelStipends = (state = initialState, action) => {
       },
       isLoading: false
     };
-  case  FETCH_SINGLE_TRAVEL_STIPEND: {
+  case FETCH_SINGLE_TRAVEL_STIPEND: {
     const { stipends } = state;
     return {...state,
       selectedStipend: stipends.find(
@@ -144,6 +144,9 @@ const travelStipends = (state = initialState, action) => {
     return deleteTravelStipend(state,action);
   }
 };
+
+
+
 
 
 export default travelStipends;

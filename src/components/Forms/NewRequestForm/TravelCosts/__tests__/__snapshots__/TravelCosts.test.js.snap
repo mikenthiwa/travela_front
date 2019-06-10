@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TravelCosts /> should match snapshot 1`] = `
+Array [
+  <div
+    className="travel-cost-header-container"
+>
+    <div
+        className="trip-header-box-selected"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="presentation"
+    >
+        <p
+            className="trip-header-text-title-selected"
+        >
+            TRIP 1
+            <img
+                alt="Hotel"
+                className="active-icon"
+                src="icon.svg"
+            />
+        </p>
+        <p
+            className="overflow trip-header-text-content-selected"
+        >
+            13 days in Lagos
+        </p>
+    </div>
+    <div
+        className="trip-header-box"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="presentation"
+    >
+        <p
+            className="trip-header-text-title"
+        >
+            Total Estimate
+        </p>
+        <p
+            className="overflow trip-header-text-content"
+        >
+            13 days in total
+        </p>
+    </div>
+</div>,
+  <div
+    className="line"
+/>,
+  <div
+    className="travel-cost-body-container"
+>
+    <div
+        className="breakdown-box"
+    >
+        <div
+            className="false"
+        >
+            <div
+                className="breakdown-box-content"
+            >
+                <div
+                    className="breakdown-box-icon"
+                >
+                    <img
+                        alt="Hotel"
+                        src="Hotel.svg"
+                    />
+                </div>
+                <div
+                    className="breakdown-box-title"
+                >
+                    Hotel Estimate
+                </div>
+                <div
+                    className="breakdown-box-cost"
+                >
+                    $3900
+                </div>
+                <div
+                    className="breakdown-box-cost-details"
+                >
+                    Costs $300 per day
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        className="breakdown-box"
+    >
+        <div
+            className="false"
+        >
+            <div
+                className="breakdown-box-content"
+            >
+                <div
+                    className="breakdown-box-icon"
+                >
+                    <img
+                        alt="Flight"
+                        src="Flight.svg"
+                    />
+                </div>
+                <div
+                    className="breakdown-box-title"
+                >
+                    Flight Costs
+                </div>
+                <div
+                    className="breakdown-box-cost"
+                >
+                    $1000
+                </div>
+                <div
+                    className="breakdown-box-cost-details"
+                >
+                    Lagos, Portugal - Lagos, Nigeria
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        className="breakdown-box"
+    >
+        <div
+            className="false"
+        >
+            <div
+                className="breakdown-box-content"
+            >
+                <div
+                    className="breakdown-box-icon"
+                >
+                    <img
+                        alt="Hotel"
+                        src="Cash.svg"
+                    />
+                </div>
+                <div
+                    className="breakdown-box-title"
+                >
+                    Travel Stipend
+                </div>
+                <div
+                    className="breakdown-box-cost"
+                >
+                    $6500
+                </div>
+                <div
+                    className="breakdown-box-cost-details"
+                >
+                    Costs $500 per day
+                </div>
+            </div>
+        </div>
+    </div>
+</div>,
+]
+`;

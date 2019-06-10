@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HotelEstimates /> should render while loading 1`] = `
+<div
+  className="stipend-container-with-loading"
+>
+  <div
+    className="preloader"
+  >
+    <div
+      className="spinner "
+    />
+  </div>
+</div>
+`;

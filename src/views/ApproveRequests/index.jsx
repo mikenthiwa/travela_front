@@ -12,18 +12,20 @@ import NotFound from '../ErrorPages/NotFound';
 import './ApproveRequests.scss';
 import { fetchSubmission } from '../../redux/actionCreator/checkListSubmissionActions';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
+import {fetchTravelCostsByLocation} from '../../redux/actionCreator/travelCostsActions';
 
 export const Approve = (type = 'manager') => {
   class ApproveRequests extends Component {
     state = {
       modalInvisible: true,
-      buttonSelected: ''
+      buttonSelected: '',
+      isTravelCostLoaded: false
     };
 
     componentDidMount() {
       const {
         fetchUserRequestDetails,fetchSubmission, request: {tripType},
-        match: { params: { requestId } },
+        match: { params: { requestId } }
       } = this.props;
       fetchUserRequestDetails(requestId);
       fetchSubmission({requestId, tripType});
@@ -35,6 +37,32 @@ export const Approve = (type = 'manager') => {
       if(isUpdatedStatus) {
         this.setState({modalInvisible: isUpdatedStatus && !isConfirmDialogLoading});
       }
+    }
+
+    componentDidUpdate(prevProps, prevState){
+      const {request: {trips, tripType}, fetchTravelCostsByLocation} = this.props;
+      if (trips) {
+        let locations = tripType === 'One Way' ? [] : this.getStipendOriginAndDestination(trips);
+        if (!prevState.isTravelCostLoaded && locations){
+          fetchTravelCostsByLocation(locations);
+          const onUpdate = () => {
+            this.setState({
+              isTravelCostLoaded: true
+            });
+          };
+          onUpdate();
+        } 
+      }
+    }
+
+
+
+    getStipendOriginAndDestination = (trips) => {
+      const locations = trips.map(trip => {
+        const { origin, destination } = trip;
+        return { origin, destination };
+      });
+      return locations;
     }
 
     handleButtonSelected = (e) => {
@@ -125,7 +153,7 @@ export const Approve = (type = 'manager') => {
     render() {
       const {
         request, isLoading, match: { params: { requestId } },
-        currentUser, email, location: { pathname }, errors, history, submissionInfo, shouldOpen, openModal, closeModal
+        currentUser, email, location: { pathname }, errors, history, submissionInfo, shouldOpen, openModal, closeModal, travelCosts
       } = this.props;
 
       const headerTags =  ['Manager\'s Approval', 'Budget Check', 'Travel verifications'];
@@ -150,6 +178,7 @@ export const Approve = (type = 'manager') => {
             shouldOpen={shouldOpen}
             openModal={openModal}
             closeModal={closeModal}
+            travelCosts={travelCosts}
           />
           {
             !isEmpty(request) ? (
@@ -186,7 +215,9 @@ export const Approve = (type = 'manager') => {
     openModal: PropTypes.func.isRequired,
     closeModal: PropTypes.func.isRequired,
     isConfirmDialogLoading: PropTypes.bool,
-    isUpdatedStatus: PropTypes.bool
+    isUpdatedStatus: PropTypes.bool,
+    travelCosts: PropTypes.object,
+    fetchTravelCostsByLocation: PropTypes.func.isRequired
   };
 
   ApproveRequests.defaultProps = {
@@ -196,7 +227,13 @@ export const Approve = (type = 'manager') => {
     email: {},
     errors: {},
     isConfirmDialogLoading:false,
-    isUpdatedStatus:false
+    isUpdatedStatus:false,
+    travelCosts: {
+      isLoading: false,
+      stipends: [],
+      flightCosts: [],
+      hotelEstimates: []
+    }
   };
   return ApproveRequests;
 };
@@ -211,6 +248,7 @@ const mapStateToProps = (state) => ({
   shouldOpen: state.modal.modal.shouldOpen,
   isConfirmDialogLoading: state.approvals.updatingStatus,
   isUpdatedStatus: state.approvals.updatedStatus,
+  travelCosts: state.travelCosts
 });
 
 const actionCreators = {
@@ -219,7 +257,8 @@ const actionCreators = {
   updateBudgetStatus,
   fetchSubmission,
   openModal,
-  closeModal
+  closeModal,
+  fetchTravelCostsByLocation
 };
 
 export default (type = 'manager') => connect(mapStateToProps, actionCreators)(Approve(type));

@@ -17,6 +17,7 @@ import NotFound from '../ErrorPages/NotFound';
 import './VerificationDetails.scss';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 import {updateModification} from '../../redux/actionCreator/tripModificationActions';
+import {fetchTravelCostsByLocation} from '../../redux/actionCreator/travelCostsActions';
 
 
 const VerificationDetails = (type = 'verifications') => {
@@ -25,6 +26,7 @@ const VerificationDetails = (type = 'verifications') => {
       modalInvisible: true,
       buttonSelected: '',
       displayComments: true,
+      isTravelCostLoaded: true
     };
 
     componentDidMount() {
@@ -44,6 +46,32 @@ const VerificationDetails = (type = 'verifications') => {
       if (isUpdatedStatus) {
         this.setState({modalInvisible: isUpdatedStatus && !isConfirmDialogLoading});
       }
+    }
+
+    componentDidUpdate(prevProps, prevState){
+      const {request: {trips, tripType}, fetchTravelCostsByLocation} = this.props;
+      if (trips) {
+        let locations = tripType === 'One Way' ? [] : this.getStipendOriginAndDestination(trips);
+        if (!prevState.isTravelCostLoaded && locations){
+          fetchTravelCostsByLocation(locations);
+          const onUpdate = () => {
+            this.setState({
+              isTravelCostLoaded: true
+            });
+          };
+          onUpdate();
+        } 
+      }
+    }
+
+
+
+    getStipendOriginAndDestination = (trips) => {
+      const locations = trips.map(trip => {
+        const { origin, destination } = trip;
+        return { origin, destination };
+      });
+      return locations;
     }
 
     getValues() {
@@ -253,7 +281,7 @@ const VerificationDetails = (type = 'verifications') => {
         request, isLoading, submissionInfo,
         match: {params: {requestId}}, location: {pathname},
         history, shouldOpen, openModal, closeModal,
-        updateModification, tripModification
+        updateModification, tripModification, travelCosts
       } = this.props;
       const headerTags = ['Manager\'s Approval', 'Budget Check', 'Travel Verification'];
       return (
@@ -276,6 +304,7 @@ const VerificationDetails = (type = 'verifications') => {
                   shouldOpen={shouldOpen}
                   openModal={openModal}
                   closeModal={closeModal}
+                  travelCosts={travelCosts}
                 />
                 {this.renderBottomPane()}
               </div>
@@ -294,7 +323,13 @@ const VerificationDetails = (type = 'verifications') => {
     errors: {},
     isConfirmDialogLoading: false,
     isUpdatedStatus: false,
-    tripModification: {}
+    tripModification: {},
+    travelCosts: {
+      isLoading: false,
+      stipends: [],
+      flightCosts: [],
+      hotelEstimates: []
+    }
   };
 
   Verifications.propTypes = {
@@ -313,7 +348,9 @@ const VerificationDetails = (type = 'verifications') => {
     isConfirmDialogLoading: PropTypes.bool,
     isUpdatedStatus: PropTypes.bool,
     updateModification: PropTypes.func.isRequired,
-    tripModification: PropTypes.object
+    tripModification: PropTypes.object, 
+    travelCosts: PropTypes.object,
+    fetchTravelCostsByLocation: PropTypes.func.isRequired
   };
   return Verifications;
 };
@@ -332,6 +369,7 @@ const mapStateToProps = (state) => {
     shouldOpen: state.modal.modal.shouldOpen,
     isConfirmDialogLoading: state.approvals.updatingStatus,
     isUpdatedStatus: state.approvals.updatedStatus,
+    travelCosts: state.travelCosts
   };
 };
 
@@ -343,7 +381,8 @@ const actionCreators = {
   downloadAttachments,
   fetchSubmission,
   openModal,
-  closeModal
+  closeModal,
+  fetchTravelCostsByLocation
 };
 
 export default (type = 'verifications') => connect(mapStateToProps, actionCreators)(VerificationDetails(type));

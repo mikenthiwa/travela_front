@@ -25,7 +25,8 @@ import {
   fetchSubmission, postSubmission } from '../../redux/actionCreator/checkListSubmissionActions';
 import { uploadFile } from '../../redux/actionCreator/fileUploadActions';
 import {fetchCenters} from '../../redux/actionCreator/centersActions';
-import { fetchAllTravelStipends } from '../../redux/actionCreator/travelStipendsActions';
+import { fetchAllTravelStipends} from '../../redux/actionCreator/travelStipendsActions';
+import { fetchTravelCostsByLocation} from '../../redux/actionCreator/travelCostsActions';
 import { validateTrips } from '../../redux/actionCreator/tripActions';
 
 export class Requests extends Base {
@@ -212,7 +213,7 @@ export class Requests extends Base {
       updateUserProfile, userData, fetchPostUserData,
       loading,errors,closeModal,shouldOpen, createNewRequest, modalType, roleUsers,requestOnEdit,editRequest,
       fetchUserRequests, fetchAllTravelStipends, user, centers, userData: { result: { location}},
-      fetchAvailableRooms, availableRooms, fetchAvailableRoomsSuccess, creatingRequest, validateTrips
+      fetchAvailableRooms, availableRooms, fetchAvailableRoomsSuccess, creatingRequest, validateTrips, fetchTravelCostsByLocation
     } = this.props;
     const { url } = this.state;
     return (
@@ -239,6 +240,7 @@ export class Requests extends Base {
           fetchAllTravelStipends={fetchAllTravelStipends}
           creatingRequest={creatingRequest}
           validateTrips={validateTrips}
+          fetchTravelCostsByLocation={fetchTravelCostsByLocation}
         />
       </Modal>
     );
@@ -302,6 +304,7 @@ Requests.propTypes = {
   fetchAvailableRoomsSuccess: PropTypes.func.isRequired,
   submissionInfo: PropTypes.object.isRequired,
   fileUploads: PropTypes.object.isRequired,
+  fetchTravelCostsByLocation: PropTypes.func,
   fetchAllTravelStipends: PropTypes.func.isRequired,
   validateTrips: PropTypes.func.isRequired
 };
@@ -352,6 +355,7 @@ const actionCreators = {
   uploadFile,
   deleteRequest,
   fetchAllTravelStipends,
+  fetchTravelCostsByLocation,
   validateTrips
 };
 

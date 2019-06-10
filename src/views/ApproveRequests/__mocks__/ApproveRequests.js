@@ -171,5 +171,5 @@ export const props = {
   history: {
     goBack: jest.fn()
   },
-  submissionInfo: { percentageCompleted: 0 }
+  submissionInfo: { percentageCompleted: 0 },
 };

@@ -1,15 +1,14 @@
-import React, {PureComponent} from 'react';
-import {PropTypes} from 'prop-types';
+import React, { PureComponent, Fragment } from 'react';
+import { PropTypes } from 'prop-types';
 import Script from 'react-load-script';
-import {isEqual, pick} from 'lodash';
+import { isEqual, pick } from 'lodash';
 import moment from 'moment';
 import toast from 'toastr';
-import {FormContext, getDefaultBlanksValidatorFor} from '../FormsAPI';
+import { FormContext, getDefaultBlanksValidatorFor } from '../FormsAPI';
 import PersonalDetailsFieldset from './FormFieldsets/PersonalDetails';
 import TravelDetailsFieldset from './FormFieldsets/TravelDetails';
 import SubmitArea from './FormFieldsets/SubmitArea';
 import RequestTabHeader from '../../RequestTab/RequestTabHead';
-import StipendDetails from './Stipend/StipendDetails';
 import './NewRequestForm.scss';
 import './RequestLoader.scss';
 import tabIcons from '../../../images/icons/new-request-icons';
@@ -20,6 +19,8 @@ import TravelChecklistsCard from './FormFieldsets/TravelChecklistsCard';
 import PendingApprovals from './FormFieldsets/PendingApprovalsCard';
 import setDropdownLocation from '../../../scripts/dropdownLocation';
 import BackButton from '../BackButton';
+import './TravelCosts/TravelCosts.scss';
+import TravelCosts from './TravelCosts/TravelCosts';
 
 
 class NewRequestForm extends PureComponent {
@@ -34,8 +35,8 @@ class NewRequestForm extends PureComponent {
   }
 
   componentDidMount() {
-    const {managers, fetchAllTravelStipends} = this.props;
-    const {values} = this.state;
+    const { managers, fetchAllTravelStipends } = this.props;
+    const { values } = this.state;
     const managerChoices = managers.map(manager => manager.fullName);
     // if manager in manager input box is not in database
     if (
@@ -49,7 +50,7 @@ class NewRequestForm extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {values, trips, selection, currentTab } = this.state;
+    const { values, trips, selection, currentTab } = this.state;
     if ((
       (prevState.values.gender !== values.gender) || (prevState.values.role !== values.role))
       && selection !== 'oneWay') {
@@ -57,18 +58,25 @@ class NewRequestForm extends PureComponent {
         this.handlePickBed(null, index, false);
       });
     }
+    if (prevState.currentTab === 2 && currentTab === 3) {
+      const { trips, selection: tripType } = this.state;
+      const { fetchTravelCostsByLocation, fetchAllTravelStipends } = this.props;
+      let locations = tripType === 'One Way' ? [] : this.getStipendOriginAndDestination(trips);
+      if (locations) fetchTravelCostsByLocation(locations);
+      fetchAllTravelStipends();
+    }
   }
 
   componentWillUnmount() {
-    const {fetchUserRequests, fetchAvailableRoomsSuccess} = this.props;
+    const { fetchUserRequests, fetchAvailableRoomsSuccess } = this.props;
     fetchUserRequests();
-    fetchAvailableRoomsSuccess({beds: []});
+    fetchAvailableRoomsSuccess({ beds: [] });
     window.removeEventListener('scroll', this.locationDropdownStick, true);
   }
 
   setupEditState() {
-    const {editing, requestOnEdit, userData: {location}} = this.props;
-    const {trips, tripType} = requestOnEdit;
+    const { editing, requestOnEdit, userData: { location } } = this.props;
+    const { trips, tripType } = requestOnEdit;
     if (editing && requestOnEdit && trips.length > 0) {
       trips.map(eachTrip => {
         if (eachTrip.accommodationType === 'Not Required') {
@@ -81,7 +89,7 @@ class NewRequestForm extends PureComponent {
       const defaultTripStateValues = this.getDefaultTripStateValues(0);
       const editTripsStateValues = editing ? this.getTrips(requestOnEdit) : {};
       const requestTrips = editing ? this.setTrips(requestOnEdit) : [{}];
-      const {name, gender, department, role, manager} = this.getPersonalDetails(
+      const { name, gender, department, role, manager } = this.getPersonalDetails(
         editing,
         requestOnEdit
       );
@@ -121,8 +129,8 @@ class NewRequestForm extends PureComponent {
 
   setUp = () => {
     const status = 'You are currently here';
-    const {editing, requestOnEdit, managers } = this.props;
-    const {name, gender, department, role, manager, location} = this.getPersonalDetails(
+    const { editing, requestOnEdit, managers } = this.props;
+    const { name, gender, department, role, manager, location } = this.getPersonalDetails(
       editing,
       requestOnEdit
     );
@@ -169,8 +177,8 @@ class NewRequestForm extends PureComponent {
           status: editing ? status : '',
           icon: tabIcons.tripDetails
         },
-        {id: 3, name: 'Travel Stipends', status: '', icon: tabIcons.stipend},
-        {id: 4, name: 'Travel Checklist', status: '', icon: tabIcons.checkList}
+        { id: 3, name: 'Travel Costs', status: '', icon: tabIcons.stipend },
+        { id: 4, name: 'Travel Checklist', status: '', icon: tabIcons.checkList }
       ],
       currentTab: editing ? 2 : 1,
       isLoading: false
@@ -179,7 +187,7 @@ class NewRequestForm extends PureComponent {
   };
 
   getPersonalDetails = (editing, detailsSource) => {
-    const {userData, userDataUpdate: {result}} = this.props;
+    const { userData, userDataUpdate: { result } } = this.props;
     const personalDetails = {};
     const personalDetailsAttributes = [
       'name',
@@ -206,14 +214,14 @@ class NewRequestForm extends PureComponent {
   };
 
   setTrips = requestOnEdit => {
-    const {trips} = requestOnEdit;
+    const { trips } = requestOnEdit;
     let allTrips = [];
     trips.map(trip => allTrips.push(trip));
     return allTrips;
   };
 
   getTrips = requestOnEdit => {
-    const {trips, tripType} = requestOnEdit;
+    const { trips, tripType } = requestOnEdit;
     const tripsStateValues = [];
     trips.map((trip, index) => {
       tripsStateValues[`origin-${index}`] = trip.origin;
@@ -234,7 +242,7 @@ class NewRequestForm extends PureComponent {
   };
 
   handleEditForm = () => {
-    const {requestOnEdit} = this.props;
+    const { requestOnEdit } = this.props;
     const event = {
       target: {
         value: requestOnEdit.tripType
@@ -244,8 +252,8 @@ class NewRequestForm extends PureComponent {
   };
 
   onChangeDate = (date, event) => {
-    const {trips, selection} = this.state;
-    const dateFormat = date ?  date.format('YYYY-MM-DD') : null;
+    const { trips, selection } = this.state;
+    const dateFormat = date ? date.format('YYYY-MM-DD') : null;
     const dateWrapperId = event.nativeEvent.path[7].id || event.nativeEvent.path[4].id;
     const dateName = dateWrapperId.split('_')[0];
     const getId = dateName.split('-')[1];
@@ -268,7 +276,7 @@ class NewRequestForm extends PureComponent {
       const targetFieldId = Number(getId) + 1;
       this.setState(
         prevState => {
-          const {trips} = prevState;
+          const { trips } = prevState;
           const newTrips = [...trips];
 
           if (targetFieldId < newTrips.length) {
@@ -293,7 +301,7 @@ class NewRequestForm extends PureComponent {
       const targetFieldId = getId - 1;
       this.setState(
         prevState => {
-          const {trips} = prevState;
+          const { trips } = prevState;
           const newTrips = [...trips];
           newTrips[targetFieldId].arrivalDate = dateFormat;
           newTrips[targetFieldId].returnDate = dateFormat;
@@ -329,29 +337,29 @@ class NewRequestForm extends PureComponent {
 
   //dates for each trip cant be the same.
   checkSameDate = () => {
-    const {trips, values} = this.state;
+    const { trips, values } = this.state;
     const tripsLength = trips.length > 1 ? trips.length - 1 : trips.length;
     const tripsDate = [];
     for (let i = 0; i < tripsLength; i++) {
       tripsDate.push(moment(trips[i].departureDate).isSame(trips[i].returnDate, 'day'));
     }
     let theBool = 0;
-    for (let i = 0; i < tripsDate.length; i++){
+    for (let i = 0; i < tripsDate.length; i++) {
       theBool += tripsDate[i];
     }
     if (theBool && trips[0].returnDate) {
-      this.setState({isSameDate: true});
+      this.setState({ isSameDate: true });
       const firstMatch = tripsDate.findIndex(trip => trip);
       trips[0].returnDate &&
-      firstMatch !== -1 && toast
+        firstMatch !== -1 && toast
         .error(`Return date must be the greater than Departure date for Trip ${
           trips.length > 1 ? firstMatch + 1 : ''}`);
-    } else  this.setState({isSameDate: false});
+    } else this.setState({ isSameDate: false });
   };
 
   //dates can be lower than the currents days date.
   checkLowerDate = () => {
-    const {trips} = this.state;
+    const { trips } = this.state;
     const tripsLength = trips.length > 1 ? trips.length - 1 : trips.length;
     const tripsDate = [];
     for (let i = 0; i < tripsLength; i++) {
@@ -359,10 +367,10 @@ class NewRequestForm extends PureComponent {
     }
     const firstMatch = tripsDate.findIndex(trip => trip);
     if (firstMatch !== -1) {
-      this.setState({isLowerDate: true});
+      this.setState({ isLowerDate: true });
       toast.error(`Date must be the greater than Today's Date for Trip ${
         trips.length > 1 ? firstMatch + 1 : ''}`);
-    } else  this.setState({isLowerDate: false});
+    } else this.setState({ isLowerDate: false });
   }
 
   resetTripArrivalDate = (id, dateName) => {
@@ -380,7 +388,7 @@ class NewRequestForm extends PureComponent {
   onChangeInput = event => {
     const name = event.target.name;
     const getId = event.target.dataset.parentid;
-    const {trips} = this.state;
+    const { trips } = this.state;
     const options = {
       types: ['(cities)']
     };
@@ -414,7 +422,7 @@ class NewRequestForm extends PureComponent {
             }
           }), () => this.validate('bed-0')
         );
-        const {selection} = this.state;
+        const { selection } = this.state;
         if (selection !== 'oneWay') {
           this.handlePickBed(null, getId, false);
         }
@@ -423,7 +431,7 @@ class NewRequestForm extends PureComponent {
           const targetFieldId = Number(getId) + 1;
           this.setState(
             prevState => {
-              const {trips} = prevState;
+              const { trips } = prevState;
               const newTrips = [...trips];
 
               if (targetFieldId < newTrips.length) {
@@ -446,17 +454,17 @@ class NewRequestForm extends PureComponent {
 
   handleRadioButton = event => {
     const { editing } = this.props;
-    let {collapse, trips, values, selection, prevValues, prevTrips} = this.state;
+    let { collapse, trips, values, selection, prevValues, prevTrips } = this.state;
     const tripType = event.target.value;
     const { requestOnEdit: { trips: nextTrips } } = this.props;
-    this.setState({selection: tripType});
-    const newTrips = prevTrips.map((trip, index) => ({...trip, ...trips[index]}));
+    this.setState({ selection: tripType });
+    const newTrips = prevTrips.map((trip, index) => ({ ...trip, ...trips[index] }));
     prevValues && prevValues['arrivalDate-0'] ? delete prevValues['arrivalDate-0'] : null;
     values && values['arrivalDate-0'] ? delete values['arrivalDate-0'] : null;
     this.setState(
       {
         prevTrips: newTrips,
-        prevValues: {...prevValues, ...values}
+        prevValues: { ...prevValues, ...values }
       }, () => this.validate());
     if (tripType === 'multi' && !collapse) {
       let parentIds,
@@ -476,11 +484,11 @@ class NewRequestForm extends PureComponent {
       this.setState(prevState => ({
         parentIds,
         trips,
-        values: {...prevState.prevValues, ...secondTripStateValues}
+        values: { ...prevState.prevValues, ...secondTripStateValues }
       }), () => this.validate());
     } else if (!collapse) {
       this.setState(prevState => {
-        const {newValues, trips} = this.refreshValues(prevState, tripType);
+        const { newValues, trips } = this.refreshValues(prevState, tripType);
         return {
           parentIds: 1,
           values: newValues,
@@ -491,27 +499,27 @@ class NewRequestForm extends PureComponent {
       }, () => this.validate());
     } else {
       this.setState(prevState => {
-        const {newValues, trips} = this.refreshValues(prevState, tripType);
+        const { newValues, trips } = this.refreshValues(prevState, tripType);
         return {
           parentIds: 1,
           values: newValues,
           trips: trips || [{}]
         };
-      }, () =>this.validate());
+      }, () => this.validate());
       this.collapsible();
     }
 
     trips[0].travelReasons &&
       !trips[0].otherTravelReasons &&
-         this.handleReason(values['reasons-0'],0,null);
+      this.handleReason(values['reasons-0'], 0, null);
 
     this.checkLowerDate();
     this.checkSameDate();
-    selection !== 'oneWay'  && setTimeout(() => this.validate('reasons-0'), 100);
-    tripType === 'return'  && !values['arrivalDate-0'] ?
+    selection !== 'oneWay' && setTimeout(() => this.validate('reasons-0'), 100);
+    tripType === 'return' && !values['arrivalDate-0'] ?
       (() => {
-        setTimeout(this.setState({isSameDate: true}), 150);
-      })():
+        setTimeout(this.setState({ isSameDate: true }), 150);
+      })() :
       null;
   };
 
@@ -527,20 +535,20 @@ class NewRequestForm extends PureComponent {
 
   refreshValues = (prevState, tripType) => {
     // squash state.values to the shape defaultState keeping the values from state
-    const {prevValues: values, prevTrips: trips} = prevState;
-    let newValues = {...this.defaultState.values};
+    const { prevValues: values, prevTrips: trips } = prevState;
+    let newValues = { ...this.defaultState.values };
     Object.keys(newValues).map(
       inputName => (newValues[inputName] = values[inputName])
     );
     if (tripType !== 'multi') {
-      let newTrip = {...trips[0]};
+      let newTrip = { ...trips[0] };
       delete newValues['arrivalDate-0'];
       delete newTrip.returnDate;
       trips[0] = newTrip;
       const slicedTrips = trips.slice(0, 1);
-      return {newValues, trips: slicedTrips};
+      return { newValues, trips: slicedTrips };
     }
-    return {newValues, trips};
+    return { newValues, trips };
   };
 
   handleSubmit = event => {
@@ -556,7 +564,7 @@ class NewRequestForm extends PureComponent {
       history,
       managers
     } = this.props;
-    const {values, selection, trips, stipend, stipendBreakdown, comments} = this.state;
+    const { values, selection, trips, stipend, stipendBreakdown, comments } = this.state;
     userData.name = userData.passportName;
     userData.role = userData.occupation;
 
@@ -581,10 +589,10 @@ class NewRequestForm extends PureComponent {
       newData.trips[0].returnDate = arrivalDate.add(1, 'months').format('YYYY-MM-DD');
     }
 
-    let data = {...newData};
+    let data = { ...newData };
     if (this.validate() && editing) {
       data.stipendBreakdown = data.stipendBreakdown || [];
-      handleEditRequest(requestOnEdit.id,data, history);
+      handleEditRequest(requestOnEdit.id, data, history);
     } else {
       handleCreateRequest(data, history);
     }
@@ -595,40 +603,40 @@ class NewRequestForm extends PureComponent {
         values.occupation = values.role;
         const userId = user.UserInfo.id;
         updateUserProfile(values, userId);
-        this.savePersonalDetails({location: values.location});
+        this.savePersonalDetails({ location: values.location });
       }
     }
   };
 
   changeState = (InputState, ErrorMessageState, errorMessage, value) => {
-    const {occupations, managers} = this.props; 
+    const { occupations, managers } = this.props;
     this.setState((prevState) => {
-      const newState = {...prevState.values, ...InputState };
-      return {...prevState, values: {...newState}};
+      const newState = { ...prevState.values, ...InputState };
+      return { ...prevState, values: { ...newState } };
     });
-    const suggestionChoices = 'manager' in InputState ? managers.map(manager => manager.fullName):
+    const suggestionChoices = 'manager' in InputState ? managers.map(manager => manager.fullName) :
       occupations.map(occupation => occupation.occupationName);
     // if typed manager is not in the database return error
     if (suggestionChoices.indexOf(value) === -1) return this.setError(errorMessage);
     // clear out error message
     return this.setState((prevState) => {
-      const newError = {...prevState.errors, ...ErrorMessageState};
-      return {...prevState, errors: {...newError}};
+      const newError = { ...prevState.errors, ...ErrorMessageState };
+      return { ...prevState, errors: { ...newError } };
     });
   }
 
   onChangeAutoSuggestion = (type, value) => {
-    let errorMessage = {manager: ' No manager with the name exists'};
-    const managerInputState = {'manager': value};
-    const managerErrorMessageState = {'manager': ''};
-    const occupationErrorMessageState ={'role':''};
-    let occupationInputState = {'role': value};
-    if ( type === 'manager' ){
+    let errorMessage = { manager: ' No manager with the name exists' };
+    const managerInputState = { 'manager': value };
+    const managerErrorMessageState = { 'manager': '' };
+    const occupationErrorMessageState = { 'role': '' };
+    let occupationInputState = { 'role': value };
+    if (type === 'manager') {
       this.changeState(managerInputState, managerErrorMessageState, errorMessage, value);
     }
-    errorMessage = {role: ' No role with the name exists'};
-    if (type === 'role'){
-      this.changeState(occupationInputState, occupationErrorMessageState, errorMessage, value); 
+    errorMessage = { role: ' No role with the name exists' };
+    if (type === 'role') {
+      this.changeState(occupationInputState, occupationErrorMessageState, errorMessage, value);
     }
   };
 
@@ -638,14 +646,14 @@ class NewRequestForm extends PureComponent {
         ...prevState.errors,
         ...errorMessage
       };
-      return {...prevState, errors: {...newError}};
+      return { ...prevState, errors: { ...newError } };
     });
   };
 
 
   addNewTrip = () => {
     return this.setState(prevState => {
-      const {parentIds, values, trips} = prevState;
+      const { parentIds, values, trips } = prevState;
       const addedTripStateValues = this.getDefaultTripStateValues(parentIds);
       const nextDepartureField = `departureDate-${parentIds}`;
       const lastArrivalValue = values[`arrivalDate-${parentIds - 1}`];
@@ -662,7 +670,7 @@ class NewRequestForm extends PureComponent {
           departureDate: newTripDepartureDate,
           origin: lastDepartureLocation
         }]),
-        values: {...values, ...addedTripStateValues}
+        values: { ...values, ...addedTripStateValues }
       };
     }, () => this.validate());
   };
@@ -670,7 +678,7 @@ class NewRequestForm extends PureComponent {
   removeTrip = (i) => {
     const tripProps = ['origin', 'destination', 'arrivalDate', 'departureDate', 'bed', 'reasons', 'otherReasons'];
     this.setState((prevState) => {
-      let {parentIds, trips, values, errors} = prevState;
+      let { parentIds, trips, values, errors } = prevState;
       trips.splice(i, 1);
       parentIds--;
       tripProps.map(prop => {
@@ -689,7 +697,7 @@ class NewRequestForm extends PureComponent {
   };
 
   collapsible = () => {
-    const {collapse} = this.state;
+    const { collapse } = this.state;
     if (!collapse) {
       this.setState({
         collapse: true,
@@ -708,8 +716,8 @@ class NewRequestForm extends PureComponent {
   };
 
   showComments = () => {
-    const {collapse} = this.state;
-    const {collapseValue, commentTitle} = hideSection(collapse);
+    const { collapse } = this.state;
+    const { collapseValue, commentTitle } = hideSection(collapse);
     this.setState({
       collapse: collapseValue,
       commentTitle: commentTitle,
@@ -757,7 +765,7 @@ class NewRequestForm extends PureComponent {
         currentTab: currentTab - 1
       });
     }
-    if (currentTab !==2) {
+    if (currentTab !== 2) {
       this.setState({
         steps: newSteps(steps, currentTab - 1),
         currentTab: currentTab - 1
@@ -766,8 +774,8 @@ class NewRequestForm extends PureComponent {
   };
 
   renderPersonalDetailsFieldset = () => {
-    const {collapse, title, position, line, values, errors} = this.state;
-    const {managers, occupations, creatingRequest} = this.props;
+    const { collapse, title, position, line, values, errors } = this.state;
+    const { managers, occupations, creatingRequest } = this.props;
     return (
       <PersonalDetailsFieldset
         values={values}
@@ -794,7 +802,7 @@ class NewRequestForm extends PureComponent {
   handlePickBed = (bedId, tripIndex, updateTrip = true) => {
     const fieldName = `bed-${tripIndex}`;
     this.setState(prevState => {
-      const {trips} = prevState;
+      const { trips } = prevState;
       if (updateTrip) trips[tripIndex].bedId = bedId;
       return {
         ...prevState,
@@ -811,7 +819,7 @@ class NewRequestForm extends PureComponent {
 
   handleComment = (commentText) => {
     this.setState(prevState => {
-      const {comments} = prevState;
+      const { comments } = prevState;
       if (commentText) {
         comments.comment = commentText;
       }
@@ -822,7 +830,7 @@ class NewRequestForm extends PureComponent {
     const fieldName = `reasons-${tripIndex}`;
     const otherfieldName = `otherReasons-${tripIndex}`;
     this.setState(prevState => {
-      const {trips} = prevState;
+      const { trips } = prevState;
       if (trips[tripIndex]) {
         if (other) {
           trips[tripIndex].otherTravelReasons = reason;
@@ -848,22 +856,22 @@ class NewRequestForm extends PureComponent {
   checkValidOtherReason = () => {
     const { trips } = this.state;
     const otherReasons = [];
-    for (let i = 0; i < trips.length; i++){
-      if (trips[i].travelReasons) {continue;}
+    for (let i = 0; i < trips.length; i++) {
+      if (trips[i].travelReasons) { continue; }
       otherReasons.push(trips[i].otherTravelReasons ? trips[i].otherTravelReasons.trim() : '');
     }
     const invalidReason = otherReasons.find(reason => reason.length <= 7);
-    invalidReason ? this.setState({ inValidOtherReason: true})
-      : this.setState({ inValidOtherReason: false});
+    invalidReason ? this.setState({ inValidOtherReason: true })
+      : this.setState({ inValidOtherReason: false });
   }
 
   onEditCancelHandler = () => {
-    const {history} = this.props;
+    const { history } = this.props;
     history.push('/requests');
   };
 
   handleReasonsId(reason) {
-    const {listTravelReasons} = this.props;
+    const { listTravelReasons } = this.props;
     if (reason === 'Other..') {
       return null;
     } else {
@@ -881,7 +889,7 @@ class NewRequestForm extends PureComponent {
   }
 
   renderTravelDetailsFieldset = () => {
-    const {selection, parentIds, values} = this.state;
+    const { selection, parentIds, values } = this.state;
     const {
       fetchAvailableRooms, availableRooms,
       editing, requestOnEdit, listTravelReasons
@@ -909,33 +917,46 @@ class NewRequestForm extends PureComponent {
     );
   };
 
-  renderTravelStipend = () => {
-    const {trips, selection} = this.state;
-    const {travelStipends: {stipends, isLoading}} = this.props;
-    let total = '';
-    let travelStipends = [];
-    if (!isLoading && stipends.length) {
-      const {totalStipend, stipendSubTotals} = travelStipendHelper
-        .getAllTripsStipend(trips, stipends, selection);
-      total = totalStipend;
-      travelStipends = stipendSubTotals;
-    }
+  getStipendOriginAndDestination = (trips) => {
+    const locations = trips.map(trip => {
+      const { origin, destination } = trip;
+      return { origin, destination };
+    });
+    return locations;
+  }
+
+  renderTravelCosts = () => {
+    const { trips } = this.state;
+    const { travelCosts: { stipends, flightCosts, hotelEstimates, isLoading }, userData: { fullName } } = this.props;
     return (
-      <div className="personal-rectangle mdl-grid">
-        {
-          <StipendDetails
-            stipends={stipends}
-            trips={trips}
-            total={total}
-            travelStipends={travelStipends}
-            isLoading={isLoading}           
-          />
-        }
-        {!isLoading && (
+      <Fragment>
+        <div className="personal-rectangle mdl-grid">
+          <div name="travelcosts" className="travel-costs-container">
+            <div>
+              <p className="travel-costs-title">
+                {'Your Travel Cost Breakdown'}
+              </p>
+              <p className="travel-costs-description">
+                {`Hi ${fullName.split(' ')[0]}, here is a breakdown of your cost estimate.`}
+              </p>
+            </div>
+            <div className="travel-cost-body">
+              {
+                <TravelCosts
+                  isLoading={isLoading}
+                  trips={trips}
+                  stipends={stipends}
+                  flightCosts={flightCosts}
+                  hotelEstimates={hotelEstimates}
+                />
+              }
+            </div>
+          </div>
+        </div>
+        {(
           <div className="request-submit-area submit-area">
             <button
-              onClick={e => this.nextStep(e, travelStipends)}
-              disabled={isLoading}
+              onClick={e => this.nextStep(e, '')}
               type="button"
               className="bg-btn bg-btn--active" id="stipend-next">
               Next
@@ -944,19 +965,19 @@ class NewRequestForm extends PureComponent {
         )
         }
         <div className="back-btn-stipend">
-          <BackButton 
+          <BackButton
             backStep={this.backStep}
           />
         </div>
-      </div>
+      </Fragment>
     );
-  };
+  }
 
   renderSubmitArea = (hasBlankFields, errors, sameOriginDestination,
     selection, creatingRequest, disableOnChangeProfile, collapse,
     commentTitle, currentTab, editing,
   ) => {
-    const {isLoading, isSameDate, isLowerDate, inValidOtherReason} = this.state;
+    const { isLoading, isSameDate, isLowerDate, inValidOtherReason } = this.state;
     const { requestOnEdit, userData, comments } = this.props;
     return (
       <div className="trip__tab-body">
@@ -971,7 +992,7 @@ class NewRequestForm extends PureComponent {
           onError={this.handleScriptError}
           onLoad={this.handleScriptLoad} />
         <div className="back-btn-request">
-          <BackButton 
+          <BackButton
             backStep={this.backStep}
           />
         </div>
@@ -1023,7 +1044,7 @@ class NewRequestForm extends PureComponent {
         </div>
         <div className="travel-checklist__submit-area submit-area">
           <div className="back-btn-checklist">
-            <BackButton 
+            <BackButton
               backStep={this.backStep}
             />
           </div>
@@ -1049,10 +1070,10 @@ class NewRequestForm extends PureComponent {
     } = this.state;
     const {
       editing, creatingRequest, fetchTravelChecklist,
-      travelChecklists: {checklistItems, isLoading}, userData, history, isEditing
+      travelChecklists: { checklistItems, isLoading }, userData, history, isEditing
     } = this.props;
-    const {requestOnEdit} = this.props;
-    const {name, gender, department, role, manager} = requestOnEdit || {};
+    const { requestOnEdit } = this.props;
+    const { name, gender, department, role, manager } = requestOnEdit || {};
     const {
       name: stateName, manager: stateManager, gender: stateGender,
       department: stateDepartment, role: stateRole
@@ -1070,20 +1091,20 @@ class NewRequestForm extends PureComponent {
           validatorName="validate">
           <form onSubmit={this.handleSubmit} className="new-request">
             {currentTab === 1 &&
-            this.renderPersonalDetailsFieldset()}
+              this.renderPersonalDetailsFieldset()}
             {currentTab === 2 && this.renderSubmitArea(
               hasBlankFields, errors, sameOriginDestination,
               selection, creatingRequest, disableOnChangeProfile,
               collapse, commentTitle, currentTab, editing, history)
             }
             {currentTab === 3 &&
-            this.renderTravelStipend()}
+              this.renderTravelCosts()}
             {currentTab === 4 &&
-            this.renderTravelCheckList(
-              hasBlankFields, selection, creatingRequest,
-              currentTab, fetchTravelChecklist, trips, checklistItems, isLoading, userData,
-              editing, history, isEditing
-            )}
+              this.renderTravelCheckList(
+                hasBlankFields, selection, creatingRequest,
+                currentTab, fetchTravelChecklist, trips, checklistItems, isLoading, userData,
+                editing, history, isEditing
+              )}
           </form>
         </FormContext>
       </div>
@@ -1118,7 +1139,8 @@ NewRequestForm.propTypes = {
   listTravelReasons: PropTypes.object,
   history: PropTypes.object,
   fetchAllTravelStipends: PropTypes.func.isRequired,
-  travelStipends: PropTypes.object,
+  fetchTravelCostsByLocation: PropTypes.func,
+  travelCosts: PropTypes.object,
   fetchTravelChecklist: PropTypes.func,
   travelChecklists: PropTypes.object,
   validateTrips: PropTypes.func.isRequired,
@@ -1138,11 +1160,14 @@ NewRequestForm.defaultProps = {
   },
   listTravelReasons: {},
   history: {},
-  travelStipends: {
+  travelCosts: {
     isLoading: false,
-    stipends: []
+    stipends: [],
+    flightCosts: [],
+    hotelEstimates: []
   },
   travelChecklists: {},
+  fetchTravelCostsByLocation: () => {},
   fetchTravelChecklist: () => {
   },
   isEditing: false,

@@ -162,24 +162,4 @@ describe('TEST ConnectedApproveRequests COMPONENT', () => {
       expect(wrapper.find('.text--grey').at(7).text()).toEqual('You have rejected Christopher Moses\' travel request');
     });
   });
-
-
-  describe('TEST TRAVEL STIPEND POP UP MODAL', () => {
-    it('should make modal appear', () => {
-      store = mockStore((actions) => {
-        const newState = {...initialState};
-        if( actions.slice(-1).pop()){
-          newState.modal =  { ...modal(initialState.modal, actions.slice(-1).pop()) };
-        }
-        return newState;
-      });
-      const wrapper = setupConnectedComponent(props, store);
-      const button = wrapper.find('button').at(0);
-      expect(wrapper.find('.modal')).toHaveLength(0);// check that modal is hidden
-      button.simulate('click');
-      expect(wrapper.find('.modal')).toHaveLength(1);// check that modal is hidden
-      wrapper.find('button.modal-close').simulate('click');
-      expect(wrapper.find('.modal')).toHaveLength(0);// check that modal is hidden
-    });
-  });
 });

@@ -2,35 +2,40 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import returnTrip from '../../helper/generateTripType';
 import StipendDetails from '../Forms/NewRequestForm/Stipend/StipendDetails';
+import TravelCosts from '../Forms/NewRequestForm/TravelCosts/TravelCosts';
 import Modal from '../modal/Modal';
 
 class InfoCenter extends Component {
-
 
   showModal = () => {
     const { openModal } = this.props;
     openModal(true);
   }
 
-  renderStipendModal = (shouldOpen, closeModal, total, stipend) => (
-    <Modal
-      customModalStyles="travel-stipend-modal"
-      closeDeleteModal={closeModal}
-      width="580px"
-      height="600px"
-      visibility={shouldOpen? 'visible':'invisible'}
-      title="Travel Stipend Breakdown"
-    >
-      <StipendDetails
-        total={total ? `$ ${total}` : 'N/A'}
-        travelStipends={stipend}
-        isLoading={false}
-      />
-    </Modal>
-  );
+  renderStipendModal = (shouldOpen, closeModal) => {
+    const {travelCosts: { stipends, flightCosts, hotelEstimates, isLoading }, request: {trips}} = this.props;
+    return (
+      <Modal
+        customModalStyles="travel-stipend-modal"
+        closeDeleteModal={closeModal}
+        width="100%"
+        height="100%"
+        visibility={shouldOpen? 'visible':'invisible'}
+        title="Travel Stipend Breakdown"
+      >
+        <div className="modal-info-center-body">
+          <TravelCosts
+            isLoading={isLoading}
+            trips={trips}
+            stipends={stipends}
+            flightCosts={flightCosts}
+            hotelEstimates={hotelEstimates} />
+        </div>
+      </Modal>
+    );
+  };
 
-  renderPartitions = (name, total, tripType, picture, stipend) => {
-    const disabled = Array.isArray(stipend) ? false : true;
+  renderPartitions = (name, tripType, picture) => {
     return (
       <Fragment>
         <div className="partition">
@@ -48,19 +53,15 @@ class InfoCenter extends Component {
         </div>
         <div className="partition">
           <p className="text--grey">
-            Total Stipend
-            <button
-              type="button"
-              onClick={this.showModal}
-              className={`info-button--${disabled}`}
-              disabled={disabled}
-            >
-            i
-              <span>{disabled ? 'Breakdown Unavailable' : 'Click for Travel Stipend Breakdown'}</span>
-            </button>
+            Click for Travel Cost Breakdown
           </p>
           <p className="text--blue">
-            {(total && total !== 'N/A') && `$${total}` || 'N/A'}
+            <button
+              onClick={this.showModal}
+              type="button"
+              className="bg-btn bg-btn--active" id="stipend-next">
+              View Cost Breakdown
+            </button>
           </p>
         </div>
       </Fragment>
@@ -68,25 +69,14 @@ class InfoCenter extends Component {
   }
 
   render () {
-    const { request, shouldOpen, closeModal } = this.props;
+    const { shouldOpen, closeModal, request } = this.props;
     const {
-      name, tripType, picture, stipend
+      name, tripType, picture
     } = request;
-    let total;
-    if (Array.isArray(stipend)) {
-      if(stipend.length > 0) {
-        const totArr = stipend.map(obj => obj.subTotal);
-        total = totArr.reduce((acc, num) => acc + num);
-      } else {
-        total = 0;
-      }
-    } else {
-      total = stipend ? stipend : 'N/A';
-    }
     return (
       <div className="row">
-        {this.renderPartitions(name, total, tripType, picture, stipend)}
-        {this.renderStipendModal(shouldOpen, closeModal, total, stipend)}
+        {this.renderPartitions(name, tripType, picture)}
+        {this.renderStipendModal(shouldOpen, closeModal)}
       </div>
     );
   }
@@ -96,7 +86,8 @@ InfoCenter.propTypes = {
   request: PropTypes.object.isRequired,
   shouldOpen: PropTypes.bool.isRequired,
   openModal: PropTypes.func.isRequired,
-  closeModal: PropTypes.func.isRequired
+  closeModal: PropTypes.func.isRequired,
+  travelCosts: PropTypes.object.isRequired,
 };
 
 export default InfoCenter;

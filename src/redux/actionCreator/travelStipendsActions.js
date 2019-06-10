@@ -35,6 +35,7 @@ export const fetchAllTravelStipendsFailure = error => ({
   type: FETCH_ALL_TRAVEL_STIPENDS_FAILURE,
   error
 });
+
 export const createTravelStipend = (requestData, history) => ({
   type: CREATE_TRAVEL_STIPEND,
   requestData,
@@ -61,6 +62,7 @@ export const deleteTravelStipendSuccess = (deleteMessage, stipendId) => ({
   deleteMessage,
   stipendId
 });
+
 export const deleteTravelStipendFailure = (error) => ({
   type: DELETE_TRAVEL_STIPEND_FAILURE,
   error,

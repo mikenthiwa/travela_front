@@ -16,6 +16,12 @@ class TravelStipendsAPI {
   static updateTravelStipend = (stipendId, payload) => {
     return axios.put(`${baseUrl}/travelStipend/${stipendId}`, payload);
   }
+  static async getTravelStipendsByLocation({locations}){
+    const test = await axios.get(`${baseUrl}/travelStipends/location`, { params: {
+      locations
+    }});
+    return test;
+  }
 }
 
 export default TravelStipendsAPI;

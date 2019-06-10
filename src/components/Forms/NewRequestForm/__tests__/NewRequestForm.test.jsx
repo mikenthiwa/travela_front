@@ -274,6 +274,7 @@ describe('<NewRequestForm />', () => {
       destination: 'Lagos, Nigeria'
     },
     fetchTravelChecklist: jest.fn(),
+    fetchTravelCostsByLocation: jest.fn(),
     centers,
     history: {
       push: jest.fn()
@@ -909,6 +910,21 @@ describe('<NewRequestForm />', () => {
     expect(wrapper.instance().setTrips(props.requestOnEdit)).toEqual(props.requestOnEdit.trips);
   });
 
+  it('should execute getOriginandDestination', () => {
+    const wrapper = shallow(<NewRequestForm {...props} />);
+    wrapper.instance().setState({...defaultState, selection: 'Multi'});
+    wrapper.setState({
+      currentTab: 2
+    });
+    wrapper.setState({
+      currentTab: 3
+    });
+    expect(wrapper.state().currentTab).toEqual(3);
+    wrapper.setState({
+      currentTab: 1
+    });
+  });
+
   it('should call localStorage when savePersonalDetails is called', () => {
     const wrapper = shallow(<NewRequestForm {...props} />);
     wrapper.instance().savePersonalDetails({key: 'value'});
@@ -1031,7 +1047,7 @@ describe('<NewRequestForm />', () => {
       }
     };
     nextButton.simulate('click', event);
-    sinon.spy(shallowWrapper.instance(), 'renderTravelStipend');
+    sinon.spy(shallowWrapper.instance(), 'renderTravelCosts');
     expect(event.preventDefault).toBeCalled();
     expect(shallowWrapper.state().currentTab).toEqual(2);
   });
@@ -1183,57 +1199,6 @@ describe('<NewRequestForm />', () => {
     nextButton.simulate('click', event);
     expect(event.preventDefault).toBeCalled();
     expect(shallowWrapper.state().currentTab).toEqual(4);
-  });
-
-  it('should render stipend on next click', () => {
-    const newProps = {
-      ...props,
-      travelStipends: {
-        stipends: [
-          {
-            'amount': 100,
-            'center': {
-              'location': 'Lagos, Nigeria'
-            }
-          }
-        ],
-        isLoading: false
-      }
-    };
-    const shallowWrapper = mount(<NewRequestForm {...newProps} />);
-    shallowWrapper.instance().setState({
-      currentTab: 2,
-      trips: [
-        {
-          destination: 'Nairobi, Kenya'
-        }
-      ]
-    });
-    const nextButton = shallowWrapper.find('#submit');
-    const event = {
-      preventDefault: jest.fn(),
-      target: {
-        name: 'Next',
-      }
-    };
-
-    jest.spyOn(shallowWrapper.instance(), 'renderTravelStipend');
-    jest.spyOn(travelStipendHelper, 'getAllTripsStipend');
-    shallowWrapper.instance().forceUpdate();
-    moxios.install();
-    nextButton.simulate('click', event);
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200
-      });
-      expect(event.preventDefault).toBeCalled();
-      expect(travelStipendHelper.getAllTripsStipend).toHaveBeenCalled();
-      expect(shallowWrapper.instance().renderTravelStipend).toBeCalled();
-      expect(wrapper.find('StipendDetails')).toBeTruthy();
-      expect(shallowWrapper.state().currentTab).toEqual(3);
-    });
-    moxios.uninstall();
   });
 
   it('should display trip checkList  ', () => {

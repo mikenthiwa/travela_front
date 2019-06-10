@@ -102,6 +102,7 @@ describe('TEST ConnectedVerificationDetails COMPONENT', () => {
         isConfirmDialogLoading: false
       };
       instance.componentWillReceiveProps(nextProps);
+      instance.componentDidUpdate(nextProps, nextProps);
       expect(instance.state.modalInvisible).toBe(true);
       instance.state.modalInvisible = false;
       nextProps = {

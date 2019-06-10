@@ -21,10 +21,11 @@ class RequestDetails extends Component {
 
   renderRequest = (request) => {
     const { renderButtons, renderRightPaneQuestion, shouldOpen, openModal, closeModal,
-      showModifications, updateModification, tripModification} = this.props;
+      showModifications, updateModification, tripModification, travelCosts} = this.props;
     return (
       <div className="main-container">
         <LeftPane 
+          travelCosts={travelCosts}
           request={request}
           shouldOpen={shouldOpen}
           openModal={openModal}
@@ -87,7 +88,8 @@ RequestDetails.propTypes = {
   closeModal: PropTypes.func.isRequired,
   showModifications: PropTypes.bool,
   updateModification: PropTypes.func,
-  tripModification: PropTypes.object
+  tripModification: PropTypes.object,
+  travelCosts: PropTypes.object
 };
 
 RequestDetails.defaultProps = {
@@ -95,7 +97,13 @@ RequestDetails.defaultProps = {
   updateModification: () => {},
   tripModification: {},
   isLoading: true,
-  showModifications: false
+  showModifications: false,
+  travelCosts: {
+    isLoading: false,
+    stipends: [],
+    flightCosts: [],
+    hotelEstimates: []
+  }
 };
 
 

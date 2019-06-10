@@ -14,6 +14,7 @@ import { fetchRoleUsers } from '../../../redux/actionCreator/roleActions';
 import { getOccupation } from '../../../redux/actionCreator/occupationActions';
 import {fetchAllTravelReasons} from '../../../redux/actionCreator/listTravelReasonsActions';
 import { fetchAllTravelStipends } from '../../../redux/actionCreator/travelStipendsActions';
+import { fetchTravelCostsByLocation } from '../../../redux/actionCreator/travelCostsActions';
 import { fetchTravelChecklist } from '../../../redux/actionCreator/travelChecklistActions';
 import { validateTrips } from '../../../redux/actionCreator/tripActions';
 import Preloader from '../../../components/Preloader/Preloader';
@@ -50,9 +51,9 @@ export const RequestPage = (editing = false) => {
     render() {
       const { updateUserProfile, userData, fetchPostUserData, user, createNewRequest, listTravelReasons,
         loading, errors, roleUsers, requestOnEdit, editRequest, fetchUserRequests, occupations,
-        travelChecklists, fetchTravelChecklist, fetchAvailableRooms, availableRooms,
-        fetchAvailableRoomsSuccess, creatingRequest, fetchAllTravelReasons, history,
-        fetchAllTravelStipends, travelStipends, validateTrips, fetchingRequest, editingRequest, comments
+        travelChecklists, fetchTravelChecklist, fetchAvailableRooms, availableRooms, travelCosts,
+        fetchAvailableRoomsSuccess, creatingRequest, fetchAllTravelReasons, history, fetchTravelCostsByLocation,
+        fetchAllTravelStipends, fetchTravelStipendsByLocation, travelStipends, validateTrips, fetchingRequest, editingRequest, comments
       } = this.props;
       const { url } = this.state;
       const manager = requestOnEdit && requestOnEdit.manager;
@@ -75,8 +76,9 @@ export const RequestPage = (editing = false) => {
               fetchAllTravelReasons={fetchAllTravelReasons} listTravelReasons={listTravelReasons}
               travelChecklists={travelChecklists} fetchTravelChecklist={fetchTravelChecklist}
               requestOnEdit={requestOnEdit} fetchUserRequests={() => fetchUserRequests(url)}
+              fetchTravelStipendsByLocation={fetchTravelStipendsByLocation} fetchTravelCostsByLocation={fetchTravelCostsByLocation}
               history={history} fetchAllTravelStipends={fetchAllTravelStipends} travelStipends={travelStipends}
-              validateTrips={validateTrips} editing={editing} isEditing={editingRequest} comments={comments}
+              validateTrips={validateTrips} editing={editing} isEditing={editingRequest} comments={comments} travelCosts={travelCosts}
             />)
       );
     }
@@ -86,7 +88,7 @@ export const RequestPage = (editing = false) => {
 
 const mapStateToProps = ({
   requests, user, role, availableRooms, occupations,
-  modal, teammates, travelReason, travelStipends, travelChecklist
+  modal, teammates, travelReason, travelStipends, travelChecklist, travelCosts
 }) => ({
   ...requests,
   ...role,
@@ -99,6 +101,7 @@ const mapStateToProps = ({
   department: user.currentUser.department,
   listTravelReasons: travelReason,
   travelStipends,
+  travelCosts,
   travelChecklists: travelChecklist,
 });
 
@@ -114,6 +117,7 @@ const actions = () => ({
   getOccupation,
   fetchAllTravelReasons,
   fetchAllTravelStipends,
+  fetchTravelCostsByLocation,
   fetchTravelChecklist,
   validateTrips,
   fetchEditRequest

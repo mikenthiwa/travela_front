@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TabView /> should match snapshot 1`] = `
+Array [
+  <div
+    className="travel-cost-header-container"
+>
+    <div
+        className="trip-header-box-selected"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="presentation"
+    >
+        <p
+            className="trip-header-text-title-selected"
+        >
+            Title
+            <img
+                alt="Hotel"
+                className="active-icon"
+                src="icon.svg"
+            />
+        </p>
+        <p
+            className="overflow trip-header-text-content-selected"
+        >
+            subtitle
+        </p>
+    </div>
+    <div
+        className="trip-header-box"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="presentation"
+    >
+        <p
+            className="trip-header-text-title"
+        >
+            Title
+        </p>
+        <p
+            className="overflow trip-header-text-content"
+        >
+            subtitle
+        </p>
+    </div>
+</div>,
+  <div
+    className="line"
+/>,
+  <div
+    className="travel-cost-body-container"
+>
+    <div>
+        content 1
+    </div>
+</div>,
+]
+`;
