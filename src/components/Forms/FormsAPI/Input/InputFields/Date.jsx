@@ -10,14 +10,14 @@ class DateInput extends Component {
     selectedDate: null
   };
 
-  static getDerivedStateFromProps(nextProps, nextState) {
+  componentWillReceiveProps(nextProps, nextState) {
     const { value, showTimeSelect } = nextProps;
     const selectedDate = value ?
       moment(
         nextProps.value, `MM-DD-YYYY${ showTimeSelect ? 'THH:mm' : ''}`
       )
       : null;
-    return { selectedDate };
+    return  selectedDate && selectedDate._isValid && this.setState({ selectedDate });
   }
 
   handleChange = (date, event, raw = false) => {
@@ -77,6 +77,7 @@ DateInput.propTypes = {
   dateFormat: PropTypes.string,
   timeFormat: PropTypes.string,
   onChangeRaw: PropTypes.func,
+  value: PropTypes.object
 };
 
 DateInput.defaultProps = {
@@ -92,7 +93,8 @@ DateInput.defaultProps = {
   openToDate: moment(),
   dateFormat: undefined,
   showYearDropdown: false,
-  onChangeRaw: () => {}
+  onChangeRaw: () => {},
+  value: null
 };
 
 export default DateInput;
