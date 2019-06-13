@@ -34,20 +34,21 @@ document.removeEventListener = jest.fn((event, callback) => {
   eventQueue.removeListener(event, callback);
 });
 
+const props = (overrides = {}) => ({
+  title: 'test modal',
+  visibility: 'visible',
+  closeModal: jest.fn(),
+  closeDeleteModal: jest.fn(),
+  requestId: '34uoj31OJ',
+  ...overrides
+});
 describe('<Modal />', () => {
-  let props, click, wrapper;
+  let click, wrapper, currentProps = props();
 
   beforeEach(() => {
     click = jest.fn();
-    props = {
-      title: 'test modal',
-      visibility: 'visible',
-      closeModal: jest.fn(),
-      closeDeleteModal: jest.fn(),
-      requestId: '34uoj31OJ'
-    };
     wrapper = mount(
-      <Modal {...props}>
+      <Modal {...currentProps}>
         <div>
           Test content
         </div>
@@ -75,11 +76,56 @@ describe('<Modal />', () => {
     const event = { key : 'Escape'};
     eventQueue.fire('keydown', event);
 
-    expect(props.closeModal).toHaveBeenCalled();
+    expect(currentProps.closeModal).toHaveBeenCalled();
   });
 
   it('should release the keydown listener on unmount', () => {
     wrapper.unmount();
     expect(document.removeEventListener).toHaveBeenCalled();
+  });
+
+  describe('Modal Animations', () => {
+    let callback;
+    beforeEach(() => {
+      wrapper = mount(
+        <Modal {...props({visibility: 'invisible'})}>
+          <div>
+            Modal Content
+          </div>
+        </Modal>
+      );
+      jest.resetAllMocks();
+
+
+      window.setTimeout = jest.fn((func) => {
+        callback = func;
+      });
+    });
+
+    it('should show a fade in animation', () => {
+      wrapper.setProps({ visibility: 'visible'});
+
+      expect(window.setTimeout.mock.calls[0][1]).toEqual(0);
+      expect(wrapper.find('Overlay').props().className).toContain('invisible');
+      expect(wrapper.find('div.modal').props().className).toContain('invisible');
+      expect(wrapper.find('.modal-content').length).toEqual(1);
+
+      callback();
+      wrapper.update();
+
+      expect(wrapper.find('Overlay').props().className).toEqual('visible ');
+      expect(wrapper.find('div.modal').props().className).toContain('visible');
+    });
+
+    it('should show a fade out animation', () => {
+      wrapper.setProps({ visibility: 'visible'});
+      callback();
+
+      wrapper.setProps({ visibility: 'invisible'});
+
+      expect(window.setTimeout.mock.calls[1][1]).toEqual(200);
+      expect(wrapper.find('Overlay').props().className).toContain('invisible');
+      expect(wrapper.find('div.modal').props().className).toContain('invisible');
+    });
   });
 });

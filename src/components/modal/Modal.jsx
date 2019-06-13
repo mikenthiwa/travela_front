@@ -7,6 +7,9 @@ import './_modal.scss';
 
 class Modal extends PureComponent {
   _isMounted = false;
+  state = {
+    showing: false
+  };
 
   componentDidMount() {
     this._isMounted = true;
@@ -19,6 +22,11 @@ class Modal extends PureComponent {
     if( this.timeout ){
       clearTimeout(this.timeout);
     }
+  }
+  componentWillReceiveProps( { visibility }, nextContext) {
+    setTimeout(() => {
+      this.setState({ showing: visibility === 'visible'});
+    }, visibility === 'visible' ? 0 : 200);
   }
 
   hideModal = (e) => {
@@ -74,39 +82,45 @@ class Modal extends PureComponent {
     );
   };
 
+
+  renderContent = (
+    showing, visibility, customModalStyles,
+    width, modalId, modalContentId, children
+  ) => (
+    <div
+      className={`modal ${ showing ? visibility : 'invisible' } ${customModalStyles}`}
+      style={{maxWidth: width}}
+      onClick={e => {e.stopPropagation();}} onKeyPress={() => {}}
+      id={modalId}
+      tabIndex="0"
+      role="button">
+      {this.renderModalHeader()}
+      <div className="modal-content" id={modalContentId}>
+        {children}
+      </div>
+    </div>
+  );
+
   render() {
     const {
-      children,
-      visibility,
-      width,
-      modalId,
-      modalContentId,
-      showOverlay,
-      customOverlayStyle,
-      customModalStyles,
-      closeModal
+      children, visibility, width, modalId,
+      modalContentId, showOverlay, customOverlayStyle,
+      customModalStyles, closeModal
     } = this.props;
-    const overlayStyle = `${ visibility } ${customOverlayStyle}`;
+    const { showing } = this.state;
+    const overlayStyle = `${ showing ? visibility : 'invisible' } ${customOverlayStyle}`;
 
-    const showModal = visibility === 'visible';
+    const showModal = showing || visibility === 'visible';
     return showModal ? (
       <Fragment>
         <Overlay
           closeModal={closeModal}
           className={`${overlayStyle}`}
           overlayBackground={!showOverlay ? 'overlayBackground' : ''}>
-          <div
-            className={`modal ${ visibility } ${customModalStyles}`}
-            style={{maxWidth: width}}
-            onClick={e => {e.stopPropagation();}} onKeyPress={() => {}}
-            id={modalId}
-            tabIndex="0"
-            role="button">
-            {this.renderModalHeader()}
-            <div className="modal-content" id={modalContentId}>
-              {children}
-            </div>
-          </div>
+          {this.renderContent(
+            showing, visibility, customModalStyles,
+            width, modalId, modalContentId, children)
+          }
         </Overlay>
       </Fragment>
     ): null;
