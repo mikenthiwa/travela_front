@@ -5,6 +5,7 @@ import moment from 'moment';
 import withTravelReadinessForm from '../withTravelReadinessForm';
 import VisaFormFieldset from '../../Forms/TravelReadinessForm/FormFieldsets/VisaFormFieldset';
 import OtherDocumentFieldSet from '../../Forms/TravelReadinessForm/FormFieldsets/OtherDocumentFieldSet';
+import FileUploadField from '../../Forms/TravelReadinessForm/FormFieldsets/FileUploadField';
 
 
 
@@ -69,6 +70,23 @@ const NewOtherDocumentII  = withTravelReadinessForm(OtherDocumentFieldSet, 'othe
   uploadingDocument: false,
   documentUploaded: true,
   image: 'image.jpeg'
+});
+
+
+const YellowFeverDocument  = withTravelReadinessForm(OtherDocumentFieldSet, 'other', {
+  values: {
+    name: 'Yellow Fever',
+    expiryDate: moment(),
+    dateOfIssue: moment(),
+    documentId : 'Not Applicable'
+  },
+  errors: {},
+  hasBlankFields: true,
+  uploadingDocument: false,
+  documentUploaded: true,
+  image: 'image.jpeg',
+  scanning: false,
+  showForm: true
 });
 
 const VisaDefault = withTravelReadinessForm(VisaFormFieldset, 'visa', {
@@ -136,7 +154,7 @@ describe('<OtherDocumentForm />', () => {
 
   it('renders other document modal', () => {
     expect(
-      wrapperWithOtherDocumentField.find(OtherDocumentFieldSet))
+      wrapperWithOtherDocumentField.find(FileUploadField))
       .toHaveLength(1);
   });
 
@@ -147,7 +165,7 @@ describe('<OtherDocumentForm />', () => {
 
   it('renders the edit other document modal', () => {
     expect(
-      wrapperWithOtherDocumentField.find(OtherDocumentFieldSet))
+      wrapperWithOtherDocumentField.find(FileUploadField))
       .toHaveLength(1);
   });
 
@@ -609,6 +627,93 @@ describe('<OtherDocumentForm />', () => {
     event.target.files = [invalidFileSize];
     wrapper.find('#select-file').simulate('change', event);
     expect(toast.error).toHaveBeenCalledWith('This upload has exceeded the 10 MB limit that is allowed');
+  });
+
+  it('should call the handleSubmit method for document addition', () => {
+    const wrapperWithOtherDocumentField = mount(
+      <YellowFeverDocument {...props} />
+    );
+    
+    let documentUploaded = false;
+    wrapperWithOtherDocumentField.setProps({document: {data: { imageName: 'image.jpg' }}});
+    wrapperWithOtherDocumentField.find('#select-file').simulate('change', {
+      preventDefault:()=>{
+        documentUploaded = true;
+      },
+    });
+    expect(documentUploaded).toBe(true);
+    expect(wrapperWithOtherDocumentField.state().uploadingDocument).toEqual(false);
+    expect(wrapperWithOtherDocumentField.state().scanning).toEqual(false);
+    expect(wrapperWithOtherDocumentField.state().showForm).toEqual(true);
+  });
+
+  it('should return text from scanned Yellow Fever card', () => {
+    const wrapperWithOtherDocumentField = mount(
+      <YellowFeverDocument {...props} />
+    );
+    global.Tesseract = {
+      TesseractWorker : jest.fn(() => ({
+        recognize: jest.fn(() => ({
+          progress: jest.fn().mockImplementation(() => Promise.resolve({
+            lines: [
+              {
+                words: Array(7), text: 'e s (] e e e S↵', confidence: 30.161697387695312
+              },
+              {
+                words: Array(8), text: 'INTERNATIONAL CERTIFICATE OF VACCINATION CERTIFICAT INTERNATIONAL DE VACCINATION↵', confidence: 91.99420166015625
+              },
+              {
+                words: Array(5), text: 'OR PROPHYLAXIS OU DE PROPHYLAXIE↵', confidence: 82.91642761230469
+              }
+            ]
+          }))
+        }))}))
+    };
+
+    const instance = wrapperWithOtherDocumentField.instance();
+    jest.spyOn(instance, 'handleUpload');
+    let documentUploaded = false;
+    wrapperWithOtherDocumentField.find('#select-file').simulate('change', async ()=> {
+      documentUploaded = true;
+      await global.Tesseract.TesseractWorker().recognize('image.jpeg');
+      expect(wrapperWithOtherDocumentField.state().name).toEqual('Yellow Fever');
+      expect(wrapperWithOtherDocumentField.state().documentId).toEqual('Not Applicable');
+    });
+  });
+
+
+  it('should return text from scanned images', () => {
+    const wrapperWithOtherDocumentField = mount(
+      <NewOtherDocument {...props} />
+    );
+    global.Tesseract = {
+      TesseractWorker : jest.fn(() => ({
+        recognize: jest.fn(() => ({
+          progress: jest.fn().mockImplementation(() => Promise.resolve({
+            lines: [
+              {
+                words: Array(7), text: 'e s (] e e e S↵', confidence: 30.161697387695312
+              },
+              {
+                words: Array(8), text: 'This application ensures that users to create articles', confidence: 91.99420166015625
+              },
+              {
+                words: Array(5), text: ', read articles, like rate and share articles', confidence: 82.91642761230469
+              }
+            ]
+          }))
+        }))}))
+    };
+
+    const instance = wrapperWithOtherDocumentField.instance();
+    jest.spyOn(instance, 'handleUpload');
+    let documentUploaded = false;
+    wrapperWithOtherDocumentField.find('#select-file').simulate('change', async ()=> {
+      documentUploaded = true;
+      await global.Tesseract.TesseractWorker().recognize('image.jpeg');
+      expect(wrapperWithOtherDocumentField.state().name).toEqual('Other Document');
+      expect(wrapperWithOtherDocumentField.state().documentId).toEqual('');
+    });
   });
 
 });

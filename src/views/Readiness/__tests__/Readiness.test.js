@@ -4,7 +4,6 @@ import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import ConnectedReadiness from '../index';
-import { TravelReadinessDocuments } from '../index';
 import { initialState } from '../../../redux/reducers/travelReadinessDocuments';
 import users from '../../TravelReadinessDocuments/__mocks__/users';
 

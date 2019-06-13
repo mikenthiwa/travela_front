@@ -1,8 +1,10 @@
 export default (file, response) => {
   const { Tesseract } = window;
+  const TesseractWorker = Tesseract ? Tesseract.TesseractWorker : null;
+  const worker = Tesseract ? new TesseractWorker() : null;
   const getDate = (position, arrayOfDates) => arrayOfDates[position] ? arrayOfDates[position]
-    .slice(arrayOfDates[position].indexOf(':') + 2) : '';
-  return Tesseract && Tesseract.recognize(file)
+    .slice(arrayOfDates[position].indexOf(':') + 2) : '';   
+  return worker && worker.recognize(file)
     .progress(() => {})
     .then(
       (result) => {

@@ -12,9 +12,10 @@ describe('extractText() function', () => {
 
   it('should return ticket details', async () => {
     global.Tesseract = {
-      recognize: jest.fn(() => ({
-        progress: jest.fn().mockImplementation(() => Promise.resolve({
-          text: `1501 Page Mill Road, tripactions.com
+      TesseractWorker : jest.fn(() => ({
+        recognize: jest.fn(() => ({
+          progress: jest.fn().mockImplementation(() => Promise.resolve({
+            text: `1501 Page Mill Road, tripactions.com
           TrIpACtlons Building 1 support@tripactions.com
           Palo Alto, CA 94304 +1 888-433-8747
           United States
@@ -35,8 +36,8 @@ describe('extractText() function', () => {
           RwandAir PRICE SUMMARY Sub Total USD 258.00
           Taxes & Fees USD 190.00
           `
-        }))
-      }))
+          }))
+        }))}))
     };
     await extractText(file, response);
     const { data } = response;

@@ -12,6 +12,8 @@ import SubmitArea from '../Forms/TravelReadinessForm/FormFieldsets/SubmitArea';
 import Preloader from '../Preloader/Preloader';
 import documentUpload from '../../images/icons/document-upload-blue.svg';
 import { isOptional } from '../Forms/FormsAPI/formValidator';
+import * as otherDocumentUtils from '../../helper/otherDocumentsUtils';
+
 
 
 export default function TravelReadinessForm (FormFieldSet, documentType, defaultFormState) {
@@ -27,7 +29,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
       if(/edit/.test(modalType) && !isEmpty(document)){
         return this.updateFormFields(document);
       }
-      return this.setState({errors, uploadingDocument: false});
+      return this.setState({errors, uploadingDocument: false, scanning: false});
     }
 
     componentWillUnmount() {
@@ -51,7 +53,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
 
     handleSubmit = async (event) => {
       event.preventDefault();
-      const {values, image, errors, id} = this.state;
+      const {values, image, errors, id, secure_url} = this.state;
       const {createTravelReadinessDocument, editTravelReadinessDocument, modalType} = this.props;
       const {dateOfIssue, expiryDate} = values;
       const { name } = this.state;
@@ -71,23 +73,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
         )
       };
       if (image) {
-        const fd = new FormData();
-        fd.append('file', image);
-        fd.append('upload_preset', process.env.REACT_APP_PRESET_NAME);
         try {
-          delete axios.defaults.headers.common['Authorization'];
-          this.setState({uploadingDocument: true});
-          const imageData = await axios.post(
-            process.env.REACT_APP_CLOUNDINARY_API, fd,
-            { onUploadProgress: this.handleUploadProgress
-            }
-          );
-          const {data: {secure_url}} = imageData;
-          this.setState({
-            documentUploaded: true,
-            uploadingDocument: false,
-            values: {...values, cloudinaryUrl: secure_url}
-          });
           DocumentAPI.setToken();
           const documentValues = {
             ...newValues,
@@ -112,7 +98,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
 
     handleUploadProgress = (e) => this.setState({ uploadProgress: e.loaded/e.total});
 
-    handleUpload = (e) => {
+    handleUpload = async (e) => {
       e.preventDefault();
       const image = e.target.files[0];
       if( !image ) return;
@@ -128,6 +114,48 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
       const hasBlankFields = Object.keys(values)
         .some(key => !values[key] && !isOptional(key, optionalFields));
       this.setState({name, image, imageChanged: true, hasBlankFields: hasBlankFields || false });
+
+      if (image) {
+        const fd = new FormData();
+        fd.append('file', image);
+        fd.append('upload_preset', process.env.REACT_APP_PRESET_NAME);
+        try {
+          delete axios.defaults.headers.common['Authorization'];
+          this.setState({uploadingDocument: true, showForm: false});
+          const imageData = await axios.post(
+            process.env.REACT_APP_CLOUNDINARY_API, fd,
+            { onUploadProgress: this.handleUploadProgress
+            }
+          );
+          const {data: {secure_url}} = imageData;
+          this.setState({secure_url});
+          if(documentType === 'other'){
+            const { TesseractWorker } = window.Tesseract;
+            const worker = new TesseractWorker();
+
+            worker
+              .recognize(`${secure_url}`)
+              .progress((p) => {
+                this.setState({scanning: true, progressCount: p});
+              })
+              .then((result) => {
+                this.setState({uploadingDocument: false, scanning: false, showForm: true, values: {
+                  name: otherDocumentUtils.documentName(result),
+                  dateOfIssue: '',
+                  expiryDate: '',
+                  documentId: otherDocumentUtils.documentId()
+                }, });
+              });
+          }
+          this.setState({
+            documentUploaded: true,
+            uploadingDocument: false,
+            values: {...values, cloudinaryUrl: secure_url}
+          });
+        } catch (e) {
+          toast.error('Error uploading document. Please try again!');
+        }
+      }
     };
     onChangeVisa = (e) => {
       const visaType = e;
@@ -153,7 +181,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
     }
     render() {
       const { errors, values, hasBlankFields, uploadingDocument,
-        name, imageChanged, uploadProgress } = this.state;
+        name, imageChanged, uploadProgress, showForm, scanning, progressCount } = this.state;
       const { modalType, document, fetchingDocument, updatingDocument } = this.props;
       if (documentType === 'other') delete errors.documentid;
       const { visaType, otherVisaTypeDetails } = values;
@@ -168,34 +196,48 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
           {fetchingDocument ? <Preloader /> : (
             <FormContext values={values} errors={errors} targetForm={this}>
               <form className="travel-document-form" onSubmit={this.handleSubmit}>
-                {<FormFieldSet
-                  visaType={visaType} onChangeVisa={this.onChangeVisa}
-                  values={values} otherVisaTypeDetails={otherVisaTypeDetails} />}
+
                 <div className="travel-document-select-file">
                   <p className="attach-document-text">
-                    {
+                    { scanning ? ( `Scanning Image ${(progressCount.status === 'recognizing text') ? (progressCount.progress * 100).toFixed() :  '0'} % `) :
                       `Attach the image or PDF of your ${modalType && modalType.split(' ').splice(-1)} document`
                     }
                   </p>
-                  <FileUploadField
-                    name={name}
-                    documentUpload={documentUpload}
-                    handleUpload={this.handleUpload}
-                    document={document}
-                    modalType={modalType}
-                  />
+
+                  { scanning ? <Preloader /> :   
+                    ( <FileUploadField
+                      name={name}
+                      documentUpload={documentUpload}
+                      handleUpload={this.handleUpload}
+                      document={document}
+                      modalType={modalType}
+                    />
+                    )
+                  }
                   {uploadingDocument && <progress className="progress-bar" value={uploadProgress} max={1} />}
+                  
                 </div>
+                {
+                  ( documentType === 'other' && !showForm && !(/edit/.test(modalType)) ) ? '' : scanning ? '' : (
+                    <FormFieldSet
+                      visaType={visaType} onChangeVisa={this.onChangeVisa}
+                      values={values} otherVisaTypeDetails={otherVisaTypeDetails} />
+                  )
+                }
                 <hr />
                 <div className="travel-document-submit-area">
-                  <SubmitArea
-                    onCancel={this.onCancel} hasBlankFields={hasBlankFields || !imageChanged}
-                    send={
-                      (modalType && modalType.startsWith('edit')) ? 'Save Changes' :
-                        submitButton[documentType]}
-                    loading={uploadingDocument}
-                    updatingDocument={updatingDocument}
-                  />
+                  { scanning ? '' :
+                    (
+                      <SubmitArea
+                        onCancel={this.onCancel} hasBlankFields={hasBlankFields || !imageChanged}
+                        send={
+                          (modalType && modalType.startsWith('edit')) ? 'Save Changes' :
+                            submitButton[documentType]}
+                        loading={uploadingDocument}
+                        updatingDocument={updatingDocument}
+                      />
+                    )
+                  }
                 </div>
               </form>
             </FormContext>)}

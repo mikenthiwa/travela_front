@@ -46,6 +46,12 @@ describe('<AddVisaForm />', () => {
     expect(wrapper.find('.travel-document-select-file').length).toEqual(1);
   });
 
+  it('closes modal on cancel', () => {
+    expect(wrapper.find('#cancel').length).toEqual(1);
+    wrapper.find('#cancel').simulate('click', event);
+    expect(props.closeModal).toHaveBeenCalled();
+  });
+
   it('handles submit', () => {
     moxios.stubRequest(
       process.env.REACT_APP_CLOUNDINARY_API,
@@ -142,12 +148,6 @@ describe('<AddVisaForm />', () => {
   it('toasts an error if cloudinary returns an error', () => {
     moxios.stubRequest(process.env.REACT_APP_CLOUNDINARY_API, { status: 500});
     wrapper.find('#select-file').simulate('change', event);
-  });
-
-  it('closes modal on cancel', () => {
-    expect(wrapper.find('#cancel').length).toEqual(1);
-    wrapper.find('#cancel').simulate('click', event);
-    expect(props.closeModal).toHaveBeenCalled();
   });
 
 });
