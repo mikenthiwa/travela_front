@@ -870,24 +870,6 @@ class NewRequestForm extends PureComponent {
     history.push('/requests');
   };
 
-  handleReasonsId(reason) {
-    const { listTravelReasons } = this.props;
-    if (reason === 'Other..') {
-      return null;
-    } else {
-      const foundReason = listTravelReasons.travelReasons.find((travelReason) => {
-        return travelReason.title === reason;
-      });
-      return foundReason.id;
-    }
-  }
-
-  savePersonalDetails(personalDetails) {
-    Object.keys(personalDetails).forEach(key => {
-      localStorage.setItem(key, personalDetails[key]);
-    });
-  }
-
   renderTravelDetailsFieldset = () => {
     const { selection, parentIds, values } = this.state;
     const {
@@ -923,6 +905,25 @@ class NewRequestForm extends PureComponent {
       return { origin, destination };
     });
     return locations;
+  };
+
+
+  savePersonalDetails(personalDetails) {
+    Object.keys(personalDetails).forEach(key => {
+      localStorage.setItem(key, personalDetails[key]);
+    });
+  }
+
+  handleReasonsId(reason) {
+    const { listTravelReasons } = this.props;
+    if (reason === 'Other..') {
+      return null;
+    } else {
+      const foundReason = listTravelReasons.travelReasons.find((travelReason) => {
+        return travelReason.title === reason;
+      });
+      return foundReason.id;
+    }
   }
 
   renderTravelCosts = () => {

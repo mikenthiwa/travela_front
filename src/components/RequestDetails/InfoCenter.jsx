@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import returnTrip from '../../helper/generateTripType';
 import StipendDetails from '../Forms/NewRequestForm/Stipend/StipendDetails';
-import TravelCosts from '../Forms/NewRequestForm/TravelCosts/TravelCosts';
+import TravelCosts, {calculateTotalTripCost} from '../Forms/NewRequestForm/TravelCosts/TravelCosts';
 import Modal from '../modal/Modal';
 
 class InfoCenter extends Component {
@@ -36,6 +36,11 @@ class InfoCenter extends Component {
   };
 
   renderPartitions = (name, tripType, picture) => {
+    const { travelCosts: {flightCosts, hotelEstimates, stipends }, request: { trips }} = this.props;
+    const total = calculateTotalTripCost(trips, stipends, flightCosts, hotelEstimates)
+      .reduce((acc, { stipendAmount = 0, hotelCost = 0 , flightCost = 0}) =>
+        (acc + stipendAmount + hotelCost + flightCost),
+      0);
     return (
       <Fragment>
         <div className="partition">
@@ -53,15 +58,17 @@ class InfoCenter extends Component {
         </div>
         <div className="partition">
           <p className="text--grey">
-            Click for Travel Cost Breakdown
-          </p>
-          <p className="text--blue">
+            Cost Breakdown
             <button
               onClick={this.showModal}
               type="button"
-              className="bg-btn bg-btn--active" id="stipend-next">
-              View Cost Breakdown
+              className="info-button--false" id="stipend-next">
+              i
+              <span>Click for Cost breakdown</span>
             </button>
+          </p>
+          <p className="text--blue">
+            {(total && total !== 'N/A') && `$${total}` || 'N/A'}
           </p>
         </div>
       </Fragment>

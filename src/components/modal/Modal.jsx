@@ -16,17 +16,18 @@ class Modal extends PureComponent {
     document.addEventListener('keydown', this.hideModal);
   }
 
+  componentWillReceiveProps( { visibility }, nextContext) {
+    setTimeout(() => {
+      this.setState({ showing: visibility === 'visible'});
+    }, visibility === 'visible' ? 0 : 200);
+  }
+
   componentWillUnmount() {
     this._isMounted = false;
     document.removeEventListener('keydown', this.hideModal);
     if( this.timeout ){
       clearTimeout(this.timeout);
     }
-  }
-  componentWillReceiveProps( { visibility }, nextContext) {
-    setTimeout(() => {
-      this.setState({ showing: visibility === 'visible'});
-    }, visibility === 'visible' ? 0 : 200);
   }
 
   hideModal = (e) => {

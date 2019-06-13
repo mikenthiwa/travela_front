@@ -33,7 +33,7 @@ const getTripFlightCost = (flightCosts, origin, destination) => {
   return tripFlightCost;
 };
 
-const calculateTotalTripCost = (trips, stipends, flightCosts, hotelEstimates) => {
+export const calculateTotalTripCost = (trips, stipends, flightCosts, hotelEstimates) => {
   const getAllTripsTotal = trips.map((trip, index) => {
     const { origin, destination } = trip;
     const tripDuration = calculateTripDuration(trip);
@@ -95,9 +95,9 @@ const renderStipends = (isLoading, tripStipend, destination, tripDuration, retur
     const calculatedTotalTripStipends = amount ? calculateTotalTripStipends(amount, tripDuration) : tripStipend;
     return (
       <div className="breakdown-box">
-        <TraveStipends 
-          isLoading={isLoading} stipend={amount || tripStipend} 
-          location={destination} duration={tripDuration} 
+        <TraveStipends
+          isLoading={isLoading} stipend={amount || tripStipend}
+          location={destination} duration={tripDuration}
           calculatedTotalTripStipends={calculatedTotalTripStipends}
           displayType={displayType} />
       </div>
@@ -108,13 +108,13 @@ const renderStipends = (isLoading, tripStipend, destination, tripDuration, retur
 const renderFlightCosts = (isLoading, origin, destination, tripFlightCost, displayType) => {
   if (!tripFlightCost) return '';
   if (tripFlightCost) {
-    const { cost } = tripFlightCost; 
+    const { cost } = tripFlightCost;
     return (
       <div className="breakdown-box">
-        <FlightCosts 
-          isLoading={isLoading} 
-          origin={origin} destination={destination} 
-          cost={cost || tripFlightCost} 
+        <FlightCosts
+          isLoading={isLoading}
+          origin={origin} destination={destination}
+          cost={cost || tripFlightCost}
           displayType={displayType} />
       </div>
     );
@@ -128,10 +128,10 @@ const renderHotelEstimates = (isLoading, rate, destination, tripDuration, return
     const calculatedTotalHotelRate = amount ? calculateTotalHotelRate(amount, tripDuration) : rate;
     return (
       <div className="breakdown-box">
-        <HotelEstimates 
-          isLoading={isLoading} 
-          rate={amount || rate} location={destination} 
-          duration={tripDuration} 
+        <HotelEstimates
+          isLoading={isLoading}
+          rate={amount || rate} location={destination}
+          duration={tripDuration}
           calculatedTotalHotelRate={calculatedTotalHotelRate}
           displayType={displayType} />
       </div>
@@ -181,7 +181,7 @@ const renderTabContent = (isLoading, trip) => {
 
   if (subTitle === 'Final Stop' && !tripFlightCost) return noEstimatesMessage;
   if (!tripHotelRate && !tripFlightCost && !tripStipend) return noEstimatesMessage;
-  
+
   return (
     <Fragment key={title}>
       {renderHotelEstimates(isLoading, tripHotelRate, destination, tripDuration, returnDate, displayType)}
@@ -196,9 +196,9 @@ const TravelCosts = ({stipends, flightCosts, hotelEstimates, isLoading, trips}) 
   const totalSum = sumAllTripCosts(tripsSum);
   const totalTab = {
     ...tripsData[0],
-    ...totalSum, 
-    title: 'TOTAL ESTIMATE', 
-    subTitle: totalSum.tripDuration > 0 ? `${totalSum.tripDuration} days in total` : 'No duration', 
+    ...totalSum,
+    title: 'TOTAL ESTIMATE',
+    subTitle: totalSum.tripDuration > 0 ? `${totalSum.tripDuration} days in total` : 'No duration',
     displayType:'sum'
   };
   const tabContent = [...tripsData, {...totalTab}];
