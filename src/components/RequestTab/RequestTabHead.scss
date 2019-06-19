@@ -1,17 +1,18 @@
 .request__tab {
   margin-top: 57px;
   padding: 0;
-  margin: 0;
   list-style: none;
   display: flex;
+  align-items: center;
 }
-
 
 .request__tab-card {
   box-sizing: border-box;
   min-height: 150px;
   border-radius: 16px;
-  background-color: #FFFFFF;
+  margin-left: 0;
+  margin-right: 8px;
+  background-color: #ffffff;
   float: left;
   position: relative;
   padding-bottom: 23px;
@@ -32,7 +33,7 @@
       transform: translate(-50%, -50%);
       float: left;
       top: 50%;
-      position: relative; 
+      position: relative;
     }
   }
   .tab-title {
@@ -40,7 +41,7 @@
     text-align: center;
     margin-top: 7px;
     height: 21px;
-    color: #4F4F4F;
+    color: #4f4f4f;
     font-family: "DIN Pro";
     font-size: 16px;
     font-weight: bold;
@@ -50,7 +51,7 @@
     margin-top: 5px;
     height: 15px;
     width: 100%;
-    color: #4F4F4F;
+    color: #4f4f4f;
     font-family: "DIN Pro";
     font-size: 12px;
     line-height: 15px;
@@ -58,18 +59,17 @@
   }
 }
 
-
 .current_request {
-  border: 1px solid #3359DB;
+  border: 1px solid #3359db;
   opacity: 1 !important;
   .foot-text {
-      display: block!important;
+    display: block !important;
   }
 }
 
-
 .complete {
   opacity: 1 !important;
+  margin: 0;
   .tab-logo {
     background-color: rgba(16, 163, 109, 0.15);
   }
@@ -93,27 +93,26 @@
   top: 10px;
   height: 24px;
   width: 24px;
-  background-color: #10A36D;
+  background-color: #10a36d;
   border-radius: 50%;
   text-align: center;
-
 }
 
-.new-request_title{
-  height: 23px;	
-  width: 277px;	
-  color: #4F4F4F;	
-  font-family: "DIN Pro";	
-  font-size: 18px;	
-  font-weight: 700;	
+.new-request_title {
+  height: 23px;
+  width: 277px;
+  color: #4f4f4f;
+  font-family: "DIN Pro";
+  font-size: 18px;
+  font-weight: 700;
   line-height: 23px;
-  margin-top:60px;
+  margin-top: 60px;
   margin-bottom: 25px;
 }
 .hide_element {
-z-index: -1;
+  z-index: -1;
 }
-.page-header__edit-request{
+.page-header__edit-request {
   display: inline;
   align-items: center;
   a {
@@ -121,9 +120,13 @@ z-index: -1;
   }
 }
 
-@media (max-width: 479px){
-.request__tab-card {
-  width: -webkit-stretch !important;
-}
+@media (max-width: 479px) {
+  .request__tab-card {
+    width: -webkit-stretch !important;
+    margin: 8px;
+  }
 
+  .complete {
+    margin-bottom: 10px;
+  }
 }

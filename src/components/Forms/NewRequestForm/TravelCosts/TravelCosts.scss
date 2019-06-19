@@ -2,7 +2,6 @@
   width: 100%;
   height: 100%;
   padding-bottom: 30px;
-  padding-left: 15px;
 }
 
 .modal-info-center-body {
@@ -167,7 +166,7 @@
   border: 1px solid #EFEFEF;	
   border-radius: 19px;	
   background-color: #FFFFFF;
-  margin: 1%;
+  margin: 2%;
 }
 .breakdown-box-content {
   padding: 10%;
@@ -226,4 +225,15 @@
 .trip-header-text-title-selected > .active-icon {
   float: right;
   padding: 2px;
+}
+
+@media( max-width: 479px){
+  .trip-header-box-selected, .trip-header-box {
+    width: 40%;
+  }
+
+  .breakdown-box {
+    width: 90%;
+    margin: 4.5%;
+  }
 }

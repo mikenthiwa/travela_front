@@ -3,7 +3,8 @@
   .width-91 {
     width: 91.5%;
     @media(max-width: 520px){
-      width: 95%
+      width: 95%;
+      margin: 0 auto;
     }
   }
  }
