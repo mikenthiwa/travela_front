@@ -13,6 +13,7 @@ import TextLink from '../../components/TextLink/TextLink';
 import { loginStatus } from '../../helper/userDetails';
 import Utils from '../../helper/Utils';
 import ButtonLoadingIcon from '../../components/Forms/ButtonLoadingIcon';
+import LoaderPage from '../../components/LoaderPage';
 
 export class Login extends Component {
 
@@ -21,7 +22,7 @@ export class Login extends Component {
   };
 
   componentDidMount() {
-    const {match:{params}, isAuthenticated} = this.props;
+    const {match:{params}} = this.props;
     if(params[0]){
       localStorage.setItem('url', `/${params[0]}`);
     }
@@ -55,8 +56,6 @@ export class Login extends Component {
     }
     setUser();
   };
-
-
 
   checkTokenExpiration = (exp) => {
     const { user } = this.props;
@@ -122,7 +121,6 @@ export class Login extends Component {
   }
 
   renderGoogleLogin() {
-    const { isLoading } = this.state;
     const { resetErrors } = this.props;
     return (
       <GoogleLogin
@@ -137,7 +135,7 @@ export class Login extends Component {
             disabled={renderProps.disabled}>
             <img src={symbolG} alt="google-logo" className="login-page__google-white" />
                       Login to Get Started
-            <ButtonLoadingIcon isLoading={isLoading} />
+            <ButtonLoadingIcon />
           </button>
         )}
         cookiePolicy="single_host_origin"
@@ -149,35 +147,39 @@ export class Login extends Component {
   }
 
   render() {
+    const { isLoading } = this.state;
     return (
       <div className="mdl-layout mdl-js-layout login-page">
-        <div className="mdl-layout__content">
-          <div className="mdl-grid mdl-grid--no-spacing">
-            <div className="mdl-cell mdl-cell--5-col mdl-cell--5-col-tablet hero">
-              <div className="hero__main">
-                <img
-                  src={travelaLogo}
-                  alt="Andela Logo"
-                  className="login-page__andela-logo" />
-                <p className="login-page__travel-request-text">
+        {
+          isLoading ? <LoaderPage /> : (
+            <div className="mdl-layout__content">
+              <div className="mdl-grid mdl-grid--no-spacing">
+                <div className="mdl-cell mdl-cell--5-col mdl-cell--5-col-tablet hero">
+                  <div className="hero__main">
+                    <img
+                      src={travelaLogo}
+                      alt="Andela Logo"
+                      className="login-page__andela-logo" />
+                    <p className="login-page__travel-request-text">
                   Travel Requests Made Easier
-                </p>
-                {this.renderGoogleLogin()}
-              </div>
-              <div className="hero__links">
-                {this.renderLinks()}
+                    </p>
+                    {this.renderGoogleLogin()}
+                  </div>
+                  <div className="hero__links">
+                    {this.renderLinks()}
+                  </div>
+                </div>
+                {this.renderLandPageImage()}
               </div>
             </div>
-            {this.renderLandPageImage()}
-          </div>
-        </div>
+          )
+        }
       </div>
     );
   }
 }
 
 Login.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
   history: PropTypes.shape({}).isRequired,
   setUser: PropTypes.func.isRequired,
   postData: PropTypes.func.isRequired,
