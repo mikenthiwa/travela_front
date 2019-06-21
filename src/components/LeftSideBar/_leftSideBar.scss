@@ -53,31 +53,3 @@
     @import 'responsiveness';
   }
 }
-
-.helpIcon {
-  position: fixed;
-  bottom: 15px;
-  left: 5px;
-  span {
-    width: 8em;
-    margin-left: 2em;
-    bottom: 30px;
-    background-color: #f8f8f8;
-    -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-    color: #4f4f4f;
-    display: none;
-    padding: 0.5em 1em;
-    position: fixed;
-    z-index: 2;
-  }
-
-  &:hover {
-    cursor: pointer;
-
-    span {
-      display:block;
-    }
-  }
-}
-

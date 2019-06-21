@@ -5,7 +5,6 @@ import { NavLink, Link} from 'react-router-dom';
 import SideBarMetadata from './Metadata';
 import LeftSideNavItems from './LeftSideNavItems/LeftSideNavItems';
 import './_leftSideBar.scss';
-import inactiveHelpIcon from '../../images/icons/helpIcon_inactive.svg';
 
 
 export class LeftSideBar extends Component {
@@ -16,19 +15,6 @@ export class LeftSideBar extends Component {
 
   setActiveNavItem = (clickedNavItem) => {
     this.setState({activeNavItem: clickedNavItem});
-  }
-
-  renderHelpLink(){
-    return(
-      <div className="helpIcon">
-        <Link to="/help">
-          <span>
-            <p>Click to access Help Page</p>
-          </span>
-          <img alt="HelpIcon" src={inactiveHelpIcon} />
-        </Link>
-      </div>
-    );
   }
 
   render() {
@@ -47,7 +33,6 @@ export class LeftSideBar extends Component {
         <div className="left-sidebar__fixed_wrapper">
           <div className="left-sidebar__scrollable_wrapper">
             {body}
-            {this.renderHelpLink()}
           </div>  
         </div>
       </div>

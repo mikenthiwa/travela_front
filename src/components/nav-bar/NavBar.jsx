@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import _ from  'lodash';
+import _ from 'lodash';
 import { withRouter, Link } from 'react-router-dom';
 import debounce from 'lodash/debounce';
 import travela from '../../images/travela.svg';
@@ -21,9 +21,10 @@ import Utils from '../../helper/Utils';
 import LocationDropdownRoutes from '../../helper/LocationDropdownRoutes';
 import './NavBar.scss';
 import searchBarAllowedRoutes from '../search-bar/SearchBarRoutes';
+import inactiveHelpIcon from '../../images/icons/helpIcon_inactive.svg';
 
 export class NavBar extends PureComponent {
-
+  
   state = {
     hideLogoutDropdown: true,
     keyword: '',
@@ -97,12 +98,12 @@ export class NavBar extends PureComponent {
     const {hideLogoutDropdown} = this.state;
     this.setState({ hideLogoutDropdown: !hideLogoutDropdown});
     document.addEventListener('click', this.hideDropdown);
-  }
+  };
 
   hideDropdown = () => {
-    this.setState({hideLogoutDropdown: true});
+    this.setState({ hideLogoutDropdown: true });
     document.removeEventListener('click', this.hideDropdown);
-  }
+  };
 
   logout = () => {
     const { history } = this.props;
@@ -110,7 +111,7 @@ export class NavBar extends PureComponent {
   };
 
   logoutLink() {
-    const {hideLogoutDropdown} = this.state;
+    const { hideLogoutDropdown } = this.state;
     const logoutDropdownStyle = hideLogoutDropdown ? 'none' : 'block';
     return (
       <span className="dropdown-arrow">
@@ -126,7 +127,7 @@ export class NavBar extends PureComponent {
         <div className="navbar__mdl-list" style={{display: `${logoutDropdownStyle}`}}>
           <div className="navbar__link">
             <Link className="navbar__link" id="profile" role="presentation" to="/settings/profile">
-              <img
+              <img 
                 src={account} alt="profile" className="navbar__navbar-account"
               />
               Profile
@@ -143,6 +144,19 @@ export class NavBar extends PureComponent {
           </div>
         </div>
       </span>
+    );
+  }
+
+  renderHelpLink() {
+    return (
+      <div className="navbar__navbar-help-icon">
+        <Link to="/help">
+          <span>
+            <p>Click to access Help Page</p>
+          </span>
+          <img alt="HelpIcon" src={inactiveHelpIcon} />
+        </Link>
+      </div>
     );
   }
 
@@ -226,8 +240,7 @@ export class NavBar extends PureComponent {
     const locationUrl = new URLSearchParams(location.search);
     const centerSelected = locationUrl.get('center');
     const defaultCenters = Array.from(new Set([ userLocation, ...userCenters]).values());
-    const centers = location.pathname === '/trip-planner/checklists' ? defaultCenters :
-      ['All Locations', ...userCenters];
+    const centers = location.pathname === '/trip-planner/checklists' ? defaultCenters : ['All Locations', ...userCenters];
     const allCenters = centers.map(center => ({ value: center, name: center }));
     return(
       <div className="mdl-layout__header-row">
@@ -245,11 +258,11 @@ export class NavBar extends PureComponent {
             </div>
           )
         }
-
         <div className="center-dropdown">
           {allCenters.length > 1 && this.renderLocationDropdown(allCenters, centerSelected)}
         </div>
         <nav className="mdl-navigation">
+          {this.renderHelpLink()}
           {this.renderNotification()}
           <div className="navbar__user-icon navbar__nav-size
             mdl-cell--hide-tablet mdl-cell--hide-phone">
@@ -269,17 +282,23 @@ export class NavBar extends PureComponent {
       <div className={shouldOpen ? 'header-container-modal-open' :'header-container'}>
         <header className="mdl-layout__header navbar__layout_header">
           {this.renderHeader(handleShowDrawer, keyword)}
-          <button type="button" className="navbar__search-icon--btn" onClick={handleHideSearchBar}>
-            <div>
-              <i className="material-icons navbar__search-icon">
-          search
-              </i>
-            </div>
-          </button>
-          <div
-            className="navbar__onclick-search-size" style={{display: `${showSearch}`}}>
-            <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} value={keyword} />
-          </div>
+          {( searchBarAllowedRoutes.find(route => route.test(location.pathname))) && 
+          (
+            <Fragment>
+              <button
+                type="button"
+                className="navbar__search-icon--btn"
+                onClick={handleHideSearchBar}
+              >
+                <div>
+                  <i className="material-icons navbar__search-icon">search</i>
+                </div>
+              </button>
+              <div
+                className="navbar__onclick-search-size" style={{ display: `${showSearch}` }}>
+                <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} value={keyword} />
+              </div>
+            </Fragment>)}
         </header>
       </div>
     );
