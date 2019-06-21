@@ -14,14 +14,18 @@
 - [Setup](#setup)
   - [Dependencies](#dependencies)
   - [Getting Started](#getting-started)
+  - [Environment Variables](#environment-variables)
 - [Testing](#testing)
 - [To use Storybook](#to-use-storybook)
+- [Prototype](#prototype)
 - [Contribute](#contribute)
 - [Deployment](#deployment)
+- [License](#license)
+- [Technical Charts](#technical-charts)
 
 ## Documentation
 
-TODO - when endpoints are ready
+[Link to Documentation](https://documenter.getpostman.com/view/5772810/S1ZxbV12)
 
 ## Setup
 
@@ -32,13 +36,33 @@ List of libraries, tools, etc needed (e.g. yarn, node.js, python, etc)
 - [React.js](https://reactjs.org/) - A JavaScript library for building user interfaces
 - [Node.js](https://nodejs.org/en/) - A JavaScript runtime environment
 - A package manager - [yarn](https://yarnpkg.com/lang/en/) or [NPM](https://www.npmjs.com/)
+- [Redux](https://redux.js.org/) - A predictable state container for JavaScript apps
+- [Webpack](https://webpack.js.org/) - A bundler for assets and scripts
 
 ### Getting Started
 
 - Clone the repo - `git clone https://github.com/andela/travel_tool_front.git`
-- Change into the project directory
-- Install project dependencies run `make ssh` and then `yarn install`
-- Run the server `make start`
+- Change into the project directory - `cd travel_tool_front`
+- Install project dependencies run `make ssh` and/or `yarn install`
+- Run the server `make start` or `yarn start`
+
+### Environment Variables
+
+ Create your `.env` file in the root directory by following the `.env.example` below
+  ```
+  REACT_APP_ANDELA_AUTH_HOST=andela microservices url
+  REACT_APP_AUTH_REDIRECT_URL=website url
+  REACT_APP_API_URL=api url
+  REACT_APP_CLOUNDINARY_API=Your cloudinary URL
+  REACT_APP_PRESET_NAME=Name of the preset for unsigned uplaod
+  REACT_APP_CITY=city for a user if andela api does not return a location
+  REACT_APP_ALL_USERS=Andela api endpoint to fetch information for user
+  REACT_APP_DEFAULT_LOCATION=default location for a user if andela api does not return a location
+  REACT_APP_JWT_PUBLIC_KEY=input public token
+  NODE_ENV=environment for putting the app in maintenance mode
+  REACT_APP_GOOGLE_AUTH_CLIENT_ID=google authentication id
+  BAMBOOHRID_API=bamboohr directory
+  ```
 
 ## Testing
 
@@ -49,6 +73,10 @@ List of libraries, tools, etc needed (e.g. yarn, node.js, python, etc)
 - Ensure docker is installed, to install docker click [here](https://www.docker.com/products/docker-desktop)
 - Run `make components` docker build command on the terminal to run storybook in the docker development environment server
 - On the web browser, type `http://localhost:9001` to access storybook.
+
+## Prototype
+
+The application is staged [here](https://travela-staging.andela.com/)
 
 ## Contribute
 
@@ -63,4 +91,18 @@ If the pull request is accepted by the owners of the repository, then it is merg
 
 ## Deployment
 
-TODO - add deployment commands
+Deployment in this project happens under two circumstances.
+- When a PR has been successfully merged to `develop`, the application is deployed to the `staging` environment.
+- When `QA` and `QC` tests have been successfully carried out and merged to `master`, the application is deployed to the `production` environment
+
+[Jenkins](https://jenkins.io/doc/) is used to hanlde support for automatating the implementation and integration of continuous delivery pipelines.
+
+The deployment scripts for the application are hosted [here](https://github.com/andela/travel_tool_deployment_scripts)
+
+## License
+
+This application is licensed under the terms of the [MIT License](https://github.com/andela/travel_tool_back/blob/develop/LICENSE)
+
+## Technical Charts
+
+[Architectural Diagram](https://www.lucidchart.com/invitations/accept/777cc1cd-1e62-4ccc-867c-2d0c6f9e85ec)
