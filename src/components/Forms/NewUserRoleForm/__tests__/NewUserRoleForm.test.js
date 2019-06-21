@@ -96,7 +96,7 @@ describe('<NewUserRoleForm />', () => {
     wrapper.find('.add_button').simulate('click');
     wrapper.find('input').at(1).simulate('change', { target: { value: 'test'}});
     wrapper.find('.add_button').simulate('click');
-    wrapper.find('input').at(1).simulate('change', { target: { value: 'est'}});
+    wrapper.find('input').at(1).simulate('change', { target: { value: 'est' } });
     wrapper.find('.remove_department').simulate('click');
     wrapper.find('input').at(1).simulate('change', { target: { value: 'test'}});
     wrapper.find('.add_button').simulate('click');

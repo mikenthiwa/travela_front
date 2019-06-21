@@ -72,30 +72,25 @@ class PersonalDetailsFiedset extends Component {
                 !(/Manager|Requester/.test(roleName)) && displayInput('Country')
             }
           </div>
-          <div className="">
-            <table className="mdl-js-data-table table__requests" style={{ backgroundColor: 'white'}}>
-              {values.items.map((list, i) =>
-                (
-                  <tbody key={Math.floor((Math.random() * 5000) + 1)} className="table__body">
-                    <tr className="table__row" style={{ backgroundColor: '#F8F8F8' }}>
-                      <td className="mdl-data-table__cell--non-numeric table__data" style={{ textTransform: 'capitalize', borderLeft: 'none' }}>
-                        {list}
-                      </td>
-                      <td style={{ borderRight: 'none'}}>
-                        <i
-                          role="button"
-                          className="remove_department"
-                          id="remove"
-                          onKeyDown={this.handleKeyDown}
-                          tabIndex="0"
-                          onClick={() =>removeItem(i)}>
+          <div className="center-button-group-edit">
+            {values.items.map((list, cancelIcon) => (
+              <button
+                style={{ textTransform: 'capitalize' }}
+                key={Math.floor((Math.random() * 5000) + 1)}
+                type="button"
+                className="center_buttons">
+                {list}
+                <span
+                  className="remove_department"
+                  role="button"
+                  id="remove"
+                  onKeyDown={this.handleKeyDown}
+                  tabIndex="0"
+                  onClick={() =>removeItem(cancelIcon)}>
                               X
-                        </i>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
-            </table>
+                </span>
+              </button>
+            ))}
           </div>
         </div>
       </fieldset>

@@ -1,77 +1,81 @@
-.add_button{
-    border: 1px solid #3359DB;
-    border-radius: 1px;
-    background-color: #3359DB;
-    height: 36px;
-    width: auto;
-    border: 1px solid #D4D4D4;
-    border-radius: 1px;
-    color: white;
-    font-family: "DIN Pro";
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 14px;
-    margin: 28px 1px 0pc 352px;
-    padding: 9px 21px;
-    cursor: pointer;
-    outline: none !important;
+.add_button {
+  border: 1px solid #3359db;
+  border-radius: 1px;
+  background-color: #3359db;
+  height: 36px;
+  width: auto;
+  border: 1px solid #d4d4d4;
+  border-radius: 1px;
+  color: white;
+  font-family: 'DIN Pro';
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+  margin: 28px 1px 0pc 352px;
+  padding: 9px 21px;
+  cursor: pointer;
+  outline: none !important;
 }
 
-.size_in{
-    padding-top: 14px;
-    display: flex;
-    margin-bottom: 17px;
+.size_in {
+  padding-top: 14px;
+  display: flex;
+  margin-bottom: 17px;
 }
 
-
-.back{
-    background-color: white !important;
+.back {
+  background-color: white !important;
 }
 
-.remove_department{
-    font-family: "DIN Pro";
-    font-style: normal;
-    font-size: 20px !important;
-    font-weight: 900 !important;
-    color: #FF5359;
-    display: inline-block;
-    outline: none;
-    width: 25px;
-    cursor: pointer;
+.remove_department {
+  margin-left: 5px;
+  font-family: 'DIN Pro';
+  font-style: normal;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  color: #e20909;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
 }
 
 .disable_button {
-    background-color: rgba(51, 89, 219, 0.3);
-    border: none;
-    color: #FFFFFF;
-    cursor: not-allowed;
-    height: 36px;
-    width: auto;
-    font-family: "DIN Pro";
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 14px;
-    margin: 28px 1px 0pc 352px;
-    padding: 9px 21px;
+  background-color: rgba(51, 89, 219, 0.3);
+  border: none;
+  color: #ffffff;
+  cursor: not-allowed;
+  height: 36px;
+  width: auto;
+  font-family: 'DIN Pro';
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+  margin: 28px 1px 0pc 352px;
+  padding: 9px 21px;
 }
 
 .add_dept {
-    position: fixed;
-    width: 65%;
+  position: fixed;
+  width: 65%;
 }
-.center_buttons{
-    margin-right: 16px;
-    background-color: #F8F8F8;
-    border: .5px solid rgb(216, 216, 216);
-    border-radius: 4px;
-    padding: 4px 10px;
-    margin-top: 8px;
-}
-
-.center-button-group{
-    margin-top: 3px;
-    margin-bottom: 17px;
+.center_buttons {
+  border: 0.5px solid #d8d8d8;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 12px;
+  display: inline-block;
+  padding: 4px 15px 4px 10px;
+  margin-top: 8px;
+  margin-right: 7px;
 }
 
-
-
+.center-button-group,
+.center-button-group-edit {
+  margin-top: 3px;
+  margin-bottom: 17px;
+}
+@media screen and (max-width: 480px) {
+  .center-button-group-edit {
+    margin-top: 74px;
+  }
+}
