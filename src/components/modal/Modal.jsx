@@ -19,7 +19,7 @@ class Modal extends PureComponent {
   componentWillReceiveProps( { visibility }, nextContext) {
     setTimeout(() => {
       this.setState({ showing: visibility === 'visible'});
-    }, visibility === 'visible' ? 0 : 200);
+    }, visibility === 'visible' ? 100 : 200);
   }
 
   componentWillUnmount() {

@@ -4,7 +4,9 @@ exports[`<RoomLabel /> should match snapshot 1`] = `
 <div
   className="room-name item-row"
 >
-  <div>
+  <div
+    className="name"
+  >
     qwetu
   </div>
   <div
@@ -17,16 +19,14 @@ exports[`<RoomLabel /> should match snapshot 1`] = `
     …
     <div
       className="mark-unavailable is-hidden"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex="0"
     >
-      <div>
-        <div
-          className="container_room_fine"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          role="button"
-          tabIndex="0"
-        />
-      </div>
+      <div
+        className="container_room_fine"
+      />
       <span>
         Unavailable
       </span>

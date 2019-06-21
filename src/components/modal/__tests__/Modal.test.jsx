@@ -105,7 +105,7 @@ describe('<Modal />', () => {
     it('should show a fade in animation', () => {
       wrapper.setProps({ visibility: 'visible'});
 
-      expect(window.setTimeout.mock.calls[0][1]).toEqual(0);
+      expect(window.setTimeout.mock.calls[0][1]).toEqual(100);
       expect(wrapper.find('Overlay').props().className).toContain('invisible');
       expect(wrapper.find('div.modal').props().className).toContain('invisible');
       expect(wrapper.find('.modal-content').length).toEqual(1);

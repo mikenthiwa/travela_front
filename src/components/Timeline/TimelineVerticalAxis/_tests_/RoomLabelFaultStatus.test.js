@@ -60,4 +60,25 @@ describe('<RoomLabel />', ()=> {
     elipses.simulate('focus');
     expect(wrapper.state().showMarkUnavailable).toEqual(true);
   });
+
+  it('should not open modal when room is unavailable',() =>{
+    const propsWithVisibilityTrue = {...props, status: true};
+    const wrapper = shallow(<RoomLabel {...propsWithVisibilityTrue} />);
+    wrapper.setState({showMarkUnavailable: true });
+    const ellipsis = wrapper.find('.ellipsis');
+    ellipsis.simulate('focus');
+    const dialogue = wrapper.find('.mark-unavailable');
+    dialogue.simulate('click');
+    expect(props.openModal).not.toHaveBeenCalled();
+  });
+
+  it('open modal on clicking the dialogue box', () => {
+    const wrapper = shallow(<RoomLabel {...props} />);
+    wrapper.setState({showMarkUnavailable: true });
+    const ellipsis = wrapper.find('.ellipsis');
+    ellipsis.simulate('focus');
+    const dialogue = wrapper.find('.mark-unavailable');
+    dialogue.simulate('click');
+    expect(props.openModal).toHaveBeenCalledWith(true, 'qwetu-thjfsndj12');
+  }); 
 });

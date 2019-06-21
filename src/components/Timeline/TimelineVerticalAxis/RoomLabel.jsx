@@ -39,36 +39,14 @@ class RoomLabel extends PureComponent {
     );
   }
 
-  renderCheckBox = (statusClass) => {
-    const { id, status, openModal, name} = this.props;
-    return (
-      <div>
-        {status ? (
-          <div
-            role="button"
-            tabIndex="0"
-            className={`container_room_${statusClass}`}
-          />
-        ): (
-          <div
-            role="button"
-            tabIndex="0"
-            className={`container_room_${statusClass}`}
-            onClick={() => openModal(true,  `${name}-${id}`)}
-            onKeyDown={() => openModal(true,  `${name}-${id}`)}
-          />
-        )}
-      </div>
-    );
-  }
-
   render() {
     const {showMarkUnavailable} = this.state;
-    const {name, id, status} = this.props;
+    const {name, id, openModal, status} = this.props;
     const visibility = showMarkUnavailable ? 'is-visible' : 'is-hidden';
+    const statusClass = status ? 'fault' : 'fine';
     return (
       <div className="room-name item-row">
-        <div>{name}</div>
+        <div className="name">{name}</div>
         <div
           className="ellipsis"
           tabIndex="0"
@@ -77,8 +55,13 @@ class RoomLabel extends PureComponent {
           onBlur={this.toggleMarkUnavailable}
         >
           &hellip;
-          <div className={`mark-unavailable ${visibility}`}>
-            {status ? this.renderCheckBox('fault') : this.renderCheckBox('fine')}
+          <div 
+            className={`mark-unavailable ${visibility}`}
+            role="button"
+            tabIndex="0"
+            onClick={() => status ? {} : openModal(true,  `${name}-${id}`)}
+            onKeyDown={() => status ? {} : openModal(true,  `${name}-${id}`)}>
+            <div className={`container_room_${statusClass}`} />
             <span>Unavailable</span>
           </div>
         </div>

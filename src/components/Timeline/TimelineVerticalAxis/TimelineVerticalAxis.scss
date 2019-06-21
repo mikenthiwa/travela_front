@@ -34,11 +34,13 @@
       font-size: 15px;
       font-weight: 500;
       text-transform: uppercase;
+      .name{
+        overflow: hidden;
+      }
       .modal.visible {
         text-transform: none;
       }
       .ellipsis {
-        position: absolute;
         right: 10px;
         text-transform: none;
         margin-left: 15px;
@@ -63,6 +65,8 @@
         box-shadow: 0 2px 5px 0 rgba(0,0,0,0.15);
         transition: transform .2s ease-out;
         transform-origin: top left;
+        outline:none !important;
+
         &.is-visible {
           transform: scale(1) translateX(0);
           z-index: 200;
