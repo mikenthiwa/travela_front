@@ -25,10 +25,10 @@ import ConnectedTravelReasons from '../views/TravelReasons';
 import ConnectedTravelStipend from '../views/TravelStipends';
 import ConnectedApproveRequests from '../views/ApproveRequests';
 import ConnectedVerificationDetails from '../views/VerificationDetails';
-import ConnectedHelpers from '../views/HelpLinks';
 import ConnectedTravelRegion from '../views/TravelRegion';
 import ConnectedCountries from '../views/Countries';
 import ConnectedHotelEstimate from '../views/HotelEstimate';
+import ConnectedHelpers from '../views/HelpLinks';
 
 
 import {
@@ -39,8 +39,6 @@ import {
 const routes = {
   '/dashboard': [ConnectedDashboard, TRAVEL_MANAGERS],
   '/home': [ConnectedHome] ,
-  '/requests/modifications/': [ConnectedApprovals('modifications'), TRAVEL_MANAGERS],
-  '/requests/modifications/:requestId': [ConnectedVerificationDetails('modifications'), TRAVEL_MANAGERS],
   '/requests/my-approvals/': [ConnectedApprovals(), [SUPER_ADMINISTRATOR, MANAGER]],
   '/requests/my-approvals/:requestId': [ConnectedApproveRequests(), [SUPER_ADMINISTRATOR, MANAGER]],
   '/requests/budgets/:requestId': [ConnectedApproveRequests('budget'),[SUPER_ADMINISTRATOR, BUDGET_CHECKER, FINANCE_TEAM_MEMBER]],

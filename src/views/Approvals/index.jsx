@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
-import querystring from 'querystring';
 import ApprovalsPanelHeader from '../../components/ApprovalsPanelHeader';
 import {fetchUserApprovals} from '../../redux/actionCreator/approvalActions';
 import {closeModal, openModal} from '../../redux/actionCreator/modalActions';
@@ -14,7 +13,6 @@ export const Approvals = ( type = 'manager') => {
     state = {
       clickPage: true,
       activeStatus: Utils.getActiveStatus(this.props.location.search),
-      modificationType: querystring.parse(this.props.location.search).type,
       searchQuery: this.props.location.search,
       requestId: ''
     };
@@ -81,9 +79,9 @@ export const Approvals = ( type = 'manager') => {
     };
 
     renderApprovalsPanelHeader(loading) {
-      const {activeStatus, searchQuery, modificationType} = this.state;
+      const {activeStatus, searchQuery} = this.state;
       const {approvals} = this.props;
-      const {openApprovalsCount, pastApprovalsCount, cancelledTrips, modifiedTrips } = approvals;
+      const {openApprovalsCount, pastApprovalsCount } = approvals;
 
       return (
         <div className="rp-requests__header">
@@ -91,13 +89,10 @@ export const Approvals = ( type = 'manager') => {
             url={searchQuery}
             openApprovalsCount={openApprovalsCount}
             pastApprovalsCount={pastApprovalsCount}
-            cancelledTrips={cancelledTrips}
-            modifiedTrips={modifiedTrips}
             fetchApprovals={this.fetchFilteredApprovals}
             getApprovalsWithLimit={this.getApprovalsWithLimit}
             activeStatus={activeStatus}
             type={type}
-            modificationType={modificationType || 'all'}
             approvalsLength={approvals.approvals.length}
             loading={loading}
           />

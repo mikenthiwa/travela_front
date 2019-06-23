@@ -20,7 +20,7 @@ export function* submitModificationRequestSaga(action){
     const response = yield call(TripModificationsAPI.submitModificationRequest,requestId, type, reason );
     yield put(submitModificationRequestSuccess(response.data));
     toast.success(response.data.message);
-    yield response.data.modification.type === 'Cancel Trip' && history.goBack();
+    yield history.goBack();
   }catch(error){
     const errorMessage = apiErrorHandler(error);
     yield put(submitModificationRequestFailure(errorMessage));
@@ -55,7 +55,6 @@ export function* updateModificationRequest(action){
 export function* watchSubmitModificationRequest(){
   yield takeLatest(SUBMIT_MODIFICATION_REQUEST, submitModificationRequestSaga);
 }
-
 
 export function* watchFetchModificationForRequest() {
   yield takeLatest(FETCH_MODIFICATION_REQUEST, fetchModificationForRequestSaga);

@@ -16,7 +16,6 @@ import Preloader from '../../components/Preloader/Preloader';
 import NotFound from '../ErrorPages/NotFound';
 import './VerificationDetails.scss';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
-import {updateModification} from '../../redux/actionCreator/tripModificationActions';
 import {fetchTravelCostsByLocation} from '../../redux/actionCreator/travelCostsActions';
 
 
@@ -280,8 +279,7 @@ const VerificationDetails = (type = 'verifications') => {
       const {
         request, isLoading, submissionInfo,
         match: {params: {requestId}}, location: {pathname},
-        history, shouldOpen, openModal, closeModal,
-        updateModification, tripModification, travelCosts
+        history, shouldOpen, openModal, closeModal, travelCosts
       } = this.props;
       const headerTags = ['Manager\'s Approval', 'Budget Check', 'Travel Verification'];
       return (
@@ -296,9 +294,6 @@ const VerificationDetails = (type = 'verifications') => {
                   history={history}
                   renderRightPaneQuestion={this.renderRightPaneQuestion} isLoading={isLoading}
                   type={headerTags}
-                  tripModification={tripModification}
-                  updateModification={updateModification}
-                  showModifications={type === 'modifications'}
                   headerTags={headerTags} pathname={pathname}
                   submissionInfo={submissionInfo}
                   shouldOpen={shouldOpen}
@@ -323,7 +318,6 @@ const VerificationDetails = (type = 'verifications') => {
     errors: {},
     isConfirmDialogLoading: false,
     isUpdatedStatus: false,
-    tripModification: {},
     travelCosts: {
       isLoading: false,
       stipends: [],
@@ -347,8 +341,6 @@ const VerificationDetails = (type = 'verifications') => {
     closeModal: PropTypes.func.isRequired,
     isConfirmDialogLoading: PropTypes.bool,
     isUpdatedStatus: PropTypes.bool,
-    updateModification: PropTypes.func.isRequired,
-    tripModification: PropTypes.object, 
     travelCosts: PropTypes.object,
     fetchTravelCostsByLocation: PropTypes.func.isRequired
   };
@@ -363,7 +355,6 @@ const mapStateToProps = (state) => {
     isLoading: state.requests.fetchingRequest,
     currentUser: state.user.currentUser,
     email: state.user.getUserData,
-    tripModification: state.tripModifications.updateRequest,
     attachments: state.attachments.submissions,
     submissionInfo: state.submissions,
     shouldOpen: state.modal.modal.shouldOpen,
@@ -377,7 +368,6 @@ const actionCreators = {
   fetchUserRequestDetails,
   fetchAttachments,
   updateRequestStatus,
-  updateModification,
   downloadAttachments,
   fetchSubmission,
   openModal,
