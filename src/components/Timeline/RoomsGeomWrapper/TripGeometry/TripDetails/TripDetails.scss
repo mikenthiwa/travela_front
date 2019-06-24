@@ -7,6 +7,7 @@
     box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15);
     z-index: 100;
     transition: all .5s ease-out;
+    bottom: 0px;
     cursor: auto;
     &__header, &__body {
       padding: 0 15px;
@@ -76,15 +77,15 @@
       cursor: pointer;
     }
     &.details-visible {
-      transform: translateY(-10%) scaleY(1);
+      transform: translateY(-100%) scaleY(1);
       &.translateX {
-        transform: translateY(-10%) scaleY(1) translateX(-90%);
+        transform: translateY(-100%) scaleY(1) translateX(-90%);
       }
     }
     &.details-hidden {
-      transform: translateY(-10%) scaleY(0);
+      transform: translateY(0%) scaleY(0);
       &.translateX {
-        transform: translateY(-10%) scaleY(0) translateX(-90%);
+        transform: translateY(0%) scaleY(0) translateX(-90%);
       }
     }
   }
@@ -96,7 +97,7 @@
   }
   &:last-child, &:nth-last-child(2) {
     .trip-booking-details {
-      transform-origin: bottom;
+      transform-origin: top;
       &.details-visible {
         transform: translateY(-10%) scaleY(1);
         &.translateX {
@@ -104,9 +105,9 @@
         }
       }
       &.details-hidden {
-        transform: translateY(-110%) scaleY(0);
+        transform: translateY(90%) scaleY(0);
         &.translateX {
-          transform: translateY(-110%) scaleY(0) translateX(-90%);
+          transform: translateY(90%) scaleY(0) translateX(-90%);
         }
       }
     }
@@ -115,15 +116,15 @@
     .trip-booking-details {
       transform-origin: bottom;
       &.details-visible {
-        transform: translateY(-10%) scaleY(1);
+        transform: translateY(100%) scaleY(1);
         &.translateX {
-          transform: translateY(-10%) scaleY(1) translateX(-90%);
+          transform: translateY(100%) scaleY(1) translateX(-90%);
         }
       }
       &.details-hidden {
-        transform: translateY(-110%) scaleY(0);
+        transform: translateY(0%) scaleY(0);
         &.translateX {
-          transform: translateY(-110%) scaleY(0) translateX(-90%);
+          transform: translateY(0%) scaleY(0) translateX(-90%);
         }
       }
     }

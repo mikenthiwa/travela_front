@@ -1,5 +1,4 @@
 .room-geometry-wrapper {
-  display: flex;
   flex-flow: column;
 
   .room-status-bar {
@@ -11,7 +10,7 @@
   }
 
   &:not(:first-child) {
-    border-top: 1px solid transparent;
+    border-top: 1px solid #E4E4E4;
   }
 
   .bed-geometry-wrapper {
