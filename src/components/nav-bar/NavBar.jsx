@@ -222,9 +222,6 @@ export class NavBar extends PureComponent {
     const { location } = this.props;
     return ( LocationDropdownRoutes.find(route => route.test(location.pathname))) &&(
       <div className="center-dropdown__container">
-        <div className="location_circle_container">
-          <img src={centerIcon} alt="location-icon" />
-        </div>
         <SelectDropDown
           onClickItem={this.getCenter}
           dropDownItems={centers}
