@@ -55,12 +55,11 @@ class NewUserRoleForm extends PureComponent {
       items.length < 1 ?
         dataValue :
         dataValue = { ...dataValue, center: items };
-
     if (this.validate()) {
       myTitle === 'Add User' ?
         handleUpdateRole(dataValue) :
-        myTitle === 'Edit Budget Checker User' ?
-          updateBudgetChecker({email: dataValue.email, departments: items}):
+        myTitle === 'Edit Budget Checker' ?
+          updateBudgetChecker({email: dataValue.email, departments: items}) :
           updateUserCenter(dataValue);
     }
   };
