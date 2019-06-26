@@ -29,21 +29,22 @@ describe('Accommodation Reducer', () => {
       editAccommodationData: {},
       editingAccommodation: false,
       guestHouses: [],
-      guestHouseData: {'guestHouse': {
-        'houseName': 'Kololo heights',
-        'location': 'Kampala',
-        'bathRooms': '4',
-        'imageUrl': 'https://www.lol.com',
-        'genderPolicy': 'unisex',
-        'rooms': [
-          {
-            'roomName': 'Rwenzori',
-            'roomType': 'non-ensuite',
-            'bedCount': '1',
-            'id': 'dtnJtaRE7Y'
-          }
-        ]
-      }
+      guestHouseData: {
+        guestHouse: {
+          houseName: 'Kololo heights',
+          location: 'Kampala',
+          bathRooms: '4',
+          imageUrl: 'https://www.lol.com',
+          genderPolicy: 'unisex',
+          rooms: [
+            {
+              roomName: 'Rwenzori',
+              roomType: 'non-ensuite',
+              bedCount: '1',
+              id: 'dtnJtaRE7Y'
+            }
+          ]
+        }
       },
       guestHouse: {
         rooms: []
@@ -51,14 +52,14 @@ describe('Accommodation Reducer', () => {
       disabledGuestHouses: [],
       disabling: false,
       restoring: false,
-      isLoading: false,
+      isLoading: false
     };
 
     const error = 'Error fetching accommodation centres, network error';
     it('returns the correct initial state', () => {
       expect(accommodation(undefined, {})).toEqual({
-        ...{...initialState, isSaving: false},
-        'guestHouseData': {}
+        ...{ ...initialState, isSaving: false },
+        guestHouseData: {}
       });
     });
 
@@ -69,7 +70,7 @@ describe('Accommodation Reducer', () => {
       };
       expect(accommodation(initialState, action)).toEqual({
         ...initialState,
-        isLoading: true,
+        isLoading: true
       });
     });
 
@@ -103,21 +104,22 @@ describe('Accommodation Reducer', () => {
     it('should handle EDIT_ACCOMMODATION_DATA', () => {
       const action = {
         type: EDIT_ACCOMMODATION_DATA,
-        guestHouseData: { guestHouse: {
-          'houseName': 'Kololo heights',
-          'location': 'Kampala',
-          'bathRooms': '4',
-          'imageUrl': 'https://www.lol.com',
-          'genderPolicy': 'unisex',
-          'rooms': [
-            {
-              'roomName': 'Rwenzori',
-              'roomType': 'non-ensuite',
-              'bedCount': '1',
-              'id': 'dtnJtaRE7Y'
-            }
-          ]
-        }
+        guestHouseData: {
+          guestHouse: {
+            houseName: 'Kololo heights',
+            location: 'Kampala',
+            bathRooms: '4',
+            imageUrl: 'https://www.lol.com',
+            genderPolicy: 'unisex',
+            rooms: [
+              {
+                roomName: 'Rwenzori',
+                roomType: 'non-ensuite',
+                bedCount: '1',
+                id: 'dtnJtaRE7Y'
+              }
+            ]
+          }
         }
       };
 
@@ -135,21 +137,22 @@ describe('Accommodation Reducer', () => {
         guestHouse: {
           rooms: []
         },
-        guestHouseData: {'guestHouse': {
-          'houseName': 'Kololo heights',
-          'location': 'Kampala',
-          'bathRooms': '4',
-          'imageUrl': 'https://www.lol.com',
-          'genderPolicy': 'unisex',
-          'rooms': [
-            {
-              'roomName': 'Rwenzori',
-              'roomType': 'non-ensuite',
-              'bedCount': '1',
-              'id': 'dtnJtaRE7Y'
-            }
-          ]
-        }
+        guestHouseData: {
+          guestHouse: {
+            houseName: 'Kololo heights',
+            location: 'Kampala',
+            bathRooms: '4',
+            imageUrl: 'https://www.lol.com',
+            genderPolicy: 'unisex',
+            rooms: [
+              {
+                roomName: 'Rwenzori',
+                roomType: 'non-ensuite',
+                bedCount: '1',
+                id: 'dtnJtaRE7Y'
+              }
+            ]
+          }
         },
         isLoading: false
       };
@@ -161,23 +164,24 @@ describe('Accommodation Reducer', () => {
       const action = {
         type: EDIT_ACCOMMODATION_DATA_SUCCESS,
         guestHouseData: {
-          'houseName': 'Kololo heights',
-          'location': 'Kampala',
-          'bathRooms': '4',
-          'imageUrl': 'https://www.lol.com',
-          'genderPolicy': 'unisex',
-          'rooms': [
+          houseName: 'Kololo heights',
+          location: 'Kampala',
+          bathRooms: '4',
+          imageUrl: 'https://www.lol.com',
+          genderPolicy: 'unisex',
+          rooms: [
             {
-              'roomName': 'Rwenzori',
-              'roomType': 'non-ensuite',
-              'bedCount': '1',
-              'id': 'dtnJtaRE7Y'
+              roomName: 'Rwenzori',
+              roomType: 'non-ensuite',
+              bedCount: '1',
+              id: 'dtnJtaRE7Y'
             }
           ]
-        },
+        }
       };
 
       const newState = accommodation(initialState, action);
+
       const expectedState = {
         postAccommodationData: [],
         disabledGuestHouses: [],
@@ -188,25 +192,9 @@ describe('Accommodation Reducer', () => {
         editAccommodationData: {},
         editingAccommodation: false,
         guestHouses: [],
-        guestHouse: {
-          rooms: []
-        },
-        guestHouseData: {
-          'houseName': 'Kololo heights',
-          'location': 'Kampala',
-          'bathRooms': '4',
-          'imageUrl': 'https://www.lol.com',
-          'genderPolicy': 'unisex',
-          'rooms': [
-            {
-              'roomName': 'Rwenzori',
-              'roomType': 'non-ensuite',
-              'bedCount': '1',
-              'id': 'dtnJtaRE7Y'
-            }
-          ]
-        },
-        isLoading: false,
+        guestHouse: { ...action.guestHouseData },
+        guestHouseData: { guestHouse: { ...action.guestHouseData } },
+        isLoading: false
       };
       expect(newState).toEqual(expectedState);
     });
@@ -230,7 +218,7 @@ describe('Accommodation Reducer', () => {
       const action = { type: 'INIT_FETCH_TIMELINE_DATA' };
       const expectedState = {
         ...initialState,
-        guestHouse: { rooms: []},
+        guestHouse: { rooms: [] },
         isLoading: true
       };
       expect(accommodation(initialState, action)).toEqual(expectedState);
@@ -271,7 +259,7 @@ describe('Accommodation Reducer', () => {
 
     it('should handle DISABLE_ACCOMMODATION', () => {
       const action = {
-        type: DISABLE_ACCOMMODATION,
+        type: DISABLE_ACCOMMODATION
       };
 
       const newState = accommodation(initialState, action);
@@ -286,23 +274,36 @@ describe('Accommodation Reducer', () => {
         editingAccommodation: false,
         guestHouses: [],
         guestHouse: {
-          rooms: []
-        },
-        guestHouseData: {'guestHouse': {
-          'houseName': 'Kololo heights',
-          'location': 'Kampala',
-          'bathRooms': '4',
-          'imageUrl': 'https://www.lol.com',
-          'genderPolicy': 'unisex',
-          'rooms': [
+          houseName: 'Kololo heights',
+          location: 'Kampala',
+          bathRooms: '4',
+          imageUrl: 'https://www.lol.com',
+          genderPolicy: 'unisex',
+          rooms: [
             {
-              'roomName': 'Rwenzori',
-              'roomType': 'non-ensuite',
-              'bedCount': '1',
-              'id': 'dtnJtaRE7Y'
+              roomName: 'Rwenzori',
+              roomType: 'non-ensuite',
+              bedCount: '1',
+              id: 'dtnJtaRE7Y'
             }
           ]
-        }
+        },
+        guestHouseData: {
+          guestHouse: {
+            houseName: 'Kololo heights',
+            location: 'Kampala',
+            bathRooms: '4',
+            imageUrl: 'https://www.lol.com',
+            genderPolicy: 'unisex',
+            rooms: [
+              {
+                roomName: 'Rwenzori',
+                roomType: 'non-ensuite',
+                bedCount: '1',
+                id: 'dtnJtaRE7Y'
+              }
+            ]
+          }
         },
         isLoading: false
       };
@@ -327,14 +328,14 @@ describe('Accommodation Reducer', () => {
               roomName: 'Nyati',
               roomType: 'Ensuite',
               bedCount: 2,
-              faulty: false,
+              faulty: false
             },
             {
               id: 'trytrimo',
               roomName: 'Maputi',
               roomType: 'Ensuite',
               bedCount: 2,
-              faulty: false,
+              faulty: false
             }
           ]
         }
@@ -350,7 +351,7 @@ describe('Accommodation Reducer', () => {
         ...state,
         guestHouses: guestHouses.filter(list => list.id !== 'wrtiuy56_u'),
         disabledGuestHouses: [action.disabledGuestHouseData],
-        disabling: false,
+        disabling: false
       };
 
       expect(newState).toEqual(expectedState);
@@ -373,14 +374,14 @@ describe('Accommodation Reducer', () => {
               roomName: 'Nyati',
               roomType: 'Ensuite',
               bedCount: 2,
-              faulty: false,
+              faulty: false
             },
             {
               id: 'trytrimo',
               roomName: 'Maputi',
               roomType: 'Ensuite',
               bedCount: 2,
-              faulty: false,
+              faulty: false
             }
           ]
         }
@@ -393,12 +394,15 @@ describe('Accommodation Reducer', () => {
       };
 
       const newState = accommodation(state, action);
-      let update = [{ ...action.disabledGuestHouseData }, ...state.disabledGuestHouses];
+      let update = [
+        { ...action.disabledGuestHouseData },
+        ...state.disabledGuestHouses
+      ];
       const expectedState = {
         ...state,
         guestHouses: guestHouses.filter(list => list.id !== 'wrtiuy56_u'),
         disabledGuestHouses: [...update],
-        disabling: false,
+        disabling: false
       };
 
       expect(newState).toEqual(expectedState);
@@ -426,7 +430,7 @@ describe('Accommodation Reducer', () => {
       };
       expect(accommodation(initialState, action)).toEqual({
         ...initialState,
-        isLoading: true,
+        isLoading: true
       });
     });
 
@@ -452,20 +456,20 @@ describe('Accommodation Reducer', () => {
       expect(accommodation(initialState, action)).toEqual({
         ...initialState,
         isLoading: false,
-        error,
+        error
       });
     });
 
     it('should handle RESTORE_DISABLED_ACCOMMODATION', () => {
       const action = {
-        type: RESTORE_DISABLED_ACCOMMODATION,
+        type: RESTORE_DISABLED_ACCOMMODATION
       };
 
       const newState = accommodation(initialState, action);
       const expectedState = {
         ...initialState,
         restoring: true,
-        isLoading: true,
+        isLoading: true
       };
 
       expect(newState).toEqual(expectedState);
@@ -488,14 +492,14 @@ describe('Accommodation Reducer', () => {
               roomName: 'ZAPTIU',
               roomType: 'Ensuite',
               bedCount: 2,
-              faulty: false,
+              faulty: false
             },
             {
               id: 'NBiojnn98u',
               roomName: 'AFEIK',
               roomType: 'Ensuite',
               bedCount: 2,
-              faulty: false,
+              faulty: false
             }
           ]
         }
@@ -509,9 +513,11 @@ describe('Accommodation Reducer', () => {
       const newState = accommodation(state, action);
       const expectedState = {
         ...state,
-        disabledGuestHouses: disabledGuestHouses.filter(list => list.id !== 'juhiuhoji0'),
+        disabledGuestHouses: disabledGuestHouses.filter(
+          list => list.id !== 'juhiuhoji0'
+        ),
         guestHouses: [action.restoredGuestHouseData],
-        disabling: false,
+        disabling: false
       };
 
       expect(newState).toEqual(expectedState);
@@ -540,7 +546,7 @@ describe('Accommodation Reducer', () => {
       };
       expect(accommodation(initialState, action)).toEqual({
         ...initialState,
-        isSaving: false,
+        isSaving: false
       });
     });
 
@@ -552,7 +558,7 @@ describe('Accommodation Reducer', () => {
       };
       expect(accommodation(initialState, action)).toEqual({
         ...initialState,
-        isSaving: true,
+        isSaving: true
       });
     });
   });

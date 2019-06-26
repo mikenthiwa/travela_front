@@ -78,7 +78,7 @@ const accommodation = (state = initialState, action) => {
       guestHouseData: action.guestHouseData, guestHouseId: action.guestHouseId };
   case EDIT_ACCOMMODATION_DATA_SUCCESS:
     return { ...state, editingAccommodation: false,
-      guestHouseData: action.guestHouseData };
+      guestHouse: Object.assign(state.guestHouse, {...action.guestHouseData}) };
   case EDIT_ACCOMMODATION_DATA_FAILURE:
     return { ...state, editingAccommodation: false, error: action.error };
   case DISABLE_ACCOMMODATION:

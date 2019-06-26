@@ -25,4 +25,3 @@ export const restoreGuestHouseSuccessState = (state, action) => {
   return { ...state, isLoading: false, restoring: false, guestHouses: [...guestHousesUpdate],
     disabledGuestHouses: [...disabledGuestHousesUpdate] };
 };
-
