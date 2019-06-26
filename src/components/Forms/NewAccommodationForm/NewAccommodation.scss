@@ -2,14 +2,15 @@ form.new-guesthouse {
 
   fieldset {
 
-    .add-rooms{
+    .add-rooms {
       color: #4f4f4f;
       font-size: 18px;
       font-weight: 500;
       line-height: 23px;
       font-family: "DIN Pro";
     }
-    .aline-box{
+
+    .aline-box {
       display: flex;
       margin-bottom: 30px;
 
@@ -18,7 +19,8 @@ form.new-guesthouse {
         flex-direction: column;
       }
 
-      .imgPre{
+      .imgPre {
+        cursor: pointer;
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -27,8 +29,9 @@ form.new-guesthouse {
         width: 302px;
       }
 
-      .image-rectangle{
+      .image-rectangle {
         box-sizing: border-box;
+        cursor: pointer;
         height: 182px;
         width: 302px;
         border: 2px dotted #d4d4d4;
@@ -54,7 +57,7 @@ form.new-guesthouse {
           line-height: 20px;
         }
 
-        .upload-btn-wrapper{
+        .upload-btn-wrapper {
           position: relative;
           overflow: hidden;
           display: inline-block;
@@ -87,15 +90,15 @@ form.new-guesthouse {
       }
     }
 
-    .input-group{
+    .input-group {
 
       &.reduce-margin {
         margin-bottom: -17px;
 
-        .guest-house-input{
+        .guest-house-input {
           width: 50%;
 
-          .form-input{
+          .form-input {
             display: flex;
             flex-flow: column;
             margin: 0 2%;
@@ -105,11 +108,11 @@ form.new-guesthouse {
       }
     }
 
-    .add-cancel{
+    .add-cancel {
       display: flex;
       margin-bottom: -12px;
 
-      .room-rectangle{
+      .room-rectangle {
         height: auto;
         border: 1px solid #e4e4e4;
         border-radius: 2px;
@@ -118,7 +121,7 @@ form.new-guesthouse {
         color: gray;
         width: 100%;
 
-        .style-input-box{
+        .style-input-box {
           display: flex;
           padding: 10px;
 
@@ -127,14 +130,14 @@ form.new-guesthouse {
             position: relative;
             width: 33.3%;
 
-            &.remove{
+            &.remove {
               -webkit-appearance: none;
             }
           }
         }
       }
 
-      .cancel-button{
+      .cancel-button {
         margin: 3.5em 0;
         position: absolute;
         cursor: pointer;
@@ -142,21 +145,22 @@ form.new-guesthouse {
       }
     }
 
-    .add-more-room-rectangle{
+    .add-more-room-rectangle {
       height: 50px;
       border: 1px dashed #d4d4d4;
       border-radius: 2px;
       background-color: #ffffff;
       margin-bottom: 30px;
 
-      .set-width{
+      .set-width {
         display: flex;
         cursor: pointer;
-        .add-sug-room{
+
+        .add-sug-room {
           margin: 1em;
         }
 
-        .add-another-room{
+        .add-another-room {
           width: 85px;
           color: gray;
           font-family: "DIN Pro";

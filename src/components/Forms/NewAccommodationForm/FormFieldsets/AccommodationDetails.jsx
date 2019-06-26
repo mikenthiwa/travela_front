@@ -118,7 +118,9 @@ class AccommodationDetails extends Component {
     const { modalType } = this.props;
     return (
       <div className="aline-box">
-        {displayImage()}
+        <label htmlFor="guesthouse-image">
+          {displayImage()}
+        </label>
         <div className="image-space">
           {modalType === 'edit accomodation' ? (
             <p className="upload">Change guest house image</p>
@@ -129,7 +131,7 @@ class AccommodationDetails extends Component {
             <button type="button" id="myBtn" className="action-btn btn-new-request">
                 Upload
             </button>
-            <input type="file" name="myfile" onChange={handleImageChange} />
+            <input type="file" name="myfile" onChange={handleImageChange} id="guesthouse-image" />
             <div className="image-type">
                 Only *jpg or *png files are allowed
             </div>
