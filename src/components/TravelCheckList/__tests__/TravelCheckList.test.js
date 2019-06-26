@@ -61,6 +61,7 @@ describe('TravelChecklist Component', () => {
     shouldOpen: false,
     userReadinessDocument: {},
     history: { push: jest.fn()},
+    downloadAttachments: jest.fn(),
     travelChecklists: {
       checklistItems: travelChecklistMockData,
       isLoading: false
@@ -88,18 +89,12 @@ describe('TravelChecklist Component', () => {
   it ('should render the component', () => {
     const wrapper = setup(props);
     expect(wrapper).toMatchSnapshot();
-    const travelChecklistRow = wrapper.find('.travelCheckList__row');
-    const progressBarText2 = wrapper.find('.progressBar__text-head');
-    const progressBarText1 = wrapper.find('.progressBar__text-foot');
-    const travelChecklistCardHead = wrapper.find('.travelCheckList--card__head');
-    const checklistItem = wrapper.find('.travelCheck-list');
-    const progressBarMessage = wrapper.find('.progressBar__message');
-    expect(travelChecklistRow.length).toBe(1);
-    expect(progressBarText2.text()).toBe('You are');
-    expect(progressBarText1.text()).toBe('Travel Ready');
-    expect(progressBarMessage.text()).toBe('Complete the checklist to continue');
-    expect(travelChecklistCardHead.length).toBe(2);
-    expect(checklistItem.length).toBe(1);
+    const travelChecklist = wrapper.find('.travelCheck-list');
+    const travelChecklistCardHead = wrapper.find('.travelCheck-list--card__head');
+    const checklistItemBody = wrapper.find('.travelCheck-list--card__body');
+    expect(travelChecklist.length).toBe(1);
+    expect(travelChecklistCardHead.length).toBe(1);
+    expect(checklistItemBody.length).toBe(1);
   });
 
   it('should call showTravelChecklist on componentWillRecieveProps', () => {
@@ -111,18 +106,6 @@ describe('TravelChecklist Component', () => {
     };
     expect(wrapper.instance().componentWillReceiveProps(props)).toBeCalled;
     expect(wrapper.instance().props.showTravelChecklist(props.request)).toBeCalled;
-  });
-
-  it('should uploadFile when handleFileUpload is called', ()=>{
-    const wrapper = setup(props);
-    wrapper.instance().handleFileUpload( {}, 1, 1, 1);
-    expect(wrapper.instance().props.uploadFile).toBeCalled;
-  });
-
-  it('should open a modal when handleUserDocumentUpload is triggered', () => {
-    const wrapper = setup(props);
-    wrapper.instance().handleUserDocumentUpload('modal-1');
-    expect(wrapper.instance().props.openModal(true, 'modal-1')).toBeCalled;
   });
 
   it('should return to requests page', () =>{
@@ -138,7 +121,7 @@ describe('TravelChecklist Component', () => {
         uploadSuccess: 'succesfully'
       },
       showTravelChecklist: jest.fn(),
-      request: {}
+      request: {name:'john doe'}
     });
     expect(wrapper.instance().showTravelChecklist).toBeCalled;
   });

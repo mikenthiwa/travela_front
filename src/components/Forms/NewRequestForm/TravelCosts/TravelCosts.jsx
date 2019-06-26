@@ -204,7 +204,7 @@ const TravelCosts = ({stipends, flightCosts, hotelEstimates, isLoading, trips}) 
   const tabContent = [...tripsData, {...totalTab}];
   return (
     <Fragment>
-      <TabView tabs={tabContent} current={0}>
+      <TabView tabs={tabContent} currentTab={0}>
         {
           tabContent.map(trip => renderTabContent(isLoading, trip))
         }

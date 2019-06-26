@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SubmitArea /> should render <SubmitAra /> 1`] = `
+<div
+  className="checklist-submit-area submit-area"
+>
+  <button
+    className="bg-btn bg-btn--active"
+    disabled={true}
+    id="back-submit"
+    onClick={[Function]}
+    type="button"
+  >
+    Back
+  </button>
+  <button
+    className="bg-btn bg-btn--active"
+    disabled={false}
+    id="back-submit"
+    onClick={[Function]}
+    type="button"
+  >
+    Next
+  </button>
+</div>
+`;

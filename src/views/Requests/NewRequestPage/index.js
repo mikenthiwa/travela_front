@@ -22,6 +22,7 @@ import {
   fetchModificationRequest,
   submitModificationRequest
 } from '../../../redux/actionCreator/tripModificationActions';
+import { downloadAttachments } from '../../../redux/actionCreator/attachmentActions';
 
 export class NewRequestPage extends Component {
   state = {
@@ -53,7 +54,8 @@ export class NewRequestPage extends Component {
     const { match:{ params: { requestId } },
       requestData, fetchingRequest, currentUser, user, shouldOpen, modalType,
       userReadinessDocument, fetchSubmission, postSubmission, travelChecklists,
-      submissionInfo, fileUploads, uploadFile, openModal, closeModal, history, managers
+      submissionInfo, fileUploads, uploadFile, openModal, closeModal, history, managers,
+      downloadAttachments
     } = this.props;
 
     const managerName = RequestUtils.getManagerNameOrId(managers, requestData.approver);
@@ -71,6 +73,7 @@ export class NewRequestPage extends Component {
         fileUploads={fileUploads} fetchSubmission={fetchSubmission}
         postSubmission={postSubmission} submissionInfo={submissionInfo}
         uploadFile={uploadFile} userReadinessDocument={userReadinessDocument}
+        downloadAttachments={downloadAttachments}
       />
     );
   };
@@ -269,7 +272,8 @@ NewRequestPage.propTypes = {
   errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   fetchRoleUsers: PropTypes.func.isRequired,
   managers: PropTypes.array.isRequired,
-  submitModificationRequest: PropTypes.func.isRequired
+  submitModificationRequest: PropTypes.func.isRequired,
+  downloadAttachments: PropTypes.func.isRequired
 };
 
 NewRequestPage.defaultProps = {
@@ -312,7 +316,8 @@ const actionCreators = {
   openModal,
   closeModal,
   fetchUserReadinessDocuments,
-  fetchRoleUsers
+  fetchRoleUsers,
+  downloadAttachments
 };
 
 export default connect(mapStateToProps, actionCreators)(NewRequestPage);

@@ -14,13 +14,15 @@ import {
 export function* uploadFileAsync(action) {
   try {
     const {
-      file, submissionData: { tripId, checklistItemId }, checkId, requestId
+      file, submissionData: { tripId, checklistItemId }, checkId, requestId, ocrScan
     } = action;
     const response = yield call(FileUploadAPI.uploadFile, file);
     const { secure_url } = response.data;
     const fileData = { url: secure_url, fileName: file.name };
     API.setToken();
-    yield(extractText(file, response));
+    if(ocrScan) {
+      yield(extractText(file, response));
+    }
     yield put(postSubmission(
       { formData: { tripId, file: fileData }, checklistItemId },
       checkId, requestId

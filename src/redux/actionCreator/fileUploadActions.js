@@ -4,12 +4,13 @@ import {
   UPLOAD_FILE_SUCCESS
 } from '../constants/actionTypes';
 
-export const uploadFile = (file, { checklistItemId, tripId }, checkId, requestId)=> ({
+export const uploadFile = (file, { checklistItemId, tripId }, checkId, requestId, ocrScan)=> ({
   type: UPLOAD_FILE,
   file,
   submissionData: { checklistItemId, tripId },
   checkId,
-  requestId
+  requestId,
+  ocrScan
 });
 
 export const uploadFileSuccess = (

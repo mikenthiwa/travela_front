@@ -1,0 +1,7 @@
+.trip-tab {
+  transition: 0.5s box-shadow;
+
+  &.active {
+    box-shadow: 0 8px 12px 0 rgba(31, 35, 49, 0.616);
+  }
+}

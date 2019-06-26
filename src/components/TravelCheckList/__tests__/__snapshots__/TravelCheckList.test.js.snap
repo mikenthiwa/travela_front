@@ -1,79 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TravelChecklist Component should render the component 1`] = `
-<div
-  className="travelCheck-list"
->
+<div>
   <div
-    className="travelCheckList__row mdl-grid"
+    className="travelCheck-list"
   >
     <div
-      className="travelCheckList__col-7 mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--12-col-phone"
+      className="travelCheck-list--card"
     >
       <div
-        className="travelCheckList--card"
+        className="travelCheck-list--card__head"
       >
         <div
-          className="travelCheckList--card__head"
+          className="details"
         >
-          These are the checklist items required to be submitted for this trip
-        </div>
-      </div>
-    </div>
-    <div
-      className="travelCheckList__col-5 mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--12-col-phone "
-    >
-      <div
-        className="travelCheckList--card travelCheckList--card__sticky"
-      >
-        <div
-          className="travelCheckList--card__head"
-        >
-          Your Travel Readiness
+          <p>
+            Your Travel checklist
+          </p>
+          Hi John, kindly fill in your details to complete your travel checklist
         </div>
         <div
-          className="progressBar"
+          className="circular-calculator"
         >
-          <div
-            className="progressBar__text"
-          >
-            <div
-              className="progressBar__text-head"
-            >
-              You are
-            </div>
-            <div
-              className="progressBar__text-foot"
-            >
-              Travel Ready
-            </div>
-          </div>
           <svg
-            height={169}
-            viewBox="0 0 169 169"
-            width={169}
+            height={50}
+            viewBox="0 0 50 50"
+            width={50}
           >
             <circle
               className="circle-background"
-              cx={84.5}
-              cy={84.5}
-              r={79.5}
-              strokeWidth="10px"
+              cx={25}
+              cy={25}
+              r={22.5}
+              strokeWidth="5px"
             />
             <circle
               className="circle-progress"
-              cx={84.5}
-              cy={84.5}
-              r={79.5}
+              cx={25}
+              cy={25}
+              r={22.5}
               stroke="#3359DB"
-              strokeWidth="10px"
+              strokeWidth="5px"
               style={
                 Object {
-                  "strokeDasharray": 499.5132319207771,
-                  "strokeDashoffset": 99.90264638415545,
+                  "strokeDasharray": 141.3716694115407,
+                  "strokeDashoffset": 28.27433388230814,
                 }
               }
-              transform="rotate(-90 84.5 84.5)"
+              transform="rotate(-90 25 25)"
             />
             <text
               className="circle-text"
@@ -86,31 +60,35 @@ exports[`TravelChecklist Component should render the component 1`] = `
             </text>
           </svg>
         </div>
-        <div
-          className="progressBar__message"
-        >
-          <p>
-            Complete the checklist to continue
-          </p>
-        </div>
       </div>
       <div
-        className="travelCheckList__row--button-area"
+        className="travelCheck-list--card__body"
       >
-        <div
-          className="travelSubmission--submit-area__button"
-        >
-          <button
-            className=""
-            id="save-button"
-            onClick={[Function]}
-            type="button"
-          >
-            Save
-          </button>
-        </div>
+        <undefined />
       </div>
     </div>
+  </div>
+  <div
+    className="checklist-submit-area submit-area"
+  >
+    <button
+      className="bg-btn bg-btn--active"
+      disabled={true}
+      id="back-submit"
+      onClick={[Function]}
+      type="button"
+    >
+      Back
+    </button>
+    <button
+      className="bg-btn bg-btn--active"
+      disabled={true}
+      id="back-submit"
+      onClick={[Function]}
+      type="button"
+    >
+      Next
+    </button>
   </div>
 </div>
 `;

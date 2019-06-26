@@ -7,6 +7,7 @@ const props = {
   closeModal: jest.fn(),
   currentUser: {id: 62, fullName: 'Hope Uwa', email: 'hope.uwa@andela.com', userId: '-LSZHlCYZHY6-9lHqmCY', passportName: 'Hope Uwa',},
   fetchSubmission: jest.fn(),
+  downloadAttachments: jest.fn(),
   fetchingRequest: false,
   fileUploads: {isUploading: '', uploadSuccess: '', cloudinaryUrl: '', error: ''},
   history: {createHref: jest.fn()},
@@ -100,7 +101,7 @@ const props = {
             id: 'B523ka3vN',
             tripId: 'GCpkv0WQpg',
             updatedAt: '2019-03-12T20:40:53.694Z',
-            value: {url: 'http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg', fileName: 'Passport.jpeg', documentId: 'zu6sKphUj'}}]
+            userUpload: {url: 'http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg', fileName: 'Passport.jpeg', documentId: 'zu6sKphUj'}}]
         }],
         tripId: 'GCpkv0WQpg'},
       {destinationName: 'Lagos, Nigeria',

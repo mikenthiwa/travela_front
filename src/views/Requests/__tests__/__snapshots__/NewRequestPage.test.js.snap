@@ -2,7 +2,9 @@
 
 exports[`<Request Page> renders appropriately 1`] = `
 Array [
-  <div>
+  <div
+    className="requests__page-header"
+>
     <h1
         className="page-header__request"
     >
@@ -21,7 +23,13 @@ Array [
             REQUEST #xDh20btGx
         </span>
     </h1>
+    <div
+        className="page-header__request__action-btns"
+    />
 </div>,
+  <div
+    className="trip-modification-reason-modal"
+/>,
   <div
     className="width-91"
 >
@@ -177,7 +185,7 @@ Array [
                 <div
                     className="foot-text"
                 >
-                    Completed on 29/05/19
+                    Completed on 19/06/19
                 </div>
             </div>
             <div
@@ -333,7 +341,7 @@ Array [
                 <div
                     className="foot-text"
                 >
-                    Completed on 29/05/19
+                    Completed on 19/06/19
                 </div>
             </div>
         </div>
@@ -452,7 +460,9 @@ Array [
 
 exports[`<Request Page> renders appropriately with null fetching request false and request approved 1`] = `
 Array [
-  <div>
+  <div
+    className="requests__page-header"
+>
     <h1
         className="page-header__request"
     >
@@ -471,7 +481,13 @@ Array [
             REQUEST #xDh20btGx
         </span>
     </h1>
+    <div
+        className="page-header__request__action-btns"
+    />
 </div>,
+  <div
+    className="trip-modification-reason-modal"
+/>,
   <div
     className="width-91"
 >
@@ -976,7 +992,9 @@ Array [
 
 exports[`<Request Page> renders appropriately with null fetching request false and request approved for multicity 1`] = `
 Array [
-  <div>
+  <div
+    className="requests__page-header"
+>
     <h1
         className="page-header__request"
     >
@@ -995,7 +1013,13 @@ Array [
             REQUEST #xDh20btGx
         </span>
     </h1>
+    <div
+        className="page-header__request__action-btns"
+    />
 </div>,
+  <div
+    className="trip-modification-reason-modal"
+/>,
   <div
     className="width-91"
 >
@@ -1068,7 +1092,7 @@ Array [
                 <div
                     className="foot-text"
                 >
-                    Approved by Samuel Kubai
+                    Approved by 1
                 </div>
                 <div
                     className="foot-text"
@@ -1500,7 +1524,9 @@ Array [
 
 exports[`<Request Page> renders appropriately with null fetching request true and request approved 1`] = `
 Array [
-  <div>
+  <div
+    className="requests__page-header"
+>
     <h1
         className="page-header__request"
     >
@@ -1519,7 +1545,13 @@ Array [
             REQUEST #xDh20btGx
         </span>
     </h1>
+    <div
+        className="page-header__request__action-btns"
+    />
 </div>,
+  <div
+    className="trip-modification-reason-modal"
+/>,
   <div
     className="preloader"
 >

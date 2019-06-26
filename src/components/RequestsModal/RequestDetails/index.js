@@ -255,7 +255,7 @@ export class RequestDetails extends Component {
   renderCheckListSubmission(hideButton) {
     const { requestData, travelChecklists, closeModal, openModal, showTravelChecklist, modalType,
       fileUploads, fetchSubmission, postSubmission, submissionInfo, uploadFile, shouldOpen,
-      userReadinessDocument, history } = this.props;
+      userReadinessDocument, history, downloadAttachments } = this.props;
     return (
       <Fragment>
         {
@@ -272,7 +272,9 @@ export class RequestDetails extends Component {
               shouldOpen={shouldOpen} hideSubmit={hideButton}
               showTravelChecklist={showTravelChecklist}
               fileUploads={fileUploads} history={history}
-              userReadinessDocument={userReadinessDocument} />
+              userReadinessDocument={userReadinessDocument}
+              downloadAttachments={downloadAttachments} 
+            />
           )}
       </Fragment>
 
@@ -345,7 +347,8 @@ RequestDetails.propTypes = {
   travelChecklists: PropTypes.object.isRequired,
   fileUploads: PropTypes.object.isRequired,
   uploadFile: PropTypes.func.isRequired,
-  shouldOpen: PropTypes.bool
+  shouldOpen: PropTypes.bool,
+  downloadAttachments: PropTypes.func.isRequired
 
 };
 

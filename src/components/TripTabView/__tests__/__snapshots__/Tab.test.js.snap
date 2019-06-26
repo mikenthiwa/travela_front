@@ -2,7 +2,9 @@
 
 exports[`<Tab /> should render <Tab /> 1`] = `
 <div
-  className="trip-header-box-selected"
+  className="trip-tab trip-header-box-selected
+        active
+      "
   onClick={[Function]}
   onKeyDown={[Function]}
   role="presentation"
@@ -11,11 +13,6 @@ exports[`<Tab /> should render <Tab /> 1`] = `
     className="trip-header-text-title-selected"
   >
     title
-    <img
-      alt="Hotel"
-      className="active-icon"
-      src="icon.svg"
-    />
   </p>
   <p
     className="overflow trip-header-text-content-selected"

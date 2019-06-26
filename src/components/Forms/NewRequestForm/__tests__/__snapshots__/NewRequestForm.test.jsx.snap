@@ -222,7 +222,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
           <div
             className="tab-title"
           >
-            Travel Stipends
+            Travel Costs
           </div>
           <div
             className="foot-text"
@@ -564,16 +564,8 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
                         onChange={[Function]}
                         size="100%"
                         type="text"
-                        value="Collins"
+                        value=""
                       />
-                      <div
-                        className="hide"
-                      >
-                        <ul
-                          className="select-menu select-menu--inactive"
-                          onScroll={[Function]}
-                        />
-                      </div>
                     </div>
                   </div>
                   <span

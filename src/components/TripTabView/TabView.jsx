@@ -7,8 +7,18 @@ class TabView extends Component {
     current: 0
   };
 
-  changeTab = (index) => {
+  componentWillReceiveProps = nextProps => {
+    const { current } = this.state;
+    const { currentTab: newCurrent } = nextProps;
+    if (current != newCurrent) {
+      this.setState({ current: newCurrent });
+    }
+  };
+
+  changeTab = index => {
+    const { handleTabChange, tabs } = this.props;
     this.setState({ current: index });
+    handleTabChange && handleTabChange(index);
   };
 
   render() {
@@ -17,18 +27,19 @@ class TabView extends Component {
     return (
       <Fragment>
         <div className="travel-cost-header-container">
-          {
-            tabs ? tabs.map((tab, index) => (
-              <Tab key={`Tab ${index + 1}`} {...tab} onClick={() => this.changeTab(index)} active={index === current} />
-            )) : ''
-          }
+          {tabs
+            ? tabs.map((tab, index) => (
+              <Tab
+                key={`Tab ${index + 1}`}
+                {...tab}
+                onClick={() => this.changeTab(index)}
+                active={index === current}
+              />
+            ))
+            : ''}
         </div>
         <div className="line" />
-        <div className="travel-cost-body-container">
-          {
-            children[current]
-          }
-        </div>
+        <div className="travel-cost-body-container">{children[current]}</div>
       </Fragment>
     );
   }

@@ -6,7 +6,9 @@ Array [
     className="travel-cost-header-container"
 >
     <div
-        className="trip-header-box-selected"
+        className="trip-tab trip-header-box-selected
+            active
+          "
         onClick={[Function]}
         onKeyDown={[Function]}
         role="presentation"
@@ -28,7 +30,9 @@ Array [
         </p>
     </div>
     <div
-        className="trip-header-box"
+        className="trip-tab trip-header-box
+            not-active
+          "
         onClick={[Function]}
         onKeyDown={[Function]}
         role="presentation"

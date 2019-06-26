@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { PropTypes } from 'prop-types';
-import { Link } from 'react-router-dom';
 import countryUtils from '../../../helper/countryUtils';
 import SubmissionItem from './SubmissionItem';
 import Preloader from '../../Preloader/Preloader';
-import '../travelSubmission.scss';
 
 class CheckListSubmissions extends Component {
   renderCheckList = (list, keyIndex) => {

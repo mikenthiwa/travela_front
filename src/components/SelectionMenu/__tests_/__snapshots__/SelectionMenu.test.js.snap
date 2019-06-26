@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SelectionMenu> should match snapshot 1`] = `
+<div
+  className="menu"
+>
+  <div
+    className="menu-item "
+    key="1"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="presentation"
+  >
+    <img
+      alt="file"
+      src="https://gist.img.png"
+    />
+    <p>
+      passport.png
+    </p>
+  </div>
+  <div
+    className="menu-item "
+    key="2"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="presentation"
+  >
+    <img
+      alt="file"
+      src="https://gist.img2.pntg"
+    />
+    <p>
+      visa.png
+    </p>
+  </div>
+  <div
+    className="menu-item "
+    key="3"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="presentation"
+  >
+    <img
+      alt="file"
+      src="https://gist.img3.png"
+    />
+    <p>
+      yellow.png
+    </p>
+  </div>
+  <div
+    className="submit-button"
+  >
+    <button
+      className="bg-btn"
+      disabled={true}
+      onClick={[Function]}
+      type="submit"
+    >
+      Submit
+    </button>
+  </div>
+</div>
+`;

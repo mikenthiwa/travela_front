@@ -93,7 +93,8 @@ const user = {
     occupation: 'Technical Team Lead',
     manager: 'Christopher Akanmu',
     gender: 'Male',
-    picture: 'https://lh3.googleusercontent.com/-0IiIxTNUkIY/AAAAAAAAAAI/AAAAAAAAAAc/bjqhX-Jagqc/photo.jpg?sz=50',
+    picture:
+      'https://lh3.googleusercontent.com/-0IiIxTNUkIY/AAAAAAAAAAI/AAAAAAAAAAc/bjqhX-Jagqc/photo.jpg?sz=50',
     location: 'Lagos',
     createdAt: '2019-02-25T10:54:30.214Z',
     updatedAt: '2019-02-27T12:44:18.033Z',
@@ -102,10 +103,10 @@ const user = {
         roleName: 'Travel Administrator',
         centers: [
           {
-            location: 'Nigeria',
+            location: 'Nigeria'
           }
         ]
-      },
+      }
     ]
   },
   getUserData: {
@@ -203,9 +204,7 @@ export const initialState = {
   comments,
   modal,
   tripModifications: {
-    updateRequest: {
-
-    }
+    updateRequest: {}
   },
   attachments: {
     submissions: [
@@ -220,7 +219,7 @@ export const initialState = {
             submissions: [
               {
                 id: 'FLkx_xe9f',
-                value: {
+                userUpload: {
                   url: 'some.url.com',
                   fileName: 'somefile.jpg'
                 },
@@ -235,7 +234,7 @@ export const initialState = {
             destinationName: 'Nairobi, Kenya',
             submissions: [
               {
-                value: 'Some Value',
+                userUpload: 'Some Value',
                 updatedAt: '2019-04-04T16:17:54.739Z'
               }
             ]
@@ -254,7 +253,7 @@ export const initialState = {
             submissions: [
               {
                 id: 'mspJ6ew9K',
-                value: {
+                userUpload: {
                   departureTime: '2019-03-11T15:00',
                   arrivalTime: '2019-03-12T00:00',
                   airline: 'Nai Air',

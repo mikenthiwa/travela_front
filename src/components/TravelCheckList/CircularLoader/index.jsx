@@ -43,6 +43,7 @@ class CircularProgressBar extends Component {
 
 
   
+
 CircularProgressBar.defaultProps = {
   sqSize: 200,
   percentage: 25,

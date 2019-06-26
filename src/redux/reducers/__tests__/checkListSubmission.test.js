@@ -23,7 +23,7 @@ describe('ChecklistSubmission reducer', () => {
   const checkId = `${tripId}-${checklistItemId}`;
   const formData = { checklistItemId, tripId, requestId };
   const error = 'Server Error';
-  it('should add checklist id to isUploading` state to  while uploading file', 
+  it('should add checklist id to isUploading` state to  while uploading file',
     (done) => {
       const currentState = {
         ...initialState,
@@ -54,16 +54,62 @@ describe('ChecklistSubmission reducer', () => {
       expect(newState.isLoading).toBe(false);
       done();
     });
+  it('should add checklist item checkId to `itemsToCheck` on post success and update the item',
+    (done) => {
+      const currentState = {
+        ...initialState,
+        isUploading: [checkId],
+        submissions: checklistSubmission
+      };
+
+      const action = postSubmissionSuccess({...submissionSuccessResponse, submission: {
+        ...submissionSuccessResponse,
+        id: 'JGLqrmBEd'
+      } }, checkId);
+
+      const newState = checklistSubmissionReducer(currentState, action);
+
+      expect(newState.successMessage).toEqual(responseMessage);
+      expect(newState.successStatus).toEqual(true);
+      expect(newState.postSuccess).toContain(checkId);
+      expect(newState.itemsToCheck).toContain(checkId);
+      expect(newState.isUploading.length).toEqual(0);
+      expect(newState.percentageCompleted).toBe(100);
+      expect(newState.isFetching).toBe(false);
+      done();
+    });
 
   it('should add checklist item checkId to `itemsToCheck` on post success',
     (done) => {
       const currentState = {
         ...initialState,
-        isUploading: [checkId]
+        isUploading: [checkId],
+        submissions: checklistSubmission
       };
 
       const action = postSubmissionSuccess(submissionSuccessResponse, checkId);
-      
+
+      const newState = checklistSubmissionReducer(currentState, action);
+
+      expect(newState.successMessage).toEqual(responseMessage);
+      expect(newState.successStatus).toEqual(true);
+      expect(newState.postSuccess).toContain(checkId);
+      expect(newState.itemsToCheck).toContain(checkId);
+      expect(newState.isUploading.length).toEqual(0);
+      expect(newState.percentageCompleted).toBe(100);
+      expect(newState.isFetching).toBe(false);
+      done();
+    });
+
+  it('should add update submissions even with a failure',
+    (done) => {
+      const currentState = {
+        ...initialState,
+        isUploading: [checkId],
+      };
+
+      const action = postSubmissionSuccess(submissionSuccessResponse, checkId);
+
       const newState = checklistSubmissionReducer(currentState, action);
 
       expect(newState.successMessage).toEqual(responseMessage);

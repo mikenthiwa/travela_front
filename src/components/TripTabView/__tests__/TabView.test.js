@@ -1,17 +1,16 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import TabView from '../TabView';
-import Tab from '../Tab';
-
 
 describe('<TabView />', () => {
   const tab = {
     subTitle: 'subtitle',
-    title: 'Title',
+    title: 'Title'
   };
   const props = {
     tabs: [tab, tab],
-    current: 0
+    currentTab: 0,
+    handleTabChange: jest.fn()
   };
   const wrapper = mount(
     <TabView {...props}>
@@ -23,8 +22,18 @@ describe('<TabView />', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should switch tab', () => {
-    wrapper.find('.trip-header-box').simulate('click', {preventDefault: jest.fn()});
+    wrapper
+      .find('.trip-header-box')
+      .simulate('click', { preventDefault: jest.fn() });
     expect(wrapper.state().current).toEqual(1);
     expect(wrapper.props().children.length).toEqual(2);
+  });
+  it('should change tab if props change', () => {
+    wrapper.setProps({
+      currentTab: 1
+    });
+    expect(wrapper.instance().state).toEqual({
+      current:1
+    });
   });
 });
