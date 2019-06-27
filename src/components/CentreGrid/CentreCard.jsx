@@ -1,6 +1,9 @@
 import React, { PureComponent} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import FemaleIcon from '../../images/icons/Female-grey.svg';
+import MaleIcon from '../../images/icons/Male-grey.svg';
+import UnisexIcon from '../../images/icons/Unisex-grey.svg';
 import Button from '../buttons/Buttons';
 import bedIcon from '../../images/icons/accomodation-grey.svg';
 import bathroomIcon from '../../images/icons/hot_tub_24px.svg';
@@ -20,12 +23,20 @@ class CentreCard extends PureComponent {
     bathrooms: PropTypes.number.isRequired,
     guesthouseId: PropTypes.string.isRequired,
     disabledGuestHouse: PropTypes.object.isRequired,
-    handleOnRestore: PropTypes.func
+    handleOnRestore: PropTypes.func,
+    guestHouse: PropTypes.object.isRequired
   };
   static defaultProps = {
     handleOnRestore: () => null
   }
+  
 
+  genderPolicy = {
+    Unisex: UnisexIcon,
+    Female: FemaleIcon,
+    Male: MaleIcon
+  }
+  
   handleClick(e) {
     e.preventDefault();
   }
@@ -86,7 +97,7 @@ class CentreCard extends PureComponent {
 
   render() {
     const { cardImage, imageAlt, countryFlagImage, guestHouseName, guestHouseLocation, beds,
-      bathrooms, guesthouseId, disabledGuestHouse } = this.props;
+      bathrooms, guesthouseId, disabledGuestHouse, guestHouse } = this.props;
     return (
       <div className={disabledGuestHouse.id ? 
         'mdl-cell mdl-cell--4 mdl-card centre-card-disabled' 
@@ -108,6 +119,7 @@ class CentreCard extends PureComponent {
             <div className="centre__horizontal-line" />
             <div className="centre__facility">
               {this.renderCentreFacilities(bedIcon, 'Bed', beds)}
+              <img src={`${this.genderPolicy[guestHouse.genderPolicy]}`} alt={guestHouse.genderPolicy} title={guestHouse.genderPolicy} />
               {this.renderCentreFacilities(bathroomIcon, 'Bathroom', bathrooms)}
             </div>
           </div>

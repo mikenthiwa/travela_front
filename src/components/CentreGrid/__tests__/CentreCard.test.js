@@ -15,6 +15,9 @@ const props = {
   guesthouseId: 'guest-house-1',
   disabledGuestHouse: {
     id: 'guest-house-1',
+  },
+  guestHouse: {
+    genderPolicy: 'male'
   }
 };
 
