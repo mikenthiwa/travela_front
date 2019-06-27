@@ -180,17 +180,8 @@
     "extends": "react-app"
   },
   "commitplease": {
-    "style": "angular",
-    "types": [
-      "feat",
-      "fix",
-      "docs",
-      "style",
-      "refactor",
-      "perf",
-      "test",
-      "chore"
-    ],
+    "ticketPattern": "^[A-Z]+-\\d+-(story|task|bug)\\(.*\\): .*",
+    "types": [],
     "scope": "\\S+.*"
   },
   "engines": {

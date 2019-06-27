@@ -154,6 +154,9 @@ import {
   watchUpdateHotelEstimate
 } from './hotelEstimateSaga';
 
+import { watchAddResourcesSagaAsync, watchFetchLinkDataSagaAsync } from './helpResourceSaga';
+
+
 function* rootSaga() {
   yield all([
     userAuth(),
@@ -268,7 +271,9 @@ function* rootSaga() {
     watchCreateHotelEstimateAsync(),
     watchDeleteHotelEstimate(),
     watchUpdateHotelEstimate(),
-    watchgetTravelCostsByLocation()
+    watchgetTravelCostsByLocation(),
+    watchFetchLinkDataSagaAsync(),
+    watchAddResourcesSagaAsync()
   ]);
 }
 

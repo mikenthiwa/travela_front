@@ -1,11 +1,59 @@
 import React, { Component, Fragment } from 'react';
-import HelpHeader from '../../components/HelpHeader';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import TextLink from '../../components/TextLink/TextLink';
 import fileSymbol from '../../images/file.svg';
 import './helpLink.scss';
+import PageHeader from '../../components/PageHeader';
+import Modal from '../../components/modal/Modal';
+import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
+import AddHelpResourceForm from '../../components/Forms/AddHelpResourceForm';
+import {
+  addResource,
+  fetchResources
+} from '../../redux/actionCreator/helpResourceActions';
+
+
 
 class HelperPage extends Component {
+  state = {
+    headTitle: 'Add Resource',
+    linkDetail: null
+  }
 
+  componentDidMount() {
+    const { fetchResources } = this.props;
+    fetchResources();
+  }
+
+  handleAddResource = () => {
+    const { openModal } = this.props;
+    this.setState({headTitle: 'Add Resource', linkDetail: null});
+    openModal(true, 'new model');
+  }
+
+  renderTravelPolicyForm() {
+    const { headTitle, linkDetail } = this.state;
+    const { helpResourceErrors, closeModal, shouldOpen, modalType,
+      addResource, isAddingResource, isLoading } = this.props;
+    return (
+      <Modal
+        closeModal={closeModal}
+        customModalStyles="modal--add-user" width="480px"
+        visibility={shouldOpen && modalType === 'new model' ? 'visible' : 'invisible'}
+        title={headTitle}>
+        <AddHelpResourceForm
+          addResource={addResource}
+          errors={helpResourceErrors}
+          closeModal={closeModal}
+          addingRegion={isAddingResource}
+          linkDetail={linkDetail}
+          myTitle={headTitle}
+        />
+      </Modal>
+    );
+  }
+  
   renderLinks(documentLink, text) {
     return (
       <Fragment>
@@ -22,35 +70,78 @@ class HelperPage extends Component {
   }
 
   renderTravelPolicyDocuments() {
-    const travelIntranet = 'https://sites.google.com/andela.com/travel-intranet/home?authuser=0';
-    const andelaPolicy = 'https://docs.google.com/document/d/1ZqJ3OAF-7NfJAgkzMBdiMoTrsftTWJp9tNhV8eOe1d8/edit';
-    const IntranetTitle = 'Travel Intranet';
-    const AndelaTitle = 'Andela Policy';
+    const { helpResources } = this.props;
 
-    return (
-      <div>
-        <div className="policy-document">
-          <div className="item-name">
-            {this.renderLinks(travelIntranet, IntranetTitle)}
+    const resources = helpResources.map((helpResource) => {
+      return(
+        <div key={helpResource.id}>
+          <div className="policy-document">
+            <div className="item-name">
+              {this.renderLinks(helpResource.title, helpResource.link)}
+            </div>
           </div>
         </div>
-        <div className="policy-document">
-          <div className="item-name">
-            {this.renderLinks(andelaPolicy, AndelaTitle)}
-          </div>
-        </div>
-      </div>
-    );
+      );
+    });
+    return resources;
   }
 
   render() {
+    const { roles } = this.props;
+    const canAddResource = ['Super Administrator', 'Travel Administrator']
+      .find(role => roles.includes(role));
     return (
-      <div>
-        <HelpHeader />
-        {this.renderTravelPolicyDocuments()}
-      </div>
+      <Fragment>
+        <div>
+          <PageHeader
+            title="TRAVEL POLICY DOCUMENTS"
+            actionBtn={canAddResource ? 'Add Resource' : ''}
+            actionBtnClickHandler={this.handleAddResource}
+          /> 
+          <div className="header-body-margin" />
+          {this.renderTravelPolicyForm()}
+          {this.renderTravelPolicyDocuments()}
+        </div>
+      </Fragment>
+      
     );
   }
 }
 
-export default HelperPage;
+export const mapStateToProps = ({modal, user, helpResources: { resources }}) => ({
+  ...modal.modal,
+  helpResources: resources,
+  roles: user.getCurrentUserRole
+});
+
+HelperPage.propTypes = {
+  openModal: PropTypes.func.isRequired,
+  helpResources: PropTypes.array,
+  closeModal: PropTypes.func.isRequired,
+  fetchResources: PropTypes.func.isRequired,
+  helpResourceErrors: PropTypes.string,
+  addResource: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  shouldOpen: PropTypes.bool.isRequired,
+  modalType: PropTypes.string,
+  isAddingResource: PropTypes.bool,
+  roles: PropTypes.array
+};
+
+HelperPage.defaultProps = {
+  isLoading: false,
+  helpResourceErrors: '',
+  modalType: '',
+  isAddingResource: false,
+  helpResources:[],
+  roles: []
+};
+
+const actionCreators = {
+  openModal,
+  closeModal,
+  addResource,
+  fetchResources
+};
+
+export default connect(mapStateToProps, actionCreators)(HelperPage);
