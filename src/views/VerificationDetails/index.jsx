@@ -17,6 +17,7 @@ import NotFound from '../ErrorPages/NotFound';
 import './VerificationDetails.scss';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 import {fetchTravelCostsByLocation} from '../../redux/actionCreator/travelCostsActions';
+import { TRAVEL_MANAGERS } from '../../helper/roles';
 
 
 const VerificationDetails = (type = 'verifications') => {
@@ -244,7 +245,7 @@ const VerificationDetails = (type = 'verifications') => {
       const {currentUser: {roles}, isConfirmDialogLoading, 
         submissionInfo: { percentageCompleted } } = this.props;
 
-      const allowedRoles = ['Travel Administrator', 'Super Administrator'];
+      const allowedRoles = TRAVEL_MANAGERS;
       const [{centers}] = roles.filter(role => allowedRoles.includes(role.roleName));
       const locations = centers.length && centers.map(center => center.location);
       const origin = trips.length && trips[0].origin.split(', ').pop();
