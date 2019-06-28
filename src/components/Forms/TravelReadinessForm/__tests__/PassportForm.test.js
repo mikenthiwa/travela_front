@@ -15,6 +15,7 @@ describe('<PassportForm/>',  () => {
   const props = {
     createTravelReadinessDocument: jest.fn(),
     editTravelReadinessDocument: jest.fn(),
+    scaningPassport: jest.fn(),
     fetchingDocument: false,
     isLoading: false,
     document: { },
@@ -23,7 +24,11 @@ describe('<PassportForm/>',  () => {
     users: [],
     user: {},
     closeModal: jest.fn(),
-    onCancel: jest.fn()
+    onCancel: jest.fn(),
+    passportInfo:{},
+    modalType:'Add Passport',
+    scanning:false,
+    showPassportForm:true
   };
 
   const document = {
@@ -246,7 +251,6 @@ describe('<PassportForm/>',  () => {
 
   it('should show the year from 18 years ago on the birthdate', () => {
     wrapper = mount(<PassportForm {...props} />);
-
     const datePicker = wrapper.find('DateInput[name="dateOfBirth"]').find('DatePicker');
     expect(datePicker.props().showYearDropdown).toBeTruthy();
     expect(moment(datePicker.props().maxDate).year()).toEqual(moment().subtract(18,'year').year());

@@ -8,6 +8,9 @@ import {
   CREATE_TRAVEL_READINESS_DOCUMENT,
   CREATE_TRAVEL_READINESS_DOCUMENT_FAILURE,
   CREATE_TRAVEL_READINESS_DOCUMENT_SUCCESS,
+  PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN, 
+  PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS, 
+  PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_FALURE
 } from '../constants/actionTypes';
 
 export const createTravelReadinessDocument = (documentType, payload) => ({
@@ -52,5 +55,21 @@ export const exportReadinessSuccess = () => ({
 
 export const exportReadinessFailure = (error) => ({
   type: EXPORT_TRAVEL_READINESS_FAILURE,
+  error
+});
+
+
+export const scanPassport = (payload) => ({
+  type: PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN,
+  payload,
+});
+
+export const scanPassportSuccess = (response) => ({
+  type: PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS, 
+  response
+});
+
+export const scanPassportFailure = (error) => ({
+  type: PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_FALURE, 
   error
 });

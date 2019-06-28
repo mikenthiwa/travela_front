@@ -15,7 +15,6 @@ import { isOptional } from '../Forms/FormsAPI/formValidator';
 import * as otherDocumentUtils from '../../helper/otherDocumentsUtils';
 
 
-
 export default function TravelReadinessForm (FormFieldSet, documentType, defaultFormState) {
   class BaseForm extends Component {
     constructor(props) {
@@ -24,10 +23,28 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
       this.validate = getDefaultBlanksValidatorFor(this);
     }
 
+    componentDidMount(){
+      const {modalType, passportInfo:{passportData}} = this.props;
+      if(/add passport/.test(modalType)){
+        if (/add/.test(modalType) && !isEmpty(passportData)){
+          this.scanUpdatePopulates(passportData, modalType);
+        }}
+    }
+     
     componentWillReceiveProps(nextProps) {
-      const { errors, document, modalType } = nextProps;
+      const { errors, document, modalType, passportInfo: {passportData}} = nextProps;
+      const {id} = document;
       if(/edit/.test(modalType) && !isEmpty(document)){
-        return this.updateFormFields(document);
+        const {showPassportForm}  = nextProps;
+        const {showPassportForm : showMyForm } = this.props;
+        if( showMyForm !== showPassportForm){
+          this.scanUpdatePopulates(passportData, modalType, id);
+        }else{
+          return this.updateFormFields(document);
+        }
+      }
+      if (/add passport/.test(modalType) && !isEmpty(passportData)){  
+        this.scanUpdatePopulates(passportData, modalType);
       }
       return this.setState({errors, uploadingDocument: false, scanning: false});
     }
@@ -41,9 +58,28 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
       const { data } = document;
       return this.setState(prevState => {
         const newValues = { ...prevState.values, ...data };
-        return { ...prevState, id: document.id, values: {...newValues}, imageChanged:true };
+        return { ...prevState, id: document.id, values: {...newValues}, imageChanged:true, hasBlankFields:false };
       });
     }
+
+    scanUpdatePopulates = (passportData, modalType, id) => {
+      const {nationality, number, birthDay, expires, dateOfIssue, country, surname, imageLink} = passportData;
+      const document = {
+        data:{ name: surname,
+          passportNumber: number,
+          nationality,
+          dateOfBirth: moment(birthDay).format( 'MM/DD/YYYY'),
+          dateOfIssue:  moment(dateOfIssue).format( 'MM/DD/YYYY'),
+          placeOfIssue: country,
+          expiryDate:  moment(expires).format( 'MM/DD/YYYY'),
+          cloudinaryUrl: imageLink, 
+        }
+      };
+      if (/edit passport/.test(modalType)){
+        document['id'] = id;
+      }
+      return this.updateFormFields(document);
+    };
 
     onCancel = (event) => {
       event.preventDefault();
@@ -91,6 +127,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
       if (/edit/.test(modalType)) {
         editTravelReadinessDocument(documentType, newValues, id);
       } else {
+
         createTravelReadinessDocument(documentType, newValues);
       }
       return this.setState({errors: {...errors, cloudinaryUrl: 'Please upload a document'}});
@@ -101,7 +138,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
     handleUpload = async (e) => {
       e.preventDefault();
       const image = e.target.files[0];
-      if( !image ) return;
+      if( !image );
       if (!['image/jpeg', 'image/png', 'application/pdf'].includes(image.type)) {
         return toast.error('Invalid file type. Please upload an image');
       }
@@ -109,57 +146,59 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
         e.target.value= '';
         return toast.error('This upload has exceeded the 10 MB limit that is allowed');
       }
+      const fd = new FormData();
+      fd.append('file', image);
+      fd.append('upload_preset', process.env.REACT_APP_PRESET_NAME);
       const {name} = image;
-      const { values, optionalFields } = this.state;
+      try {
+        delete axios.defaults.headers.common['Authorization'];
+        this.setState({uploadingDocument: true, showForm: false});
+        const imageData = await axios.post(
+          process.env.REACT_APP_CLOUNDINARY_API, fd,
+          { onUploadProgress: this.handleUploadProgress
+          }
+        );
+        DocumentAPI.setToken();
+        const {data: {secure_url}} = imageData;
+        this.setState({secure_url});
+
+        if(documentType === 'other'){
+          const { TesseractWorker } = window.Tesseract;
+          const worker = new TesseractWorker();
+          worker
+            .recognize(`${secure_url}`)
+            .progress((p) => {
+              this.setState({scanning: true, progressCount: p});
+            })
+            .then((result) => {
+              this.setState({uploadingDocument: false, scanning: false, showForm: true, values: {
+                name: otherDocumentUtils.documentName(result),
+                dateOfIssue: '',
+                expiryDate: '',
+                documentId: otherDocumentUtils.documentId()
+              }, });
+            });
+        }
+        const {scanPassport} = this.props;
+        if(documentType === 'passport'){
+          scanPassport(secure_url);
+        }
+        this.setState({
+          documentUploaded: true,
+          uploadingDocument: false,
+          values: {...values, cloudinaryUrl: secure_url}
+        });
+      } catch (e) {
+        toast.error('Error uploading document. Please try again!');
+      }
+      const { values, optionalFields} = this.state;
       const hasBlankFields = Object.keys(values)
         .some(key => !values[key] && !isOptional(key, optionalFields));
       this.setState({name, image, imageChanged: true, hasBlankFields: hasBlankFields || false });
-
-      if (image) {
-        const fd = new FormData();
-        fd.append('file', image);
-        fd.append('upload_preset', process.env.REACT_APP_PRESET_NAME);
-        try {
-          delete axios.defaults.headers.common['Authorization'];
-          this.setState({uploadingDocument: true, showForm: false});
-          const imageData = await axios.post(
-            process.env.REACT_APP_CLOUNDINARY_API, fd,
-            { onUploadProgress: this.handleUploadProgress
-            }
-          );
-          const {data: {secure_url}} = imageData;
-          this.setState({secure_url});
-          if(documentType === 'other'){
-            const { TesseractWorker } = window.Tesseract;
-            const worker = new TesseractWorker();
-
-            worker
-              .recognize(`${secure_url}`)
-              .progress((p) => {
-                this.setState({scanning: true, progressCount: p});
-              })
-              .then((result) => {
-                this.setState({uploadingDocument: false, scanning: false, showForm: true, values: {
-                  name: otherDocumentUtils.documentName(result),
-                  dateOfIssue: '',
-                  expiryDate: '',
-                  documentId: otherDocumentUtils.documentId()
-                }, });
-              });
-          }
-          this.setState({
-            documentUploaded: true,
-            uploadingDocument: false,
-            values: {...values, cloudinaryUrl: secure_url}
-          });
-        } catch (e) {
-          toast.error('Error uploading document. Please try again!');
-        }
-      }
     };
+    
     onChangeVisa = (e) => {
       const visaType = e;
-      const { modalType } = this.props;
       this.setState((prevState) => {
         if(visaType !== 'Other'){
           delete prevState.values.otherVisaTypeDetails;
@@ -179,10 +218,13 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
         };
       }, () =>  this.validate());
     }
+
     render() {
       const { errors, values, hasBlankFields, uploadingDocument,
         name, imageChanged, uploadProgress, showForm, scanning, progressCount } = this.state;
-      const { modalType, document, fetchingDocument, updatingDocument } = this.props;
+
+      const { modalType, document, fetchingDocument, updatingDocument, showPassportForm, retrieving, passportInfo} = this.props;
+      const {cloudinaryUrl} = values;
       if (documentType === 'other') delete errors.documentid;
       const { visaType, otherVisaTypeDetails } = values;
       const submitButton = {
@@ -190,41 +232,65 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
         visa: 'Add Visa Details',
         passport: 'Add Passport'
       };
-      
+
       return (
         <div>
           {fetchingDocument ? <Preloader /> : (
             <FormContext values={values} errors={errors} targetForm={this}>
               <form className="travel-document-form" onSubmit={this.handleSubmit}>
-
                 <div className="travel-document-select-file">
-                  <p className="attach-document-text">
-                    { scanning ? ( `Scanning Image ${(progressCount.status === 'recognizing text') ? (progressCount.progress * 100).toFixed() :  '0'} % `) :
-                      `Attach the image or PDF of your ${modalType && modalType.split(' ').splice(-1)} document`
-                    }
-                  </p>
-
-                  { scanning ? <Preloader /> :   
-                    ( <FileUploadField
+                  { documentType === 'other' ?
+                    (
+                      <p className="attach-document-text">
+                        { scanning ? ( `Scanning Image ${(progressCount.status === 'recognizing text') ? (progressCount.progress * 100).toFixed() :  '0'} % `) :
+                          `Attach the image of your ${modalType && modalType.split(' ').splice(-1)} document`}
+                      </p>
+                    ):(
+                      <p className="attach-document-text">
+                        { retrieving && /passport/.test(modalType)? `Scanning your ${modalType.split(' ').splice(-1)} document to retrieve data` 
+                          :`Attach the image or PDF of your ${modalType && modalType.split(' ').splice(-1)} document ensure it is in Landscape`}
+                      </p>
+                    )}
+                  { retrieving &&  /passport/.test(modalType) ?  <Preloader /> :(
+                    <FileUploadField
                       name={name}
                       documentUpload={documentUpload}
                       handleUpload={this.handleUpload}
                       document={document}
                       modalType={modalType}
-                    />
-                    )
-                  }
+                      passportInfo={passportInfo}
+                      cloudinaryUrl={cloudinaryUrl}
+                    />)}
                   {uploadingDocument && <progress className="progress-bar" value={uploadProgress} max={1} />}
-                  
                 </div>
-                {
-                  ( documentType === 'other' && !showForm && !(/edit/.test(modalType)) ) ? '' : scanning ? '' : (
+
+
+                { documentType === 'other' ?
+                  (
+                    <div className={!showForm && !(/edit/.test(modalType)) ? 'invisible': 'visible'}>
+                      {<FormFieldSet
+                        visaType={visaType} onChangeVisa={this.onChangeVisa}
+                        values={values} otherVisaTypeDetails={otherVisaTypeDetails} />}
+                    </div>
+                  ):''
+                }
+
+                { documentType === 'passport' ?
+                  (
+                    <div className={/add passport/.test(modalType) && !showPassportForm ? 'invisible': 'visible'}>
+                      {<FormFieldSet
+                        visaType={visaType} onChangeVisa={this.onChangeVisa}
+                        values={values} otherVisaTypeDetails={otherVisaTypeDetails} />}
+                    </div>
+                  ):''
+                }
+                { documentType === 'visa' ? (
+                  <div className="visible">
                     <FormFieldSet
                       visaType={visaType} onChangeVisa={this.onChangeVisa}
-                      values={values} otherVisaTypeDetails={otherVisaTypeDetails} />
-                  )
-                }
-                <hr />
+                      values={values} otherVisaTypeDetails={otherVisaTypeDetails} /> 
+                  </div>) : ''}
+
                 <div className="travel-document-submit-area">
                   { scanning ? '' :
                     (
@@ -235,6 +301,9 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
                             submitButton[documentType]}
                         loading={uploadingDocument}
                         updatingDocument={updatingDocument}
+                        modalType={modalType}
+                        retrieving={retrieving}
+                        showPassportForm={showPassportForm}
                       />
                     )
                   }
@@ -255,17 +324,27 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
     editTravelReadinessDocument: PropTypes.func,
     document: PropTypes.object,
     modalType: PropTypes.string, fetchingDocument: PropTypes.bool,
-    updatingDocument: PropTypes.bool
+    updatingDocument: PropTypes.bool,
+    scanPassport: PropTypes.func,
+    passportInfo: PropTypes.object,
+    showPassportForm: PropTypes.bool,
+    retrieving: PropTypes.bool,
   };
 
   BaseForm.defaultProps = {
     editTravelReadinessDocument: () => {
     },
+    scanPassport: () => {
+
+    },
     document: {},
     modalType: '',
     errors: {},
     fetchingDocument: false,
-    updatingDocument: false
+    updatingDocument: false,
+    showPassportForm: false,
+    retrieving:false,
+    passportInfo:{}
   };
   return BaseForm;
 }

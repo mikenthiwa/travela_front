@@ -25,7 +25,8 @@ const props = {
   },
   location: {
     search: '/travel_readiness?id=EBUmAX3z1&type=passport',
-  }
+  }, 
+  passportInfo:{ passportData:{}}
 };
 
 const newProps = {
@@ -48,6 +49,10 @@ const state = {
     documents: {},
     errors:{},
     isLoading: false
+  },
+  readiness:{
+    readiness:[],
+    passportInfo:{}
   },
   modal: {
     modal: {

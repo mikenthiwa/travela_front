@@ -82,7 +82,7 @@ import {
 import { watchFetchCenters, watchUpdateUserCenters } from './centersSaga';
 import { watchFetchAnalytics, watchdownloadAnalytics } from './analyticsSaga';
 import {
-  watchFetchReadiness,
+  watchFetchReadiness, watchpassportScanSaga,
   watchExportReadiness, watchCreateTravelReadinessDocument
 } from './travelReadinessSaga';
 
@@ -273,7 +273,8 @@ function* rootSaga() {
     watchUpdateHotelEstimate(),
     watchgetTravelCostsByLocation(),
     watchFetchLinkDataSagaAsync(),
-    watchAddResourcesSagaAsync()
+    watchAddResourcesSagaAsync(),
+    watchpassportScanSaga()
   ]);
 }
 

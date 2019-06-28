@@ -25,7 +25,8 @@ const props = {
   },
   location: {
     search: '/travel_readiness/HFHFHFHRRHHD?id=EBUmAX3z1&type=passport',
-  }
+  },
+  passportInfo:{}
 };
 
 const state = {
@@ -49,7 +50,12 @@ const state = {
     currentUser:{
       userId: '1200'
     }
-  }
+  }, 
+  readiness:{
+    readiness:[],
+    passportInfo:{}
+  },
+
 };
 
 describe('renders <TravelReadinessDocuments />', () =>{

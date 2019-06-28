@@ -907,7 +907,6 @@ class NewRequestForm extends PureComponent {
     return locations;
   };
 
-
   savePersonalDetails(personalDetails) {
     Object.keys(personalDetails).forEach(key => {
       localStorage.setItem(key, personalDetails[key]);

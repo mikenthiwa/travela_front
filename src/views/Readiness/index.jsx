@@ -6,7 +6,7 @@ import { closeModal, openModal } from '../../redux/actionCreator/modalActions';
 import Modal from '../../components/modal/Modal';
 import TravelDocumentModal from '../../components/modal/TravelDocumentModal/TravelDocumentModal';
 import PassportForm from '../../components/Forms/TravelReadinessForm/PassportForm';
-import { createTravelReadinessDocument } from '../../redux/actionCreator/travelReadinessActions';
+import { createTravelReadinessDocument, scanPassport } from '../../redux/actionCreator/travelReadinessActions';
 import PageHeader from '../../components/PageHeader';
 import TravelReadinessDetailsTable from '../TravelReadinessDocuments/UserTravelReadinessDetails/UserTravelReadinessDetailsTable';
 import {
@@ -22,7 +22,7 @@ export class TravelReadinessDocuments extends Component {
   }
 
   componentDidMount() {
-    const { fetchUserData, user, location: { search } } = this.props;
+    const { fetchUserData, user, location: { search }, modalType } = this.props;
     fetchUserData(user.currentUser.userId);
     const travelDocumentDetails = search ? search.split('?').join('').split('&') : '';
     const searchMatch = /id=\w+&type=(passport|other|visa)/.test(search.split('?')[1]);
@@ -123,9 +123,9 @@ export class TravelReadinessDocuments extends Component {
   renderPassportModal = () => {
     const {
       closeModal, shouldOpen,
-      modalType, travelReadinessDocuments,
+      modalType, travelReadinessDocuments, showPassportForm,
       createTravelReadinessDocument, editTravelReadinessDocument,
-      fetchUserData, user, document, fetchingDocument
+      fetchUserData, user, document, fetchingDocument, scanPassport, passportInfo, retrieving
     } = this.props;
     return (
       <Modal
@@ -138,9 +138,12 @@ export class TravelReadinessDocuments extends Component {
         <PassportForm
           createTravelReadinessDocument={createTravelReadinessDocument}
           editTravelReadinessDocument={editTravelReadinessDocument}
+          scanPassport={scanPassport}
           {...travelReadinessDocuments} fetchUserData={fetchUserData}
-          closeModal={closeModal} user={user}
-          document={document} modalType={modalType} fetchingDocument={fetchingDocument} />
+          closeModal={closeModal} user={user} showPassportForm={showPassportForm}
+          document={document} modalType={modalType} fetchingDocument={fetchingDocument}
+          passportInfo={passportInfo} retrieving={retrieving}
+        />
       </Modal>
     );
   };
@@ -216,6 +219,7 @@ export class TravelReadinessDocuments extends Component {
     const { documentId, documentContext, } = this.state;
     const { userReadiness, isLoading, shouldOpen,
       modalType, closeModal, location, openModal, history } = this.props;
+   
     const { travelDocuments: { passport, visa, other  } } = userReadiness;
     return (
       <Fragment>
@@ -240,12 +244,15 @@ export class TravelReadinessDocuments extends Component {
     ); }
 }
 
-const mapStateToProps = ({ modal, travelReadinessDocuments, user }) => ({
+const mapStateToProps = ({ modal, travelReadinessDocuments, readiness, user }) => ({
   ...modal.modal, travelReadinessDocuments,
   userReadiness: travelReadinessDocuments.userReadiness,
   isLoading: travelReadinessDocuments.isLoading, user: user,
   document: travelReadinessDocuments.document,
   fetchingDocument: travelReadinessDocuments.fetchingDocument,
+  passportInfo: travelReadinessDocuments.passportInfo, 
+  retrieving: travelReadinessDocuments.scanning, 
+  showPassportForm: travelReadinessDocuments.showForm,
 });
 
 const matchDispatchToProps = {
@@ -253,6 +260,7 @@ const matchDispatchToProps = {
   editTravelReadinessDocument, deleteTravelReadinessDocument,
   fetchUserData: fetchUserReadinessDocuments,
   fetchDocumentDetails: fetchTravelReadinessDocument,
+  scanPassport
 };
 
 TravelReadinessDocuments.propTypes = {
@@ -263,6 +271,9 @@ TravelReadinessDocuments.propTypes = {
   deleteTravelReadinessDocument: PropTypes.func.isRequired,
   fetchDocumentDetails: PropTypes.func.isRequired,
   document: PropTypes.object.isRequired,
+  scanPassport: PropTypes.func.isRequired,
+  showPassportForm: PropTypes.bool.isRequired
+
 };
 
 TravelReadinessDocuments.defaultProps = { modalType: 'add visa' };

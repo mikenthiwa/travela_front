@@ -4,10 +4,10 @@ import { isEmpty } from 'lodash';
 
 class FileUploadField extends Component{
   getUrlLink = (name) => {
-    const { document:{ data }, modalType } = this.props;
-    if (!isEmpty(data) && (modalType.startsWith('edit')) && name === '') {
+    const { document:{ data }, modalType, passportInfo:{passportData}} = this.props;
+    if ((!isEmpty(data) && modalType && modalType.startsWith('edit') && name === '')){
       const { imageName, cloudinaryUrl } = data;
-      const documentImage = imageName 
+      let  documentImage = imageName
         ? imageName.length > 40
           ?  `${imageName.substring(0, 40)}...`
           : `${imageName}`
@@ -16,6 +16,14 @@ class FileUploadField extends Component{
           : `${cloudinaryUrl}`;
       return documentImage;
     }
+    if (/add passport/.test(modalType) && !isEmpty(passportData)){
+      const {imageLink} = passportData;
+      let  documentImage = imageLink.length > 40
+        ?  `${imageLink.substring(0, 40)}...`
+        : `${imageLink}`;
+      return documentImage;
+    }
+    
     const uploadText = (
       <span className="upload-text">
         Drag file here to upload or
@@ -32,9 +40,11 @@ class FileUploadField extends Component{
     );
   };
 
+
   render(){
-    const { name, documentUpload, handleUpload } = this.props;
+    const { name, documentUpload, handleUpload} = this.props;
     return  ( 
+  
       <div className="document-input__input-container">
         <label className="document-input__input-container__prompts" htmlFor="select-file">
           <div className="document-input__input-container__prompts__img">
@@ -61,11 +71,13 @@ FileUploadField.propTypes = {
   handleUpload: Proptypes.func.isRequired,
   document: Proptypes.object.isRequired,
   modalType: Proptypes.string,
+  passportInfo: Proptypes.object.isRequired
 };
 
 FileUploadField.defaultProps = {
   name: '',
-  modalType: ''
+  modalType: '',
+ 
 };
 
 export default FileUploadField;

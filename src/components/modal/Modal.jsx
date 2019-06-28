@@ -4,7 +4,6 @@ import Overlay from './overlay/Overlay';
 import closeButton from '../../images/icons/close.svg';
 import './_modal.scss';
 
-
 class Modal extends PureComponent {
   _isMounted = false;
   state = {

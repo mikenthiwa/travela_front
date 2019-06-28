@@ -1,14 +1,19 @@
 import documentMock from '../../../mockData/travelReadinesMockData';
+import ImageMock from '../../../mockData/imageLinkMockData';
 import {
   fetchReadiness,
   fetchReadinessSuccess,
   fetchReadinessFailure,
   createTravelReadinessDocument,
   createTravelReadinessDocumentSuccess,
-  createTravelReadinessDocumentFailure
+  createTravelReadinessDocumentFailure, 
+  scanPassport, 
+  scanPassportSuccess, 
+  scanPassportFailure
 } from '../travelReadinessActions';
 import { fetchReadinessResponse } from '../../__mocks__/reduxMocks';
-import {CREATE_TRAVEL_READINESS_DOCUMENT} from '../../constants/actionTypes';
+import {CREATE_TRAVEL_READINESS_DOCUMENT, PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN } from '../../constants/actionTypes';
+import imageLinkMockData from '../../../mockData/imageLinkMockData';
 
 describe('Travel Readiness Action', () => {
   it('should return action type of FETCH_TRAVEL_READINESS and payload', () => {
@@ -82,4 +87,37 @@ describe('Travel Readiness Action', () => {
       error: { errors: {}}
     });
   });
+
+  it('should return action type of PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN ', () => {
+    const expectedAction = {
+      type: 'PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN',
+      payload: {...imageLinkMockData.passportInfo},
+    };
+    const scanningAction = scanPassport(imageLinkMockData.passportInfo);
+    expect(scanningAction).toEqual(expectedAction);
+  });
+
+  describe('should return action of type passport travel readiness document scan success', () =>  {
+    const expectedAction = {
+      type: 'PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS',
+    };
+    const createdAction = scanPassportSuccess();
+    expect(createdAction).toEqual(expectedAction);
+  });
+
+  it('should return action type of PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS', () => {
+    const expectedAction ={
+      type: 'PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS',
+      response: {}
+    };
+    expect(scanPassportSuccess({})).toEqual(expectedAction);
+  });
+
+  it('should return action type of PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_FAILURE with right payload', () => {
+    expect(scanPassportFailure({ errors: {}})).toEqual({
+      type: 'PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_FALURE',
+      error: { errors: {}}
+    });
+  });
+
 });

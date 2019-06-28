@@ -22,7 +22,10 @@ import {
   DELETE_TRAVEL_READINESS_DOCUMENT_FAILURE,
   CREATE_COMMENT_SUCCESS,
   EDIT_COMMENT_SUCCESS,
-  DELETE_COMMENT_SUCCESS
+  DELETE_COMMENT_SUCCESS,
+  PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN,
+  PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS,
+  PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_FALURE
 } from '../constants/actionTypes';
 import { commentsUpdate } from './requests';
 
@@ -39,12 +42,15 @@ export const initialState = {
     },
   },
   errors: {},
+  passportInfo: {},
   document: {
     comments: [],
   },
   updatingDocument: false,
   comments: [],
   fetchingDocument: false,
+  showForm:false,
+  scanning:false
 };
 
 let comments;
@@ -166,7 +172,7 @@ export default (state = initialState, action) => {
   case CREATE_TRAVEL_READINESS_DOCUMENT:
     return {...state, isLoading: true};
   case CREATE_TRAVEL_READINESS_DOCUMENT_SUCCESS:
-    return {...state, isLoading: false, document: action.response};
+    return {...state, isLoading: false, document: action.response, passportInfo:{}, showForm:false};
   case CREATE_TRAVEL_READINESS_DOCUMENT_FAILURE: {
     const {error: {errors}} = action;
     const validationErrors = {};
@@ -248,6 +254,17 @@ export default (state = initialState, action) => {
       },
       comments
     };
+  case PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN:
+    return {...state, scanning: true, showForm:false};
+  case PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS:
+    return {
+      ...state, scanning: false, passportInfo: action.response, showForm:true };
+  case PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_FALURE:
+    if(action.error === 'please upload a valid passport image'){
+      return {...state, scanning: false, error: action.error, showForm:false};
+    }else {
+      return {...state, scanning: false, error: action.error, showForm:false};
+    }
   default: return state;
   }
 };

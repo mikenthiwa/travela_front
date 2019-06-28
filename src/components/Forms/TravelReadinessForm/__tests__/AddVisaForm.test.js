@@ -9,7 +9,14 @@ const props = {
   createTravelReadinessDocument: jest.fn(),
   closeModal: jest.fn(),
   fetchUserData: jest.fn(),
-  user: {}
+  scanPassport: jest.fn(),
+  user: {},
+  retrieving:false,
+  showPassportForm:true,
+  passportInfo:{
+    passportData:{
+  }},
+  modalType:'add visa'
 };
 
 const textFile = new Blob(['This is a text file'], {type : 'text/plain'});
@@ -119,7 +126,7 @@ describe('<AddVisaForm />', () => {
   it('Renders Visa modal with modal title text \'Attach the image of your visa page\'', () => {
     expect(
       wrapper.find('.travel-document-select-file p').at(0).text()).toEqual(
-      'Attach the image or PDF of your visa document'
+      'Attach the image or PDF of your visa document ensure it is in Landscape'
     );
   });
 
@@ -148,6 +155,15 @@ describe('<AddVisaForm />', () => {
   it('toasts an error if cloudinary returns an error', () => {
     moxios.stubRequest(process.env.REACT_APP_CLOUNDINARY_API, { status: 500});
     wrapper.find('#select-file').simulate('change', event);
+  });
+
+  it('closes modal on cancel', () => {
+    expect(wrapper.find('#cancel').length).toEqual(1);
+    const cancel = wrapper.find('#cancel')
+    cancel.simulate('click');
+    setTimeout(()=>{
+      expect(props.closeModal).toHaveBeenCalled();
+    }, 5000)
   });
 
 });

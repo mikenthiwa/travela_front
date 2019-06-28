@@ -68,6 +68,25 @@ describe('<AddRegionForm />', () => {
     expect(handleSubmit).toBeCalled();
     expect(props.addRegion.mock.calls.length).toBe(0);
   });
+  it('it should validate values ', () => {
+    const props = propsFactory();
+    const wrapper = mount(<AddRegionForm {...props} />);
+    const addForm = wrapper.find('form#add-region-form');
+    const regionInput = wrapper.find('textarea#add-region-description');
+    const handleSubmit = jest.spyOn(wrapper.instance(), 'handleSubmit');
+    const event = {
+      target: {
+        value: 'description'
+      }
+    };
+    regionInput.simulate('change', event);
+
+    addForm.simulate('submit', {
+      preventDefault: jest.fn()
+    });
+    expect(handleSubmit).toBeCalled();
+    expect(props.addRegion.mock.calls.length).toBe(0);
+  });
 
   it('closes modal when cancel button is clicked', ()=>{
     const props = propsFactory();

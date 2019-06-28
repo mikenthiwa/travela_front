@@ -82,6 +82,7 @@ class NewDocumentForm extends PureComponent {
       );
     };
     fileReader.readAsDataURL(file);
+   
   };
 
   handleUploadProgress = e => this.setState({ uploadProgress: e.loaded/e.total});
@@ -105,7 +106,6 @@ class NewDocumentForm extends PureComponent {
 
         cloudinaryUrl = uploadedDoc.data.secure_url;
         publicId = uploadedDoc.data.public_id;
-
         this.setState({ isSubmitting: false, uploadProgress: 0 });
       }
       DocumentAPI.setToken();
@@ -116,6 +116,7 @@ class NewDocumentForm extends PureComponent {
         userId: user.result.userId
       };
       createDocument(documentData);
+
     } catch (error) {
       errorMessage('Unable to upload document');
       DocumentAPI.setToken();

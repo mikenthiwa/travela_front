@@ -4,10 +4,10 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import FileSaver from 'file-saver';
 import ReadinessAPI from '../../../services/ReadinessAPI';
 import {
-  watchFetchReadiness, watchExportReadiness, watchCreateTravelReadinessDocument
+  watchFetchReadiness, watchExportReadiness, watchCreateTravelReadinessDocument, watchpassportScanSaga,
 } from '../travelReadinessSaga';
 import {
-  fetchReadinessResponse, fetchTravelReadinessResponse, passportDetails
+  fetchReadinessResponse, fetchTravelReadinessResponse, passportDetails, imageLink
 } from '../../__mocks__/reduxMocks';
 import {
   FETCH_TRAVEL_READINESS,
@@ -18,7 +18,10 @@ import {
   EXPORT_TRAVEL_READINESS_FAILURE,
   CREATE_TRAVEL_READINESS_DOCUMENT_SUCCESS,
   CREATE_TRAVEL_READINESS_DOCUMENT_FAILURE,
-  CREATE_TRAVEL_READINESS_DOCUMENT
+  CREATE_TRAVEL_READINESS_DOCUMENT, 
+  PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN, 
+  PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS,
+  PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_FALURE
 } from '../../constants/actionTypes';
 
 FileSaver.saveAs = jest.fn();
@@ -184,4 +187,69 @@ describe('Travel readiness documents test suite', () => {
         documentType: 'visa',
       }).silentRun();
   });
+
+  it('gets a response with travel reasons and dispatches PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS', () => {
+    return expectSaga(watchpassportScanSaga)
+      .provide([[call(ReadinessAPI.pasportImageScan, imageLink), response]])
+      .dispatch({
+        type: PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN,
+        ...imageLink
+      })
+      .silentRun();
+  });
+
+  it('gets a response with travel reasons and dispatches PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS', () => {
+    return expectSaga(watchpassportScanSaga)
+      .provide([[call(ReadinessAPI.pasportImageScan, imageLink), response]])
+      .dispatch({
+        type: PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS,
+        ...imageLink
+      })
+      .silentRun();
+  });
+
+  it('handles an error', () => {
+    const error = {response : {
+      status: 409,
+      data: {'success': false,
+        'message': 'validation error',
+        errors: [{
+          message: 'n',
+        }]
+      }}};
+    return expectSaga(watchpassportScanSaga)
+      .provide([[call(ReadinessAPI.pasportImageScan, imageLink), throwError(error)]])
+      .dispatch({
+        type: PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_FALURE,
+        ...imageLink,
+        history
+      })
+      .silentRun();
+  });
+
+  it('gets a response with travel reason details and dispatches ', () => {
+    const passportInfo = {
+        "success": true,
+        "message": "passport succesfully scanned",
+        "passportData": {
+            "country": "Portugal",
+            "names": "INES         C  C",
+            "number": "1700044",
+            "birthDay": "04/07/1974",
+            "expirationDate": "06/16/2022",
+            "dataOfIssue": "06/16/2012",
+            "nationality": "Portugees",
+            "validScore": 62,
+            "sex": "F",
+            "surname": "GARCAO DE MAGALHAES",
+            "imageLink": "/Users/nesh/Desktop/passport.jpg"
+        }
+    };
+    return expectSaga(watchpassportScanSaga)
+      .provide([[call(ReadinessAPI.pasportImageScan, imageLink), passportInfo]])
+      .dispatch({
+        type: PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN_SUCCESS,
+      })
+      .silentRun();
+  });  
 });

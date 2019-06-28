@@ -12,13 +12,14 @@ export default withTravelReadinessForm(PassportDetailsFieldSet,'passport',
       dateOfBirth: '',
       dateOfIssue: '',
       placeOfIssue: '',
-      expiryDate: ''
+      expiryDate: '',
     },
+   
     image: '',
     imageChanged: false,
     documentUploaded: false,
     uploadingDocument: false,
     errors: {},
-    hasBlankFields: true,
+    hasBlankFields: true
   });
 

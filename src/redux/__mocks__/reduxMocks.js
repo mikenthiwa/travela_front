@@ -426,7 +426,35 @@ export const passportDetails  = {
   'expiryDate': '11/11/2019',
   'cloudinaryUrl': 'https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpeg'
 };
+
+export const passportError = {
+ 'success':false,
+  'message': 'Please upload a valid passport image and ensure the image is in landscape',
+}
+
+export const passportInfo = {
+  "success": true,
+  "message": "passport succesfully scanned",
+  "passportData": {
+      "country": "Portugal",
+      "names": "INES         C  C",
+      "number": "1700044",
+      "birthDay": "04/07/1974",
+      "expirationDate": "06/16/2022",
+      "dataOfIssue": "06/16/2012",
+      "nationality": "Portugees",
+      "validScore": 62,
+      "sex": "F",
+      "surname": "GARCAO DE MAGALHAES",
+      "imageLink": "/Users/nesh/Desktop/passport.jpg"
+  }
+}
+
 export const fetchTravelReadinessResponse = {
   'passport': {...passportDetails}
 };
+
+export const imageLink = {
+  'imageLink': 'https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpeg'
+}
 

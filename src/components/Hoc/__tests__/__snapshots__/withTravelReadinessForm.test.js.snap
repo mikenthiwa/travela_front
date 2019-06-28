@@ -6,184 +6,13 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
     className="travel-document-form"
     onSubmit={[Function]}
   >
-    <fieldset>
-      <div
-        className="input-group visa-input"
-      >
-        <div
-          className="form-input  "
-        >
-          <label
-            htmlFor="name"
-          >
-            Name
-            <span
-              style={
-                Object {
-                  "color": "red",
-                }
-              }
-            >
-               * 
-            </span>
-          </label>
-          <input
-            autoComplete="off"
-            className=" "
-            label="Name"
-            name="name"
-            onBlur={[Function]}
-            onChange={[Function]}
-            type="text"
-            value=""
-          />
-          <span
-            className="error"
-          />
-        </div>
-        <div
-          className="form-input  "
-        >
-          <label
-            htmlFor="dateOfIssue"
-          >
-            Date of Issue (MM/DD/YYYY)
-            <span>
-               
-              (Optional)
-            </span>
-          </label>
-          <div
-            className="date-wrapper    "
-            id="dateOfIssue_date"
-          >
-            <div>
-              <div
-                className="react-datepicker-wrapper"
-              >
-                <div
-                  className="react-datepicker__input-container"
-                >
-                  <input
-                    autoComplete="off"
-                    className=""
-                    disabled={false}
-                    name="dateOfIssue"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    onKeyDown={[Function]}
-                    placeholder="MM/DD/YYYY"
-                    readOnly={false}
-                    type="text"
-                    value="05/29/2019"
-                  />
-                </div>
-              </div>
-            </div>
-            <img
-              alt="cal"
-              className="calendar-icon"
-              src="calendar_icon.svg"
-            />
-          </div>
-          <span
-            className="error"
-          />
-        </div>
-        <div
-          className="form-input  "
-        >
-          <label
-            htmlFor="documentId"
-          >
-            Document Id
-            <span>
-               
-              (Optional)
-            </span>
-          </label>
-          <input
-            autoComplete="off"
-            className=" "
-            label="Document Id"
-            name="documentId"
-            onBlur={[Function]}
-            onChange={[Function]}
-            required={false}
-            type="text"
-            value=""
-          />
-          <span
-            className="error"
-          />
-        </div>
-        <div
-          className="form-input  "
-        >
-          <label
-            htmlFor="expiryDate"
-          >
-            Expiry Date (MM/DD/YYYY)
-            <span
-              style={
-                Object {
-                  "color": "red",
-                }
-              }
-            >
-               * 
-            </span>
-          </label>
-          <div
-            className="date-wrapper    "
-            id="expiryDate_date"
-          >
-            <div>
-              <div
-                className="react-datepicker-wrapper"
-              >
-                <div
-                  className="react-datepicker__input-container"
-                >
-                  <input
-                    autoComplete="off"
-                    className=""
-                    disabled={false}
-                    name="expiryDate"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    onKeyDown={[Function]}
-                    placeholder="MM/DD/YYYY"
-                    readOnly={false}
-                    type="text"
-                    value="05/29/2019"
-                  />
-                </div>
-              </div>
-            </div>
-            <img
-              alt="cal"
-              className="calendar-icon"
-              src="calendar_icon.svg"
-            />
-          </div>
-          <span
-            className="error"
-          />
-        </div>
-      </div>
-    </fieldset>
     <div
       className="travel-document-select-file"
     >
       <p
         className="attach-document-text"
       >
-        Attach the image or PDF of your  document
+        Attach the image or PDF of your  document ensure it is in Landscape
       </p>
       <div
         className="document-input__input-container"
@@ -221,7 +50,181 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
         </label>
       </div>
     </div>
-    <hr />
+    <div
+      className="visible"
+    >
+      <fieldset>
+        <div
+          className="input-group visa-input"
+        >
+          <div
+            className="form-input  "
+          >
+            <label
+              htmlFor="name"
+            >
+              Name
+              <span
+                style={
+                  Object {
+                    "color": "red",
+                  }
+                }
+              >
+                 * 
+              </span>
+            </label>
+            <input
+              autoComplete="off"
+              className=" "
+              label="Name"
+              name="name"
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+            <span
+              className="error"
+            />
+          </div>
+          <div
+            className="form-input  "
+          >
+            <label
+              htmlFor="dateOfIssue"
+            >
+              Date of Issue (MM/DD/YYYY)
+              <span>
+                 
+                (Optional)
+              </span>
+            </label>
+            <div
+              className="date-wrapper    "
+              id="dateOfIssue_date"
+            >
+              <div>
+                <div
+                  className="react-datepicker-wrapper"
+                >
+                  <div
+                    className="react-datepicker__input-container"
+                  >
+                    <input
+                      autoComplete="off"
+                      className=""
+                      disabled={false}
+                      name="dateOfIssue"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="MM/DD/YYYY"
+                      readOnly={false}
+                      type="text"
+                      value="06/12/2019"
+                    />
+                  </div>
+                </div>
+              </div>
+              <img
+                alt="cal"
+                className="calendar-icon"
+                src="calendar_icon.svg"
+              />
+            </div>
+            <span
+              className="error"
+            />
+          </div>
+          <div
+            className="form-input  "
+          >
+            <label
+              htmlFor="documentId"
+            >
+              Document Id
+              <span>
+                 
+                (Optional)
+              </span>
+            </label>
+            <input
+              autoComplete="off"
+              className=" "
+              label="Document Id"
+              name="documentId"
+              onBlur={[Function]}
+              onChange={[Function]}
+              required={false}
+              type="text"
+              value=""
+            />
+            <span
+              className="error"
+            />
+          </div>
+          <div
+            className="form-input  "
+          >
+            <label
+              htmlFor="expiryDate"
+            >
+              Expiry Date (MM/DD/YYYY)
+              <span
+                style={
+                  Object {
+                    "color": "red",
+                  }
+                }
+              >
+                 * 
+              </span>
+            </label>
+            <div
+              className="date-wrapper    "
+              id="expiryDate_date"
+            >
+              <div>
+                <div
+                  className="react-datepicker-wrapper"
+                >
+                  <div
+                    className="react-datepicker__input-container"
+                  >
+                    <input
+                      autoComplete="off"
+                      className=""
+                      disabled={false}
+                      name="expiryDate"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="MM/DD/YYYY"
+                      readOnly={false}
+                      type="text"
+                      value="06/12/2019"
+                    />
+                  </div>
+                </div>
+              </div>
+              <img
+                alt="cal"
+                className="calendar-icon"
+                src="calendar_icon.svg"
+              />
+            </div>
+            <span
+              className="error"
+            />
+          </div>
+        </div>
+      </fieldset>
+    </div>
     <div
       className="travel-document-submit-area"
     >

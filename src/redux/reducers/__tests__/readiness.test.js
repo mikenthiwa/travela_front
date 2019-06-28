@@ -4,7 +4,7 @@ import {
 
 } from '../../constants/actionTypes';
 import {
-  fetchReadinessResponse, passportDetails
+  fetchReadinessResponse, passportDetails, passportInfo
 
 } from '../../__mocks__/reduxMocks';
 import {
@@ -16,15 +16,17 @@ import {
   exportReadinessSuccess,
   createTravelReadinessDocumentSuccess,
   createTravelReadinessDocument,
-  createTravelReadinessDocumentFailure
+  createTravelReadinessDocumentFailure, 
+
+  scanPassportFailure
 } from '../../actionCreator/travelReadinessActions';
 
 describe('Test suite for readiness reducer', () => {
   const initialState = {
     readiness: [],
-    isLoading:false,
+    isLoading: false,
     error: '',
-    pagination: {}
+    pagination: {},
   };
   it('should return initial state', () => {
     expect(readiness(undefined, {})).toEqual({
@@ -58,45 +60,45 @@ describe('Test suite for readiness reducer', () => {
 
 
   it('should handle FETCH_READINESS_SUCCESS',
-    (done) => {
-      const currentState = {
-        ...initialState,
-        readiness: {
-          isLoading: true,
-          readiness: {},
-          pagination: {}
-        }
-      };
+      (done) => {
+        const currentState = {
+          ...initialState,
+          readiness: {
+            isLoading: true,
+            readiness: {},
+            pagination: {}
+          }
+        };
 
-      const action = fetchReadinessSuccess(fetchReadinessResponse);
-      const newState = readiness(currentState, action);
-      expect(newState.isLoading).toBe(false);      
-      expect(newState).toMatchObject(fetchReadinessResponse);
-      done();
-    });
+        const action = fetchReadinessSuccess(fetchReadinessResponse);
+        const newState = readiness(currentState, action);
+        expect(newState.isLoading).toBe(false);
+        expect(newState).toMatchObject(fetchReadinessResponse);
+        done();
+      });
 
   it('should handle FETCH_READINESS_FAILURE',
-    (done) => {
-      const currentState = {
-        ...initialState,
-        isLoading: true,
-        error: null
-      };
-      const error = 'Error';
-      const action = fetchReadinessFailure(error);
-      const newState = readiness(currentState, action);
-      expect(newState.isLoading).toBe(false);
-      expect(newState.error).toEqual(error);
-      done();
-    });
-  it('should handle CREATE_READINESS_DOCUMENT_SUCCESS', (done)=> {
+      (done) => {
+        const currentState = {
+          ...initialState,
+          isLoading: true,
+          error: null
+        };
+        const error = 'Error';
+        const action = fetchReadinessFailure(error);
+        const newState = readiness(currentState, action);
+        expect(newState.isLoading).toBe(false);
+        expect(newState.error).toEqual(error);
+        done();
+      });
+  it('should handle CREATE_READINESS_DOCUMENT_SUCCESS', (done) => {
     const currentState = {
       isLoading: false,
       document: {},
       errors: {}
     };
 
-    const response = { 'passport': {...passportDetails}};
+    const response = {'passport': {...passportDetails}};
     const action = createTravelReadinessDocumentSuccess(response);
     const newState = readiness(currentState, action);
     expect(newState.error, {});
@@ -104,14 +106,14 @@ describe('Test suite for readiness reducer', () => {
     done();
   });
 
-  it('should handle CREATE_READINESS_DOCUMENT', (done)=> {
+  it('should handle CREATE_READINESS_DOCUMENT', (done) => {
     const currentState = {
       isLoading: true,
       document: {},
       errors: {}
     };
 
-    const response = { 'passport': {...passportDetails}};
+    const response = {'passport': {...passportDetails}};
     const action = createTravelReadinessDocument(response);
     const newState = readiness(currentState, action);
     expect(newState.error, {});
@@ -119,14 +121,14 @@ describe('Test suite for readiness reducer', () => {
     done();
   });
 
-  it('should handle CREATE_READINESS_DOCUMENT', (done)=> {
+  it('should handle CREATE_READINESS_DOCUMENT', (done) => {
     const currentState = {
       isLoading: false,
       document: {},
       errors: {}
     };
 
-    const response = { 'passport': {...passportDetails}};
+    const response = {'passport': {...passportDetails}};
     const action = createTravelReadinessDocumentFailure(response);
     const newState = readiness(currentState, action);
     expect(newState.error, {});

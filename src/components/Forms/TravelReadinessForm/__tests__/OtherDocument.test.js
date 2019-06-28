@@ -10,7 +10,14 @@ const props = {
   closeModal: jest.fn(),
   openModal: jest.fn(),
   fetchUserData: jest.fn(),
-  user: {}
+  scanPassport: jest.fn(),
+  user: {}, 
+  showPassportForm:false,
+  retrieving:false, 
+  modalType:'add other',
+  passportInfo:{
+    passportData:{}
+  }
 };
 
 const textFile = new Blob(['This is a text file'], {type : 'text/plain'});
@@ -88,5 +95,13 @@ describe('<OtherDocumentForm />', () => {
   it('toasts an error if cloudinary returns an error', () => {
     moxios.stubRequest(process.env.REACT_APP_CLOUNDINARY_API, { status: 500});
     wrapper.find('#select-file').simulate('change', event);
+  });
+
+  it('closes modal on cancel', () => {
+    expect(wrapper.find('#cancel').length).toEqual(1);
+    wrapper.find('#cancel').simulate('click', event);
+    setTimeout(()=>{
+      expect(props.closeModal).toHaveBeenCalled();
+    }, 5000)
   });
 });

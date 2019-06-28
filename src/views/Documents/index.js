@@ -145,6 +145,7 @@ export class Documents extends Component {
       </Modal>
     );
   };
+
   renderSubmitArea = () => {
     const { isUpdating } = this.props;
     const { hasBlankFields } = this.state;
@@ -172,7 +173,6 @@ export class Documents extends Component {
       </div>
     );
   };
-
 
   renderDocumentRenameForm = () => {
     const { documentOnEdit } = this.props;

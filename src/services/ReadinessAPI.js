@@ -28,6 +28,10 @@ class ReadinessAPI {
       [documentType]: documentDetails
     });
   }
+
+  static pasportImageScan(image){
+    return axios.post(`${baseUrl}/travelreadiness/documents/scan`, {imageLink: image});
+  }
 }
 
 export default ReadinessAPI;

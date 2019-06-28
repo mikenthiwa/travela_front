@@ -6,7 +6,7 @@ import withTravelReadinessForm from '../withTravelReadinessForm';
 import VisaFormFieldset from '../../Forms/TravelReadinessForm/FormFieldsets/VisaFormFieldset';
 import OtherDocumentFieldSet from '../../Forms/TravelReadinessForm/FormFieldsets/OtherDocumentFieldSet';
 import FileUploadField from '../../Forms/TravelReadinessForm/FormFieldsets/FileUploadField';
-
+import PassportDetailsFieldSet from '../../Forms/TravelReadinessForm/FormFieldsets/passportDetails';
 
 
 const props = {
@@ -14,16 +14,37 @@ const props = {
   createTravelReadinessDocument: jest.fn(),
   closeModal: jest.fn(),
   fetchUserData: jest.fn(),
+  scanPassport: jest.fn(),
   user: {
     currentUser: {
-
     }
   },
   editTravelReadinessDocument: jest.fn(),
   document: {},
   handleSubmit: jest.fn(),
   modalType: '',
+  passportInfo:{
+    passportData:{
+  }}, 
+  scanning:false, 
+  showPassportForm:true
+
 };
+const passportInfo = {
+  "passportData": {
+    "country": "Portugal",
+    "names": "INES         C  C",
+    "number": "1700044",
+    "birthDay": moment(),
+    "expirationDate": moment(),
+    "dataOfIssue": moment(),
+    "nationality": "Portugees",
+    "validScore": 62,
+    "sex": "F",
+    "surname": "GARCAO DE MAGALHAES",
+    "imageLink": "http://cloudinary/image.jpg"
+  }
+}
 
 const OtherDocumentDefault  = withTravelReadinessForm(OtherDocumentFieldSet, 'other', {
   values: {
@@ -35,7 +56,7 @@ const OtherDocumentDefault  = withTravelReadinessForm(OtherDocumentFieldSet, 'ot
   hasBlankFields: true,
   documentUploaded: false,
   uploadingDocument: false,
-  image: ''
+  image: '',
 });
 
 const document = {
@@ -45,6 +66,8 @@ const document = {
   expiryDate: moment(),
   dateOfIssue: moment()
 };
+
+
 
 const NewOtherDocument= withTravelReadinessForm(OtherDocumentFieldSet, 'other', {
   values: {
@@ -57,6 +80,25 @@ const NewOtherDocument= withTravelReadinessForm(OtherDocumentFieldSet, 'other', 
   uploadingDocument: false,
   documentUploaded: true,
   image: '',
+});
+
+const NewPassportDocument = withTravelReadinessForm(PassportDetailsFieldSet, 'passport', {
+  values: {
+      name: '',
+      passportNumber: '',
+      nationality:'',
+      dateOfBirth: moment(),
+      dateOfIssue:  moment(),
+      placeOfIssue: '',
+      expiryDate:  moment()
+    },
+   
+    image: '',
+    imageChanged: false,
+    documentUploaded: false,
+    uploadingDocument: false,
+    errors: {},
+    hasBlankFields: true
 });
 
 const NewOtherDocumentII  = withTravelReadinessForm(OtherDocumentFieldSet, 'other', {
@@ -107,20 +149,28 @@ const VisaDefault = withTravelReadinessForm(VisaFormFieldset, 'visa', {
   image: ''
 });
 
+
 const wrapperWithOtherDocumentField = mount(
   <OtherDocumentDefault {...props} />
 );
 const wrapperWithVisaDocumentField = mount(
   <VisaDefault {...props} />
 );
+const wrapperwithPassportDocumentField = mount(
+  <VisaDefault {...props} />
+)
 const textFile = new Blob(['This is a text file'], {type : 'text/plain'});
 textFile.name = 'textFile.txt';
 
-const validFile =new Blob(['x'.repeat(10000000)], {type : 'image/jpeg'});
-validFile.name = 'file.png';
+const validFile = {
+  name: 'file.png',
+  size: 10000000,
+  type: 'image/png'
+};
 
-const invalidFileSize = new Blob(['x'.repeat(10000001)], {type : 'image/jpeg'});
-invalidFileSize.name = 'invalidFileSize.jpeg';
+const invalidFileSize = {name: 'invalidFileSize.jpg',
+size: 10000000000000,
+type: 'image/png'}
 
 
 toast.error = jest.fn();
@@ -192,18 +242,38 @@ describe('<OtherDocumentForm />', () => {
   });
 
   it('should upload a file', () => {
+    const cloudinaryResponse = {
+      url: 'secure url'
+    };
+    moxios.stubRequest(process.env.REACT_APP_CLOUNDINARY_API, {
+      status: 200,
+      response: cloudinaryResponse
+    });
     wrapper.find('#select-file').simulate('change', event);
-    expect(wrapper.state().image).toEqual(validFile);
+
+    setTimeout(()=>{
+      expect(wrapper.state().image).toEqual(validFile);
+    }, 5000)
   });
+
 
   it('should upload a file for edit', () => {
     const newProps = {
       ...props,
-      modalType: 'edit visa',
+      modalType: 'edit visa'
     };
+    const cloudinaryResponse = {
+      url: 'secure url'
+    };
+    moxios.stubRequest(process.env.REACT_APP_CLOUNDINARY_API, {
+      status: 200,
+      response: cloudinaryResponse
+    });
     const wrapper = mount(<VisaDefault {...newProps} />);
     wrapper.find('#select-file').simulate('change', event);
-    expect(wrapper.state().image).toEqual(validFile);
+    setTimeout(()=>{
+      expect(wrapper.state().image).toEqual(validFile);
+    }, 5000)
   });
 
   it('toasts an error if cloudinary returns an error', () => {
@@ -262,8 +332,8 @@ describe('<OtherDocumentForm />', () => {
       ...props,
       modalType: 'edit visa',
       documentType: 'visa',
-      document: {data: { imageName: 'image.jpg' }}
-    };
+      document: {data: { imageName: 'image.jpg' }}, 
+    }
     const wrapperWithOtherDocumentField = mount(
       <NewOtherDocument {...newProps} />
     );
@@ -421,9 +491,20 @@ describe('<OtherDocumentForm />', () => {
       modalType: 'edit other',
     };
 
+    const cloudinaryResponse = {
+      url: 'secure url'
+    };
+    moxios.stubRequest(process.env.REACT_APP_CLOUNDINARY_API, {
+      status: 200,
+      response: cloudinaryResponse
+    });
+   ;
+
+
     const wrapperWithOtherDocumentField = mount(
       <NewOtherDocument {...newProps} handleUpload={jest.fn()} />
     );
+    
     wrapperWithOtherDocumentField.instance().setState({
       imageChanged: true,
       image: 'image.jpg',
@@ -433,15 +514,22 @@ describe('<OtherDocumentForm />', () => {
         expiryDate: moment(),
         image: 'image.jpg'}
     });
-    const validFile = new Blob(['This is a valid png file'], {type : 'image/png', size: 1092});
-    validFile.name = 'file.png';
+    const validFile = {
+      name: 'file.png',
+      size: 10000000,
+      type: 'image/png'
+    };
     const event = {
       preventDefault: jest.fn(),
       target:{
         files: [validFile]
       }};
     wrapperWithOtherDocumentField.instance().handleUpload(event);
-    expect(wrapperWithOtherDocumentField.instance().state.hasBlankFields).toBe(true);
+
+     setTimeout(()=>{
+      expect(wrapperWithOtherDocumentField.instance().state.hasBlankFields).toBe(true);
+    }, 5000)
+  
     wrapperWithOtherDocumentField.instance().setState({
       imageChanged: true,
       image: 'image.jpg',
@@ -452,7 +540,10 @@ describe('<OtherDocumentForm />', () => {
         image: 'image.jpg'}
     });
     wrapperWithOtherDocumentField.instance().handleUpload(event);
-    expect(wrapperWithOtherDocumentField.instance().state.hasBlankFields).toBe(false);
+    setTimeout(()=>{
+      expect(wrapperWithOtherDocumentField.instance().state.hasBlankFields).toBe(false);
+    }, 5000)
+   
   });
 
   it('Maximum size should be 10MB', ()=>{
@@ -460,7 +551,11 @@ describe('<OtherDocumentForm />', () => {
       ...props,
       modalType: 'add visa'
     };
-    const invalidFileSize = new Blob(['x'.repeat(40000001)], {type : 'image/png', size: 1092});
+    const invalidFileSize =  {
+      name: 'file.png',
+      size: 50000000,
+      type: 'image/png'
+    };
     invalidFileSize.name = 'file.png';
     const event = {
       preventDefault: jest.fn(),
@@ -471,6 +566,28 @@ describe('<OtherDocumentForm />', () => {
     event.target.files = [invalidFileSize];
     wrapper.find('#select-file').simulate('change', event);
     expect(toast.error).toHaveBeenCalledWith('This upload has exceeded the 10 MB limit that is allowed');
+  });
+
+  it('Image should be png/jpg/jpeg', ()=>{
+    const newProps = {
+      ...props,
+      modalType: 'add visa'
+    };
+    const invalidFileSize =  {
+      name: 'file.png',
+      size: 50000000,
+      type: 'image/mbp'
+    };
+    invalidFileSize.name = 'file.png';
+    const event = {
+      preventDefault: jest.fn(),
+      target:{
+        files: [invalidFileSize]
+      }};
+    const wrapper = mount(<VisaDefault {...newProps} />);
+    event.target.files = [invalidFileSize];
+    wrapper.find('#select-file').simulate('change', event);
+    expect(toast.error).toHaveBeenCalledWith('Invalid file type. Please upload an image');
   });
 
   it('should create visa if all the data is valid',  () => {
@@ -562,7 +679,7 @@ describe('<OtherDocumentForm />', () => {
     process.env.REACT_APP_CLOUNDINARY_API = 'https://mock-passport-cloudinary-api-succeed';
 
     const cloudinaryResponse = {
-      url: 'secure url'
+      data:{url: 'secure url'}
     };
 
     moxios.stubRequest(process.env.REACT_APP_CLOUNDINARY_API, {
@@ -716,4 +833,108 @@ describe('<OtherDocumentForm />', () => {
     });
   });
 
+  it('should scan passport on edit', () =>{
+    const newProps = {
+      ...props,
+      modalType: 'edit passport',
+      showPassportForm: false,
+      document: {
+        data: {
+          name: 'kevin Munene',
+          passportNumber: '99292',
+          nationality: 'Kenyan',
+          dateOfBirth: moment(),
+          dateOfIssue: moment(),
+          placeOfIssue: 'Kenya',
+          expiryDate: moment(),
+          documentId: '1234',
+          cloudinaryUrl: 'http://cloudinary/image.jpg',
+          imageName: 'ken.jpg'
+        }
+      },
+    };
+    const cloudinaryResponse = {
+      secure_url: 'http://cloudinary/image.jpg'
+    };
+    moxios.stubRequest(process.env.REACT_APP_CLOUNDINARY_API, {
+      status: 200,
+      response: cloudinaryResponse
+    });
+    const validFile = {
+      name: 'file.png',
+      size: 10000000,
+      type: 'image/png'
+    };
+    const event = {
+      preventDefault: jest.fn(),
+      target:{
+        files: [validFile]
+      }};
+
+    const documentId = 1234;
+
+    const wrapperPassport = mount(<NewPassportDocument {...newProps} handleUpload={jest.fn()} />);
+    wrapperPassport.find('#select-file').simulate('change', event);
+
+    wrapperPassport.instance().setState({
+          imageChanged: true,
+          image: 'image.jpg',
+          values:{
+            name: 'kevin Munene',
+            passportNumber: '99292',
+            nationality: 'Kenyan',
+            dateOfBirth:  moment(),
+            dateOfIssue: moment(),
+            placeOfIssue: 'Kenya',
+            expiryDate: moment(),
+            documentId: '1234',
+            cloudinaryUrl: cloudinaryResponse.secure_url,
+            imageName: 'ken.jpg'}
+        });
+
+    wrapperPassport.instance().handleUpload(event);
+
+    setTimeout(()=>{
+      expect(props.scanPassport).toHaveBeenCalledWith(cloudinaryResponse.secure_url);
+    }, 5000);
+    wrapperPassport.instance().scanUpdatePopulates(passportInfo.passportData, 'edit passport', documentId);
+  expect(wrapperPassport.instance().state.hasBlankFields).toBe(false);
+  });
+
+it('should upload an image', () =>{
+  const newProps = {
+    ...props,
+    modalType: 'add passport',
+    showPassportForm:false,
+    passportInfo,
+  };
+  const cloudinaryResponse = {
+    secure_url: 'http://cloudinary/image.jpg'
+  };
+  moxios.stubRequest(process.env.REACT_APP_CLOUNDINARY_API, {
+    status: 200,
+    response: cloudinaryResponse
+  });
+  const validFile = {
+    name: 'file.png',
+    size: 10000000,
+    type: 'image/png'
+  };
+  const event = {
+    preventDefault: jest.fn(),
+    target:{
+      files: [validFile]
+    }};
+
+  const wrapperPassport = mount(<NewPassportDocument {...newProps} handleUpload={jest.fn()} />);
+  wrapperPassport.find('#select-file').simulate('change', event);
+  wrapperPassport.instance().handleUpload(event);
+  setTimeout(()=>{
+    expect(props.scanPassport).toHaveBeenCalledWith(cloudinaryResponse.secure_url);
+  }, 5000);
+  wrapperPassport.instance().scanUpdatePopulates(passportInfo.passportData, 'add passport');
+  setTimeout(()=>{
+    expect(wrapperPassport.find('FileUploadField').text()).toContain(cloudinaryResponse.secure_url);
+  }, 5000);
+});
 });

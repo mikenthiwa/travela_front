@@ -16,7 +16,7 @@ import {
   CREATE_DOCUMENT_FAILURE,
   DOWNLOAD_DOCUMENTS,
   DOWNLOAD_DOCUMENTS_SUCCESS,
-  DOWNLOAD_DOCUMENTS_FAILURE
+  DOWNLOAD_DOCUMENTS_FAILURE,
 } from '../constants/actionTypes';
 
 
@@ -111,3 +111,4 @@ export const createDocumentFailure = (error) => ({
   type: CREATE_DOCUMENT_FAILURE,
   error,
 });
+

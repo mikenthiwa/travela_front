@@ -2,7 +2,6 @@ import axios from 'axios';
 import { resolveBaseUrl } from '.';
 
 const baseUrl = resolveBaseUrl();
-
 class TravelReadinessDocumentsAPI {
   static getAllUsersReadiness(query) {
     return axios.get(`${baseUrl}/travelreadiness/users?searchQuery=${query}`);
@@ -33,6 +32,8 @@ class TravelReadinessDocumentsAPI {
     return axios.delete(`${baseUrl}/travelreadiness/documents/${documentId}`);
   }
 }
+
+
 
 export default TravelReadinessDocumentsAPI;
 

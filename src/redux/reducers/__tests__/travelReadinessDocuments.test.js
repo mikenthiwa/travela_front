@@ -1,8 +1,13 @@
 import travelReadinessDocuments, { initialState } from '../travelReadinessDocuments';
 import {
-  createTravelReadinessDocument, createTravelReadinessDocumentFailure, createTravelReadinessDocumentSuccess
+  createTravelReadinessDocument,
+  createTravelReadinessDocumentFailure,
+  createTravelReadinessDocumentSuccess,
+  scanPassport, scanPassportFailure, scanPassportSuccess
 } from '../../actionCreator/travelReadinessActions';
 import * as types from '../../constants/actionTypes';
+import {passportDetails, passportInfo, passportError} from "../../__mocks__/reduxMocks";
+import readiness from "../readiness";
 
 describe('travel readiness reducer', () => {
   it('returns initial state', () => {
@@ -242,7 +247,7 @@ describe('travel readiness reducer', () => {
           'country': 'Estoni and Herzegovina',
           'dateOfIssue': '02/01/2018',
           'expiryDate': '06/01/2019',
-          'cloudinaryUrl': 'http://n.com'
+          'cloudinaryUrl': '/usr/desktop/ken.jpg'
         }
       },
       documentId: 'JiSe',
@@ -556,5 +561,78 @@ describe('travel readiness reducer', () => {
       },
       comments: [],
     });
+  });
+
+  it('should handle PASSPORT_SCAN', (done) => {
+    const currentState = {
+      isLoading: false,
+      document: {},
+      errors: {},
+      passportInfo: {},
+      showForm: false
+    };
+
+    const response = {...passportInfo};
+    const action = scanPassport(response);
+    const newState = travelReadinessDocuments(currentState, action);
+    expect(newState.error, {});
+    expect(newState.passportInfo, response);
+    done();
+  });
+
+  it('should handle PASSPORT_SCAN_SUCCESS', (done) => {
+    const currentState = {
+      isLoading: false,
+      document: {},
+      errors: {},
+      passportInfo: {},
+      showForm: false
+    };
+
+    const response = {...passportInfo};
+    const action = scanPassportSuccess(response);
+    const newState = travelReadinessDocuments(currentState, action);
+    expect(newState.error, {});
+    expect(newState.showForm, response);
+    done();
+  });
+  it('should handle PASSPORT_SCAN_FAILURE', (done) => {
+    const currentState = {
+      isLoading: false,
+      document: {},
+      errors: {},
+      passportInfo: {},
+      showForm: false
+    };
+
+    const response = {'passport': {...passportDetails}};
+    const action = scanPassportFailure(response);
+    const newState = travelReadinessDocuments(currentState, action);
+    expect(newState.error, {});
+    expect(newState.passportInfo, response);
+    done();
+  });
+
+  it('should handle PASSPORT_SCAN_FAILURE on message ', (done) => {
+    const currentState = {
+      isLoading: false,
+      document: {},
+      errors: {},
+      passportInfo: {},
+      showForm: false
+    };
+
+    const receivedState = {
+      ...currentState,
+      scanning: false,
+      showForm:false,
+      error: 'Please upload a valid passport image and ensure the image is in landscape'
+    };
+    const response = {'error': {...passportError}};
+    const action = scanPassportFailure(response);
+    const newState = travelReadinessDocuments(receivedState, action);
+    expect(newState.error, 'Please upload a valid passport image and ensure the image is in landscape');
+    expect(newState.passportInfo, response);
+    done();
   });
 });

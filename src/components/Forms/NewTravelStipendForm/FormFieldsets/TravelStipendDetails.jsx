@@ -16,7 +16,7 @@ class TravelStipendFieldset extends Component {
       values,
       getCountryChoices
     } = this.props;
-
+    
     const { renderInput } = this.inputRenderer;
     return (
       <div>

@@ -7,7 +7,8 @@ import apiErrorHandler from '../../services/apiErrorHandler';
 import {
   FETCH_TRAVEL_READINESS,
   EXPORT_TRAVEL_READINESS,
-  CREATE_TRAVEL_READINESS_DOCUMENT
+  CREATE_TRAVEL_READINESS_DOCUMENT, 
+  PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN
 } from '../constants/actionTypes';
 import {
   fetchReadinessSuccess,
@@ -15,7 +16,9 @@ import {
   exportReadinessFailure,
   exportReadinessSuccess,
   createTravelReadinessDocumentSuccess,
-  createTravelReadinessDocumentFailure
+  createTravelReadinessDocumentFailure, 
+  scanPassportSuccess, 
+  scanPassportFailure
 } from '../actionCreator/travelReadinessActions';
 import { closeModal, openModal } from '../actionCreator/modalActions';
 
@@ -64,6 +67,23 @@ export function* exportReadinessSaga(action) {
     let errorMessage = apiErrorHandler(error);
     yield put(exportReadinessFailure(errorMessage));
   }
+}
+
+export function* passportScanSaga(action) {
+  try {
+    const response = yield call(ReadinessAPI.pasportImageScan, action.payload);
+    yield put(scanPassportSuccess(response.data));
+    toast.success(response.data.message);
+  }
+  catch(error) {
+    const errorMessage = apiErrorHandler(error);
+    yield put(scanPassportFailure(errorMessage));
+    toast.error(errorMessage);
+  }
+}
+
+export function* watchpassportScanSaga() {
+  yield takeLatest(PASSPORT_TRAVEL_READINESS_DOCUMENT_SCAN, passportScanSaga);
 }
 
 export function* watchFetchReadiness() {

@@ -22,7 +22,7 @@ class DocumentAPI {
   static setToken () {
     const token = localStorage.getItem('jwt-token');
     axios.defaults.headers.common['Authorization'] = token;
-  } 
+  }
 }
 
 export default DocumentAPI;

@@ -6,12 +6,18 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
     .form-input {
       width: 48%;
     }
   }
 
+  .invisible {
+    display: none
+  }
+
+  .visible {
+    display: block;
+  }
 
   .form-input.fluid {
     width: 100%;
