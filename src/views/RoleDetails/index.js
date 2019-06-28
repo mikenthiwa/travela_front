@@ -121,7 +121,7 @@ export class RoleDetails extends Component {
 
   renderRoleForm() {
     const {
-      error, closeModal, shouldOpen, modalType, isUpdating,
+      error, closeModal, shouldOpen, modalType, isUpdating, isUpdatingCenter, 
       roleName, fetchRoleUsers, fetchCenters, centers, getUsersEmail: allMails,
       putRoleData, updateBudgetChecker, match, getAllUsersEmail, updateUserCenter,updatingRole, departments, getAllDepartment} = this.props;
     const { headTitle, userDetail } = this.state;
@@ -141,7 +141,7 @@ export class RoleDetails extends Component {
         <NewUserRoleForm
           role={roleName}
           roleId={roleId}
-          updatingRole={updatingRole || isUpdating}
+          updatingRole={updatingRole || isUpdatingCenter || isUpdating}
           errors={error}
           closeModal={closeModal}
           getRoleData={() => fetchRoleUsers(roleId, page)}
@@ -222,7 +222,7 @@ export const mapStateToProps = ({ modal, role, user, centers }) => ({
   ...modal.modal,
   ...role,
   ...centers,
-  isUpatingCenter: centers.update.isLoading
+  isUpdatingCenter: centers.update.isLoading
 });
 
 RoleDetails.propTypes = {
@@ -259,6 +259,7 @@ RoleDetails.propTypes = {
   departments: PropTypes.array,
   getAllDepartment: PropTypes.func,
   isUpdating: PropTypes.bool,
+  isUpdatingCenter: PropTypes.bool,
   updateUserCenter: PropTypes.func,
 };
 
@@ -270,6 +271,7 @@ RoleDetails.defaultProps = {
   roleName: '',
   updatingRole: false,
   isUpdating: false,
+  isUpdatingCenter: false,
   centers: [],
   getUsersEmail: [],
   meta: { currentPage: 1, pageCount: 0, search:'' },

@@ -8,6 +8,7 @@ import {
 } from '../constants/actionTypes';
 
 const initialSate = {
+  isLoading: false,
   update: {
     isLoading: false
   }
@@ -24,13 +25,13 @@ const centers = (state = initialSate, action) => {
     return {
       ...state, isLoading: false, centersError: action.error };
   case UPDATE_USER_CENTER:
-    return {...state, isLoading: true };
+    return {...state, update: { isLoading: true }};
   case UPDATE_USER_CENTER_SUCCESS:
     return {
-      ...state, isLoading: false, centersUpdate: action.response };
+      ...state, update: { isLoading: false }, centersUpdate: action.response };
   case UPDATE_USER_CENTER_FAILURE:
     return {
-      ...state, isLoading: false, centersUpdateError: action.error };
+      ...state, update: { isLoading: false }, centersUpdateError: action.error };
   default:
     return state;
   }

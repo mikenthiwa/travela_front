@@ -20,9 +20,8 @@ const centersResponse = [{
 describe('Centers Reducer', () => {
   describe('Fetch Centers Reducer', () => {
     const initialState = {
-      update: {
-        isLoading: false,
-      }
+      isLoading: false,
+      update: { isLoading: false }
     };
     it('returns the correct initial state', () => {
       expect(centers(undefined, {})).toEqual({
@@ -68,7 +67,7 @@ describe('Centers Reducer', () => {
       };
       expect(centers(initialState, action)).toEqual({
         ...initialState,
-        isLoading: true
+        update: { isLoading: true }
       });
     });
 
@@ -79,7 +78,7 @@ describe('Centers Reducer', () => {
       };
       expect(centers(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        update: { isLoading: false },
         centers: action.centers
       });
     });
@@ -91,7 +90,7 @@ describe('Centers Reducer', () => {
       };
       expect(centers(initialState, action)).toEqual({
         ...initialState,
-        isLoading: false,
+        update: { isLoading: false },
         centersUpdateError: action.error
       });
     });
