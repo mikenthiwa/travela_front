@@ -75,18 +75,19 @@ class AccommodationDetails extends Component {
             <div className="room remove" onChange={handleInputChange}>
               {renderInput(`bedCount-${i}`, 'number', { parentid: i })}
             </div>
+            {(
+              <img
+                src={deleteRoomIcon}
+                alt="clicked"
+                onClick={() => removeRoom()}
+                className="cancel-button"
+                role="presentation"
+                onKeyPress={this.press}
+              />
+            )}
           </div>
         </div>
-        {i >= 0 ? (
-          <img
-            src={deleteRoomIcon}
-            alt="clicked"
-            onClick={() => removeRoom(i)}
-            className="cancel-button"
-            role="presentation"
-            onKeyPress={this.press}
-          />
-        ) : null}
+      
       </div>
     );
   };
