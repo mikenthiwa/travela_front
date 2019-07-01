@@ -20,12 +20,12 @@ export class RoleDetailsTable extends PureComponent {
   }
 
   renderDeleteModal = (user) => {
-    const { handleDeleteUserRole, deleteModalState } = this.props;
+    const { handleDeleteUserRole, deleteModalRoleId } = this.props;
     return (
       <Modal
         customModalStyles="delete-role-modal"
         customOverlayStyle="delete-modal-overlay position-below"
-        visibility={deleteModalState}
+        visibility={deleteModalRoleId === user.id ? 'visible' : 'invisible'}
         closeDeleteModal={this.closeDeleteModal}
         title="Remove Member ?"
         showOverlay={false}
@@ -45,7 +45,7 @@ export class RoleDetailsTable extends PureComponent {
   }
 
   renderRoleUser(roleUser) {
-    const { handleEditRole, deleteModalRoleId, deleteModalState, roleName } = this.props;
+    const { handleEditRole, roleName } = this.props;
     const showTip = roleName === 'Budget Checker' ? Utils.returnTip(roleUser.budgetCheckerDepartments, 'name')
       : Utils.returnTip(roleUser.centers, 'location');
     return (
@@ -79,7 +79,6 @@ export class RoleDetailsTable extends PureComponent {
             onKeyDown={this.key}>
             Delete
             {
-              deleteModalRoleId === roleUser.id && deleteModalState === 'visible' &&
               this.renderDeleteModal(roleUser)
             }
           </span>
@@ -152,7 +151,6 @@ RoleDetailsTable.propTypes = {
     PropTypes.bool,
   ]),
   roleName: PropTypes.string,
-  deleteModalState: PropTypes.string,
   deleteModalRoleId: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
@@ -166,7 +164,6 @@ RoleDetailsTable.defaultProps = {
   error: '',
   roleName: '',
   handleEditRole: () => { },
-  deleteModalState: 'invisible',
   deleteModalRoleId: 0,
   hideDeleteRoleModal: () => { },
   showDeleteRoleModal: () => { },
