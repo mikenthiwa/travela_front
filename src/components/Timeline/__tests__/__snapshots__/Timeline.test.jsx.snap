@@ -62,7 +62,7 @@ exports[`<Timeline /> renders correctly 1`] = `
       <span
         className="timeline-period value"
       >
-        May 2019
+        June 2019
       </span>
       <div
         className="timeline-navigator"
@@ -308,7 +308,7 @@ exports[`<Timeline /> renders correctly 1`] = `
         key="24"
       />
       <div
-        className="timeline__segment  month-view"
+        className="timeline__segment current month-view"
         data-segment-label="26"
         key="25"
       />
@@ -323,7 +323,7 @@ exports[`<Timeline /> renders correctly 1`] = `
         key="27"
       />
       <div
-        className="timeline__segment current month-view"
+        className="timeline__segment  month-view"
         data-segment-label="29"
         key="28"
       />
@@ -331,11 +331,6 @@ exports[`<Timeline /> renders correctly 1`] = `
         className="timeline__segment  month-view"
         data-segment-label="30"
         key="29"
-      />
-      <div
-        className="timeline__segment  month-view"
-        data-segment-label="31"
-        key="30"
       />
       <div
         className="rooms-geometry-wrapper"
@@ -354,14 +349,14 @@ exports[`<Timeline /> renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="overlay visible  overlayBackground"
+    className="overlay invisible  overlayBackground"
     onClick={null}
     onKeyPress={[Function]}
     role="button"
     tabIndex="0"
   >
     <div
-      className="modal visible change-room-modal"
+      className="modal invisible change-room-modal"
       id=""
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -407,6 +402,7 @@ exports[`<Timeline /> renders correctly 1`] = `
       >
         <form
           className="change-room-modal__form"
+          key=".0"
         >
           <div
             className="change-room-modal__other-available-room"
@@ -541,7 +537,7 @@ exports[`<Timeline /> renders the weekly view correctly 1`] = `
       <span
         className="timeline-period value"
       >
-        1 - 4 May 2019
+        1 - 1 Jun 2019
       </span>
       <div
         className="timeline-navigator"
@@ -663,37 +659,37 @@ exports[`<Timeline /> renders the weekly view correctly 1`] = `
     >
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Wed 5/1"
+        data-segment-label="Sat 6/1"
         key="0"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Thu 5/2"
+        data-segment-label="Sun 6/2"
         key="1"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Fri 5/3"
+        data-segment-label="Mon 6/3"
         key="2"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Sat 5/4"
+        data-segment-label="Tue 6/4"
         key="3"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Sun 5/5"
+        data-segment-label="Wed 6/5"
         key="4"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Mon 5/6"
+        data-segment-label="Thu 6/6"
         key="5"
       />
       <div
         className="timeline__segment  week-view"
-        data-segment-label="Tue 5/7"
+        data-segment-label="Fri 6/7"
         key="6"
       />
       <div
@@ -713,14 +709,14 @@ exports[`<Timeline /> renders the weekly view correctly 1`] = `
     </div>
   </div>
   <div
-    className="overlay visible  overlayBackground"
+    className="overlay invisible  overlayBackground"
     onClick={null}
     onKeyPress={[Function]}
     role="button"
     tabIndex="0"
   >
     <div
-      className="modal visible change-room-modal"
+      className="modal invisible change-room-modal"
       id=""
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -766,6 +762,7 @@ exports[`<Timeline /> renders the weekly view correctly 1`] = `
       >
         <form
           className="change-room-modal__form"
+          key=".0"
         >
           <div
             className="change-room-modal__other-available-room"
@@ -1022,62 +1019,62 @@ exports[`<Timeline /> renders the year view correctly 1`] = `
     >
       <div
         className="timeline__segment current year-view"
-        data-segment-label="May"
+        data-segment-label="Jun"
         key="0"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Jun"
+        data-segment-label="Jul"
         key="1"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Jul"
+        data-segment-label="Aug"
         key="2"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Aug"
+        data-segment-label="Sep"
         key="3"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Sep"
+        data-segment-label="Oct"
         key="4"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Oct"
+        data-segment-label="Nov"
         key="5"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Nov"
+        data-segment-label="Dec"
         key="6"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Dec"
+        data-segment-label="Jan"
         key="7"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Jan"
+        data-segment-label="Feb"
         key="8"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Feb"
+        data-segment-label="Mar"
         key="9"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Mar"
+        data-segment-label="Apr"
         key="10"
       />
       <div
         className="timeline__segment  year-view"
-        data-segment-label="Apr"
+        data-segment-label="May"
         key="11"
       />
       <div
@@ -1097,14 +1094,14 @@ exports[`<Timeline /> renders the year view correctly 1`] = `
     </div>
   </div>
   <div
-    className="overlay visible  overlayBackground"
+    className="overlay invisible  overlayBackground"
     onClick={null}
     onKeyPress={[Function]}
     role="button"
     tabIndex="0"
   >
     <div
-      className="modal visible change-room-modal"
+      className="modal invisible change-room-modal"
       id=""
       onClick={[Function]}
       onKeyPress={[Function]}
@@ -1150,6 +1147,7 @@ exports[`<Timeline /> renders the year view correctly 1`] = `
       >
         <form
           className="change-room-modal__form"
+          key=".0"
         >
           <div
             className="change-room-modal__other-available-room"

@@ -82,6 +82,7 @@ exports[`<NewUserRoleForm /> <PersonalDetails /> renders correctly 1`] = `
 exports[`<NewUserRoleForm /> renders correctly 1`] = `
 <form
   className="new-request"
+  key=".0"
   onSubmit={[Function]}
 >
   <fieldset

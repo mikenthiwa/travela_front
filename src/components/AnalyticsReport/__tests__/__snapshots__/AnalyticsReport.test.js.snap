@@ -5,6 +5,7 @@ exports[`Test suite for Analytics Report Component should match the snapshot 1`]
   className="analyticsReport"
 >
   <TravelReadiness
+    center="Kenya"
     exportReadiness={[Function]}
     fetchReadiness={[Function]}
     range={

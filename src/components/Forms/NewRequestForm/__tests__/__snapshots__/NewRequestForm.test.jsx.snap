@@ -312,6 +312,7 @@ exports[`<NewRequestForm /> renders correctly 1`] = `
     </div>
     <form
       className="new-request"
+      key=".0"
       onSubmit={[Function]}
     >
       <fieldset

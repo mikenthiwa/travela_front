@@ -92,7 +92,19 @@ describe('<FileUploadField />', () => {
     const event = {
       target: {files: [{size: 10000, name: 'test.png'}]}
     };
+    const fileInput = wrapper.find('.upload-file');
 
+    expect(fileInput.length).toBe(1);
+    fileInput.simulate('change', event);
+    expect(checkFileSize).toHaveBeenCalled();
+  });
+
+  it('shouldn hit if statement if size is too big', () => {
+    const wrapper = setup(props);
+    const checkFileSize = jest.spyOn(wrapper.instance(), 'checkFileSize');
+    const event = {
+      target: {files: [{size: 1500000000, name: 'test.png'}]}
+    };
     const fileInput = wrapper.find('.upload-file');
 
     expect(fileInput.length).toBe(1);
@@ -119,7 +131,6 @@ describe('<FileUploadField />', () => {
     wrapper.find('.action-btn').at(0).simulate('click');
     expect(handleDeleteFile).toHaveBeenCalled();
   });
-
 
   it('should download a document', () => {
     const wrapper = setup(props);

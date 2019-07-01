@@ -12,7 +12,7 @@ exports[`ConfirmDialog component should match snapshot 1`] = `
     modalId=""
     requestId=""
     showOverlay={false}
-    title="false Request?"
+    title="Approve Request?"
     visibility="invisible"
     width=""
   >
@@ -24,12 +24,12 @@ exports[`ConfirmDialog component should match snapshot 1`] = `
     <button
       className="undefined-comment-modal__btn"
       disabled={false}
-      id={false}
+      id="Approve"
       onClick={[Function]}
       type="button"
     >
       <ButtonLoadingIcon
-        buttonText={false}
+        buttonText="Approve"
         isLoading={false}
       />
     </button>

@@ -170,7 +170,7 @@ exports[`<GuestHouseDetails /> renders properly 1`] = `
         >
           <img
             alt="Unisex"
-            src="https://img.icons8.com/ios/50/000000/toilet-filled.png"
+            src="Unisex.svg"
             title="Unisex"
           />
         </div>

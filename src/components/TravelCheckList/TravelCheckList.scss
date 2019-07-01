@@ -26,6 +26,10 @@
       &__body{
         border: 1px solid #E4E4E4;
         border-radius: 6px;
+        .travel-cost-body-container{
+          padding: 0 0;  
+          width: 100%;
+        }
       }
     }
   }

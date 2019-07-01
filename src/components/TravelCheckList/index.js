@@ -6,6 +6,7 @@ import './TravelCheckList.scss';
 import CircularProgressBar from './CircularLoader';
 import TabView from '../TripTabView/TabView';
 import SubmitArea from '../TripTabView/SubmitArea';
+import FlightDetails from './CheckListItems/FlightDetails/index';
 
 class TravelCheckListPage extends Component {
   state = {
@@ -76,7 +77,7 @@ class TravelCheckListPage extends Component {
       submissionInfo, postSubmission, request, openModal, closeModal, shouldOpen,
       modalType, uploadFile, userReadinessDocument, fileUploads, downloadAttachments
     } = this.props;
-    const { submissions, percentageCompleted, postSuccess } = submissionInfo;
+    const { submissions, percentageCompleted, postSuccess, tripType } = submissionInfo;
     let tabsData;
     tabsData = submissions.map((list, index) => {
       const location = localStorage.getItem('location');
@@ -117,17 +118,38 @@ class TravelCheckListPage extends Component {
                 currentTab={current}
                 handleTabChange={this.handleTabChange}
               >
-
-                {submissions.map(submission => (
-                  <TravelChecklist
-                    checklistItems={submission.checklist} key={submission.tripId} tripId={submission.tripId}
-                    postSubmission={postSubmission} requestId={request.id} openModal={openModal}
-                    closeModal={closeModal} shouldOpen={shouldOpen} modalType={modalType} uploadFile={uploadFile}
-                    userReadinessDocument={userReadinessDocument} fileUploads={fileUploads} postSuccess={postSuccess}
-                    downloadAttachments={downloadAttachments} destination={submission.destinationName}
-                  />
-                ))
-                }
+                {submissions
+                  .map(submission => (
+                    <TravelChecklist
+                      checklistItems={submission.checklist}
+                      key={submission.id}
+                      tripId={submission.tripId}
+                      postSubmission={postSubmission}
+                      requestId={request.id}
+                      openModal={openModal}
+                      closeModal={closeModal}
+                      shouldOpen={shouldOpen}
+                      modalType={modalType}
+                      uploadFile={uploadFile}
+                      userReadinessDocument={userReadinessDocument}
+                      fileUploads={fileUploads}
+                      postSuccess={postSuccess}
+                      downloadAttachments={downloadAttachments}
+                      destination={submission.destinationName}
+                    />
+                  ))
+                  .concat(
+                    <FlightDetails
+                      uploadFile={uploadFile}
+                      request={request}
+                      submissions={submissions}
+                      downloadAttachments={downloadAttachments}
+                      fileUploads={fileUploads}
+                      postSubmission={postSubmission}
+                      tripType={tripType}
+                      handleInputChange={this.handleInputChange}
+                    />
+                  )}
               </TabView>
             </div>
           </div>

@@ -231,6 +231,7 @@ exports[`<TravelDetails /> should match snapshot 1`] = `
           }
         }
         selection="multi"
+        setCurrentOrigin={[Function]}
         values={
           Object {
             "arrivalDate-1": "2019-10-29T21:00:00.000Z",

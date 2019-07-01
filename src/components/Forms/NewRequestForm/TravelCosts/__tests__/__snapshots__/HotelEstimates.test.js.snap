@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<HotelEstimates /> should render while loading 1`] = `
+exports[`<HotelEstimates /> should match snapshot 1`] = `
 <div
   className="stipend-container-with-loading"
 >

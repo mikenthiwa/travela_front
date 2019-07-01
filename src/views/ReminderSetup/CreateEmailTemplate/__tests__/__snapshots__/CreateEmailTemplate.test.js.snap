@@ -30,6 +30,7 @@ exports[`<CreateEmailTemplate> page Should render correctly 1`] = `
   >
     <form
       className="new-email-template-form"
+      key=".0"
       onSubmit={[Function]}
     >
       <fieldset
@@ -210,18 +211,22 @@ exports[`<CreateEmailTemplate> page Should render correctly 1`] = `
                  * 
               </span>
             </label>
-            <textarea
-              autoComplete="off"
-              className=" textarea-box email-message"
-              data-gramm_editor="false"
-              label="Email Message"
-              name="message"
-              onBlur={[Function]}
-              onChange={[Function]}
-              rows="10"
-              type="textarea"
-              value=""
-            />
+            <div
+              className="form-input__textarea "
+            >
+              <textarea
+                autoComplete="off"
+                className=" textarea-box email-message"
+                data-gramm_editor="false"
+                label="Email Message"
+                name="message"
+                onBlur={[Function]}
+                onChange={[Function]}
+                rows="10"
+                type="textarea"
+                value=""
+              />
+            </div>
             <span
               className="error"
             />

@@ -6,7 +6,9 @@ Array [
     className="travel-cost-header-container"
 >
     <div
-        className="trip-header-box-selected"
+        className="trip-tab trip-header-box-selected
+            active
+          "
         onClick={[Function]}
         onKeyDown={[Function]}
         role="presentation"
@@ -15,11 +17,6 @@ Array [
             className="trip-header-text-title-selected"
         >
             TRIP 1
-            <img
-                alt="Hotel"
-                className="active-icon"
-                src="icon.svg"
-            />
         </p>
         <p
             className="overflow trip-header-text-content-selected"
@@ -28,7 +25,9 @@ Array [
         </p>
     </div>
     <div
-        className="trip-header-box"
+        className="trip-tab trip-header-box
+            not-active
+          "
         onClick={[Function]}
         onKeyDown={[Function]}
         role="presentation"
@@ -36,7 +35,7 @@ Array [
         <p
             className="trip-header-text-title"
         >
-            Total Estimate
+            TOTAL ESTIMATE
         </p>
         <p
             className="overflow trip-header-text-content"
@@ -82,41 +81,6 @@ Array [
                     className="breakdown-box-cost-details"
                 >
                     Costs $300 per day
-                </div>
-            </div>
-        </div>
-    </div>
-    <div
-        className="breakdown-box"
-    >
-        <div
-            className="false"
-        >
-            <div
-                className="breakdown-box-content"
-            >
-                <div
-                    className="breakdown-box-icon"
-                >
-                    <img
-                        alt="Flight"
-                        src="Flight.svg"
-                    />
-                </div>
-                <div
-                    className="breakdown-box-title"
-                >
-                    Flight Costs
-                </div>
-                <div
-                    className="breakdown-box-cost"
-                >
-                    $1000
-                </div>
-                <div
-                    className="breakdown-box-cost-details"
-                >
-                    Lagos, Portugal - Lagos, Nigeria
                 </div>
             </div>
         </div>

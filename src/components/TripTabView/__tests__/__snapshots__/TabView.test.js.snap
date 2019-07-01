@@ -17,11 +17,6 @@ Array [
             className="trip-header-text-title-selected"
         >
             Title
-            <img
-                alt="Hotel"
-                className="active-icon"
-                src="icon.svg"
-            />
         </p>
         <p
             className="overflow trip-header-text-content-selected"

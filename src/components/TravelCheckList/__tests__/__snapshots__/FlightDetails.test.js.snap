@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Flight Details matches snapshot 1`] = `
+<div
+  className="ticketContainer"
+>
+  <div
+    className="flight-guide"
+  >
+    Flight Application Guide
+  </div>
+  <br />
+  <FlightDetailsForm
+    checkId="QDYDpqEE-U-2"
+    checklist={
+      Object {
+        "ticket": Object {
+          "deleteReason": null,
+          "destinationName": "Default",
+          "id": "2",
+          "name": "Travel Ticket",
+          "requiresFiles": true,
+          "resources": Array [],
+          "submissions": Array [
+            Object {
+              "checklistItemId": "2",
+              "checklistSubmissions": Object {
+                "id": "2",
+              },
+              "createdAt": "2019-06-19T14:33:09.307Z",
+              "deletedAt": null,
+              "documentId": null,
+              "id": "WdrAZHV-j",
+              "tripId": "QDYDpqEE-U",
+              "updatedAt": "2019-06-19T14:33:09.307Z",
+              "userResponse": null,
+              "userUpload": Object {
+                "fileName": "ticket (1) (1).png",
+                "url": "https://res.cloudinary.com/authors-haven/image/upload/v1560954789/zt6ekgifcak8rsxuwzam.png",
+              },
+            },
+          ],
+        },
+        "ticketDetails": Object {
+          "deleteReason": null,
+          "destinationName": "Default",
+          "id": "1",
+          "name": "Travel Ticket Details",
+          "requiresFiles": false,
+          "resources": Array [
+            Object {
+              "checklistItemId": "1",
+              "id": "1",
+              "label": "Flight Application Guide",
+              "link": "https://docs.google.com/document/d/17vOCjPE3sgG2OSYV_3ZcpzCg1IbD7dCO8cVa8aBDN_M/edit?usp=drivesdk",
+            },
+          ],
+          "submissions": Array [
+            Object {
+              "checklistItemId": "1",
+              "checklistSubmissions": Object {
+                "id": "1",
+              },
+              "createdAt": "2019-06-19T14:32:42.556Z",
+              "deletedAt": null,
+              "documentId": null,
+              "id": "kwgrc80D9",
+              "tripId": "QDYDpqEE-U",
+              "updatedAt": "2019-06-20T12:23:17.980Z",
+              "userResponse": null,
+              "userUpload": Object {},
+            },
+          ],
+        },
+      }
+    }
+    counter={1}
+    downloadAttachments={[Function]}
+    fileUploads={[Function]}
+    key="QDYDpqEE-U-2"
+    postSubmission={[Function]}
+    request={
+      Object {
+        "createdAt": "2018-12-19T15:32:39.167Z",
+        "deletedAt": null,
+        "department": "Talent & Development",
+        "gender": "Male",
+        "id": "w05yTx4aV",
+        "manager": "Moffat Gitau",
+        "name": "4fr0c0d3 Gitau",
+        "picture": "https://lh3.googleusercontent.com/-GndNwsNM0HI/AAAAAAAAAAI/AAAAAAAAAAc/0kPTNBhCkXU/photo.jpg?sz=50",
+        "role": "Software developer",
+        "status": "Approved",
+        "travelCompletion": "100% complete",
+        "tripType": "return",
+        "trips": Array [
+          Object {
+            "bedId": 10945,
+            "beds": Array [
+              Object {
+                "bedName": "Bed 1",
+                "booked": false,
+                "createdAt": "2018-08-16T11:11:52.181Z",
+                "id": 10945,
+                "roomId": "10946",
+                "rooms": Object {
+                  "bedCount": 2,
+                  "createdAt": "2018-08-16T11:11:52.181Z",
+                  "faulty": false,
+                  "guestHouseId": 10948,
+                  "guestHouses": Object {
+                    "bathRooms": 3,
+                    "createdAt": "2018-08-16T11:11:52.181Z",
+                    "disabled": false,
+                    "genderPolicy": "unisex",
+                    "houseName": "Guest House B",
+                    "id": 10948,
+                    "imageUrl": "guest.com",
+                    "location": "Nairobi, Kenya",
+                    "updatedAt": "2018-08-16T11:11:52.181Z",
+                    "userId": "-LTMfmwvXO0D9BQ8fXgl",
+                  },
+                  "id": 10945,
+                  "isDeleted": false,
+                  "roomName": "Nyati",
+                  "roomType": "ensuite",
+                  "updatedAt": "2018-08-16T11:11:52.181Z",
+                },
+                "updatedAt": "2018-08-16T11:11:52.181Z",
+              },
+            ],
+            "checkInDate": null,
+            "checkOutDate": null,
+            "checkStatus": "Not Checked In",
+            "createdAt": "2018-12-19T15:32:39.177Z",
+            "deletedAt": null,
+            "departureDate": "2019-07-08",
+            "destination": "Nairobi, Kenya",
+            "id": "ktgbyIEjWb",
+            "lastNotifyDate": null,
+            "notificationCount": 0,
+            "origin": "Lagos, Nigeria",
+            "requestId": "w05yTx4aV",
+            "returnDate": "2019-07-11",
+            "travelCompletion": false,
+            "updatedAt": "2018-12-19T15:32:39.177Z",
+          },
+        ],
+        "updatedAt": "2018-12-19T15:32:39.167Z",
+        "userId": "-LTMfmwvXO0D9BQ8fXgl",
+      }
+    }
+    tripId="QDYDpqEE-U"
+    tripType="return"
+    uploadFile={[Function]}
+  />
+</div>
+`;

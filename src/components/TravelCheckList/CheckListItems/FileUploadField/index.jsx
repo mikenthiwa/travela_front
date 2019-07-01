@@ -34,7 +34,7 @@ class FileUploadField extends Component {
       checkId
     } = nextProps;
     const uploadFileName = item && item.userUpload.fileName;
-    uploadSuccess.includes(checkId) &&
+    uploadSuccess && uploadSuccess.includes(checkId) &&
       imageName &&
       this.setState({ showDocument: true, fileName: imageName });
     !uploadFileName && this.setState({ showDocument: false });

@@ -65,3 +65,4 @@ const inputLabels = {
 };
 
 export default inputLabels;
+

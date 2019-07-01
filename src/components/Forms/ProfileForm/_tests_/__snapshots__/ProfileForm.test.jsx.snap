@@ -3,6 +3,7 @@
 exports[`<ProfileForm /> renders correctly 1`] = `
 <form
   className="new-profile"
+  key=".0"
   onSubmit={[Function]}
 >
   <fieldset
@@ -230,8 +231,8 @@ exports[`<ProfileForm /> renders correctly 1`] = `
               autoComplete="off"
               choices={
                 Array [
-                  undefined,
-                  undefined,
+                  "Samuel Kubai",
+                  "Bolton Otieno",
                 ]
               }
               className="occupationInput"

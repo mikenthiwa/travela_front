@@ -75,17 +75,6 @@ exports[`Test Suite for <TravelDetailsItem /> should match snapshot 1`] = `
                 }
               }
             />
-            <div
-              className="character__conditions"
-              style={
-                Object {
-                  "color": "red",
-                  "top": "undefined",
-                }
-              }
-            >
-              A minimum of 8 Characters is required
-            </div>
           </div>
         </div>
       </div>

@@ -407,197 +407,53 @@ exports[`<RequestDetails /> should render properly 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="travelCheck-list"
-    >
+    <div>
       <div
-        className="travelCheckList__row mdl-grid"
+        className="travelCheck-list"
       >
         <div
-          className="travelCheckList__col-7 mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--12-col-phone"
+          className="travelCheck-list--card"
         >
           <div
-            className="travelCheckList--card"
+            className="travelCheck-list--card__head"
           >
             <div
-              className="travelCheckList--card__head"
+              className="details"
             >
-              These are the checklist items required to be submitted for this trip
+              <p>
+                Your Travel checklist
+              </p>
+              Hi Hope, kindly fill in your details to complete your travel checklist
             </div>
             <div
-              className="travelCheckList"
+              className="circular-calculator"
             >
-              <div
-                className="travelCheckList__destination mdl-grid"
-                key="0"
-              >
-                <div
-                  className="destination"
-                >
-                  <div
-                    className="country-flag"
-                  >
-                    <img
-                      alt="country flag"
-                      className="flag"
-                      src="https://www.countryflags.io/KE/flat/64.png"
-                    />
-                  </div>
-                </div>
-                <div
-                  className="travelSubmission--item false"
-                >
-                  <span
-                    className="travelSubmission--item__name"
-                  >
-                    visa
-                  </span>
-                  <div
-                    className="travelSubmission--input__upload-field__"
-                  >
-                    <div
-                      className="travelSubmission--input__input-field__"
-                    >
-                      <img
-                        alt="document"
-                        className="travelSubmission--input__input-field__image"
-                        src="http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg"
-                      />
-                      <div
-                        className="travelSubmission--input__btn--"
-                        role="presentation"
-                      >
-                        <div
-                          className="travelSubmission--input__btn--uploadedFileName"
-                          id="file-upload"
-                          role="presentation"
-                        >
-                          <p
-                            className="bold"
-                          >
-                            Passport.jpeg
-                          </p>
-                        </div>
-                        <div
-                          className="travelSubmission--input__btn--uploadedFileDate"
-                        >
-                          Uploaded
-                           
-                          12-03-19
-                        </div>
-                        <div>
-                          <a
-                            href="http://res.cloudinary.com/authors-haven/image/upload/v1552330953/xbi9b9efov468sqdsyjk.jpg"
-                            target="_blank"
-                          >
-                            <img
-                              alt="upload_icon"
-                              className="travelSubmission--input__image"
-                              src="download_file.svg"
-                            />
-                          </a>
-                        </div>
-                      </div>
-                      <input
-                        className="uploadedFile"
-                        disabled=""
-                        name="file"
-                        onChange={[Function]}
-                        type="file"
-                      />
-                    </div>
-                  </div>
-                  <div
-                    className="submission-progress__wrapper  "
-                  >
-                    <div
-                      className="submission-progress__"
-                    >
-                      <div
-                        className="submission-progress__success"
-                      >
-                        Done
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="travelCheckList__destination mdl-grid"
-                key="1"
-              >
-                <div
-                  className="destination"
-                >
-                  <div
-                    className="country-flag"
-                  >
-                    <img
-                      alt="country flag"
-                      className="flag"
-                      src="https://www.countryflags.io/NG/flat/64.png"
-                    />
-                  </div>
-                </div>
-                0
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="travelCheckList__col-5 mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--12-col-phone "
-        >
-          <div
-            className="travelCheckList--card travelCheckList--card__sticky"
-          >
-            <div
-              className="travelCheckList--card__head"
-            >
-              Your Travel Readiness
-            </div>
-            <div
-              className="progressBar"
-            >
-              <div
-                className="progressBar__text"
-              >
-                <div
-                  className="progressBar__text-head"
-                >
-                  You are
-                </div>
-                <div
-                  className="progressBar__text-foot"
-                >
-                  Travel Ready
-                </div>
-              </div>
               <svg
-                height={169}
-                viewBox="0 0 169 169"
-                width={169}
+                height={50}
+                viewBox="0 0 50 50"
+                width={50}
               >
                 <circle
                   className="circle-background"
-                  cx={84.5}
-                  cy={84.5}
-                  r={79.5}
-                  strokeWidth="10px"
+                  cx={25}
+                  cy={25}
+                  r={22.5}
+                  strokeWidth="5px"
                 />
                 <circle
                   className="circle-progress"
-                  cx={84.5}
-                  cy={84.5}
-                  r={79.5}
+                  cx={25}
+                  cy={25}
+                  r={22.5}
                   stroke="#10A36D"
-                  strokeWidth="10px"
+                  strokeWidth="5px"
                   style={
                     Object {
-                      "strokeDasharray": 499.5132319207771,
+                      "strokeDasharray": 141.3716694115407,
                       "strokeDashoffset": 0,
                     }
                   }
-                  transform="rotate(-90 84.5 84.5)"
+                  transform="rotate(-90 25 25)"
                 />
                 <text
                   className="circle-text"
@@ -610,22 +466,35 @@ exports[`<RequestDetails /> should render properly 1`] = `
                 </text>
               </svg>
             </div>
-            <div
-              className="progressBar__message"
-            >
-              <p>
-                Travel Team will review your document and advise accordingly
-              </p>
-            </div>
           </div>
           <div
-            className="travelCheckList__row--button-area"
+            className="travelCheck-list--card__body"
           >
-            <div
-              className="travelSubmission--submit-area__button"
-            />
+            <undefined />
           </div>
         </div>
+      </div>
+      <div
+        className="checklist-submit-area submit-area"
+      >
+        <button
+          className="bg-btn bg-btn--active"
+          disabled={true}
+          id="back-submit"
+          onClick={[Function]}
+          type="button"
+        >
+          Back
+        </button>
+        <button
+          className="bg-btn bg-btn--active"
+          disabled={false}
+          id="back-submit"
+          onClick={[Function]}
+          type="button"
+        >
+          Next
+        </button>
       </div>
     </div>
   </div>

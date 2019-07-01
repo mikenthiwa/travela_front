@@ -1,22 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<HotelEstimateCard /> renders as expected 1`] = `
-<Component
-  country="Rwanda"
-  estimate={2}
-  isLoading={false}
-  region="West Africa"
-  regionId={2}
-/>
-`;
-
 exports[`<ListHotelEstimates /> renders HotelEstimates page without crashing 1`] = `
 <div>
   <div
     className="no-templates list-templates"
   >
     <div
-      className="content"
+      className="content no-estimates"
     >
       <img
         alt=""
@@ -30,12 +20,12 @@ exports[`<ListHotelEstimates /> renders HotelEstimates page without crashing 1`]
 </div>
 `;
 
-exports[`<NoHotelEstimates /> renders without crashing 1`] = `
+exports[`<NoHotelEstimates /> renders NoHotelEstimates page without crashing 1`] = `
 <div
   className="no-templates list-templates"
 >
   <div
-    className="content"
+    className="content no-estimates"
   >
     <img
       alt=""

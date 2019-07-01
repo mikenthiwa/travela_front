@@ -4,6 +4,7 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
 <div>
   <form
     className="travel-document-form"
+    key=".0"
     onSubmit={[Function]}
   >
     <div
@@ -684,17 +685,6 @@ exports[`<AddVisaForm /> renders without crashing 1`] = `
           <span
             className="error"
           />
-        </div>
-        <div
-          className="character__conditions__visa error__height-one"
-          style={
-            Object {
-              "color": "red",
-              "display": "none",
-            }
-          }
-        >
-          A minimum of 8 Characters is required
         </div>
       </div>
     </fieldset>

@@ -3,6 +3,7 @@
 exports[`<AddTravelReason /> renders without crashing 1`] = `
 <form
   className="new-request"
+  key=".0"
   onSubmit={[Function]}
 >
   <fieldset
@@ -59,18 +60,22 @@ exports[`<AddTravelReason /> renders without crashing 1`] = `
              * 
           </span>
         </label>
-        <textarea
-          autoComplete="off"
-          className=" textarea-box "
-          data-gramm_editor="false"
-          label="Description"
-          name="description"
-          onBlur={[Function]}
-          onChange={[Function]}
-          rows="10"
-          type="textarea"
-          value=""
-        />
+        <div
+          className="form-input__textarea "
+        >
+          <textarea
+            autoComplete="off"
+            className=" textarea-box "
+            data-gramm_editor="false"
+            label="Description"
+            name="description"
+            onBlur={[Function]}
+            onChange={[Function]}
+            rows="10"
+            type="textarea"
+            value=""
+          />
+        </div>
         <span
           className="error"
         />

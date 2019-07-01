@@ -4,6 +4,7 @@ exports[`Reminder Form Create Reminder Form renders correctly 1`] = `
 <div>
   <div
     className="reminder-card"
+    key=".0"
   >
     <form
       onSubmit={[Function]}
@@ -786,6 +787,7 @@ exports[`Reminder Form Reminder Update Form renders correctly in edit mode 1`] =
 <div>
   <div
     className="reminder-card"
+    key=".0"
   >
     <form
       onSubmit={[Function]}

@@ -13,6 +13,7 @@ Array [
     >
         <form
             className="new-profile"
+            key=".0"
             onSubmit={[Function]}
         >
             <fieldset

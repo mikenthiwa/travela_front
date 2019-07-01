@@ -4,6 +4,7 @@ exports[`<TemplateDetailsForm /> renders without crashing 1`] = `
 <div>
   <form
     className="template-details"
+    key=".0"
   >
     <fieldset>
       <div
@@ -58,18 +59,22 @@ exports[`<TemplateDetailsForm /> renders without crashing 1`] = `
                * 
             </span>
           </label>
-          <textarea
-            autoComplete="off"
-            className=" textarea-box message-input"
-            data-gramm_editor="false"
-            disabled={true}
-            label="Message"
-            name="message"
-            onBlur={[Function]}
-            onChange={[Function]}
-            rows="10"
-            type="textarea"
-          />
+          <div
+            className="form-input__textarea "
+          >
+            <textarea
+              autoComplete="off"
+              className=" textarea-box message-input"
+              data-gramm_editor="false"
+              disabled={true}
+              label="Message"
+              name="message"
+              onBlur={[Function]}
+              onChange={[Function]}
+              rows="10"
+              type="textarea"
+            />
+          </div>
           <span
             className="error"
           />

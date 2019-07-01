@@ -58,6 +58,7 @@ exports[`< AddCountryForm/> <AddCountryFields /> renders correctly 1`] = `
 exports[`< AddCountryForm/> renders correctly 1`] = `
 <form
   className="new-request"
+  key=".0"
   onSubmit={[Function]}
 >
   <fieldset

@@ -2,6 +2,7 @@
 
 exports[`<NewDocumentForm /> renders correctly 1`] = `
 <form
+  key=".0"
   onSubmit={[Function]}
 >
   <div

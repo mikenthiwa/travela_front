@@ -177,6 +177,7 @@ exports[`<Requests> renders as expected 1`] = `
       fetchAvailableRooms={[Function]}
       fetchAvailableRoomsSuccess={[Function]}
       fetchTravelChecklist={[Function]}
+      fetchTravelCostsByLocation={[Function]}
       fetchUserRequests={[Function]}
       handleCreateRequest={[Function]}
       handleEditRequest={[Function]}
@@ -217,8 +218,10 @@ exports[`<Requests> renders as expected 1`] = `
         }
       }
       travelChecklists={Object {}}
-      travelStipends={
+      travelCosts={
         Object {
+          "flightCosts": Array [],
+          "hotelEstimates": Array [],
           "isLoading": false,
           "stipends": Array [],
         }

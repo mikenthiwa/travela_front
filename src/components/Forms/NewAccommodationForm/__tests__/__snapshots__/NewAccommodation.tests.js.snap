@@ -3,6 +3,7 @@
 exports[`<NewAccommodation /> renders correctly 1`] = `
 <form
   className="new-guesthouse"
+  key=".0"
   onSubmit={[Function]}
 >
   <fieldset>

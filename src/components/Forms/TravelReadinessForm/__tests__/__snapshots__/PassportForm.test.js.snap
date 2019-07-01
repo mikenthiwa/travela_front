@@ -4,8 +4,53 @@ exports[`<PassportForm/> renders correctly 1`] = `
 <div>
   <form
     className="travel-document-form"
+    key=".0"
     onSubmit={[Function]}
   >
+    <div
+      className="travel-document-select-file"
+    >
+      <p
+        className="attach-document-text"
+      >
+        Attach the image or PDF of your  document
+      </p>
+      <div
+        className="document-input__input-container"
+      >
+        <label
+          className="document-input__input-container__prompts"
+          htmlFor="select-file"
+        >
+          <div
+            className="document-input__input-container__prompts__img"
+          >
+            <img
+              alt="Document Upload"
+              src="document-upload-blue.svg"
+            />
+          </div>
+          <div
+            className="document-input__input-container__prompts__text"
+          >
+            <p>
+              Choose from computer
+            </p>
+            <p
+              className="maximum-file-size"
+            >
+              Maximum file size - 10MB
+            </p>
+          </div>
+          <input
+            accept="image/jpg, image/png, application/pdf"
+            id="select-file"
+            onChange={[Function]}
+            type="file"
+          />
+        </label>
+      </div>
+    </div>
     <div>
       <fieldset>
         <div
@@ -562,50 +607,6 @@ exports[`<PassportForm/> renders correctly 1`] = `
           </div>
         </div>
       </fieldset>
-    </div>
-    <div
-      className="travel-document-select-file"
-    >
-      <p
-        className="attach-document-text"
-      >
-        Attach the image or PDF of your  document
-      </p>
-      <div
-        className="document-input__input-container"
-      >
-        <label
-          className="document-input__input-container__prompts"
-          htmlFor="select-file"
-        >
-          <div
-            className="document-input__input-container__prompts__img"
-          >
-            <img
-              alt="Document Upload"
-              src="document-upload-blue.svg"
-            />
-          </div>
-          <div
-            className="document-input__input-container__prompts__text"
-          >
-            <p>
-              Choose from computer
-            </p>
-            <p
-              className="maximum-file-size"
-            >
-              Maximum file size - 10MB
-            </p>
-          </div>
-          <input
-            accept="image/jpg, image/png, application/pdf"
-            id="select-file"
-            onChange={[Function]}
-            type="file"
-          />
-        </label>
-      </div>
     </div>
     <hr />
     <div

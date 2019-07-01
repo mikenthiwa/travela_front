@@ -4,6 +4,7 @@ exports[`<OtherDocumentForm /> renders without crashing 1`] = `
 <div>
   <form
     className="travel-document-form"
+    key=".0"
     onSubmit={[Function]}
   >
     <div

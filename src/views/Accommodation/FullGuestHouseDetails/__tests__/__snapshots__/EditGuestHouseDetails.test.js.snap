@@ -158,7 +158,13 @@ exports[`<Accommodation /> should render correctly 1`] = `
         </div>
         <div
           className="genderIcon"
-        />
+        >
+          <img
+            alt="unisex"
+            src="undefined"
+            title="unisex"
+          />
+        </div>
       </div>
       <div
         className="guest-house-action-div"
