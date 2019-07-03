@@ -8,19 +8,19 @@ import { fetchSubmission } from '../../redux/actionCreator/checkListSubmissionAc
 import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import RequestDetails from '../../components/RequestDetails';
 import CommentsSection from './CommentsSection';
-import countryUtils from '../../helper/countryUtils';
-import { AttachmentItems, ChecklistItems, TicketDetails } from './TravelChecklistItems';
-import getValues from './getValues';
+import { ChecklistItems, TicketDetails } from './TravelChecklistItems';
 import chatIcon from '../../images/icons/Chat.svg';
 import Preloader from '../../components/Preloader/Preloader';
-import NotFound from '../ErrorPages/NotFound';
 import './VerificationDetails.scss';
+import '../../components/TravelCheckList/CheckListItems/FileUploadField/FileUploadField.scss';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 import {fetchTravelCostsByLocation} from '../../redux/actionCreator/travelCostsActions';
 import { TRAVEL_MANAGERS } from '../../helper/roles';
+import TabView from '../../components/TripTabView/TabView';
+import CircularProgressBar from '../../components/TravelCheckList/CircularLoader';
 
 
-const VerificationDetails = (type = 'verifications') => {
+export const VerificationDetails = (type = 'verifications') => {
   class Verifications extends Component {
     state = {
       modalInvisible: true,
@@ -74,11 +74,6 @@ const VerificationDetails = (type = 'verifications') => {
       return locations;
     }
 
-    getValues() {
-      const {attachments} = this.props;
-      return getValues(attachments);
-    }
-
     handleButtonSelected = (e) => {
       const newState= {buttonSelected: e.target.textContent, modalInvisible: false};
       this.setState( newState);
@@ -103,7 +98,6 @@ const VerificationDetails = (type = 'verifications') => {
 
     renderRightPaneQuestion = (name) => {
       const {request: {status}} = this.props;
-
       const pluralizedName = name && name[name.length - 1] === 's' ?
         `${name}'` : `${name}'s`;
 
@@ -112,76 +106,66 @@ const VerificationDetails = (type = 'verifications') => {
         : `You have ${status && status.toLowerCase()} ${pluralizedName} travel request`;
     };
 
-    renderFlightDetails() {
-      const {ticketDetails} = this.getValues();
-      return (
-        <div className="rectangle right">
-          <div className="flightDetails">
-            <p className="flight-heading">Flight Details</p>
-            {ticketDetails.length
-              ? <TicketDetails ticketDetails={ticketDetails} />
-              : (
-                <div className="no-flightDetails">
-                  <p>No Flight Details</p>
-                </div>
-              )}
-          </div>
-        </div>
-      );
-    }
-
     renderTravelCheckList = () => {
-      const {attachments, errors} = this.props;
-      const {checklistItems, attachmentDetails} = this.getValues();
-      if (typeof (errors) === 'string' && errors.includes('does not exist')) {
-        return <NotFound redirectLink="/requests/my-verifications" errorMessage={errors} />;
-      }
+
+      const {submissionInfo: { submissions, percentageCompleted},  
+        request} = this.props;
+      const name = request.name && request.name.split(' ')[0];
+      const gender = request.gender && request.gender;
+      const genderPronoun = request.gender && 
+            gender.toLowerCase() === 'female'? 'her' : 'his';
+      const statusMessage = percentageCompleted === 100 ? 
+        `has completed ${genderPronoun} Travel Checklist`:
+        `is yet to complete ${genderPronoun} Travel Checklist`;
+      let tabsData = submissions.map((list, index) => {
+        const title = `Trip ${index + 1}`;
+        const subTitle = `${list.tripOrigin} to ${list.destinationName}`;
+        return { title, subTitle };
+      });
+      const flightTab = { title: 'FLIGHT DETAILS', subTitle: 'Ticket details' };
+      tabsData = [...tabsData, flightTab];
+      const newSubmissions = [...submissions, {}];
       return (
-        <div className="rectangle left">
+        <div className="rectangle checklist">
           <div className="attachments">
-            <p className="heading">Travel Checklist For This Trip</p>
-            <div>
-              <div>
-                {attachments.length ? (attachments.map(item => {
-                  return (
-                    <div key={item.destinationName} className="location-items">
-                      <div className="destination">
-                        <span className="country-flag">
-                          <img
-                            className="flag"
-                            src={countryUtils.getCountryFlagUrl(item.destinationName)} alt="country flag" />
-                        </span>
-                        <span><strong>{item.tripLocation}</strong></span>
-                      </div>
-                      <div className="attachment-items">
-                        {(attachmentDetails.length)
-                          ? (
-                            <AttachmentItems
-                              attachments={item}
-                              attachmentDetails={attachmentDetails}
-                              handleDownloadAttachments={this.handleDownloadAttachments}
-                            />
-                          ) : (
-                            <div className="no-attachments">
-                              <p>No Uploaded Attachments.</p>
-                            </div>
-                          )}
-                      </div>
-                      {checklistItems.length
-                        ? <ChecklistItems checklistItems={checklistItems} destination={item.destinationName} />
-                        : null
-                      }
-                    </div>
-                  );
-                })) :
-                  (
-                    <div className="no-attachments">
-                      <p>No Uploaded Attachments.</p>
-                    </div>
-                  )
-                }
+            <div className="travelCheck-list">
+              <div className="travelCheck-list--card__head">
+                <div className="details">
+                  <p>{`${name}'s Travel Checklist`}</p>
+                  {`${request.name} ${statusMessage} `}
+                </div>
+                <div className="circular-calculator">
+                  <CircularProgressBar
+                    percentage={percentageCompleted}
+                    strokeWidth={5}
+                    sqSize={50}
+                  />
+                </div>
               </div>
-            </div>
+              <div>         
+                <div className="travelCheck-list--card__body">
+                  <TabView tabs={tabsData} currentTab={0}>
+                    {
+                      newSubmissions.map((submission, index) => (
+                        (index !== newSubmissions.length-1) ? (
+                          <ChecklistItems
+                            key={submission.tripId}
+                            handleDownloadAttachments={this.handleDownloadAttachments} 
+                            checklistItems={submission.checklist} 
+                            destination={submission.destinationName} />
+                        ) : (
+                          <TicketDetails
+                            key="ticket-tab"
+                            submissions={submissions} 
+                            handleDownloadAttachments={this.handleDownloadAttachments}
+                          />
+                        )
+                      ))
+                    }
+                  </TabView>
+                </div>
+              </div>
+            </div> 
           </div>
           <div className="desktop-comment">
             {this.renderComments()}
@@ -211,7 +195,6 @@ const VerificationDetails = (type = 'verifications') => {
         <div className="">
           <div className="bottom-container">
             {this.renderTravelCheckList()}
-            {this.renderFlightDetails()}
             <div className="mobile-comment left">
               {this.renderComments()}
             </div>
@@ -316,7 +299,6 @@ const VerificationDetails = (type = 'verifications') => {
     isLoading: true,
     currentUser: {},
     email: {},
-    errors: {},
     isConfirmDialogLoading: false,
     isUpdatedStatus: false,
     travelCosts: {
@@ -332,9 +314,9 @@ const VerificationDetails = (type = 'verifications') => {
     isLoading: PropTypes.bool, currentUser: PropTypes.object,
     email: PropTypes.object, fetchUserRequestDetails: PropTypes.func.isRequired,
     fetchAttachments: PropTypes.func.isRequired, downloadAttachments: PropTypes.func.isRequired,
-    updateRequestStatus: PropTypes.func.isRequired, match: PropTypes.object.isRequired,
-    attachments: PropTypes.array.isRequired, location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired, errors: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    updateRequestStatus: PropTypes.func.isRequired, match: PropTypes.object.isRequired, 
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
     submissionInfo: PropTypes.object.isRequired,
     fetchSubmission: PropTypes.func.isRequired,
     shouldOpen: PropTypes.bool.isRequired,

@@ -54,14 +54,9 @@ exports[`TEST ConnectedVerificationDetails COMPONENT Updates after props are rec
             Budget Check
           </div>
           <div
-            className="stage "
+            className="stage incomplete"
           >
             Travel Checklist Submission
-            <img
-              alt="green-tick"
-              className="green-tick"
-              src="green_tick.svg"
-            />
           </div>
           <div
             className="stage incomplete"
@@ -253,24 +248,72 @@ exports[`TEST ConnectedVerificationDetails COMPONENT Updates after props are rec
       className="bottom-container"
     >
       <div
-        className="rectangle left"
+        className="rectangle checklist"
       >
         <div
           className="attachments"
         >
-          <p
-            className="heading"
+          <div
+            className="travelCheck-list"
           >
-            Travel Checklist For This Trip
-          </p>
-          <div>
-            <div>
+            <div
+              className="travelCheck-list--card__head"
+            >
               <div
-                className="no-attachments"
+                className="details"
               >
                 <p>
-                  No Uploaded Attachments.
+                  Christopher's Travel Checklist
                 </p>
+                Christopher Akanmu is yet to complete his Travel Checklist 
+              </div>
+              <div
+                className="circular-calculator"
+              >
+                <svg
+                  height={50}
+                  viewBox="0 0 50 50"
+                  width={50}
+                >
+                  <circle
+                    className="circle-background"
+                    cx={25}
+                    cy={25}
+                    r={22.5}
+                    strokeWidth="5px"
+                  />
+                  <circle
+                    className="circle-progress"
+                    cx={25}
+                    cy={25}
+                    r={22.5}
+                    stroke="#3359DB"
+                    strokeWidth="5px"
+                    style={
+                      Object {
+                        "strokeDasharray": 141.3716694115407,
+                        "strokeDashoffset": 28.27433388230814,
+                      }
+                    }
+                    transform="rotate(-90 25 25)"
+                  />
+                  <text
+                    className="circle-text"
+                    dy=".3em"
+                    textAnchor="middle"
+                    x="50%"
+                    y="50%"
+                  >
+                    80%
+                  </text>
+                </svg>
+              </div>
+            </div>
+            <div>
+              <div
+                className="travelCheck-list--card__body"
+              >
+                <undefined />
               </div>
             </div>
           </div>
@@ -397,26 +440,6 @@ exports[`TEST ConnectedVerificationDetails COMPONENT Updates after props are rec
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="rectangle right"
-      >
-        <div
-          className="flightDetails"
-        >
-          <p
-            className="flight-heading"
-          >
-            Flight Details
-          </p>
-          <div
-            className="no-flightDetails"
-          >
-            <p>
-              No Flight Details
-            </p>
           </div>
         </div>
       </div>

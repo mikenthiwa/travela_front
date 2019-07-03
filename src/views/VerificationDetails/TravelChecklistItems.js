@@ -1,55 +1,71 @@
 import React from 'react';
-import saveIcon from '../../images/icons/save-icon.svg';
-import documentIcon from '../../images/document-rect.png';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+import moment from 'moment';
+import documentIcon from '../../images/icons/uploaded-document.svg';
 
 
 
-export function AttachmentItems({ attachments, attachmentDetails, handleDownloadAttachments}) {
+export function AttachmentItem (itemName, imageUrl, onclick) {
   return (
-    attachmentDetails.map((item) => {
-      const isPdf = item.itemUrl && item.itemUrl.substr(-3) ==='pdf';
-      return (attachments.destinationName === item.itemDestination || attachments.tripId === item.itemTripId)? 
-        (
-          <div key={item.itemId} className="attachment-item">
-            <p className="attachment-header">{item.itemName}</p>
-            <div className="split">
-              <div className="attachment-image">
-                {isPdf ? (
-                  <embed
-                    src={`${item.itemUrl}#toolbar=0&statusbar=0&page=1`}
-                    alt={item.itemName}
-                    className="travelSubmission--input__input-field__image"
-                    type="application/pdf"
-                  />
-                ): 
-                  <img src={item.itemUrl} alt={item.itemName} className="travelSubmission--input__input-field__image" />}
-              </div>
-              <div className="attachment-value">
-                <p className="bold">                                             
-                  <span><strong>{item.fileName}</strong></span>       
-                </p>
-                <p>
-                  <span>Uploaded </span> 
-                  <span>{item.uploadDate}</span>
-                </p>
-                <button type="button" onClick={() => handleDownloadAttachments(item.itemUrl, item.fileName)}><img src={saveIcon} alt="save" /></button>
-              
-              </div>
-            </div>
-          </div>
-        ): null;
-    })
+    <div className="uploaded-button">
+      <button
+        type="button"
+        className="upload-btn__uploaded"
+        onClick={() => onclick(imageUrl, itemName)}
+      >
+        <img src={documentIcon} alt="file" />
+        <p>{itemName}</p>
+      </button>
+    </div>
   );
 }
 
-export  function ChecklistItems({ destination, checklistItems }) {
+
+
+export function UserResponse (response) {
   return (
-    checklistItems.map(item => {
-      return (item.submissions[0]  && destination === item.destinationName)?
+    <div className="checklist-item-value">
+      <div 
+        className={`${response.toLowerCase() === 'pending reply' ? 
+          'pending-checklist' :'checklist-button'}`} 
+        type="button">
+        {_.startCase(response)}
+      </div>
+    </div>
+  );
+}
+
+export  function ChecklistItems({ destination, checklistItems, handleDownloadAttachments }) {
+  return (
+    checklistItems.map((checklist, index) => {
+      const { submissions : [item]}  = checklist;
+      const  userResponse = !!(item && item.userResponse !== null);
+      const userUpload = !!(item && item.userUpload.fileName !== undefined);
+      const message = userResponse ? 'Replied on ' : 'Uploaded on ';
+      const updateDate = item && moment(item.updatedAt).format('DD/MM/YYYY');
+      let response = (!userResponse && !userUpload) && 'Pending Reply';
+      response =  userResponse ? item.userResponse : response ;
+      return (destination === checklist.destinationName)?
         (
-          <div key={item.id} className="checklist-items">
-            <div className="checklist-item-name"><strong>{item.name}</strong></div>
-            <div className="checklist-item-value">{item.submissions[0].value}</div>
+          <div key={checklist.id} className="checklist-items">
+            <div className="checklist-item-name">
+              <p className="checklist-item-number">{index+1}</p>
+              <strong>{checklist.name}</strong>
+              <p className="response-message">
+                {userResponse || userUpload ? message : ''}
+                <span>{updateDate}</span>
+              </p>
+              <div>
+                {
+                  userUpload ? AttachmentItem(
+                    item.userUpload.fileName, 
+                    item.userUpload.url,
+                    handleDownloadAttachments) :
+                    UserResponse(response)
+                }
+              </div>
+            </div>
           </div>
         )
         : null;                
@@ -57,62 +73,81 @@ export  function ChecklistItems({ destination, checklistItems }) {
   );
 }
 
-export function TicketDetails({ ticketDetails }) {
+export function DateFormat(date) {
+  return moment(date).format('DD-MM-YYYY, h:mm a');
+}
 
+export function GetTicketDetail(details, key) {
+  return (details && details.userUpload[key] !== undefined) ? details.userUpload[key] : 'Pending';
+}
+
+export function TicketDetails({ submissions ,handleDownloadAttachments}) {
   return (
-    ticketDetails.map(item => {
-      return (
-        <div key={item.ticketNumber} className="flight-detail clearfix">
-          <div>
-            <div className="destination">
-              <span>Destination: </span>
-              <span><strong>{item.destination}</strong></span>
+    <div className="flight-details">
+      {submissions.map((submission, index) => {
+        const locationDetails = `${submission.tripOrigin} to ${submission.destinationName}`;
+        const flightChecklist = {};
+        submission.checklist.map(checklist => {
+          if(checklist.name === 'Travel Ticket Details') flightChecklist['ticketDetails'] = checklist;
+          if(checklist.name === 'Travel Ticket') flightChecklist['ticket'] = checklist;
+        });
+        const details = flightChecklist['ticketDetails'].submissions !== undefined ?
+          flightChecklist['ticketDetails'].submissions[0] : undefined;
+        const ticketItem = flightChecklist['ticket'].submissions !== undefined ?
+          flightChecklist['ticket'].submissions[0] : undefined;
+        const flightTicket = (ticketItem && ticketItem.userUpload.fileName !== undefined) ? true : false;
+        const departureTime = GetTicketDetail(details, 'departureTime') !== 'Pending' ?
+          DateFormat(GetTicketDetail(details, 'departureTime')) : 'Pending';
+        const arrivalTime = GetTicketDetail(details, 'arrivalTime') !== 'Pending' ?
+          DateFormat(GetTicketDetail(details, 'arrivalTime')) : 'Pending';
+        const valueClass = (val) => (`value ${val === 'Pending' ? 'pending': ''}`);
+        const flightNumber = GetTicketDetail(details, 'flightNumber');
+        const airline = GetTicketDetail(details, 'airline');
+        return (
+          <div key={submission.tripId} className="flight-details-form">
+            <div className="checklist-item-name">
+              <p className="checklist-item-number">{index+1}</p>
+              <strong>{locationDetails}</strong>
             </div>
-            <div className="detail-left">
-              <p>Departure Time</p>
-              <p><strong>{item.departureTime}</strong></p>
-            </div> 
-            <div className="detail-right">    
-              <p>Arrival Time</p>  
-              <p><strong>{item.arrivalTime}</strong></p>
-            </div>               
-            <div data-test="ticketNumber" className="detail-left">
-              <p>Ticket Number</p>
-              <p><strong>{item.ticketNumber}</strong></p>
-            </div> 
-            <div className="detail-right">
-              <p>Airline</p>
-              <p><strong key={item.airline}>{item.airline}</strong></p>
-            </div> 
-          </div> 
-          { item.returnTicketNumber ? (
-            <div className="return">
-              <div className="destination">
-                <span>Return From: </span>
-                <span><strong>{item.destination}</strong></span>
+            <div className="ticket-details">
+              <div className="flight-departure details">
+                <p className="details-title">Departure Time</p>
+                <p className={valueClass(departureTime)}>{departureTime}</p>
               </div>
-              <div className="detail-left">
-                <p>Departure Time</p>
-                <p><strong>{item.returnDepartureTime}</strong></p>
-              </div> 
-              <div className="detail-right">    
-                <p>Arrival Time</p>  
-                <p><strong>{item.returnTime}</strong></p>
-              </div>               
-              <div data-test="ticketNumber" className="detail-left">
-                <p>Ticket Number</p>
-                <p><strong>{item.returnTicketNumber}</strong></p>
-              </div> 
-              <div className="detail-right">
-                <p>Airline</p>
-                <p><strong key={item.returnAirline}>{item.returnAirline}</strong></p>
-              </div> 
+              <div className="flight-arrival details">
+                <p className="details-title">Arrival Time</p>
+                <p className={valueClass(arrivalTime)}>{arrivalTime}</p>
+              </div>
+              <div className="flight-number details">
+                <p className="details-title">Flight Number</p>
+                <p className={valueClass(flightNumber)}>{flightNumber}</p>
+              </div>
+              <div className="flight-airline details ">
+                <p className="details-title">Airline</p>
+                <p className={valueClass(airline)}>{airline}</p>
+              </div>
             </div>
-          )            
-            : null
-          } 
-        </div>                     
-      );
-    })   
+            <div className="ticket-attachment">
+              <p className="ticket-attachment__title">Flight Ticket</p>
+              {flightTicket ? AttachmentItem(
+                ticketItem.userUpload.fileName,
+                ticketItem.userUpload.url,
+                handleDownloadAttachments
+              ) : (
+                <div className="pending-upload" type="button">
+                  Pending
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })
+      }
+    </div>
   );
 }
+
+TicketDetails.propTypes = {
+  submissions: PropTypes.array.isRequired ,
+  handleDownloadAttachments: PropTypes.func.isRequired
+};
