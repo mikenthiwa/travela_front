@@ -14,7 +14,6 @@ import profileMock from '../../ProfileForm/__mocks__/ProfileForm';
 import tabIcons from '../../../../images/icons/new-request-icons';
 import travelStipendHelper from '../../../../helper/request/RequestUtils'; 
 
-
 global.MutationObserver = MutationObserver;
 window.document.getSelection = () => {};
 const {centers} = profileMock;
@@ -74,8 +73,12 @@ describe('<NewRequestForm />', () => {
       roleId: 401938,
       location: 'Kigali'
     },
-
-
+    travelCosts: {
+      isLoading: false,
+      stipends: [],
+      flightCosts: [],
+      hotelEstimates: []
+    },
     userDataUpdate: [],
     requestOnEdit: {
       id: '1',
@@ -117,6 +120,7 @@ describe('<NewRequestForm />', () => {
       ],
       comments: []
     },
+    occupations: [],
     availableRooms: {
       beds
     },
@@ -550,8 +554,10 @@ describe('<NewRequestForm />', () => {
       nativeEvent: {
         path: [0, 1, 2, 3, 4, 5, 6, {id: 'departureDate-1_date'}]
       },
+      preventDefault: () => 0,
     };
     const spyChange = sinon.spy(wrapper.instance(), 'onChangeDate');
+    wrapper.instance().backStep(event);
     wrapper.instance().onChangeDate(moment('2018-12-01'), event);
     expect(wrapper.state().values['arrivalDate-0'])
       .toEqual(moment('2018-12-01'));
@@ -810,7 +816,7 @@ describe('<NewRequestForm />', () => {
         gender: 'male',
         department: 'Success',
         role: 'Software Developer',
-        manager: 'Samuel Kubai',
+        manager: 'David Ssalli',
       },
       trips: [],
       selection: 'return',
@@ -818,19 +824,18 @@ describe('<NewRequestForm />', () => {
     });
     const inputField = shallowWrapper.find('.occupationInput').at(0);
     const params = ['manager', 'David Ssalli'];
-    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params))
+    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params));
     inputField.simulate('change');
     const {manager} = shallowWrapper.state('values');
     expect(manager).toEqual('David Ssalli');
 
-    const params2 = ["manager", "will fail"]
+    const params2 = ['manager', 'Davidd Ssalli'];
     inputField.simulate('change');
-    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params2))
+    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params2));
     const {manager: newManager} = shallowWrapper.state('values');
     const {manager: secondManagerError} = shallowWrapper.state('errors');
-    expect(newManager).toEqual('will fail');
-    expect(secondManagerError).toEqual(" No manager with the name exists");
-    
+    expect(newManager).toEqual('Davidd Ssalli');
+    expect(secondManagerError).toEqual(' No manager with the name exists');
   });
 
   it('should test onChangeOccupation()', () => {
@@ -849,20 +854,20 @@ describe('<NewRequestForm />', () => {
       stipendBreakDown: []
     });
 
-    const inputField = shallowWrapper.find('.occupationInput').at(1)
-    const params = ["role", "Software Developers"]
+    const inputField = shallowWrapper.find('.occupationInput').at(1);
+    const params = ['role', 'Software Developer'];
     inputField.simulate('change');
-    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params))
+    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params));
     const {role} = shallowWrapper.state('values');
-    expect(role).toEqual('Software Developers');
+    expect(role).toEqual('Software Developer');
 
-    const params2 = ['role','Journalist']
+    const params2 = ['role','Software Developerss'];
     inputField.simulate('change');
-    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params2))
+    expect(shallowWrapper.instance().onChangeAutoSuggestion(...params2));
     const {role: newRole} = shallowWrapper.state('values');
     const {role: secondRoleError} = shallowWrapper.state('errors');
-    expect(newRole).toEqual('Journalist');
-    expect(secondRoleError).toEqual(" No role with the name exists");
+    expect(newRole).toEqual('Software Developerss');
+    expect(secondRoleError).toEqual(' No role with the name exists');
     
   });
 
@@ -1156,7 +1161,7 @@ describe('<NewRequestForm />', () => {
   it('should display next step on trip stipend  ', () => {
     const newProps = {
       ...props,
-      travelStipends: {
+      travelCosts: {
         stipends: [
           {
             'amount': 100,
@@ -1250,6 +1255,7 @@ describe('<NewRequestForm />', () => {
     shallowWrapper.setState({
       currentTab: 2
     });
+    shallowWrapper.instance().handleReason();
     expect(shallowWrapper.instance().handleReasonsId('Other..')).toEqual(null);
   });
 

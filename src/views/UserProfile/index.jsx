@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import '../../components/Forms/NewRequestForm/NewRequestForm.scss';
+import '../../components/Forms/NewRequestForm/NewRequestForm/NewRequestForm.scss';
 import './UserProfile.scss';
 import updateUserProfile from '../../redux/actionCreator/userProfileActions';
 import ProfileForm from '../../components/Forms/ProfileForm';

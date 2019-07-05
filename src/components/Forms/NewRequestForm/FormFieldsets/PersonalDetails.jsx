@@ -29,7 +29,7 @@ class PersonalDetailsFieldset extends Component {
     const { value, managers, occupations, onChangeAutoSuggestion,
       hasBlankFields, loading, send, completePersonalDetails } = this.props;
     const managerChoices = managers.map(manager => manager.fullName);
-    const occupationChoices = occupations.map(occupation => occupation.occupationName);
+    const occupationChoices = occupations ? occupations.map(occupation => occupation.occupationName) : [];
     const { renderInput } = this.inputRenderer;
     const disabled = disableInputs;
     return (
