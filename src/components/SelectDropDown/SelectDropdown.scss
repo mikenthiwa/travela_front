@@ -79,6 +79,8 @@ $border-color: #D4D4D4;
       cursor:pointer;
       text-align: left;
       background:white;
+      max-height: 155px;
+      overflow-y: auto;
     }
     &__item {
       @include itemsFontStyle(#4F4F4F);
