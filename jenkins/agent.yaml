@@ -6,7 +6,7 @@ labels:
 spec:
   containers:
   - name: travela-frontend-agent
-    image: harithj/jenkins-travela-frontend
+    image: eu.gcr.io/andela-learning/jenkins-travela-frontend
     resources:
       requests:
         cpu: "2000m"
