@@ -46,11 +46,12 @@ describe('Readiness API', () => {
     const query = {
       type: 'file',
       travelFlow: 'inflow',
-      range: { start: '2018-05-20', end: '2018-07-22'}
+      range: { start: '2018-05-20', end: '2018-07-22'},
+      center: 'Kenya'
     };
     moxios.stubRequest(
       `${baseUrl}/analytics/readiness?type=${
-        query.type}&travelFlow=${query.travelFlow}&dateFrom=${query.range.start}&dateTo=${query.range.end}`,
+        query.type}&travelFlow=${query.travelFlow}&dateFrom=${query.range.start}&dateTo=${query.range.end}&center=${query.center}`,
       {
         status: 200,
       }
@@ -58,7 +59,7 @@ describe('Readiness API', () => {
     const response = await ReadinessAPI.exportTravelReadiness(query);
     expect(moxios.requests.mostRecent().url).toEqual(
       `${baseUrl}/analytics/readiness?type=${query.type}&travelFlow=${
-        query.travelFlow}&dateFrom=${query.range.start}&dateTo=${query.range.end}`
+        query.travelFlow}&dateFrom=${query.range.start}&dateTo=${query.range.end}&center=${query.center}`
     );
     expect(response.status).toEqual(200);
   });

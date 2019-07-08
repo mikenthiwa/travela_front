@@ -9,7 +9,7 @@ class CalendarAnalyticsAPI{
     const {filter, page, type, history} = query;
     const locationUrl = new URLSearchParams(history.location.search);
     const selectedCenter = locationUrl.get('center');
-    const center = !selectedCenter ? 'All Locations' : selectedCenter;
+    const center = selectedCenter ? selectedCenter : 'All Locations';
     const responseType = (type === 'file') ? 'blob' : 'json';
     return axios.get(`${baseUrl}/analytics/calendar?type=${type}&location=${center}&${filter
     }&limit=${limit}&page=${page}`, {

@@ -53,9 +53,9 @@ class TravelReadiness extends PureComponent {
 
   };
   getReadinessCSV = () => {
-    const { exportReadiness, range } = this.props;
+    const { exportReadiness, range, center } = this.props;
     const { travelFlow } = this.state;
-    exportReadiness({ type: 'file', travelFlow: travelFlow, range });
+    exportReadiness({ type: 'file', travelFlow: travelFlow, range, center });
   };
 
   getTravelFlow = travelArgument => {

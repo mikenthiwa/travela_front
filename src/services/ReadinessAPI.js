@@ -15,10 +15,11 @@ class ReadinessAPI {
   }
 
   static exportTravelReadiness(query) {
+    const center = query.center ? query.center : 'All Locations';
     return axios.get(
       `${baseUrl}/analytics/readiness?type=${query.type}&travelFlow=${
         query.travelFlow
-      }&dateFrom=${query.range.start}&dateTo=${query.range.end}`,
+      }&dateFrom=${query.range.start}&dateTo=${query.range.end}&center=${center}`,
       { responseType: 'blob' }
     );
   }

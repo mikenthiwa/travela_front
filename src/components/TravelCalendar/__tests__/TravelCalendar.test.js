@@ -71,7 +71,7 @@ describe('Travel Calendar', () => {
     const btn = wrapper.find('.actions__btn');
     btn.simulate('click');
     expect(props.downloadCalendarAnalytics).toHaveBeenCalled();
-    expect(props.downloadCalendarAnalytics).toHaveBeenCalledWith({type: 'file', filter, page: 1});
+    expect(props.downloadCalendarAnalytics).toHaveBeenCalledWith({type: 'file', filter, history: props.history, page: 1});
   });
 
   it('checks that handle change is invoked', () => {

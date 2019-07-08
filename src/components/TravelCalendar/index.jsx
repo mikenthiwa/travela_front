@@ -72,10 +72,10 @@ class TravelCalendar extends PureComponent {
   }
 
   getTravelCalendarCSV = () => {
-    const {downloadCalendarAnalytics} = this.props;
+    const {downloadCalendarAnalytics, history} = this.props;
     const {filter: activeFilter, page } = this.state;
     const filter = Utils.manageRangeFilter(activeFilter);
-    downloadCalendarAnalytics({type: 'file', filter, page});
+    downloadCalendarAnalytics({type: 'file', filter, page, history});
   }
 
   renderButton (icon, text, onclickFunction, status) {

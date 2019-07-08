@@ -45,11 +45,11 @@ export default class DashboardHeader extends PureComponent {
   }
 
   renderButton = (icon, text, method) => {
-    const { downloadCsv, context } = this.props;
+    const { downloadCsv, context: { state: { center }} } = this.props;
     return (
       <button
         type="button" className="action-btn" id={!text ? 'download' : ''} onClick={
-          !text ? (() => downloadCsv(`?location=${context.state.center}&type=file`)) : method}>
+          !text ? (() => downloadCsv(`?center=${center}&type=file`)) : method}>
         {text}
         <img src={icon} alt={text} />
       </button>

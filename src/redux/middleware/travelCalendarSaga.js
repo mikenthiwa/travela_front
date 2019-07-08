@@ -31,6 +31,7 @@ export function* downloadCalendarAnalyticsSaga(action) {
   try {
     const response = yield call(CalendarAnalyticsAPI.getCalendarAnalytics, action.query);
     yield FileSaver.saveAs(response.data, 'Travel Calendar Analytics');
+    toast.success('Download Successful');
   }
   catch(error) {
     const errorMessage = apiErrorHandler(error);
