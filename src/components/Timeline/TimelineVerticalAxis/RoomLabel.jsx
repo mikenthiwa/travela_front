@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 import MaintainceForm from '../../Forms/MaintainanceForm';
@@ -51,16 +52,15 @@ class RoomLabel extends PureComponent {
           className="ellipsis"
           tabIndex="0"
           role="button"
-          onFocus={this.toggleMarkUnavailable}
-          onBlur={this.toggleMarkUnavailable}
+          onClick={this.toggleMarkUnavailable}
         >
           &hellip;
           <div 
             className={`mark-unavailable ${visibility}`}
             role="button"
             tabIndex="0"
-            onClick={() => status ? {} : openModal(true,  `${name}-${id}`)}
-            onKeyDown={() => status ? {} : openModal(true,  `${name}-${id}`)}>
+            onClick={() => !status && openModal(true,  `${name}-${id}`)}
+          >
             <div className={`container_room_${statusClass}`} />
             <span>Unavailable</span>
           </div>

@@ -20,6 +20,7 @@ class MaintainanceFieldSets extends Component {
             })}
           {renderInput('maintainanceEnd', 'date',
             {
+              disabled: !maintainanceStart,
               value: maintainanceEnd,
               minDate: moment(new Date(maintainanceStart))
             })}

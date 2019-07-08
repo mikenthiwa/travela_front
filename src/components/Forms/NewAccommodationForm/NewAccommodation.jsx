@@ -128,7 +128,7 @@ class NewAccommodation extends PureComponent {
         rooms[parentid].bedCount = value;}
     } else { rooms.push({ [name.split('-')[0]]: value });}
     this.setState(prevState => ({
-      values: { ...prevState.values, [rooms]: value } }), this.validate);
+      values: { ...prevState.values, } }), this.validate);
   };
 
   handleDropDown = (data, choice) => {
@@ -140,7 +140,7 @@ class NewAccommodation extends PureComponent {
       } else {
         rooms.push({ [name.split('-')[0]]: choice });}
       this.setState(prevState => ({
-        values: { ...prevState.values, [rooms]: choice } }), this.validate);
+        values: { ...prevState.values, } }), this.validate);
     } else {
       this.setState(prevState => ({
         values: { ...prevState.values } }), this.validate);

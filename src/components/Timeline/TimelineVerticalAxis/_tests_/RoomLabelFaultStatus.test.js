@@ -57,7 +57,7 @@ describe('<RoomLabel />', ()=> {
 
   it('changes the state of the elipses when clicked', () => {
     const elipses = wrapper.find('.ellipsis');
-    elipses.simulate('focus');
+    elipses.simulate('click');
     expect(wrapper.state().showMarkUnavailable).toEqual(true);
   });
 

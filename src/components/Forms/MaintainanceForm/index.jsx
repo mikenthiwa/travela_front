@@ -102,7 +102,7 @@ class MaintainceForm extends PureComponent {
 
   render() {
     const { values, errors, hasBlankFields } = this.state;
-    const { modalType, editMaintenance } = this.props;
+    const { modalType, editMaintenance, closeModal } = this.props;
     const onSubmit = (modalType === 'edit-maintenance')
       ? this.submitEditedMaintenanceData
       : this.submitMaintainanceData;
@@ -115,7 +115,7 @@ class MaintainceForm extends PureComponent {
           <div className="maintainence-submit-area">
             <button
               type="button" className="bg-btn bg-btn--inactive btn-cancel"
-              onClick={this.handleClearForm}>
+              onClick={closeModal}>
               Cancel
             </button>
             <button

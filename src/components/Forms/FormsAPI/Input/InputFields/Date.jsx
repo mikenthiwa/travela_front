@@ -38,7 +38,7 @@ class DateInput extends Component {
   render() {
     const {
       error, className, name, onBlur, minimumDate, maximumDate, openToDate,
-      showYearDropdown, showTimeSelect, dateFormat, minTime, maxTime, timeFormat,
+      showYearDropdown, showTimeSelect, dateFormat, minTime, maxTime, timeFormat, disabled,
     } = this.props;
     const { selectedDate } = this.state;
     const timeClasses =  `${showTimeSelect ? 'time-wrapper': ''}  ${/HH:mm/.test(timeFormat) ? 'twenty_four_h': ''}`;
@@ -47,6 +47,7 @@ class DateInput extends Component {
     return (
       <div className={`date-wrapper ${className} ${timeClasses}`} id={`${name}_date`}>
         <DatePicker
+          disabled={disabled}
           className={`${error ? 'error' : ''}`}
           calendarClassName="calendar-body"
           dayClassName={() => 'calendar-day'}
@@ -85,7 +86,7 @@ DateInput.propTypes = {
   dateFormat: PropTypes.string,
   timeFormat: PropTypes.string,
   onChangeRaw: PropTypes.func,
-  
+  disabled: PropTypes.bool,
 };
 
 DateInput.defaultProps = {
@@ -101,7 +102,8 @@ DateInput.defaultProps = {
   openToDate: moment(),
   dateFormat: undefined,
   showYearDropdown: false,
-  onChangeRaw: () => {}
+  onChangeRaw: () => {},
+  disabled: false,
 };
 
 export default DateInput;

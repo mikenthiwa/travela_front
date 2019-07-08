@@ -79,7 +79,7 @@ class AccommodationDetails extends Component {
               <img
                 src={deleteRoomIcon}
                 alt="clicked"
-                onClick={() => removeRoom()}
+                onClick={() => removeRoom(i)}
                 className="cancel-button"
                 role="presentation"
                 onKeyPress={this.press}

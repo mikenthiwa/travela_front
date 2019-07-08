@@ -35,11 +35,11 @@ describe('<RoomLabel />', () => {
 
   it('toggles mark unavailable pop up on focus and blur ellipsis', () => {
     const ellipsis = wrapper.find('.ellipsis');
-    const focusListener = ellipsis.prop('onFocus');
+    const focusListener = ellipsis.prop('onClick');
     focusListener();
     expect(wrapper.state().showMarkUnavailable).toBe(true);
     // on blur
-    const blurListener = ellipsis.prop('onBlur');
+    const blurListener = ellipsis.prop('onClick');
     blurListener();
     expect(wrapper.state().showMarkUnavailable).toBe(false);
   });
