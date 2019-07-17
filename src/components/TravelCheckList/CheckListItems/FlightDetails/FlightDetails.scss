@@ -49,74 +49,68 @@
     margin: 1em 0;
     padding: 0;
   }
+  .ticketForm{
+    display: flex;
+    flex-direction: row;
+    width: 76%;
+    flex-wrap: wrap;
+    padding-top: 10px;
+      .ticketInput{
+        flex-basis: 40%;
+        input{
+        line-height: 18px;
+        color: #757171!important;
+        font-weight: 300;
+        border-radius: 2px;
+        margin: 5px 10px 5px 0;
+        background-color: #ffffff;
+        border: 1px solid #d4d4d4;
+        width: 280px!important;
+        height: 32px;
+        font-size: 13px;
+        }
+        input:focus{
+          outline: none;
+          box-shadow: 0px 0px 3.5px rgba(51, 89, 219, 0.6);
+          border: 1px solid rgba(51, 89, 219, 0.7);
+        }
+        label{
+          color: #999999;
+          font-size: 13px;
+        }
+        .react-datepicker.calendar-body {
+          box-shadow: 0px 1px 3px 1px rgba(0,0,0,.2);
+        }
+        }
+        .return-form{
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          flex-wrap: wrap;
+        }
+        .error-div{
+          width: 100%;
+          font-size: 12px;
+          margin-top: -9px;
+          margin-bottom: 4px;
+        }
+        .error{
+          color: #ff0000;
+        }
+    
+    }
+    
+    .calendar-icon{
+      display: none;
+    }
+    
+    form .form-input {
+      margin: 0!important;
+    }
+    
+    @media (max-width: 450px){
+      form .form-input .date-wrapper input, form .form-input .date-wrapper > div input {
+        width: 190px!important;
+      }
+    }
 }
-
-.ticketForm{
-display: flex;
-flex-direction: row;
-width: 76%;
-flex-wrap: wrap;
-padding-top: 10px;
-  .ticketInput{
-    flex-basis: 40%;
-    input{
-    line-height: 18px;
-    color: #757171!important;
-    font-weight: 300;
-    border-radius: 2px;
-    margin: 5px 10px 5px 0;
-    background-color: #ffffff;
-    border: 1px solid #d4d4d4;
-    width: 280px!important;
-    height: 32px;
-    font-size: 13px;
-    }
-    input:focus{
-      outline: none;
-      box-shadow: 0px 0px 3.5px rgba(51, 89, 219, 0.6);
-      border: 1px solid rgba(51, 89, 219, 0.7);
-    }
-    label{
-      color: #999999;
-      font-size: 13px;
-    }
-    .react-datepicker.calendar-body {
-      box-shadow: 0px 1px 3px 1px rgba(0,0,0,.2);
-    }
-    }
-    .return-form{
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      flex-wrap: wrap;
-    }
-    .error-div{
-      width: 100%;
-      font-size: 12px;
-      margin-top: -9px;
-      margin-bottom: 4px;
-    }
-    .error{
-      color: #ff0000;
-    }
-
-}
-
-.calendar-icon{
-  display: none;
-}
-
-form .form-input {
-  margin: 0!important;
-}
-
-@media (max-width: 450px){
-  form .form-input .date-wrapper input, form .form-input .date-wrapper > div input {
-    width: 190px!important;
-  }
-}
-
-
-
-
-
