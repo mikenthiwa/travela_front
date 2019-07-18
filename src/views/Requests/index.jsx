@@ -93,8 +93,10 @@ export class Requests extends Base {
   }
 
   handleDeleteRequest = (requestId) => {
+    const { url } = this.state;
     const { deleteRequest } = this.props;
     deleteRequest(requestId);
+    this.fetchRequests(url);
   }
 
   handleEditRequest = (requestId) => {
