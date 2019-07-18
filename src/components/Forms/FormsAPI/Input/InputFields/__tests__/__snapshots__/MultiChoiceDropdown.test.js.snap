@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MultipleChoiceDropdown /> should render without crashing 1`] = `
+<div
+  className="multichoice-dropdown closed"
+>
+  <div
+    className="style-dropdown"
+  >
+    <input
+      autoComplete="off"
+      id="flight-input"
+      onChange={[Function]}
+      onClick={[Function]}
+      type="text"
+      value=""
+    />
+    <img
+      alt="icn"
+      onClick={[Function]}
+      role="presentation"
+      src="form_select_dropdown.svg"
+    />
+  </div>
+  <div
+    className="multichoice-dropdown__dropdown closed"
+  >
+    <ul
+      className="multichoice-dropdown__dropdown__menu"
+    >
+      <li
+        className="active"
+        key="Countries"
+        onClick={[Function]}
+        role="presentation"
+      >
+        Countries
+      </li>
+    </ul>
+    <ul
+      className="multichoice-dropdown__dropdown__list"
+    >
+      <li
+        className=""
+        key="Aruba0.9097494202270933"
+        onClick={[Function]}
+        role="presentation"
+      >
+        Aruba
+      </li>
+    </ul>
+  </div>
+</div>
+`;

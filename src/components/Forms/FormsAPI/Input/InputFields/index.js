@@ -7,6 +7,7 @@ import NumberInput from './NumberInput';
 import CheckBox from './CheckBox';
 import TextArea from './TextArea';
 import TagsInput from './TagsInput';
+import MultipleChoiceDropdown from './MultipleChoiceDropdown';
 
 export {
   DropdownSelect,
@@ -17,5 +18,6 @@ export {
   filterDropdownSelect,
   CheckBox,
   TextArea,
-  TagsInput
+  TagsInput,
+  MultipleChoiceDropdown
 };

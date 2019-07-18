@@ -20,6 +20,8 @@ class InputRenderer {
     case 'button-toggler':
       inputProps.choices = (formMetadata.buttonToggleOptions || {})[name];
       return inputProps;
+    case 'multiple-choice-dropdown':
+      return inputProps;
     default:
       return inputProps;
     }

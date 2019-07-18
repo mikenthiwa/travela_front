@@ -38,6 +38,7 @@ import tripModifications from './tripModifications';
 import listAllhotelEstimates from './hotelEstimates';
 import travelCosts from './travelCosts';
 import helpResources from './helpResources';
+import listAllFlightEstimates from './flightEstimates';
 
 const rootReducer = combineReducers({
   auth,
@@ -78,7 +79,8 @@ const rootReducer = combineReducers({
   country,
   listAllhotelEstimates,
   travelCosts,
-  helpResources
+  helpResources,
+  listAllFlightEstimates
 });
 
 export default rootReducer;

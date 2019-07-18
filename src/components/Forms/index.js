@@ -10,6 +10,7 @@ import NewTravelStipendForm from './NewTravelStipendForm/NewTravelStipendForm';
 import NewHotelEstimateForm from './NewHotelEstimateForm';
 import AddRegionForm from './AddRegionForm';
 import AddCountryForm from './AddCountriesForm/AddCountriesForm';
+import NewFlightEstimateForm from './NewFlightEstimateForm/NewFlightEstimateForm';
 import './index.scss';
 
 
@@ -23,5 +24,6 @@ export {
   NewTravelStipendForm,
   AddRegionForm,
   AddCountryForm,
-  NewHotelEstimateForm
+  NewHotelEstimateForm,
+  NewFlightEstimateForm
 };

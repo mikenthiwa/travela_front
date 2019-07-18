@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListFlightEstimates /> should render FlightEstimates page without crashing 1`] = `
+<div>
+  <div
+    className="no-templates list-templates"
+  >
+    <div
+      className="content no-estimates"
+    >
+      <img
+        alt=""
+        src="no-document.svg"
+      />
+      <p>
+        No Flight Estimates have been created
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<NoFlightEstimates  /> should render NoFlightEstimates page without crashing 1`] = `
+<div
+  className="no-templates list-templates"
+>
+  <div
+    className="content no-estimates"
+  >
+    <img
+      alt=""
+      src="no-document.svg"
+    />
+    <p>
+      No Flight Estimates have been created
+    </p>
+  </div>
+</div>
+`;

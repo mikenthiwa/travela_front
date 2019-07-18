@@ -78,10 +78,15 @@
       margin-bottom: 100px !important;
       display: flex;
   }
-  .rp-requests {
-    .rp-requests__header {
-  
-  }
-  }
 }
+}
+
+@media (max-width: 1079px) {
+  .travelStipends--header {
+    .PageHeader {
+      .action-btn {
+        margin-right: 40px;
+      }
+    }
+  }
 }

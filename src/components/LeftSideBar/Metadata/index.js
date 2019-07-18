@@ -114,6 +114,12 @@ const NavItemsMetadata = [
         text: 'Hotel Estimate',
         onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member'],
         exact: true
+      },
+      {
+        link_to: '/travel-cost/flight-estimates',
+        text: 'Flight Estimate',
+        onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member'],
+        exact: true
       }
     ],
     icons: {

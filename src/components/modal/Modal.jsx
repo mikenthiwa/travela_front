@@ -16,7 +16,7 @@ class Modal extends PureComponent {
   }
 
   componentWillReceiveProps( { visibility }, nextContext) {
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.setState({ showing: visibility === 'visible'});
     }, visibility === 'visible' ? 100 : 200);
   }

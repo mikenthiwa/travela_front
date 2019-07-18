@@ -1,0 +1,104 @@
+.multichoice-dropdown {
+  position: relative;
+
+  &__dropdown {
+    position: absolute;
+    background: white;
+    border: 1px solid #c3c3c3;
+    box-shadow: 2px 0 5px 2px rgba(0, 0, 0, .1);
+    min-height: 100px;
+    max-height: 300px;
+    border-radius: 2px;
+    margin-top: 5px;
+    z-index: 10;
+    overflow: hidden;
+    width: calc(100%);
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    transition: 0.5s all;
+
+    &.closed {
+      z-index: -1;
+      min-height: 0;
+      max-height: 0;
+      opacity: 0;
+
+      .multichoice-dropdown__dropdown {
+        &__menu, &__list {
+          margin-top: -50px;
+          opacity: 0;
+        }
+      }
+    }
+
+    &.open {
+      opacity: 1;
+      min-height: 100px;
+      max-height: 300px;
+
+      .multichoice-dropdown__dropdown {
+        &__menu, &__list {
+          margin-top: 10px;
+          opacity: 1;
+        }
+      }
+    }
+
+    &__menu, &__list {
+      transition: 0.5s all;
+    }
+    &__menu {
+      display: flex;
+      flex-direction: column;
+      padding-left: 0;
+      li {
+        padding-left: 1em;
+        color: #3d45e3;
+        cursor: pointer;
+        margin-bottom: 0.5em;
+        transition: 0.5s all;
+        &.active {
+          background: rgba(108, 108, 108, 0.2);
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+        }
+        &:hover:not(.active) {
+          background: rgba(108, 108, 108, 0.1);
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+        }
+      }
+    }
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      margin-left: 20px;
+      grid-row-gap: 1em;
+      overflow-y: scroll;
+      max-height: 280px;
+      li {
+        cursor: pointer;
+        transition: 0.4s all;
+        &:hover, &.active {
+          color: #3d45e3;
+        }
+      }
+    }
+  }
+}
+
+.style-dropdown img{
+  position: absolute;
+  top: 23px;
+  right: 15px;
+  transition: transform 0.05s ease-out;
+  transform-origin: center;
+}
+
+.style-dropdown > input#flight-input{
+  color: transparent;
+  text-shadow: 0 0 0 black;
+  &:focus {
+    outline: none;
+  }
+}

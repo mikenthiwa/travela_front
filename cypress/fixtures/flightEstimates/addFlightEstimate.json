@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "message": "Successfully created a new flight estimate for the given location",
+  "flightEstimate": {
+    "id": 44,
+    "amount": 80,
+    "originCountry": "Niger",
+    "destinationCountry": "Uganda",
+    "createdBy": "2190",
+    "updatedAt": "2019-06-10T17:13:45.264Z",
+    "createdAt": "2019-06-10T17:13:45.264Z",
+    "originRegion": null,
+    "destinationRegion": null,
+    "deletedAt": null
+  }
+}

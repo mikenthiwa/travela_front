@@ -153,6 +153,12 @@ import {
   watchDeleteHotelEstimate,
   watchUpdateHotelEstimate
 } from './hotelEstimateSaga';
+import {
+  watchCreateFlightEstimateAsync,
+  watchGetAllFlightEstimates, 
+  watchUpdateFlightEstimate,
+  watchDeleteFlightEstimate 
+} from './flightEstimatesSaga';
 
 import { watchAddResourcesSagaAsync, watchFetchLinkDataSagaAsync } from './helpResourceSaga';
 
@@ -274,7 +280,11 @@ function* rootSaga() {
     watchgetTravelCostsByLocation(),
     watchFetchLinkDataSagaAsync(),
     watchAddResourcesSagaAsync(),
-    watchpassportScanSaga()
+    watchpassportScanSaga(),
+    watchCreateFlightEstimateAsync(),
+    watchGetAllFlightEstimates(),
+    watchUpdateFlightEstimate(),
+    watchDeleteFlightEstimate()
   ]);
 }
 

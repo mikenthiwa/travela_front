@@ -29,6 +29,7 @@ import ConnectedTravelRegion from '../views/TravelRegion';
 import ConnectedCountries from '../views/Countries';
 import ConnectedHotelEstimate from '../views/HotelEstimate';
 import ConnectedHelpers from '../views/HelpLinks';
+import ConnectedFlightEstimate from '../views/FlightEstimates';
 
 
 import {
@@ -53,6 +54,7 @@ const routes = {
   '/settings/roles': [ConnectedRole, [SUPER_ADMINISTRATOR]],
   '/requests/:requestId': [ConnectedRequestDetailsPage],
   '/travel-cost/hotel-estimates': [ConnectedHotelEstimate, TRAVEL_MANAGERS],
+  '/travel-cost/flight-estimates': [ConnectedFlightEstimate, TRAVEL_MANAGERS],
   '/requests/:requestId/checklist': [ConnectedRequestDetailsPage],
   '/settings/profile': [ConnectedUserProfile],
   '/residence/manage': [ConnectedAccommodation, TRAVEL_MANAGERS],

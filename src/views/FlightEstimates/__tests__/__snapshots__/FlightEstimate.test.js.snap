@@ -1,0 +1,224 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FlightEstimates should render the flight estimate page without crashing 1`] = `
+Array [
+  <div
+    className="travelStipends--header"
+>
+    <div
+        className="PageHeader"
+    >
+        <div>
+            <span
+                className="title"
+            >
+                FLIGHT ESTIMATES
+            </span>
+        </div>
+        <div>
+            <button
+                className="action-btn btn-new-request"
+                id="actionButton"
+                onClick={[Function]}
+                type="button"
+            >
+                Add Estimate
+            </button>
+        </div>
+    </div>
+</div>,
+  "",
+  <div>
+    <div>
+        <div />
+        <div
+            className="stipend-list mdl-grid"
+        >
+            <div
+                className="card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--3-col-phone"
+            >
+                <div
+                    className="travel_stipend_menu"
+                >
+                    <span>
+                        <i
+                            className="fa fa-ellipsis-v on"
+                            onClick={[Function]}
+                            role="presentation"
+                        />
+                        <div
+                            className="context-menu table__menu-container false"
+                        >
+                            <ul
+                                className="table__menu-list"
+                            >
+                                <li
+                                    className="edit"
+                                    onClick={[Function]}
+                                    role="presentation"
+                                >
+                                    <span>
+                                        Edit
+                                    </span>
+                                </li>
+                                <li
+                                    className="delete"
+                                    onClick={[Function]}
+                                    role="presentation"
+                                >
+                                    <span>
+                                        Delete
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+                </div>
+                <div
+                    className="card_title"
+                >
+                    Kenya
+                     to 
+                    Nigeria
+                     
+                </div>
+                <div
+                    className="card_stipend"
+                >
+                    $
+                    150
+                     
+                </div>
+                <p
+                    className="card_p"
+                >
+                    Flight Estimate
+                </p>
+            </div>
+            <div
+                className="card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--3-col-phone"
+            >
+                <div
+                    className="travel_stipend_menu"
+                >
+                    <span>
+                        <i
+                            className="fa fa-ellipsis-v on"
+                            onClick={[Function]}
+                            role="presentation"
+                        />
+                        <div
+                            className="context-menu table__menu-container false"
+                        >
+                            <ul
+                                className="table__menu-list"
+                            >
+                                <li
+                                    className="edit"
+                                    onClick={[Function]}
+                                    role="presentation"
+                                >
+                                    <span>
+                                        Edit
+                                    </span>
+                                </li>
+                                <li
+                                    className="delete"
+                                    onClick={[Function]}
+                                    role="presentation"
+                                >
+                                    <span>
+                                        Delete
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+                </div>
+                <div
+                    className="card_title"
+                >
+                    France
+                     to 
+                    Germany
+                     
+                </div>
+                <div
+                    className="card_stipend"
+                >
+                    $
+                    100
+                     
+                </div>
+                <p
+                    className="card_p"
+                >
+                    Flight Estimate
+                </p>
+            </div>
+            <div
+                className="card mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--3-col-phone"
+            >
+                <div
+                    className="travel_stipend_menu"
+                >
+                    <span>
+                        <i
+                            className="fa fa-ellipsis-v on"
+                            onClick={[Function]}
+                            role="presentation"
+                        />
+                        <div
+                            className="context-menu table__menu-container false"
+                        >
+                            <ul
+                                className="table__menu-list"
+                            >
+                                <li
+                                    className="edit"
+                                    onClick={[Function]}
+                                    role="presentation"
+                                >
+                                    <span>
+                                        Edit
+                                    </span>
+                                </li>
+                                <li
+                                    className="delete"
+                                    onClick={[Function]}
+                                    role="presentation"
+                                >
+                                    <span>
+                                        Delete
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+                </div>
+                <div
+                    className="card_title"
+                >
+                    Uganda
+                     to 
+                    Rwanda
+                     
+                </div>
+                <div
+                    className="card_stipend"
+                >
+                    $
+                    300
+                     
+                </div>
+                <p
+                    className="card_p"
+                >
+                    Flight Estimate
+                </p>
+            </div>
+        </div>
+    </div>
+</div>,
+]
+`;
