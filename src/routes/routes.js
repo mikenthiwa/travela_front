@@ -15,6 +15,7 @@ import ConnectedReadiness from '../views/Readiness';
 import ConnectedRequestDetailsPage from '../views/Requests/NewRequestPage';
 import ConnectedTravelReadinessDocuments from '../views/TravelReadinessDocuments';
 import ConnectedUserTravelReadinessDetails from '../views/TravelReadinessDocuments/UserTravelReadinessDetails';
+import ConnectedChecklistWizard from '../views/ChecklistWizard';
 import ConnectedHome from '../views/Home';
 import ConnectedReminders from '../views/Reminders';
 import ConnectedCreateEmailTemplate from '../views/ReminderSetup/CreateEmailTemplate';
@@ -62,6 +63,7 @@ const routes = {
   '/residence/checkin': [ConnectedCheckIn],
   '/trip-planner/checklists': [ConnectedChecklist, TRAVEL_MANAGERS],
   '/trip-planner/travel-readiness': [ConnectedTravelReadinessDocuments, TRAVEL_MANAGERS],
+  '/trip-planner/checklist-wizard': [ConnectedChecklistWizard, TRAVEL_MANAGERS],
   '/travel-readiness/:userId': [ConnectedUserTravelReadinessDetails, TRAVEL_MANAGERS],
   '/settings/roles/:roleId': [ConnectedRoleDetails, TRAVEL_MANAGERS],
   '/settings/reminder-setup': [ConnectedReminderSetup, TRAVEL_MANAGERS],

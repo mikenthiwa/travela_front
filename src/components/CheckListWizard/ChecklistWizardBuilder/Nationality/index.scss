@@ -1,0 +1,101 @@
+.select-countries-container{
+    z-index: 100;
+    position: relative;
+    margin:  10px 25px 10px 50px;
+
+    .select-input-delete-container{
+      display: grid;
+      grid-template-columns: 1fr 20px;
+
+      .delete-icon-container{
+        align-self: center;
+      }
+    }
+
+    .select-options {
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        cursor: pointer;
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        height: 25px;
+      }
+      
+      .select-options:hover {
+        background-color: #F0F3F7;
+      }
+      
+      .select-input-area {
+        border: 1px solid #eeeeee;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        padding: 5px;
+      }
+
+      .caret {
+        background: transparent;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        height: 20px;
+        margin: auto;
+      }
+      
+      .selected-country-item {
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        width: 95%;
+      }
+      
+      .country-name {
+        margin: auto 5px;
+        font-size: 1rem;
+      }
+      
+      .select-placeholder {
+        color: lightgray;
+        width: 95%;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+      }
+      
+      .country-options-container {
+        border: 1px solid #eeeeee;
+        margin: 5px auto;
+        min-height: 35px;
+        max-height: 250px;
+        overflow: scroll;
+        position: absolute;
+        background: #fff;
+        width: 95%;
+        box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15);
+
+        .dest-filter {
+          position: sticky;
+          top: 0px;
+          height: 30px;
+          background: #fff;
+          width: 100%;
+        }
+
+        .dest-filter-input {
+          height: 30px;
+          width: 99%;
+          margin: 0px;
+          padding: 0px;
+          text-align: center;
+          border: none;
+          border-bottom: 1px solid #111;
+          outline: none;
+          font-size: 1rem;
+        }
+      }
+}

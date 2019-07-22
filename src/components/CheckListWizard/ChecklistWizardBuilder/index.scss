@@ -1,0 +1,49 @@
+.checklist-wizard-builder{
+    display: grid;
+    background-color: #FFFFFF;
+
+    .builder-checklist-item{
+        width: 95%;
+        height: auto;
+        margin: 10px auto;
+    }
+
+    .builder-header{
+        margin: 30px 50px 10px 50px;
+        color: #3359DB;
+        font-weight: 900;
+    }
+
+    .new-checklist-container{
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        margin: 20px auto;
+        width: 100%;
+
+        .new-checklist-icon{
+            background-color: #3359DB;
+            height: 25px;
+            width: 25px;
+            color: #fff;
+            border-radius: 50%;
+            align-self: center;
+            justify-self: center;
+            font-size: 2rem;
+            text-align: center;
+            box-sizing: border-box;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .wiz-btn{
+            height: 30px;
+            width: 40%;
+            color: #fff;
+            background: #3359DB;
+            border-radius: 6px;
+            cursor: pointer;
+            outline: none;
+            align-self: center;
+        }
+    }
+}

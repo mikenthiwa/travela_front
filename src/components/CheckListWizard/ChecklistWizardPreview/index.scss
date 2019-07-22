@@ -1,0 +1,50 @@
+.checklist-wizard-preview{
+    background-color: #FFFFFF;
+
+    .radio-grid{
+        display: flex;
+    }
+
+    .preview-prompt, .coutries-blue{
+        color: #3359DB;
+    }
+
+    .preview-prompt{
+        margin-top: 5px;
+    }
+
+    .upload-doc{
+        display: none;
+    }
+
+    .custom-file-upload{
+        background-color: #10A36D;
+        color: #FFFFFF;
+        height: auto;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: capitalize;
+        padding: 10px;
+
+    }
+
+    .behaviour-style{
+        margin-top: 20px;
+    }
+
+
+    .preview-item-header{
+        margin: 30px 50px;
+        height: 100px;
+
+        .preview-header{
+            margin: 20px 0px 10px 0px;
+            color: #3359DB;
+            font-weight: 900;
+        }
+    }
+
+    .preview-checklist-item{
+        min-height: 100px;
+    }
+}
