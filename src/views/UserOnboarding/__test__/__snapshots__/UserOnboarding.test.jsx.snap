@@ -1,0 +1,273 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserOnboarding /> Request Edit renders correctly 1`] = `
+<div>
+  <div
+    className="width-911"
+  >
+    <FormContext
+      currentPage={1}
+      currentTab={1}
+      editing={false}
+      errors={Object {}}
+      history={Object {}}
+      steps={
+        Array [
+          Object {
+            "id": 1,
+            "name": "Personal Information",
+            "position": 1,
+          },
+          Object {
+            "id": 2,
+            "name": "Travel Document",
+            "position": 2,
+          },
+        ]
+      }
+      targetForm={
+        UserOnboarding {
+          "changeState": [Function],
+          "context": Object {},
+          "defaultState": Object {
+            "collapse": false,
+            "errors": Object {},
+            "hasBlankFields": true,
+            "parentIds": 1,
+            "steps": Array [
+              Object {
+                "id": 1,
+                "name": "Personal Information",
+                "position": 1,
+              },
+              Object {
+                "id": 2,
+                "name": "Travel Document",
+                "position": 2,
+              },
+            ],
+            "values": Object {
+              "department": "",
+              "gender": "",
+              "location": "",
+              "manager": null,
+              "name": "",
+              "role": "",
+            },
+          },
+          "getPersonalDetails": [Function],
+          "handleSubmit": [Function],
+          "nextStep": [Function],
+          "onChangeAutoSuggestion": [Function],
+          "props": Object {
+            "creatingRequest": false,
+            "editing": false,
+            "history": Object {},
+            "managers": Array [],
+            "occupations": Array [],
+            "userData": Object {
+              "gender": undefined,
+              "name": undefined,
+              "role": undefined,
+            },
+            "userDataUpdate": Array [],
+          },
+          "refs": Object {},
+          "renderForm": [Function],
+          "renderPersonalDetailsFieldset": [Function],
+          "renderWelcomePage": [Function],
+          "setError": [Function],
+          "setState": [Function],
+          "setUp": [Function],
+          "state": Object {
+            "collapse": false,
+            "currentOrigin": 0,
+            "currentPage": 1,
+            "currentTab": 1,
+            "errors": Object {},
+            "hasBlankFields": true,
+            "parentIds": 1,
+            "steps": Array [
+              Object {
+                "id": 1,
+                "name": "Personal Information",
+                "position": 1,
+              },
+              Object {
+                "id": 2,
+                "name": "Travel Document",
+                "position": 2,
+              },
+            ],
+            "values": Object {
+              "department": "",
+              "gender": "",
+              "location": "",
+              "manager": null,
+              "name": "",
+              "role": "",
+            },
+          },
+          "updater": Updater {
+            "_callbacks": Array [],
+            "_renderer": ReactShallowRenderer {
+              "_context": Object {},
+              "_element": <UserOnboarding
+                creatingRequest={false}
+                editing={false}
+                history={Object {}}
+                managers={Array []}
+                occupations={Array []}
+                userData={
+                        Object {
+                                "gender": undefined,
+                                "name": undefined,
+                                "role": undefined,
+                              }
+                }
+                userDataUpdate={Array []}
+        />,
+              "_forcedUpdate": false,
+              "_instance": [Circular],
+              "_newState": null,
+              "_rendered": <div>
+                <div
+                        className="width-911"
+                >
+                        <FormContext
+                                currentPage={1}
+                                currentTab={1}
+                                editing={false}
+                                errors={Object {}}
+                                history={Object {}}
+                                steps={
+                                        Array [
+                                                Object {
+                                                  "id": 1,
+                                                  "name": "Personal Information",
+                                                  "position": 1,
+                                                },
+                                                Object {
+                                                  "id": 2,
+                                                  "name": "Travel Document",
+                                                  "position": 2,
+                                                },
+                                              ]
+                                }
+                                targetForm={[Circular]}
+                                validatorName="validate"
+                                values={
+                                        Object {
+                                                "department": "",
+                                                "gender": "",
+                                                "location": "",
+                                                "manager": null,
+                                                "name": "",
+                                                "role": "",
+                                              }
+                                }
+                        >
+                                <form
+                                        className="new-request"
+                                        onSubmit={[Function]}
+                                >
+                                        <div
+                                                className="user_onboarding"
+                                        >
+                                                <WelcomePage
+                                                        hasBlankFields={false}
+                                                        loading={false}
+                                                        nextStep={[Function]}
+                                                        send="Get Started"
+                                                />
+                                        </div>
+                                </form>
+                        </FormContext>
+                </div>
+        </div>,
+              "_rendering": false,
+              "_updater": [Circular],
+            },
+          },
+          "validate": [Function],
+          Symbol(enzyme.__setState__): [Function],
+        }
+      }
+      validatorName="validate"
+      values={
+        Object {
+          "department": "",
+          "gender": "",
+          "location": "",
+          "manager": null,
+          "name": "",
+          "role": "",
+        }
+      }
+    >
+      <form
+        className="new-request"
+        onSubmit={[Function]}
+      >
+        <div
+          className="user_onboarding"
+        >
+          <WelcomePage
+            hasBlankFields={false}
+            loading={false}
+            nextStep={[Function]}
+            send="Get Started"
+          />
+        </div>
+      </form>
+    </FormContext>
+  </div>
+</div>
+`;
+
+exports[`<UserOnboarding /> renders correctly 1`] = `
+<div>
+  <div
+    className="width-911"
+  >
+    <form
+      className="new-request"
+      key=".0"
+      onSubmit={[Function]}
+    >
+      <div
+        className="user_onboarding"
+      >
+        <div
+          className="welcome"
+        >
+          <div
+            className="heading"
+          >
+            Welcome to Travela
+          </div>
+          <img
+            alt="welcome"
+            className="welcome_image"
+            src="welcome_page.svg"
+          />
+          <div
+            className="message"
+          >
+            Hi slim this is your first time here & we're glad to have you on board. please click the button to begin
+          </div>
+          <button
+            className="get_started"
+            disabled={false}
+            id="get-started"
+            onClick={[Function]}
+            type="submit"
+          >
+            <undefined />
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+`;

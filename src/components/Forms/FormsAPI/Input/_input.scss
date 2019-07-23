@@ -73,10 +73,15 @@ form .form-input {
     button {
       width: 50%;
       margin: 0;
-      &.bg-btn {
+      &.bg-onboarding {
         &--inactive {
           background-color: #ffffff;
           color: #4f4f4f;
+        }
+        &--active {
+          border-radius: 0 2px 2px 0;	
+          background-color: #E2E5EB;
+          color: #3359DB
         }
       }
     }

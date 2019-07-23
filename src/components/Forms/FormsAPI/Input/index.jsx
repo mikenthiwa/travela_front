@@ -10,7 +10,8 @@ import {
   CheckBox,
   TextArea, 
   TagsInput,
-  MultipleChoiceDropdown
+  MultipleChoiceDropdown,
+  OnboardingButtonToggler,
 } from './InputFields';
 import createEventHandlersFor from '../formEventHandlers';
 import './_input.scss';
@@ -35,6 +36,12 @@ class Input extends PureComponent {
           onChange: onChange ||  eventHandlers.handleSelectTogglerOpt
         };
         return ButtonToggler;
+      case 'onboarding-button-toggler':
+        this.props = {
+          ...this.props,
+          onChange: onChange ||  eventHandlers.handleSelectTogglerOpt
+        };
+        return OnboardingButtonToggler;
       case 'date':
         this.props = {
           ...this.props,

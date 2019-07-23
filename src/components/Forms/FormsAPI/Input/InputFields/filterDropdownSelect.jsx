@@ -160,10 +160,11 @@ filterDropdownSelect.propTypes = {
     PropTypes.string,
     PropTypes.number
   ]),
-  size:  PropTypes.string.isRequired,
+  size:  PropTypes.string,
 };
 
 filterDropdownSelect.defaultProps = {
   choices: [],
-  value: ''
+  value: '',
+  size: ''
 };

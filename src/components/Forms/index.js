@@ -1,6 +1,7 @@
 // a registry of the applications forms
 
 import NewRequestForm from './NewRequestForm/NewRequestForm';
+import UserOnboarding from '../../views/UserOnboarding/Index';
 import NewUserRoleForm from './NewUserRoleForm/NewUserRoleForm';
 import NewAccommodationForm from './NewAccommodationForm/NewAccommodation';
 import NewChecklistForm from './NewChecklistForm';
@@ -25,5 +26,6 @@ export {
   AddRegionForm,
   AddCountryForm,
   NewHotelEstimateForm,
-  NewFlightEstimateForm
+  NewFlightEstimateForm,
+  UserOnboarding,
 };

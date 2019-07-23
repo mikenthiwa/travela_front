@@ -18,14 +18,15 @@ class ImageLink extends PureComponent {
 }
 
 ImageLink.propTypes = {
-  imageSrc: PropTypes.string.isRequired,
+  imageSrc: PropTypes.string,
   altText: PropTypes.string,
   imageClass: PropTypes.string
 };
 
 ImageLink.defaultProps = {
   imageClass: 'mdl-Icon',
-  altText: 'Dropdown Icon'
+  altText: 'Dropdown Icon',
+  imageSrc: 'imageSrc'
 };
 
 export default ImageLink;

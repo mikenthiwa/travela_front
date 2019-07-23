@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OnboardingButtonToggler /> renders as expected 1`] = `
+<div
+  className="input "
+>
+  <button
+    className="bg-btn bg-onboarding--active"
+    data-value="male"
+    disabled={false}
+    key="male"
+    name="gender"
+    onClick={[Function]}
+    type="button"
+  >
+    male
+    <i
+      className="fa fa-check-circle"
+    />
+  </button>
+  <button
+    className="bg-btn bg-onboarding--inactive"
+    data-value="female"
+    disabled={false}
+    key="female"
+    name="gender"
+    onClick={[Function]}
+    type="button"
+  >
+    female
+  </button>
+</div>
+`;

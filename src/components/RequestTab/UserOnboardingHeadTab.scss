@@ -1,0 +1,273 @@
+.request__tab-onboarding {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 41%;
+    margin: 37px auto 0;
+  }
+
+  .request__tab-card {
+    box-sizing: border-box;
+    min-height: 150px;
+    border-radius: 16px;
+    margin-left: 0;
+    margin-right: 8px;
+    background-color: #ffffff;
+    float: left;
+    position: relative;
+    padding-bottom: 23px;
+
+    &:nth-child(4n) {
+      margin-right: 0px;
+    }
+
+    .tab-logo {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #f5f5f5;
+
+      svg {
+        left: 50%;
+        width: 29px;
+        transform: translate(-50%, -50%);
+        float: left;
+        top: 50%;
+        position: relative;
+      }
+    }
+
+    .tab-logo-onboarding {
+      text-align: center;
+      width: 31px;
+      padding-top: 6px;
+      height: 27px;
+      border: 1px solid #3359db;
+      border-radius: 50%;
+      margin-top: 21px;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
+    .tab-title {
+      width: 100%;
+      text-align: center;
+      margin-top: 7px;
+      height: 21px;
+      color: #4f4f4f;
+      font-family: "DIN Pro";
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 21px;
+    }
+
+    .foot-text {
+      margin-top: 5px;
+      height: 15px;
+      width: 100%;
+      color: #4f4f4f;
+      font-family: "DIN Pro";
+      font-size: 12px;
+      line-height: 15px;
+      text-align: center;
+    }
+  }
+
+  .request__tab-card-onboarding {
+    box-sizing: border-box;
+    min-height: 150px;
+    border-radius: 16px;
+    margin-left: 0;
+    margin-right: 8px;
+    float: left;
+    position: relative;
+    padding-bottom: 23px;
+
+    &:nth-child(4n) {
+      margin-right: 0px;
+    }
+
+    .tab-logo-onboarding {
+      text-align: center;
+      // width: 31px;
+      padding-top: 6px;
+      height: 27px;
+      border: 1px solid #3359db;
+      border-radius: 50%;
+      margin-top: 21px;
+      margin-left: 10px;
+
+    }
+
+    .tab-title {
+      width: 32%;
+      text-align: center;
+      margin-top: 14px;
+      height: 21px;
+      color: #3359db;
+      font-family: "DIN Pro";
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 21px;
+    }
+
+    .foot-text {
+      margin-top: 5px;
+      height: 15px;
+      width: 100%;
+      color: #4f4f4f;
+      font-family: "DIN Pro";
+      font-size: 12px;
+      line-height: 15px;
+      text-align: center;
+    }
+  }
+
+  .current_request {
+    border: 1px solid #3359db;
+    opacity: 1 !important;
+
+    .foot-text {
+      display: block !important;
+    }
+  }
+
+  .current_request-tab {
+    color: #3359db;
+    opacity: 1 !important;
+
+    .foot-text {
+      display: block !important;
+    }
+  }
+
+  .complete {
+    opacity: 1 !important;
+    margin: 0;
+
+    .tab-logo {
+      background-color: rgba(16, 163, 109, 0.15);
+    }
+  }
+
+  .completecolor {
+    opacity: 0.5;
+
+    .tab-logo-onboarding {
+      color: rgba(90, 101, 119, 0.66);
+      border: 1px solid rgba(90, 101, 119, 0.66);
+      height: 27px;
+      width: 33px;
+
+    }
+
+    .tab-title {
+      color: rgba(90, 101, 119, 0.66);
+    }
+
+    .foot-text {
+      display: none;
+    }
+  }
+
+  .incompletecolor {
+    opacity: 1 !important;
+    margin: 0;
+
+    .tab-logo-onboarding {
+      height: 26px;
+      width: 33px;
+    }
+
+    .foot-text {
+      display: none;
+    }
+  }
+
+  .mark {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 24px;
+    width: 24px;
+    background-color: #10a36d;
+    border-radius: 50%;
+    text-align: center;
+  }
+
+  .new-request_title {
+    height: 23px;
+    width: 277px;
+    color: #4f4f4f;
+    font-family: "DIN Pro";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 23px;
+    margin-top: 60px;
+    margin-bottom: 25px;
+  }
+
+  .hide_element {
+    z-index: -1;
+  }
+
+  .page-header__edit-request {
+    display: inline;
+    align-items: center;
+
+    a {
+      margin-right: 5px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .request__tab-card {
+      width: -webkit-stretch !important;
+      margin: 8px;
+    }
+
+    .request__tab-card-onboarding {
+      width: -webkit-stretch !important;
+      margin: 8px;
+    }
+
+    .complete {
+      margin-bottom: 10px;
+    }
+
+    .completedcolor {
+      margin-bottom: 10px;
+    }
+  }
+
+  .request__tab-onboarding div.request__tab-card-onboarding {
+    div.distance-line {
+      position: relative !important;
+      top: -30px !important;
+      right: -50px !important;
+      width: 104px !important;
+    }
+
+    &:not(:nth-of-type(1)) hr {
+      border-color: white !important;
+    }
+  }
+
+  .inactive_request-tab {
+    .tab-logo-onboarding {
+      border: 1px solid #ccc !important;
+    }
+
+    .tab-title {
+      color: #ccc !important;
+    }
+  }
+
+  .inactive_request-tab * {
+    opacity: 0.5;
+  }

@@ -2,6 +2,7 @@ import React from 'react';
 import ConnectedDashboard from '../views/Dashboard';
 import ConnectedRequests from '../views/Requests';
 import ConnectedNewRequests from '../views/Requests/NewRequests';
+import ConnectedOnboarding from '../views/Requests/NewRequests/UserOnboarding';
 import ConnectedGuestHouseDetails from '../views/Accommodation/FullGuestHouseDetails';
 import ConnectedApprovals from '../views/Approvals';
 import ConnectedVerifications from '../views/Verifications';
@@ -40,7 +41,8 @@ import {
 
 const routes = {
   '/dashboard': [ConnectedDashboard, TRAVEL_MANAGERS],
-  '/home': [ConnectedHome] ,
+  '/home': [ConnectedHome],
+  '/welcome-page': [ConnectedOnboarding()],
   '/requests/my-approvals/': [ConnectedApprovals(), [SUPER_ADMINISTRATOR, MANAGER]],
   '/requests/my-approvals/:requestId': [ConnectedApproveRequests(), [SUPER_ADMINISTRATOR, MANAGER]],
   '/requests/budgets/:requestId': [ConnectedApproveRequests('budget'),[SUPER_ADMINISTRATOR, BUDGET_CHECKER, FINANCE_TEAM_MEMBER]],

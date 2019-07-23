@@ -67,17 +67,19 @@ export class Login extends Component {
 
   /* istanbul ignore next */
   redirect =() => {
-    const {  history } = this.props;
+    const {  history, postUserData } = this.props;
     const url = localStorage.getItem('url');
+    const firstLoginResponse = postUserData.message ==='first user login';
     if(url) {
       window.location.replace(url);
       history.push(url);
       localStorage.removeItem('url');
     } else {
-      window.location.replace('/home');
+      const loginRedirect = firstLoginResponse ? '/welcome-page' : '/home';
+      window.location.replace(loginRedirect);
     }
   }
-
+  
   login = (GoogleAuth) => {
     const { postData } = this.props;
     const token = GoogleAuth.tokenId;

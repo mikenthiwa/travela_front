@@ -200,17 +200,17 @@ export class NavBar extends PureComponent {
   }
 
   renderUserIcons() {
-    const { avatar, user } = this.props;
+    const { avatar, currentUser } = this.props;
     return (
       <div className="profile-sec">
         <span className="navbar__mdl-icons">
           <ImageLink
-            imageSrc={user ? user.UserInfo.picture : avatar}
+            imageSrc={currentUser ? currentUser.picture : avatar}
             altText="Andela Logo"
             imageClass="navbar__mdl-upic"
           />
           <span className="navbar__text-size">
-            {user ? user.UserInfo.name : ''}
+            {currentUser ? currentUser.fullName : ''}
           </span>
         </span>
         {this.logoutLink()}
@@ -259,7 +259,7 @@ export class NavBar extends PureComponent {
           {allCenters.length > 1 && this.renderLocationDropdown(allCenters, centerSelected)}
         </div>
         <nav className="mdl-navigation">
-          {this.renderHelpLink()}
+          {location.pathname !== '/welcome-page' ? this.renderHelpLink() : null}
           {this.renderNotification()}
           <div className="navbar__user-icon navbar__nav-size
             mdl-cell--hide-tablet mdl-cell--hide-phone">
@@ -307,7 +307,7 @@ NavBar.propTypes = {
   history: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({}).isRequired,
   userLocation: PropTypes.string,
-  user: PropTypes.shape({}).isRequired,
+  currentUser: PropTypes.shape({}).isRequired,
   avatar: PropTypes.string.isRequired,
   handleHideSearchBar: PropTypes.func.isRequired,
   openSearch: PropTypes.bool,
@@ -335,7 +335,7 @@ const mapStateToProps = state => {
   ],
   _.size);
   return {
-    user: state.auth.user,
+    currentUser: state.user.currentUser,
     ...state.notifications,
     ...state.modal.modal,
     userLocation: state.user.currentUser.location,

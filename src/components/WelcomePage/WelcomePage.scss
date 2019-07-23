@@ -1,0 +1,102 @@
+.welcome {
+	height: 46rem;
+	width: 80%;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    margin: 0 auto;
+
+    .heading {
+        height: 26px;
+        width: 253px;
+        color: #4F4F4F;
+        font-family: "DIN Pro";
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 26px;
+    }
+    .welcome_image {
+        width: 330px;
+        margin: 3em 0;
+    }
+    .message {
+        height: 42px;
+        width: 374px;
+        color: #4F4F4F;
+        font-family: "DIN Pro";
+        font-size: 15.96px;
+        line-height: 21px;
+    }
+    .get_started {
+        height: 36px;
+        width: 46%;
+        margin: 34px 55px 0 0;
+        border: 1px solid #3359DB;
+        border-radius: 1px;
+        background-color: #3359DB;
+        outline: none;
+        color: #FFFFFF;
+        font-family: "DIN Pro";
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        text-align: center;
+        cursor: pointer;
+    }
+}
+@media( max-width: 425px){
+    .welcome {
+        height: 41rem;
+        .welcome_image {
+        margin: 2rem !important;
+        width: 266px
+        }
+        .message {
+           width: 332px !important
+        }
+        .get_started {
+            margin: 34px 0 0 0;
+        }
+        .heading {
+            width: 208px !important;
+        }
+    }
+}
+@media( max-width: 375px){
+    .welcome {
+        height: 41rem;
+        .welcome_image {
+        margin: 2rem !important;
+        width: 266px
+        }
+        .message {
+           width: 307px !important
+        }
+        .get_started {
+            margin: 34px 0 0 0;
+        }
+        .heading {
+            width: 208px !important;
+        }
+    }
+}
+@media( max-width: 320px){
+    .welcome {
+        height: 41rem;
+        .welcome_image {
+        margin: 2rem !important;
+        width: 266px
+        }
+        .message {
+           width: 307px !important
+        }
+        .get_started {
+            margin: 34px 0 0 0;
+        }
+        .heading {
+            width: 208px !important;
+        }
+    }
+}

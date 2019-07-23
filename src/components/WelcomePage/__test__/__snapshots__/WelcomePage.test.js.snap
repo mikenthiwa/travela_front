@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WelcomePage /> renders correctly 1`] = `
+<div
+  className="welcome"
+>
+  <div
+    className="heading"
+  >
+    Welcome to Travela
+  </div>
+  <img
+    alt="welcome"
+    className="welcome_image"
+    src="welcome_page.svg"
+  />
+  <div
+    className="message"
+  >
+    Hi slim this is your first time here & we're glad to have you on board. please click the button to begin
+  </div>
+  <button
+    className="get_started"
+    disabled={true}
+    id="get-started"
+    onClick={[Function]}
+    type="submit"
+  >
+    <ButtonLoadingIcon
+      buttonText="Get Started"
+      isLoading={false}
+    />
+  </button>
+</div>
+`;

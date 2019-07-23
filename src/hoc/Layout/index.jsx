@@ -73,17 +73,21 @@ export class Layout extends Component {
 
   renderLeftSideBar = (hideSideBar) => {
     const hideClass2 = hideSideBar ? 'hide mdl-cell--hide-desktop' : '';
-    const {location} = this.props;
-    return (
-      <div
-        className={`mdl-cell mdl-cell--2-col-desktop mdl-cell--hide-tablet
-        mdl-cell--hide-phone request-page__left-side-bar ${hideClass2}`}>
-        <div className={`sidebar ${hideClass2}`}>
-          <ConnectedLeftSideBar location={location} />
+    const { location } = this.props;
+    if (location.pathname !== '/welcome-page') {
+      return (
+        <div
+          className={`mdl-cell mdl-cell--2-col-desktop mdl-cell--hide-tablet
+          mdl-cell--hide-phone request-page__left-side-bar ${hideClass2}`}>
+          <div className={`sidebar ${hideClass2}`}>
+            <ConnectedLeftSideBar location={location} />
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return null;
   };
+
 
   renderOverlay = (overlayClass) => {
     return (

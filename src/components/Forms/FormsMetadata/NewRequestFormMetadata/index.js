@@ -5,9 +5,11 @@
 import inputLabels from './inputLabels';
 import dropdownSelectOptions from './dropdownSelectOptions';
 import buttonToggleOptions from './buttonToggleOptions';
+import confirmPersonalInputLabels from './confirmPersonalInputLabels';
 
 export {
   inputLabels,
   dropdownSelectOptions,
-  buttonToggleOptions
+  buttonToggleOptions,
+  confirmPersonalInputLabels
 };
