@@ -159,6 +159,17 @@ import {
   watchUpdateFlightEstimate,
   watchDeleteFlightEstimate 
 } from './flightEstimatesSaga';
+import {
+  watchAddChecklistWizard,
+  watchHandleChecklistItems,
+  watchDeleteItems,
+  watchAddQuestion,
+  watchDeleteQuestion,
+  watchUpdateBehaviour,
+  watchUpdateNationality,
+  watchUpdateDestination,
+  watchCreateDynamicChecklist
+} from './travelChecklistWizardSaga';
 
 import { watchAddResourcesSagaAsync, watchFetchLinkDataSagaAsync } from './helpResourceSaga';
 import { watchgetAllDynamicChecklists} from './checklistWizardSaga';
@@ -286,7 +297,16 @@ function* rootSaga() {
     watchGetAllFlightEstimates(),
     watchUpdateFlightEstimate(),
     watchDeleteFlightEstimate(),
-    watchgetAllDynamicChecklists()
+    watchgetAllDynamicChecklists(),
+    watchAddChecklistWizard(),
+    watchHandleChecklistItems(),
+    watchDeleteItems(),
+    watchDeleteQuestion(),
+    watchUpdateBehaviour(),
+    watchUpdateNationality(),
+    watchUpdateDestination(),
+    watchCreateDynamicChecklist(),
+    watchAddQuestion()
   ]);
 }
 

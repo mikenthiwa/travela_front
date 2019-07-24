@@ -37,4 +37,10 @@ describe('<ChecklistWizardBuilder />', () => {
     const wrapper = shallow(<ChecklistWizardBuilder {...props} />);
     expect(wrapper.find('div'));
   });
+
+  it('should call addNewChecklistItem on button click', () => {
+    const wrapper = shallow(<ChecklistWizardBuilder {...props} />);
+    wrapper.find('button').at(0).simulate('click', props.items);
+    expect(props.addNewChecklistItem).toHaveBeenCalled();
+  });
 });

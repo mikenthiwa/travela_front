@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BuilderOptions from '../BuilderOptions';
+import RenderCheckbox from '../CheckboxBuilder';
+
 
 const BuilderOptionConfiguration = ({
   type,
@@ -9,6 +11,7 @@ const BuilderOptionConfiguration = ({
   order,
   addQuestion,
   deleteQuestion,
+  items
 }) => {
   switch (type) {
   case 'radio':
@@ -17,13 +20,23 @@ const BuilderOptionConfiguration = ({
         type={type}
         configuration={configuration}
         order={order}
+        items={items}
         updateBehaviour={updateBehaviour}
         addQuestion={addQuestion}
         deleteQuestion={deleteQuestion}
       />
     );
   case 'checkbox':
-    return <div>This is checkbox</div>;
+    return (
+      <RenderCheckbox
+        configuration={configuration}
+        order={order}
+        items={items}
+        updateBehaviour={updateBehaviour}
+        addQuestion={addQuestion}
+        deleteQuestion={deleteQuestion}
+      />
+    );
   case 'dropdown':
     return <div>This is dropdown</div>;
   case 'image':

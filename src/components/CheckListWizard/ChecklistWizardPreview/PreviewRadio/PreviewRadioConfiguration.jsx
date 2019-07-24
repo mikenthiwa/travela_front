@@ -17,6 +17,10 @@ const PreviewRadioConfiguration = ({behaviourName}) => {
   }
 };
 
+PreviewRadioConfiguration.defaultProps = {
+  behaviourName: ''
+};
+
 PreviewRadioConfiguration.propTypes = {
   behaviourName: PropTypes.string.isRequired,
 };

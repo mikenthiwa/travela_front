@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 import ChecklistWizardPreview from '../index';
 
 const props = {
-  nationality: 'Nigerians',
-  destinations: ['USA', 'Brazil', 'Japan'],
+  nationality: { name: 'Nigerians' },
+  destinations: [{ name: 'USA'}, {name: 'Brazil'}],
   items: [
     {
       order: 1,
@@ -29,6 +29,6 @@ const props = {
 describe('<ChecklistWizardPreview />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<ChecklistWizardPreview {...props} />);
-    expect(wrapper.find('div'));
+    expect(wrapper).toMatchSnapshot();
   });
 });

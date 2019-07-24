@@ -1,50 +1,79 @@
-.checklist-wizard-preview{
-    background-color: #FFFFFF;
+.checklist-wizard-preview {
+  background-color: #ffffff;
 
-    .radio-grid{
-        display: flex;
+  .radio-grid {
+    display: flex;
+    grid-template-columns: 30px 1fr;
+    margin-top: 23px;
+  }
+
+  .preview-prompt,
+  .coutries-blue {
+    color: #3359db;
+  }
+
+  .preview-prompt {
+    margin: 3px 0;
+  }
+
+  .upload-doc {
+    display: none;
+  }
+
+  .custom-file-upload {
+    background-color: #10a36d;
+    color: #ffffff;
+    height: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: capitalize;
+    padding: 10px;
+  }
+
+  .behaviour-style {
+    margin-top: 20px;
+  }
+
+  .preview-item-header {
+    margin: 30px 50px 0;
+
+    .preview-header {
+      color: #3359db;
+      margin: 0;
+      margin-top: 41px;
+      font-size: 16px;
+      font-weight: 500;
     }
 
-    .preview-prompt, .coutries-blue{
-        color: #3359DB;
+    .travellingto-preview {
+      margin: 0;
+      margin-top: 20px;
+      font-size: 15px;
+      color: #5a6577;
     }
+  }
 
-    .preview-prompt{
-        margin-top: 5px;
+  .preview-checklist-item {
+    margin-top: 30px;
+  }
+
+  .display-preview-behaviour {
+    .skipQuestion {
+      height: 39px;
+      width: 177px;
+      border-radius: 5px;
+      background-color: #10a36d;
+      box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11);
+      color: #fff;
+      font-size: 14px;
+      letter-spacing: 0.58px;
+      font-weight: bold;
+      margin-top: 15px;
+      outline: none;
+      cursor: pointer;
     }
-
-    .upload-doc{
-        display: none;
+    .skipQuestion:hover {
+      opacity: 0.85;
     }
-
-    .custom-file-upload{
-        background-color: #10A36D;
-        color: #FFFFFF;
-        height: auto;
-        border-radius: 5px;
-        cursor: pointer;
-        text-transform: capitalize;
-        padding: 10px;
-
-    }
-
-    .behaviour-style{
-        margin-top: 20px;
-    }
-
-
-    .preview-item-header{
-        margin: 30px 50px;
-        height: 100px;
-
-        .preview-header{
-            margin: 20px 0px 10px 0px;
-            color: #3359DB;
-            font-weight: 900;
-        }
-    }
-
-    .preview-checklist-item{
-        min-height: 100px;
-    }
+  }
 }

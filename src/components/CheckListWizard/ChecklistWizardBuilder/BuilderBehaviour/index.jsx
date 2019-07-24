@@ -18,15 +18,20 @@ class Behaviours extends Component {
     this.onBehaviourChange(event);
   }
 
+
   onBehaviourChange = ({ target }) => {
-    const { updateBehaviour, order, optionId } = this.props;
+    const { updateBehaviour, order, optionId, type } = this.props;
     if (target.value === 'skip to another question') {
       this.setState({ noAction: true, actionType: target.value });
     }
 
     if (target.value === 'upload a document') {
       this.setState({ noAction: false, actionType: target.value });
-      updateBehaviour(BehaviourPool({name:target.value}), order, optionId, 'behaviour');
+      type === 'checkbox' ? (
+        updateBehaviour(BehaviourPool({name:target.value}), order, optionId, 'behaviour', type)
+      ) : (
+        updateBehaviour(BehaviourPool({name:target.value}), order, optionId, 'behaviour')
+      );
     }
 
     if (target.value === 'preview document') {
@@ -38,11 +43,16 @@ class Behaviours extends Component {
     }
   };
 
-  handleBehaviour = ({target}) => {
+  handleBehaviour = ({target}, type) => {
     const { updateBehaviour, order, optionId } = this.props;
     const { actionType } = this.state;
-    updateBehaviour(BehaviourPool({name: actionType, payload: target.value}), order, optionId, 'behaviour');
+    type === 'checkbox' ? (
+      updateBehaviour(BehaviourPool({name: actionType, payload: target.value}), order, optionId, 'behaviour', type)
+    ) : (
+      updateBehaviour(BehaviourPool({name: actionType, payload: target.value}), order, optionId, 'behaviour')
+    );
   }
+
 
   handleInputBehaviour = ({target}) => {
     this.setState({[target.id]: target.value});
@@ -50,6 +60,7 @@ class Behaviours extends Component {
 
   renderBehaviourInputType = (actionType) => {
     const { numberToSkipTo, documentToPreview, emailToSend } = this.state;
+    const { type } = this.props;
     switch (actionType) {
     case 'skip to another question':
       return (
@@ -59,7 +70,7 @@ class Behaviours extends Component {
           className="behaviour-payload-input"
           onChange={this.handleInputBehaviour}
           placeholder="2"
-          onKeyUp={this.handleBehaviour}
+          onKeyUp={(e) => this.handleBehaviour(e, type)}
           value={numberToSkipTo}
         />
       );
@@ -71,8 +82,8 @@ class Behaviours extends Component {
           className="behaviour-payload-input"
           placeholder="ex. example@andela.com"
           value={emailToSend}
+          onKeyUp={(e) => this.handleBehaviour(e, type)}
           onChange={this.handleInputBehaviour}
-          onKeyUp={this.handleBehaviour}
         />
       );
     case 'preview document':
@@ -84,7 +95,7 @@ class Behaviours extends Component {
           value={documentToPreview}
           className="behaviour-payload-input"
           onChange={this.handleInputBehaviour}
-          onKeyUp={this.handleBehaviour}
+          onKeyUp={(e) => this.handleBehaviour(e, type)}
         />
       );
     }
@@ -103,9 +114,15 @@ class Behaviours extends Component {
   }
 }
 
+Behaviours.defaultProps = {
+  optionId: 0,
+  type: '',
+};
+
 Behaviours.propTypes = {
+  type: PropTypes.string,
   order: PropTypes.number.isRequired,
-  optionId: PropTypes.number.isRequired,
+  optionId: PropTypes.number,
   updateBehaviour: PropTypes.func.isRequired,
 };
 
