@@ -161,6 +161,7 @@ import {
 } from './flightEstimatesSaga';
 
 import { watchAddResourcesSagaAsync, watchFetchLinkDataSagaAsync } from './helpResourceSaga';
+import { watchgetAllDynamicChecklists} from './checklistWizardSaga';
 
 
 function* rootSaga() {
@@ -284,7 +285,8 @@ function* rootSaga() {
     watchCreateFlightEstimateAsync(),
     watchGetAllFlightEstimates(),
     watchUpdateFlightEstimate(),
-    watchDeleteFlightEstimate()
+    watchDeleteFlightEstimate(),
+    watchgetAllDynamicChecklists()
   ]);
 }
 

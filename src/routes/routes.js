@@ -32,6 +32,7 @@ import ConnectedCountries from '../views/Countries';
 import ConnectedHotelEstimate from '../views/HotelEstimate';
 import ConnectedHelpers from '../views/HelpLinks';
 import ConnectedFlightEstimate from '../views/FlightEstimates';
+import ConnectedChecklistWizardInterface from '../views/ChecklistWizardInterface';
 
 
 import {
@@ -78,6 +79,7 @@ const routes = {
   '/help': [ConnectedHelpers],
   '/settings/travel-region': [ConnectedTravelRegion, TRAVEL_MANAGERS],
   '/settings/travel-region/:regionId': [ConnectedCountries, TRAVEL_MANAGERS],
+  '/trip-planner/checklist-wizard-interface': [ConnectedChecklistWizardInterface, TRAVEL_MANAGERS],
 };
 
 export default routes;

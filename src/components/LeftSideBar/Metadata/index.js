@@ -159,7 +159,7 @@ const NavItemsMetadata = [
         onlyVisibleTo: ['Super Administrator', 'Travel Administrator', 'Travel Team Member']
       },
       {
-        link_to: '/trip-planner/checklist-wizard',
+        link_to: '/trip-planner/checklist-wizard-interface',
         exact: true,
         text: 'Checklist Wizard',
         onlyVisibleTo: ['Super Administrator', 'Travel Administrator', 'Travel Team Member']

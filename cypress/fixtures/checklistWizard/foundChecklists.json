@@ -1,0 +1,1113 @@
+{
+  "success": true,
+  "checklists": [
+      {
+          "id": 1,
+          "name": "poland-Uganda-dnZjGPGwo",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T15:16:35.047Z",
+          "updatedAt": "2019-07-18T15:16:35.047Z",
+          "destinations": [
+              {
+                  "id": 1,
+                  "checklistId": 1,
+                  "countryId": 2,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T15:16:35.119Z",
+                  "updatedAt": "2019-07-18T15:16:35.119Z",
+                  "country": {
+                      "id": 2,
+                      "country": "Uganda",
+                      "createdAt": "2019-07-18T15:16:35.113Z",
+                      "updatedAt": "2019-07-18T15:16:35.113Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 1,
+                  "checklistId": 1,
+                  "countryId": 1,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T15:16:35.099Z",
+                  "updatedAt": "2019-07-18T15:16:35.099Z",
+                  "country": {
+                      "id": 1,
+                      "country": "poland",
+                      "createdAt": "2019-07-18T15:16:35.066Z",
+                      "updatedAt": "2019-07-18T15:16:35.066Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      },
+      {
+          "id": 2,
+          "name": "poland-Uganda-SNFDsMImM",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T15:17:07.114Z",
+          "updatedAt": "2019-07-18T15:17:07.114Z",
+          "destinations": [
+              {
+                  "id": 2,
+                  "checklistId": 2,
+                  "countryId": 2,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T15:17:07.138Z",
+                  "updatedAt": "2019-07-18T15:17:07.138Z",
+                  "country": {
+                      "id": 2,
+                      "country": "Uganda",
+                      "createdAt": "2019-07-18T15:16:35.113Z",
+                      "updatedAt": "2019-07-18T15:16:35.113Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 2,
+                  "checklistId": 2,
+                  "countryId": 1,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T15:17:07.128Z",
+                  "updatedAt": "2019-07-18T15:17:07.128Z",
+                  "country": {
+                      "id": 1,
+                      "country": "poland",
+                      "createdAt": "2019-07-18T15:16:35.066Z",
+                      "updatedAt": "2019-07-18T15:16:35.066Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      },
+      {
+          "id": 3,
+          "name": "Morocco-Ghana-pt1oXzwwR",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T16:19:29.959Z",
+          "updatedAt": "2019-07-18T16:19:29.959Z",
+          "destinations": [
+              {
+                  "id": 4,
+                  "checklistId": 3,
+                  "countryId": 100,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:19:30.040Z",
+                  "updatedAt": "2019-07-18T16:19:30.040Z",
+                  "country": {
+                      "id": 100,
+                      "country": "Kenya",
+                      "createdAt": "2019-10-05T08:36:11.170Z",
+                      "updatedAt": "2019-10-05T08:36:11.170Z",
+                      "regionId": 1001
+                  },
+                  "region": null
+              },
+              {
+                  "id": 3,
+                  "checklistId": 3,
+                  "countryId": 4,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:19:30.033Z",
+                  "updatedAt": "2019-07-18T16:19:30.033Z",
+                  "country": {
+                      "id": 4,
+                      "country": "Ghana",
+                      "createdAt": "2019-07-18T16:19:30.018Z",
+                      "updatedAt": "2019-07-18T16:19:30.018Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 3,
+                  "checklistId": 3,
+                  "countryId": 3,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:19:30.006Z",
+                  "updatedAt": "2019-07-18T16:19:30.006Z",
+                  "country": {
+                      "id": 3,
+                      "country": "Morocco",
+                      "createdAt": "2019-07-18T16:19:29.982Z",
+                      "updatedAt": "2019-07-18T16:19:29.982Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      },
+      {
+          "id": 4,
+          "name": "UnitedStates-Ghana-bAVomALSK",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T16:19:42.760Z",
+          "updatedAt": "2019-07-18T16:19:42.760Z",
+          "destinations": [
+              {
+                  "id": 6,
+                  "checklistId": 4,
+                  "countryId": 100,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:19:42.812Z",
+                  "updatedAt": "2019-07-18T16:19:42.812Z",
+                  "country": {
+                      "id": 100,
+                      "country": "Kenya",
+                      "createdAt": "2019-10-05T08:36:11.170Z",
+                      "updatedAt": "2019-10-05T08:36:11.170Z",
+                      "regionId": 1001
+                  },
+                  "region": null
+              },
+              {
+                  "id": 5,
+                  "checklistId": 4,
+                  "countryId": 4,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:19:42.801Z",
+                  "updatedAt": "2019-07-18T16:19:42.801Z",
+                  "country": {
+                      "id": 4,
+                      "country": "Ghana",
+                      "createdAt": "2019-07-18T16:19:30.018Z",
+                      "updatedAt": "2019-07-18T16:19:30.018Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 4,
+                  "checklistId": 4,
+                  "countryId": 5,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:19:42.782Z",
+                  "updatedAt": "2019-07-18T16:19:42.782Z",
+                  "country": {
+                      "id": 5,
+                      "country": "United States",
+                      "createdAt": "2019-07-18T16:19:42.772Z",
+                      "updatedAt": "2019-07-18T16:19:42.772Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      },
+      {
+          "id": 5,
+          "name": "Mali-Ghana-Jqnenxa5K",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T16:20:19.776Z",
+          "updatedAt": "2019-07-18T16:20:19.776Z",
+          "destinations": [
+              {
+                  "id": 8,
+                  "checklistId": 5,
+                  "countryId": 100,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:20:19.828Z",
+                  "updatedAt": "2019-07-18T16:20:19.828Z",
+                  "country": {
+                      "id": 100,
+                      "country": "Kenya",
+                      "createdAt": "2019-10-05T08:36:11.170Z",
+                      "updatedAt": "2019-10-05T08:36:11.170Z",
+                      "regionId": 1001
+                  },
+                  "region": null
+              },
+              {
+                  "id": 7,
+                  "checklistId": 5,
+                  "countryId": 4,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:20:19.817Z",
+                  "updatedAt": "2019-07-18T16:20:19.817Z",
+                  "country": {
+                      "id": 4,
+                      "country": "Ghana",
+                      "createdAt": "2019-07-18T16:19:30.018Z",
+                      "updatedAt": "2019-07-18T16:19:30.018Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 5,
+                  "checklistId": 5,
+                  "countryId": 6,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:20:19.800Z",
+                  "updatedAt": "2019-07-18T16:20:19.800Z",
+                  "country": {
+                      "id": 6,
+                      "country": "Mali",
+                      "createdAt": "2019-07-18T16:20:19.787Z",
+                      "updatedAt": "2019-07-18T16:20:19.787Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      },
+      {
+          "id": 6,
+          "name": "Madagascar-Leichestein-UllZbSanT",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T16:20:38.593Z",
+          "updatedAt": "2019-07-18T16:20:38.593Z",
+          "destinations": [
+              {
+                  "id": 10,
+                  "checklistId": 6,
+                  "countryId": 100,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:20:38.654Z",
+                  "updatedAt": "2019-07-18T16:20:38.654Z",
+                  "country": {
+                      "id": 100,
+                      "country": "Kenya",
+                      "createdAt": "2019-10-05T08:36:11.170Z",
+                      "updatedAt": "2019-10-05T08:36:11.170Z",
+                      "regionId": 1001
+                  },
+                  "region": null
+              },
+              {
+                  "id": 9,
+                  "checklistId": 6,
+                  "countryId": 8,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:20:38.648Z",
+                  "updatedAt": "2019-07-18T16:20:38.648Z",
+                  "country": {
+                      "id": 8,
+                      "country": "Leichestein",
+                      "createdAt": "2019-07-18T16:20:38.635Z",
+                      "updatedAt": "2019-07-18T16:20:38.635Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 6,
+                  "checklistId": 6,
+                  "countryId": 7,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:20:38.620Z",
+                  "updatedAt": "2019-07-18T16:20:38.620Z",
+                  "country": {
+                      "id": 7,
+                      "country": "Madagascar",
+                      "createdAt": "2019-07-18T16:20:38.613Z",
+                      "updatedAt": "2019-07-18T16:20:38.613Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      },
+      {
+          "id": 7,
+          "name": "Benin-Leichestein-DoWtoOGkh",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T16:22:48.184Z",
+          "updatedAt": "2019-07-18T16:22:48.184Z",
+          "destinations": [
+              {
+                  "id": 12,
+                  "checklistId": 7,
+                  "countryId": 100,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:22:48.240Z",
+                  "updatedAt": "2019-07-18T16:22:48.240Z",
+                  "country": {
+                      "id": 100,
+                      "country": "Kenya",
+                      "createdAt": "2019-10-05T08:36:11.170Z",
+                      "updatedAt": "2019-10-05T08:36:11.170Z",
+                      "regionId": 1001
+                  },
+                  "region": null
+              },
+              {
+                  "id": 11,
+                  "checklistId": 7,
+                  "countryId": 8,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:22:48.230Z",
+                  "updatedAt": "2019-07-18T16:22:48.230Z",
+                  "country": {
+                      "id": 8,
+                      "country": "Leichestein",
+                      "createdAt": "2019-07-18T16:20:38.635Z",
+                      "updatedAt": "2019-07-18T16:20:38.635Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 7,
+                  "checklistId": 7,
+                  "countryId": 9,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:22:48.211Z",
+                  "updatedAt": "2019-07-18T16:22:48.211Z",
+                  "country": {
+                      "id": 9,
+                      "country": "Benin",
+                      "createdAt": "2019-07-18T16:22:48.200Z",
+                      "updatedAt": "2019-07-18T16:22:48.200Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      },
+      {
+          "id": 8,
+          "name": "SouthAfrica-Leichestein-ebFn8HO8q",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T16:23:07.069Z",
+          "updatedAt": "2019-07-18T16:23:07.069Z",
+          "destinations": [
+              {
+                  "id": 14,
+                  "checklistId": 8,
+                  "countryId": 100,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:07.128Z",
+                  "updatedAt": "2019-07-18T16:23:07.128Z",
+                  "country": {
+                      "id": 100,
+                      "country": "Kenya",
+                      "createdAt": "2019-10-05T08:36:11.170Z",
+                      "updatedAt": "2019-10-05T08:36:11.170Z",
+                      "regionId": 1001
+                  },
+                  "region": null
+              },
+              {
+                  "id": 13,
+                  "checklistId": 8,
+                  "countryId": 8,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:07.118Z",
+                  "updatedAt": "2019-07-18T16:23:07.118Z",
+                  "country": {
+                      "id": 8,
+                      "country": "Leichestein",
+                      "createdAt": "2019-07-18T16:20:38.635Z",
+                      "updatedAt": "2019-07-18T16:20:38.635Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 8,
+                  "checklistId": 8,
+                  "countryId": 10,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:07.089Z",
+                  "updatedAt": "2019-07-18T16:23:07.089Z",
+                  "country": {
+                      "id": 10,
+                      "country": "South Africa",
+                      "createdAt": "2019-07-18T16:23:07.081Z",
+                      "updatedAt": "2019-07-18T16:23:07.081Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      },
+      {
+          "id": 9,
+          "name": "Senegal-Leichestein-co36gbzFl",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T16:23:17.508Z",
+          "updatedAt": "2019-07-18T16:23:17.508Z",
+          "destinations": [
+              {
+                  "id": 16,
+                  "checklistId": 9,
+                  "countryId": 100,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:17.562Z",
+                  "updatedAt": "2019-07-18T16:23:17.562Z",
+                  "country": {
+                      "id": 100,
+                      "country": "Kenya",
+                      "createdAt": "2019-10-05T08:36:11.170Z",
+                      "updatedAt": "2019-10-05T08:36:11.170Z",
+                      "regionId": 1001
+                  },
+                  "region": null
+              },
+              {
+                  "id": 15,
+                  "checklistId": 9,
+                  "countryId": 8,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:17.549Z",
+                  "updatedAt": "2019-07-18T16:23:17.549Z",
+                  "country": {
+                      "id": 8,
+                      "country": "Leichestein",
+                      "createdAt": "2019-07-18T16:20:38.635Z",
+                      "updatedAt": "2019-07-18T16:20:38.635Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 9,
+                  "checklistId": 9,
+                  "countryId": 11,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:17.529Z",
+                  "updatedAt": "2019-07-18T16:23:17.529Z",
+                  "country": {
+                      "id": 11,
+                      "country": "Senegal",
+                      "createdAt": "2019-07-18T16:23:17.521Z",
+                      "updatedAt": "2019-07-18T16:23:17.521Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      },
+      {
+          "id": 10,
+          "name": "Denmark-Leichestein-x91tG0ndf",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T16:23:33.008Z",
+          "updatedAt": "2019-07-18T16:23:33.008Z",
+          "destinations": [
+              {
+                  "id": 18,
+                  "checklistId": 10,
+                  "countryId": 100,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:33.063Z",
+                  "updatedAt": "2019-07-18T16:23:33.063Z",
+                  "country": {
+                      "id": 100,
+                      "country": "Kenya",
+                      "createdAt": "2019-10-05T08:36:11.170Z",
+                      "updatedAt": "2019-10-05T08:36:11.170Z",
+                      "regionId": 1001
+                  },
+                  "region": null
+              },
+              {
+                  "id": 17,
+                  "checklistId": 10,
+                  "countryId": 8,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:33.054Z",
+                  "updatedAt": "2019-07-18T16:23:33.054Z",
+                  "country": {
+                      "id": 8,
+                      "country": "Leichestein",
+                      "createdAt": "2019-07-18T16:20:38.635Z",
+                      "updatedAt": "2019-07-18T16:20:38.635Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 10,
+                  "checklistId": 10,
+                  "countryId": 12,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:33.037Z",
+                  "updatedAt": "2019-07-18T16:23:33.037Z",
+                  "country": {
+                      "id": 12,
+                      "country": "Denmark",
+                      "createdAt": "2019-07-18T16:23:33.025Z",
+                      "updatedAt": "2019-07-18T16:23:33.025Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      },
+      {
+          "id": 11,
+          "name": "Sweden-Leichestein-VnITJfKYK",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T16:23:45.564Z",
+          "updatedAt": "2019-07-18T16:23:45.564Z",
+          "destinations": [
+              {
+                  "id": 20,
+                  "checklistId": 11,
+                  "countryId": 100,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:45.625Z",
+                  "updatedAt": "2019-07-18T16:23:45.625Z",
+                  "country": {
+                      "id": 100,
+                      "country": "Kenya",
+                      "createdAt": "2019-10-05T08:36:11.170Z",
+                      "updatedAt": "2019-10-05T08:36:11.170Z",
+                      "regionId": 1001
+                  },
+                  "region": null
+              },
+              {
+                  "id": 19,
+                  "checklistId": 11,
+                  "countryId": 8,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:45.619Z",
+                  "updatedAt": "2019-07-18T16:23:45.619Z",
+                  "country": {
+                      "id": 8,
+                      "country": "Leichestein",
+                      "createdAt": "2019-07-18T16:20:38.635Z",
+                      "updatedAt": "2019-07-18T16:20:38.635Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 11,
+                  "checklistId": 11,
+                  "countryId": 13,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:23:45.592Z",
+                  "updatedAt": "2019-07-18T16:23:45.592Z",
+                  "country": {
+                      "id": 13,
+                      "country": "Sweden",
+                      "createdAt": "2019-07-18T16:23:45.580Z",
+                      "updatedAt": "2019-07-18T16:23:45.580Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      },
+      {
+          "id": 12,
+          "name": "Norway-Leichestein-Os2TH4Aw5",
+          "config": [
+              {
+                  "url": "",
+                  "type": "image",
+                  "order": 1,
+                  "prompt": "Do you have a passport",
+                  "configuration": {
+                      "url": "",
+                      "options": [],
+                      "behaviour": {
+                          "name": "preview image",
+                          "action": {
+                              "type": "PREVIEW_IMAGE",
+                              "payload": "http://url"
+                          }
+                      }
+                  }
+              }
+          ],
+          "createdAt": "2019-07-18T16:25:16.839Z",
+          "updatedAt": "2019-07-18T16:25:16.839Z",
+          "destinations": [
+              {
+                  "id": 22,
+                  "checklistId": 12,
+                  "countryId": 100,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:25:16.899Z",
+                  "updatedAt": "2019-07-18T16:25:16.899Z",
+                  "country": {
+                      "id": 100,
+                      "country": "Kenya",
+                      "createdAt": "2019-10-05T08:36:11.170Z",
+                      "updatedAt": "2019-10-05T08:36:11.170Z",
+                      "regionId": 1001
+                  },
+                  "region": null
+              },
+              {
+                  "id": 21,
+                  "checklistId": 12,
+                  "countryId": 8,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:25:16.889Z",
+                  "updatedAt": "2019-07-18T16:25:16.889Z",
+                  "country": {
+                      "id": 8,
+                      "country": "Leichestein",
+                      "createdAt": "2019-07-18T16:20:38.635Z",
+                      "updatedAt": "2019-07-18T16:20:38.635Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "origin": [
+              {
+                  "id": 12,
+                  "checklistId": 12,
+                  "countryId": 14,
+                  "regionId": null,
+                  "createdAt": "2019-07-18T16:25:16.868Z",
+                  "updatedAt": "2019-07-18T16:25:16.868Z",
+                  "country": {
+                      "id": 14,
+                      "country": "Norway",
+                      "createdAt": "2019-07-18T16:25:16.855Z",
+                      "updatedAt": "2019-07-18T16:25:16.855Z",
+                      "regionId": 9999
+                  },
+                  "region": null
+              }
+          ],
+          "createdBy": {
+              "id": 113,
+              "fullName": "Jude Afam",
+              "email": "jude.afam@andela.com",
+              "userId": "2410",
+              "passportName": "Jude Afam",
+              "department": "Fellows-TDD",
+              "occupation": "Software Developer",
+              "manager": null,
+              "gender": "Male",
+              "picture": "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png",
+              "location": "Lagos",
+              "bambooHrId": 2410,
+              "lastLogin": "2019-07-20T19:44:31.092Z",
+              "createdAt": "2019-07-18T15:11:07.330Z",
+              "updatedAt": "2019-07-20T19:44:31.092Z",
+              "deletedAt": null
+          }
+      }
+  ]
+}

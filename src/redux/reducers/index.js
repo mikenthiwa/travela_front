@@ -39,6 +39,7 @@ import listAllhotelEstimates from './hotelEstimates';
 import travelCosts from './travelCosts';
 import helpResources from './helpResources';
 import listAllFlightEstimates from './flightEstimates';
+import checklistWizard from './checklistWizard';
 
 const rootReducer = combineReducers({
   auth,
@@ -80,7 +81,8 @@ const rootReducer = combineReducers({
   listAllhotelEstimates,
   travelCosts,
   helpResources,
-  listAllFlightEstimates
+  listAllFlightEstimates,
+  checklistWizard
 });
 
 export default rootReducer;
