@@ -66,6 +66,7 @@ export class Login extends Component {
   }
 
   /* istanbul ignore next */
+
   redirect =() => {
     const {  history, postUserData } = this.props;
     const url = localStorage.getItem('url');

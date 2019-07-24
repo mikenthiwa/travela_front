@@ -131,7 +131,7 @@ export class Layout extends Component {
   };
 
   renderContent(){
-    const {children, isLoaded, user} = this.props;
+    const {children, isLoaded, user, location} = this.props;
     const { hideNotificationPane, hideSideBar} = this.state;
     const [hideClass, leftPaddingClass] = hideNotificationPane
       ? ['hide', '']
@@ -139,7 +139,7 @@ export class Layout extends Component {
     return (
       <div className="mdl-layout__content full-height">
         <div className="mdl-grid mdl-grid--no-spacing full-height">
-          {this.renderLeftSideBar(hideSideBar)}
+          {location.pathname !== '/welcome-page' ? this.renderLeftSideBar(hideSideBar) : null}
           <div className="mdl-cell mdl-cell--9-col-desktop request-page__table-view
           mdl-cell--8-col-tablet mdl-cell--4-col-phone">
             <div className={`rp-requests ${leftPaddingClass}`}>

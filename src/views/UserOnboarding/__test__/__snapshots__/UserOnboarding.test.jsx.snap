@@ -175,6 +175,7 @@ exports[`<UserOnboarding /> Request Edit renders correctly 1`] = `
                                                 className="user_onboarding"
                                         >
                                                 <WelcomePage
+                                                        fullName=""
                                                         hasBlankFields={false}
                                                         loading={false}
                                                         nextStep={[Function]}
@@ -213,6 +214,7 @@ exports[`<UserOnboarding /> Request Edit renders correctly 1`] = `
           className="user_onboarding"
         >
           <WelcomePage
+            fullName=""
             hasBlankFields={false}
             loading={false}
             nextStep={[Function]}
@@ -254,7 +256,7 @@ exports[`<UserOnboarding /> renders correctly 1`] = `
           <div
             className="message"
           >
-            Hi slim this is your first time here & we're glad to have you on board. please click the button to begin
+            Hi Collins Muru this is your first time here & we're glad to have you on board. please click the button to begin
           </div>
           <button
             className="get_started"

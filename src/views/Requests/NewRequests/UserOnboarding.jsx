@@ -28,7 +28,6 @@ export const UserOnboardingRequestPage = (editing = false) => {
       const {params: {request_id}} = match;
       getOccupation();
       fetchRoleUsers(53019);
-
     }
 
     render() {

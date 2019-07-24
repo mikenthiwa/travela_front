@@ -229,7 +229,7 @@ class UserOnboarding extends Component {
 
   renderWelcomePage = () => {
     const { errors } = this.state;
-    const { creatingRequest } = this.props;
+    const { creatingRequest, userData } = this.props;
     return (
       <div className="user_onboarding">
         <WelcomePage
@@ -239,6 +239,7 @@ class UserOnboarding extends Component {
           }
           send="Get Started"
           loading={creatingRequest}
+          fullName={userData.fullName}
         />
       </div>
     );

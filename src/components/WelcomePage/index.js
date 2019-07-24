@@ -8,8 +8,9 @@ class WelcomePage extends Component {
   handleGetStartedButtonClick = (event, nextStep) => {
     nextStep && nextStep(event);
   };
+  
   render() {
-    const { hasBlankFields, loading, send, nextStep } = this.props;
+    const { hasBlankFields, loading, send, nextStep, fullName } = this.props;
     return (
       <div className="welcome">
         <div className="heading">
@@ -17,7 +18,7 @@ class WelcomePage extends Component {
         </div>
         <img src={welcomeImage} className="welcome_image" alt="welcome" />
         <div className="message">
-          {'Hi slim this is your first time here & we\'re glad to have you on board. please click the button to begin'}
+          {`Hi ${fullName} this is your first time here & we're glad to have you on board. please click the button to begin`}
         </div>
         <button
           onClick={e => this.handleGetStartedButtonClick(e, nextStep)}
@@ -37,11 +38,13 @@ WelcomePage.propTypes = {
   hasBlankFields: PropTypes.bool.isRequired,
   loading: PropTypes.bool,
   send: PropTypes.string,
+  fullName: PropTypes.string,
 };
 
 WelcomePage.defaultProps = {
   loading: false,
   send: '',
+  fullName: '',
   nextStep: () => {}
 };
 
