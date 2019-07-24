@@ -1261,18 +1261,32 @@ describe('<NewRequestForm />', () => {
 
   it('returns trip details page if trip validation fails', (done) => {
     const wrapper = mount(<NewRequestForm {...props} />);
-    const trips = [{
-      id: '1',
-      origin: 'Nairobi,Kenya',
-      destination: 'Lagos,Nigeria',
-      departureDate: '2018-09-30',
-      returnDate: '2018-09-30',
-      createdAt: '2018-09-27T18:49:03.626Z',
-      updatedAt: '2018-09-27T18:49:43.803Z',
-      requestId: 'NfR-9KoCP',
-      accomodationType: 'Not Required',
-      bedId: 1
-    }];
+    const trips = [
+      {
+        id: '1',
+        origin: 'Nairobi,Kenya',
+        destination: 'Lagos,Nigeria',
+        departureDate: '2018-09-30',
+        returnDate: '2018-09-30',
+        createdAt: '2018-09-27T18:49:03.626Z',
+        updatedAt: '2018-09-27T18:49:43.803Z',
+        requestId: 'NfR-9KoCP',
+        accomodationType: 'Not Requiredffff',
+        bedId: 1
+      },
+      {
+        id: '2',
+        origin: 'Kigali Rwanda',
+        destination: 'Nairobi Kenya',
+        departureDate: '2020-09-30',
+        returnDate: '2021-09-30',
+        createdAt: '2019-09-27T18:49:03.626Z',
+        updatedAt: '2019-09-27T18:49:43.803Z',
+        requestId: 'MfR-9KoCQ',
+        bedId: beds[1].id,
+        otherTravelReasons: 'my other reason'
+      }
+    ];
     wrapper.instance().setState({
       currentTab: 2,
       trips
