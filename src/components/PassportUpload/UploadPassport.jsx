@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import toast from 'toastr';
-import NoPassportAPI from '../../services/noPassportAPI';
 import { closeModal, openModal } from '../../redux/actionCreator/modalActions';
 import Modal from '../modal/Modal';
 import PassportForm from '../Forms/TravelReadinessForm/PassportForm';
