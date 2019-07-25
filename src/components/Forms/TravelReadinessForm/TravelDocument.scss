@@ -38,6 +38,7 @@
   }
   .document-input__input-container{
     margin-bottom: 2em;
+    margin-top: 15px;
   }
 
   .date-wrapper {
@@ -116,8 +117,7 @@
  .add-document-item {
    transform: none;
    -webkit-transform: none !important;
-   top: 0;
-   left: 0;
-   width: 100%;
+   top: 10 !important;
+   
  }
 }

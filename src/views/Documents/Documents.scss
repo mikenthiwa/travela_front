@@ -20,9 +20,6 @@
   @media(max-width: 1024px){
     top: 58%;
   }
-  @media(max-width: 600px){
-    top: 75%
-  }
 }
 
 .document-page {
@@ -314,4 +311,18 @@ $border-color: #e4e4e4;
   height: 13px;
   width: 10px;
   margin-right: 15.5px;
+}
+@media(max-width: 425px){
+  .add-document-item{
+    .modal {
+      &.visible {
+        max-width: 307px !important;
+        position: absolute !important;
+        margin-left: 15rem !important;
+        margin-top: 30rem !important;
+      }
+      }
+  }
+    
+        
 }

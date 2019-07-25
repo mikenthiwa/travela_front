@@ -173,6 +173,7 @@ import {
 
 import { watchAddResourcesSagaAsync, watchFetchLinkDataSagaAsync } from './helpResourceSaga';
 import { watchgetAllDynamicChecklists} from './checklistWizardSaga';
+import { watchPostNoPassportNotification } from './noPassportSaga';
 
 
 function* rootSaga() {
@@ -306,7 +307,8 @@ function* rootSaga() {
     watchUpdateNationality(),
     watchUpdateDestination(),
     watchCreateDynamicChecklist(),
-    watchAddQuestion()
+    watchAddQuestion(),
+    watchPostNoPassportNotification(),
   ]);
 }
 

@@ -1,0 +1,271 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Upload a passport should render correctly 1`] = `
+<Fragment>
+  <div>
+    <div
+      className="passport-question"
+    >
+      <p
+        className="question-body"
+      >
+        Do you have a Valid Passport?
+      </p>
+      <div
+        className="body"
+      >
+        <div
+          className="radio-buttons"
+        >
+          <label
+            className="radio-button"
+            htmlFor="yes"
+          >
+            Yes
+            <input
+              className="input-radio-button"
+              id="yes"
+              name="passport"
+              onChange={[Function]}
+              type="radio"
+              value={true}
+            />
+            <div
+              className="check"
+            />
+          </label>
+          <label
+            className="radio-button new-class extra-class"
+            htmlFor="no"
+          >
+            No
+            <input
+              className="input-radio-button"
+              disabled={false}
+              id="no"
+              name="passport"
+              onChange={[Function]}
+              type="radio"
+              value=""
+            />
+            <div
+              className="check"
+            />
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="next-btn"
+  >
+    <button
+      className="bg-btn bg-btn--active"
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    >
+      Next
+    </button>
+  </div>
+</Fragment>
+`;
+
+exports[`Upload a passport should render correctly when passport is set to false 1`] = `
+<Fragment>
+  <div>
+    <div
+      className="passport-question"
+    >
+      <p
+        className="question-body"
+      >
+        Do you have a Valid Passport?
+      </p>
+      <div
+        className="body"
+      >
+        <div
+          className="radio-buttons"
+        >
+          <label
+            className="radio-button"
+            htmlFor="yes"
+          >
+            Yes
+            <input
+              className="input-radio-button"
+              id="yes"
+              name="passport"
+              onChange={[Function]}
+              type="radio"
+              value={true}
+            />
+            <div
+              className="check"
+            />
+          </label>
+          <label
+            className="radio-button new-class extra-class"
+            htmlFor="no"
+          >
+            No
+            <input
+              className="input-radio-button"
+              disabled={false}
+              id="no"
+              name="passport"
+              onChange={[Function]}
+              type="radio"
+              value=""
+            />
+            <div
+              className="check"
+            />
+          </label>
+        </div>
+        <div
+          className="reason"
+        >
+          <p>
+            Reason
+          </p>
+          <textarea
+            className="reason-textarea"
+            cols="62"
+            name="reason"
+            onChange={[Function]}
+            placeholder="Type Reason..."
+            rows="6"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="next-btn"
+  >
+    <button
+      className="bg-btn bg-btn--active"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Next
+    </button>
+  </div>
+</Fragment>
+`;
+
+exports[`Upload a passport should render correctly when passport is set to true 1`] = `
+<Fragment>
+  <div>
+    <div
+      className="passport-question"
+    >
+      <p
+        className="question-body"
+      >
+        Do you have a Valid Passport?
+      </p>
+      <div
+        className="body"
+      >
+        <div
+          className="radio-buttons"
+        >
+          <label
+            className="radio-button new-class"
+            htmlFor="yes"
+          >
+            Yes
+            <input
+              className="input-radio-button"
+              id="yes"
+              name="passport"
+              onChange={[Function]}
+              type="radio"
+              value={true}
+            />
+            <div
+              className="check"
+            />
+          </label>
+          <label
+            className="radio-button extra-class"
+            htmlFor="no"
+          >
+            No
+            <input
+              className="input-radio-button"
+              disabled={false}
+              id="no"
+              name="passport"
+              onChange={[Function]}
+              type="radio"
+              value=""
+            />
+            <div
+              className="check"
+            />
+          </label>
+        </div>
+        <div>
+          <button
+            className="upload-btn"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            <p>
+              UPLOAD PASSPORT
+            </p>
+          </button>
+          <Modal
+            closeDeleteModal={null}
+            closeModal={[Function]}
+            customModalStyles="add-document-item"
+            customOverlayStyle=""
+            modalBar={<div />}
+            modalContentId=""
+            modalId=""
+            requestId=""
+            showOverlay={true}
+            title="Add Passport Details"
+            visibility="invisible"
+            width="680px"
+          >
+            <BaseForm
+              closeModal={[Function]}
+              createTravelReadinessDocument={[Function]}
+              document={Object {}}
+              editTravelReadinessDocument={[Function]}
+              errors={Object {}}
+              fetchingDocument={false}
+              modalType="add passport"
+              passportInfo={Object {}}
+              retrieving={false}
+              scanPassport={true}
+              showPassportForm={[Function]}
+              updatingDocument={false}
+            />
+          </Modal>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="next-btn"
+  >
+    <button
+      className="bg-btn bg-btn--active"
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    >
+      Next
+    </button>
+  </div>
+</Fragment>
+`;

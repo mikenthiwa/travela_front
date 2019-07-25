@@ -1,0 +1,222 @@
+.passport-question {
+    background-color: #fff;
+    width: 580px;
+    border: 1px solid rgba(90,101,119,0.08);
+    border-radius: 26px;
+    background-color: #FFFFFF;
+    margin: auto;
+    margin-top: 66px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 28px;
+
+
+.radio-buttons {
+    position: relative;
+    display: flex;
+    width: 177px;
+    border: 1px solid #E4E4E4;
+    border-radius: 3px;
+}
+
+.radio-button {
+    padding: 6px 22px;
+    -ms-flex-align: center;
+    -ms-flex-line-pack: center;
+    align-items: center;
+    cursor: pointer;
+    border-right: 1px solid #e4e4e4;
+    display: -ms-inline-flexbox;
+    display: flex;
+    flex-direction: row-reverse;
+    -webkit-transition: all .2s;
+    -o-transition: .2s all;
+    -o-transition: all .2s;
+    transition: all .2s;
+    position: relative;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.extra-class {
+    border-right: 0;
+}
+
+.input-radio-button {
+    border-radius: 50%;
+    background: white;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    position: relative;
+    -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    position: relative;
+    visibility: hidden;
+}
+
+.radio-button .check {
+    display: block;
+    position: absolute;
+    border: 1px solid #AAAAAA;
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    left: 12px;
+	z-index: 5;
+	transition: border .25s linear;
+	-webkit-transition: border .25s linear;
+}
+
+.radio-button .check::before {
+    display: block;
+    position: absolute;
+	content: '';
+    border-radius: 100%;
+    height: 10px;
+    width: 10px;
+    top: 3px;
+	left: 3px;
+    margin: auto;
+	transition: background 0.25s linear;
+	-webkit-transition: background 0.25s linear;
+}
+
+.input-radio-button:checked ~ .check {
+    border: 1px solid #3359DB;
+  }
+  
+ .input-radio-button:checked ~ .check::before{
+    background: #3359DB;
+  }
+  
+.input-radio-button:checked ~ label{
+    color: #3359DB;
+  }
+
+
+.new-class {
+    background-color: #EEF0F6;  
+    color: #3359DB;
+    width: 100%;
+}
+
+.upload-btn {
+    height: 39px;
+    width: 177px;
+    margin-top: 39px;
+    background-color: #10a36d;
+    border-radius: 6px;
+    outline: none;
+    -webkit-box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.15);
+    border: none;
+    cursor: pointer;
+}
+.upload-btn:disabled{
+    background-color: #a3cabb;
+    border: none;
+    color: #FFFFFF;
+    cursor: not-allowed;
+}
+p {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+}
+.next-btn{
+    margin-top: 24px;
+    margin-bottom: 24px;
+    text-align: center;
+    margin-left: 32rem;
+    .bg-btn {
+        padding: 9px 45.5px;
+        text-transform: uppercase;
+    }
+}
+
+
+.bg-btn:disabled {
+    background-color: rgba(51, 89, 219, 0.3);
+    border: none;
+    color: #FFFFFF;
+    cursor: not-allowed;
+}
+
+
+.reason {
+    margin-top: 47px;
+
+    p {
+        font-size: 14px;
+        color: #4F4F4F;
+        text-align: left;
+        margin-bottom: 8px;
+    }
+}
+
+
+
+.reason-textarea {
+    border: 1px solid #D4D4D4;
+    border-radius: 6px;
+    resize: none;
+    padding: 9px 0 0 15px;
+    outline: none;
+    width: 333px;
+    height: 90px;
+    font-size: 18px;
+}
+
+.reason-textarea::placeholder {
+    color: rgba(79,79,79,0.48);
+    font-size: 14px;
+}
+@media(max-width: 425px) {
+    .passport-question {
+        width: 89%
+    }
+    .reason p {
+        text-align: center
+    }
+}
+@media(max-width: 375px) {
+    .reason-textarea {
+        width: 94%;
+       margin: 0 auto;
+    }
+    
+}
+@media(max-width:425px) {
+    .next-btn{
+        margin-left: 16rem !important;
+    }
+}
+@media(max-width:375px) {
+    .next-btn{
+        margin-left: 13rem !important;
+    }
+}
+@media(max-width:320px) {
+    .next-btn{
+        margin-left: 10.5rem !important;
+    }
+}

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import './UserOnboardingForm.scss';
+import './userOnboardingForm.scss';
 import OnBoardingTabHead from '../../components/RequestTab/OnboardingTabHead';
 import ConfirmPersonalDetailsFieldset from '../../components/Forms/NewRequestForm/FormFieldsets/ConfirmPersonalDetails';
 import travelStipendHelper from '../../helper/request/RequestUtils';
 import FormContext from '../../components/Forms/FormsAPI/FormContext/FormContext';
 import getDefaultBlanksValidatorFor from '../../components/Forms/FormsAPI/formValidator/confirmUserDetails';
 import WelcomePage from '../../components/WelcomePage';
+import UploadPassportPage from '../../components/PassportUpload/UploadPassport';
 
 class UserOnboarding extends Component {
   constructor(props) {
@@ -193,6 +194,13 @@ class UserOnboarding extends Component {
     }
   };
 
+  previousStep = () => {
+    const { currentPage , currentTab } = this.state;
+    if (currentPage === 3) {
+      this.setState({ currentPage: currentPage - 1, currentTab: currentTab -1 });
+    }
+  };
+
   renderPersonalDetailsFieldset = () => {
     const { collapse, title, position, line, values, errors } = this.state;
     const { managers, occupations, creatingRequest } = this.props;
@@ -244,6 +252,23 @@ class UserOnboarding extends Component {
       </div>
     );
   }
+  renderUploadPassportPage = () => {
+    const { history } = this.props;
+    return (
+      <div> 
+        <UploadPassportPage history={history} />
+        
+        <button
+          type="button"
+          className="back-btn-travel-document back-btn--active"
+          onClick={this.previousStep}
+        >
+       Back
+        </button>
+        
+      </div>
+    );
+  }
 
   renderForm = () => {
     const {
@@ -272,7 +297,7 @@ class UserOnboarding extends Component {
           <form onSubmit={() => this.handleSubmit()} className="new-request">
             { currentPage === 1 && this.renderWelcomePage()}
             { currentPage === 2 && this.renderPersonalDetailsFieldset()}
-            { currentPage === 3 ? ' Travel Document Page!!': null}
+            { currentPage === 3 &&this.renderUploadPassportPage()}
           </form>
         </FormContext>
       </div>

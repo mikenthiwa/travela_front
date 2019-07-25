@@ -40,6 +40,7 @@ import travelCosts from './travelCosts';
 import helpResources from './helpResources';
 import listAllFlightEstimates from './flightEstimates';
 import checklistWizard from './checklistWizard';
+import noPassport from './noPassport';
 
 const rootReducer = combineReducers({
   auth,
@@ -82,7 +83,8 @@ const rootReducer = combineReducers({
   travelCosts,
   helpResources,
   listAllFlightEstimates,
-  checklistWizard
+  checklistWizard,
+  noPassport
 });
 
 export default rootReducer;
