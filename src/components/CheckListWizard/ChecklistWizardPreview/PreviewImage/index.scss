@@ -1,0 +1,13 @@
+.single-preview-item.image {
+  display: flex;
+  margin: 0;
+
+  .preview-image-container {
+    grid-column: 1;
+
+    .preview-image {
+      max-height: 500px;
+      max-width: 100%;
+    }
+  }
+}

@@ -1,51 +1,17 @@
-import toast from 'toastr';
+import * as behaviourTypes from './behaviourActions';
 
-const getBehaviours = behaviour => {
-  switch (behaviour.name) {
-  case 'upload a document':
-    return {
-      name: 'upload a document',
-      action: {
-        type: 'UPLOAD_DOCUMENT'
-      }
-    };
-  case 'skip to another question':
-    if (!behaviour.payload.length) {
-      toast.error('number must have a value');
-    }
-    return {
-      name: 'skip to another question',
-      action: {
-        type: 'SKIP_QUESTION',
-        payload: behaviour.payload
-      }
-    };
-  case 'preview document':
-    if (!behaviour.payload.length) {
-      toast.error('url must be present');
-    }
-    return {
-      name: 'preview document',
-      action: {
-        type: 'PREVIEW_DOCUMENT',
-        payload: behaviour.payload
-      }
-    };
-  case 'notify an email address':
-    if (!behaviour.payload.length) {
-      toast.error('email must be present');
-    }
-    return {
-      name: 'notify an email address',
-      action: {
-        type: 'NOTIFY_EMAIL',
-        payload: behaviour.payload
-      }
-    };
+const getBehaviours = (type, payload)  => {
+  switch (type) {
+  case behaviourTypes.UPLOAD_DOCUMENT:
+    return { type };
+  case behaviourTypes.SKIP_QUESTION:
+    return { type, payload: payload || '' };
+  case behaviourTypes.PREVIEW_DOCUMENT:
+    return { type, payload: payload || '' };
+  case behaviourTypes.NOTIFY_EMAIL:
+    return { type, payload: payload || '' };
   default:
-    return {
-      name: 'no action'
-    };
+    return {};
   }
 };
   

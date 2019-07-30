@@ -89,6 +89,11 @@ exports[`<CentreCard /> renders correctly 1`] = `
           </span>
           Beds
         </div>
+        <img
+          alt="male"
+          src="undefined"
+          title="male"
+        />
         <div
           className="centre__icon-container"
         >

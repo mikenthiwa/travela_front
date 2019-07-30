@@ -1,8 +1,19 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import BuilderChecklistItem from '../index';
 
+const dndProps = { isDragging: false };
+
+jest.mock('react-beautiful-dnd', () => {
+  const Component = ({ children }) => (<div>{children({ innerRef: jest.fn(), draggableProps: {} }, { isDragging: false })}</div>);
+  return {
+    Draggable: Component
+  };
+});
+
 const props = {
+  id: 1,
   order: 1,
   type: 'radio',
   prompt: 'Do you hava a valid visa?',
@@ -17,6 +28,9 @@ const props = {
         }
       },
     ]
+  },
+  item: {
+    id: 1,
   },
   handleItems: jest.fn(),
   addQuestion: jest.fn(),
@@ -51,5 +65,17 @@ describe('<BuilderChecklistItem />', () => {
     const deleteIcon = wrapper.find('button#prompt-del-icon');
     deleteIcon.simulate('click', mockEvents);
     expect(wrapper.deleteItem).toBeCalled;
+  });
+
+  it('should change icon on drag start', () => {
+    const wrapper = mount(<BuilderChecklistItem {...props} />);
+    expect(wrapper.find('.drag-indicator-icon')).toHaveLength(1);
+  });
+
+  it('should animate question number container on order change', () => {
+    const wrapper = mount(<BuilderChecklistItem {...props} />);
+    const newProps = { ...props, item: { id: 2 } };
+    wrapper.setProps(newProps);
+    expect(wrapper.find('.order-number')).toHaveLength(1);
   });
 });

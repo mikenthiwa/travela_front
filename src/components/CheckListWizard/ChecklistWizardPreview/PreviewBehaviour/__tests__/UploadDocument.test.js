@@ -3,7 +3,9 @@ import { shallow } from 'enzyme';
 import UplaodDocument from '../UploadDocument';
 
 const props = {
-  behaviourName: 'Upload Document',
+  behaviour: {
+    type: 'UPLOAD_DOCUMENT'
+  },
 };
 
 describe('<UplaodDocument />', () => {

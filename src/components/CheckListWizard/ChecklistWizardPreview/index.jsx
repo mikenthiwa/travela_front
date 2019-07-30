@@ -22,27 +22,23 @@ const ChecklistWizardPreview = ({ items, nationality, destinations }) => {
   };
   return (
     <div className="checklist-wizard-preview checklist-wizard-col">
-      <div className="preview-item-header">
-        <p className="preview-header">Preview the Checklist</p>
-        <p className="travellingto-preview">
-          {`Applicable to ${nationality.name} travelling to `}
-          <span className="coutries-blue">{`${destinations.length} countries`}</span>
-        </p>
-      </div>
-      {items.map(item => (
-        <div className="preview-checklist-item" key={item.order} ref={refs[item.order]} id={item.order}>
-          <PreviewChecklistItem
-            key={item.order}
-            type={item.type}
-            order={item.order}
-            prompt={item.prompt}
-            configuration={item.configuration}
-            handleSkipToQuestion={handleSkipToQuestion}
-            items={items}
-            itemBehaviour={item.behaviour}
-          />
+      <div className="checklist-wizard-preview-wrapper">
+        <div className="preview-item-header">
+          <p className="preview-header">Preview the Checklist</p>
+          <p className="travellingto-preview">
+            {`Applicable to ${nationality.name} travelling to `}
+            <span className="coutries-blue">{`${destinations.length} ${destinations.length === 1 ? 'country' : 'countries'}`}</span>
+          </p>
         </div>
-      ))}
+        {items.map(item => (
+          <div className="preview-checklist-item" key={item.order} ref={refs[item.order]} id={item.order}>
+            <PreviewChecklistItem
+              handleSkipToQuestion={handleSkipToQuestion}
+              item={item}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

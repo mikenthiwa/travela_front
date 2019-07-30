@@ -1,22 +1,24 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import PreviewRadio from '../index';
 
 const props = {
-  prompt: 'Do you have valid visa',
-  order: 1,
-  configuration: {
-    options: [
-      {
-        id: 1,
-        name: 'Yes',
-        behaviour: {
-          name: 'upload a document',
-          payload: 'UPLOAD_DOCUMENT',
-        }
-      },
-    ]
-  }
+  item: {
+    prompt: 'Do you have valid visa',
+    id: 'klakdja',
+    configuration: {
+      options: [
+        {
+          id: 1,
+          name: 'Yes',
+          behaviour: {
+            type: 'UPLOAD_DOCUMENT',
+          }
+        },
+      ]
+    }
+  },
+  handleSkipToQuestion: jest.fn(),
 };
 
 describe('<PreviewRadio />', () => {
@@ -27,9 +29,9 @@ describe('<PreviewRadio />', () => {
 
 
   it('should hadle checkname function', () => {
-    const wrapper = shallow(<PreviewRadio {...props} />);
-    wrapper.instance().handleCheckName('upload a document', 1);
+    const wrapper = mount(<PreviewRadio {...props} />);
+    wrapper.find('.radio-btn.checklist-preview').first().simulate('change');
     expect(wrapper.state('preview')).toEqual(true);
-    expect(wrapper.state('behaviourName')).toEqual('upload a document');
+    expect(wrapper.state('behaviour')).toEqual(props.item.configuration.options[0].behaviour);
   });
 });

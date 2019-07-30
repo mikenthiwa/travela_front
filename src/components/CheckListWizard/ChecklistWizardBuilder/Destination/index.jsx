@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CountryList from 'countries-list';
 import DeleteIcon from '../../Shared/deleteIcon';
+import checkboxImage from '../../images/checkbox.svg';
 import './index.scss';
 
 const countries = [];
@@ -22,10 +23,19 @@ class Destination extends Component {
     dropDown: false
   };
 
-  destinationDropDown = React.createRef();
+  destinationInput = React.createRef();
+
+  destinationDropdown = React.createRef();
+
+  searchRef = React.createRef();
 
   componentDidMount() {
     document.addEventListener('click', this.showDropDown, false);
+  }
+
+  componentDidUpdate() {
+    const { dropDown } = this.state;
+    dropDown && this.searchRef.current.focus();
   }
 
   componentWillUnmount(){
@@ -38,8 +48,6 @@ class Destination extends Component {
     const item = filteredState.find(item => item.name === target.value);
     item.checked = !item.checked;
 
-    const newState = filteredState.filter(item => item.name !== target.value);
-
     let newSelectedCountries = selectedCountries;
 
     if (item.checked) {
@@ -51,7 +59,6 @@ class Destination extends Component {
     }
 
     this.setState({
-      filteredState: [item, ...newState],
       selectedCountries: [...newSelectedCountries]
     });
     updateDestinations(newSelectedCountries);
@@ -93,7 +100,12 @@ class Destination extends Component {
   };
 
   showDropDown = e => {
-    this.setState({ dropDown: this.destinationDropDown.current.contains(e.target)});
+    const { dropDown } = this.state;
+    if (dropDown && this.destinationDropdown.current.contains(e.target)) { return; }
+    const isOutside = !this.destinationInput.current.contains(e.target);
+    this.setState({
+      dropDown: isOutside ? false : !dropDown,
+    });
   };
 
   render() {
@@ -102,9 +114,9 @@ class Destination extends Component {
       <div className="dest-container">
         <p>Travelling To</p>
         <div className="dest-delete-containter">
-          <div ref={this.destinationDropDown} className="dest-input-countries-container">
+          <div className="dest-input-countries-container">
           
-            <div className="dest-input-container">
+            <div ref={this.destinationInput} className="dest-input-container">
               <div className="dest-input">
                 {selectedCountries.length ? selectedCountries.map(item => (
                   <div key={item.name} className="sel-country">
@@ -117,21 +129,22 @@ class Destination extends Component {
                       onClick={() => this.removeSelected(item.name)}
                       className="remove-country"
                     >
-                  x
+                      ×
                     </button>
                   </div>
                 )): <div className="select-placeholder">Select destinations</div>}
               </div>
-              <button type="button" onClick={this.showDropDown} className="caret">
+              <button type="button" className="caret">
                 {dropDown ? <i className="material-icons">expand_less</i> : <i className="material-icons">expand_more</i>}
               </button>
             </div>
             <div>
               {dropDown && (
-                <div className="dest-countries-container">
+                <div ref={this.destinationDropdown} className="dest-countries-container">
                   <div className="dest-filter">
                     <input
                       type="text"
+                      ref={this.searchRef}
                       placeholder="Search country"
                       value={country}
                       className="dest-filter-input"
@@ -150,6 +163,9 @@ class Destination extends Component {
                           className="dest-checkbox-item"
                           onChange={this.onToggle}
                         />
+                        <div className={`custom-checkbox ${item.checked ? 'checked' : 'unchecked'}`}>
+                          {item.checked && (<img src={checkboxImage} alt="checkbox checked" />)}
+                        </div>
                         <span className={item.checked ? 'checked-country' : 'unchecked-country'}>{item.name}</span>
                       </label>
                     ))}

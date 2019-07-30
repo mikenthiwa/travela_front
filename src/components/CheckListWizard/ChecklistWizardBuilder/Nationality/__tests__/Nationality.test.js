@@ -41,7 +41,7 @@ describe('<Nationality />', () => {
   });
 
   it('should handle prompt button click', () => {
-    const wrapper = shallow(<Nationality {...props} />);
+    const wrapper = mount(<Nationality {...props} />);
     const mockEvents = { target: { value: '.select-options'} };
     wrapper.setState({dropdown: true});
     const btn = wrapper.find('button#NIGER');

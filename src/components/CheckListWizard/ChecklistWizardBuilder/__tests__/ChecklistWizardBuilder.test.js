@@ -32,9 +32,20 @@ const props = {
   updateDestinations: jest.fn()
 };
 
+jest.mock('react-beautiful-dnd', () => {
+  const Component = ({ children }) => (<div>{children({ innerRef: jest.fn(), droppableProps: {} })}</div>);
+  const Component2 = ({ children }) => (<div>{children({ innerRef: jest.fn(), draggableProps: {} }, { isDragging: false })}</div>);
+
+  return {
+    Droppable: Component,
+    Draggable: Component2,
+  };
+});
+
+
 describe('<ChecklistWizardBuilder />', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<ChecklistWizardBuilder {...props} />);
+    const wrapper = mount(<ChecklistWizardBuilder {...props} />);
     expect(wrapper.find('div'));
   });
 

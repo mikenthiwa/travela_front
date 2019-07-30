@@ -26,8 +26,17 @@ class Nationality extends Component {
 
   dropDown = React.createRef();
 
+  originDropdown = React.createRef();
+
+  inputRef = React.createRef();
+
   componentDidMount() {
     document.addEventListener('click', this.showDropdown, false);
+  }
+
+  componentDidUpdate() {
+    const { dropdown } = this.state;
+    dropdown && this.inputRef.current.focus();
   }
 
   componentWillUnmount(){
@@ -36,7 +45,7 @@ class Nationality extends Component {
 
   selectCountry = (name, emoji) => {
     const { updateNationality } = this.props;
-    this.setState({ selected: { name, emoji } });
+    this.setState({ selected: { name, emoji }, dropdown: false });
     updateNationality(name, emoji);
   };
 
@@ -50,7 +59,12 @@ class Nationality extends Component {
   };
 
   showDropdown = e => {
-    this.setState({ dropdown: this.dropDown.current.contains(e.target)});
+    const { dropdown } = this.state;
+    if (dropdown && this.originDropdown.current.contains(e.target)) { return; }
+    const isOutside = !this.dropDown.current.contains(e.target);
+    this.setState({
+      dropdown: isOutside ? false : !dropdown,
+    });
   };
 
 
@@ -67,29 +81,30 @@ class Nationality extends Component {
       <div className="select-countries-container">
         <p>Select Nationality</p>
         <div className="select-input-delete-container">
-          <div ref={this.dropDown} className="select-input-options-container">
+          <div className="select-input-options-container">
             {selected.name.length ? (
-              <div className="select-input-area">
+              <div ref={this.dropDown} className="select-input-area">
                 <div className="selected-country-item">
                   <div className="country-name">{selected.name}</div>
                   <div>{selected.emoji}</div>
                 </div>
-                <button type="button" onClick={this.showDropdown} className="caret">
+                <button type="button" className="caret">
                   {dropdown ? <i className="material-icons">expand_less</i> : <i className="material-icons">expand_more</i>}
                 </button>
               </div>
             ) : (
-              <div className="select-input-area">
+              <div ref={this.dropDown} className="select-input-area">
                 <div className="select-placeholder">Select a country</div>
-                <button type="button" onClick={this.showDropdown} className="caret">
+                <button type="button" className="caret">
                   {dropdown ? <i className="material-icons">expand_less</i> : <i className="material-icons">expand_more</i>}
                 </button>
               </div>
             )}
             {dropdown && (
-              <div className="country-options-container">
+              <div ref={this.originDropdown} className="country-options-container">
                 <div className="dest-filter">
                   <input
+                    ref={this.inputRef}
                     type="text"
                     placeholder="Search country"
                     value={country}

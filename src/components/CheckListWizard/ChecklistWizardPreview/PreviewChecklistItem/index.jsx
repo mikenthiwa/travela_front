@@ -1,43 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
 import PreviewOptionConfiguration from '../PreviewOptionConfiguration';
 
+class PreviewChecklistItem extends Component {
 
-const PreviewChecklistItem = ({ type, prompt, order, configuration, itemBehaviour, handleSkipToQuestion }) => {
-  return (
-    <div className="preview-checklist-item">
+  orderNumberRef = React.createRef();
+
+  componentDidUpdate (prevProps) {
+    const { item } = this.props;
+    if (item.id !== prevProps.item.id) this.orderNumberRef.current.classList.add('animate');
+  }
+
+  render() {
+    const { item, handleSkipToQuestion } = this.props;
+    return (
       <div className="single-preview-item">
-        <div className="preview-order">{order}</div>
+        <div
+          ref={this.orderNumberRef}
+          onAnimationEnd={e => e.target.classList.remove('animate')}
+          className="preview-order"
+        >
+          {item.order}
+        </div>
         <div>
-          <p className="preview-prompt">{prompt}</p>
-          <PreviewOptionConfiguration 
-            type={type} 
+          <p className="preview-prompt">{item.prompt}</p>
+          <PreviewOptionConfiguration
+            item={item}
             handleSkipToQuestion={handleSkipToQuestion}
-            prompt={prompt} 
-            order={order}
-            configuration={configuration} 
-            itemBehaviour={itemBehaviour}
-          />
+          />          
         </div>
       </div>
-    </div>
-  );
-};
-
-PreviewChecklistItem.defaultProps = {
-  itemBehaviour: {},
-};
+    );
+  }
+}
 
 PreviewChecklistItem.propTypes = {
-  type: PropTypes.string.isRequired,
-  prompt: PropTypes.string.isRequired,
-  order: PropTypes.number.isRequired,
   handleSkipToQuestion: PropTypes.func.isRequired,
-  configuration: PropTypes.shape({options: PropTypes.array}).isRequired,
-  itemBehaviour: PropTypes.shape({
-    name: PropTypes.string,
-    action: PropTypes.shape({ payload: PropTypes.oneOfType([PropTypes.string, PropTypes.number]) })
-  }),
+  item: PropTypes.object.isRequired,
 };
 
 export default PreviewChecklistItem;

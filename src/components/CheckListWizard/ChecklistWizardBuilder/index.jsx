@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Droppable } from 'react-beautiful-dnd';
 import BuilderChecklistItem from './BuilderChecklistItem';
 import Nationality from './Nationality';
 import Destination from './Destination';
+import addIcon from '../images/add-icon.svg';
 import './index.scss';
 
 
@@ -13,43 +15,48 @@ class ChecklistWizardBuilder extends Component {
       addNewChecklistItem, 
       handleItems, 
       addQuestion, 
-      updateBehaviour, 
       deleteItem, 
-      deleteQuestion, 
       updateNationality, 
       updateDestinations,
       postChecklist
     } = this.props;
     return (
       <div className="checklist-wizard-builder checklist-wizard-col">
-        <p className="builder-header">Setup the Checklist</p>
-        <Nationality updateNationality={updateNationality}  />
-        <Destination updateDestinations={updateDestinations} />
-        <p className="builder-header">Checklist Item</p>
-        {items.map(item => (
-          <div key={item.order}>
-            <BuilderChecklistItem 
-              type={item.type}
-              order={item.order}
-              prompt={item.prompt}
-              configuration={item.configuration}
-              items={items}
-              handleItems={handleItems}
-              updateBehaviour={updateBehaviour}
-              addQuestion={addQuestion}
-              deleteItem={deleteItem}
-              deleteQuestion={deleteQuestion}
-            />
+        <div className="checklist-wizard-builder-wrapper">
+          <p className="builder-header first">Setup the Checklist</p>
+          <Nationality updateNationality={updateNationality}  />
+          <Destination updateDestinations={updateDestinations} />
+          <p className="builder-header second">Checklist Item</p>
+          <Droppable droppableId={1}>
+            {provided => (
+              <div className="wrapper-damn" ref={provided.innerRef} {...provided.droppableProps}>
+                {items.map((item, index) => (
+                  <BuilderChecklistItem
+                    index={index}
+                    key={item.id}
+                    item={item}
+                    handleItems={handleItems}
+                    addQuestion={addQuestion}
+                    deleteItem={deleteItem}
+                  />
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+          <div className="new-checklist-container">
+            <button className="new-checklist-icon" onClick={addNewChecklistItem} type="button">
+              <img src={addIcon} alt="checklist icon" />
+            </button>
+            <div className="checklist-action-btns-wrapper">
+              <button className="wiz-btn" onClick={addNewChecklistItem} type="button">
+              Add a Checklist Item
+              </button>
+              <button className="wiz-btn" type="button" onClick={postChecklist}>
+              Save As Draft
+              </button>
+            </div>
           </div>
-        ))}
-        <div className="new-checklist-container">
-          <div onClick={addNewChecklistItem} tabIndex={0} role="button" onKeyUp={addNewChecklistItem} className="new-checklist-icon">+</div>
-          <button className="wiz-btn" onClick={() => addNewChecklistItem(items)} type="button">
-            Add a Checklist Item
-          </button>
-          <button className="wiz-btn" type="button" onClick={postChecklist}>
-            Save As Draft
-          </button>
         </div>
       </div>
     );
@@ -64,10 +71,8 @@ ChecklistWizardBuilder.propTypes = {
   items: PropTypes.arrayOf(Object).isRequired,
   addNewChecklistItem: PropTypes.func.isRequired,
   handleItems: PropTypes.func.isRequired,
-  addQuestion: PropTypes.func.isRequired,
   updateBehaviour: PropTypes.func,
   deleteItem: PropTypes.func.isRequired,
-  deleteQuestion: PropTypes.func.isRequired,
   updateNationality: PropTypes.func.isRequired,
   updateDestinations: PropTypes.func.isRequired,
   postChecklist: PropTypes.func.isRequired

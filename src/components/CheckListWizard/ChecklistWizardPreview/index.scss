@@ -1,10 +1,17 @@
 .checklist-wizard-preview {
   background-color: #ffffff;
+  padding: 1px;
+  box-sizing: border-box;
+  
+  .checklist-wizard-preview-wrapper {
+    display: grid;
+    grid-template-columns: 40px 40px calc(100% - 120px) 40px;
+    padding-bottom: 50px;
+  }
 
-  .radio-grid {
+  .radio-grid{
     display: flex;
-    grid-template-columns: 30px 1fr;
-    margin-top: 23px;
+    height: 39px;
   }
 
   .preview-prompt,
@@ -13,7 +20,8 @@
   }
 
   .preview-prompt {
-    margin: 3px 0;
+    margin: 4px 0 10px 0;
+    min-height: 2em;
   }
 
   .upload-doc {
@@ -35,19 +43,19 @@
   }
 
   .preview-item-header {
-    margin: 30px 50px 0;
+    grid-column: 2/4;
 
     .preview-header {
       color: #3359db;
       margin: 0;
       margin-top: 41px;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: bold;
     }
 
     .travellingto-preview {
       margin: 0;
-      margin-top: 20px;
+      margin-top: 30px;
       font-size: 15px;
       color: #5a6577;
     }
@@ -55,25 +63,6 @@
 
   .preview-checklist-item {
     margin-top: 30px;
-  }
-
-  .display-preview-behaviour {
-    .skipQuestion {
-      height: 39px;
-      width: 177px;
-      border-radius: 5px;
-      background-color: #10a36d;
-      box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11);
-      color: #fff;
-      font-size: 14px;
-      letter-spacing: 0.58px;
-      font-weight: bold;
-      margin-top: 15px;
-      outline: none;
-      cursor: pointer;
-    }
-    .skipQuestion:hover {
-      opacity: 0.85;
-    }
+    grid-column: 2/4;
   }
 }

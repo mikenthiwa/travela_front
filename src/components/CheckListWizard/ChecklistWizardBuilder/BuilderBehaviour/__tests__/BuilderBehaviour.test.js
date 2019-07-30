@@ -1,10 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import BuilderBehaviour from '../index';
+import * as actions from '../behaviourActions';
+import getBehaviours from '../BehaviourPool';
 
 const props = {
-  order: 1,
-  optionId: 1,
+  behaviour: {},
   updateBehaviour: jest.fn(),
 };
 
@@ -16,78 +17,77 @@ describe('<BuilderBehaviour />', () => {
 
   it('should handle behaviour change: skip to another question', () => {
     const wrapper = mount(<BuilderBehaviour {...props} />);
-    wrapper.instance().handleBehaviourDropdownChange('skip to another question');
-    wrapper.setState({noAction: true});
-    expect(wrapper.onBehaviourChange).toBeCalled;
-
+    wrapper.instance().handleBehaviourDropdownChange(actions.SKIP_QUESTION);
+    expect(wrapper.props.updateBehaviour).toBeCalled;
+    
+    wrapper.setProps({...props, behaviour: { type: actions.SKIP_QUESTION, payload: '' } });
     const mockEvents2 = { target: { value: 2} };
     const input = wrapper.find('#numberToSkipTo');
-    input.simulate('keyUp', mockEvents2);
     input.simulate('change', mockEvents2);
-    expect(wrapper.handleInputBehaviour).toBeCalled;
-    expect(wrapper.updateBehaviour).toBeCalled;
+    expect(wrapper.props.updateBehaviour).toBeCalled;
   });
 
   it('should handle behaviour change: upload a document', () => {
     const wrapper = mount(<BuilderBehaviour {...props} />);
-    wrapper.instance().handleBehaviourDropdownChange('upload a document');
+    wrapper.instance().handleBehaviourDropdownChange(actions.UPLOAD_DOCUMENT);
     expect(wrapper.onBehaviourChange).toBeCalled;
+
+    wrapper.setProps({...props, behaviour: { type: actions.UPLOAD_DOCUMENT } });
+    expect(wrapper.find('input')).toHaveLength(0);
+
   });
 
   it('should handle behaviour change: preview document', () => {
     const wrapper = mount(<BuilderBehaviour {...props} />);
-    wrapper.instance().handleBehaviourDropdownChange('preview document');
-    wrapper.setState({noAction: true});
-    expect(wrapper.onBehaviourChange).toBeCalled;
+    wrapper.instance().handleBehaviourDropdownChange(actions.PREVIEW_DOCUMENT);
+    expect(wrapper.props.updateBehaviour).toBeCalled;
 
+    wrapper.setProps({...props, behaviour: { type: actions.PREVIEW_DOCUMENT, payload: '' } });
     const mockEvents2 = { target: { value: 'https://link.com'} };
     const input = wrapper.find('#documentToPreview');
-    input.simulate('keyUp', mockEvents2);
     input.simulate('change', mockEvents2);
-    expect(wrapper.handleInputBehaviour).toBeCalled;
-    expect(wrapper.updateBehaviour).toBeCalled;
+    expect(wrapper.props.updateBehaviour).toBeCalled;
   });
 
   it('should handle behaviour change: notify an email address', () => {
     const wrapper = mount(<BuilderBehaviour {...props} />);
-    wrapper.instance().handleBehaviourDropdownChange('notify an email address');
-    wrapper.setState({noAction: true});
-    expect(wrapper.onBehaviourChange).toBeCalled;
+    wrapper.instance().handleBehaviourDropdownChange(actions.NOTIFY_EMAIL);
+    expect(wrapper.props.updateBehaviour).toBeCalled;
 
-    const mockEvents2 = { target: { value: 'ex. example@andela.com'} };
+    wrapper.setProps({...props, behaviour: { type: actions.NOTIFY_EMAIL, payload: '' } });
+    const mockEvents2 = { target: { value: 'example@andela.com'} };
     const input = wrapper.find('#emailToSend');
-    input.simulate('keyUp', mockEvents2);
     input.simulate('change', mockEvents2);
-    expect(wrapper.handleInputBehaviour).toBeCalled;
-    expect(wrapper.updateBehaviour).toBeCalled;
+    wrapper.setProps({...props, behaviour: { type: actions.SKIP_QUESTION, payload: '' } });
+    expect(wrapper.props.updateBehaviour).toBeCalled;
   });
 
   it('should handle behaviour change error: preview document', () => {
     const wrapper = mount(<BuilderBehaviour {...props} />);
-    wrapper.instance().handleBehaviourDropdownChange('preview document');
-    wrapper.setState({noAction: true});
-    expect(wrapper.onBehaviourChange).toBeCalled;
+    wrapper.instance().handleBehaviourDropdownChange(actions.PREVIEW_DOCUMENT);
+    expect(wrapper.props.updateBehaviour).toBeCalled;
 
+    wrapper.setProps({...props, behaviour: { type: actions.PREVIEW_DOCUMENT, payload: '' } });
     const mockEvents2 = { target: { value: ''} };
     const input = wrapper.find('#documentToPreview');
-    input.simulate('keyUp', mockEvents2);
     input.simulate('change', mockEvents2);
-    expect(wrapper.handleInputBehaviour).toBeCalled;
-    expect(wrapper.updateBehaviour).toBeCalled;
-    
+    expect(wrapper.props.updateBehaviour).toBeCalled;
   });
   
   it('should handle behaviour change errors: email', () => {
     const wrapper = mount(<BuilderBehaviour {...props} />);
-    wrapper.instance().handleBehaviourDropdownChange('notify an email address');
-    wrapper.setState({noAction: true});
-    expect(wrapper.onBehaviourChange).toBeCalled;
+    wrapper.instance().handleBehaviourDropdownChange(actions.NOTIFY_EMAIL);
+    expect(wrapper.props.updateBehaviour).toBeCalled;
 
+    wrapper.setProps({...props, behaviour: { type: actions.NOTIFY_EMAIL, payload: '' } });
     const mockEvents2 = { target: { value: ''} };
     const input = wrapper.find('#emailToSend');
-    input.simulate('keyUp', mockEvents2);
     input.simulate('change', mockEvents2);
-    expect(wrapper.handleInputBehaviour).toBeCalled;
-    expect(wrapper.updateBehaviour).toBeCalled;
+    expect(wrapper.props.updateBehaviour).toBeCalled;
+  });
+
+  it('should return an empty object for an invalid behaviour type', () => {
+    const behaviour = getBehaviours('invalid', 'payload');
+    expect(behaviour).toEqual({});
   });
 });

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const UploadDocument = ({behaviourName}) => {
+const UploadDocument = ({behaviour}) => {
   return(
     <label htmlFor="doc-upload" className="custom-file-upload">
-      {behaviourName}
+      {'Upload a document'}
       <input
         type="file"
         id="doc-upload"
@@ -15,7 +15,7 @@ const UploadDocument = ({behaviourName}) => {
 };
 
 UploadDocument.propTypes = {
-  behaviourName: PropTypes.string.isRequired,
+  behaviour: PropTypes.object.isRequired,
 };
 
 export default UploadDocument;

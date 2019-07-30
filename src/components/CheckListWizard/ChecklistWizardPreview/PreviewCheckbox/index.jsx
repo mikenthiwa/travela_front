@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from './Checkbox';
-import PreviewRadioConfiguration from '../PreviewRadio/PreviewRadioConfiguration';
-import SkipToAnotherQuestion from '../PreviewBehaviour/SkipToAnotherQuestion';
+import PreviewBehaviour from '../PreviewBehaviour';
 import './index.scss';
 
 class PreviewCheckbox extends Component {
@@ -10,76 +9,51 @@ class PreviewCheckbox extends Component {
     isChecked: 0,
   }
 
-  handleCheckbox = ({ target }) => {
+  handleCheckbox = ({ target: { checked } }) => {
     const { isChecked } = this.state;
-    if (target.checked) {
-      this.setState({
-        isChecked: isChecked + 1
-      });
-    } else {
-      this.setState({
-        isChecked: isChecked - 1
-      });
-    }
+    this.setState({ isChecked: checked ? isChecked + 1 : isChecked - 1 });
   }
 
-  renderPreviewBehavior = (isChecked, itemBehaviour, handleSkipToQuestion, options) => (
-    <div className="display-preview-behaviour">
-      {
-        isChecked > 0 && options.length ? itemBehaviour && itemBehaviour.name === 'skip to another question' ? (
-          <SkipToAnotherQuestion
+  renderPreviewBehavior = () => {
+    const { item: { behaviour } , handleSkipToQuestion } = this.props;
+    const { isChecked } = this.state;
+    return (
+      <div className="display-preview-behaviour">
+        {!!isChecked && (
+          <PreviewBehaviour
+            behaviour={behaviour}
             handleSkipToQuestion={handleSkipToQuestion}
-            payload={itemBehaviour.action.payload}
-          />
-        ) :
-          (
-            <PreviewRadioConfiguration
-              behaviourName={itemBehaviour.name}
-            />
-          ) : null
-      }
-    </div>
-  )
+          />)}
+      </div>
+    );
+  }
 
   render() {
-    const { prompt, configuration: { options }, order, itemBehaviour, handleSkipToQuestion } = this.props;
-    const { isChecked } = this.state;
-    const behaviourName = itemBehaviour && itemBehaviour.name;
+    const { item: { prompt, configuration: { options } } } = this.props;
     return (
       <div>
         <div className="checkbox-preview-wrapper">
           <div className="checkbox-input-wrap">
-            {options.map(item => (
-              <div key={item.id} className="checkbox-option">
+            {options.map(option => (
+              <div key={option.id} className="checkbox-option">
                 <Checkbox
                   prompt={prompt}
-                  options={item}
+                  options={option}
                   handleCheckbox={this.handleCheckbox}
-                  behaviourName={behaviourName}
                 />
               </div>
             ))}
           </div>
-          { this.renderPreviewBehavior(isChecked, itemBehaviour, handleSkipToQuestion, options) }
+          { this.renderPreviewBehavior() }
         </div>
       </div>
     );
   }
 }
 
-PreviewCheckbox.defaultProps = {
-  order: 0,
-};
-
 PreviewCheckbox.propTypes = {
-  prompt: PropTypes.string.isRequired,
-  order: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  configuration: PropTypes.shape({ options: PropTypes.array }).isRequired,
+  item: PropTypes.object.isRequired,
   handleSkipToQuestion: PropTypes.func.isRequired,
-  itemBehaviour: PropTypes.shape({
-    name: PropTypes.string,
-    action: PropTypes.shape({ payload: PropTypes.oneOfType([PropTypes.string, PropTypes.number]) })
-  }).isRequired,
 };
 
 export default PreviewCheckbox;

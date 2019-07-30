@@ -21,7 +21,11 @@ class Dropdown extends Component {
   }
 
   closeOption = e => {
-    this.setState({ optionsOpen: this.selRef.current.contains(e.target) });
+    const { optionsOpen } = this.state;
+    const isOutside = !this.selRef.current.contains(e.target);
+    this.setState({
+      optionsOpen: isOutside ? false : !optionsOpen,
+    });
   };
 
   selectOption = item => {

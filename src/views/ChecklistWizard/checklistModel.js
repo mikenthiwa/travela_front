@@ -1,14 +1,18 @@
+import shortId from 'shortid';
+
 export const ChecklistModel = (num) => ({
+  id: shortId.generate(),
   order: num + 1,
   prompt: '',
   type: '',
+  behaviour: {},
   configuration: {
     options: [OptionModel()]
   }
 });
 
 export const OptionModel = () => ({
-  id: Math.random() * 1000000000,
+  id: shortId.generate(),
   name: '',
   behaviour: {}
 });

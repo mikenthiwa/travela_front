@@ -4,23 +4,36 @@ import RenderCheckbox from '..';
 import CheckboxOption from '../CheckboxOption';
 
 const props = {
-  addQuestion: jest.fn(),
-  configuration: { options: [{ behaviour: { name: 'upload a document', action: { payload: ' '} } }] },
-  updateBehaviour: jest.fn(),
-  order: 1,
-  deleteQuestion: jest.fn()
+  item: {
+    id: 'kljaidjaiodf',
+    order: 1,
+    behaviour: {
+      type: 'NOTIFY_EMAIL',
+      payload: 'document',
+    },
+    configuration: {
+      options: [
+        {
+          id: 'dkadajfda',
+          name: 'are you awesome?'
+        }
+      ]
+    }
+  },
+  handleItems: jest.fn(),
 };
 
 const props2 = {
-  updateBehaviour: jest.fn(),
+  option: {
+    id: 'klksjlfa',
+    name: 'are you awesome?'
+  },
   deleteQuestion: jest.fn(),
-  optionId: 1,
-  name: '',
-  order: 1
+  updateBehaviour: jest.fn(),
 };
 
 const setup = props => {
-  return shallow(<RenderCheckbox {...props} />);
+  return mount(<RenderCheckbox {...props} />);
 };
 
 const setup2 = props => {
@@ -41,20 +54,21 @@ describe('<RenderCheckbox/>', () => {
 
   it('shoudl call showListOfBehaviours when button is clicked', () => {
     jest.spyOn(wrapper.instance(), 'showListOfBehaviours');
-    wrapper.find('button').at(0).simulate('click', 1);
+    wrapper.find('.set-behaviour-btn').first().simulate('click');
     expect(wrapper.state('showBehaviourList')).toEqual(true);
   });
 
   it('shoudl call addQuestion when addQuestion button is clicked', () => {
-    wrapper.find('button').at(1).simulate('click', 1);
-    expect(props.addQuestion).toHaveBeenCalledTimes(1);
-    expect(props.addQuestion).toHaveBeenCalledWith(1);
+    const spy = jest.spyOn(wrapper.instance(), 'addQuestion');
+    wrapper.find('.anoter-question-btn').first().simulate('click');
+    // expect(spy).toHaveBeenCalledTimes(1);
+    expect(props.handleItems).toHaveBeenCalled;
   });
 
   it('shoudl call updateBehaviour when updateBehaviour button is clicked', () => {
     const event = { target: { value: 'yes' }};
     wrapper2.find('input').simulate('change', event, 1, 1, 'name');
-    expect(props2.updateBehaviour).toHaveBeenCalledWith('yes', 1, 1, 'name');
+    expect(props2.updateBehaviour).toHaveBeenCalledWith({ ...props2.option, name: 'yes' });
   });
 
   it('should handle delete icon onChange', () => {
@@ -62,5 +76,28 @@ describe('<RenderCheckbox/>', () => {
     const deleteIcon = wrapper2.find('button#option-del-icon');
     deleteIcon.simulate('click', mockEvents);
     expect(wrapper.deleteQuestion).toBeCalled;
+  });
+
+  it('should handle update question', () => {
+    props.handleItems.mockClear();
+    const mockEvents = { target: { value: 'Passport?'} };
+    const BehaviourInput = wrapper.find('#option-name-input').first();
+    BehaviourInput.simulate('change', mockEvents);
+    expect(wrapper.instance().props.handleItems).toHaveBeenCalledTimes(1);
+  });
+
+  it('should handle delete question', () => {
+    props.handleItems.mockClear();
+    const BehaviourInput = wrapper.find('#option-del-icon').first();
+    BehaviourInput.simulate('click');
+    expect(wrapper.instance().props.handleItems).toHaveBeenCalledTimes(1);
+  });
+
+  it('should handle update behaviour', () => {
+    props.handleItems.mockClear();
+    wrapper.find('.set-behaviour-btn').first().simulate('click');
+    const input = wrapper.find('#emailToSend').first();
+    input.simulate('change', { target: { value: 'something' } });
+    expect(wrapper.instance().props.handleItems).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,3 +1,4 @@
+import shortId from 'shortid';
 import {
   GET_ALL_DYNAMIC_CHECKLISTS,
   GET_ALL_DYNAMIC_CHECKLISTS_FAILURE,
@@ -25,6 +26,7 @@ export const initialState = {
   destinations: [],
   items: [
     {
+      id: shortId.generate(),
       order: 1,
       prompt: '',
       type: '',
@@ -32,7 +34,7 @@ export const initialState = {
       configuration: {
         options: [
           {
-            id: 1,
+            id: shortId.generate(),
             name: '',
             behaviour: {}
           },
@@ -61,7 +63,7 @@ const checklistWizard = (state = initialState, action) => {
   case ADD_NEW_CHECKLIST_ITEM_SUCCESS:
     return { ...state, items: Object.assign(state.items, action.newItem) };
   case HANDLE_ITEMS_SUCCESS:
-    return { ...state, items: Object.assign(state.items, action.newItem) };
+    return { ...state, items: action.newItem };
   case ADD_QUESTION_SUCCESS:
     return { ...state, items: Object.assign(state.items, action.newItems) };
   case DELETE_ITEM_SUCCESS:

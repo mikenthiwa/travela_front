@@ -1,92 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { DragDropContext } from 'react-beautiful-dnd';
 import CheckListWizardHeader from '../../components/CheckListWizard/ChecklistWizardHeader';
 import CheckListWizardBuilder from '../../components/CheckListWizard/ChecklistWizardBuilder';
 import CheckListWizardPreview from '../../components/CheckListWizard/ChecklistWizardPreview';
-import { ChecklistModel, OptionModel } from './checklistModel';
+import { ChecklistModel } from './checklistModel';
 import {
-  handleAddChecklistItem,
   handleChecklistItems,
-  addChecklistQuestion,
-  deleteChecklistItems,
-  deleteChecklistQuestion,
-  updateChecklistBehaviour,
   updateChecklistNationality,
   updateChecklistDestination,
   createDynamicChecklist
 } from '../../redux/actionCreator/travelChecklistWizardActions';
-import helpers from './helpers';
 import './index.scss';
 
 export class ChecklistWizard extends Component {
   addNewChecklistItem = () => {
-    const { checklistWizard: { items }, handleAddChecklistItem } = this.props;
-    let newOrder;
-    items.length ? newOrder = items[items.length - 1].order : newOrder = 0;
-    const newItem = ChecklistModel(newOrder);
-    const currentItemsState = items;
-    const newItems = helpers.arrangeChecklistByOrder([...currentItemsState, newItem]);
-    handleAddChecklistItem(newItems);
+    const { checklistWizard: { items }, handleChecklistItems } = this.props;
+    const newItems = [...items, ChecklistModel(items.length)];
+    handleChecklistItems(newItems);
   };
 
-  deleteItem = order => {
-    const { deleteChecklistItems } = this.props;
-    deleteChecklistItems(order);
-  }
-
-  handleItems = ({ target }, order, itemKey) => {
+  deleteItem = id => {
     const { checklistWizard: { items }, handleChecklistItems } = this.props;
-    const item = items.find(item => item.order === order);
-    const newState = items.filter(item => item.order !== order);
-    item[itemKey] = target.value;
-    const newItems = helpers.arrangeChecklistByOrder([item, ...newState]);
+    const newItems = items.filter(item => item.id !== id)
+      .map((item, index) => ({ ...item, order: index + 1 }));
     handleChecklistItems(newItems);
   }
 
-  addQuestion = (order) => {
-    const { checklistWizard: { items }, addChecklistQuestion } = this.props;
-    const newItem = OptionModel();
-    const item = items.find(item => item.order === order);
-    const newState = items.filter(item => item.order !== order);
-    item.configuration.options.push(newItem);
-    const newItems = helpers.arrangeChecklistByOrder([item, ...newState]);
-    addChecklistQuestion(newItems);
+  handleItems = (updatedItem) => {
+    const { checklistWizard: { items }, handleChecklistItems } = this.props;
+    const newItems = items.map((item) => item.id === updatedItem.id ? updatedItem : item);
+    handleChecklistItems(newItems);
   }
-
-  deleteQuestion = (order, optionId) => {
-    const { checklistWizard: { items }, deleteChecklistQuestion } = this.props;
-    const item = items.find(item => item.order === order);
-    item.behaviour = {};
-    const newState = items.filter(item => item.order !== order);
-    const newOptions = item.configuration.options.filter(question => question.id !== optionId);
-    item.configuration.options = newOptions;
-    const newItems = helpers.arrangeChecklistByOrder([item, ...newState]);
-    deleteChecklistQuestion(newItems);
-  }
-
-  updateBehaviour = (behaviour, order, optionId, itemKey, type) => {
-    const { checklistWizard: { items }, updateChecklistBehaviour } = this.props;
-    const item = items.find(item => item.order === order);
-    const newState = items.filter(item => item.order !== order);
-    if (type === 'checkbox') {
-      items.map(item => {
-        if (item.order === order) {
-          item.behaviour = behaviour;
-        }
-        return item;
-      });
-    } else {
-      item.configuration.options.map(item => {
-        if (item.id === optionId) {
-          item[itemKey] = behaviour;
-        }
-        return item;
-      });
-    }
-    const newItems = helpers.arrangeChecklistByOrder([item, ...newState]);
-    updateChecklistBehaviour(newItems);
-  };
 
   updateNationality = (name, emoji) => {
     const { updateChecklistNationality } = this.props;
@@ -103,32 +49,45 @@ export class ChecklistWizard extends Component {
     createDynamicChecklist(checklistWizard);
   }
 
+  onDragEnd = ({ destination, source, draggableId }) => {
+    if(!destination) { return; }
+    if(source.index === destination.index) { return; }
+
+    const { checklistWizard: { items }, handleChecklistItems } = this.props;
+    let newItems = items.filter(item => item.id !== draggableId);
+
+    newItems.splice(destination.index, 0, items[source.index]);
+    newItems = newItems.map((item, index) => ({ ...item, order: index + 1 }));
+    handleChecklistItems(newItems);
+  }
+
   render() {
     const { checklistWizard } = this.props;
     return (
-      <div>
-        <CheckListWizardHeader />
-        <div className="checklist-wizard-container">
-          <CheckListWizardBuilder
-            items={checklistWizard.items}
-            handleItems={this.handleItems}
-            addNewChecklistItem={this.addNewChecklistItem}
-            updateBehaviour={this.updateBehaviour}
-            addQuestion={this.addQuestion}
-            nationality={checklistWizard.nationality}
-            updateNationality={this.updateNationality}
-            deleteItem={this.deleteItem}
-            deleteQuestion={this.deleteQuestion}
-            updateDestinations={this.updateDestinations}
-            postChecklist={this.postChecklist}
-          />
-          <CheckListWizardPreview
-            nationality={checklistWizard.nationality}
-            destinations={checklistWizard.destinations}
-            items={checklistWizard.items}
-          />
+      <DragDropContext
+        onDragEnd={this.onDragEnd}
+      >
+        <div>
+          <CheckListWizardHeader />
+          <div className="checklist-wizard-container">
+            <CheckListWizardBuilder
+              items={checklistWizard.items}
+              handleItems={this.handleItems}
+              addNewChecklistItem={this.addNewChecklistItem}
+              nationality={checklistWizard.nationality}
+              updateNationality={this.updateNationality}
+              deleteItem={this.deleteItem}
+              updateDestinations={this.updateDestinations}
+              postChecklist={this.postChecklist}
+            />
+            <CheckListWizardPreview
+              nationality={checklistWizard.nationality}
+              destinations={checklistWizard.destinations}
+              items={checklistWizard.items}
+            />
+          </div>
         </div>
-      </div>
+      </DragDropContext>
     );
   }
 }
@@ -136,12 +95,7 @@ export class ChecklistWizard extends Component {
 
 ChecklistWizard.propTypes = {
   checklistWizard: PropTypes.object.isRequired,
-  handleAddChecklistItem: PropTypes.func.isRequired,
   handleChecklistItems: PropTypes.func.isRequired,
-  addChecklistQuestion: PropTypes.func.isRequired,
-  deleteChecklistItems: PropTypes.func.isRequired,
-  deleteChecklistQuestion: PropTypes.func.isRequired,
-  updateChecklistBehaviour: PropTypes.func.isRequired,
   updateChecklistNationality: PropTypes.func.isRequired,
   updateChecklistDestination: PropTypes.func.isRequired,
   createDynamicChecklist: PropTypes.func.isRequired
@@ -150,12 +104,7 @@ ChecklistWizard.propTypes = {
 export const mapStateToProps = checklistWizard => checklistWizard;
 
 const mapDispatchToProps = {
-  handleAddChecklistItem,
   handleChecklistItems,
-  addChecklistQuestion,
-  deleteChecklistItems,
-  deleteChecklistQuestion,
-  updateChecklistBehaviour,
   updateChecklistNationality,
   updateChecklistDestination,
   createDynamicChecklist

@@ -3,29 +3,25 @@ import PropTypes from 'prop-types';
 import BuilderInput from '../BuilderOptions/BuilderInput';
 
 
-const CheckboxOption = ({ order, updateBehaviour, name, optionId, deleteQuestion }) => {
+const CheckboxOption = ({ option, updateBehaviour, deleteQuestion }) => {
+
+  const onChangeBehaviour = value => {
+    updateBehaviour({ ...option, name: value });
+  };
   return (
     <div>
       <BuilderInput 
         deleteQuestion={deleteQuestion} 
-        order={order} 
-        name={name}
-        optionId={optionId} 
-        updateBehaviour={updateBehaviour} 
+        name={option.name}
+        optionId={option.id} 
+        updateBehaviour={onChangeBehaviour} 
       />
     </div>
   );
 };
 
-CheckboxOption.defaultProps = {
-  name: '',
-  optionId: 0,
-};
-
 CheckboxOption.propTypes = {
-  order: PropTypes.number.isRequired,
-  optionId: PropTypes.number,
-  name: PropTypes.string,
+  option: PropTypes.object.isRequired,
   deleteQuestion: PropTypes.func.isRequired,
   updateBehaviour: PropTypes.func.isRequired,
 };

@@ -3,39 +3,28 @@ import { shallow } from 'enzyme';
 import Radio from '../Radio';
 
 const props = {
-  prompt: 'Do you have valid visa',
-  behaviourName: 'Yes',
-  handleCheckName: jest.fn(),
-  options: {
-    id: 1,
+  option: {
+    id: 'kjaslda',
     name: 'Yes',
+    order: 1,
     behaviour: {
-      name: 'upload a document',
-      payload: 'UPLOAD_DOCUMENT',
+      type: 'UPLOAD_DOCUMENT',
     }
   },
-  optionId: 1,
-  radioId: 1,
-  order: 1,
+  checked: false,
+  handleCheckName: jest.fn()
 };
 
 describe('<Radio />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<Radio {...props} />);
-    expect(wrapper.find('div'));
+    expect(wrapper.find('label.radio-cell'));
   });
 
   it('should handle prompt input onChange', () => {
     const wrapper = mount(<Radio {...props} />);
-    const mockEvents = { target: { value: 'Passport?'} };
     const input = wrapper.find('.radio-btn');
-    input.simulate('change', mockEvents);
-    expect(wrapper.handleCheckName).toBeCalled;
-  });
-
-  it('should handle change of behaviour', () => {
-    const wrapper = shallow(<Radio {...props} />);
-    wrapper.setProps({behaviourName: 'skip to another question'});
-    expect(wrapper.handleCheckName).toBeCalled;
+    input.simulate('change');
+    expect(wrapper.instance().props.handleCheckName).toBeCalled;
   });
 });

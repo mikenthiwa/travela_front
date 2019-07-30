@@ -1,128 +1,81 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from '../../Shared/Dropdown';
 import MetaData from '../../Shared/Dropdown/metaData';
 import BehaviourPool from './BehaviourPool';
+import * as actions from './behaviourActions';
 
-class Behaviours extends Component {
-  state = {
-    noAction: false,
-    actionType: 'default',
-    numberToSkipTo: '',
-    documentToPreview: '',
-    emailToSend: ''
-  };
+class Behaviours extends PureComponent {
 
   handleBehaviourDropdownChange = (value) => {
-    const event = {target : { value }};
-    this.onBehaviourChange(event);
+    const { updateBehaviour } = this.props;
+    updateBehaviour(BehaviourPool(value));
   }
 
-
-  onBehaviourChange = ({ target }) => {
-    const { updateBehaviour, order, optionId, type } = this.props;
-    if (target.value === 'skip to another question') {
-      this.setState({ noAction: true, actionType: target.value });
-    }
-
-    if (target.value === 'upload a document') {
-      this.setState({ noAction: false, actionType: target.value });
-      type === 'checkbox' ? (
-        updateBehaviour(BehaviourPool({name:target.value}), order, optionId, 'behaviour', type)
-      ) : (
-        updateBehaviour(BehaviourPool({name:target.value}), order, optionId, 'behaviour')
-      );
-    }
-
-    if (target.value === 'preview document') {
-      this.setState({ noAction: true, actionType: target.value });
-    }
-
-    if (target.value === 'notify an email address') {
-      this.setState({ noAction: true, actionType: target.value });
-    }
-  };
-
-  handleBehaviour = ({target}, type) => {
-    const { updateBehaviour, order, optionId } = this.props;
-    const { actionType } = this.state;
-    type === 'checkbox' ? (
-      updateBehaviour(BehaviourPool({name: actionType, payload: target.value}), order, optionId, 'behaviour', type)
-    ) : (
-      updateBehaviour(BehaviourPool({name: actionType, payload: target.value}), order, optionId, 'behaviour')
-    );
+  handleBehaviour = ({ target }) => {
+    const { updateBehaviour, behaviour } = this.props;
+    updateBehaviour(BehaviourPool(behaviour.type, target.value));
   }
 
+  renderBehaviourInputType = () => {
+    const { behaviour } = this.props;
+    const payload = behaviour.payload || '';
+    const actionType = behaviour.type || '';
 
-  handleInputBehaviour = ({target}) => {
-    this.setState({[target.id]: target.value});
-  }
-
-  renderBehaviourInputType = (actionType) => {
-    const { numberToSkipTo, documentToPreview, emailToSend } = this.state;
-    const { type } = this.props;
     switch (actionType) {
-    case 'skip to another question':
+    case actions.UPLOAD_DOCUMENT: 
+      return null;
+    case actions.SKIP_QUESTION:
       return (
         <input
           type="number"
           id="numberToSkipTo"
           className="behaviour-payload-input"
-          onChange={this.handleInputBehaviour}
+          onChange={this.handleBehaviour}
           placeholder="2"
-          onKeyUp={(e) => this.handleBehaviour(e, type)}
-          value={numberToSkipTo}
+          value={payload}
         />
       );
-    case 'notify an email address':
+    case actions.NOTIFY_EMAIL:
       return (
         <input
           type="email"
           id="emailToSend"
           className="behaviour-payload-input"
           placeholder="ex. example@andela.com"
-          value={emailToSend}
-          onKeyUp={(e) => this.handleBehaviour(e, type)}
-          onChange={this.handleInputBehaviour}
+          value={payload}
+          onChange={this.handleBehaviour}
         />
       );
-    case 'preview document':
+    case actions.PREVIEW_DOCUMENT:
       return (
         <input
           type="text"
           id="documentToPreview"
           placeholder="https://link.com"
-          value={documentToPreview}
+          value={payload}
           className="behaviour-payload-input"
-          onChange={this.handleInputBehaviour}
-          onKeyUp={(e) => this.handleBehaviour(e, type)}
+          onChange={this.handleBehaviour}
         />
       );
+    default: return null;
     }
   }
 
   render() {
-    const { noAction, actionType } = this.state;
     return (
       <div className="behaviour-select-type-container">
         <div className="behaviour-dropdown-container">
           <Dropdown dropdownOptions={MetaData.behaviourTypeDropdownMetaData} changeFunc={this.handleBehaviourDropdownChange} />
         </div>
-        {noAction && this.renderBehaviourInputType(actionType)}
+        {this.renderBehaviourInputType()}
       </div>
     );
   }
 }
 
-Behaviours.defaultProps = {
-  optionId: 0,
-  type: '',
-};
-
 Behaviours.propTypes = {
-  type: PropTypes.string,
-  order: PropTypes.number.isRequired,
-  optionId: PropTypes.number,
+  behaviour: PropTypes.object.isRequired,
   updateBehaviour: PropTypes.func.isRequired,
 };
 

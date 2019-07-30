@@ -1,55 +1,40 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
+import radioIconUnchecked from '../../images/radio-unchecked.svg';
+import radioIconChecked from '../../images/radio-checked.svg';
 
 class Radio extends Component {
   componentDidUpdate(prevProps) {
-    const { behaviourName, handleCheckName, optionId, radioId, payload } = this.props;
-    if (prevProps.behaviourName !== behaviourName) {
-      handleCheckName(behaviourName, radioId, payload);
-    }
+    const { handleCheckName, option } = this.props;
+    !isEqual(prevProps.option.behaviour, option.behaviour) && handleCheckName(option.id, option.behaviour);
   }
 
   render() {
-    const { 
-      options, 
-      prompt, 
-      handleCheckName, 
-      behaviourName, 
-      optionId, 
-      radioId, 
-      order,
-      payload
-    } = this.props;
+    const { option, handleCheckName, checked } = this.props;
     return (
-      <label className={radioId === optionId ? 'radio-cell-selected' : 'radio-cell'} htmlFor="radio">
+      <label className={`radio-cell ${checked ? 'selected' : ''}`} htmlFor={`radio-${option.id}`}>
         <input 
-          className="radio-btn"
+          className="radio-btn checklist-preview"
           type="radio"
-          checked={radioId === optionId}
-          onChange={() => handleCheckName(behaviourName, radioId, payload)}
-          name={`${order}-radio-${prompt}`} 
-          value={options.name} />
-        <span className="radio-value">{options.name}</span>
+          checked={checked}
+          onChange={handleCheckName}
+          id={`radio-${option.id}`} 
+          value={option.name}
+        />
+        <div className="radio-icon">
+          <img src={checked ? radioIconChecked : radioIconUnchecked} alt="radio icon" />
+        </div>
+        <span className="radio-value">{option.name}</span>
       </label>
     );
   }
 }
 
-Radio.defaultProps = {
-  behaviourName: '',
-  optionId: 1,
-  payload: 0
-};
-
 Radio.propTypes = {
-  prompt: PropTypes.string.isRequired,
-  options: PropTypes.shape({id: PropTypes.number, name: PropTypes.string}).isRequired,
+  option: PropTypes.object.isRequired,
   handleCheckName: PropTypes.func.isRequired,
-  behaviourName: PropTypes.string,
-  optionId: PropTypes.number,
-  radioId: PropTypes.number.isRequired,
-  order: PropTypes.number.isRequired,
-  payload: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  checked: PropTypes.bool.isRequired,
 };
 
 export default Radio;

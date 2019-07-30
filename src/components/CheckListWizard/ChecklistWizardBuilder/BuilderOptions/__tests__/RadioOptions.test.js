@@ -3,10 +3,14 @@ import { shallow } from 'enzyme';
 import RadioOption from '../RadioOptions';
 
 const props = {
-  order: 1,
-  optionId: 1,
-  optionNumber: 1,
-  name: 'yes',
+  item: {
+    id: 'kldskd',
+    name: 'are you serious?',
+    behaviour: {
+      type: 'NOTIFY_EMAIL',
+      payload: 'john@example.com'
+    }
+  },
   updateBehaviour: jest.fn(),
   deleteQuestion: jest.fn(),
 };
@@ -41,5 +45,15 @@ describe('<RadioOption />', () => {
     const btn = wrapper.find('.set-behaviour-btn');
     btn.simulate('click', mockEvents);
     expect(wrapper.showListOfBehaviours).toBeCalled;
+  });
+
+  it('should handle show behaviour btn', () => {
+    
+    const wrapper = mount(<RadioOption {...props} />);
+    wrapper.find('.set-behaviour-btn').first().simulate('click');
+    const input = wrapper.find('#emailToSend');
+    input.first().simulate('change');
+    expect(input).toHaveLength(1);
+    expect(wrapper.instance().props.updateBehaviour).toBeCalled;
   });
 });

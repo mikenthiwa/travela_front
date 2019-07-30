@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import shortId from 'shortid';
 import BuilderBehaviour from '../BuilderBehaviour';
 import Helper from '../BuilderOptions/helper';
 import CheckboxOption from './CheckboxOption';
@@ -7,69 +8,109 @@ import CheckboxOption from './CheckboxOption';
 class RenderCheckbox extends Component {
   state = {
     showBehaviourList: false,
-    optionId: ''
   };
 
-  showListOfBehaviours = optionId => {
+  showListOfBehaviours = () => {
     const { showBehaviourList } = this.state;
-    this.setState({ showBehaviourList: !showBehaviourList, optionId });
+    this.setState({ showBehaviourList: !showBehaviourList });
   };
 
-  renderBehaviour = (updateBehaviour, order, optionNumber) => {
-    const { optionId } = this.state;
+  updateBehaviour = (behaviour) => {
+    const { item, handleItems } = this.props;
+    handleItems({ ...item, behaviour });
+  };
+
+  updateOptions = (option) => {
+    const { item, handleItems } = this.props;
+    const newOptions = item.configuration.options.map(opt => opt.id === option.id ? option : opt);
+    handleItems({
+      ...item,
+      configuration: {
+        ...item.configuration,
+        options: newOptions,
+      }
+    });
+  }
+
+  addQuestion = () => {
+    const { item, handleItems } = this.props;
+    const newQuestion = { id: shortId.generate(), name: '', behaviour: {} };
+    const newItem = {
+      ...item,
+      configuration: {
+        ...item.configuration,
+        options: [...item.configuration.options, newQuestion]
+      }
+    };
+    handleItems(newItem);
+  }
+
+  deleteQuestion = (id) => {
+    const { item, handleItems } = this.props;
+    const newItem = {
+      ...item,
+      behaviour: {},
+      configuration: {
+        ...item.configuration,
+        options: item.configuration.options.filter(question => question.id !== id),
+      }
+    };
+    handleItems(newItem);
+  }
+
+  renderBehaviour = () => {
+    const { item: { behaviour, order } } = this.props;
     return (
       <div>
-        <p className="behaviour-placeholder">{`Upon selecting Option ${optionNumber}, enable`}</p>
+        <p className="behaviour-placeholder">{`Upon selecting Option ${order + 1}, enable`}</p>
         <BuilderBehaviour
-          updateBehaviour={updateBehaviour}
-          order={order}
-          optionId={optionId}
-          type="checkbox"
+          updateBehaviour={this.updateBehaviour}
+          behaviour={behaviour}
         />
       </div>
     );
   };
 
-  renderCheckboxBehaviour = (showBehaviourList, order, updateBehaviour) => (
-    <div className="behaviour-container">
-      <div className="set-behaviour-btn-container">
-        {showBehaviourList ? null : (
-          <button
-            onClick={() => this.showListOfBehaviours(order)}
-            type="button"
-            className="set-behaviour-btn"
-          >
-            Set behaviour
-          </button>
-        )}
-      </div>
-      <div>
-        {showBehaviourList && this.renderBehaviour(updateBehaviour, order, order + 1)}
-      </div>
-    </div>
-  )
-
-  render() {
-    const { addQuestion, configuration, updateBehaviour, order, deleteQuestion } = this.props;
+  renderCheckboxBehaviour = () => {
     const { showBehaviourList } = this.state;
     return (
+      <div className="behaviour-container">
+        <div className="set-behaviour-btn-container">
+          {!showBehaviourList && (
+            <button
+              onClick={this.showListOfBehaviours}
+              type="button"
+              className="set-behaviour-btn"
+            >
+              Set behaviour
+            </button>
+          )}
+        </div>
+        <div>
+          {showBehaviourList && this.renderBehaviour()}
+        </div>
+      </div>
+    );
+  };
+
+  render() {
+    const { item: { configuration }} = this.props;
+    return (
       <div>
-        {configuration.options.map((item, i) => (
-          <div key={item.id}>
+        {configuration.options.map((option, i) => (
+          <div key={option.id}>
             <p>{`Enter Option ${i + 1}`}</p>
             <CheckboxOption
-              updateBehaviour={updateBehaviour}
-              order={order}
-              name={item.name}
-              optionId={item.id}
-              deleteQuestion={deleteQuestion}
+              updateBehaviour={this.updateOptions}
+              option={option}
+              deleteQuestion={this.deleteQuestion}
             />
           </div>
         ))}
-        {this.renderCheckboxBehaviour(showBehaviourList, order, updateBehaviour)}
+        {this.renderCheckboxBehaviour()}
         <button
           className="anoter-question-btn"
-          onClick={() => addQuestion(order)}
+          onClick={this.addQuestion}
           type="button">
           {`Add a ${Helper.getSuffix(configuration.options.length + 1)} option`}
         </button>
@@ -79,11 +120,8 @@ class RenderCheckbox extends Component {
 }
 
 RenderCheckbox.propTypes = {
-  order: PropTypes.number.isRequired,
-  configuration: PropTypes.shape({ options: PropTypes.array }).isRequired,
-  addQuestion: PropTypes.func.isRequired,
-  deleteQuestion: PropTypes.func.isRequired,
-  updateBehaviour: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
+  handleItems: PropTypes.func.isRequired,
 };
 
 export default RenderCheckbox;

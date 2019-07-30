@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // skip to another question behaviour
-const SkipToAnotherQuestion = ({ handleSkipToQuestion, payload}) => (
-  <button type="button" className="skipQuestion" onClick={() => handleSkipToQuestion(Number(payload))}>
-    {`Skip to Question ${payload}`}
+const SkipToAnotherQuestion = ({ handleSkipToQuestion, behaviour}) => (
+  <button type="button" className="skipQuestion" onClick={() => handleSkipToQuestion(Number(behaviour.payload))}>
+    {`Skip to Question ${behaviour.payload}`}
   </button>
 );
 
 
 SkipToAnotherQuestion.propTypes = {
-  payload: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  behaviour: PropTypes.object.isRequired,
   handleSkipToQuestion: PropTypes.func.isRequired
 };
 

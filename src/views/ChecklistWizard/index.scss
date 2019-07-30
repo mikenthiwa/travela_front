@@ -1,6 +1,6 @@
 .checklist-wizard-container{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, calc(50% - 10px));
     grid-gap: 20px;
     font-family: 'Din Pro Medium';
     margin-bottom: 100px;
