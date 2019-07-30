@@ -21,6 +21,13 @@ const props = {
     }
   },
   handleItems: jest.fn(),
+  addQuestion: jest.fn(),
+  configuration: { options: [{ behaviour: { name: 'upload a document', action: { payload: ' '} } }] },
+  updateBehaviour: jest.fn(),
+  order: 1,
+  optionId: 1,
+  deleteQuestion: jest.fn(),
+  deleteRadioOptionBehaviour: jest.fn(),
 };
 
 const props2 = {
@@ -30,6 +37,10 @@ const props2 = {
   },
   deleteQuestion: jest.fn(),
   updateBehaviour: jest.fn(),
+  optionId: 1,
+  name: '',
+  order: 1,
+  deleteRadioOptionBehaviour: jest.fn(),
 };
 
 const setup = props => {
@@ -51,17 +62,17 @@ describe('<RenderCheckbox/>', () => {
   it('should render RenderCheckbox component properly', () => {
     expect(wrapper).toMatchSnapshot();
   });
-
+  it('should render RenderCheckbox component properly', () => {
+    expect(wrapper2).toMatchSnapshot();
+  });
   it('shoudl call showListOfBehaviours when button is clicked', () => {
     jest.spyOn(wrapper.instance(), 'showListOfBehaviours');
     wrapper.find('.set-behaviour-btn').first().simulate('click');
     expect(wrapper.state('showBehaviourList')).toEqual(true);
   });
-
   it('shoudl call addQuestion when addQuestion button is clicked', () => {
     const spy = jest.spyOn(wrapper.instance(), 'addQuestion');
     wrapper.find('.anoter-question-btn').first().simulate('click');
-    // expect(spy).toHaveBeenCalledTimes(1);
     expect(props.handleItems).toHaveBeenCalled;
   });
 

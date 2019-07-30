@@ -15,6 +15,12 @@ import {
 import './index.scss';
 
 export class ChecklistWizard extends Component {
+
+  componentWillUnmount() {
+    const { handleChecklistItems } = this.props;
+    handleChecklistItems([ChecklistModel(1)]);
+  }
+
   addNewChecklistItem = () => {
     const { checklistWizard: { items }, handleChecklistItems } = this.props;
     const newItems = [...items, ChecklistModel(items.length)];

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import BuilderBehaviour from '../BuilderBehaviour';
 import DeleteIcon from '../../Shared/deleteIcon';
 
+
 class RadioOptions extends Component {
   state = {
     showBehaviourList: false,
@@ -21,14 +22,19 @@ class RadioOptions extends Component {
   };
 
   renderBehaviour = () => {
+    const { showBehaviourList } = this.state;
     const { item, optionNumber } = this.props;
     return (
       <div>
-        <p className="behaviour-placeholder">{`Upon selecting Option ${optionNumber}, enable`}</p>
-        <BuilderBehaviour
-          behaviour={item.behaviour}
-          updateBehaviour={this.changeBehaviour()}
-        />
+        {showBehaviourList !== false? (
+          <BuilderBehaviour
+            behaviour={item.behaviour}
+            behaviourText={`Upon selecting Option ${optionNumber}, enable`}
+            updateBehaviour={this.changeBehaviour()}
+            showBehaviourList={showBehaviourList}
+          />
+        ): null}
+        
       </div>
     );
   };
@@ -64,7 +70,7 @@ class RadioOptions extends Component {
                 )}
               </div>
               <div>
-                {showBehaviourList && this.renderBehaviour()}
+                {this.renderBehaviour()}
               </div>
             </div>
           </div>

@@ -14,35 +14,44 @@ const props = {
   updateBehaviour: jest.fn(),
   deleteQuestion: jest.fn(),
 };
+const setup = props => {
+  return shallow(<RadioOption {...props} />);
+};
 
+const setup2 = props => {
+  return mount(<RadioOption {...props} />);
+};
 describe('<RadioOption />', () => {
-  it('should render correctly', () => {
-    const wrapper = shallow(<RadioOption {...props} />);
-    expect(wrapper.find('div'));
+  let wrapper;
+  let secondWrapper;
+  beforeEach(() => {
+    wrapper = setup(props);
+    secondWrapper = setup2(props);
+  });
+  it('should render RenderCheckbox component properly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should render RenderCheckbox component properly', () => {
+    expect(secondWrapper).toMatchSnapshot();
   });
 
   it('should handle update behaviour', () => {
-    
-    const wrapper = mount(<RadioOption {...props} />);
     const mockEvents = { target: { value: 'Passport?'} };
-    const btn = wrapper.find('#option-name-input');
+    const btn = secondWrapper.find('#option-name-input');
     btn.simulate('change', mockEvents);
     expect(wrapper.updateBehaviour).toBeCalled;
   });
 
   it('should handle delete icon onChange', () => {
-    const wrapper = mount(<RadioOption {...props} />);
     const mockEvents = { target: { value: 'Passport?'} };
-    const deleteIcon = wrapper.find('button#option-del-icon');
+    const deleteIcon = secondWrapper.find('button#option-del-icon');
     deleteIcon.simulate('click', mockEvents);
     expect(wrapper.deleteQuestion).toBeCalled;
   });
 
   it('should handle show behaviour btn', () => {
-    
-    const wrapper = mount(<RadioOption {...props} />);
     const mockEvents = jest.fn();
-    const btn = wrapper.find('.set-behaviour-btn');
+    const btn = secondWrapper.find('.set-behaviour-btn');
     btn.simulate('click', mockEvents);
     expect(wrapper.showListOfBehaviours).toBeCalled;
   });

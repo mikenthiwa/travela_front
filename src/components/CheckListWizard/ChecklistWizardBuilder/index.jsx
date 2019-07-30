@@ -29,7 +29,7 @@ class ChecklistWizardBuilder extends Component {
           <p className="builder-header second">Checklist Item</p>
           <Droppable droppableId={1}>
             {provided => (
-              <div className="wrapper-damn" ref={provided.innerRef} {...provided.droppableProps}>
+              <div className="main-builder" ref={provided.innerRef} {...provided.droppableProps}>
                 {items.map((item, index) => (
                   <BuilderChecklistItem
                     index={index}

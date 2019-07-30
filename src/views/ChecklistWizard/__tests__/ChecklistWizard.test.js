@@ -76,7 +76,15 @@ describe('<ChecklistWizard />', () => {
     wrapper.unmount();
   });
 
-
+  it('should clear the form when the component unmounts', () => {
+    const wrapper = shallow(<ChecklistWizard {...props} />);
+    const componentWillUnmount = jest.spyOn(
+      wrapper.instance(),
+      'componentWillUnmount'
+    );
+    wrapper.unmount();
+    expect(componentWillUnmount).toHaveBeenCalledTimes(1);
+  });
   it('should handle update nationality', () => {
     const wrapper = shallow(<ChecklistWizard {...props} />);
     wrapper.instance().updateNationality('nigeria', '9jaflag');
@@ -94,7 +102,7 @@ describe('<ChecklistWizard />', () => {
   it('should handle new checklist', () => {
     const wrapper = shallow(<ChecklistWizard {...props} />);
     wrapper.instance().addNewChecklistItem();
-    expect(props.handleChecklistItems).toHaveBeenCalledTimes(1);
+    expect(props.handleChecklistItems).toHaveBeenCalledTimes(3);
   });
 
   it('should handle item', () => {

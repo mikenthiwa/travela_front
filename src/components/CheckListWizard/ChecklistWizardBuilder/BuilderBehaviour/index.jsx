@@ -1,9 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from '../../Shared/Dropdown';
 import MetaData from '../../Shared/Dropdown/metaData';
 import BehaviourPool from './BehaviourPool';
 import * as actions from './behaviourActions';
+import ContextMenu from '../../../ContextMenu/ContextMenu';
+import MenuItem from '../../../ContextMenu/MenuItem';
 
 class Behaviours extends PureComponent {
 
@@ -63,20 +65,45 @@ class Behaviours extends PureComponent {
   }
 
   render() {
+    const { showBehaviourList, behaviourText, updateBehaviour } = this.props;
     return (
-      <div className="behaviour-select-type-container">
-        <div className="behaviour-dropdown-container">
-          <Dropdown dropdownOptions={MetaData.behaviourTypeDropdownMetaData} changeFunc={this.handleBehaviourDropdownChange} />
+      <Fragment>
+        <div className="remove-set-behaviour"> 
+          {' '}
+          {showBehaviourList?(
+            <span>
+              <ContextMenu>
+                <MenuItem 
+                  classNames="delete"
+                  onClick={() => updateBehaviour({})}
+                >
+              Remove Behaviour
+                </MenuItem>
+              </ContextMenu>
+            </span>
+          ): null}
+          {behaviourText}
         </div>
-        {this.renderBehaviourInputType()}
-      </div>
+        <div className="behaviour-select-type-container">
+          <div className="behaviour-dropdown-container">
+            <Dropdown dropdownOptions={MetaData.behaviourTypeDropdownMetaData} changeFunc={this.handleBehaviourDropdownChange} />
+          </div>
+          {this.renderBehaviourInputType()}
+        </div>
+      </Fragment>
+      
     );
   }
 }
-
+Behaviours.defaultProps = {
+  behaviourText: 'string',
+  showBehaviourList: false
+};
 Behaviours.propTypes = {
+  behaviourText: PropTypes.string,
   behaviour: PropTypes.object.isRequired,
   updateBehaviour: PropTypes.func.isRequired,
+  showBehaviourList: PropTypes.bool,
 };
 
 export default Behaviours;

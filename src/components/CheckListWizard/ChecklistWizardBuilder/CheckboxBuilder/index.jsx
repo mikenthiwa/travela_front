@@ -5,6 +5,7 @@ import BuilderBehaviour from '../BuilderBehaviour';
 import Helper from '../BuilderOptions/helper';
 import CheckboxOption from './CheckboxOption';
 
+
 class RenderCheckbox extends Component {
   state = {
     showBehaviourList: false,
@@ -59,14 +60,18 @@ class RenderCheckbox extends Component {
   }
 
   renderBehaviour = () => {
-    const { item: { behaviour, order } } = this.props;
+    const { showBehaviourList } = this.state;
+    const { item: { behaviour } } = this.props;
     return (
       <div>
-        <p className="behaviour-placeholder">{`Upon selecting Option ${order + 1}, enable`}</p>
-        <BuilderBehaviour
-          updateBehaviour={this.updateBehaviour}
-          behaviour={behaviour}
-        />
+        {showBehaviourList !== false? (
+          <BuilderBehaviour
+            behaviourText="Upon selecting any option, enable"
+            updateBehaviour={this.updateBehaviour}
+            showBehaviourList={showBehaviourList}
+            behaviour={behaviour}
+          />
+        ): null}
       </div>
     );
   };
@@ -87,7 +92,7 @@ class RenderCheckbox extends Component {
           )}
         </div>
         <div>
-          {showBehaviourList && this.renderBehaviour()}
+          {this.renderBehaviour()}
         </div>
       </div>
     );
@@ -119,9 +124,13 @@ class RenderCheckbox extends Component {
   }
 }
 
+RenderCheckbox.defaultProps = {
+  configuration: {},
+};
 RenderCheckbox.propTypes = {
   item: PropTypes.object.isRequired,
   handleItems: PropTypes.func.isRequired,
+  configuration: PropTypes.shape({ options: PropTypes.array }),
 };
 
 export default RenderCheckbox;
