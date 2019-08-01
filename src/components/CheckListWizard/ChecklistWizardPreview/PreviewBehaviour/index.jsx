@@ -4,6 +4,7 @@ import * as behaviourTypes from '../../ChecklistWizardBuilder/BuilderBehaviour/b
 import UploadDocument from './UploadDocument';
 import NotifyEmail from './NotifyEmail';
 import SkipToAnotherQuestion from './SkipToAnotherQuestion';
+import PreviewDocument from './PreviewDocument';
 
 const PreviewBehaviour = ({ behaviour, handleSkipToQuestion }) => {
   switch (behaviour.type) {
@@ -16,7 +17,11 @@ const PreviewBehaviour = ({ behaviour, handleSkipToQuestion }) => {
       </div>
     );
   case behaviourTypes.PREVIEW_DOCUMENT:
-    return <div className="behaviour-style">Preview Document</div>;
+    return (
+      <div className="behaviour-style">
+        <PreviewDocument behaviour={behaviour} />
+      </div>
+    );
   case behaviourTypes.NOTIFY_EMAIL:
     return(
       <div className="behaviour-style">

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PreviewDocument /> should render without crashing 1`] = `
+<div>
+  <div
+    className="document"
+  >
+    <Document
+      error="Failed to load PDF file."
+      loading="Loading PDF…"
+      noData="No PDF file specified."
+      onLoadSuccess={[Function]}
+      onPassword={[Function]}
+    >
+      <ForwardRef(Page)
+        pageNumber={1}
+      />
+    </Document>
+  </div>
+  <div
+    className="page-number"
+  />
+</div>
+`;

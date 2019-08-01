@@ -6,6 +6,7 @@ import BehaviourPool from './BehaviourPool';
 import * as actions from './behaviourActions';
 import ContextMenu from '../../../ContextMenu/ContextMenu';
 import MenuItem from '../../../ContextMenu/MenuItem';
+import PreviewDocumentUpload from './PreviewDocumentUpload';
 
 class Behaviours extends PureComponent {
 
@@ -14,9 +15,9 @@ class Behaviours extends PureComponent {
     updateBehaviour(BehaviourPool(value));
   }
 
-  handleBehaviour = ({ target }) => {
+  handleBehaviour = ({ target }, file) => {
     const { updateBehaviour, behaviour } = this.props;
-    updateBehaviour(BehaviourPool(behaviour.type, target.value));
+    updateBehaviour(BehaviourPool(behaviour.type, target ? target.value : file));
   }
 
   renderBehaviourInputType = () => {
@@ -51,13 +52,8 @@ class Behaviours extends PureComponent {
       );
     case actions.PREVIEW_DOCUMENT:
       return (
-        <input
-          type="text"
-          id="documentToPreview"
-          placeholder="https://link.com"
-          value={payload}
-          className="behaviour-payload-input"
-          onChange={this.handleBehaviour}
+        <PreviewDocumentUpload
+          handleBehaviour={this.handleBehaviour}
         />
       );
     default: return null;

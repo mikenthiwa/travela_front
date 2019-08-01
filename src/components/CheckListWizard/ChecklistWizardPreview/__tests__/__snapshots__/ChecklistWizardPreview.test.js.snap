@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChecklistWizardPreview /> should render correctly 1`] = `
+<div
+  className="checklist-wizard-preview checklist-wizard-col"
+>
+  <div
+    className="preview-item-header"
+  >
+    <p
+      className="preview-header"
+    >
+      Preview the Checklist
+    </p>
+    <p
+      className="travellingto-preview"
+    >
+      Applicable to Nigerians travelling to 
+      <span
+        className="coutries-blue"
+      >
+        2 countries
+      </span>
+    </p>
+  </div>
+  <div
+    className="preview-checklist-item"
+    id={1}
+    key="1"
+  >
+    <PreviewChecklistItem
+      configuration={
+        Object {
+          "options": Array [
+            Object {
+              "behaviour": Object {
+                "name": "upload a document",
+                "payload": "UPLOAD_DOCUMENT",
+              },
+              "id": 1,
+              "name": "Yes",
+            },
+          ],
+        }
+      }
+      handleSkipToQuestion={[Function]}
+      itemBehaviour={Object {}}
+      items={
+        Array [
+          Object {
+            "configuration": Object {
+              "options": Array [
+                Object {
+                  "behaviour": Object {
+                    "name": "upload a document",
+                    "payload": "UPLOAD_DOCUMENT",
+                  },
+                  "id": 1,
+                  "name": "Yes",
+                },
+              ],
+            },
+            "order": 1,
+            "prompt": "Do you have a valid visa?",
+            "type": "radio",
+          },
+        ]
+      }
+      key="1"
+      order={1}
+      prompt="Do you have a valid visa?"
+      type="radio"
+    />
+  </div>
+</div>
+`;

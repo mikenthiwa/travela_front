@@ -1,0 +1,106 @@
+.file-input-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.custom-align > input[type="file"] {
+  font-size: 200px;
+  position: absolute;
+  width: 130px;
+  height: 35px;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-button {
+  text-align: center;
+  padding: 5px 15px;
+  font-size: 15px;
+  width: 130px;
+  border: 1px solid blue;
+  color: blue;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.custom-align {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+}
+
+.preview-document-input {
+  margin-top: 15px;
+}
+
+.progress-div {
+  display: flex;
+}
+
+.progress-bar {
+  -webkit-appearance: none;
+  width: 110px;
+  height: 5px;
+  margin-top: 17px;
+  box-sizing: border-box;
+
+  &[value]::-webkit-progress-bar {
+    background-color: white;
+    border: 1px solid #d4d4d4;
+    border-radius: 2.5px;
+  }
+
+  &[value]::-webkit-progress-value {
+    background: rgb(14, 177, 139) !important;
+    border-radius: 2px;
+  }
+}
+.cancelButton {
+  color: #e20909;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  -ms-flex-item-align: center;
+  align-self: center;
+  background-color: transparent;
+  transform: rotate(45deg);
+  font-size: 25px;
+}
+.uploading-title {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5px;
+}
+
+.progress {
+  padding: 5px 15px;
+  font-size: 15px;
+  width: 130px;
+  border: 1px solid blue;
+  color: blue;
+  border-radius: 2px;
+}
+
+.result-div {
+  display: flex;
+  padding: 5px 15px;
+  font-size: 15px;
+  width: 130px;
+  border: 1px solid blue;
+  color: blue;
+  border-radius: 2px;
+  .file-name {
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 120px;
+  }
+}

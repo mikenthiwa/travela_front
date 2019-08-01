@@ -23,7 +23,12 @@ const BuilderOptionConfiguration = ({ item, handleItems }) => {
       />
     );
   case 'dropdown':
-    return <div>This is dropdown</div>;
+    return (
+      <BuilderOptions
+        item={item}
+        handleItems={handleItems}
+      />
+    );
   case 'image':
     return (
       <ImageOptions

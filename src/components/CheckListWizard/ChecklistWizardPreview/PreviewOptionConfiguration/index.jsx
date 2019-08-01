@@ -4,6 +4,7 @@ import PreviewRadio from '../PreviewRadio';
 import VideoPreview from '../PreviewVideo';
 import PreviewCheckbox from '../PreviewCheckbox';
 import PreviewImage from '../PreviewImage';
+import PreviewDropdown from '../PreviewDropdown';
 
 const PreviewOptionConfiguration = ({ item, handleSkipToQuestion }) => {
   switch (item.type) {
@@ -22,7 +23,11 @@ const PreviewOptionConfiguration = ({ item, handleSkipToQuestion }) => {
       />
     );
   case 'dropdown':
-    return <div>This is dropdown</div>;
+    return (
+      <PreviewDropdown 
+        item={item}
+      />
+    );
   case 'image':
     return (<PreviewImage item={item} />);
   case 'video':

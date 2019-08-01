@@ -37,18 +37,6 @@ describe('<BuilderBehaviour />', () => {
 
   });
 
-  it('should handle behaviour change: preview document', () => {
-    const wrapper = mount(<BuilderBehaviour {...props} />);
-    wrapper.instance().handleBehaviourDropdownChange(actions.PREVIEW_DOCUMENT);
-    expect(wrapper.props.updateBehaviour).toBeCalled;
-
-    wrapper.setProps({...props, behaviour: { type: actions.PREVIEW_DOCUMENT, payload: '' } });
-    const mockEvents2 = { target: { value: 'https://link.com'} };
-    const input = wrapper.find('#documentToPreview');
-    input.simulate('change', mockEvents2);
-    expect(wrapper.props.updateBehaviour).toBeCalled;
-  });
-
   it('should handle behaviour change: notify an email address', () => {
     const wrapper = mount(<BuilderBehaviour {...props} />);
     wrapper.instance().handleBehaviourDropdownChange(actions.NOTIFY_EMAIL);
@@ -59,18 +47,6 @@ describe('<BuilderBehaviour />', () => {
     const input = wrapper.find('#emailToSend');
     input.simulate('change', mockEvents2);
     wrapper.setProps({...props, behaviour: { type: actions.SKIP_QUESTION, payload: '' } });
-    expect(wrapper.props.updateBehaviour).toBeCalled;
-  });
-
-  it('should handle behaviour change error: preview document', () => {
-    const wrapper = mount(<BuilderBehaviour {...props} />);
-    wrapper.instance().handleBehaviourDropdownChange(actions.PREVIEW_DOCUMENT);
-    expect(wrapper.props.updateBehaviour).toBeCalled;
-
-    wrapper.setProps({...props, behaviour: { type: actions.PREVIEW_DOCUMENT, payload: '' } });
-    const mockEvents2 = { target: { value: ''} };
-    const input = wrapper.find('#documentToPreview');
-    input.simulate('change', mockEvents2);
     expect(wrapper.props.updateBehaviour).toBeCalled;
   });
   
@@ -89,5 +65,13 @@ describe('<BuilderBehaviour />', () => {
   it('should return an empty object for an invalid behaviour type', () => {
     const behaviour = getBehaviours('invalid', 'payload');
     expect(behaviour).toEqual({});
+  });
+
+  it('should handle behaviour change: preview document', () => {
+    const wrapper = mount(<BuilderBehaviour {...props} />);
+    wrapper.instance().handleBehaviourDropdownChange(actions.PREVIEW_DOCUMENT);
+    wrapper.setProps({...props, behaviour: { type: actions.PREVIEW_DOCUMENT } });
+    expect(wrapper.onBehaviourChange).toBeCalled;
+    expect(wrapper.updateBehaviour).toBeCalled;
   });
 });
