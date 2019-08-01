@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import BuilderOptions from '../BuilderOptions';
 import RenderCheckbox from '../CheckboxBuilder';
 import ImageOptions from '../BuilderImage';
+import VideoOptions from '../BuilderVideo';
 
 
 const BuilderOptionConfiguration = ({ item, handleItems }) => {
@@ -31,7 +32,12 @@ const BuilderOptionConfiguration = ({ item, handleItems }) => {
       />
     );
   case 'video':
-    return <div>This is video</div>;
+    return (
+      <VideoOptions 
+        item={item}
+        handleItems={handleItems} 
+      />
+    );
   case 'scale':
     return <div>This is scale</div>;
   default:

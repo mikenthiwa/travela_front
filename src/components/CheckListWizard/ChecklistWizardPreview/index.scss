@@ -65,4 +65,18 @@
     margin-top: 30px;
     grid-column: 2/4;
   }
+
+    .react-player-div{
+        iframe, video{
+            width: 100%!important;
+            height: 200px!important;
+        }
+        iframe, video:focus{
+            outline: none;
+        }
+        .video-caption{
+            object-fit: contain!important;
+            height: 200px !important;
+        }
+    }
 }

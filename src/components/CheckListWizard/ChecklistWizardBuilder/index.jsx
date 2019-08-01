@@ -18,7 +18,7 @@ class ChecklistWizardBuilder extends Component {
       deleteItem, 
       updateNationality, 
       updateDestinations,
-      postChecklist
+      postChecklist,
     } = this.props;
     return (
       <div className="checklist-wizard-builder checklist-wizard-col">
@@ -75,7 +75,7 @@ ChecklistWizardBuilder.propTypes = {
   deleteItem: PropTypes.func.isRequired,
   updateNationality: PropTypes.func.isRequired,
   updateDestinations: PropTypes.func.isRequired,
-  postChecklist: PropTypes.func.isRequired
+  postChecklist: PropTypes.func.isRequired,
 };
 
 export default ChecklistWizardBuilder;

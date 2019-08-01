@@ -134,7 +134,7 @@ describe('<ChecklistWizard />', () => {
     expect(props.handleChecklistItems).toHaveBeenCalledTimes(1);
   });
 
-  it('does not call handlecheclistitems when position does not change', () => {
+  it('does not call handlechecklistitems when position does not change', () => {
     const wrapper = shallow(<ChecklistWizard {...props} />);
     props.handleChecklistItems.mockClear();
     wrapper.instance().onDragEnd({ destination: { index: 1 }, source: { index: 1 }, draggableId: 'id' });

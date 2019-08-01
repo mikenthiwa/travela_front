@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PreviewRadio from '../PreviewRadio';
+import VideoPreview from '../PreviewVideo';
 import PreviewCheckbox from '../PreviewCheckbox';
 import PreviewImage from '../PreviewImage';
 
@@ -25,7 +26,7 @@ const PreviewOptionConfiguration = ({ item, handleSkipToQuestion }) => {
   case 'image':
     return (<PreviewImage item={item} />);
   case 'video':
-    return <div>This is video</div>;
+    return (<VideoPreview item={item} />);
   case 'scale':
     return <div>This is scale</div>;
   default:
