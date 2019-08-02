@@ -5,6 +5,7 @@ import VideoPreview from '../PreviewVideo';
 import PreviewCheckbox from '../PreviewCheckbox';
 import PreviewImage from '../PreviewImage';
 import PreviewDropdown from '../PreviewDropdown';
+import ScalePreview from '../PreviewScaleOption';
 
 const PreviewOptionConfiguration = ({ item, handleSkipToQuestion }) => {
   switch (item.type) {
@@ -33,7 +34,9 @@ const PreviewOptionConfiguration = ({ item, handleSkipToQuestion }) => {
   case 'video':
     return (<VideoPreview item={item} />);
   case 'scale':
-    return <div>This is scale</div>;
+    return (
+      <ScalePreview item={item} />
+    );
   default:
     return null;
   }

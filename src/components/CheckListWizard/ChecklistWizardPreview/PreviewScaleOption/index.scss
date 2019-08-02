@@ -1,0 +1,27 @@
+.scale-rectangle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 39px;
+  border: 1px solid rgba(188, 188, 188, 0.4);
+  border-radius: 5px;
+  background-color: #f4f8f9;
+  margin: 0 7px 0 0;
+  outline: none;
+  cursor: pointer;
+
+}
+
+.scale-box {
+  display: flex;
+}
+
+.default-bg-color {
+  background-color: #f4f8f9;
+}
+
+.blue-bg-color {
+  background-color: #3359DB;
+  color: #FFFFFF;
+}

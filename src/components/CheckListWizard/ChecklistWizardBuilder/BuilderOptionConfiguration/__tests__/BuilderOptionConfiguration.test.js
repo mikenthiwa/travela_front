@@ -4,6 +4,7 @@ import BuilderOptionConfiguration from '../index';
 import BuilderImage from '../../BuilderImage';
 import BuilderOptions from '../../BuilderOptions';
 import RenderCheckbox from '../../CheckboxBuilder';
+import ScaleOptionBuilder from '../../ScaleOptionBuilder';
 
 const props = {
   item: {
@@ -59,7 +60,7 @@ describe('<BuilderOptionConfiguration />', () => {
   it('should render correctly: scale', () => {
     props.item.type = 'scale';
     const wrapper = shallow(<BuilderOptionConfiguration {...props} />);
-    expect(wrapper.find('div'));
+    expect(wrapper.find(ScaleOptionBuilder).length).toEqual(1);
   });
 
   it('should render correctly: default', () => {

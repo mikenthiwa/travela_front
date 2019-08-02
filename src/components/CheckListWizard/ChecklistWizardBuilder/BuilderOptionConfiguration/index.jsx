@@ -4,6 +4,7 @@ import BuilderOptions from '../BuilderOptions';
 import RenderCheckbox from '../CheckboxBuilder';
 import ImageOptions from '../BuilderImage';
 import VideoOptions from '../BuilderVideo';
+import ScaleOptionBuilder from '../ScaleOptionBuilder';
 
 
 const BuilderOptionConfiguration = ({ item, handleItems }) => {
@@ -44,7 +45,9 @@ const BuilderOptionConfiguration = ({ item, handleItems }) => {
       />
     );
   case 'scale':
-    return <div>This is scale</div>;
+    return (
+      <ScaleOptionBuilder item={item} handleItems={handleItems} />
+    );
   default:
     return null;
   }
