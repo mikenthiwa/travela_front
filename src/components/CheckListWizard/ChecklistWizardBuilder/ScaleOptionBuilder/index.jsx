@@ -26,7 +26,7 @@ class ScaleOptionBuilder extends Component {
       <div className="parent">
         <div className="child-1">
           <div className="combined-shape">Starts at</div>
-          <div className="value">1</div>
+          <div className="scale-value">1</div>
           <div role="button" className="scale-icon">
             <i className="material-icons scale">expand_less</i>
             <i className="material-icons scale">expand_more</i>
@@ -36,7 +36,7 @@ class ScaleOptionBuilder extends Component {
           <div className="combined-shape">
             <span>Ends at</span>
           </div>
-          <div className="value">{value}</div>
+          <div className="scale-value">{value}</div>
           <div className="scale-icon">
             <i
               className="material-icons scale"

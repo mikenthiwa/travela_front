@@ -1,6 +1,18 @@
-.file-input-wrapper {
+.custom-align {
   overflow: hidden;
   position: relative;
+  display: inline-block;
+
+  .upload-button {
+    text-align: center;
+    padding: 5px 15px;
+    font-size: 15px;
+    width: 130px;
+    border: 1px solid blue;
+    color: blue;
+    border-radius: 2px;
+    cursor: pointer;
+  }
 }
 
 .custom-align > input[type="file"] {
@@ -14,50 +26,52 @@
   cursor: pointer;
 }
 
-.upload-button {
-  text-align: center;
+.preview-document-input {
+  margin-top: 15px;
+}
+
+.show-progress {
   padding: 5px 15px;
   font-size: 15px;
   width: 130px;
   border: 1px solid blue;
   color: blue;
   border-radius: 2px;
-  cursor: pointer;
-}
 
-.custom-align {
-  overflow: hidden;
-  position: relative;
-  display: inline-block;
-}
-
-.preview-document-input {
-  margin-top: 15px;
-}
-
-.progress-div {
-  display: flex;
-}
-
-.progress-bar {
-  -webkit-appearance: none;
-  width: 110px;
-  height: 5px;
-  margin-top: 17px;
-  box-sizing: border-box;
-
-  &[value]::-webkit-progress-bar {
-    background-color: white;
-    border: 1px solid #d4d4d4;
-    border-radius: 2.5px;
+  .progress-div {
+    display: flex;
   }
 
-  &[value]::-webkit-progress-value {
-    background: rgb(14, 177, 139) !important;
-    border-radius: 2px;
+  .progress-bar {
+    -webkit-appearance: none;
+    width: 110px;
+    height: 5px;
+    margin-top: 17px;
+    box-sizing: border-box;
+  
+    &[value]::-webkit-progress-bar {
+      background-color: white;
+      border: 1px solid #d4d4d4;
+      border-radius: 2.5px;
+    }
+  
+    &[value]::-webkit-progress-value {
+      background: rgb(14, 177, 139) !important;
+      border-radius: 2px;
+    }
+  }
+
+  .uploading-title {
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 5px;
   }
 }
-.cancelButton {
+
+.cancel-button {
   color: #e20909;
   border-radius: 6px;
   cursor: pointer;
@@ -68,23 +82,6 @@
   background-color: transparent;
   transform: rotate(45deg);
   font-size: 25px;
-}
-.uploading-title {
-  display: flex;
-  justify-content: center;
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 5px;
-}
-
-.progress {
-  padding: 5px 15px;
-  font-size: 15px;
-  width: 130px;
-  border: 1px solid blue;
-  color: blue;
-  border-radius: 2px;
 }
 
 .result-div {

@@ -82,11 +82,11 @@ class PreviewDocumentUpload extends Component {
   renderProgress = () => {
     const { progress } = this.state;
     return (
-      <div className="progress">
+      <div className="show-progress">
         <div className="uploading-title">Uploading...</div>
         <div className="progress-div">
           { <progress className="progress-bar" value={progress*100} max={100} /> }
-          <button type="submit" onClick={this.cancelUpload} className="cancelButton">+</button>
+          <button type="submit" onClick={this.cancelUpload} className="cancel-button">+</button>
         </div>
       </div>
     );
@@ -98,7 +98,7 @@ class PreviewDocumentUpload extends Component {
       <div className="result-div">
         <div className="file-name">{pdfFile.name}</div>
         <div>
-          <button type="submit" onClick={this.cancelResult} className="cancelButton">+</button>
+          <button type="submit" onClick={this.cancelResult} className="cancel-button">+</button>
         </div>
       </div>
     ): (
