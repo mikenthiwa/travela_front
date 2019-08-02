@@ -20,7 +20,9 @@ export function* submitModificationRequestSaga(action){
     const response = yield call(TripModificationsAPI.submitModificationRequest,requestId, type, reason );
     yield put(submitModificationRequestSuccess(response.data));
     toast.success(response.data.message);
-    yield history.goBack();
+
+    // redirect user based on modification type
+    type === 'Modify Dates' ? yield history.push(`/requests/edit-request/${requestId}`) : yield history.goBack();
   }catch(error){
     const errorMessage = apiErrorHandler(error);
     yield put(submitModificationRequestFailure(errorMessage));

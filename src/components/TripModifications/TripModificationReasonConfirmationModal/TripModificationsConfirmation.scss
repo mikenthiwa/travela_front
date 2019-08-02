@@ -1,0 +1,52 @@
+.trip-modification-confirmation-modal {
+  .modal {
+    top: 30%;
+  }
+
+  .modal-content {
+    padding: 0;
+  }
+
+  &__content{
+    display: flex;
+    padding: 1em 2em;
+    justify-content: space-evenly;
+    height: 150px;
+    align-items: center;
+    &Text{
+      margin-top: 15px;
+      span{
+        color: white;
+        border-radius: 4px;
+        padding: 2px 5px;
+        margin: 0 5px;
+      }
+      &Open{
+        background-color: blue;
+      }
+      &Approvals{
+        background-color: green;
+      }
+    }
+  }
+
+  &__submit-area{
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+    background-color: #f8f8f8;
+    button{
+      margin-right: 15px;
+      border: 1px solid #D4D4D4;
+      width: 110px;
+      color: #999999;
+      cursor: pointer;
+    }
+
+    button:nth-child(2){
+      background-color: #2f56e3;
+      border: none;
+      color: white;
+    }
+  }
+}

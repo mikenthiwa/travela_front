@@ -1,5 +1,5 @@
 const addOtherReasons = (trip, otherReasons) => {
-  if (!trip.travelReasons) { 
+  if (!trip.travelReasons) {
     otherReasons.push(trip.otherTravelReasons ? trip.otherTravelReasons.trim() : '');
   }
 };
@@ -44,7 +44,7 @@ function handleReason (reason, tripIndex, other) {
         trips[tripIndex].otherTravelReasons = reason;
       } else {
         delete prevState.values[otherfieldName];
-        trips[tripIndex].travelReasons = this.handleReasonsId(reason);
+        trips[tripIndex].travelReasons = reason ? this.handleReasonsId(reason) : null;
         return {
           ...prevState,
           values: {
