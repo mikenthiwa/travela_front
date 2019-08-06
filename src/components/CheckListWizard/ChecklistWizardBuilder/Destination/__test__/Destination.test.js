@@ -4,6 +4,7 @@ import Destination from '../index';
 
 const props = {
   updateDestinations: jest.fn(),
+  destinations: [{checked: true, name: 'Nigeria'}]
 };
 
 describe('<Destination />', () => {
@@ -54,6 +55,7 @@ describe('<Destination />', () => {
     expect(wrapper.showDropDown).toBeCalled;
     expect(wrapper.instance().showDropDown(mockEvents));
     wrapper.setState({dropDown: true});
+    wrapper.setProps({ destinations: [{name: 'Nigeria', checked: false}]});
     wrapper.unmount();
   });
 

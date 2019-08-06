@@ -13,24 +13,22 @@ jest.mock('react-beautiful-dnd', () => {
 });
 
 const props = {
-  id: 1,
-  order: 1,
-  type: 'radio',
-  prompt: 'Do you hava a valid visa?',
-  configuration: {
-    options: [
-      {
-        id: 1,
-        name: 'Yes',
-        behaviour: {
-          name: 'upload a document',
-          payload: 'UPLOAD_DOCUMENT',
-        }
-      },
-    ]
-  },
   item: {
     id: 1,
+    prompt: 'Do you hava a valid visa?',
+    type: 'radio',
+    configuration: {
+      options: [
+        {
+          id: 1,
+          name: 'Yes',
+          behaviour: {
+            name: 'upload a document',
+            payload: 'UPLOAD_DOCUMENT',
+          }
+        },
+      ]
+    }
   },
   handleItems: jest.fn(),
   addQuestion: jest.fn(),
@@ -41,7 +39,7 @@ const props = {
 
 describe('<BuilderChecklistItem />', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<BuilderChecklistItem {...props} />);
+    const wrapper = mount(<BuilderChecklistItem {...props} />);
     expect(wrapper.find('div'));
   });
 
@@ -74,7 +72,7 @@ describe('<BuilderChecklistItem />', () => {
 
   it('should animate question number container on order change', () => {
     const wrapper = mount(<BuilderChecklistItem {...props} />);
-    const newProps = { ...props, item: { id: 2 } };
+    const newProps = { ...props, item: { id: 2, type: 'radio', configuration: { options: [] } } };
     wrapper.setProps(newProps);
     expect(wrapper.find('.order-number')).toHaveLength(1);
   });

@@ -4,6 +4,7 @@ import Nationality from '../index';
 
 const props = {
   updateNationality: jest.fn(),
+  nationality: {name: 'Nigeria', emoji: 'flag'}
 };
 
 describe('<Nationality />', () => {

@@ -8,6 +8,7 @@ import Dropdown from '../../Shared/Dropdown';
 import MetaData from '../../Shared/Dropdown/metaData';
 import DragIndicatorIcon from '../../images/baseline-drag_indicator-24px.svg';
 import DraggingIndicatorIcon from '../../images/drag-active-indicator.svg';
+import Helper from '../BuilderOptions/helper';
 import './index.scss';
 
 class BuilderChecklistItem extends Component {
@@ -32,20 +33,27 @@ class BuilderChecklistItem extends Component {
   }
 
   renderSelectItemTypes = () => {
-    const { item: { prompt, id }, deleteItem } = this.props;
+    const { item: { prompt, id, type }, deleteItem } = this.props;
     return (
       <div>
         <div>
           <p className="builder-prompt-title">Prompt</p>
           <div className="prompt-item">
-            <input id="prompt-input" className="prompt-input" type="text" value={prompt} onChange={this.handlePromptChange} placeholder="e.g. Do you have a valid visa?" />
+            <input 
+              id="prompt-input" 
+              className="prompt-input" 
+              type="text" value={prompt} 
+              onKeyDown={Helper.disableInputUndoActions} 
+              onChange={this.handlePromptChange} 
+              placeholder="e.g. Do you have a valid visa?" 
+            />
             <DeleteIcon id="prompt-del-icon" onClick={() => deleteItem(id)} />
           </div>
         </div>
         <div className="item-type-container">
           <p>Item Type</p>
           <div className="item-type-dropdown">
-            <Dropdown dropdownOptions={MetaData.itemTypeDropdownMetaData} changeFunc={this.handleItemType} />
+            <Dropdown dropdownOptions={MetaData.itemTypeDropdownMetaData} value={type} changeFunc={this.handleItemType} />
           </div>
         </div>
       </div>

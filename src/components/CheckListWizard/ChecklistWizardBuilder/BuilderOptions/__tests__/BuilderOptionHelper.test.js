@@ -13,3 +13,14 @@ describe('Get suffix function', () => {
     expect(Helper.getSuffix(25)).toEqual('25th');
   });
 });
+
+describe('disable undo actions', () => {
+  it('should be called', () => {
+    const event1 =  { metaKey: true, key: 'z', shiftKey: false, preventDefault: jest.fn() };
+    const event2 = { metaKey: true, shiftKey: true, key: 'z', preventDefault: jest.fn() };
+    const event3 = { ctrlKey: true, key: 'y', preventDefault: jest.fn() };
+    expect(Helper.disableInputUndoActions(event1));
+    expect(Helper.disableInputUndoActions(event2));
+    expect(Helper.disableInputUndoActions(event3));
+  });
+});

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
 import expandMore from './images/baseline-expand_more-24px.svg';
 import expandLess from './images/baseline-expand_less-24px.svg';
 import './index.scss';
@@ -16,8 +17,26 @@ class Dropdown extends Component {
     document.addEventListener('click', this.closeOption, false);
   }
 
+  componentDidUpdate(prevProps) {
+    const { value } = this.props;
+    if (!isEqual(prevProps.value, value)){
+      const { dropdownOptions } = this.props;
+      const { options } = dropdownOptions;
+      this.updateState(options, value);
+    }
+  }
+
   componentWillUnmount(){
     document.removeEventListener('click', this.closeOption, false);
+  }
+
+  updateState = (options, value) => {
+    let selected = '';
+    const item = options.find(item => item.value === value);
+    if (item) {
+      selected = item.displayValue;
+    }
+    this.setState({selected});
   }
 
   closeOption = e => {
@@ -36,12 +55,12 @@ class Dropdown extends Component {
 
   render() {
     const { selected, optionsOpen } = this.state;
-    const { dropdownOptions } = this.props;
+    const { dropdownOptions, value } = this.props;
     const { options, placeHolder = 'select an option', selectAreaSyle, selectStyle, selectOptionContainerStyle } = dropdownOptions;
     return (
       <div className="dropdown-container">
         <div ref={this.selRef} className={`selected-area ${selectAreaSyle}`}>
-          {selected.length ? (
+          {value.length ? (
             <p className={`selected ${selectStyle}`}>{selected}</p>
           ) : (
             <p className="selected-placeholder">{placeHolder}</p>
@@ -77,6 +96,7 @@ class Dropdown extends Component {
 Dropdown.propTypes = {
   dropdownOptions: PropTypes.shape({options: PropTypes.array}).isRequired,
   changeFunc: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
   
 export default Dropdown;

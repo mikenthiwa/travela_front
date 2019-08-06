@@ -77,16 +77,17 @@ class Nationality extends Component {
 
   render() {
     const { selected, dropdown, country, filteredState } = this.state;
+    const { nationality } = this.props;
     return (
       <div className="select-countries-container">
         <p>Select Nationality</p>
         <div className="select-input-delete-container">
           <div className="select-input-options-container">
-            {selected.name.length ? (
+            {nationality.name.length ? (
               <div ref={this.dropDown} className="select-input-area">
                 <div className="selected-country-item">
-                  <div className="country-name">{selected.name}</div>
-                  <div>{selected.emoji}</div>
+                  <div className="country-name">{nationality.name}</div>
+                  <div>{nationality.emoji}</div>
                 </div>
                 <button type="button" className="caret">
                   {dropdown ? <i className="material-icons">expand_less</i> : <i className="material-icons">expand_more</i>}
@@ -128,7 +129,7 @@ class Nationality extends Component {
             )}
           </div>
           <div className="delete-icon-container">
-            {selected.name.length ? <DeleteIcon id="nationality-del-icon" onClick={this.removeSelected} />  : null}
+            {nationality.name.length ? <DeleteIcon id="nationality-del-icon" onClick={this.removeSelected} />  : null}
           </div>
         </div>
 
@@ -140,6 +141,7 @@ class Nationality extends Component {
 
 Nationality.propTypes = {
   updateNationality: PropTypes.func.isRequired,
+  nationality: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default Nationality;

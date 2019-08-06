@@ -10,15 +10,23 @@ import {
   handleChecklistItems,
   updateChecklistNationality,
   updateChecklistDestination,
-  createDynamicChecklist
+  createDynamicChecklist,
+  undoChecklist,
+  redoChecklist,
+  resetChecklist,
 } from '../../redux/actionCreator/travelChecklistWizardActions';
 import './index.scss';
 
 export class ChecklistWizard extends Component {
 
+  componentWillMount() {
+    const { resetChecklist } = this.props;
+    resetChecklist();
+  }
+
   componentWillUnmount() {
-    const { handleChecklistItems } = this.props;
-    handleChecklistItems([ChecklistModel(1)]);
+    const { resetChecklist } = this.props;
+    resetChecklist();
   }
 
   addNewChecklistItem = () => {
@@ -68,19 +76,26 @@ export class ChecklistWizard extends Component {
   }
 
   render() {
-    const { checklistWizard } = this.props;
+    const { checklistWizard, undoChecklist, redoChecklist } = this.props;
     return (
       <DragDropContext
         onDragEnd={this.onDragEnd}
       >
         <div>
-          <CheckListWizardHeader />
+          <CheckListWizardHeader 
+            disableUndo={checklistWizard.disableUndo}  
+            disableRedo={checklistWizard.disableRedo}  
+            undoChecklist={undoChecklist} 
+            redoChecklist={redoChecklist}
+            resetChecklist={resetChecklist}
+          />
           <div className="checklist-wizard-container">
             <CheckListWizardBuilder
               items={checklistWizard.items}
               handleItems={this.handleItems}
               addNewChecklistItem={this.addNewChecklistItem}
               nationality={checklistWizard.nationality}
+              destinations={checklistWizard.destinations}
               updateNationality={this.updateNationality}
               deleteItem={this.deleteItem}
               updateDestinations={this.updateDestinations}
@@ -104,7 +119,10 @@ ChecklistWizard.propTypes = {
   handleChecklistItems: PropTypes.func.isRequired,
   updateChecklistNationality: PropTypes.func.isRequired,
   updateChecklistDestination: PropTypes.func.isRequired,
-  createDynamicChecklist: PropTypes.func.isRequired
+  createDynamicChecklist: PropTypes.func.isRequired,
+  undoChecklist: PropTypes.func.isRequired,
+  redoChecklist: PropTypes.func.isRequired,
+  resetChecklist: PropTypes.func.isRequired,
 };
 
 export const mapStateToProps = checklistWizard => checklistWizard;
@@ -113,7 +131,10 @@ const mapDispatchToProps = {
   handleChecklistItems,
   updateChecklistNationality,
   updateChecklistDestination,
-  createDynamicChecklist
+  createDynamicChecklist,
+  undoChecklist,
+  redoChecklist,
+  resetChecklist,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChecklistWizard);

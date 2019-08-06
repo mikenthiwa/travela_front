@@ -11,14 +11,15 @@ import {
   UPDATE_BEHAVIOUR_SUCCESS,
   UPDATE_NATIONALITY_SUCCESS,
   UPDATE_DESTINATION_SUCCESS,
-  CREATE_DYNAMIC_CHECKLIST_SUCCESS
+  CREATE_DYNAMIC_CHECKLIST_SUCCESS,
+  UNDO_DYNAMIC_CHECKLIST,
+  REDO_DYNAMIC_CHECKLIST,
+  RESET_DYNAMIC_CHECKLIST,
 } from '../constants/actionTypes';
 import helpers from '../../views/ChecklistWizard/helpers';
+import UndoStack from '../../helper/UndoStack';
 
-export const initialState = {
-  checklists: [],
-  loading: false,
-  error: null,
+const config = {
   nationality: { 
     name: '', 
     emoji: ''
@@ -42,7 +43,20 @@ export const initialState = {
       }
     },
   ],
-  message: ''
+};
+
+const ChecklistStorage = new UndoStack(config);
+
+export const initialState = {
+  checklists: [],
+  loading: false,
+  error: null,
+  nationality: ChecklistStorage.current.nationality,
+  destinations: ChecklistStorage.current.destinations,
+  items: ChecklistStorage.current.items,
+  message: '',
+  disableUndo: ChecklistStorage.disableUndo,
+  disableRedo: ChecklistStorage.disableRedo,
 };
 
 const reorder = (state, order) => {
@@ -61,23 +75,103 @@ const checklistWizard = (state = initialState, action) => {
   case GET_ALL_DYNAMIC_CHECKLISTS_FAILURE:
     return { ...state, error: action.error, loading: false};
   case ADD_NEW_CHECKLIST_ITEM_SUCCESS:
-    return { ...state, items: Object.assign(state.items, action.newItem) };
+    ChecklistStorage.save({ ...state, items: Object.assign(state.items, action.newItem) });
+    return { 
+      ...state, 
+      items: ChecklistStorage.current.items,
+      disableUndo: ChecklistStorage.disableUndo,
+      disableRedo: ChecklistStorage.disableRedo,
+    };
   case HANDLE_ITEMS_SUCCESS:
-    return { ...state, items: action.newItem };
+    ChecklistStorage.save({ ...state, items: action.newItem });
+    return { 
+      ...state, 
+      items: ChecklistStorage.current.items,
+      disableUndo: ChecklistStorage.disableUndo,
+      disableRedo: ChecklistStorage.disableRedo, 
+    };
   case ADD_QUESTION_SUCCESS:
-    return { ...state, items: Object.assign(state.items, action.newItems) };
+    ChecklistStorage.save({ ...state, items: action.newItems });
+    return { 
+      ...state, 
+      items: ChecklistStorage.current.items,
+      disableUndo: ChecklistStorage.disableUndo,
+      disableRedo: ChecklistStorage.disableRedo,
+    };
   case DELETE_ITEM_SUCCESS:
-    return { ...state, items: reorder(state, action.order) };
+    ChecklistStorage.save({ ...state, items: reorder(state, action.order) });
+    return { 
+      ...state, 
+      items: ChecklistStorage.current.items,
+      disableUndo: ChecklistStorage.disableUndo,
+      disableRedo: ChecklistStorage.disableRedo,
+    };
   case DELETE_QUESTION_SUCCESS:
+    ChecklistStorage.save({ ...state });
     return { ...state };
   case UPDATE_BEHAVIOUR_SUCCESS:
-    return { ...state, items: Object.assign(state.items, action.newItems) };
+    ChecklistStorage.save({...state, items: Object.assign(state.items, action.newItems) });
+    return { 
+      ...state, 
+      items: ChecklistStorage.current.items,
+      disableUndo: ChecklistStorage.disableUndo,
+      disableRedo: ChecklistStorage.disableRedo, 
+    };
   case UPDATE_NATIONALITY_SUCCESS:
-    return { ...state, nationality: Object.assign(state.nationality, action.nationality) };
+    ChecklistStorage.save({ ...state, nationality: action.nationality });
+    return { 
+      ...state, 
+      nationality: ChecklistStorage.current.nationality, 
+      disableUndo: ChecklistStorage.disableUndo,
+      disableRedo: ChecklistStorage.disableRedo,
+    };
   case UPDATE_DESTINATION_SUCCESS:
-    return { ...state, destinations: action.destination };
+    ChecklistStorage.save({ ...state, destinations: action.destination });
+    return { 
+      ...state, 
+      destinations: ChecklistStorage.current.destinations,
+      disableUndo: ChecklistStorage.disableUndo,
+      disableRedo: ChecklistStorage.disableRedo,
+    };
   case CREATE_DYNAMIC_CHECKLIST_SUCCESS:
     return { ...state, message: action.response };
+  case UNDO_DYNAMIC_CHECKLIST: {
+    const { nationality, destinations, items} = ChecklistStorage.undo();
+    const { disableRedo, disableUndo } = ChecklistStorage;
+    return { 
+      ...state, 
+      nationality,
+      destinations, 
+      items,
+      disableRedo,
+      disableUndo
+    };
+  }
+  case REDO_DYNAMIC_CHECKLIST: {
+    const { nationality, destinations, items } = ChecklistStorage.redo();
+    const { disableRedo, disableUndo } = ChecklistStorage;
+    return { 
+      ...state, 
+      nationality,
+      destinations, 
+      items,
+      disableRedo,
+      disableUndo
+    };
+  }
+  case RESET_DYNAMIC_CHECKLIST: {
+    ChecklistStorage.reset();
+    const { nationality, destinations, items } = ChecklistStorage.current;
+    const { disableRedo, disableUndo } = ChecklistStorage;
+    return { 
+      ...state, 
+      nationality,
+      destinations, 
+      items,
+      disableRedo,
+      disableUndo,
+    };
+  }
   default: return state;
   }
 };

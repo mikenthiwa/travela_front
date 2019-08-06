@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Suite for CheckIn Component renders as expected 1`] = `
+Array [
+  <div>
+    <div
+        className="PageHeader"
+    >
+        <div>
+            <span
+                className="title"
+            >
+                RESIDENCE
+            </span>
+        </div>
+    </div>
+    <div
+        className="table__container table__resize padding-top checkInContainer"
+    >
+        <table
+            className="mdl-data-table mdl-js-data-table checkInTable__trips"
+        >
+            <tbody
+                className="table__body"
+            >
+                <tr
+                    className="checkInTable__row"
+                    key="3"
+                >
+                    <td
+                        className="mdl-data-table__cell--non-numeric 
+                                        checkInTable__data__roomName residence__text"
+                    >
+                        Mini flat, big cutter,
+                              bed 1
+                    </td>
+                    <td
+                        className="mdl-data-table__cell--non-numeric 
+                                          checkInTable__data residence__text"
+                    >
+                        29th May - 4th Oct 2025
+                    </td>
+                    <td
+                        className="mdl-data-table__cell--non-numeric  checkInTable__data__column table__button-column"
+                    >
+                        <button
+                            className="checkInTable__button-checkin"
+                            disabled={false}
+                            id="btnCheck"
+                            onClick={[Function]}
+                            type="button"
+                        >
+                            Check-in
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>,
+  <div>
+    <div
+        className="PageHeader"
+    >
+        <div>
+            <span
+                className="past_checkin_header"
+            >
+                Past Check-in's
+            </span>
+        </div>
+    </div>
+    <div
+        className="table__container table__resize padding-top checkInContainer"
+    >
+        <div
+            className="checkInTable__trips--empty"
+        >
+            You have no check-in record yet, because you haven't booked a room in any of the Andela Guest Houses
+        </div>
+    </div>
+</div>,
+]
+`;

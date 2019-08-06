@@ -5,13 +5,16 @@ exports[`<ChecklistWizard /> should render correctly 1`] = `
   onDragEnd={[Function]}
 >
   <div>
-    <Component />
+    <Component
+      resetChecklist={[Function]}
+    />
     <div
       className="checklist-wizard-container"
     >
       <ChecklistWizardBuilder
         addNewChecklistItem={[Function]}
         deleteItem={[Function]}
+        destinations={Array []}
         handleItems={[Function]}
         items={
           Array [

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
 import CountryList from 'countries-list';
 import DeleteIcon from '../../Shared/deleteIcon';
 import checkboxImage from '../../images/checkbox.svg';
@@ -31,11 +32,16 @@ class Destination extends Component {
 
   componentDidMount() {
     document.addEventListener('click', this.showDropDown, false);
+    this.unCheckDestinations([]);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const { dropDown } = this.state;
     dropDown && this.searchRef.current.focus();
+    const { destinations } = this.props;
+    if (!isEqual(prevProps.destinations, destinations)){
+      this.unCheckDestinations(destinations);
+    }
   }
 
   componentWillUnmount(){
@@ -43,27 +49,49 @@ class Destination extends Component {
   }
 
   onToggle = ({ target }) => {
-    const { updateDestinations } = this.props;
-    const { filteredState, selectedCountries } = this.state;
+    const { updateDestinations, destinations } = this.props;
+    const { filteredState } = this.state;
     const item = filteredState.find(item => item.name === target.value);
     item.checked = !item.checked;
 
-    let newSelectedCountries = selectedCountries;
+    const newState = filteredState.filter(item => item.name !== target.value);
+
+    let newSelectedCountries = JSON.parse(JSON.stringify(destinations));
 
     if (item.checked) {
       newSelectedCountries.push(item);
     }
 
     if (!item.checked) {
-      newSelectedCountries = selectedCountries.filter(item => item.checked);
+      newSelectedCountries = filteredState.filter(item => item.checked);
     }
 
     this.setState({
+      filteredState: [item, ...newState],
       selectedCountries: [...newSelectedCountries]
     });
     updateDestinations(newSelectedCountries);
 
   };
+
+  unCheckDestinations = (checkDestinations) => {
+    const { filteredState } = this.state;
+    filteredState.forEach(item => item.checked = false);
+    this.setState({selectedCountries: []});
+    checkDestinations.length && this.checkDestinations(checkDestinations);
+  }
+
+  checkDestinations = (checkedDestinations) => {
+    const { filteredState } = this.state;
+    if (checkedDestinations.length){
+      checkedDestinations.forEach(country => {
+        const checkedItem = filteredState.find(item => item.name === country.name); 
+        checkedItem.checked = true;
+      });
+    }
+
+    this.setState({selectedCountries: checkedDestinations});
+  }
 
   removeSelected = name => {
     const { updateDestinations } = this.props;
@@ -109,7 +137,8 @@ class Destination extends Component {
   };
 
   render() {
-    const { country, filteredState, selectedCountries, dropDown } = this.state;
+    const { country, filteredState, dropDown } = this.state;
+    const { destinations } = this.props;
     return (
       <div className="dest-container">
         <p>Travelling To</p>
@@ -118,7 +147,7 @@ class Destination extends Component {
           
             <div ref={this.destinationInput} className="dest-input-container">
               <div className="dest-input">
-                {selectedCountries.length ? selectedCountries.map(item => (
+                {destinations.length ? destinations.map(item => (
                   <div key={item.name} className="sel-country">
                     <div className="country-item">
                       {item.name}
@@ -177,7 +206,7 @@ class Destination extends Component {
           </div>
 
           <div className="remove-all-selected-container">
-            {selectedCountries.length ? (
+            {destinations.length ? (
               <DeleteIcon id="destinaton-del-icon" onClick={this.removeAllSelected} />
             ) : null}
           </div>
@@ -190,6 +219,7 @@ class Destination extends Component {
 
 Destination.propTypes = {
   updateDestinations: PropTypes.func.isRequired,
+  destinations: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Destination;

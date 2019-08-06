@@ -17,6 +17,9 @@ import {
   updateDestinationSuccess,
   createDynamicChecklist,
   createDynamicChecklistSuccess,
+  undoChecklist,
+  redoChecklist,
+  resetChecklist,
 } from '../../actionCreator/travelChecklistWizardActions';
 
 import travelDynamicChecklist from '../../../mockData/travelChecklistWizardMockData';
@@ -202,6 +205,48 @@ describe('Travel checklists wizard reducer', () => {
       done();
     });
 
+  it('should undo succesfully',
+    (done) => {
+      const currentState = {
+        ...initialState,
+        destinations: [{name: 'nigeria'}, {name: 'kenya'}]
+      };
+
+      const action = undoChecklist();
+      const newState = checklistWizard(currentState, action);
+      expect(newState.destinations).toMatchObject([]);
+      done();
+    });
+
+  it('should redo succesfully',
+    (done) => {
+      const currentState = {
+        ...initialState,
+        destinations: [{name: 'nigeria'}, {name: 'kenya'}],
+        disableUndo: false
+      };
+
+      const action = redoChecklist();
+      const newState = checklistWizard(currentState, action);
+      expect(newState).toMatchObject(currentState);
+      done();
+    });
+
+  it('should reset succesfully',
+    (done) => {
+      const currentState = {
+        ...initialState,
+        destinations: [{name: 'nigeria'}, {name: 'kenya'}],
+        disableUndo: false
+      };
+
+      const action = resetChecklist();
+      const newState = checklistWizard(currentState, action);
+      expect(newState.nationality).toMatchObject({name: '', emoji: ''});
+      expect(newState.destinations).toEqual([]);
+      done();
+    });
+
   it('should create "checklist" successfully',
     (done) => {
       const currentState = {
@@ -215,10 +260,10 @@ describe('Travel checklists wizard reducer', () => {
       done();
     });
 
-    it('should return default state', (done) => {
-      const newState = checklistWizard(initialState, {});
+  it('should return default state', (done) => {
+    const newState = checklistWizard(initialState, {});
   
-      expect(newState).toMatchObject(initialState);
-      done();
-    });
+    expect(newState).toMatchObject(initialState);
+    done();
+  });
 });

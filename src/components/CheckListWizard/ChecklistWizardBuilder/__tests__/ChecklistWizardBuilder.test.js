@@ -22,6 +22,8 @@ const props = {
       }
     },  
   ],
+  nationality: {name: 'Nigeria', emoji: 'flag'},
+  destinations: [{name: 'Nigeria', checked: false}],
   addNewChecklistItem: jest.fn(),
   handleItems: jest.fn(),
   addQuestion: jest.fn(),

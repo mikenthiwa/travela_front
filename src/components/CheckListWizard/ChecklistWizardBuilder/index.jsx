@@ -19,13 +19,15 @@ class ChecklistWizardBuilder extends Component {
       updateNationality, 
       updateDestinations,
       postChecklist,
+      nationality,
+      destinations,
     } = this.props;
     return (
       <div className="checklist-wizard-builder checklist-wizard-col">
         <div className="checklist-wizard-builder-wrapper">
           <p className="builder-header first">Setup the Checklist</p>
-          <Nationality updateNationality={updateNationality}  />
-          <Destination updateDestinations={updateDestinations} />
+          <Nationality nationality={nationality} updateNationality={updateNationality}  />
+          <Destination destinations={destinations} updateDestinations={updateDestinations} />
           <p className="builder-header second">Checklist Item</p>
           <Droppable droppableId={1}>
             {provided => (
@@ -76,6 +78,8 @@ ChecklistWizardBuilder.propTypes = {
   updateNationality: PropTypes.func.isRequired,
   updateDestinations: PropTypes.func.isRequired,
   postChecklist: PropTypes.func.isRequired,
+  nationality: PropTypes.objectOf(PropTypes.string).isRequired,
+  destinations: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ChecklistWizardBuilder;

@@ -14,7 +14,7 @@ const CheckboxOption = ({ option, updateBehaviour, deleteQuestion }) => {
         deleteQuestion={deleteQuestion} 
         name={option.name}
         optionId={option.id} 
-        updateBehaviour={onChangeBehaviour} 
+        updateBehaviour={onChangeBehaviour}
       />
     </div>
   );

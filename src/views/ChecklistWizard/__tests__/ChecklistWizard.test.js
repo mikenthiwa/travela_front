@@ -53,6 +53,7 @@ const props = {
   updateChecklistNationality: jest.fn(),
   updateChecklistDestination: jest.fn(),
   createDynamicChecklist: jest.fn(),
+  resetChecklist: jest.fn(),
   mapStateToProps: jest.fn()
 };
 
@@ -102,7 +103,7 @@ describe('<ChecklistWizard />', () => {
   it('should handle new checklist', () => {
     const wrapper = shallow(<ChecklistWizard {...props} />);
     wrapper.instance().addNewChecklistItem();
-    expect(props.handleChecklistItems).toHaveBeenCalledTimes(3);
+    expect(props.handleChecklistItems).toHaveBeenCalledTimes(1);
   });
 
   it('should handle item', () => {

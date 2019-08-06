@@ -14,4 +14,16 @@ const getSuffix = (number) => {
   return `${number}th`;
 };
 
-export default { getSuffix };
+const disableInputUndoActions = event => {
+  const keysTodisable = [
+    //mac
+    (event.metaKey || event.ctrlKey) && event.shiftKey && event.key === 'z',
+    (event.metaKey || event.ctrlKey) && event.key === 'z' && !event.shiftKey,
+    //windows
+    event.ctrlKey && event.key === 'y',
+  ];
+
+  keysTodisable.forEach(item => item && event.preventDefault());
+};
+
+export default { getSuffix, disableInputUndoActions };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios, { CancelToken } from 'axios';
 import { successMessage, errorMessage } from '../../../../helper/toast';
+import Helper from '../BuilderOptions/helper';
 import './index.scss';
 
 class PreviewDocumentUpload extends Component {
@@ -110,6 +111,7 @@ class PreviewDocumentUpload extends Component {
           type="file" 
           name="file"
           onChange={this.onFileChange}
+          onKeyDown={Helper.disableInputUndoActions}
           accept="application/pdf"
         />
       </span>
@@ -128,7 +130,7 @@ class PreviewDocumentUpload extends Component {
 }
 
 PreviewDocumentUpload.propTypes = {
-  handleBehaviour: PropTypes.func.isRequired
+  handleBehaviour: PropTypes.func.isRequired,
 };
 
 export default PreviewDocumentUpload;

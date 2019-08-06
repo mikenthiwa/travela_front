@@ -5,6 +5,7 @@ import MetaData from '../metaData';
 
 const props = {
   dropdownOptions: MetaData.itemTypeDropdownMetaData,
+  value: '',
   changeFunc: jest.fn()
 };
 

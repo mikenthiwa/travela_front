@@ -16,7 +16,10 @@ import {
   DELETE_ITEM_SUCCESS,
   ADD_QUESTION_SUCCESS,
   CREATE_DYNAMIC_CHECKLIST,
-  CREATE_DYNAMIC_CHECKLIST_SUCCESS
+  CREATE_DYNAMIC_CHECKLIST_SUCCESS,
+  UNDO_DYNAMIC_CHECKLIST,
+  REDO_DYNAMIC_CHECKLIST,
+  RESET_DYNAMIC_CHECKLIST,
 } from '../constants/actionTypes';
 
 export const handleAddChecklistItem = item => ({
@@ -109,4 +112,16 @@ export const createDynamicChecklist = payload => ({
 export const createDynamicChecklistSuccess = response => ({
   type: CREATE_DYNAMIC_CHECKLIST_SUCCESS,
   response
+});
+
+export const undoChecklist = () => ({
+  type: UNDO_DYNAMIC_CHECKLIST
+});
+
+export const redoChecklist = () => ({
+  type: REDO_DYNAMIC_CHECKLIST
+});
+
+export const resetChecklist = () => ({
+  type: RESET_DYNAMIC_CHECKLIST
 });

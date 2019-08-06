@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import BuilderBehaviour from '../BuilderBehaviour';
 import DeleteIcon from '../../Shared/deleteIcon';
-
+import Helper from './helper';
 
 class RadioOptions extends Component {
   state = {
@@ -51,8 +51,10 @@ class RadioOptions extends Component {
               <input
                 id="option-name-input"
                 className="prompt-input"
-                type="text" placeholder="Yes"
+                type="text" 
+                placeholder="Yes"
                 value={name}
+                onKeyDown={Helper.disableInputUndoActions}
                 onChange={(e) => updateBehaviour(e.target.value, id, 'name')}
               />
               <DeleteIcon id="option-del-icon" onClick={() => deleteQuestion(id)} />

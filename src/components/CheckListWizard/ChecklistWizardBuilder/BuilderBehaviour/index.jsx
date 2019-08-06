@@ -7,6 +7,7 @@ import * as actions from './behaviourActions';
 import ContextMenu from '../../../ContextMenu/ContextMenu';
 import MenuItem from '../../../ContextMenu/MenuItem';
 import PreviewDocumentUpload from './PreviewDocumentUpload';
+import Helper from '../BuilderOptions/helper';
 
 class Behaviours extends PureComponent {
 
@@ -37,6 +38,7 @@ class Behaviours extends PureComponent {
           onChange={this.handleBehaviour}
           placeholder="2"
           value={payload}
+          onKeyDown={Helper.disableInputUndoActions}
         />
       );
     case actions.NOTIFY_EMAIL:
@@ -48,6 +50,7 @@ class Behaviours extends PureComponent {
           placeholder="ex. example@andela.com"
           value={payload}
           onChange={this.handleBehaviour}
+          onKeyDown={Helper.disableInputUndoActions}
         />
       );
     case actions.PREVIEW_DOCUMENT:
@@ -61,7 +64,7 @@ class Behaviours extends PureComponent {
   }
 
   render() {
-    const { showBehaviourList, behaviourText, updateBehaviour } = this.props;
+    const { showBehaviourList, behaviourText, updateBehaviour, behaviour } = this.props;
     return (
       <Fragment>
         <div className="remove-set-behaviour"> 
@@ -82,7 +85,7 @@ class Behaviours extends PureComponent {
         </div>
         <div className="behaviour-select-type-container">
           <div className="behaviour-dropdown-container">
-            <Dropdown dropdownOptions={MetaData.behaviourTypeDropdownMetaData} changeFunc={this.handleBehaviourDropdownChange} />
+            <Dropdown dropdownOptions={MetaData.behaviourTypeDropdownMetaData} value={behaviour.type || ''} changeFunc={this.handleBehaviourDropdownChange} />
           </div>
           {this.renderBehaviourInputType()}
         </div>

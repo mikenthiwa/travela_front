@@ -1,0 +1,257 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OtherDocumentForm /> renders without crashing 1`] = `
+<div>
+  <form
+    className="travel-document-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="travel-document-select-file"
+    >
+      <p
+        className="attach-document-text"
+      >
+        Attach the image or PDF of your  document ensure it is in Landscape
+      </p>
+      <div
+        className="document-input__input-container"
+      >
+        <label
+          className="document-input__input-container__prompts"
+          htmlFor="select-file"
+        >
+          <div
+            className="document-input__input-container__prompts__img"
+          >
+            <img
+              alt="Document Upload"
+              src="document-upload-blue.svg"
+            />
+          </div>
+          <div
+            className="document-input__input-container__prompts__text"
+          >
+            <p>
+              Choose from computer
+            </p>
+            <p
+              className="maximum-file-size"
+            >
+              Maximum file size - 10MB
+            </p>
+          </div>
+          <input
+            accept="image/jpg, image/png, application/pdf"
+            id="select-file"
+            onChange={[Function]}
+            type="file"
+          />
+        </label>
+      </div>
+    </div>
+    <div
+      className="visible"
+    >
+      <fieldset>
+        <div
+          className="input-group visa-input"
+        >
+          <div
+            className="form-input  "
+          >
+            <label
+              htmlFor="name"
+            >
+              Name
+              <span
+                style={
+                  Object {
+                    "color": "red",
+                  }
+                }
+              >
+                 * 
+              </span>
+            </label>
+            <input
+              autoComplete="off"
+              className=" "
+              label="Name"
+              name="name"
+              onBlur={[Function]}
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+            <span
+              className="error"
+            />
+          </div>
+          <div
+            className="form-input  "
+          >
+            <label
+              htmlFor="dateOfIssue"
+            >
+              Date of Issue (MM/DD/YYYY)
+              <span>
+                 
+                (Optional)
+              </span>
+            </label>
+            <div
+              className="date-wrapper    "
+              id="dateOfIssue_date"
+            >
+              <div>
+                <div
+                  className="react-datepicker-wrapper"
+                >
+                  <div
+                    className="react-datepicker__input-container"
+                  >
+                    <input
+                      autoComplete="off"
+                      className=""
+                      disabled={false}
+                      name="dateOfIssue"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="MM/DD/YYYY"
+                      readOnly={false}
+                      type="text"
+                      value="06/12/2019"
+                    />
+                  </div>
+                </div>
+              </div>
+              <img
+                alt="cal"
+                className="calendar-icon"
+                src="calendar_icon.svg"
+              />
+            </div>
+            <span
+              className="error"
+            />
+          </div>
+          <div
+            className="form-input  "
+          >
+            <label
+              htmlFor="documentId"
+            >
+              Document Id
+              <span>
+                 
+                (Optional)
+              </span>
+            </label>
+            <input
+              autoComplete="off"
+              className=" "
+              label="Document Id"
+              name="documentId"
+              onBlur={[Function]}
+              onChange={[Function]}
+              required={false}
+              type="text"
+              value=""
+            />
+            <span
+              className="error"
+            />
+          </div>
+          <div
+            className="form-input  "
+          >
+            <label
+              htmlFor="expiryDate"
+            >
+              Expiry Date (MM/DD/YYYY)
+              <span
+                style={
+                  Object {
+                    "color": "red",
+                  }
+                }
+              >
+                 * 
+              </span>
+            </label>
+            <div
+              className="date-wrapper    "
+              id="expiryDate_date"
+            >
+              <div>
+                <div
+                  className="react-datepicker-wrapper"
+                >
+                  <div
+                    className="react-datepicker__input-container"
+                  >
+                    <input
+                      autoComplete="off"
+                      className=""
+                      disabled={false}
+                      name="expiryDate"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="MM/DD/YYYY"
+                      readOnly={false}
+                      type="text"
+                      value="06/12/2019"
+                    />
+                  </div>
+                </div>
+              </div>
+              <img
+                alt="cal"
+                className="calendar-icon"
+                src="calendar_icon.svg"
+              />
+            </div>
+            <span
+              className="error"
+            />
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div
+      className="travel-document-submit-area"
+    >
+      <fieldset>
+        <div
+          className="submit-area"
+        >
+          <button
+            className="bg-btn bg-btn--inactive"
+            disabled={false}
+            id="cancel"
+            onClick={[Function]}
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            className="bg-btn bg-btn--active"
+            disabled={true}
+            id="submit"
+            type="submit"
+          >
+            <undefined />
+          </button>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+</div>
+`;

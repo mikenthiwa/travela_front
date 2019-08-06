@@ -63,7 +63,7 @@ const BuilderOptions =  ({ item, handleItems }) => {
 
 BuilderOptions.propTypes = {
   item: PropTypes.object.isRequired,
-  handleItems: PropTypes.func.isRequired
+  handleItems: PropTypes.func.isRequired,
 };
 
 export default BuilderOptions;
