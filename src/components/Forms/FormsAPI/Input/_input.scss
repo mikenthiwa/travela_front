@@ -65,7 +65,7 @@ form .form-input {
     color: #4f4f4f;
     margin-top: 8px;
     font-family: "DIN Pro";
-    font-weight: 300;
+
     cursor: pointer;
     &[type="text"] {
       cursor: text;
@@ -79,7 +79,7 @@ form .form-input {
           color: #4f4f4f;
         }
         &--active {
-          border-radius: 0 2px 2px 0;	
+          border-radius: 0 2px 2px 0;
           background-color: #E2E5EB;
           color: #3359DB
         }
@@ -310,7 +310,7 @@ form .form-input {
         color: #4f4f4f;
         font-family: "DIN Pro";
         font-size: 12px;
-        font-weight: 300;
+
         line-height: 15px;
       }
     }

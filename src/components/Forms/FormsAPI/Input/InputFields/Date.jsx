@@ -10,6 +10,8 @@ class DateInput extends Component {
     selectedDate: null
   };
 
+  dateWrapper = React.createRef();
+
   componentDidMount = () => {
     this.updateDate(this.props);
   }
@@ -31,8 +33,12 @@ class DateInput extends Component {
   handleChange = (date, event, raw = false) => {
     const { onChange , onChangeRaw} = this.props;
     this.setState({ selectedDate: date });
-    onChange(date, event);
-    raw && onChangeRaw(date, event);
+
+    const { current: target } = this.dateWrapper;
+    const generatedEvent =  {...event, target };
+
+    onChange(date, generatedEvent );
+    raw && onChangeRaw(date, generatedEvent);
   };
 
   render() {
@@ -45,7 +51,7 @@ class DateInput extends Component {
 
     const onChangeRaw = (date, event) => this.handleChange(moment(date), event, true);
     return (
-      <div className={`date-wrapper ${className} ${timeClasses}`} id={`${name}_date`}>
+      <div className={`date-wrapper ${className} ${timeClasses}`} id={`${name}_date`} ref={this.dateWrapper}>
         <DatePicker
           disabled={disabled}
           className={`${error ? 'error' : ''}`}

@@ -35,7 +35,7 @@
     }
 
     .builder-prompt-title{
-        font-weight: bold;
+
     }
 
     .drag-indicator-icon{
@@ -44,7 +44,7 @@
         width: 24px;
         height: 24px;
     }
-    
+
     .prompt-item{
         display: grid;
         grid-template-columns: auto 40px;
@@ -63,7 +63,7 @@
         }
     }
 
-  
+
   .prompt-item{
       display: grid;
       grid-template-columns: auto 40px;
@@ -89,7 +89,7 @@
 
       .item-type-dropdown{
           width: calc(100% - 40px);
-      }  
+      }
 
       .item-type-options-container{
           z-index: 20
@@ -144,7 +144,7 @@
           cursor: pointer;
           border-bottom: 1px solid #3359DB;
           margin-bottom: 10px;
-      } 
+      }
 
       .behaviour-selected{
           color: #3359DB;
@@ -159,8 +159,8 @@
           border-bottom: 1px solid #3359DB;
           outline: none;
       }
-      
-      
+
+
   }
 
   .anoter-question-btn{

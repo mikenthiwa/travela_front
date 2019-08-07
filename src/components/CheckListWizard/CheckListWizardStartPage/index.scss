@@ -1,15 +1,15 @@
 .start-page {
   height: 524px;
-  max-width: 1041px;	
-  border: 1px solid #E4E4E4;	
-  border-radius: 3px;	
+  max-width: 1041px;
+  border: 1px solid #E4E4E4;
+  border-radius: 3px;
   background-color: #FFFFFF;
   text-align: center;
 
   .welcome-message {
     width: 346px;
     font-size: 16px;
-    font-weight: normal;
+
     line-height: 21px;
     margin: 34px auto;
     color: #4F4F4F;
@@ -18,8 +18,8 @@
    button {
     font-size: 14px;
     line-height: 18px;
-    border: 1px solid #3359DB;	
-    border-radius: 1px;	
+    border: 1px solid #3359DB;
+    border-radius: 1px;
     background-color: #3359DB;
     color: #FFFFFF;
     padding: 8.5px 19px;
@@ -31,8 +31,8 @@
   .intro {
     margin-top: 70px;
     margin-bottom: 34px;
-    font-size: 18px;	
-    font-weight: 500;	
+    font-size: 18px;
+
     line-height: 23px;
     color: #4F4F4F;
   }

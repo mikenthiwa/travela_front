@@ -2,7 +2,7 @@
   .trip-tab {
     text-align: start;
   }
-  
+
 .verification-page-container {
 
   margin-bottom: 50px;
@@ -10,13 +10,13 @@
     @media (max-width: 1018px) {
         display: none;
     }
-  } 
+  }
   .mobile-comment{
     display: none;
     @media (max-width: 1018px) {
         display: block;
     }
-  }   
+  }
 
   .checklist {
     width: 100%;
@@ -25,12 +25,12 @@
     @media (max-width: 1018px) {
       width: 100%;
       }
-    
+
     .attachments {
         background-color: #FFF;
         border-radius: 0.5em;
-    
-      
+
+
       .attachment-items {
             display: flex;
             flex-wrap: wrap;
@@ -47,10 +47,10 @@
                 text-align: left;
                 width: 44%;
                 padding: 20px 0 10px 32px;
-                
+
                 @media (max-width: 482px) {
                   width: 100%;
-                }                   
+                }
 
                 .attachment-header {
                     font-size: 12px;
@@ -65,37 +65,37 @@
                         width: 52px;
                         background-color: #F8F8F8;
                     }
-                    .attachment-image img{                       
+                    .attachment-image img{
                         width: 40px;
                         margin: 8px 0 0 8px;
-                        vertical-align: middle;                    
+                        vertical-align: middle;
                     }
-                    .attachment-value p {                               
-                        font-size: 12px;                                
+                    .attachment-value p {
+                        font-size: 12px;
                         margin-bottom: 0px;
                     }
 
-                    .attachment-value button {                               
-                        border: 0;                               
+                    .attachment-value button {
+                        border: 0;
                         background-color: transparent;
                     }
 
                     .attachment-value {
                         padding-left: 7px;
-                        font-size: 12px; 
-                        font-weight: 500;
-                        
+                        font-size: 12px;
+
+
                         .bold {
-                            font-weight: 500;
+
 
                             @media (max-width: 469px) {
                               word-break: break-word;
                             }
-                            
+
                         }
                     }
                 }
-                
+
             }
       }
 
@@ -125,17 +125,17 @@
               text-align: center;
               font-size: 12px;
               margin-right: 20px;
-              font-weight: bold;
+
               float: left;
             }
             .upload-button {
               .upload-btn__uploaded{
-                border-radius: 5px;	
+                border-radius: 5px;
                 background-color: #EEF0F6;
                 color: #3359DB;
                 margin-left: 0px;
                 background-color: yellow;
-              }	
+              }
             }
           }
         }
@@ -175,11 +175,11 @@
                 text-align: center;
                 font-size: 12px;
                 margin-right: 20px;
-                font-weight: bold;
+
                 float: left;
               }
             }
-            .ticket-details{    
+            .ticket-details{
               display: grid;
               grid-template-columns: 1fr 1fr;
               justify-items: start;
@@ -187,7 +187,7 @@
               margin-right: 370px;
               text-align: start;
               grid-row-gap: 1em;
-              
+
               .details {
                 margin-right: 70px;
                 .details-title {
@@ -215,7 +215,7 @@
               margin-top: 20px;
 
               .ticket-attachment__title {
-                font-weight: 900;
+
               }
 
               .pending-upload {
@@ -231,14 +231,14 @@
                 text-align: center;
                 text-decoration: none;
                 font-size: 1.1em;
-                font-weight: bold;
+
                 margin: 4px 2px;
                 cursor: text;
               }
             }
             .ticket{
               position: relative;
-              right: 38%;  
+              right: 38%;
             }
           }
         }
@@ -247,24 +247,24 @@
             margin-left: 48px;
             .checklist-button {
               color:#3359DB;
-              background-color: #EEF0F6; 
+              background-color: #EEF0F6;
               border: none;
               border-radius: 5px;
               padding: 0.4em 1.3em;
               text-decoration: none;
               display: inline-flex;
-              font-weight: bold;
+
               cursor: text;
             }
             .pending-checklist{
               color:#5A6577;
-              background-color: #EEF0F6; 
+              background-color: #EEF0F6;
               border: none;
               border-radius: 5px;
               padding: 0.4em 1.3em;
               text-decoration: none;
               display: inline-flex;
-              font-weight: bold;
+
               cursor: text;
             }
         }
@@ -308,26 +308,26 @@
                   .editor__editor-form {
 
                       .quill-contents {
-                  
+
                         .ql-snow {
                           background-color: #FFF;
                         }
-                      
+
                         .ql-toolbar {
                           border-top-left-radius: 0.1em;
                           border-top-right-radius: 0.1em;
                         }
-                      
+
                         .ql-container {
                           border-bottom-left-radius: 0.1em;
                           border-bottom-right-radius: 0.1em;
                         }
                       }
-                  
+
                       .editor__btn-size {
-                  
+
                         .editor__btn-wrap {
-                          
+
                           .editor__post-btn {
                             border-radius: 0.1em;
                           }
@@ -341,28 +341,28 @@
                     }
                     .false{
                       display: none;
-              
+
               }
           }
       }
-  
-      .comment-toggle-button {        
+
+      .comment-toggle-button {
           display: flex;
           align-items: center;
           border: none;
           background-color: inherit;
           cursor: pointer;
       }
-  
+
       .comment-toggle-button:focus {
           outline: none;
       }
-  
+
       .comment-button-text {
           margin: 0;
           padding-left: 10px;
           padding-bottom: 2px;
-          font-weight: 500;
+
           color: #3359DB;
       }
     }
@@ -399,10 +399,10 @@
           text-align: start;
           height: 20px;
         }
-      }	
+      }
     }
-    .right {            
-          width: 38%;           
+    .right {
+          width: 38%;
 
           @media (max-width: 1018px) {
             width: 100%;
@@ -426,7 +426,7 @@
                 border-top:1px solid #E4E4E4;
                 padding: 28px;
             }
-          
+
           .flight-detail {
               border-top: 1px dotted #E4E4E4;
               margin-left: 10%;
@@ -441,11 +441,11 @@
                   content: "";
                   display: table;
                   clear: both;
-                
+
                     @media (max-width: 1385px) {
                       display: block;
                       }
-              
+
               }
           }
 
@@ -455,10 +455,10 @@
           }
 
           .flight-heading{
-              padding: 17px 0 0px 0;                    
+              padding: 17px 0 0px 0;
               color: #4F4F4F;
-          }                
-        }               
-    }       
+          }
+        }
+    }
 
 }

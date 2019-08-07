@@ -13,7 +13,7 @@ $font-medium: 'DIN Pro Medium';
 @mixin fontStyle($fontWeight:500) {
   font-size: 15px;
   line-height: 20px;
-  font-weight: $fontWeight;
+
 }
 
 .pagination {

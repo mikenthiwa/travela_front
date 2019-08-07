@@ -2,6 +2,10 @@ a {
   text-decoration: none;
 }
 
+* {
+  font-weight: normal !important;
+}
+
 body {
   background-color: #F8F8F8;
   margin: 0;
@@ -46,7 +50,7 @@ body {
       }
     }
   }
-  
+
   .rp-table {
     @media (max-width: 977px ) {
       overflow: auto

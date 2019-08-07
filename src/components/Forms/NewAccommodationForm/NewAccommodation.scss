@@ -1,11 +1,12 @@
 form.new-guesthouse {
 
   fieldset {
+    display: grid;
 
     .add-rooms {
       color: #4f4f4f;
       font-size: 18px;
-      font-weight: 500;
+
       line-height: 23px;
       font-family: "DIN Pro";
       margin-bottom: 4px;
@@ -75,7 +76,7 @@ form.new-guesthouse {
             color: #3359db;
             font-family: "DIN Pro";
             font-size: 14px;
-            font-weight: 500;
+
             line-height: 18px;
             text-align: center;
           }

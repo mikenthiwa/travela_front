@@ -30,7 +30,7 @@
         font-family: 'Din Pro Medium';
         color: #4F4F4F;
         font-size: 18px;
-        font-weight: 500;
+
         line-height: 23px;
         text-transform: uppercase;
         margin: auto;
@@ -144,7 +144,7 @@
    margin-bottom: 78px;
    margin-right: 3px;
   }
-  
+
   .actions {
     margin-left: 2px;
     margin-top: 10px;
@@ -160,7 +160,7 @@
     margin-bottom: 30px;
    }
   }
-  
+
    @media  (max-width: 479px){
    .DashboardHeader {
    top: 70px;
@@ -196,19 +196,19 @@
     .actions{
       width: 100%;
       margin-top: 10px;
- 
+
       button:nth-child(1) {
         display: none;
       }
- 
+
       button:nth-child(2) {
         width: 220px;
       }
- 
+
     }
    }
    }
-  
+
   @media  (max-width: 392px){
     .DashboardHeader {
     .actions{

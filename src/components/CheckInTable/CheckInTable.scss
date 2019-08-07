@@ -8,7 +8,7 @@ $font-medium: 'DIN Pro Medium';
 $font-normal: 'DIN Pro';
 @mixin fontStyle($fontSize, $fontWeight) {
   font-size: $fontSize !important;
-  font-weight: $fontWeight !important;
+
 }
 
 .checkInTable {
@@ -48,7 +48,7 @@ $font-normal: 'DIN Pro';
     border-color: #e4e4e4 !important;
     cursor: pointer;
     font-size: 15px;
-    font-weight: 500;
+
     line-height: 20px;
     color: $table-font-color;
     @media (max-width: 479px) {
@@ -63,7 +63,7 @@ $font-normal: 'DIN Pro';
     border-color: #e4e4e4 !important;
     cursor: pointer;
     font-size: 15px;
-    font-weight: 500;
+
     line-height: 20px;
     color: $table-font-color;
     border-right: 1px solid rgba(0, 0, 0, 0.12);
@@ -126,7 +126,7 @@ $font-normal: 'DIN Pro';
     color: #FFFFFF;
     font-family: "DIN Pro";
     font-size: 15px;
-    font-weight: 500;
+
     line-height: 20px;
     border-style: none;
     float: right;
@@ -148,7 +148,7 @@ $font-normal: 'DIN Pro';
     color: #FFFFFF;
     font-family: "DIN Pro";
     font-size: 15px;
-    font-weight: 500;
+
     line-height: 20px;
     border-style: none;
     float: right;
@@ -164,7 +164,7 @@ $font-normal: 'DIN Pro';
     color: #FFFFFF;
     font-family: "DIN Pro";
     font-size: 15px;
-    font-weight: 500;
+
     line-height: 20px;
     border-style: none;
     float: right;

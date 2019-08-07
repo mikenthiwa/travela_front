@@ -5,7 +5,7 @@ $border-color: #D4D4D4;
   color: $fontColor;
   font-family: "DIN Pro Medium";
   font-size: 15px;
-  font-weight: 500;
+
   line-height: 20px;
   text-align: center;
 }
@@ -20,7 +20,7 @@ $border-color: #D4D4D4;
     height: 30px;
     &.open > div.dropdown__input {
       border: 1px solid $primary-color;
-      
+
     }
     &.open > div.dropdown__list {
       transform: scale(1,1)
@@ -40,7 +40,7 @@ $border-color: #D4D4D4;
     min-height: 36px;
     border-radius: 2px;
     background-color: #FFFFFF;
-    
+
     &:hover,
     &:active {
       border: 1px solid $primary-color;
@@ -68,7 +68,7 @@ $border-color: #D4D4D4;
     border-radius: 0 0 2px 2px;
     background-color: #FFFFFF;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
-    
+
     &__items {
       box-sizing: border-box;
       width: 100%;

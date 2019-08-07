@@ -6,7 +6,7 @@
       margin-bottom: 70px;
       margin-top: 70px;
     }
-    
+
   }
   .tiny.material-icons {
     margin-left: 10px;
@@ -145,7 +145,7 @@
 form.template-details{
 
   input{
-    font-weight: bold;
+
   }
 
   .bg-btn--active{
@@ -184,7 +184,7 @@ form.template-details{
       &:first-of-type {
           position: sticky;
           left: 0;
-          z-index: 2 
+          z-index: 2
       }
     }
     .table__body {
@@ -196,10 +196,10 @@ form.template-details{
             background-color: #fff;
             border-right: 1px solid;
             z-index: 2;
-          } 
-        } 
+          }
+        }
       }
-    }  
+    }
   }
 }
 @media only screen and (max-width: 550px) {
