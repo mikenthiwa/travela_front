@@ -1,0 +1,15 @@
+.checklist-wizard-container{
+    display: grid;
+    grid-template-columns: repeat(2, calc(50% - 10px));
+    grid-gap: 20px;
+    font-family: 'Din Pro Medium';
+    margin-bottom: 100px;
+
+    .checklist-wizard-col{
+        min-height: 600px;
+        border: 1px solid#e4e4e4;
+        width: 100%;
+        border-radius: 5px;
+
+    }
+}

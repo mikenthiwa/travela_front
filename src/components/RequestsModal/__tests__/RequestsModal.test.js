@@ -272,4 +272,24 @@ describe('Render RequestsModal component', () => {
       expect(headerWrapper).toMatchSnapshot();
     });
   });
+
+  describe('Connected RequestDetailsModal component', () => {
+    it('tests that the component successfully rendered when type is Multi', () => {
+      const requestData = {
+        tripType: 'multi'
+      };
+      const headerWrapper = shallow(<RequestDetailsHeader requestData={requestData} />);
+      expect(headerWrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('Connected RequestDetailsModal component', () => {
+    it('tests that the component successfully rendered when type is one way', () => {
+      const requestData = {
+        tripType: 'oneWay'
+      };
+      const headerWrapper = shallow(<RequestDetailsHeader requestData={requestData} />);
+      expect(headerWrapper).toMatchSnapshot();
+    });
+  });
 });

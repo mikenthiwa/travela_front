@@ -12,7 +12,7 @@ import NewRequestForm from '../NewRequestForm';
 import beds from '../../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
 import profileMock from '../../ProfileForm/__mocks__/ProfileForm';
 import tabIcons from '../../../../images/icons/new-request-icons';
-import travelStipendHelper from '../../../../helper/request/RequestUtils'; 
+import travelStipendHelper from '../../../../helper/request/RequestUtils';
 
 global.MutationObserver = MutationObserver;
 window.document.getSelection = () => {};
@@ -142,7 +142,7 @@ describe('<NewRequestForm />', () => {
     }),
     fetchAllTravelStipends: jest.fn(),
     onChangeAutoSuggestion: jest.fn(),
-  
+
     closeModal: jest.fn(),
     choices: ['director', 'chef'],
     managers: [{
@@ -399,8 +399,8 @@ describe('<NewRequestForm />', () => {
   it('call event when date is changed', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
     const event = {
-      nativeEvent: {
-        path: [0, 1, 2, 3, 4, 5, 6, {id: 'departureDate-0_date'}]
+      target: {
+        id: 'departureDate-0_date'
       }
     };
     sinon.spy(shallowWrapper.instance(), 'onChangeDate');
@@ -414,8 +414,8 @@ describe('<NewRequestForm />', () => {
   it('call event when date is changed', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
     const event = {
-      nativeEvent: {
-        path: [0, 1, 2, 3, 4, 5, 6, {id: 'arrival-0_date'}]
+      target: {
+        id: 'arrival-0_date'
       }
     };
     shallowWrapper.setState({
@@ -442,8 +442,8 @@ describe('<NewRequestForm />', () => {
   it('call event when date is changed', () => {
     const shallowWrapper = shallow(<NewRequestForm {...props} />);
     const event = {
-      nativeEvent: {
-        path: [0, 1, 2, 3, 4, 5, 6, {id: 'departureDate-0_date'}]
+      target: {
+        id: 'departureDate-0_date'
       }
     };
     shallowWrapper.setState({
@@ -551,8 +551,8 @@ describe('<NewRequestForm />', () => {
     });
     wrapper.find('.another-trip').simulate('click');
     const event = {
-      nativeEvent: {
-        path: [0, 1, 2, 3, 4, 5, 6, {id: 'departureDate-1_date'}]
+      target: {
+        id: 'departureDate-1_date'
       },
       preventDefault: () => 0,
     };
@@ -868,7 +868,7 @@ describe('<NewRequestForm />', () => {
     const {role: secondRoleError} = shallowWrapper.state('errors');
     expect(newRole).toEqual('Software Developerss');
     expect(secondRoleError).toEqual(' No role with the name exists');
-    
+
   });
 
   it('should add new trip field for multi trip  ', () => {
@@ -1261,18 +1261,32 @@ describe('<NewRequestForm />', () => {
 
   it('returns trip details page if trip validation fails', (done) => {
     const wrapper = mount(<NewRequestForm {...props} />);
-    const trips = [{
-      id: '1',
-      origin: 'Nairobi,Kenya',
-      destination: 'Lagos,Nigeria',
-      departureDate: '2018-09-30',
-      returnDate: '2018-09-30',
-      createdAt: '2018-09-27T18:49:03.626Z',
-      updatedAt: '2018-09-27T18:49:43.803Z',
-      requestId: 'NfR-9KoCP',
-      accomodationType: 'Not Required',
-      bedId: 1
-    }];
+    const trips = [
+      {
+        id: '1',
+        origin: 'Nairobi,Kenya',
+        destination: 'Lagos,Nigeria',
+        departureDate: '2018-09-30',
+        returnDate: '2018-09-30',
+        createdAt: '2018-09-27T18:49:03.626Z',
+        updatedAt: '2018-09-27T18:49:43.803Z',
+        requestId: 'NfR-9KoCP',
+        accomodationType: 'Not Requiredffff',
+        bedId: 1
+      },
+      {
+        id: '2',
+        origin: 'Kigali Rwanda',
+        destination: 'Nairobi Kenya',
+        departureDate: '2020-09-30',
+        returnDate: '2021-09-30',
+        createdAt: '2019-09-27T18:49:03.626Z',
+        updatedAt: '2019-09-27T18:49:43.803Z',
+        requestId: 'MfR-9KoCQ',
+        bedId: beds[1].id,
+        otherTravelReasons: 'my other reason'
+      }
+    ];
     wrapper.instance().setState({
       currentTab: 2,
       trips

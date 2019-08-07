@@ -9,7 +9,7 @@
     color: white;
     font-family: "DIN Pro";
     font-size: 14px;
-    font-weight: 500;
+
     line-height: 14px;
     margin: 28px 1px 0pc 352px;
     padding: 9px 21px;
@@ -33,7 +33,7 @@
     font-family: "DIN Pro";
     font-style: normal;
     font-size: 11px !important;
-    font-weight: 900 !important;
+
     color: #e20909;
     display: inline-block;
     outline: none;
@@ -49,7 +49,7 @@
     width: auto;
     font-family: "DIN Pro";
     font-size: 14px;
-    font-weight: 500;
+
     line-height: 14px;
     margin: 28px 1px 0pc 352px;
     padding: 9px 21px;
@@ -88,9 +88,9 @@
         display: none;
       }
     }
-  
+
   }
-  
+
   @media only screen and (max-width: 839px) {
     .table__resize {
       position: inherit;

@@ -11,6 +11,7 @@ import Routes from '../../routes/index';
 import '../../../node_modules/material-design-lite/material';
 import '../../../node_modules/material-design-icons';
 import '../../customStyles/toast.scss';
+import ErrorBoundary from '../ErrorBoundary';
 
 
 // Check if the bugsnag API key was configured correctly
@@ -55,9 +56,11 @@ class App extends Component {
               )
               : (
                 <Provider store={store}>
-                  <BrowserRouter>
-                    <Routes />
-                  </BrowserRouter>
+                  <ErrorBoundary>
+                    <BrowserRouter>
+                      <Routes />
+                    </BrowserRouter>
+                  </ErrorBoundary>
                 </Provider>
               )}
         </div>

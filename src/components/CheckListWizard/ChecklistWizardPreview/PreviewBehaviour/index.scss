@@ -1,0 +1,61 @@
+.behaviour-style {
+  .skipQuestion {
+    height: 39px;
+    width: 177px;
+    border-radius: 5px;
+    background-color: #10a36d;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.11);
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 0.58px;
+
+    margin-top: 15px;
+    outline: none;
+    cursor: pointer;
+  }
+  .skipQuestion:hover {
+    opacity: 0.85;
+  }
+
+  .notify-email-behaviour.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 39px;
+    width: auto;
+    border: 1px solid #DFE3E8;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px 0 #0000001c;
+
+    p {
+      margin: 0;
+      color: #5A6577;
+    }
+  }
+}
+.document {
+  canvas {
+    width: 325px !important;
+    height: auto !important;
+    border-radius: 2px;
+  }
+}
+
+.page-number {
+  margin-top: 10px;
+}
+
+.page-buttons {
+  margin-left: 155px;
+  margin-bottom: 10px;
+  width: auto;
+  button {
+    padding: 3px 8px;
+    width: 80px;
+    cursor: pointer;
+    margin-left: 5px;
+    border: 1px solid blue;
+    border-radius: 2px;
+    color: blue;
+  }
+}

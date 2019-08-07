@@ -8,6 +8,7 @@ import CheckBox from './CheckBox';
 import TextArea from './TextArea';
 import TagsInput from './TagsInput';
 import MultipleChoiceDropdown from './MultipleChoiceDropdown';
+import OnboardingButtonToggler from './OnboardingButtonTogggle';
 
 export {
   DropdownSelect,
@@ -19,5 +20,6 @@ export {
   CheckBox,
   TextArea,
   TagsInput,
-  MultipleChoiceDropdown
+  MultipleChoiceDropdown,
+  OnboardingButtonToggler
 };

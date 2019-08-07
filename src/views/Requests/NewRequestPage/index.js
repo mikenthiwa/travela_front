@@ -17,6 +17,7 @@ import {
 import NotFound from '../../ErrorPages/NotFound';
 import RequestUtils from '../../../helper/request/RequestUtils';
 import TripModificationReasonModal from '../../../components/TripModifications/TripModificationReasonModal';
+import TripModificationReasonConfirmationModal from '../../../components/TripModifications/TripModificationReasonConfirmationModal/TripModificationReasonConfirmationModal';
 import ButtonLoadingIcon from '../../../components/Forms/ButtonLoadingIcon';
 import {
   fetchModificationRequest,
@@ -110,6 +111,29 @@ export class NewRequestPage extends Component {
     );
   };
 
+  renderModificationReasonConfirmationDialog = () => {
+    const {
+      shouldOpen, modalType, closeModal, openModal,
+      requestData: {
+        id: requestId
+      },
+    } = this.props;
+    const { modificationReason, } = this.state;
+    return (
+      <TripModificationReasonConfirmationModal
+        closeModal={closeModal}
+        shouldOpen={shouldOpen}
+        openModal={openModal}
+        onSubmit={(type, modalTitle, modalMessage) => {
+          this.showModificationReasonDialog(type, modalTitle, modalMessage);
+        }}
+        modalType={modalType}
+        requestId={requestId}
+        {...modificationReason}
+      />
+    );
+  };
+
   showModificationReasonDialog = (type, title, message) => {
     const { openModal, requestData: { status } } = this.props;
     this.setState({ modificationReason : { title, message, type }});
@@ -119,13 +143,24 @@ export class NewRequestPage extends Component {
     openModal(true, modalType);
   };
 
-  renderModificationButton = ({type,modalTitle, modalMessage, classNames = ''}) => {
+  showModificationReasonConfirmationDialog = (type, title, message,) => {
+    const { openModal} = this.props;
+    this.setState({ modificationReason : { title, message, type }});
+    openModal(true, `${type} request modification confirmation`);
+  };
+
+  triggerModificationType = (type, modalTitle, modalMessage) => {
+    type === 'Modify Dates' ? this.showModificationReasonConfirmationDialog(type, modalTitle, modalMessage,) :
+      this.showModificationReasonDialog(type, modalTitle, modalMessage);
+  };
+
+  renderModificationButton = ({type, modalTitle, modalMessage, classNames = ''}) => {
     const { modificationReason: { type: modificationType }} = this.state;
     const { tripModifications : { viewRequest: { submittingRequest }} } = this.props;
     return (
       <button
         type="button"
-        onClick={() => this.showModificationReasonDialog(type, modalTitle, modalMessage)}
+        onClick={() => this.triggerModificationType(type, modalTitle, modalMessage,)}
         className={`action-btn ${classNames}`}>
         <ButtonLoadingIcon buttonText={type} isLoading={type === modificationType && submittingRequest} />
       </button>
@@ -239,6 +274,7 @@ export class NewRequestPage extends Component {
           </h1>
           {status !== 'Open' && this.renderModificationButtons()}
         </div>
+        {this.renderModificationReasonConfirmationDialog()}
         {this.renderModificationReasonDialog()}
         {fetchingRequest ? <Preloader /> : this.renderRequestDetailsPage() }
       </Fragment>

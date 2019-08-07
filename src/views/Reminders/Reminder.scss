@@ -5,12 +5,46 @@
   width: 96.3%;
 
   .PageHeader {
-    justify-content: unset;
+    display: inline-grid;
+    align-items: center;
+    grid-auto-flow: column;
+    grid-gap: 2em;
+    margin: 0;
+
+    > div {
+      display: grid;
+      grid-auto-flow: column;
+
+      .title {
+        width: auto;
+      }
+
+      a {
+        display: block;
+      }
+    }
   }
 
   .dropdown__container {
     width: fit-content;
-    margin: 60px 25px 0;
+    height: auto;
+    position: relative;
+
+    .dropdown__list {
+      position: absolute;
+      top: 100%;
+      width: 100%;
+    }
+
+    &.open {
+
+      .dropdown__list {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        left: 0;
+      }
+    }
   }
 
   .dropdown__input {
@@ -50,6 +84,11 @@
   background-color: #FFFFFF;
   margin-top: 80px;
   padding: 44px 55px;
+
+  fieldset {
+    display: grid;
+  }
+
   @media screen and (min-width: 840px) and (max-width: 1178px) {
     width: initial
   }
@@ -128,7 +167,6 @@
 }
 
 .add-reminder__border-dashed {
-  height: 50px;
   width: 100%;
   border: 1px solid #D4D4D4;
   border-style: dashed;
@@ -138,7 +176,6 @@
 }
 
 .add-reminder__button {
-  height: 21px;
   color: #4F4F4F;
   font-family: "DIN Pro";
   font-size: 16px;
@@ -279,6 +316,10 @@
   .reminder-card {
     width: initial;
     padding: 22px 30px;
+
+    fieldset {
+      display: grid;
+    }
   }
   .reminders-fieldset {
     display: inline-grid;

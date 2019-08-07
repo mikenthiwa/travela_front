@@ -1,0 +1,39 @@
+.checkbox-preview-wrapper {
+  .checkbox-input-wrap {
+    input.checkbox-input {
+      margin: 0 12px 11px 0;
+      display: none;
+    }
+
+    label {
+      margin-bottom: 14px;
+      width: max-content;
+      display: flex;
+      align-items: center;
+      color: #5A6577;
+    }
+
+    .fancy-checkbox {
+      position: relative;
+      top: 2px;
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      border: 1px solid #e4e4e4;
+      margin-right: 14px;
+      box-sizing: border-box;
+    }
+
+    .checkbox-input:checked ~ .fancy-checkbox{
+      border: none;
+      background-image: url(../../../../images/Tick/white_tick_checkbox.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .checkbox-input:checked:after {
+      background-image: url(../../../../images/Tick/white_tick_checkbox.svg);
+    }
+  }
+}

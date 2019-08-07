@@ -5,11 +5,13 @@ import RequireAuth from '../hoc/authHoc';
 import LayoutShell from '../hoc/Layout';
 import NotFound from '../views/ErrorPages';
 import TravelaRoutes from './routes';
+import AllSetUpPage from '../components/PassportUpload/AllSetUpPage';
 
 const Routes = () => (
   <Switch>
     <Route path="/" exact component={ConnectedLogin} />
     <Route path="/redirect/*" exact component={ConnectedLogin} />
+    <Route path="/all-done" component={AllSetUpPage} />
     <Route>
       <LayoutShell>
         <Switch>

@@ -9,7 +9,7 @@
     display: flex;
     margin: 10px 0 0;
     .user-role {
-      font-weight: 100;
+
       color: #999999;
     }
   }
@@ -25,7 +25,7 @@
         font-family: "DIN Pro";
         font-size: 15px;
         line-height: 20px;
-        font-weight: 100;
+
       }
     }
   }
@@ -113,7 +113,7 @@
     color: #999999;
     font-family: 'DIN Pro';
     font-size: 15px;
-    font-weight: 500;
+
     line-height: 20px;
     margin: 0 0 0 5px;
   }
@@ -123,7 +123,7 @@
     color: #4f4f4f;
     font-family: 'DIN Pro';
     font-size: 15px;
-    font-weight: 500;
+
     line-height: 20px;
     margin: 0 0 0 0;
   }
@@ -132,7 +132,7 @@
     color: #999999;
     font-family: 'DIN Pro';
     font-size: 14px;
-    font-weight: 100;
+
     line-height: 18px;
     margin: -20px 0 0 70px;
   }
@@ -142,7 +142,7 @@
     color: #4f4f4f;
     font-family: 'DIN Pro';
     font-size: 15px;
-    font-weight: 500;
+
     line-height: 20px;
     margin: 5px 15px 10px 0;
   }
@@ -152,7 +152,7 @@
     color: #4f4f4f;
     font-family: 'DIN Pro';
     font-size: 15px;
-    font-weight: 500;
+
     line-height: 20px;
     margin: 5px 50px 10px 0;
   }
@@ -163,7 +163,7 @@
     color: #999999;
     font-family: 'DIN Pro';
     font-size: 14px;
-    font-weight: 100;
+
     line-height: 18px;
   }
   &__departure-date {
@@ -178,14 +178,14 @@
   &__city-name {
     color: #3359db;
     padding-left: 5px;
-    font-weight: 1000;
+
   }
 
   &__trip-detail-text {
     color: #4f4f4f;
     font-family: 'DIN Pro';
     font-size: 15px;
-    font-weight: 500;
+
     line-height: 20px;
     padding-top: 7px;
   }
@@ -200,7 +200,7 @@
     color: #4f4f4f;
     font-family: 'DIN Pro';
     font-size: 14px;
-    font-weight: 500;
+
     line-height: 18px;
     text-align: center;
     border-radius: 1px;
@@ -216,7 +216,7 @@
     color: #4f4f4f;
     font-family: 'DIN Pro';
     font-size: 14px;
-    font-weight: 500;
+
     line-height: 18px;
     text-align: center;
     border-radius: 1px;
@@ -297,7 +297,7 @@
       font-family: 'DIN Pro';
       font-size: 14px;
       line-height: 15px;
-      font-weight: normal;
+
     }
   }
   hr {
@@ -330,7 +330,7 @@
   background: none;
   margin-left: 20px;
   cursor: pointer;
-  
+
 }
 .edit-button:focus,
 .edit-button.active {

@@ -20,8 +20,12 @@ export default function handleManagerNotification({ UserInfo: { id, name } }) {
       (message === 'rejected your request')
         ? toast.error(`${senderName} ${message}`)
         : toast.success(msg);
+      let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
       const audio = new Audio(notificationSound);
-      audio.play();
+      if(!isSafari){
+        audio.play();
+      }
     }
   });
 }

@@ -99,7 +99,7 @@ class ButtonGroup extends PureComponent {
           badge={modifiedTripsCount}
           badgeClass={modificationType === 'Modify Dates' ?
             'bg-btn--with-badge--active' : 'bg-btn--with-badge__approvals--inactive'}
-          text="Date Modification"
+          text="Date Modifffication"
           disabled={modifiedTripsCount === 0}
           onClick={() => this.filterEntries(
             'approvals', '&status=open&type=Modify Dates')}

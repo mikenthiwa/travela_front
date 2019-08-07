@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Completed Onboarding Process should render correctly 1`] = `
+<div
+  className="all-done"
+>
+  <div
+    className="heading"
+  >
+    You're All Set Up
+  </div>
+  <img
+    alt="all-done"
+    className="complete_image"
+    src="allsetup.svg"
+  />
+  <button
+    className="get_started"
+    id="get-started"
+    onClick={[Function]}
+    type="button"
+  >
+    Go To Dashboard
+  </button>
+</div>
+`;

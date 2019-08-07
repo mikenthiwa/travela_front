@@ -3,19 +3,19 @@
     margin-bottom: 20px;
     hr {
       margin-left: -7.2%;
-      box-sizing: border-box;	
-      height: 1px;	
-      width: 100%;	
+      box-sizing: border-box;
+      height: 1px;
+      width: 100%;
       border: 1px solid #F8F8F8;
       margin-bottom: 40px !important;
     }
   }
   .modal-title-bar .modal-title-text {
-    height: 27px;	
-    width: 213px;	
-    color: #3359DB;	
-    font-size: 21px;	
-    font-weight: 500;	
+    height: 27px;
+    width: 213px;
+    color: #3359DB;
+    font-size: 21px;
+
     line-height: 27px;
     @media only screen and (max-width: 340px) {
       .modal-title-word {
@@ -31,22 +31,22 @@
     overflow-y: scroll;
     margin-top: 30px;
     p {
-      height: 20px;	
-      width: 78px;	
-      color: #4F4F4F;	
-      font-family: "DIN Pro";	
-      font-size: 15px;	
+      height: 20px;
+      width: 78px;
+      color: #4F4F4F;
+      font-family: "DIN Pro";
+      font-size: 15px;
       line-height: 20px;
       @media screen and (max-width: 479px) {
         font-size: 14px;
       }
     }
     .reminder__condition {
-      height: 68px;	
+      height: 68px;
       width: 100%;
       display: flex;
       justify-content: center;
-      border-radius: 2px;	
+      border-radius: 2px;
       background-color: #F6F6F6;
       flex-direction: column;
       margin-bottom: 42px;
@@ -57,10 +57,10 @@
         margin-bottom: 20px;
       }
       .frequency {
-        height: 18px;	
-        width: 182px;	
-        color: #878787;	
-        font-size: 14px;	
+        height: 18px;
+        width: 182px;
+        color: #878787;
+        font-size: 14px;
         line-height: 18px;
       }
     }

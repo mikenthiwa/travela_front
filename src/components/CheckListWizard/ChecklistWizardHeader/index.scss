@@ -1,0 +1,68 @@
+.checklist-builder-header {
+  .role-panel-header {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 50px 2fr 1fr;
+  }
+
+  .checklist-back-btn{
+    color: #FFFFFF;
+    background: #3359db;
+    align-self: center;
+    justify-self: left;
+    margin-top: 37px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+
+    .backIcon{
+      height: 15px;
+      width: 15px;
+    }
+  }
+
+  .PageHeader {
+    margin-right: 0;
+  }
+
+  .undo-redo-container{
+    display: flex;
+    align-self: center;
+    justify-self: right;
+    margin-top: 37px;
+
+    .redo{
+      transform: scaleX(-1);
+      height: 36px;
+      background-color: #FFFFFF;
+      border-radius: 8px;
+      border: 1px solid #E4E4E4;
+      width: 48px;
+      margin: 0px 5px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .undo{
+      height: 36px;
+      background-color: #FFFFFF;
+      border-radius: 8px;
+      border: 1px solid #E4E4E4;
+      width: 48px;
+      margin: 0px 5px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .undo:disabled, .redo:disabled{
+      cursor: not-allowed;
+      background-color: rgb(224, 224, 224);
+    }
+
+    p{
+      margin: 0;
+    }
+  }
+}

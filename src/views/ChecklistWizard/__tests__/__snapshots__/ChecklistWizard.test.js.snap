@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChecklistWizard /> should render correctly 1`] = `
+<DragDropContext
+  onDragEnd={[Function]}
+>
+  <div>
+    <Component
+      resetChecklist={[Function]}
+    />
+    <div
+      className="checklist-wizard-container"
+    >
+      <ChecklistWizardBuilder
+        addNewChecklistItem={[Function]}
+        deleteItem={[Function]}
+        destinations={Array []}
+        handleItems={[Function]}
+        items={
+          Array [
+            Object {
+              "behaviour": Object {},
+              "configuration": Object {
+                "options": Array [
+                  Object {
+                    "behaviour": Object {},
+                    "id": 1,
+                    "name": "",
+                  },
+                ],
+              },
+              "id": "id",
+              "order": 1,
+              "prompt": "",
+              "type": "",
+            },
+            Object {
+              "behaviour": Object {},
+              "configuration": Object {
+                "options": Array [
+                  Object {
+                    "behaviour": Object {},
+                    "id": 1,
+                    "name": "",
+                  },
+                ],
+              },
+              "id": "id1",
+              "order": 2,
+              "prompt": "",
+              "type": "",
+            },
+          ]
+        }
+        nationality={
+          Object {
+            "emoji": "",
+            "name": "",
+          }
+        }
+        postChecklist={[Function]}
+        updateBehaviour={[Function]}
+        updateDestinations={[Function]}
+        updateNationality={[Function]}
+      />
+      <ChecklistWizardPreview
+        destinations={Array []}
+        items={
+          Array [
+            Object {
+              "behaviour": Object {},
+              "configuration": Object {
+                "options": Array [
+                  Object {
+                    "behaviour": Object {},
+                    "id": 1,
+                    "name": "",
+                  },
+                ],
+              },
+              "id": "id",
+              "order": 1,
+              "prompt": "",
+              "type": "",
+            },
+            Object {
+              "behaviour": Object {},
+              "configuration": Object {
+                "options": Array [
+                  Object {
+                    "behaviour": Object {},
+                    "id": 1,
+                    "name": "",
+                  },
+                ],
+              },
+              "id": "id1",
+              "order": 2,
+              "prompt": "",
+              "type": "",
+            },
+          ]
+        }
+        nationality={
+          Object {
+            "emoji": "",
+            "name": "",
+          }
+        }
+      />
+    </div>
+  </div>
+</DragDropContext>
+`;

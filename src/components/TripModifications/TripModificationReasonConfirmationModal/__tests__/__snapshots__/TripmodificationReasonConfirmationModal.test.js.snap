@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TripModificationModal should render correctly 1`] = `
+<div
+  className="trip-modification-confirmation-modal"
+>
+  <div
+    className="overlay invisible  "
+    onClick={null}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <div
+      className="modal invisible "
+      id=""
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      style={
+        Object {
+          "maxWidth": "",
+        }
+      }
+      tabIndex="0"
+    >
+      <div
+        className="modal-title-bar"
+      >
+        <div
+          className="modal-title-text"
+        >
+          <div
+            className="modal-title modal-title-word"
+          >
+            Modify Dates
+          </div>
+          <div
+            className="lable-text modal-bar"
+          >
+            <div />
+          </div>
+        </div>
+        <button
+          className="modal-close"
+          onClick={[Function]}
+          type="button"
+        >
+          <img
+            alt="close"
+            src="close.svg"
+          />
+        </button>
+      </div>
+      <div
+        className="modal-content"
+        id=""
+      >
+        <div
+          className="trip-modification-confirmation-modal__content"
+        >
+          <img
+            alt="Warning"
+            src="warning-img.svg"
+          />
+          <div
+            className="trip-modification-confirmation-modal__contentText"
+          >
+            <p>
+              A request modification might reset the status
+            </p>
+            <p>
+              of your request back to
+              <span
+                className="trip-modification-confirmation-modal__contentTextOpen"
+              >
+                Open
+              </span>
+              and undo all
+            </p>
+            <p>
+              the previous
+              <span
+                className="trip-modification-confirmation-modal__contentTextApprovals"
+              >
+                Approvals
+              </span>
+            </p>
+          </div>
+        </div>
+        <fieldset>
+          <div
+            className="trip-modification-confirmation-modal__submit-area"
+          >
+            <button
+              className="bg-btn bg-btn--inactive"
+              id="cancel"
+              onClick={[Function]}
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              className="submit-area__modifyTrip"
+              id="submit"
+              onClick={[Function]}
+              type="button"
+            >
+              Modify
+            </button>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
+`;

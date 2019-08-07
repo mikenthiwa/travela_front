@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ConfirmPersonalDetailsFieldset/> renders correctly 1`] = `
+<fieldset
+  className="personal-details null"
+>
+  <div
+    className=""
+  >
+    <div
+      className="personal-rectangle-details-items"
+    >
+      <div
+        className="input-group-details mdl-grid "
+      >
+        <div
+          className="spaces-right"
+        >
+          <Input
+            autoComplete="off"
+            className="request_dropdown"
+            disabled={false}
+            label="Your Name"
+            labelNote=""
+            name="name"
+            onChange={null}
+            required={false}
+            type="filter-dropdown-select"
+          />
+        </div>
+        <div
+          className="spaces-right"
+        >
+          <Input
+            autoComplete="off"
+            choices={
+              Array [
+                "Female",
+                "Male",
+              ]
+            }
+            className=""
+            disabled={false}
+            label="What is your gender?"
+            labelNote=""
+            name="gender"
+            onChange={null}
+            required={false}
+            type="onboarding-button-toggler"
+          />
+        </div>
+      </div>
+      <div
+        className="input-group-details mdl-grid"
+      >
+        <div
+          className="spaces-right"
+        >
+          <Input
+            autoComplete="off"
+            choices={Array []}
+            className="request_dropdown your-department"
+            disabled={false}
+            id="your-department"
+            label="What is your department?"
+            labelNote=""
+            name="department"
+            onChange={[Function]}
+            required={false}
+            size=""
+            type="filter-dropdown-select"
+          />
+        </div>
+        <div
+          className="spaces-right"
+        >
+          <Input
+            autoComplete="off"
+            choices={
+              Array [
+                undefined,
+              ]
+            }
+            className="request_dropdown  your-role"
+            id="your-role"
+            label="What is your role?"
+            labelNote=""
+            name="role"
+            onChange={[Function]}
+            required={false}
+            size=""
+            type="filter-dropdown-select"
+          />
+        </div>
+      </div>
+      <div
+        className="input-group-details mdl-grid"
+      >
+        <div
+          className="spaces-right mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
+        >
+          <Input
+            autoComplete="off"
+            choices={
+              Array [
+                undefined,
+              ]
+            }
+            className="request_dropdown your-manager"
+            id="your-manager"
+            label="Who is your Line Manager?"
+            labelNote=""
+            name="manager"
+            onChange={[Function]}
+            required={false}
+            size=""
+            type="filter-dropdown-select"
+          />
+        </div>
+        <div
+          className="spaces-right mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-col-phone"
+        >
+          <Input
+            autoComplete="off"
+            choices={Array []}
+            className="request_dropdown user-location"
+            disabled={false}
+            id="user-location"
+            label="Where is your location?"
+            labelNote=""
+            name="location"
+            onChange={[Function]}
+            required={false}
+            size=""
+            type="filter-dropdown-select"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="request-submit-area-details"
+    >
+      <button
+        className="bg-btn bg-btn--active-1"
+        disabled={true}
+        id="submit"
+        onClick={[Function]}
+        type="submit"
+      >
+        <ButtonLoadingIcon
+          buttonText=""
+          isLoading={false}
+        />
+      </button>
+    </div>
+  </div>
+</fieldset>
+`;

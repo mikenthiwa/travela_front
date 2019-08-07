@@ -1,0 +1,107 @@
+.select-countries-container{
+  z-index: 100;
+  position: relative;
+  grid-row: 2;
+  grid-column: 2/5;
+
+  .select-input-delete-container{
+    display: grid;
+    grid-template-columns: 1fr 40px;
+
+    .delete-icon-container{
+      align-self: center;
+    }
+  }
+
+  .select-options {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      cursor: pointer;
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      height: 35px;
+    }
+    
+    .select-options:hover {
+      background-color: #F0F3F7;
+    }
+    
+    .select-input-area {
+      border: 1px solid #eeeeee;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      padding: 5px;
+    }
+
+    .caret {
+      background: transparent;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      height: 20px;
+      margin: auto;
+    }
+    
+    .selected-country-item {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      width: 95%;
+    }
+    
+    .country-name {
+      margin: auto 5px;
+      font-size: 1rem;
+    }
+    
+    .select-placeholder {
+      color: lightgray;
+      width: 95%;
+      display: flex;
+      align-items: center;
+      justify-items: center;
+    }
+    
+    .country-options-container {
+      border-top: 1px solid #eeeeee;
+      margin: 5px auto;
+      min-height: 75px;
+      max-height: 250px;
+      overflow: scroll;
+      position: absolute;
+      background: #fff;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: 0 2px 10px 0 rgba(0,0,0,0.15);
+
+      .dest-filter {
+        position: sticky;
+        top: 0px;
+        height: 30px;
+        background: #fff;
+        width: 100%;
+      }
+
+      .dest-filter-input {
+        height: 30px;
+        width: 100%;
+        margin: 0px;
+        padding-left: 12px;
+        border: none;
+        border-bottom: 1px solid #eee;
+        outline: none;
+        font-size: 1rem;
+        box-sizing: border-box;
+      }
+    }
+
+  .select-input-options-container {
+    position: relative;
+  }
+}

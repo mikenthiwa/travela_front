@@ -1,0 +1,23 @@
+@keyframes movingPerson {
+  0% { transform: translateX(-200px); }
+  45% { transform: translateX(300px) rotateY(0deg); }
+  49% { transform: translateX(300px) rotateY(180deg); }
+  50% { transform: translateX(300px) rotateY(180deg); }
+  95% { transform: translateX(-200px) rotateY(180deg); }
+  99% { transform: translateX(-200px) rotateY(0deg); }
+  100% { transform: translateX(-200px) rotateY(0deg); }
+}
+
+.error-boundary-image {
+  position: relative;
+  .person {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    svg {
+      animation: movingPerson 10s linear infinite;
+      height: 200px;
+    }
+  }
+}

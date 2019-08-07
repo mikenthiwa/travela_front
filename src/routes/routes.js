@@ -2,6 +2,7 @@ import React from 'react';
 import ConnectedDashboard from '../views/Dashboard';
 import ConnectedRequests from '../views/Requests';
 import ConnectedNewRequests from '../views/Requests/NewRequests';
+import ConnectedOnboarding from '../views/Requests/NewRequests/UserOnboarding';
 import ConnectedGuestHouseDetails from '../views/Accommodation/FullGuestHouseDetails';
 import ConnectedApprovals from '../views/Approvals';
 import ConnectedVerifications from '../views/Verifications';
@@ -15,6 +16,7 @@ import ConnectedReadiness from '../views/Readiness';
 import ConnectedRequestDetailsPage from '../views/Requests/NewRequestPage';
 import ConnectedTravelReadinessDocuments from '../views/TravelReadinessDocuments';
 import ConnectedUserTravelReadinessDetails from '../views/TravelReadinessDocuments/UserTravelReadinessDetails';
+import ConnectedChecklistWizard from '../views/ChecklistWizard';
 import ConnectedHome from '../views/Home';
 import ConnectedReminders from '../views/Reminders';
 import ConnectedCreateEmailTemplate from '../views/ReminderSetup/CreateEmailTemplate';
@@ -30,6 +32,7 @@ import ConnectedCountries from '../views/Countries';
 import ConnectedHotelEstimate from '../views/HotelEstimate';
 import ConnectedHelpers from '../views/HelpLinks';
 import ConnectedFlightEstimate from '../views/FlightEstimates';
+import ConnectedChecklistWizardInterface from '../views/ChecklistWizardInterface';
 
 
 import {
@@ -39,7 +42,8 @@ import {
 
 const routes = {
   '/dashboard': [ConnectedDashboard, TRAVEL_MANAGERS],
-  '/home': [ConnectedHome] ,
+  '/home': [ConnectedHome],
+  '/welcome-page': [ConnectedOnboarding()],
   '/requests/my-approvals/': [ConnectedApprovals(), [SUPER_ADMINISTRATOR, MANAGER]],
   '/requests/my-approvals/:requestId': [ConnectedApproveRequests(), [SUPER_ADMINISTRATOR, MANAGER]],
   '/requests/budgets/:requestId': [ConnectedApproveRequests('budget'),[SUPER_ADMINISTRATOR, BUDGET_CHECKER, FINANCE_TEAM_MEMBER]],
@@ -62,6 +66,7 @@ const routes = {
   '/residence/checkin': [ConnectedCheckIn],
   '/trip-planner/checklists': [ConnectedChecklist, TRAVEL_MANAGERS],
   '/trip-planner/travel-readiness': [ConnectedTravelReadinessDocuments, TRAVEL_MANAGERS],
+  '/trip-planner/checklist-wizard': [ConnectedChecklistWizard, TRAVEL_MANAGERS],
   '/travel-readiness/:userId': [ConnectedUserTravelReadinessDetails, TRAVEL_MANAGERS],
   '/settings/roles/:roleId': [ConnectedRoleDetails, TRAVEL_MANAGERS],
   '/settings/reminder-setup': [ConnectedReminderSetup, TRAVEL_MANAGERS],
@@ -74,6 +79,7 @@ const routes = {
   '/help': [ConnectedHelpers],
   '/settings/travel-region': [ConnectedTravelRegion, TRAVEL_MANAGERS],
   '/settings/travel-region/:regionId': [ConnectedCountries, TRAVEL_MANAGERS],
+  '/trip-planner/checklist-wizard-interface': [ConnectedChecklistWizardInterface, TRAVEL_MANAGERS],
 };
 
 export default routes;

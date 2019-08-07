@@ -1,0 +1,17 @@
+@media (max-width: 560px) {
+  .checklist-wizard-header {
+    margin-top: 0;
+    width:100%;
+
+    .PageHeader{
+      margin-top: 0 !important;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      .title {
+        font-size: 14px;
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@
     color: #4F4F4F;
     font-family: "DIN Pro";
     font-size: 18px;
-    font-weight: 800;
+
     line-height: 23px;
 }
 .personal-details .form-input.request_dropdown {
@@ -81,7 +81,7 @@ form .form-input .select-menu{
 #btn-cancel{
   color: #3359DB;
   border: 1px solid #3359DB;
-  font-weight: 500;
+
 }
 
 .profile-submit-area{
@@ -100,6 +100,7 @@ form{
 
 form.new-profile{
     fieldset {
+      display: grid;
       .input-group {
         display: flex;
         flex-wrap: wrap;

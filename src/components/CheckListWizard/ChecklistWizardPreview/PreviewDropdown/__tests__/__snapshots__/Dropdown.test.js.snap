@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dropdown /> should render without crashing 1`] = `
+<div>
+  <div
+    className="style-container"
+  >
+    <input
+      className="input"
+      onClick={[Function]}
+      readOnly="readOnly"
+      type="text"
+      value=""
+    />
+    <img
+      alt="icn"
+      onClick={[Function]}
+      role="presentation"
+      src="form_select_dropdown.svg"
+    />
+  </div>
+</div>
+`;

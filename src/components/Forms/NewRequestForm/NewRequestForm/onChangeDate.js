@@ -95,8 +95,8 @@ function handleDates (dateName, date) {
 }
 
 function onChangeDate (date, event) {
-  const dateWrapperId = event.nativeEvent.path[7].id || event.nativeEvent.path[4].id;
-  const dateName = dateWrapperId.split('_')[0];
+  const id = event.target.id;
+  const dateName = id.split('_')[0];
   const onPickDate = handleDates.bind(this)(dateName, date);
   this.setState(
     prevState => ({

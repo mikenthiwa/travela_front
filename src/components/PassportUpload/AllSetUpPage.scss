@@ -1,0 +1,57 @@
+.all-done {
+  height: 621px;
+  width: 80%;
+  border: 1px solid #e4e4e4;
+  border-radius: 3px;
+  background-color: #ffffff;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  margin: 0 auto;
+  margin-top: 90px;
+
+  .heading {
+    height: 26px;
+    width: 185px;
+    color: #4f4f4f;
+    font-family: "DIN Pro";
+    font-size: 20px;
+
+    line-height: 26px;
+  }
+  .complete_image {
+    width: 330px;
+    margin: 3em 0;
+  }
+
+  .get_started {
+    height: 36px;
+    width: 126px;
+    border: 1px solid #3359db;
+    border-radius: 1px;
+    background-color: #3359db;
+    margin-top: 34px;
+    outline: none;
+    color: #ffffff;
+    font-family: "DIN Pro";
+    font-size: 14px;
+
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+  }
+}
+@media (max-width: 375px) {
+  .all-done {
+    width: 95%;
+  }
+}
+@media (max-width: 320px) {
+  .all-done {
+    .complete_image {
+      width: 276px;
+    }
+  }
+}

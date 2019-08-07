@@ -1,5 +1,5 @@
 
- .request-page__table-view { 
+ .request-page__table-view {
   .width-91 {
     width: 91.5%;
     @media(max-width: 520px){
@@ -17,7 +17,7 @@
 .text {
   &--blue {
     color: #3359db;
-    font-weight: 900;
+
   }
 
   &--grey,
@@ -28,7 +28,7 @@
 
   &--black {
     font-size: inherit;
-    font-weight: 900;
+
   }
 }
 .main-container {
@@ -99,7 +99,7 @@
             color: #fff;
             font-size: 0.8em;
             font-style: normal;
-            font-weight: 900;
+
             margin: 0 0 0 0.5em;
             outline: none !important;
             padding: 0 0.6em;
@@ -247,8 +247,8 @@
 
             &:hover {
               cursor: not-allowed;
-            } 
-            
+            }
+
             @media (max-width: 324px) {
               font-size: smaller;
             }
@@ -360,13 +360,13 @@
             .mobile {
               display: block;
             }
-  
+
             .partition {
               padding: 2em 0 0 2em;
             }
           }
         }
-  
+
         .right-pane {
           width: 100%;
           .desktop {
@@ -396,14 +396,14 @@
                 border: 0;
               }
             }
-  
+
             .partition {
               width: 100%;
               text-align: center;
               padding: 0;
               margin: 1em 0;
               border-bottom: 1px solid #e4e4e4 !important;
-  
+
               &:last-child {
                 border: 0;
                 border-bottom: 1px !important;

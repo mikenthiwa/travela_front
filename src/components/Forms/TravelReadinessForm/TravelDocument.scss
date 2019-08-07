@@ -20,7 +20,7 @@
   }
 
   .form-input.fluid {
-    width: 100%;
+    width: 98%;
 
     &:first-child {
       margin-top: 2em;
@@ -38,6 +38,7 @@
   }
   .document-input__input-container{
     margin-bottom: 2em;
+    margin-top: 15px;
   }
 
   .date-wrapper {
@@ -73,6 +74,7 @@
     border: none;
     outline: none;
     margin-bottom: 20px;
+    width: 100%;
   }
   .character__conditions__visa {
     position: absolute;
@@ -101,6 +103,10 @@
 }
 }
 
+div.input-group.resposive_passport{
+  justify-content: space-around!important;
+}
+
 @media only screen and (max-width: 600px) {
   .resposive_passport, .resposive_visa, .resposive_other {
     display: grid !important;
@@ -116,8 +122,7 @@
  .add-document-item {
    transform: none;
    -webkit-transform: none !important;
-   top: 0;
-   left: 0;
-   width: 100%;
+   top: 10 !important;
+   
  }
 }

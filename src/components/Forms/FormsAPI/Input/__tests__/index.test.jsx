@@ -1,18 +1,27 @@
 import React from 'react';
 import Input from '..';
+import context from '../../FormContext/FormContext'
+
+
+jest.mock('../../FormContext/FormContext', () => {
+  return {
+    RealFormContext: {
+      Consumer: ({ children }) => children({
+        values: { name: '' },
+        validatorName: 'validator',
+        errors: { name: 'This field is required'},
+        targetForm: {
+          validate: jest.fn(),
+        }
+      })
+    }
+  };
+});
 
 describe('<Input />', () => {
   let wrapper;
 
   beforeEach(() => {
-    const contextObject = {
-      context: {
-        errors: {name: 'This field is required'},
-        targetForm: {
-          validate: ()=>{}
-        }
-      }
-    };
 
     wrapper = mount(
       <Input
@@ -20,7 +29,7 @@ describe('<Input />', () => {
         type="text"
         onChange={()=>{}}
         label="Test label"
-      />, contextObject
+      />
     );
   });
 

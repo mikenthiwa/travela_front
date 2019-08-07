@@ -10,17 +10,21 @@ import {
   CheckBox,
   TextArea, 
   TagsInput,
-  MultipleChoiceDropdown
+  MultipleChoiceDropdown,
+  OnboardingButtonToggler,
 } from './InputFields';
 import createEventHandlersFor from '../formEventHandlers';
 import './_input.scss';
 import './InputFields/Date.scss';
+import { RealFormContext } from '../FormContext/FormContext';
 
 class Input extends PureComponent {
 
+  newProps = {};
+
   getInputType() {
     let { name, type } = this.props;
-    const { targetForm, validatorName } = this.context;
+    const { targetForm, validatorName } = this;
     // get event handlers for the form in this context, for its input named 'name'
     const eventHandlers = createEventHandlersFor(targetForm, name, validatorName);
     return this.switchTypeWithProps(type, eventHandlers);
@@ -30,13 +34,19 @@ class Input extends PureComponent {
       const { onChange, minDate, maxDate } = this.props;
       switch (type) {
       case 'button-toggler':
-        this.props = {
+        this.newProps = {
           ...this.props,
           onChange: onChange ||  eventHandlers.handleSelectTogglerOpt
         };
         return ButtonToggler;
+      case 'onboarding-button-toggler':
+        this.newProps = {
+          ...this.props,
+          onChange: onChange ||  eventHandlers.handleSelectTogglerOpt
+        };
+        return OnboardingButtonToggler;
       case 'date':
-        this.props = {
+        this.newProps  = {
           ...this.props,
           minimumDate: minDate,
           maximumDate: maxDate,
@@ -46,19 +56,19 @@ class Input extends PureComponent {
         return DateInput;
       case 'dropdown-select':
       case 'filter-dropdown-select':
-        this.props = {
+        this.newProps= {
           ...this.props,
           onChange: onChange || eventHandlers.handleSelectDropdown,
         };
         return this.switchDropdownInputTypes(type);
       case 'checkbox':
-        this.props = {
+        this.newProps = {
           ...this.props,
           onChange: onChange || eventHandlers.handleCheckBoxChange
         };
         return CheckBox;
       case 'tags':
-        this.props = {
+        this.newProps = {
           ...this.props,
           handleDelete: onChange || eventHandlers.handleTagDeleted,
           handleAddition: onChange || eventHandlers.handleTagAdded,
@@ -66,14 +76,14 @@ class Input extends PureComponent {
         };
         return TagsInput;
       case 'multiple-choice-dropdown':
-        this.props = {
+        this.newProps = {
           ...this.props,
           onChange: onChange || eventHandlers.handleInputChange,
           onBlur: eventHandlers.handleInputBlur
         };
         return MultipleChoiceDropdown;
       default:
-        this.props = {
+        this.newProps = {
           ...this.props,
           onBlur: eventHandlers.handleInputBlur,
           onChange: onChange ||  eventHandlers.handleInputChange
@@ -133,33 +143,41 @@ class Input extends PureComponent {
     }
 
     render() {
-      const { errors, values } = this.context;
-      let { name, label, className } = this.props;
-      const value = values ? values[name]: '';
-      const error = errors ? errors[name]: '';
-      let customClass = className ? className : '';
-      // switch input types into InputElement
-      const InputElement = this.getInputType();
       return (
-        <div
-          className={`form-input ${customClass} ${errors[name] ? 'error' : ''}`}>
-          <label htmlFor={name}>
-            {label}
-            {this.renderAsterisk()}
-          </label>
-          <InputElement value={value} error={error} {...this.props} />
-          <span className="error">
-            {error}
-          </span>
-        </div>
+        <RealFormContext.Consumer>
+          {({ errors, values, targetForm, validatorName }) => {
+            this.targetForm = targetForm;
+            this.validatorName = validatorName;
+
+            let { name, label, className } = this.props;
+            const value = values ? values[name]: '';
+            const error = errors ? errors[name]: '';
+            let customClass = className ? className : '';
+            // switch input types into InputElement
+            const InputElement = this.getInputType();
+            return (
+              <div
+                className={`form-input ${customClass} ${error ? 'error' : ''}`}>
+                <label htmlFor={name}>
+                  {label}
+                  {this.renderAsterisk()}
+                </label>
+                <InputElement value={value} error={error} {...this.newProps} />
+                <span className="error">
+                  {error}
+                </span>
+              </div>
+            );
+          }}
+        </RealFormContext.Consumer>
       );
     }
 }
 
 Input.contextTypes = {
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.object,
   values: PropTypes.object,
-  targetForm: PropTypes.object.isRequired,
+  targetForm: PropTypes.object,
   validatorName: PropTypes.string
 };
 

@@ -155,12 +155,26 @@ import {
 } from './hotelEstimateSaga';
 import {
   watchCreateFlightEstimateAsync,
-  watchGetAllFlightEstimates, 
+  watchGetAllFlightEstimates,
   watchUpdateFlightEstimate,
-  watchDeleteFlightEstimate 
+  watchDeleteFlightEstimate
 } from './flightEstimatesSaga';
+import {
+  watchAddChecklistWizard,
+  watchHandleChecklistItems,
+  watchDeleteItems,
+  watchAddQuestion,
+  watchDeleteQuestion,
+  watchUpdateBehaviour,
+  watchUpdateNationality,
+  watchUpdateDestination,
+  watchCreateDynamicChecklist
+} from './travelChecklistWizardSaga';
 
 import { watchAddResourcesSagaAsync, watchFetchLinkDataSagaAsync } from './helpResourceSaga';
+import { watchgetAllDynamicChecklists} from './checklistWizardSaga';
+import { watchPostNoPassportNotification } from './noPassportSaga';
+import watchCrashReport from "./errorBoundarySaga";
 
 
 function* rootSaga() {
@@ -284,7 +298,19 @@ function* rootSaga() {
     watchCreateFlightEstimateAsync(),
     watchGetAllFlightEstimates(),
     watchUpdateFlightEstimate(),
-    watchDeleteFlightEstimate()
+    watchDeleteFlightEstimate(),
+    watchgetAllDynamicChecklists(),
+    watchAddChecklistWizard(),
+    watchHandleChecklistItems(),
+    watchDeleteItems(),
+    watchDeleteQuestion(),
+    watchUpdateBehaviour(),
+    watchUpdateNationality(),
+    watchUpdateDestination(),
+    watchCreateDynamicChecklist(),
+    watchAddQuestion(),
+    watchPostNoPassportNotification(),
+    watchCrashReport()
   ]);
 }
 

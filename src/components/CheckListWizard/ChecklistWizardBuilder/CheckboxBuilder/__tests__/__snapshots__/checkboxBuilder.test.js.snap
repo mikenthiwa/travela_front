@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RenderCheckbox/> should render RenderCheckbox component properly 1`] = `
+<div>
+  <div
+    key="dkadajfda"
+  >
+    <p>
+      Enter Option 1
+    </p>
+    <div>
+      <div
+        className="prompt-item"
+      >
+        <input
+          className="prompt-input"
+          id="option-name-input"
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          placeholder="Yes"
+          type="text"
+          value="are you awesome?"
+        />
+        <button
+          className="builder-delete-icon"
+          id="option-del-icon"
+          onClick={[Function]}
+          type="button"
+        >
+          <img
+            alt="delete-icon"
+            src="delete-icon.svg"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className="behaviour-container"
+  >
+    <div
+      className="set-behaviour-btn-container"
+    >
+      <button
+        className="set-behaviour-btn"
+        onClick={[Function]}
+        type="button"
+      >
+        Set behaviour
+      </button>
+    </div>
+    <div>
+      <div />
+    </div>
+  </div>
+  <button
+    className="anoter-question-btn"
+    onClick={[Function]}
+    type="button"
+  >
+    Add a 2nd option
+  </button>
+</div>
+`;
+
+exports[`<RenderCheckbox/> should render RenderCheckbox component properly 2`] = `
+<div>
+  <div
+    className="prompt-item"
+  >
+    <input
+      className="prompt-input"
+      id="option-name-input"
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Yes"
+      type="text"
+      value="are you awesome?"
+    />
+    <button
+      className="builder-delete-icon"
+      id="option-del-icon"
+      onClick={[Function]}
+      type="button"
+    >
+      <img
+        alt="delete-icon"
+        src="delete-icon.svg"
+      />
+    </button>
+  </div>
+</div>
+`;

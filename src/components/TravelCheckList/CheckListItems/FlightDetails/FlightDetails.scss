@@ -29,7 +29,7 @@
     flex-direction: row;
     align-items: baseline;
     color: #3359db;
-    font-weight: bold;
+
   }
   .form-title{
     padding-left: 9px;
@@ -60,7 +60,7 @@
         input{
         line-height: 18px;
         color: #757171!important;
-        font-weight: 300;
+
         border-radius: 2px;
         margin: 5px 10px 5px 0;
         background-color: #ffffff;
@@ -97,17 +97,17 @@
         .error{
           color: #ff0000;
         }
-    
+
     }
-    
+
     .calendar-icon{
       display: none;
     }
-    
+
     form .form-input {
       margin: 0!important;
     }
-    
+
     @media (max-width: 450px){
       form .form-input .date-wrapper input, form .form-input .date-wrapper > div input {
         width: 190px!important;

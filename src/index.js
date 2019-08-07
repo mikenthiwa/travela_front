@@ -4,6 +4,7 @@ import ReactGA from 'react-ga';
 
 import './index.scss';
 import App from './views/App';
+
 // import registerServiceWorker from './registerServiceWorker';
 
 // Register Google analytics tracking for the application

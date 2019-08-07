@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RequestTabHead /> should render properly 1`] = `
+<div>
+  <div
+    className="request__tab-onboarding"
+  >
+    <div
+      className="request__tab-card-onboarding current_request-tab incompletecolor"
+      key="1"
+    >
+      <div
+        className="tab-logo-onboarding"
+      >
+        1
+      </div>
+      <div
+        className="distance-line"
+      >
+        <hr />
+      </div>
+      <div
+        className="tab-title"
+      >
+        Personal Information
+      </div>
+    </div>
+    <div
+      className="request__tab-card-onboarding inactive_request-tab incompletecolor"
+      key="2"
+    >
+      <div
+        className="tab-logo-onboarding"
+      >
+        2
+      </div>
+      <div
+        className="distance-line"
+      >
+        <hr />
+      </div>
+      <div
+        className="tab-title"
+      >
+        Travel Document
+      </div>
+    </div>
+  </div>
+</div>
+`;
