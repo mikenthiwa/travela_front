@@ -47,7 +47,7 @@ export function* createTravelReadinessDocument(action) {
     yield put(closeModal());
     yield put(openModal(true, 'interactive'));
   } catch (error) {
-    toast.error(apiErrorHandler(error));
+    toast.error('This passport has already been uploaded');
     yield put(createTravelReadinessDocumentFailure(error.response.data));
   }
 }
