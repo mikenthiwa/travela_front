@@ -1,0 +1,270 @@
+@mixin fadeAnimation {
+  animation-name: fadeIn;
+  animation-duration: 1s;
+}
+
+.error-boundary-page {
+  height: 100vh;
+  display: grid;
+  align-content: start;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+          "navbar"
+          "container";
+
+  &__container {
+    height: 100%;
+    grid-area: container;
+    display: grid;
+    max-width: 1500px;
+    justify-self: center;
+    width: 95%;
+  }
+
+  .error-boundary-nav {
+    background: white;
+    grid-area: navbar;
+    height: 70px;
+    border-bottom: 1px solid #ddd;
+    padding: 0 1em;
+    display: grid;
+    align-items: center;
+
+    &__logo-mobile {
+      display: none;
+    }
+  }
+
+  .error-boundary-content {
+    display: grid;
+    align-self: center;
+    grid-template-areas: "image card";
+
+    &__image {
+      display: grid;
+      grid-area: image;
+      place-items: center;
+
+      img {
+        height: 400px;
+        width: auto;
+        object-position: center;
+        object-fit: contain;
+        margin-top: -70px;
+      }
+    }
+
+    &__card {
+      display: grid;
+      grid-template-columns: minmax(300px, 600px);
+      grid-area: card;
+      justify-content: center;
+
+      &-content {
+        background: white;
+        display: grid;
+        box-shadow: 0 0 10px 4px rgba(0, 0, 0, .08);
+        height: 70vh;
+        grid-template-rows: repeat(12, 1fr);
+        grid-template-columns: 1fr;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+
+        img {
+          width: 200px;
+          grid-row: 2 / 4;
+        }
+
+        .error-boundary-title {
+          font-size: 1.7em;
+          grid-row: 5 / 5;
+          padding: 0 1em;
+        }
+
+        .travela-send-message, .error-boundary-message {
+          background: #eee;
+          display: grid;
+          align-items: center;
+          overflow: hidden;
+          justify-content: center;
+          align-content: center;
+          grid-row: 8 / 10;
+          justify-self: stretch;
+        }
+
+        .travela-send-message {
+          position: relative;
+
+          .share-message-content {
+            z-index: 1;
+            @include fadeAnimation();
+          }
+
+          .slack-icon {
+            position: absolute;
+            z-index: 0;
+            height: 100px;
+            width: auto;
+            animation-duration: 1s;
+            transform-origin: 0 0;
+            animation-timing-function: cubic-bezier(.75,-0.5,0,1.75);
+
+            &:nth-child(1){
+              left: 20px;
+              bottom: -10px;
+              animation-name: flyInRight;
+            }
+
+            &:nth-child(2){
+              right: 20px;
+              top: 0;
+              transform: translateY(-100%);
+              animation-name: flyInLeft;
+            }
+          }
+
+          p {
+            .slack-channel, .slack-channel a {
+              color: #2f56e3;
+            }
+          }
+        }
+
+        .error-boundary-message {
+          position: relative;
+          cursor: pointer;
+
+          textarea {
+            position: absolute;
+            top: -500px;
+            z-index: -100;
+          }
+
+          &:hover {
+            .copy-icon {
+              img {
+                transform: scale(1.1);
+              }
+            }
+          }
+
+          p {
+            font-size: 1.1em;
+            color: #982d1f;
+          }
+
+          .copy-icon {
+            img {
+              height: 25px;
+              width: auto;
+              transition: 0.5s all;
+            }
+          }
+        }
+
+        .error-boundary-info {
+          font-size: 1.1em;
+          padding: 0 1em;
+          grid-row: 6 / 6;
+
+          .error-boundary-channel {
+            color: #2f56e3;
+            cursor: pointer;
+          }
+        }
+
+        .error-boundary-footer {
+          grid-row: 11 / 12;
+
+           button {
+             background: #2f56e3;
+             outline: none;
+             border: none;
+             padding: 1em 2em;
+             color: white;
+             cursor: pointer;
+             transition: 0.5s all;
+
+             &:hover {
+               box-shadow: 0 0 2px 2px rgba(0,0,0,.1);
+             }
+           }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 400px){
+    .error-boundary-nav{
+      &__logo {
+        &-desktop {
+          display: none;
+        }
+        &-mobile {
+          display: block;
+        }
+      }
+    }
+
+    .error-boundary-content {
+      &__card {
+        &-content {
+
+          .travela-send-message {
+
+            .slack-icon {
+              height: 50px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .error-boundary-content {
+      grid-template-areas: "card";
+
+      &__image {
+        display: none;
+      }
+    }
+  }
+}
+
+@keyframes flyInRight {
+  from {
+    left: -200px;
+    transform: rotate(60deg);
+  }
+
+  to {
+    left: 20px;
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes flyInLeft {
+  from {
+    right: -200px;
+    transform: rotate(60deg) translateY(-100%);
+  }
+
+  to {
+    right: 20px;
+    transform: rotate(0deg) translateY(-100%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -51,10 +51,10 @@ export const UserOnboardingRequestPage = (editing = false) => {
               updateUserProfile={updateUserProfile} user={user} errors={errors}
               userData={userData && userData.result} occupations={occupations}
               loading={loading} managers={roleUsers}
-              creatingRequest={creatingRequest} 
-              requestOnEdit={requestOnEdit} 
+              creatingRequest={creatingRequest}
+              requestOnEdit={requestOnEdit}
               history={history}
-              editing={editing} isEditing={editingRequest} 
+              editing={editing} isEditing={editingRequest}
             />)
       );
     }
@@ -68,7 +68,7 @@ const mapStateToProps = ({
   ...requests,
   ...role,
   ...occupations,
- 
+
   isFetching: requests.isLoading,
   userData: user.getUserData,
   department: user.currentUser.department,
