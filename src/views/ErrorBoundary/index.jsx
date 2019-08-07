@@ -96,10 +96,11 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     const token = hash(error);
+
     this.setState({ crashed: true , token });
     const { reportCrash } = this.props;
     reportCrash({
-      stackTrace: error.stack,
+      stackTrace: `${error.message}\n${errorInfo.componentStack}`,
       link: window.location.href,
       stackTraceId: token
     });
