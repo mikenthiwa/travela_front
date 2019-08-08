@@ -1,28 +1,32 @@
 import checklistWizard, { initialState } from '../checklistWizard';
 import {
-  handleAddChecklistItem,
   addChecklistItemSuccess,
-  handleChecklistItems,
   handleItemsSuccess,
-  addChecklistQuestion,
   addQuestionSuccess,
-  deleteChecklistItems,
   deleteItemsSuccess,
   deleteQuestionSuccess,
-  updateChecklistBehaviour,
   updateBehaviourSuccess,
-  updateChecklistNationality,
   updateNationalitySuccess,
-  updateChecklistDestination,
   updateDestinationSuccess,
-  createDynamicChecklist,
   createDynamicChecklistSuccess,
   undoChecklist,
   redoChecklist,
   resetChecklist,
   getOneChecklist,
   getOneChecklistSuccess,
-  getOneChecklistFailure
+  getOneChecklistFailure,
+  deleteChecklist,
+  deleteChecklistSuccess,
+  deleteChecklistFailure,
+  getDeletedChecklistsSuccess,
+  restoreSingleChecklist,
+  restoreSingleChecklistSuccess,
+  restoreSingleChecklistFailure,
+  restoreAllChecklists,
+  restoreAllChecklistsSuccess,
+  restoreAllChecklistsFailure,
+  getSingleChecklistSuccess,
+  getChecklistFromStorageSuccess
 } from '../../actionCreator/travelChecklistWizardActions';
 
 import travelDynamicChecklist from '../../../mockData/travelChecklistWizardMockData';
@@ -265,6 +269,165 @@ describe('Travel checklists wizard reducer', () => {
       expect(newState.message).toEqual('checklist created successfully');
       done();
     });
+
+  it('should trigger loader on click of delete "checklist"',
+    (done) => {
+      const currentState = {
+        ...initialState,
+      };
+
+      const action = deleteChecklist({}, 1);
+      const newState = checklistWizard(currentState, action);
+      expect(newState.isDeleting).toEqual(true);
+      done();
+    });
+
+  it('should update the state on succesfully deleting a checklist',
+    (done) => {
+      const currentState = {
+        ...initialState,
+        deletedChecklists: [{ name: 'checklist'}],
+        checklists: [{ item: [{name: 'checklist'}]}],
+      };
+
+      const action = deleteChecklistSuccess({}, 1);
+      const newState = checklistWizard(currentState, action);
+      expect(newState.isDeleting).toEqual(false);
+      expect(newState.checklists).toEqual([{ item: [{name: 'checklist'}]}]);
+      expect(newState.deletedChecklists).toEqual([{ name: 'checklist'}, {}]);
+      done();
+    });
+
+  it('should set delete state to false on checklist delete failure',
+  (done) => {
+    const currentState = {
+      ...initialState,
+    };
+
+    const action = deleteChecklistFailure();
+    const newState = checklistWizard(currentState, action);
+    expect(newState.isDeleting).toEqual(false);
+    done();
+  });
+
+  it('should update deletedChecklist state with fetch deleted checklist data',
+  (done) => {
+    const currentState = {
+      ...initialState,
+    };
+
+    const action = getDeletedChecklistsSuccess([{name: 'deleted checklist'}]);
+    const newState = checklistWizard(currentState, action);
+    expect(newState.deletedChecklists).toEqual([{name: 'deleted checklist'}]);
+    done();
+  });
+
+  it('should set restoring state to true when restoring a deleted checklist',
+  (done) => {
+    const currentState = {
+      ...initialState,
+    };
+
+    const action = restoreSingleChecklist({}, 1);
+    const newState = checklistWizard(currentState, action);
+    expect(newState.isRestoring).toEqual(true);
+    done();
+  });
+
+  it('should update the state on successfully restoring a checklist',
+  (done) => {
+    const currentState = {
+      ...initialState,
+      deletedChecklists: [{name: 'remove from deleted checklists'}],
+      checklists: [{name: 'restored checklist'}]
+    };
+
+    const action = restoreSingleChecklistSuccess({}, 1);
+    const newState = checklistWizard(currentState, action);
+    expect(newState.isRestoring).toEqual(false);
+    expect(newState.deletedChecklists).toEqual([{name: 'remove from deleted checklists'}]);
+    expect(newState.checklists).toEqual([{name: 'restored checklist'}, {}]);
+    done();
+  });
+
+  it('should set restoring state to false when restoring a deleted checklist fails',
+  (done) => {
+    const currentState = {
+      ...initialState,
+    };
+
+    const action = restoreSingleChecklistFailure();
+    const newState = checklistWizard(currentState, action);
+    expect(newState.isRestoring).toEqual(false);
+    done();
+  });
+
+  it('should set restoring state to true when restoring all checklists',
+  (done) => {
+    const currentState = {
+      ...initialState,
+    };
+
+    const action = restoreAllChecklists();
+    const newState = checklistWizard(currentState, action);
+    expect(newState.isRestoring).toEqual(true);
+    done();
+  });
+
+  it('should update the state on successfully restoring all checklist',
+  (done) => {
+    const currentState = {
+      ...initialState,
+      deletedChecklists: [],
+      checklists: [{name: 'restored checklist'}]
+    };
+
+    const action = restoreAllChecklistsSuccess({}, 1);
+    const newState = checklistWizard(currentState, action);
+    expect(newState.isRestoring).toEqual(false);
+    expect(newState.deletedChecklists).toEqual([]);
+    expect(newState.checklists).toEqual([{name: 'restored checklist'}]);
+    done();
+  });
+
+  it('should set restoring state to false when restoring all checklists fails',
+  (done) => {
+    const currentState = {
+      ...initialState,
+    };
+
+    const action = restoreAllChecklistsFailure();
+    const newState = checklistWizard(currentState, action);
+    expect(newState.isRestoring).toEqual(false);
+    done();
+  });
+
+  it('should update state on successfully fetching a single checklist',
+  (done) => {
+    const currentState = {
+      ...initialState,
+    };
+
+    const action = getSingleChecklistSuccess({ name: 'Nigeria'}, [{ name: 'ghana'}, {name: 'Nigeria'}], [{ name: 'items' }]);
+    const newState = checklistWizard(currentState, action);
+    expect(newState.nationality).toEqual({ name: 'Nigeria'});
+    expect(newState.destinations).toEqual([{ name: 'ghana'}, {name: 'Nigeria'}]);
+    expect(newState.items).toEqual([{ name: 'items' }]);
+    done();
+  });
+
+  it('should update state on successfully fetching a checklist from localstorage',
+  (done) => {
+    const currentState = {
+      ...initialState,
+    };
+
+    const action = getChecklistFromStorageSuccess({ name: 'Nigeria'}, [{ name: 'ghana'}, {name: 'Nigeria'}], [{ name: 'items' }]);
+    const newState = checklistWizard(currentState, action);
+    expect(newState.nationality).toEqual({ emoji: "", name: 'Nigeria'});
+    expect(newState.destinations).toEqual([{ name: 'ghana'}, {name: 'Nigeria'}]);
+    done();
+  });
 
   it('should return default state', (done) => {
     const newState = checklistWizard(initialState, {});

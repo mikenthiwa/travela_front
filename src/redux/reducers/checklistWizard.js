@@ -1,4 +1,7 @@
 import shortId from 'shortid';
+import helpers from '../../views/ChecklistWizard/helpers';
+import UndoStack from '../../helper/UndoStack';
+
 import {
   GET_ALL_DYNAMIC_CHECKLISTS,
   GET_ALL_DYNAMIC_CHECKLISTS_FAILURE,
@@ -18,9 +21,20 @@ import {
   GET_ONE_CHECKLIST,
   GET_ONE_CHECKLIST_SUCCESS,
   GET_ONE_CHECKLIST_FAILURE,
+  DELETE_CHECKLIST,
+  DELETE_CHECKLIST_SUCCESS,
+  DELETE_CHECKLIST_FAILURE,
+  GET_ALL_DELETED_CHECKLISTS_SUCCESS,
+  RESTORE_CHECKLIST,
+  RESTORE_CHECKLIST_SUCCESS,
+  RESTORE_CHECKLIST_FAILURE,
+  RESTORE_ALL_CHECKLISTS,
+  RESTORE_ALL_CHECKLISTS_SUCCESS,
+  RESTORE_ALL_CHECKLISTS_FAILURE,
+  GET_SINGLE_CHECKLIST_SUCCESS,
+  GET_CHECKLIST_FROM_STORAGE_SUCCESS
 } from '../constants/actionTypes';
-import helpers from '../../views/ChecklistWizard/helpers';
-import UndoStack from '../../helper/UndoStack';
+
 
 const config = {
   nationality: { 
@@ -52,15 +66,17 @@ const ChecklistStorage = new UndoStack(config);
 
 export const initialState = {
   checklists: [],
+  deletedChecklists: [],
+  isDeleting: false,
+  isRestoring: false,
   loading: false,
   error: null,
   nationality: ChecklistStorage.current.nationality,
   destinations: ChecklistStorage.current.destinations,
   items: ChecklistStorage.current.items,
-  message: '',
   disableUndo: ChecklistStorage.disableUndo,
   disableRedo: ChecklistStorage.disableRedo,
-  checklist: []
+  message: ''
 };
 
 const reorder = (state, order) => {
@@ -125,7 +141,7 @@ const checklistWizard = (state = initialState, action) => {
     ChecklistStorage.save({ ...state, nationality: action.nationality });
     return { 
       ...state, 
-      nationality: ChecklistStorage.current.nationality, 
+      nationality: ChecklistStorage.current.nationality,
       disableUndo: ChecklistStorage.disableUndo,
       disableRedo: ChecklistStorage.disableRedo,
     };
@@ -182,6 +198,56 @@ const checklistWizard = (state = initialState, action) => {
     return { ...state, checklist: action.payload, loading: false };
   case GET_ONE_CHECKLIST_FAILURE:
     return { ...state, error: action.error, loading: false };
+  case DELETE_CHECKLIST:
+    return { ...state, isDeleting: true };
+  case DELETE_CHECKLIST_SUCCESS:
+    return { 
+      ...state,
+      checklists: state.checklists.filter(checklist => checklist.id !== Number(action.checklistId)),
+      deletedChecklists: state.deletedChecklists.concat(action.deletedChecklist),
+      isDeleting: false
+    };
+  case DELETE_CHECKLIST_FAILURE:
+    return { ...state, isDeleting: false };
+  case GET_ALL_DELETED_CHECKLISTS_SUCCESS:
+    return { ...state, deletedChecklists: [...action.deletedChecklists] };
+  case RESTORE_CHECKLIST:
+    return { ...state, isRestoring: true };
+  case RESTORE_CHECKLIST_SUCCESS:
+    return { 
+      ...state,
+      deletedChecklists: state.deletedChecklists.filter(checklist => checklist.id !== Number(action.checklistId)),
+      checklists: state.checklists.concat(action.restoredChecklist),
+      isRestoring: false
+    };
+  case RESTORE_CHECKLIST_FAILURE:
+    return { ...state, isRestoring: false };
+  case RESTORE_ALL_CHECKLISTS:
+    return { ...state, isRestoring: true };
+  case RESTORE_ALL_CHECKLISTS_SUCCESS:
+    return { 
+      ...state,
+      checklists: [...state.checklists, ...state.deletedChecklists],
+      deletedChecklists: [],
+      isRestoring: false
+    };
+  case RESTORE_ALL_CHECKLISTS_FAILURE:
+    return { ...state, isRestoring: false };
+  case GET_SINGLE_CHECKLIST_SUCCESS:
+    ChecklistStorage.save({ ...state, nationality: action.origin, destinations: action.destinations, items: action.config });
+    return { 
+      ...state,
+      nationality: ChecklistStorage.current.nationality,
+      destinations: ChecklistStorage.current.destinations,
+      items: ChecklistStorage.current.items,
+    };
+  case GET_CHECKLIST_FROM_STORAGE_SUCCESS:
+    return { 
+      ...state,
+      nationality: Object.assign(state.nationality, action.origin),
+      destinations: action.destinations,
+      items: Object.assign(state.items, action.config)
+    };
   default: return state;
   }
 };

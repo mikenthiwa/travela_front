@@ -1,3 +1,5 @@
+import shortId from 'shortid';
+
 const arrangeChecklistByOrder = (items) => items.sort((a, b) => a.order - b.order);
 
 const reorderItems = (items) => {

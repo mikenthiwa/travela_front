@@ -70,6 +70,8 @@ const routes = {
   '/trip-planner/checklists': [ConnectedChecklist, TRAVEL_MANAGERS],
   '/trip-planner/travel-readiness': [ConnectedTravelReadinessDocuments, TRAVEL_MANAGERS],
   '/trip-planner/checklist-wizard': [ConnectedChecklistWizard, TRAVEL_MANAGERS],
+  '/trip-planner/checklist-wizard/edit-checklist/:checklistId': [ConnectedChecklistWizard, TRAVEL_MANAGERS],
+  '/trip-planner/checklist-wizard?make_copy=checklistId': [ConnectedChecklistWizard, TRAVEL_MANAGERS],
   '/travel-readiness/:userId': [ConnectedUserTravelReadinessDetails, TRAVEL_MANAGERS],
   '/settings/roles/:roleId': [ConnectedRoleDetails, TRAVEL_MANAGERS],
   '/settings/reminder-setup': [ConnectedReminderSetup, TRAVEL_MANAGERS],
