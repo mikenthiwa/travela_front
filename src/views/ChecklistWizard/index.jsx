@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { debounce } from 'lodash';
 import { DragDropContext } from 'react-beautiful-dnd';
 import CheckListWizardHeader from '../../components/CheckListWizard/ChecklistWizardHeader';
 import CheckListWizardBuilder from '../../components/CheckListWizard/ChecklistWizardBuilder';
@@ -15,54 +14,19 @@ import {
   undoChecklist,
   redoChecklist,
   resetChecklist,
-  getSingleChecklist,
-  updateChecklist,
-  getChecklistFromStorage,
 } from '../../redux/actionCreator/travelChecklistWizardActions';
 import './index.scss';
 
 export class ChecklistWizard extends Component {
-  state = {
-    timeSaved: '',
-    isSaving: false
-  };
 
-  debounceEvent = debounce((checklistWizard) => {
-    localStorage.setItem('checklistWizard', JSON.stringify(checklistWizard));
-    localStorage.setItem('timestamp', JSON.stringify(new Date()));
-    const timestamp = JSON.parse(localStorage.getItem('timestamp'));
-    this.setState({ timeSaved: timestamp, isSaving: false });
-  }, 2000);
-
-  async componentDidMount() {
-    const checklistStorage = JSON.parse(localStorage.getItem('checklistWizard'));    
-    const { getSingleChecklist, getChecklistFromStorage, match: { params: { checklistId }}, location } = this.props;
-    const query = new URLSearchParams(location.search);
-    const queryId = query.get('make_copy');
-    if(checklistStorage) {
-      await getChecklistFromStorage(checklistStorage);
-    } else if(checklistId) {
-      await getSingleChecklist(checklistId);
-    } else {
-      await getSingleChecklist(queryId);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { checklistWizard } = this.props;
-    if(prevProps.checklistWizard !== checklistWizard){
-      this.debounceEvent(checklistWizard);
-      // eslint-disable-next-line
-      this.setState({ isSaving: true });
-    }
+  componentWillMount() {
+    const { resetChecklist } = this.props;
+    resetChecklist();
   }
 
   componentWillUnmount() {
     const { resetChecklist } = this.props;
-    this.debounceEvent.cancel();
     resetChecklist();
-    localStorage.removeItem('checklistWizard');
-    localStorage.removeItem('timestamp');
   }
 
   addNewChecklistItem = () => {
@@ -95,12 +59,8 @@ export class ChecklistWizard extends Component {
   }
 
   postChecklist = () => {
-    const { checklistWizard, createDynamicChecklist, updateChecklist, match: { params: { checklistId }}} = this.props;
-    if(checklistId) {
-      updateChecklist(checklistWizard, checklistId);
-    } else {
-      createDynamicChecklist(checklistWizard);
-    }
+    const { checklistWizard, createDynamicChecklist } = this.props;
+    createDynamicChecklist(checklistWizard);
   }
 
   onDragEnd = ({ destination, source, draggableId }) => {
@@ -116,7 +76,6 @@ export class ChecklistWizard extends Component {
   }
 
   render() {
-    const { timeSaved, isSaving } = this.state;
     const { checklistWizard, undoChecklist, redoChecklist } = this.props;
     return (
       <DragDropContext
@@ -129,8 +88,6 @@ export class ChecklistWizard extends Component {
             undoChecklist={undoChecklist} 
             redoChecklist={redoChecklist}
             resetChecklist={resetChecklist}
-            timeSaved={timeSaved}
-            isSaving={isSaving}
           />
           <div className="checklist-wizard-container">
             <CheckListWizardBuilder
@@ -156,9 +113,6 @@ export class ChecklistWizard extends Component {
   }
 }
 
-ChecklistWizard.defaultProps = {
-  match: {},
-};
 
 ChecklistWizard.propTypes = {
   checklistWizard: PropTypes.object.isRequired,
@@ -169,10 +123,6 @@ ChecklistWizard.propTypes = {
   undoChecklist: PropTypes.func.isRequired,
   redoChecklist: PropTypes.func.isRequired,
   resetChecklist: PropTypes.func.isRequired,
-  getSingleChecklist: PropTypes.func.isRequired,
-  updateChecklist: PropTypes.func.isRequired,
-  getChecklistFromStorage: PropTypes.func.isRequired,
-  match: PropTypes.shape(PropTypes.shape)
 };
 
 export const mapStateToProps = checklistWizard => checklistWizard;
@@ -185,9 +135,6 @@ const mapDispatchToProps = {
   undoChecklist,
   redoChecklist,
   resetChecklist,
-  getSingleChecklist,
-  updateChecklist,
-  getChecklistFromStorage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChecklistWizard);

@@ -1,6 +1,8 @@
 import React, { Children } from 'react';
 import { shallow, mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
+import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { ChecklistWizard, mapStateToProps } from '..';
 
 
@@ -52,15 +54,7 @@ const props = {
   updateChecklistDestination: jest.fn(),
   createDynamicChecklist: jest.fn(),
   resetChecklist: jest.fn(),
-  mapStateToProps: jest.fn(),
-  undoChecklist: jest.fn(),
-  redoChecklist: jest.fn(),
-  resetChecklist: jest.fn(),
-  getSingleChecklist: jest.fn(),
-  updateChecklist: jest.fn(),
-  getChecklistFromStorage: jest.fn(),
-  match: { params: { checklistId: 1 } },
-  location: { search: 'make_copy?=2' },
+  mapStateToProps: jest.fn()
 };
 
 jest.mock('../../../components/CheckListWizard/ChecklistWizardHeader', () => {
@@ -68,8 +62,11 @@ jest.mock('../../../components/CheckListWizard/ChecklistWizardHeader', () => {
   return Component;
 });
 
+
 describe('<ChecklistWizard />', () => {
   const mockStore = configureStore();
+  const store = mockStore('nukuknkun');
+
 
   it('should render correctly', () => {
     const wrapper = shallow(<ChecklistWizard {...props} />
@@ -77,21 +74,6 @@ describe('<ChecklistWizard />', () => {
 
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.length).toBe(1);
-    wrapper.unmount();
-  });
-
-  it('should call debounce when component did update', () => {
-    const updatedChecklist = {
-      nationality: { name: 'Nigeria' },
-      items: [{ name: 'items' }],
-      destinations: [{name: 'Nigeria'}, {name: 'Kenya'}]
-    }
-    const wrapper = shallow(<ChecklistWizard {...props} />);
-
-    jest.spyOn(wrapper.instance(), 'componentDidUpdate');
-    wrapper.setProps({ checklistWizard: updatedChecklist })
-    expect(wrapper.instance().props.checklistWizard).toEqual(updatedChecklist);
-
     wrapper.unmount();
   });
 
@@ -104,18 +86,19 @@ describe('<ChecklistWizard />', () => {
     wrapper.unmount();
     expect(componentWillUnmount).toHaveBeenCalledTimes(1);
   });
-
   it('should handle update nationality', () => {
     const wrapper = shallow(<ChecklistWizard {...props} />);
     wrapper.instance().updateNationality('nigeria', '9jaflag');
     expect(props.updateChecklistNationality).toHaveBeenCalledTimes(1);
   });
 
+
   it('should handle update destination', () => {
     const wrapper = shallow(<ChecklistWizard {...props} />);
     wrapper.instance().updateDestinations(['USA', 'Brazil', 'Japan']);
     expect(props.updateChecklistDestination).toHaveBeenCalledTimes(1);
   });
+
 
   it('should handle new checklist', () => {
     const wrapper = shallow(<ChecklistWizard {...props} />);
@@ -137,24 +120,10 @@ describe('<ChecklistWizard />', () => {
     expect(props.handleChecklistItems).toHaveBeenCalledTimes(1);
   });
 
-  it('should call getSingleChecklist', () => {
-    const queryId = 1;
-    const wrapper = shallow(<ChecklistWizard {...props} queryId={queryId} />);
-    wrapper.instance().componentDidMount();
-    expect(props.getSingleChecklist).toHaveBeenCalledWith(queryId);
-  });
-
-  it('should update the checklist', () => {
-    const wrapper = shallow(<ChecklistWizard {...props} match={{params: {checklistId: 1 }}} />);
-    wrapper.instance().postChecklist();
-    expect(props.updateChecklist).toHaveBeenCalled();
-  });
-
   it('should create a checklist', () => {
-    const match = { params: { checklistId: 1 }}
-    const wrapper = shallow(<ChecklistWizard {...props} match={{params: {checklistId: '' }}}  />);
+    const wrapper = shallow(<ChecklistWizard {...props} />);
     wrapper.instance().postChecklist();
-    expect(props.createDynamicChecklist).toHaveBeenCalled();
+    expect(props.createDynamicChecklist).toHaveBeenCalledTimes(1);
   });
 
   it('should handle drag end', () => {
@@ -173,7 +142,7 @@ describe('<ChecklistWizard />', () => {
     expect(props.handleChecklistItems).toHaveBeenCalledTimes(0);
   });
 
-  it('does not call handlechecklistitems when drop area is invalid', () => {
+  it('does not call handlecheclistitems when drop area is invalid', () => {
     const wrapper = shallow(<ChecklistWizard {...props} />);
     props.handleChecklistItems.mockClear();
     wrapper.instance().onDragEnd({ destination: null, source: { index: 1 }, draggableId: 'id' });

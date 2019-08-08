@@ -2,7 +2,7 @@
   .role-panel-header {
     padding: 0;
     display: grid;
-    grid-template-columns: 50px 1fr 1fr;
+    grid-template-columns: 50px 2fr 1fr;
   }
 
   .checklist-back-btn{
@@ -31,14 +31,7 @@
     display: flex;
     align-self: center;
     justify-self: right;
-    align-items: center;
     margin-top: 37px;
-
-    p {
-      font-style: italic;
-      color: #5A6577;
-      margin-right: 15px !important;
-    }
 
     .redo{
       transform: scaleX(-1);

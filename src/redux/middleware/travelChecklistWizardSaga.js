@@ -1,7 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import toast from 'toastr';
 import travelDynamicChecklistApi from '../../services/travelDynamiChecklistApi';
-import apiErrorHandler from '../../services/apiErrorHandler';
 
 import {
   UPDATE_NATIONALITY,
@@ -13,15 +12,7 @@ import {
   HANDLE_ITEMS,
   DELETE_ITEM,
   CREATE_DYNAMIC_CHECKLIST,
-  GET_ONE_CHECKLIST,
-  GET_ALL_DYNAMIC_CHECKLISTS,
-  DELETE_CHECKLIST,
-  GET_DELETED_CHECKLISTS,
-  RESTORE_CHECKLIST,
-  RESTORE_ALL_CHECKLISTS,
-  GET_SINGLE_CHECKLIST,
-  UPDATE_CHECKLIST,
-  GET_CHECKLIST_FROM_STORAGE
+  GET_ONE_CHECKLIST
 } from '../constants/actionTypes';
 import {
   addChecklistItemSuccess,
@@ -34,20 +25,9 @@ import {
   updateDestinationSuccess,
   createDynamicChecklistSuccess,
   getOneChecklistSuccess,
-  getOneChecklistFailure,
-  getAllDynamicChecklistsSuccess,
-  getAllDynamicChecklistsFailure,
-  deleteChecklistSuccess,
-  deleteChecklistFailure,
-  getDeletedChecklistsSuccess,
-  restoreSingleChecklistSuccess,
-  restoreSingleChecklistFailure,
-  restoreAllChecklistsSuccess,
-  restoreAllChecklistsFailure,
-  getSingleChecklistSuccess,
-  updateChecklistSuccess,
-  getChecklistFromStorageSuccess
+  getOneChecklistFailure
 } from '../actionCreator/travelChecklistWizardActions';
+import apiErrorHandler from '../../services/apiErrorHandler';
 
 
 export function* addNewChecklistItem(newItems) {
@@ -125,9 +105,8 @@ export function* createChecklist(checklist) {
     const response = yield call(travelDynamicChecklistApi.createDynamicChecklist, checklistPayload);
     yield put(createDynamicChecklistSuccess(response.data.message));
     toast.success(response.data.message);
-  } catch(error) {
-    const errorMessage = apiErrorHandler(error);
-    yield call(toast.error, errorMessage);
+  } catch(err) {
+    toast.error(err.message);
   }
 }
 
@@ -147,146 +126,4 @@ export function* getOneChecklistSaga(action) {
     const errorMessage = apiErrorHandler(error);
     yield put(getOneChecklistFailure(errorMessage));
   }
-}
-
-export function* getAllDynamicChecklistsSaga() {
-  try {
-    const { data } = yield call(travelDynamicChecklistApi.getAllDynamicChecklists);
-    yield put(getAllDynamicChecklistsSuccess(data.checklists));
-  } catch (error) {
-    const errorMessage = apiErrorHandler(error);
-    yield put(getAllDynamicChecklistsFailure(errorMessage));
-  }
-}
-
-export function* watchgetAllDynamicChecklists() {
-  yield takeLatest(GET_ALL_DYNAMIC_CHECKLISTS, getAllDynamicChecklistsSaga);
-}
-
-export function* deleteChecklistWizard(checklist) {
-  try {
-    const { deletedChecklist, checklistId } = checklist;
-    const response = yield call(travelDynamicChecklistApi.deleteAChecklist, checklistId);
-
-    yield put(deleteChecklistSuccess(deletedChecklist, checklistId));
-    toast.success(response.data.message);
-  } catch(err) {
-    yield put(deleteChecklistFailure());
-    toast.error('Unable to delete this checklist, please try again!!!');
-  }
-}
-
-export function* watchDeleteChecklistWizard() {
-  yield takeLatest(DELETE_CHECKLIST, deleteChecklistWizard);
-}
-
-export function* getDeletedChecklists() {
-  try {
-    const response = yield call(travelDynamicChecklistApi.deletedChecklists);
-    yield put(getDeletedChecklistsSuccess(response.data.checklists));
-  } catch(error) {
-    const errorMessage = apiErrorHandler(error);
-    yield put(getAllDynamicChecklistsFailure(errorMessage));
-    toast.error(errorMessage);
-  }
-}
-
-export function* watchGetDeletedChecklists() {
-  yield takeLatest(GET_DELETED_CHECKLISTS, getDeletedChecklists);
-}
-
-export function* restoreAChecklist(checklist) {
-  try {
-    const { restoredChecklist, checklistId } = checklist;
-    const response = yield call(travelDynamicChecklistApi.restoreAChecklist, checklistId);
-    yield put(restoreSingleChecklistSuccess(restoredChecklist, checklistId));
-    toast.success(response.data.message);
-  } catch(error) {
-    const errorMessage = apiErrorHandler(error);
-    yield put(restoreSingleChecklistFailure());
-    toast.error(errorMessage);
-  }
-}
-
-export function* watchRestoreAChecklist() {
-  yield takeLatest(RESTORE_CHECKLIST, restoreAChecklist);
-}
-
-export function* restoreAllChecklists() {
-  try {
-    const response = yield call(travelDynamicChecklistApi.restoreAllChecklists);
-    yield put(restoreAllChecklistsSuccess());
-    toast.success(response.data.message);
-  } catch(error) {
-    const errorMessage = apiErrorHandler(error);
-    yield put(restoreAllChecklistsFailure());
-    toast.error(errorMessage);
-  }
-}
-
-export function* watchRestoreAllChecklists() {
-  yield takeLatest(RESTORE_ALL_CHECKLISTS, restoreAllChecklists);
-}
-
-export function* getSingleChecklist(checklist) {
-  const { checklistId } = checklist;
-  try {
-    const response = yield call(travelDynamicChecklistApi.getSingleChecklist, checklistId);
-
-    const { origin, destinations, config } = response.data.checklist;
-    const { country } = origin[0];
-
-    const originFrom = { emoji: '', name: country.country };
-    const destination = destinations.map(dest => {
-      return { name: dest.country.country };
-    });
-
-    yield put(getSingleChecklistSuccess(originFrom, destination, config));
-  } catch(error) {
-    apiErrorHandler(error);
-  }
-}
-
-export function* watchGetSingleChecklist() {
-  yield takeLatest(GET_SINGLE_CHECKLIST, getSingleChecklist);
-}
-
-export function* getChecklistFromStorage(checklist) {
-  const { checklistWizard } = checklist;
-  const checklistStorage = {
-    origin: { 
-      emoji: '',
-      name: checklistWizard.nationality.name },
-    destinations: checklistWizard.destinations,
-    config: checklistWizard.items
-  };
-  const { origin, destinations, config } = checklistStorage;
-
-  yield put(getChecklistFromStorageSuccess(origin, destinations, config));
-}
-
-export function* watchGetChecklistFromStorage() {
-  yield takeLatest(GET_CHECKLIST_FROM_STORAGE, getChecklistFromStorage);
-}
-
-export function* updateDynamicChecklist(payload) {
-  try {
-    const { checklistId, checklist } = payload;
-    const checklistPayload = {
-      origin: { country: checklist.nationality.name },
-      destinations: { countries: checklist.destinations.map(dest => dest.name) },
-      config: checklist.items
-    };
-
-    yield call(travelDynamicChecklistApi.updateChecklist, checklistId, checklistPayload);
-    yield put(updateChecklistSuccess());
-    toast.success('Checklist updated successfully');
-  } catch(error) {
-    const errorMessage = apiErrorHandler(error);
-    yield call(toast.error, errorMessage);
-  }
-}
-
-export function* watchUpdateDynamicChecklist() {
-  yield takeLatest(UPDATE_CHECKLIST, updateDynamicChecklist);
 }

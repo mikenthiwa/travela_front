@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import moment from 'moment';
 import PageHeader from '../../PageHeader';
 import UndoIcon from '../images/Back.svg';
 import BackIcon from '../images/left-arrow.svg';
@@ -43,7 +42,7 @@ export class ChecklistWizardHeader extends Component {
   };
 
   render() {
-    const { disableUndo, disableRedo, redoChecklist, undoChecklist, timeSaved, isSaving } = this.props;
+    const { disableUndo, disableRedo, redoChecklist, undoChecklist } = this.props;
     return (
       <div className="checklist-builder-header">
         <div className="role-panel-header">
@@ -52,8 +51,6 @@ export class ChecklistWizardHeader extends Component {
           </button>
           <PageHeader title="TRAVEL CHECKLIST BUILDER" /> 
           <div className="undo-redo-container">
-            <p>{isSaving && 'saving...'}</p>
-            <p>{timeSaved && !isSaving ? `Auto-saved ${moment(timeSaved).fromNow()}`: null}</p>
             <button disabled={disableUndo} onClick={undoChecklist} className="undo" type="button">
               <img src={UndoIcon} alt="undo" />
             </button>
@@ -67,10 +64,6 @@ export class ChecklistWizardHeader extends Component {
   }
 }
 
-ChecklistWizardHeader.defaultProps = {
-  isSaving: false
-};
-
 ChecklistWizardHeader.propTypes = {
   history: PropTypes.object.isRequired,
   disableUndo: PropTypes.bool.isRequired,
@@ -78,8 +71,6 @@ ChecklistWizardHeader.propTypes = {
   redoChecklist: PropTypes.func.isRequired,
   undoChecklist: PropTypes.func.isRequired,
   resetChecklist: PropTypes.func.isRequired,
-  timeSaved: PropTypes.string.isRequired,
-  isSaving: PropTypes.bool,
 };
 
 export default withRouter(ChecklistWizardHeader);

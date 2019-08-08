@@ -22,38 +22,17 @@ import {
   RESET_DYNAMIC_CHECKLIST,
   GET_ONE_CHECKLIST,
   GET_ONE_CHECKLIST_SUCCESS,
-  GET_ONE_CHECKLIST_FAILURE,
-  GET_ALL_DYNAMIC_CHECKLISTS,
-  GET_ALL_DYNAMIC_CHECKLISTS_FAILURE,
-  GET_ALL_DYNAMIC_CHECKLISTS_SUCCESS,
-  DELETE_CHECKLIST,
-  DELETE_CHECKLIST_SUCCESS,
-  DELETE_CHECKLIST_FAILURE,
-  GET_DELETED_CHECKLISTS,
-  GET_ALL_DELETED_CHECKLISTS_SUCCESS,
-  RESTORE_CHECKLIST,
-  RESTORE_CHECKLIST_SUCCESS,
-  RESTORE_CHECKLIST_FAILURE,
-  RESTORE_ALL_CHECKLISTS,
-  RESTORE_ALL_CHECKLISTS_SUCCESS,
-  RESTORE_ALL_CHECKLISTS_FAILURE,
-  GET_SINGLE_CHECKLIST,
-  GET_SINGLE_CHECKLIST_SUCCESS,
-  UPDATE_CHECKLIST,
-  UPDATE_CHECKLIST_SUCCESS,
-  GET_CHECKLIST_FROM_STORAGE,
-  GET_CHECKLIST_FROM_STORAGE_SUCCESS
+  GET_ONE_CHECKLIST_FAILURE
 } from '../constants/actionTypes';
-
 
 export const handleAddChecklistItem = item => ({
   type: ADD_NEW_CHECKLIST_ITEM,
-  item
+  item,
 });
 
 export const addChecklistItemSuccess = newItem => ({
   type: ADD_NEW_CHECKLIST_ITEM_SUCCESS,
-  newItem
+  newItem,
 });
 
 
@@ -163,105 +142,4 @@ export const getOneChecklistSuccess = checklist => ({
 export const getOneChecklistFailure = error => ({
   type: GET_ONE_CHECKLIST_FAILURE,
   error
-});
-
-export const getAllDynamicChecklists = () => ({
-  type: GET_ALL_DYNAMIC_CHECKLISTS
-});
-
-export const getAllDynamicChecklistsSuccess = checklists => ({
-  type: GET_ALL_DYNAMIC_CHECKLISTS_SUCCESS,
-  checklists
-});
-
-export const getAllDynamicChecklistsFailure = error => ({
-  type: GET_ALL_DYNAMIC_CHECKLISTS_FAILURE,
-  error
-});
-
-export const deleteChecklist = (deletedChecklist, checklistId) => ({
-  type: DELETE_CHECKLIST,
-  deletedChecklist,
-  checklistId
-});
-
-export const deleteChecklistSuccess = (deletedChecklist, checklistId) => ({
-  type: DELETE_CHECKLIST_SUCCESS,
-  deletedChecklist,
-  checklistId
-});
-
-export const deleteChecklistFailure = () => ({
-  type: DELETE_CHECKLIST_FAILURE,
-});
-
-export const getDeletedChecklists = () => ({
-  type: GET_DELETED_CHECKLISTS,
-});
-
-export const getDeletedChecklistsSuccess = (deletedChecklists) => ({
-  type: GET_ALL_DELETED_CHECKLISTS_SUCCESS,
-  deletedChecklists,
-});
-
-export const restoreSingleChecklist = (restoredChecklist, checklistId) => ({
-  type: RESTORE_CHECKLIST,
-  restoredChecklist,
-  checklistId
-});
-
-export const restoreSingleChecklistSuccess = (restoredChecklist, checklistId) => ({
-  type: RESTORE_CHECKLIST_SUCCESS,
-  restoredChecklist,
-  checklistId
-});
-
-export const restoreSingleChecklistFailure = () => ({
-  type: RESTORE_CHECKLIST_FAILURE,
-});
-
-export const restoreAllChecklists = () => ({
-  type: RESTORE_ALL_CHECKLISTS,
-});
-
-export const restoreAllChecklistsSuccess = () => ({
-  type: RESTORE_ALL_CHECKLISTS_SUCCESS,
-});
-
-export const restoreAllChecklistsFailure = () => ({
-  type: RESTORE_ALL_CHECKLISTS_FAILURE,
-});
-
-export const getSingleChecklist = (checklistId) => ({
-  type: GET_SINGLE_CHECKLIST,
-  checklistId
-});
-
-export const getSingleChecklistSuccess = (origin, destinations, config) => ({
-  type: GET_SINGLE_CHECKLIST_SUCCESS,
-  origin,
-  destinations,
-  config
-});
-
-export const updateChecklist = (checklist, checklistId) => ({
-  type: UPDATE_CHECKLIST,
-  checklist,
-  checklistId
-});
-
-export const updateChecklistSuccess = () => ({
-  type: UPDATE_CHECKLIST_SUCCESS
-});
-
-export const getChecklistFromStorage = (checklistWizard) => ({
-  type: GET_CHECKLIST_FROM_STORAGE,
-  checklistWizard
-});
-
-export const getChecklistFromStorageSuccess = (origin, destinations, config) => ({
-  type: GET_CHECKLIST_FROM_STORAGE_SUCCESS,
-  origin,
-  destinations,
-  config
 });
