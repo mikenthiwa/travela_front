@@ -86,8 +86,9 @@ describe('ErrorBoundary', () => {
       type: 'REPORT_CRASH',
     });
 
-    expect(action.data.stackTrace.startsWith('Cannot read property \'toLowerCase\' of undefined')).toBeTruthy();
+    expect(action.data.stackTrace.length > 0).toBeTruthy();
     expect(action.data.stackTraceId).toBeDefined();
     expect(action.data.link).toBeDefined();
+    expect(action.data.info).toBeDefined();
   });
 });

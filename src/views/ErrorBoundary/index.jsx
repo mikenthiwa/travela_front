@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import hash from 'object-hash';
+import ErrorStackParser from 'error-stack-parser';
 import travelaLogo from '../../images/travela-logo.svg';
 import travelaLogoMobile from '../../images/travela-mobile.svg';
 import copy from '../../images/copy.png';
@@ -96,13 +97,17 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     const token = hash(error);
-
     this.setState({ crashed: true , token });
     const { reportCrash } = this.props;
+
     reportCrash({
-      stackTrace: `${error.message}\n${errorInfo.componentStack}`,
+      stackTrace: ErrorStackParser.parse(error),
       link: window.location.href,
-      stackTraceId: token
+      stackTraceId: token,
+      info: {
+        userAgent: window.navigator.userAgent,
+        message: error.message
+      }
     });
   }
 
