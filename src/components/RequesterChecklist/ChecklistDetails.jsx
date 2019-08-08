@@ -1,22 +1,43 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import toast from 'toastr';
 import PropTypes from 'prop-types';
 import ChecklistItems from './ChecklistItems';
 import './ChecklistDetails.scss';
 
 class ChecklistDetails extends Component {
-  render () {
+
+  constructor(props) {
+    super(props);
     const { checklist: { config } } = this.props;
+    this.state = {
+      config,
+    };
+  }
+  
+  handleSkipToQuestion = (id, isDisabled) => {
+    const { config } = this.state;
+    const index = config.findIndex(item => item.id === id) + 1;
+    const newConfig = config.map((item, checklistIndex) => checklistIndex === index ? { ...item, isDisabled } : item);
+    this.setState({ config: newConfig });
+  };
+  
+  render() {
+    const { config } = this.state;
+    const filteredConfig = config.filter(item => !item.isDisabled);
     return (
       <div className="checklist-details">
         <div className="tab-body">
-          {config.length ? config.map(configuration => (
+          {config.length ? filteredConfig.map((configuration, index) => (
             <div className="prompt-wrapper" key={configuration.id}>
               <div className="prompt-number">
-                <div className="checklist-number">{configuration.order}</div>
+                <div className="checklist-number">{index + 1}</div>
                 <div className="checklist-prompt">{configuration.prompt}</div>
               </div>
               <div className="checklist-single-item">
-                <ChecklistItems config={configuration} />
+                <ChecklistItems 
+                  config={configuration}
+                  handleSkipToQuestion={this.handleSkipToQuestion}
+                />
               </div>
             </div>
           )) : <div>No checklist for this trip</div>} 

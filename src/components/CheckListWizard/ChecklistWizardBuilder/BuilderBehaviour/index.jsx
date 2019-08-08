@@ -23,6 +23,7 @@ class Behaviours extends PureComponent {
 
   renderBehaviourInputType = () => {
     const { behaviour } = this.props;
+    if (!behaviour) return null;
     const payload = behaviour.payload || '';
     const actionType = behaviour.type || '';
 
@@ -74,7 +75,7 @@ class Behaviours extends PureComponent {
               <ContextMenu>
                 <MenuItem 
                   classNames="delete"
-                  onClick={() => updateBehaviour({})}
+                  onClick={() => updateBehaviour(null)}
                 >
               Remove Behaviour
                 </MenuItem>

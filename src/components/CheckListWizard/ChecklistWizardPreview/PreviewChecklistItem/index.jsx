@@ -13,7 +13,7 @@ class PreviewChecklistItem extends Component {
   }
 
   render() {
-    const { item, handleSkipToQuestion } = this.props;
+    const { item, handleSkipToQuestion, order } = this.props;
     return (
       <div className="single-preview-item">
         <div
@@ -21,7 +21,7 @@ class PreviewChecklistItem extends Component {
           onAnimationEnd={e => e.target.classList.remove('animate')}
           className="preview-order"
         >
-          {item.order}
+          {order}
         </div>
         <div>
           <p className="preview-prompt">{item.prompt}</p>
@@ -38,6 +38,7 @@ class PreviewChecklistItem extends Component {
 PreviewChecklistItem.propTypes = {
   handleSkipToQuestion: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
+  order: PropTypes.number.isRequired,
 };
 
 export default PreviewChecklistItem;

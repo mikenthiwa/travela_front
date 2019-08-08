@@ -17,8 +17,9 @@ class RenderCheckbox extends Component {
   };
 
   updateBehaviour = (behaviour) => {
+    const { showBehaviourList } = this.state;
     const { item, handleItems } = this.props;
-    handleItems({ ...item, behaviour });
+    this.setState({ showBehaviourList: !!behaviour }, handleItems({ ...item, behaviour }));
   };
 
   updateOptions = (option) => {
@@ -64,12 +65,12 @@ class RenderCheckbox extends Component {
     const { item: { behaviour } } = this.props;
     return (
       <div>
-        {showBehaviourList !== false? (
+        {showBehaviourList ? (
           <BuilderBehaviour
             behaviourText="Upon selecting any option, enable"
             updateBehaviour={this.updateBehaviour}
             showBehaviourList={showBehaviourList}
-            behaviour={behaviour}
+            behaviour={behaviour || {}}
           />
         ): null}
       </div>

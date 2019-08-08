@@ -4,6 +4,7 @@ import BuilderBehaviour from '../BuilderBehaviour';
 import DeleteIcon from '../../Shared/deleteIcon';
 import Helper from './helper';
 
+
 class RadioOptions extends Component {
   state = {
     showBehaviourList: false,
@@ -15,22 +16,24 @@ class RadioOptions extends Component {
     this.setState({ showBehaviourList: !showBehaviourList, optionId });
   };
 
-  changeBehaviour = () => {
+  changeBehaviour = (behaviour) => {
     const { updateBehaviour } = this.props;
-    const { optionId } = this.state;
-    return behaviour => updateBehaviour(behaviour, optionId, 'behaviour');
+    const { optionId, showBehaviourList } = this.state;
+    updateBehaviour(behaviour, optionId, 'behaviour');
+    this.setState({ showBehaviourList: !!behaviour });
   };
 
   renderBehaviour = () => {
     const { showBehaviourList } = this.state;
     const { item, optionNumber } = this.props;
+   
     return (
       <div>
-        {showBehaviourList !== false? (
+        {showBehaviourList? (
           <BuilderBehaviour
-            behaviour={item.behaviour}
+            behaviour={item.behaviour || {}}
             behaviourText={`Upon selecting Option ${optionNumber}, enable`}
-            updateBehaviour={this.changeBehaviour()}
+            updateBehaviour={this.changeBehaviour}
             showBehaviourList={showBehaviourList}
           />
         ): null}

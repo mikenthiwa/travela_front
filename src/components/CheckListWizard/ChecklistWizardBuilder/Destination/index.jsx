@@ -86,7 +86,7 @@ class Destination extends Component {
     if (checkedDestinations.length){
       checkedDestinations.forEach(country => {
         const checkedItem = filteredState.find(item => item.name === country.name); 
-        checkedItem.checked = true;
+        if(checkedItem) checkedItem.checked = true;
       });
     }
 

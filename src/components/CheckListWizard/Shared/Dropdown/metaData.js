@@ -16,7 +16,7 @@ const itemTypeDropdownMetaData = {
 const behaviourTypeDropdownMetaData = {
   options : [
     { value: behaviourTypes.UPLOAD_DOCUMENT, displayValue: 'Upload a document' },
-    { value: behaviourTypes.SKIP_QUESTION, displayValue: 'Skip to another question' },
+    { value: behaviourTypes.SKIP_QUESTION, displayValue: 'Skip next question' },
     { value: behaviourTypes.PREVIEW_DOCUMENT, displayValue: 'Preview Document' },
     { value: behaviourTypes.NOTIFY_EMAIL, displayValue: 'Notify an Email Address' },
   ],

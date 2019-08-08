@@ -6,16 +6,11 @@ import NotifyEmail from './NotifyEmail';
 import SkipToAnotherQuestion from './SkipToAnotherQuestion';
 import PreviewDocument from './PreviewDocument';
 
-const PreviewBehaviour = ({ behaviour, handleSkipToQuestion }) => {
+const PreviewBehaviour = ({ behaviour }) => {
+  if (!behaviour) return <div className="behaviour-style">This option has not been given a behaviour</div>;
   switch (behaviour.type) {
   case behaviourTypes.UPLOAD_DOCUMENT:
     return (<div className="behaviour-style"><UploadDocument behaviour={behaviour} /></div>);
-  case behaviourTypes.SKIP_QUESTION:
-    return (
-      <div className="behaviour-style">
-        <SkipToAnotherQuestion behaviour={behaviour} handleSkipToQuestion={handleSkipToQuestion} />
-      </div>
-    );
   case behaviourTypes.PREVIEW_DOCUMENT:
     return (
       <div className="behaviour-style">
@@ -29,16 +24,11 @@ const PreviewBehaviour = ({ behaviour, handleSkipToQuestion }) => {
       </div>
     );
   default:
-    return <div className="behaviour-style">This option has not been given a behaviour</div>;
+    return null;
   }
 };
 
-PreviewBehaviour.defaultProps = {
-  handleSkipToQuestion: () => {},
-};
-
 PreviewBehaviour.propTypes = {
-  handleSkipToQuestion: PropTypes.func,
   behaviour: PropTypes.object.isRequired,
 };
 

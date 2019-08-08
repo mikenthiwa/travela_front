@@ -5,7 +5,7 @@ export const ChecklistModel = (num) => ({
   order: num + 1,
   prompt: '',
   type: '',
-  behaviour: {},
+  behaviour: null,
   configuration: {
     options: [OptionModel()]
   }
@@ -14,5 +14,5 @@ export const ChecklistModel = (num) => ({
 export const OptionModel = () => ({
   id: shortId.generate(),
   name: '',
-  behaviour: {}
+  behaviour: null
 });

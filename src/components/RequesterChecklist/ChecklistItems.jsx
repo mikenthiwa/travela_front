@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PreviewImage from '../CheckListWizard/ChecklistWizardPreview/PreviewImage';
 import PreviewVideo from '../CheckListWizard/ChecklistWizardPreview/PreviewVideo';
+import RequesterViewCheckbox from '../CheckListWizard/ChecklistWizardRequester/PreviewCheckbox/index';
 
 class ChecklistItems extends Component {
   
   render () {
-    const { config } = this.props;
+    const { config, handleSkipToQuestion } = this.props;
     switch (config.type) {
     case 'checkbox':
-      return  (<div>This is a checkbox option</div>);
+      return (
+        <RequesterViewCheckbox 
+          handleSkipToQuestion={handleSkipToQuestion}
+          item={config}
+        
+        />
+      );
     case 'image':
       return (<PreviewImage item={config} />);
     case 'radio':
@@ -27,7 +34,8 @@ class ChecklistItems extends Component {
 }
 
 ChecklistItems.propTypes = {
-  config: PropTypes.object.isRequired
+  config: PropTypes.object.isRequired,
+  handleSkipToQuestion: PropTypes.func.isRequired
 };
 
 export default ChecklistItems;

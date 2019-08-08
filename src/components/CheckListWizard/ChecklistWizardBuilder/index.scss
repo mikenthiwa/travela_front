@@ -39,7 +39,6 @@
     .builder-header {
         margin: 30px 50px 10px 50px;
         color: #3359DB;
-
     }
 
 
@@ -61,12 +60,10 @@
         margin: 40px 0 30px 0;
         color: #3359DB;
 
-
         &.first {
             grid-row: 1;
             grid-column: 2/4;
             font-size: 16px;
-
         }
 
         &.second {

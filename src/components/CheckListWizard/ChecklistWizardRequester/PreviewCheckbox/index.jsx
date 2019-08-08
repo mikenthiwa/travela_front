@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Checkbox from './Checkbox';
-import PreviewBehaviour from '../PreviewBehaviour';
-import './index.scss';
+import Checkbox from '../../ChecklistWizardPreview/PreviewCheckbox/Checkbox';
+import PreviewBehaviour from '../../ChecklistWizardPreview/PreviewBehaviour';
+import '../../ChecklistWizardPreview/PreviewCheckbox/index.scss';
 
-class PreviewCheckbox extends Component {
+class RequesterViewCheckbox extends Component {
   state = {
     isChecked: 0,
   }
+
   componentDidUpdate(prevProps, prevState) {
     const { isChecked } = this.state;
     if (!!prevState.isChecked === !!isChecked) return;
@@ -15,13 +16,14 @@ class PreviewCheckbox extends Component {
     isChecked && behaviour.type === 'SKIP_QUESTION' && handleSkipToQuestion(id, true);
     !isChecked && behaviour.type === 'SKIP_QUESTION' && handleSkipToQuestion(id, false);
   }
+
   handleCheckbox = ({ target: { checked } }) => {
     const { isChecked } = this.state;
     this.setState({ isChecked: checked ? isChecked + 1 : isChecked - 1 });
   }
 
   renderPreviewBehavior = () => {
-    const { item: { behaviour } , handleSkipToQuestion } = this.props;
+    const { item: { behaviour }, handleSkipToQuestion } = this.props;
     const { isChecked } = this.state;
     return (
       <div className="display-preview-behaviour">
@@ -35,7 +37,7 @@ class PreviewCheckbox extends Component {
   }
 
   render() {
-    const { item: { prompt, configuration: { options } } } = this.props;
+    const { item: { prompt, configuration: { options }, isDisabled } } = this.props;
     return (
       <div>
         <div className="checkbox-preview-wrapper">
@@ -52,14 +54,15 @@ class PreviewCheckbox extends Component {
           </div>
           { this.renderPreviewBehavior() }
         </div>
+        {isDisabled && <div className="disabled-overlay" />}
       </div>
     );
   }
 }
 
-PreviewCheckbox.propTypes = {
+RequesterViewCheckbox.propTypes = {
   item: PropTypes.object.isRequired,
   handleSkipToQuestion: PropTypes.func.isRequired,
 };
 
-export default PreviewCheckbox;
+export default RequesterViewCheckbox;
