@@ -11,7 +11,8 @@ import {
   UPDATE_BEHAVIOUR,
   HANDLE_ITEMS,
   DELETE_ITEM,
-  CREATE_DYNAMIC_CHECKLIST
+  CREATE_DYNAMIC_CHECKLIST,
+  GET_ONE_CHECKLIST
 } from '../constants/actionTypes';
 import {
   addChecklistItemSuccess,
@@ -22,8 +23,11 @@ import {
   updateBehaviourSuccess,
   updateNationalitySuccess,
   updateDestinationSuccess,
-  createDynamicChecklistSuccess
+  createDynamicChecklistSuccess,
+  getOneChecklistSuccess,
+  getOneChecklistFailure
 } from '../actionCreator/travelChecklistWizardActions';
+import apiErrorHandler from '../../services/apiErrorHandler';
 
 
 export function* addNewChecklistItem(newItems) {
@@ -108,4 +112,18 @@ export function* createChecklist(checklist) {
 
 export function* watchCreateDynamicChecklist() {
   yield takeLatest(CREATE_DYNAMIC_CHECKLIST, createChecklist);
+}
+
+export function* watchGetOneChecklist() {
+  yield takeLatest(GET_ONE_CHECKLIST, getOneChecklistSaga);
+}
+
+export function* getOneChecklistSaga(action) {
+  try {
+    const { data } = yield call(travelDynamicChecklistApi.getOneChecklist, action.requestId);
+    yield put(getOneChecklistSuccess(data.checklists));
+  } catch (error) {
+    const errorMessage = apiErrorHandler(error);
+    yield put(getOneChecklistFailure(errorMessage));
+  }
 }

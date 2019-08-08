@@ -20,6 +20,9 @@ import {
   UNDO_DYNAMIC_CHECKLIST,
   REDO_DYNAMIC_CHECKLIST,
   RESET_DYNAMIC_CHECKLIST,
+  GET_ONE_CHECKLIST,
+  GET_ONE_CHECKLIST_SUCCESS,
+  GET_ONE_CHECKLIST_FAILURE
 } from '../constants/actionTypes';
 
 export const handleAddChecklistItem = item => ({
@@ -124,4 +127,19 @@ export const redoChecklist = () => ({
 
 export const resetChecklist = () => ({
   type: RESET_DYNAMIC_CHECKLIST
+});
+
+export const getOneChecklist = (requestId) => ({
+  type: GET_ONE_CHECKLIST,
+  requestId
+});
+
+export const getOneChecklistSuccess = checklist => ({
+  type: GET_ONE_CHECKLIST_SUCCESS,
+  payload: checklist
+});
+
+export const getOneChecklistFailure = error => ({
+  type: GET_ONE_CHECKLIST_FAILURE,
+  error
 });

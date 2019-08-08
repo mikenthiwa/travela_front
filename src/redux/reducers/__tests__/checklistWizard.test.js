@@ -20,13 +20,19 @@ import {
   undoChecklist,
   redoChecklist,
   resetChecklist,
+  getOneChecklist,
+  getOneChecklistSuccess,
+  getOneChecklistFailure
 } from '../../actionCreator/travelChecklistWizardActions';
 
 import travelDynamicChecklist from '../../../mockData/travelChecklistWizardMockData';
 import {
   GET_ALL_DYNAMIC_CHECKLISTS,
   GET_ALL_DYNAMIC_CHECKLISTS_SUCCESS,
-  GET_ALL_DYNAMIC_CHECKLISTS_FAILURE
+  GET_ALL_DYNAMIC_CHECKLISTS_FAILURE,
+  GET_ONE_CHECKLIST,
+  GET_ONE_CHECKLIST_SUCCESS,
+  GET_ONE_CHECKLIST_FAILURE,
 } from '../../constants/actionTypes';
 
 const checklists = [{
@@ -265,5 +271,102 @@ describe('Travel checklists wizard reducer', () => {
   
     expect(newState).toMatchObject(initialState);
     done();
+    expect(newState).toMatchObject(initialState);
+    done();
+  });
+
+  it('returns the correct state for GET_ONE_CHECKLIST', () => {
+    const action = {
+      type: GET_ONE_CHECKLIST
+    };
+    expect(checklistWizard(initialState, action)).toEqual({
+      ...initialState,
+      loading: true
+    });
+  });
+
+  it('returns the correct state for GET_ONE_CHECKLIST_SUCCESS', () => {
+    const checklist = [{
+      'id': 2,
+      'createdBy': '2414',
+      'name': 'Nigeria-Angola',
+      'config': [
+        {
+          'id': 'W8rf1uoGJ',
+          'type': 'image',
+          'order': 1,
+          'prompt': 'Do you have a passport',
+          'behaviour': {},
+          'configuration': {
+            'options': [
+              {
+                'id': 'KGCe-ZmzYG',
+                'name': '',
+                'behaviour': {}
+              }
+            ]
+          }
+        }
+      ],
+      'createdAt': '2019-07-30T20:46:23.771Z',
+      'updatedAt': '2019-07-30T20:46:23.771Z',
+      'destinations': [
+        {
+          'id': 2,
+          'checklistId': 2,
+          'countryId': 3,
+          'regionId': null,
+          'createdAt': '2019-07-30T20:46:23.863Z',
+          'updatedAt': '2019-07-30T20:46:23.863Z',
+          'country': {
+            'id': 3,
+            'country': 'Angola',
+            'createdAt': '2019-07-30T20:46:23.797Z',
+            'updatedAt': '2019-07-30T20:46:23.797Z',
+            'regionId': 9999
+          },
+          'region': null
+        }
+      ],
+      'origin': [
+        {
+          'id': 2,
+          'checklistId': 2,
+          'countryId': 101,
+          'regionId': null,
+          'createdAt': '2019-07-30T20:46:23.787Z',
+          'updatedAt': '2019-07-30T20:46:23.787Z',
+          'country': {
+            'id': 101,
+            'country': 'Nigeria',
+            'createdAt': '2019-10-05T09:37:11.170Z',
+            'updatedAt': '2019-10-05T09:37:11.170Z',
+            'regionId': 1002
+          },
+          'region': null
+        }
+      ]
+    }];
+    const action = {
+      type: GET_ONE_CHECKLIST_SUCCESS,
+      payload: checklist
+    };
+    expect(checklistWizard(initialState, action)).toEqual({
+      ...initialState,
+      loading: false,
+      checklist: action.payload
+    });
+  });
+
+  it('returns the correct state for GET_ONE_CHECKLIST_FAILURE', () => {
+    const action = {
+      type: GET_ONE_CHECKLIST_FAILURE,
+      error: 'something broke'
+    };
+    expect(checklistWizard(initialState, action)).toEqual({
+      ...initialState,
+      loading: false,
+      error: action.error
+    });
   });
 });

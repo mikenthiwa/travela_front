@@ -168,7 +168,8 @@ import {
   watchUpdateBehaviour,
   watchUpdateNationality,
   watchUpdateDestination,
-  watchCreateDynamicChecklist
+  watchCreateDynamicChecklist,
+  watchGetOneChecklist
 } from './travelChecklistWizardSaga';
 
 import { watchAddResourcesSagaAsync, watchFetchLinkDataSagaAsync } from './helpResourceSaga';
@@ -310,7 +311,8 @@ function* rootSaga() {
     watchCreateDynamicChecklist(),
     watchAddQuestion(),
     watchPostNoPassportNotification(),
-    watchCrashReport()
+    watchCrashReport(),
+    watchGetOneChecklist(),
   ]);
 }
 

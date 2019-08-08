@@ -16,7 +16,10 @@ import {
   DELETE_ITEM_SUCCESS,
   ADD_QUESTION_SUCCESS,
   CREATE_DYNAMIC_CHECKLIST,
-  CREATE_DYNAMIC_CHECKLIST_SUCCESS
+  CREATE_DYNAMIC_CHECKLIST_SUCCESS,
+  GET_ONE_CHECKLIST,
+  GET_ONE_CHECKLIST_SUCCESS,
+  GET_ONE_CHECKLIST_FAILURE
 } from '../../constants/actionTypes';
 
 import {
@@ -37,7 +40,11 @@ import {
   updateChecklistDestination,
   updateDestinationSuccess,
   createDynamicChecklist,
-  createDynamicChecklistSuccess
+  createDynamicChecklistSuccess,
+  getOneChecklist,
+  getOneChecklistSuccess,
+  getOneChecklistFailure
+
 } from '../travelChecklistWizardActions';
 
 describe('Travel checklists Wizard actions test', () => {
@@ -235,6 +242,34 @@ describe('Travel checklists Wizard actions test', () => {
     };
 
     const newAction = createDynamicChecklistSuccess({});
+    expect(newAction).toEqual(expectedAction);
+    done();
+  });
+
+  it('should return action type GET_ONE_CHECKLIST', (done) => {
+    const expectedAction = {
+      type: GET_ONE_CHECKLIST,
+      requestId: 'chj7989'
+    };
+    const newAction = getOneChecklist('chj7989');
+    expect(newAction).toEqual(expectedAction);
+    done();
+  });
+   it('should return action type GET_ONE_CHECKLIST_SUCCESS', (done) => {
+    const expectedAction = {
+      type: GET_ONE_CHECKLIST_SUCCESS,
+      payload: [{}]
+    };
+    const newAction = getOneChecklistSuccess([{}]);
+    expect(newAction).toEqual(expectedAction);
+    done();
+  });
+   it('should return action type GET_ONE_CHECKLIST_FAILURE', (done) => {
+    const expectedAction = {
+      type: GET_ONE_CHECKLIST_FAILURE,
+      error: 'error'
+    };
+    const newAction = getOneChecklistFailure('error');
     expect(newAction).toEqual(expectedAction);
     done();
   });

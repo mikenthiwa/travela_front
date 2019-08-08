@@ -1,0 +1,27 @@
+.smart-checklist {
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 3%;
+
+    .smart-checklist-header {
+        padding-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        
+        .details {
+            color: #4f4f4f;
+            font-size: 12px;
+            line-height: 15px;
+
+        }
+    }
+
+    .smart-checklist-body {
+        border: 1px solid #e4e4e4;
+        border-radius: 6px; 
+    }
+}

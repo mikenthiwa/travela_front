@@ -15,6 +15,9 @@ import {
   UNDO_DYNAMIC_CHECKLIST,
   REDO_DYNAMIC_CHECKLIST,
   RESET_DYNAMIC_CHECKLIST,
+  GET_ONE_CHECKLIST,
+  GET_ONE_CHECKLIST_SUCCESS,
+  GET_ONE_CHECKLIST_FAILURE,
 } from '../constants/actionTypes';
 import helpers from '../../views/ChecklistWizard/helpers';
 import UndoStack from '../../helper/UndoStack';
@@ -57,6 +60,7 @@ export const initialState = {
   message: '',
   disableUndo: ChecklistStorage.disableUndo,
   disableRedo: ChecklistStorage.disableRedo,
+  checklist: []
 };
 
 const reorder = (state, order) => {
@@ -172,6 +176,12 @@ const checklistWizard = (state = initialState, action) => {
       disableUndo,
     };
   }
+  case GET_ONE_CHECKLIST:
+    return { ...state, loading: true };
+  case GET_ONE_CHECKLIST_SUCCESS:
+    return { ...state, checklist: action.payload, loading: false };
+  case GET_ONE_CHECKLIST_FAILURE:
+    return { ...state, error: action.error, loading: false };
   default: return state;
   }
 };

@@ -89,7 +89,9 @@ export class Table extends Component {
       history,
       location: { pathname }
     } = this.props;
-    history.push(`${pathname}${/\/$/.test(pathname) ? '' : '/'}${requestId}`);
+    (!pathname.includes('/new-requests')) ? history.push(`${pathname}${/\/$/.test(pathname) ? '' : '/'}${requestId}`) :
+      history.push(`${pathname}${/\/$/.test(pathname) ? '' : '/'}${requestId}/checklists`);
+    
   };
 
   getApprovalStatus = (status, budgetStatus) => {

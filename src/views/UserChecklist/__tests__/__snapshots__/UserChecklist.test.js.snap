@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserChecklist Test Suite should render correctly 1`] = `
+<div
+  className="smart-checklist"
+>
+  <div
+    className="smart-checklist-header"
+  >
+    <div
+      className="details"
+    >
+      <p>
+        Your Travel Checklist
+      </p>
+      Hi  kindly fill in your details to complete your travel checklist
+    </div>
+    <div
+      className="circular-calculator"
+    >
+      <CircularProgressBar
+        percentage={0}
+        sqSize={50}
+        strokeWidth={5}
+      />
+    </div>
+  </div>
+  <div
+    className="smart-checklist-body"
+  >
+    <RenderChecklists
+      checklists={
+        Array [
+          Object {},
+        ]
+      }
+    />
+  </div>
+</div>
+`;

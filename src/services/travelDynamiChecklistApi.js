@@ -11,6 +11,9 @@ class TravelDynamiChecklistAPI {
   static createDynamicChecklist(checklistItemData) {
     return axios.post(`${baseUrl}/dynamic/checklist`, checklistItemData);
   }
+  static getOneChecklist(requestId) {
+    return axios.get(`${baseUrl}/dynamic/checklist/requests/${requestId}`);
+  }
 }
 
 export default TravelDynamiChecklistAPI;

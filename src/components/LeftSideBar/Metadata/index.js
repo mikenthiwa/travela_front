@@ -66,6 +66,11 @@ const NavItemsMetadata = [
         link_to: '/requests/my-verifications',
         text: 'My Verifications'
       },
+      {
+        link_to: '/new-requests',
+        text: 'Request Checklists',
+        exact: true
+      },
     ],
     icons: {
       active: activeBookmarkIcon,
