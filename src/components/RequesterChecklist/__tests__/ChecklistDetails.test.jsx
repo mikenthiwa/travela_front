@@ -71,11 +71,13 @@ describe ('ChecklistDetails Test Suite', () => {
     },
     handleSkipToQuestion: jest.fn()
   };
+
   const wrapper = shallow(<ChecklistDetails {...props} />);
   it('should render correctly', () => {
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.length).toBe(1);
   });
+
   it('should handle remove selected checkbox', () => {
     const wrapper = shallow(<ChecklistDetails {...props2} />);
     wrapper.instance().handleSkipToQuestion(1, true);

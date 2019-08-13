@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import PreviewImage from '../CheckListWizard/ChecklistWizardPreview/PreviewImage';
 import PreviewVideo from '../CheckListWizard/ChecklistWizardPreview/PreviewVideo';
 import RequesterViewCheckbox from '../CheckListWizard/ChecklistWizardRequester/PreviewCheckbox/index';
+import PreviewScale from '../CheckListWizard/ChecklistWizardPreview/PreviewScaleOption';
 
 class ChecklistItems extends Component {
-  
   render () {
     const { config, handleSkipToQuestion } = this.props;
     switch (config.type) {
@@ -26,7 +26,7 @@ class ChecklistItems extends Component {
     case 'video':
       return (<PreviewVideo item={config} />);
     case 'scale':
-      return <div>This is scale</div>;
+      return (<PreviewScale item={config} />);
     default:
       return null;
     }

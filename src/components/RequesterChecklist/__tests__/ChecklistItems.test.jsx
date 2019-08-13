@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import ChecklistItems from '../ChecklistItems';
 import PreviewImage from '../../CheckListWizard/ChecklistWizardPreview/PreviewImage';
 import PreviewVideo from '../../CheckListWizard/ChecklistWizardPreview/PreviewVideo';
+import PreviewScale from '../../CheckListWizard/ChecklistWizardPreview/PreviewScaleOption';
 
 describe ('ChecklistItems Test Suite', () => {
   const props = {
@@ -44,7 +45,7 @@ describe ('ChecklistItems Test Suite', () => {
   it('should render scale checklist type', () => {
     props.config.type = 'scale';
     const wrapper = shallow(<ChecklistItems {...props} />);
-    expect(wrapper.find('div'));
+    expect(wrapper.find(PreviewScale).length).toEqual(1);
   });
 
   it('should render correctly: default', () => {
@@ -71,3 +72,4 @@ describe ('ChecklistItems Test Suite', () => {
     expect(wrapper.find('div'));
   });
 });
+

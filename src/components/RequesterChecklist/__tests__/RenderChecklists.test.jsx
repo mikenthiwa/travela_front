@@ -57,14 +57,17 @@ describe ('RenderChecklist Test Suite', () => {
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.length).toBe(1);
   });
+
   it('should render correctly when tabIndex exists', () => {
     wrapper.setState({tabIndex: 1});
     expect(wrapper).toMatchSnapshot();
   });
+
   it('should render correctly when showFlightdetails is true', () => {
     wrapper.setState({showFlightDetails: true});
     expect(wrapper).toMatchSnapshot();
   });
+
   it('should handle tab changes when tab is hit', () => {
     const mockHandleTabClick = jest.fn();
     wrapper.setState({tabIndex: 1, showFlightDetails: false});
@@ -72,6 +75,7 @@ describe ('RenderChecklist Test Suite', () => {
     wrapper.find(ChecklistTabs).simulate('click');
     expect(mockHandleTabClick).toHaveBeenCalledTimes(0);
   });
+
   it('should render flight details panel when flight details button is clicked', () => {
     wrapper.setState({showFlightDetails: true});
     const mockFlightDetailsTabClick = jest.fn();
@@ -80,7 +84,5 @@ describe ('RenderChecklist Test Suite', () => {
     flightDetailsButton.simulate('click');
     expect(flightDetailsButton).toHaveLength(1);
     expect(mockFlightDetailsTabClick).toHaveBeenCalledTimes(0);
-
-        
   });
 });

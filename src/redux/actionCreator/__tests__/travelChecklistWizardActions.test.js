@@ -44,7 +44,6 @@ import {
   getOneChecklist,
   getOneChecklistSuccess,
   getOneChecklistFailure
-
 } from '../travelChecklistWizardActions';
 
 describe('Travel checklists Wizard actions test', () => {
@@ -255,7 +254,8 @@ describe('Travel checklists Wizard actions test', () => {
     expect(newAction).toEqual(expectedAction);
     done();
   });
-   it('should return action type GET_ONE_CHECKLIST_SUCCESS', (done) => {
+
+  it('should return action type GET_ONE_CHECKLIST_SUCCESS', (done) => {
     const expectedAction = {
       type: GET_ONE_CHECKLIST_SUCCESS,
       payload: [{}]
@@ -264,7 +264,8 @@ describe('Travel checklists Wizard actions test', () => {
     expect(newAction).toEqual(expectedAction);
     done();
   });
-   it('should return action type GET_ONE_CHECKLIST_FAILURE', (done) => {
+
+  it('should return action type GET_ONE_CHECKLIST_FAILURE', (done) => {
     const expectedAction = {
       type: GET_ONE_CHECKLIST_FAILURE,
       error: 'error'

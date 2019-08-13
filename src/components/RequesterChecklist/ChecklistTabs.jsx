@@ -26,7 +26,6 @@ class ChecklistTabs extends Component {
   }
 }
 ChecklistTabs.propTypes = {
-
   checklist: PropTypes.object.isRequired,
   tripNum: PropTypes.number.isRequired,
   onTabClick: PropTypes.func.isRequired,

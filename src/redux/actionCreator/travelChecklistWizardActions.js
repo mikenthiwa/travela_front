@@ -35,7 +35,6 @@ export const addChecklistItemSuccess = newItem => ({
   newItem,
 });
 
-
 export const handleChecklistItems = item => ({
   type: HANDLE_ITEMS,
   item
@@ -75,7 +74,6 @@ export const deleteQuestionSuccess = newItems => ({
   type: DELETE_QUESTION_SUCCESS,
   newItems
 });
-
 
 export const updateChecklistBehaviour = items => ({
   type: UPDATE_BEHAVIOUR,

@@ -47,7 +47,6 @@ class ChecklistDetails extends Component {
   }
 }
 ChecklistDetails.propTypes = {
-
   checklist: PropTypes.object.isRequired,
 };
 

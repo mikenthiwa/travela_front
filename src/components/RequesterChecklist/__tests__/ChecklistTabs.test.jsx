@@ -15,5 +15,4 @@ describe ('ChecklistTabs Test Suite', () => {
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.length).toBe(1);
   });
-
 });
