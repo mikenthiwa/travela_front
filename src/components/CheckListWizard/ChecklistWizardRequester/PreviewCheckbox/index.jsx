@@ -13,8 +13,8 @@ class RequesterViewCheckbox extends Component {
     const { isChecked } = this.state;
     if (!!prevState.isChecked === !!isChecked) return;
     const { item: { behaviour, id }, handleSkipToQuestion } = this.props;
-    isChecked && behaviour.type === 'SKIP_QUESTION' && handleSkipToQuestion(id, true);
-    !isChecked && behaviour.type === 'SKIP_QUESTION' && handleSkipToQuestion(id, false);
+    isChecked && handleSkipToQuestion(id, true);
+    !isChecked && handleSkipToQuestion(id, false);
   }
 
   handleCheckbox = ({ target: { checked } }) => {
