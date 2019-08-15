@@ -23,7 +23,7 @@ class ChecklistDetails extends Component {
   
   render() {
     const { config } = this.state;
-    const filteredConfig = config.filter(item => !item.isDisabled);
+    const filteredConfig = config.length && config.filter(item => !item.isDisabled);
     return (
       <div className="checklist-details">
         <div className="tab-body">
@@ -46,6 +46,7 @@ class ChecklistDetails extends Component {
     );
   }
 }
+
 ChecklistDetails.propTypes = {
   checklist: PropTypes.object.isRequired,
 };

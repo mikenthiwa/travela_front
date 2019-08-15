@@ -23,7 +23,7 @@ class RenderChecklists extends Component {
   }
   
   render() {
-    const { checklists} = this.props;
+    const { checklists } = this.props;
     const { tabIndex, showFlightDetails } = this.state;
     const activeChecklist = checklists.find((value, index) => index === tabIndex);
     return (
@@ -72,4 +72,3 @@ RenderChecklists.propTypes = {
 };
 
 export default RenderChecklists;
-

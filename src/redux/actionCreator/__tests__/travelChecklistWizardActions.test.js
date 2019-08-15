@@ -104,7 +104,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type ADD_QUESTION_SUCCESS', (done) => {
     const expectedAction = {
-      type:  ADD_QUESTION_SUCCESS,
+      type: ADD_QUESTION_SUCCESS,
       newItems: [{}]
     };
 
@@ -115,7 +115,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type DELETE_ITEM', (done) => {
     const expectedAction = {
-      type:  DELETE_ITEM,
+      type: DELETE_ITEM,
       order: 1
     };
 
@@ -126,7 +126,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type DELETE_ITEM_SUCCESS', (done) => {
     const expectedAction = {
-      type:  DELETE_ITEM_SUCCESS,
+      type: DELETE_ITEM_SUCCESS,
       order: 1
     };
 
@@ -137,7 +137,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type DELETE_QUESTION', (done) => {
     const expectedAction = {
-      type:  DELETE_QUESTION,
+      type: DELETE_QUESTION,
       items: [{}]
     };
 
@@ -148,7 +148,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type  DELETE_QUESTION_SUCCESS', (done) => {
     const expectedAction = {
-      type:   DELETE_QUESTION_SUCCESS,
+      type: DELETE_QUESTION_SUCCESS,
       newItems: [{}]
     };
 
@@ -159,7 +159,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type UPDATE_BEHAVIOUR', (done) => {
     const expectedAction = {
-      type:   UPDATE_BEHAVIOUR,
+      type: UPDATE_BEHAVIOUR,
       items: [{}]
     };
 
@@ -170,7 +170,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type UPDATE_BEHAVIOUR_SUCCESS', (done) => {
     const expectedAction = {
-      type:   UPDATE_BEHAVIOUR_SUCCESS,
+      type: UPDATE_BEHAVIOUR_SUCCESS,
       newItems: [{}]
     };
 
@@ -181,7 +181,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type UPDATE_NATIONALITY', (done) => {
     const expectedAction = {
-      type:   UPDATE_NATIONALITY,
+      type: UPDATE_NATIONALITY,
       items: { name: 'Nigeria' }
     };
 
@@ -192,7 +192,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type UPDATE_NATIONALITY_SUCCESS', (done) => {
     const expectedAction = {
-      type:   UPDATE_NATIONALITY_SUCCESS,
+      type: UPDATE_NATIONALITY_SUCCESS,
       nationality: { name: 'Nigeria' }
     };
 
@@ -203,7 +203,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type UPDATE_DESTINATION', (done) => {
     const expectedAction = {
-      type:   UPDATE_DESTINATION,
+      type: UPDATE_DESTINATION,
       items: [{ name: 'Nigeria' }, { name: 'Kenya' }]
     };
 
@@ -214,7 +214,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type UPDATE_DESTINATION_SUCCESS', (done) => {
     const expectedAction = {
-      type:   UPDATE_DESTINATION_SUCCESS,
+      type: UPDATE_DESTINATION_SUCCESS,
       destination: [{ name: 'Nigeria' }, { name: 'Kenya' }]
     };
 
@@ -225,7 +225,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type CREATE_DYNAMIC_CHECKLIST', (done) => {
     const expectedAction = {
-      type:   CREATE_DYNAMIC_CHECKLIST,
+      type: CREATE_DYNAMIC_CHECKLIST,
       payload: {}
     };
 
@@ -236,7 +236,7 @@ describe('Travel checklists Wizard actions test', () => {
 
   it('should return action of type CREATE_DYNAMIC_CHECKLIST_SUCCESS', (done) => {
     const expectedAction = {
-      type:   CREATE_DYNAMIC_CHECKLIST_SUCCESS,
+      type: CREATE_DYNAMIC_CHECKLIST_SUCCESS,
       response: {}
     };
 

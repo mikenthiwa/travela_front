@@ -169,11 +169,18 @@ import {
   watchUpdateNationality,
   watchUpdateDestination,
   watchCreateDynamicChecklist,
-  watchGetOneChecklist
+  watchGetOneChecklist,
+  watchgetAllDynamicChecklists,
+  watchDeleteChecklistWizard,
+  watchGetDeletedChecklists,
+  watchRestoreAChecklist,
+  watchRestoreAllChecklists,
+  watchGetSingleChecklist,
+  watchUpdateDynamicChecklist,
+  watchGetChecklistFromStorage
 } from './travelChecklistWizardSaga';
 
 import { watchAddResourcesSagaAsync, watchFetchLinkDataSagaAsync } from './helpResourceSaga';
-import { watchgetAllDynamicChecklists} from './checklistWizardSaga';
 import { watchPostNoPassportNotification } from './noPassportSaga';
 import watchCrashReport from "./errorBoundarySaga";
 
@@ -309,6 +316,13 @@ function* rootSaga() {
     watchUpdateNationality(),
     watchUpdateDestination(),
     watchCreateDynamicChecklist(),
+    watchDeleteChecklistWizard(),
+    watchGetDeletedChecklists(),
+    watchRestoreAChecklist(),
+    watchRestoreAllChecklists(),
+    watchGetSingleChecklist(),
+    watchUpdateDynamicChecklist(),
+    watchGetChecklistFromStorage(),
     watchAddQuestion(),
     watchPostNoPassportNotification(),
     watchCrashReport(),

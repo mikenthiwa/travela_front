@@ -18,6 +18,9 @@ export default function apiErrorHandler(error) {
         .join(', ');
       errorMessage = `${validationErrors}`;
       break;
+    case 409:
+      errorMessage = 'A checklist with this origin and destination already exists';
+      break;
     default:
       errorMessage = error.response.data.error || error.response.data.message;
     }

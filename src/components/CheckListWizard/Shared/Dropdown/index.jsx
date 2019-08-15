@@ -57,11 +57,12 @@ class Dropdown extends Component {
     const { selected, optionsOpen } = this.state;
     const { dropdownOptions, value } = this.props;
     const { options, placeHolder = 'select an option', selectAreaSyle, selectStyle, selectOptionContainerStyle } = dropdownOptions;
+    const dropdown = options.length && options.find(item => item.value === value);
     return (
       <div className="dropdown-container">
         <div ref={this.selRef} className={`selected-area ${selectAreaSyle}`}>
           {value.length ? (
-            <p className={`selected ${selectStyle}`}>{selected}</p>
+            <p className={`selected ${selectStyle}`}>{selected || dropdown.displayValue}</p>
           ) : (
             <p className="selected-placeholder">{placeHolder}</p>
           )}
