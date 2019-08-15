@@ -65,7 +65,8 @@ export class NavBar extends PureComponent {
     notifications.map(notification => {
       if (notification.notificationStatus === 'unread') return count += 1;
     });
-    return count;
+    const regulatedCount = (count > 99) ? '99+': count;
+    return regulatedCount;
   }
 
   onChange = (event) => {
@@ -295,7 +296,8 @@ export class NavBar extends PureComponent {
                 className="navbar__onclick-search-size" style={{ display: `${showSearch}` }}>
                 <SearchBar onChange={this.onChange} onSubmit={this.onSubmit} value={keyword} />
               </div>
-            </Fragment>)}
+            </Fragment>
+          )}
         </header>
       </div>
     );
