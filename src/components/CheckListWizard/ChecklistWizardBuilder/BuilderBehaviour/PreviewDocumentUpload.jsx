@@ -53,8 +53,10 @@ class PreviewDocumentUpload extends Component {
       });
     };
     fd.readAsDataURL(file);
+    const { defaults: { headers: { common } } } = axios; 
+    const token = common.Authorization;
     try {
-      delete axios.defaults.headers.common['Authorization'];
+      delete common['Authorization'];
       const formData = new FormData();
       formData.set('file', file);
       formData.set('upload_preset', process.env.REACT_APP_PRESET_NAME);
@@ -67,7 +69,7 @@ class PreviewDocumentUpload extends Component {
           this.cancel = c;
         })
       });
-
+  
       this.setState({result: pdfData.secure_url}, () => {
         successMessage('PDF uploaded successfully');
       }); 
@@ -77,6 +79,7 @@ class PreviewDocumentUpload extends Component {
       this.setState({
         uploading: false
       });
+      common.Authorization = token; 
     }
   }
 

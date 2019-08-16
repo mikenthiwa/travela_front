@@ -31,8 +31,10 @@ class VideOptions extends Component {
       this.setState({ videoFile: file, showUploadName: true }, () => this.handleItem(fd.result));
     };
     fd.readAsDataURL(file);
+    const { defaults: { headers: { common } } } = axios; 
+    const token = common.Authorization;
     try{
-      delete axios.defaults.headers.common['Authorization'];
+      delete common['Authorization'];
       const formData = new FormData();
       formData.set('file', file);
       formData.set('upload_preset', process.env.REACT_APP_PRESET_NAME);
@@ -49,6 +51,8 @@ class VideOptions extends Component {
       }); 
     }catch(err){
       errorMessage('Video Upload failed');
+    } finally {
+      common.Authorization = token;
     }
   }
 
