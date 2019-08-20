@@ -1,47 +1,71 @@
-.page-header__request{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 220px;
-
-  &__action-btns {
-    .action-btn__wrapper {
-
-      .buttons {
-        display: flex;
-
-        button {
-          margin: 0 0.5em;
-        }
-      }
-      .rap-popover-content{
-        border-radius: 5px;
-        padding: 0.3em 0.5em;
-        height: auto;
-        width: 250px;
-      }
-
-      .pending__notification {
-        background: white;
-        padding: 0.3em 0.8em;
-        display: grid;
-        cursor: default;
-        align-items: center;
-        border-radius: 2px;
-        border: 1px solid #2f56e3;
-
-        .pending__message {
-          color: #2f56e3;
-        }
-      }
-    }
-  }
-}
 .requests__page-header {
   display: inline-grid;
   width: 90%;
   align-items: end;
   grid-template-columns: 1fr auto;
+
+
+  .page-header__request{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+
+    &__action-btns {
+      .action-btn__wrapper {
+
+        .buttons {
+          display: flex;
+
+          button {
+            margin: 0 0.5em;
+          }
+        }
+        .rap-popover-content{
+          border-radius: 5px;
+          padding: 0.3em 0.5em;
+          height: auto;
+          width: 250px;
+        }
+
+        .pending__notification {
+          background: white;
+          padding: 0.3em 0.8em;
+          display: grid;
+          cursor: default;
+          align-items: center;
+          border-radius: 2px;
+          border: 1px solid #2f56e3;
+
+          .pending__message {
+            color: #2f56e3;
+          }
+        }
+      }
+    }
+  }
+
+  .total-cost-button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
+    cursor: pointer;
+    outline: none;
+    height: 20px;
+    border-radius: 0px;
+    border: 0.5px solid #dee5ff;
+    font-size: 1rem;
+    padding: 0px 5px;
+    background: #fff;
+  }
+
+  .wallet-icon {
+    height: 1rem;
+    width: 1rem;
+    padding: 0px 5px;
+    color: #2f56e3
+  }
 
   .action-btn {
     background: white;

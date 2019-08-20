@@ -35,12 +35,12 @@ describe('<TravelCosts />', () => {
       flightCosts: [{id: 1, origin: 'Portugal', destination: 'Nigeria', cost: 1000}],
       stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
       isLoading: false,
-      trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+      trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null, accomodationType: 'Residence'}]
     };
     const wrapper = mount(<TravelCosts {...props} />);
     const estimates = wrapper.find('.breakdown-box-content');
 
-    expect(estimates.length).toEqual(3);
+    expect(estimates.length).toEqual(2);
   });
 });
 

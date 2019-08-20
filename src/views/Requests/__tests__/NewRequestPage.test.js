@@ -161,6 +161,14 @@ let props1 = {
     push: jest.fn(),
     goBack: jest.fn()
   },
+  fetchTravelCostsByLocation: jest.fn(),
+  travelCosts: {
+    hotelEstimates: [{id: 1, amount: 300, countryId: 1, country: {country: 'Nigeria'}}],
+    flightCosts: [{id: 1, origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', cost: 1000}],
+    stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
+    isLoading: false,
+    trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  }
 };
 
 let props2 = {
@@ -310,12 +318,20 @@ let props2 = {
   fetchTravelChecklist: jest.fn(),
   fetchRoleUsers: jest.fn(),
   fetchUserReadinessDocuments: jest.fn(),
-  fetchSubmission: jest.fn()
+  fetchSubmission: jest.fn(),
+  fetchTravelCostsByLocation: jest.fn(),
+  travelCosts: {
+    hotelEstimates: [{id: 1, amount: 300, countryId: 1, country: {country: 'Nigeria'}}],
+    flightCosts: [{id: 1, origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', cost: 1000}],
+    stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
+    isLoading: false,
+    trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  }
 };
 
 let props3 = {
   requestData: {
-    id: 'xDh20btGz',
+    id: 'xDh20btGzz',
     name: 'Adeniyi Funmbi',
     tripType: 'multi',
     manager: 1,
@@ -454,7 +470,7 @@ let props3 = {
     percentageCompleted: 80,
     postFail: false,
     postSuccess: [],
-    requestId: 'xDh20btGz',
+    requestId: 'xDh20btGzz',
     submissions: [
       {
         destinationName: 'Nairobi, Kenya',
@@ -499,7 +515,15 @@ let props3 = {
   fetchTravelChecklist: jest.fn(),
   fetchRoleUsers: jest.fn(),
   fetchUserReadinessDocuments: jest.fn(),
-  fetchSubmission: jest.fn()
+  fetchSubmission: jest.fn(),
+  fetchTravelCostsByLocation: jest.fn(),
+  travelCosts: {
+    hotelEstimates: [{id: 1, amount: 300, countryId: 1, country: {country: 'Nigeria'}}],
+    flightCosts: [{id: 1, origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', cost: 1000}],
+    stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
+    isLoading: false,
+    trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  }
 };
 
 let props4 = {
@@ -674,7 +698,15 @@ let props4 = {
   fetchTravelChecklist: jest.fn(),
   fetchRoleUsers: jest.fn(),
   fetchUserReadinessDocuments: jest.fn(),
-  fetchSubmission: jest.fn()
+  fetchSubmission: jest.fn(),
+  fetchTravelCostsByLocation: jest.fn(),
+  travelCosts: {
+    hotelEstimates: [{id: 1, amount: 300, countryId: 1, country: {country: 'Nigeria'}}],
+    flightCosts: [{id: 1, origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', cost: 1000}],
+    stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
+    isLoading: false,
+    trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  }
 };
 
 
@@ -727,6 +759,14 @@ const initialState1 = {
     uploadSuccess: '',
     cloudinaryUrl: '',
     error: ''
+  },
+  fetchTravelCostsByLocation: jest.fn(),
+  travelCosts: {
+    hotelEstimates: [{id: 1, amount: 300, countryId: 1, country: {country: 'Nigeria'}}],
+    flightCosts: [{id: 1, origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', cost: 1000}],
+    stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
+    isLoading: false,
+    trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
   }
 };
 
@@ -783,6 +823,14 @@ const initialState2 = {
     uploadSuccess: '',
     cloudinaryUrl: '',
     error: ''
+  },
+  fetchTravelCostsByLocation: jest.fn(),
+  travelCosts: {
+    hotelEstimates: [{id: 1, amount: 300, countryId: 1, country: {country: 'Nigeria'}}],
+    flightCosts: [{id: 1, origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', cost: 1000}],
+    stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
+    isLoading: false,
+    trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
   }
 };
 
@@ -834,6 +882,14 @@ const initialState3 = {
     uploadSuccess: '',
     cloudinaryUrl: '',
     error: ''
+  },
+  fetchTravelCostsByLocation: jest.fn(),
+  travelCosts: {
+    hotelEstimates: [{id: 1, amount: 300, countryId: 1, country: {country: 'Nigeria'}}],
+    flightCosts: [{id: 1, origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', cost: 1000}],
+    stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
+    isLoading: false,
+    trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
   }
 };
 
@@ -885,6 +941,14 @@ const initialState4 = {
     uploadSuccess: '',
     cloudinaryUrl: '',
     error: ''
+  },
+  fetchTravelCostsByLocation: jest.fn(),
+  travelCosts: {
+    hotelEstimates: [{id: 1, amount: 300, countryId: 1, country: {country: 'Nigeria'}}],
+    flightCosts: [{id: 1, origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', cost: 1000}],
+    stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
+    isLoading: false,
+    trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
   }
 };
 
@@ -1043,6 +1107,17 @@ describe('<Request Page>', () => {
           page: undefined
         }
       });
+    });
+
+    it('should display travel cost modal', () => {
+      wrapper = shallow(<NewRequestPage {...props1} />);
+      const travelCostButton = wrapper.find('.total-cost-button');
+      travelCostButton.simulate('click');
+      const prevProp = wrapper.props();
+      wrapper.setProps({requestData: props3.requestData});
+      wrapper.instance().componentDidUpdate(prevProp);
+      wrapper.update();
+      expect(wrapper.instance().props.fetchTravelCostsByLocation).toBeCalled();
     });
   });
 });

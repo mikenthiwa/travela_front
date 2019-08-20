@@ -33,9 +33,11 @@ const getTripFlightCost = (flightCosts, origin, destination) => {
   return tripFlightCost;
 };
 
+const HotelBooking = accommodationType => accommodationType === 'Hotel Booking' || accommodationType === -1;
+
 export const calculateTotalTripCost = (trips, stipends, flightCosts, hotelEstimates) => {
   const getAllTripsTotal = trips.map((trip, index) => {
-    const { origin, destination } = trip;
+    const { origin, destination, accommodationType, bedId } = trip;
     const tripDuration = calculateTripDuration(trip);
     const isDateValid = Math.sign(tripDuration) !== -1;//negative results means invalid dates
 
@@ -47,7 +49,7 @@ export const calculateTotalTripCost = (trips, stipends, flightCosts, hotelEstima
     }
     const tripHotelRate = getTripHotelRate(hotelEstimates, destination);
     let hotelCost;
-    if (tripHotelRate && isDateValid) {
+    if (tripHotelRate && isDateValid && HotelBooking(accommodationType || bedId)) {
       ({ amount: hotelCost } = tripHotelRate);
       hotelCost = calculateTotalHotelRate(hotelCost, tripDuration);
     }
@@ -121,9 +123,9 @@ const renderFlightCosts = (isLoading, origin, destination, tripFlightCost, displ
   }
 };
 
-const renderHotelEstimates = (isLoading, rate, destination, tripDuration, returnDate, displayType) => {
+const renderHotelEstimates = (isLoading, rate, destination, tripDuration, returnDate, displayType, accommodationType, title, bedId) => {
   if (!returnDate || !rate) return '';
-  if (rate) {
+  if (HotelBooking(accommodationType || bedId) || title === 'TOTAL ESTIMATE') {
     const { amount } = rate;
     const calculatedTotalHotelRate = amount ? calculateTotalHotelRate(amount, tripDuration) : rate;
     return (
@@ -155,7 +157,9 @@ const calculateTripDetails = (stipends, flightCosts, hotelEstimates, trip, index
     tripFlightCost,
     origin,
     destination,
-    returnDate
+    returnDate,
+    accommodationType: trip.accommodationType,
+    bedId: trip.bedId
   };
 };
 
@@ -170,7 +174,9 @@ const renderTabContent = (isLoading, trip) => {
     returnDate,
     title,
     subTitle,
-    displayType
+    displayType,
+    accommodationType,
+    bedId,
   } = trip;
 
   const noEstimatesMessage = (
@@ -184,7 +190,7 @@ const renderTabContent = (isLoading, trip) => {
 
   return (
     <Fragment key={title}>
-      {renderHotelEstimates(isLoading, tripHotelRate, destination, tripDuration, returnDate, displayType)}
+      {renderHotelEstimates(isLoading, tripHotelRate, destination, tripDuration, returnDate, displayType, accommodationType, title, bedId)}
       {renderFlightCosts(isLoading, origin, destination, tripFlightCost, displayType)}
       {renderStipends(isLoading, tripStipend, destination, tripDuration, returnDate, displayType)}
     </Fragment>

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Popover from 'react-awesome-popover';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {deleteRequest, fetchUserRequestDetails} from '../../../redux/actionCreator/requestActions';
@@ -24,6 +25,10 @@ import {
   submitModificationRequest
 } from '../../../redux/actionCreator/tripModificationActions';
 import { downloadAttachments } from '../../../redux/actionCreator/attachmentActions';
+import TravelCosts, {calculateTotalTripCost} from '../../../components/Forms/NewRequestForm/TravelCosts/TravelCosts';
+import Modal from '../../../components/modal/Modal';
+import {fetchTravelCostsByLocation} from '../../../redux/actionCreator/travelCostsActions';
+import walletImage from '../../../images/budget-Icon.svg';
 
 export class NewRequestPage extends Component {
   state = {
@@ -43,6 +48,62 @@ export class NewRequestPage extends Component {
     fetchRoleUsers(53019);
     fetchModificationRequest(requestId);
     fetchUserReadinessDocuments(user.currentUser.userId);
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    const {requestData, fetchTravelCostsByLocation} = this.props;
+    const {trips, tripType} = requestData;
+    if (trips) {
+      let locations = tripType === 'One Way' ? [] : this.getStipendOriginAndDestination(trips);
+      if (!_.isEqual(prevProps.requestData, requestData)){
+        fetchTravelCostsByLocation(locations);
+      } 
+    }
+  }
+
+
+  showModal = () => {
+    const { openModal } = this.props;
+    openModal(true);
+  }
+
+  getStipendOriginAndDestination = (trips) => {
+    const locations = trips.map(trip => {
+      const { origin, destination } = trip;
+      return { origin, destination };
+    });
+    return locations;
+  }
+
+  renderStipendModal = (shouldOpen, closeModal) => {
+    const {travelCosts: { stipends, flightCosts, hotelEstimates, isLoading }, requestData: {trips}} = this.props;
+    return (
+      <Modal
+        customModalStyles="travel-stipend-modal"
+        closeDeleteModal={closeModal}
+        width="100%"
+        height="100%"
+        visibility={shouldOpen? 'visible':'invisible'}
+        title="Travel Stipend Breakdown"
+      >
+        <div className="modal-info-center-body">
+          <TravelCosts
+            isLoading={isLoading}
+            trips={trips}
+            stipends={stipends}
+            flightCosts={flightCosts}
+            hotelEstimates={hotelEstimates} />
+        </div>
+      </Modal>
+    );
+  };
+
+  getTotalTripCost = () => {
+    const { travelCosts: {flightCosts, hotelEstimates, stipends }, requestData: { trips }} = this.props;
+    return calculateTotalTripCost(trips, stipends, flightCosts, hotelEstimates)
+      .reduce((acc, { stipendAmount = 0, hotelCost = 0 , flightCost = 0}) =>
+        (acc + stipendAmount + hotelCost + flightCost),
+      0);
   }
 
   handleShowTravelChecklist = (request) => {
@@ -250,9 +311,10 @@ export class NewRequestPage extends Component {
     const { match:
       { params: { requestId } },
     requestData : {
-      status
+      status,
+      trips
     },
-    fetchingRequest, history, errors,
+    fetchingRequest, history, errors, shouldOpen, closeModal
     } = this.props;
     if(typeof(errors) === 'string' && errors.includes('does not exist')) {
       return <NotFound redirectLink="/requests" errorMessage={errors} />;
@@ -271,11 +333,20 @@ export class NewRequestPage extends Component {
             <span>
               {`REQUEST #${requestId}`}
             </span>
+            <span 
+              onClick={this.showModal} 
+              role="presentation"
+              className="total-cost-button"
+            >
+              <img src={walletImage} alt="wallet-icon" className="wallet-icon" />
+              {trips && `${this.getTotalTripCost()} $`}
+            </span>
           </h1>
           {status !== 'Open' && this.renderModificationButtons()}
         </div>
         {this.renderModificationReasonConfirmationDialog()}
         {this.renderModificationReasonDialog()}
+        {this.renderStipendModal(shouldOpen, closeModal)}
         {fetchingRequest ? <Preloader /> : this.renderRequestDetailsPage() }
       </Fragment>
     );
@@ -325,7 +396,7 @@ NewRequestPage.defaultProps = {
 };
 
 const mapStateToProps = ({ requests, travelChecklist, role,
-  submissions, modal, fileUploads, travelReadinessDocuments, user, tripModifications}) => {
+  submissions, modal, fileUploads, travelReadinessDocuments, user, tripModifications, travelCosts}) => {
   return {
     ...requests,
     ...modal.modal,
@@ -336,7 +407,8 @@ const mapStateToProps = ({ requests, travelChecklist, role,
     submissionInfo: submissions,
     fileUploads, user,
     managers: role.roleUsers,
-    tripModifications
+    tripModifications,
+    travelCosts,
   };
 };
 
@@ -353,7 +425,8 @@ const actionCreators = {
   closeModal,
   fetchUserReadinessDocuments,
   fetchRoleUsers,
-  downloadAttachments
+  downloadAttachments,
+  fetchTravelCostsByLocation,
 };
 
 export default connect(mapStateToProps, actionCreators)(NewRequestPage);

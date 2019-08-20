@@ -22,14 +22,30 @@ Array [
         <span>
             REQUEST #xDh20btGx
         </span>
+        <span
+            className="total-cost-button"
+            onClick={[Function]}
+            role="presentation"
+        >
+            <img
+                alt="wallet-icon"
+                className="wallet-icon"
+                src="budget-Icon.svg"
+            />
+            0 $
+        </span>
     </h1>
     <div
         className="page-header__request__action-btns"
     />
 </div>,
   <div
+    className="trip-modification-confirmation-modal"
+/>,
+  <div
     className="trip-modification-reason-modal"
 />,
+  "",
   <div
     className="width-91"
 >
@@ -185,7 +201,7 @@ Array [
                 <div
                     className="foot-text"
                 >
-                    Completed on 19/06/19
+                    Completed on 16/08/19
                 </div>
             </div>
             <div
@@ -341,7 +357,7 @@ Array [
                 <div
                     className="foot-text"
                 >
-                    Completed on 19/06/19
+                    Completed on 16/08/19
                 </div>
             </div>
         </div>
@@ -480,14 +496,30 @@ Array [
         <span>
             REQUEST #xDh20btGx
         </span>
+        <span
+            className="total-cost-button"
+            onClick={[Function]}
+            role="presentation"
+        >
+            <img
+                alt="wallet-icon"
+                className="wallet-icon"
+                src="budget-Icon.svg"
+            />
+            0 $
+        </span>
     </h1>
     <div
         className="page-header__request__action-btns"
     />
 </div>,
   <div
+    className="trip-modification-confirmation-modal"
+/>,
+  <div
     className="trip-modification-reason-modal"
 />,
+  "",
   <div
     className="width-91"
 >
@@ -1012,14 +1044,30 @@ Array [
         <span>
             REQUEST #xDh20btGx
         </span>
+        <span
+            className="total-cost-button"
+            onClick={[Function]}
+            role="presentation"
+        >
+            <img
+                alt="wallet-icon"
+                className="wallet-icon"
+                src="budget-Icon.svg"
+            />
+            0 $
+        </span>
     </h1>
     <div
         className="page-header__request__action-btns"
     />
 </div>,
   <div
+    className="trip-modification-confirmation-modal"
+/>,
+  <div
     className="trip-modification-reason-modal"
 />,
+  "",
   <div
     className="width-91"
 >
@@ -1544,14 +1592,30 @@ Array [
         <span>
             REQUEST #xDh20btGx
         </span>
+        <span
+            className="total-cost-button"
+            onClick={[Function]}
+            role="presentation"
+        >
+            <img
+                alt="wallet-icon"
+                className="wallet-icon"
+                src="budget-Icon.svg"
+            />
+            0 $
+        </span>
     </h1>
     <div
         className="page-header__request__action-btns"
     />
 </div>,
   <div
+    className="trip-modification-confirmation-modal"
+/>,
+  <div
     className="trip-modification-reason-modal"
 />,
+  "",
   <div
     className="preloader"
 >

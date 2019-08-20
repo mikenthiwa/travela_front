@@ -7,7 +7,6 @@ function renderTravelCosts (props, _this) {
   const { state, nextStep, backStep } = _this;
   const { trips } = state;
   const { travelCosts: { stipends, flightCosts, hotelEstimates, isLoading }, userData: { fullName } } = props;
-
   return (
     <Fragment>
       <div className="personal-rectangle mdl-grid">
