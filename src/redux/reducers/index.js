@@ -41,6 +41,7 @@ import helpResources from './helpResources';
 import listAllFlightEstimates from './flightEstimates';
 import checklistWizard from './checklistWizard';
 import noPassport from './noPassport';
+import documentTypes from './documentTypes';
 
 const rootReducer = combineReducers({
   auth,
@@ -84,7 +85,8 @@ const rootReducer = combineReducers({
   helpResources,
   listAllFlightEstimates,
   checklistWizard,
-  noPassport
+  noPassport,
+  documentTypes,
 });
 
 export default rootReducer;

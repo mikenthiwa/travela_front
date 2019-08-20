@@ -12,8 +12,10 @@ const TravelDocumentModal = (props) => {
     travelReadinessDocuments,
     openModal,
     fetchUserData, user,
-    currentDocument, document
+    currentDocument, document, documentTypes
   } = props;
+  const filteredDocumentTypes = documentTypes.filter(({ name }) => !['passport', 'visa'].includes(name))
+    .map(({ name }) => name);
   return (
     <Modal
       customModalStyles="add-document-item"
@@ -37,6 +39,7 @@ const TravelDocumentModal = (props) => {
         currentDocument={currentDocument}
         modalType={modalType}
         document={document}
+        documentTypes={filteredDocumentTypes}
       />
     </Modal>
   );
@@ -54,6 +57,7 @@ TravelDocumentModal.propTypes = {
   editTravelReadinessDocument: PropTypes.func.isRequired,
   document: PropTypes.object.isRequired,
   currentDocument: PropTypes.object,
+  documentTypes: PropTypes.array.isRequired,
 };
 TravelDocumentModal.defaultProps = {
   modalType: '',

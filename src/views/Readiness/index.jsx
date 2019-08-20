@@ -14,6 +14,7 @@ import {
 } from '../../redux/actionCreator/travelReadinessDocumentsActions';
 import './Readiness.scss';
 import ReadinessInteractiveModal from './ReadinessInteractiveModal';
+import { fetchDocumentTypes } from '../../redux/actionCreator/documentTypesActions';
 
 export class TravelReadinessDocuments extends Component {
   constructor(props, context) {
@@ -22,8 +23,9 @@ export class TravelReadinessDocuments extends Component {
   }
 
   componentDidMount() {
-    const { fetchUserData, user, location: { search }, modalType } = this.props;
+    const { fetchUserData, user, location: { search }, modalType, fetchDocumentTypes } = this.props;
     fetchUserData(user.currentUser.userId);
+    fetchDocumentTypes();
     const travelDocumentDetails = search ? search.split('?').join('').split('&') : '';
     const searchMatch = /id=\w+&type=(passport|other|visa)/.test(search.split('?')[1]);
 
@@ -150,11 +152,6 @@ export class TravelReadinessDocuments extends Component {
 
   renderButton = (text, active, onClickHandler, document_count, moreProps, normal) => {
     let className = 'documents-button-group__button';
-    const { userReadiness, isLoading } = this.props;
-    const {
-      travelDocuments: { passport, visa }
-    } = userReadiness;
-
     return (
       <button
         type="button"
@@ -169,32 +166,36 @@ export class TravelReadinessDocuments extends Component {
       </button>
     );
   };
-  documentButtons = (passport, visa, other) => ([
-    {
-      name: 'passport',
-      display: 'Passports',
-      document_count: passport ? passport.length : 0
-    },
-    {
-      name: 'visa',
-      display: 'Visas',
-      document_count: visa ? visa.length : 0
-    },
-    {
-      name: 'other',
-      display: 'Others',
-      document_count: other ? other.length : 0
-    }
-  ]);
+  documentButtons = (travelDocuments) => {
+    const otherCount = Object.keys(travelDocuments).filter(type => !['passport', 'visa'].includes(type))
+      .reduce((prev, curr) => (prev + travelDocuments[curr].length), 0);
+    return ([
+      {
+        name: 'passport',
+        display: 'Passports',
+        document_count: travelDocuments.passport ? travelDocuments.passport.length : 0
+      },
+      {
+        name: 'visa',
+        display: 'Visas',
+        document_count: travelDocuments.visa ? travelDocuments.visa.length : 0
+      },
+      {
+        name: 'other',
+        display: 'Others',
+        document_count: otherCount
+      }
+    ]);
+  }
 
   isActive(buttonContext) {
     const { documentContext } = this.state;
     return buttonContext === documentContext;
   }
   renderButtonGroup() {
-    const {userReadiness: {travelDocuments: {passport, visa, other}}}= this.props;
+    const {userReadiness: { travelDocuments }}= this.props;
     const { documentContext } = this.state;
-    const buttons = this.documentButtons(passport, visa, other);
+    const buttons = this.documentButtons(travelDocuments);
     return (
       <div className="documents-button-group">
         <div>
@@ -213,14 +214,16 @@ export class TravelReadinessDocuments extends Component {
           false,
           () => this.handleModals(documentContext), null,
           { id: 'actionButton', 'data-content':'add' }, true)}
-      </div> ); }
+      </div>
+    );
+  }
 
   render() {
     const { documentId, documentContext, } = this.state;
     const { userReadiness, isLoading, shouldOpen,
       modalType, closeModal, location, openModal, history } = this.props;
    
-    const { travelDocuments: { passport, visa, other  } } = userReadiness;
+    const { travelDocuments } = userReadiness;
     return (
       <Fragment>
         <PageHeader title="Travel Documents" />
@@ -231,8 +234,7 @@ export class TravelReadinessDocuments extends Component {
         <TravelReadinessDetailsTable
           closeModal={closeModal} shouldOpen={shouldOpen} openModal={openModal}
           modalType={modalType} isLoading={isLoading} deleteDocument={this.handleDeleteDocument}
-          activeDocument={documentContext} passports={passport}
-          visas={visa} others={other} location={location}
+          activeDocument={documentContext} travelDocuments={travelDocuments} location={location}
           handleShowDocument={this.showDocumentDetail} documentId={documentId}
           userData={userReadiness} editDocument={this.handleEditDocument} history={history}
         />
@@ -244,7 +246,7 @@ export class TravelReadinessDocuments extends Component {
     ); }
 }
 
-const mapStateToProps = ({ modal, travelReadinessDocuments, readiness, user }) => ({
+const mapStateToProps = ({ modal, travelReadinessDocuments, documentTypes, readiness, user }) => ({
   ...modal.modal, travelReadinessDocuments,
   userReadiness: travelReadinessDocuments.userReadiness,
   isLoading: travelReadinessDocuments.isLoading, user: user,
@@ -253,6 +255,7 @@ const mapStateToProps = ({ modal, travelReadinessDocuments, readiness, user }) =
   passportInfo: travelReadinessDocuments.passportInfo, 
   retrieving: travelReadinessDocuments.scanning, 
   showPassportForm: travelReadinessDocuments.showForm,
+  documentTypes: documentTypes.documentTypes,
 });
 
 const matchDispatchToProps = {
@@ -260,7 +263,8 @@ const matchDispatchToProps = {
   editTravelReadinessDocument, deleteTravelReadinessDocument,
   fetchUserData: fetchUserReadinessDocuments,
   fetchDocumentDetails: fetchTravelReadinessDocument,
-  scanPassport
+  scanPassport,
+  fetchDocumentTypes
 };
 
 TravelReadinessDocuments.propTypes = {

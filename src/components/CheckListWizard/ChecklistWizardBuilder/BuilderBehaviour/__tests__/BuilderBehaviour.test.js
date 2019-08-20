@@ -3,6 +3,7 @@ import { shallow, mount } from 'enzyme';
 import BuilderBehaviour from '../index';
 import * as actions from '../behaviourActions';
 import getBehaviours from '../BehaviourPool';
+import DocumentUpload from '../DocumentUpload';
 
 const props = {
   behaviour: {},
@@ -28,12 +29,12 @@ describe('<BuilderBehaviour />', () => {
   });
 
   it('should handle behaviour change: upload a document', () => {
-    const wrapper = mount(<BuilderBehaviour {...props} />);
+    const wrapper = shallow(<BuilderBehaviour {...props} documentTypes={[{ id: 'id', name: 'type'}]} />);
     wrapper.instance().handleBehaviourDropdownChange(actions.UPLOAD_DOCUMENT);
     expect(wrapper.onBehaviourChange).toBeCalled;
 
     wrapper.setProps({...props, behaviour: { type: actions.UPLOAD_DOCUMENT } });
-    expect(wrapper.find('input')).toHaveLength(0);
+    expect(wrapper.find(DocumentUpload)).toHaveLength(1);
 
   });
 

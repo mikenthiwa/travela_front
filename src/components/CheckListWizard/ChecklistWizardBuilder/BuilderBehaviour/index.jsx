@@ -8,6 +8,7 @@ import ContextMenu from '../../../ContextMenu/ContextMenu';
 import MenuItem from '../../../ContextMenu/MenuItem';
 import PreviewDocumentUpload from './PreviewDocumentUpload';
 import Helper from '../BuilderOptions/helper';
+import DocumentUpload from './DocumentUpload';
 
 class Behaviours extends PureComponent {
 
@@ -22,14 +23,14 @@ class Behaviours extends PureComponent {
   }
 
   renderBehaviourInputType = () => {
-    const { behaviour } = this.props;
+    const { behaviour, updateBehaviour } = this.props;
     if (!behaviour) return null;
     const payload = behaviour.payload || '';
     const actionType = behaviour.type || '';
 
     switch (actionType) {
     case actions.UPLOAD_DOCUMENT: 
-      return null;
+      return (<DocumentUpload handleBehaviour={updateBehaviour} behaviour={behaviour} />);
     case actions.SKIP_QUESTION:
       return (
         <input

@@ -183,6 +183,7 @@ import {
 import { watchAddResourcesSagaAsync, watchFetchLinkDataSagaAsync } from './helpResourceSaga';
 import { watchPostNoPassportNotification } from './noPassportSaga';
 import watchCrashReport from "./errorBoundarySaga";
+import watchDocumentTypesSaga from './DocumentTypesSaga';
 
 
 function* rootSaga() {
@@ -327,6 +328,7 @@ function* rootSaga() {
     watchPostNoPassportNotification(),
     watchCrashReport(),
     watchGetOneChecklist(),
+    watchDocumentTypesSaga(),
   ]);
 }
 

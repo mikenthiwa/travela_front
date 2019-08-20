@@ -3,7 +3,7 @@ import OtherDocumentInputLabel from '../index';
 describe('OtherDocumentMetaData', () => {
   const inputLables = {
     name: {
-      label: 'Name'
+      label: 'Document Type'
     },
     documentId: {
       label: 'Document Id'

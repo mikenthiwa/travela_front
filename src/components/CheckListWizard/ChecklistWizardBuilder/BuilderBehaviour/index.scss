@@ -101,3 +101,29 @@
     width: 120px;
   }
 }
+
+.upload-document-behaviour.builder {
+  width: 40%;
+
+  .behaviour-input.upload-document-builder {
+    box-sizing: border-box;
+  }
+
+  .behaviour-selected.upload-document-builder {
+    text-transform: capitalize;
+  }
+
+  .select-option-container {
+
+    .select-options {
+      display: grid;
+      grid-gap: 5px;
+      max-height: 200px;
+      overflow: scroll;
+
+      button {
+        text-transform: capitalize;
+      }
+    }
+  }
+}

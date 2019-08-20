@@ -34,10 +34,6 @@
         }
     }
 
-    .builder-prompt-title{
-
-    }
-
     .drag-indicator-icon{
         color: #D8D8D8;
         cursor: grab;
@@ -133,7 +129,7 @@
       }
 
       .behaviour-input{
-          height: 30px;
+          height: 100%;
           font-size: 1rem;
           padding: 5px;
           background-color: #fff;
@@ -143,8 +139,8 @@
           outline: none;
           cursor: pointer;
           border-bottom: 1px solid #3359DB;
-          margin-bottom: 10px;
-      }
+          box-sizing: border-box
+      } 
 
       .behaviour-selected{
           color: #3359DB;
@@ -158,6 +154,7 @@
           border: none;
           border-bottom: 1px solid #3359DB;
           outline: none;
+          align-self: flex-end;
       }
 
 

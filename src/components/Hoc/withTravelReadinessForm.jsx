@@ -223,7 +223,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
       const { errors, values, hasBlankFields, uploadingDocument,
         name, imageChanged, uploadProgress, showForm, scanning, progressCount } = this.state;
 
-      const { modalType, document, fetchingDocument, updatingDocument, showPassportForm, retrieving, passportInfo} = this.props;
+      const { modalType, document, fetchingDocument, updatingDocument, showPassportForm, retrieving, passportInfo, documentTypes } = this.props;
       const {cloudinaryUrl} = values;
       if (documentType === 'other') delete errors.documentid;
       const { visaType, otherVisaTypeDetails } = values;
@@ -270,7 +270,8 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
                     <div className={!showForm && !(/edit/.test(modalType)) ? 'invisible': 'visible'}>
                       {<FormFieldSet
                         visaType={visaType} onChangeVisa={this.onChangeVisa}
-                        values={values} otherVisaTypeDetails={otherVisaTypeDetails} />}
+                        values={values} otherVisaTypeDetails={otherVisaTypeDetails}
+                        documentTypes={documentTypes} />}
                     </div>
                   ):''
                 }
@@ -329,6 +330,7 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
     passportInfo: PropTypes.object,
     showPassportForm: PropTypes.bool,
     retrieving: PropTypes.bool,
+    documentTypes: PropTypes.array,
   };
 
   BaseForm.defaultProps = {
@@ -344,7 +346,8 @@ export default function TravelReadinessForm (FormFieldSet, documentType, default
     updatingDocument: false,
     showPassportForm: false,
     retrieving:false,
-    passportInfo:{}
+    passportInfo:{},
+    documentTypes: [],
   };
   return BaseForm;
 }

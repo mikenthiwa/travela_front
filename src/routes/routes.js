@@ -34,6 +34,7 @@ import ConnectedHelpers from '../views/HelpLinks';
 import ConnectedFlightEstimate from '../views/FlightEstimates';
 import ConnectedChecklistWizardInterface from '../views/ChecklistWizardInterface';
 import ConnectedUserChecklist from '../views/UserChecklist';
+import ConnectedDocumentTypes from '../views/DocumentTypes';
 
 
 import {
@@ -85,7 +86,8 @@ const routes = {
   '/settings/travel-region': [ConnectedTravelRegion, TRAVEL_MANAGERS],
   '/settings/travel-region/:regionId': [ConnectedCountries, TRAVEL_MANAGERS],
   '/trip-planner/checklist-wizard-interface': [ConnectedChecklistWizardInterface, TRAVEL_MANAGERS],
-  '/new-requests/:requestId/checklists': [ConnectedUserChecklist]
+  '/new-requests/:requestId/checklists': [ConnectedUserChecklist],
+  '/settings/document-types': [ConnectedDocumentTypes, TRAVEL_MANAGERS],
 };
 
 export default routes;

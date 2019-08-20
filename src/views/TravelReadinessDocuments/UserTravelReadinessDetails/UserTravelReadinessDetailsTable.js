@@ -75,7 +75,7 @@ export class UserTravelReadinessDetailsTable extends Component {
     }
     if(activeDocument === 'other') {
       columnNames = [
-        'Document Name', 'Document Id', 'Date of Issue',
+        'Document Type', 'Document Id', 'Date of Issue',
         'Expiry Date', 'Attachments', 'Status'
       ];
     }
@@ -88,12 +88,12 @@ export class UserTravelReadinessDetailsTable extends Component {
   }
 
   renderTableBody() {
-    const { activeDocument, passports, visas, others } = this.props;
+    const { activeDocument, passports, visas, travelDocuments } = this.props;
     return(
       <tbody className="table__body approvals_table_body">
         {
           this.renderDocuments({
-            activeDocument, passports, visas, others
+            activeDocument, passports, visas, travelDocuments
           })
         }
       </tbody>
@@ -101,17 +101,17 @@ export class UserTravelReadinessDetailsTable extends Component {
   }
 
   renderDocuments({
-    activeDocument, passports, visas, others
+    activeDocument, travelDocuments
   }) {
     switch(activeDocument) {
     case 'passport':
-      return passports.map(data => this.renderPassPortRow(data));
+      return travelDocuments.passport.map(data => this.renderPassPortRow(data));
     case'visa':
-      return visas.map(data => this.renderVisaRow(data));
-    case 'other':
-      return others.map(data => this.renderOtherDocumentRow(data));
+      return travelDocuments.visa.map(data => this.renderVisaRow(data));
     default:
-      return;
+      return Object.keys(travelDocuments).filter(type => !['passport', 'visa'].includes(type))
+        .map(type => travelDocuments[type].map(data => this.renderOtherDocumentRow(data)))
+        .reduce((prev, curr) => prev.concat(curr), []);
     }
   }
 
@@ -258,12 +258,13 @@ export class UserTravelReadinessDetailsTable extends Component {
   }
 
   render() {
-    const { activeDocument } = this.props;
-    const { props } = this;
-    if((!props[`${activeDocument}s`].length) ) {
+    const { travelDocuments, activeDocument } = this.props;
+    const active = activeDocument !== 'other' ? activeDocument
+      : Object.keys(travelDocuments).find(type => !!travelDocuments[type].length) ;
+    if((!travelDocuments[active])) {
       return (
         <div className="table__readiness--empty">
-          {`${activeDocument}` === 'other' ?
+          {activeDocument === 'other' ?
             this.renderOtherDocuments() :
             `No ${activeDocument}s  are displayed because you have no uploaded ${activeDocument} documents`}
         </div>

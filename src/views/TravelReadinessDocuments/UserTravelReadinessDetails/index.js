@@ -38,7 +38,8 @@ class UserTravelReadinessDetails extends Component {
     const { activeDocument, documentId } = this.state;
     const { userReadiness, isLoading, shouldOpen, modalType, closeModal, location } = this.props;
     const { fullName, travelDocuments } = userReadiness;
-    const { passport, visa, other } = travelDocuments;
+    const otherCount = Object.keys(travelDocuments).filter(type => !['passport', 'visa'].includes(type))
+      .reduce((prev, curr) => (prev + travelDocuments[curr].length), 0);
     return (
       <Fragment>
         <div className={isLoading ? 'readiness-header' : ''}>
@@ -55,7 +56,7 @@ class UserTravelReadinessDetails extends Component {
                     <Button
                       className="document-button"
                       showBadge
-                      badge={passport && passport.length}
+                      badge={travelDocuments.passport && travelDocuments.passport.length}
                       text="Passports"
                       onClick={() => this.toggleDocumentTab('passport')}
                       buttonClass={`bg-btn bg-btn--with-badge ${activeDocument === 'passport' ? 'bg-btn--active' : ''}`}
@@ -63,7 +64,7 @@ class UserTravelReadinessDetails extends Component {
                     />
                     <Button
                       showBadge
-                      badge={visa && visa.length}
+                      badge={travelDocuments.visa && travelDocuments.visa.length}
                       text="Visas"
                       onClick={() => this.toggleDocumentTab('visa')}
                       buttonClass={`bg-btn bg-btn--with-badge ${activeDocument === 'visa' ? 'bg-btn--active' : ''}`}
@@ -71,7 +72,7 @@ class UserTravelReadinessDetails extends Component {
                     />
                     <Button
                       showBadge
-                      badge={other && other.length}
+                      badge={otherCount}
                       text="Others"
                       onClick={() => this.toggleDocumentTab('other')}
                       buttonClass={`bg-btn bg-btn--with-badge ${activeDocument === 'other' ? 'bg-btn--active' : ''}`}
@@ -91,12 +92,10 @@ class UserTravelReadinessDetails extends Component {
           isLoading={isLoading}
           location={location}
           modalType={modalType}
-          others={other}
           viewType="verifier"
-          passports={passport}
           shouldOpen={shouldOpen}
           userData={userReadiness}
-          visas={visa}
+          travelDocuments={travelDocuments}
         />
       </Fragment>
     );

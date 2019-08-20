@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import InputRenderer from '../../FormsAPI';
 import formMetadata from '../../FormsMetadata/TravelReadinessMetaData/OtherDocumentMetaData';
 
 class OtherDocumentFieldSet extends Component {
   render() {
+    const { documentTypes: name } = this.props;
+    formMetadata.dropdownSelectOptions = { name }; 
     const {renderInput} = new InputRenderer(formMetadata);
     return (
       <fieldset>
         <div className="input-group visa-input">
-          {renderInput('name', 'text')}
+          {name.length > 1 ? renderInput('name', 'dropdown-select', { className: 'document-types-dropdown' })
+            : renderInput('name', 'text', { className: 'document-types-input', value: name[0] || '' } )}
           {renderInput(
             'dateOfIssue',
             'date',
@@ -37,5 +41,9 @@ class OtherDocumentFieldSet extends Component {
     );
   }
 }
+
+OtherDocumentFieldSet.propTypes = {
+  documentTypes: PropTypes.array.isRequired
+};
 
 export default OtherDocumentFieldSet;

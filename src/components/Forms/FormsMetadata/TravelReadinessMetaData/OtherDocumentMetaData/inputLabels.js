@@ -1,6 +1,6 @@
 export default {
   name: {
-    label: 'Name'
+    label: 'Document Type'
   },
   documentId: {
     label: 'Document Id'

@@ -223,6 +223,12 @@ const NavItemsMetadata = [
         text: 'Travel Region',
         onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member']
       },
+      {
+        link_to: '/settings/document-types',
+        exact: true,
+        text: 'Document Types',
+        onlyVisibleTo: ['Travel Administrator', 'Super Administrator', 'Travel Team Member']
+      },
     ],
     icons: {
       active: activeSettingsIcon,

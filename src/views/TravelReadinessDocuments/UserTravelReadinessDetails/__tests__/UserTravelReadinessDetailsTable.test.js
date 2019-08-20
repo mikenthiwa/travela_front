@@ -22,7 +22,8 @@ describe('UserTravelReadinessDetailsTable', () => {
     },
     history: {
       push: jest.fn()
-    }
+    },
+    travelDocuments: { passport: passports, visa: visas },
   };
 
   it('should render the table', () => {
@@ -37,8 +38,7 @@ describe('UserTravelReadinessDetailsTable', () => {
       modalType: 'document details',
       documentId: 'fufgw',
       userData: {},
-      passports,
-      visas,
+      travelDocuments: { passport: passports, visa: visas },
     };
 
     const wrapper = shallow(<UserTravelReadinessDetailsTable {...props} />);
@@ -52,7 +52,8 @@ describe('UserTravelReadinessDetailsTable', () => {
       shouldOpen: false,
       modalType: 'document details',
       documentId: 'fufgw',
-      userData: {}
+      userData: {},
+      travelDocuments: {}
     };
 
     const wrapper = shallow(<UserTravelReadinessDetailsTable {...props} />);
@@ -63,11 +64,11 @@ describe('UserTravelReadinessDetailsTable', () => {
     const props = {
       ...defaultProps,
       activeDocument: 'other',
-      others: [],
       shouldOpen: false,
       modalType: 'document details',
       documentId: 'fufgw',
-      userData: {}
+      userData: {},
+      travelDocuments: {}
     };
     const wrapper = shallow(<UserTravelReadinessDetailsTable {...props} />);
     expect(wrapper.find('.table__readiness--empty').length).toBe(1);
@@ -81,7 +82,8 @@ describe('UserTravelReadinessDetailsTable', () => {
       shouldOpen: true,
       modalType: 'add other',
       documentId: 'fufgw',
-      userData: {}
+      userData: {},
+      travelDocuments: {}
     };
 
     const wrapper = shallow(<UserTravelReadinessDetailsTable {...props} />);
@@ -91,8 +93,7 @@ describe('UserTravelReadinessDetailsTable', () => {
   it('handles showing the passport modal', () => {
     const props = {
       ...defaultProps,
-      passports,
-      visas,
+      travelDocuments: { passport: passports, visa: visas },
     };
     const mockOnClick = jest.fn();
     const wrapper = shallow(<UserTravelReadinessDetailsTable {...props} handleShowDocument={mockOnClick} />);
@@ -105,8 +106,7 @@ describe('UserTravelReadinessDetailsTable', () => {
   it('handles showing the visa modal', () => {
     const props = {
       ...defaultProps,
-      passports,
-      visas,
+      travelDocuments: { passport: passports, visa: visas },
       activeDocument: 'visa',
     };
     const mockOnClick = jest.fn();
@@ -120,9 +120,7 @@ describe('UserTravelReadinessDetailsTable', () => {
   it('handles showing other documnent modal', () => {
     const props = {
       ...defaultProps,
-      passports,
-      visas,
-      others: otherDocuments,
+      travelDocuments: { passport: passports, visa: visas, others: otherDocuments },
       activeDocument: 'other',
     };
     const mockOnClick = jest.fn();
@@ -135,9 +133,7 @@ describe('UserTravelReadinessDetailsTable', () => {
   it('renders other documnent table', () => {
     const props = {
       ...defaultProps,
-      passports,
-      visas,
-      others: otherDocuments,
+      travelDocuments: { passport: passports, visa: visas, others: otherDocuments },
       activeDocument: 'other',
     };
     const mockOnClick = jest.fn();
@@ -150,10 +146,8 @@ describe('UserTravelReadinessDetailsTable', () => {
     documents.forEach((activeDocument) => {
       const props = {
         ...defaultProps,
-        passports,
-        visas,
         viewType: 'verifier',
-        others: otherDocuments,
+        travelDocuments: { passport: passports, visa: visas, others: otherDocuments },
         activeDocument,
       };
 

@@ -55,7 +55,9 @@ const state = {
     readiness:[],
     passportInfo:{}
   },
-
+  documentTypes: {
+    documentTypes: [{ id: 'id', name: 'type' }, { id: 'id2', name: 'type2' }]
+  },
 };
 
 describe('renders <TravelReadinessDocuments />', () =>{
