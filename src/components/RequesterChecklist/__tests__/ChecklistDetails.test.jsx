@@ -80,10 +80,8 @@ describe ('ChecklistDetails Test Suite', () => {
 
   it('should handle remove selected checkbox', () => {
     const wrapper = shallow(<ChecklistDetails {...props2} />);
-    wrapper.instance().handleSkipToQuestion(1, true);
-    expect(wrapper.state('config')[1].isDisabled).toBe(true);
-    wrapper.instance().handleSkipToQuestion(1, false);
-    expect(wrapper.state('config')[1].isDisabled).toBe(false);
+    wrapper.instance().handleSkipToQuestion(1);
+    expect(wrapper.state('disabledIndex')).toEqual(1);
   });
 
 });

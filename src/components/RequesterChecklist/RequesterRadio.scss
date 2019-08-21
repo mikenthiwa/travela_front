@@ -1,0 +1,89 @@
+.radio-grid-wrapper {
+    overflow-x: scroll;
+    width: 100%;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+
+    .radio-grid-wrapper::-webkit-scrollbar { 
+        display: none;
+    }
+    
+    .radio-grid::-webkit-scrollbar { 
+        display: none; 
+    }
+
+    .radio-grid {
+        display: flex;
+        height: 39px;
+    }
+    
+    .radio-option {
+        border: 1px solid #AAAAAA;
+        border-left: none;
+        display: flex;
+    
+        &:first-child {
+            border-radius: 5px 0 0 5px;
+            border-left: 1px solid #AAAAAA;
+        }
+    
+        &:last-child {
+            border-radius: 0 5px 5px 0;
+        }
+    
+        &:only-child {
+            border-radius: 5px;
+        }
+    
+        &.selected {
+            background-color: #EEF0F6;
+        }
+    
+        .radio-cell{
+            display: flex;
+            justify-items: center;
+            align-items: center;
+            padding: 3px 10px;
+            position: relative;
+    
+            .radio-btn{
+                margin: auto 5px;
+                display: none;
+            }
+    
+            .radio-icon {
+                display: flex;
+                position: relative;
+                height: 16px;
+                width: 16px;
+                z-index: 5;
+                transition: border .25s linear;
+                -webkit-transition: border .25s linear;
+    
+                img {
+                    max-width: 100%;
+                }
+            }
+    
+            .radio-value{
+                margin: auto 5px;
+                white-space: nowrap;
+            }
+        }
+    
+        .radio-cell.selected{
+            box-sizing: border-box;
+    
+            .radio-value{
+                color: #3359DB
+            }
+        }
+    }
+    
+    .upload-document-btn {
+        .upload-doc {
+            display: none;
+          }
+    }
+}
+

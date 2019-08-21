@@ -12,8 +12,7 @@ class OtherDocumentFieldSet extends Component {
     return (
       <fieldset>
         <div className="input-group visa-input">
-          {name.length > 1 ? renderInput('name', 'dropdown-select', { className: 'document-types-dropdown' })
-            : renderInput('name', 'text', { className: 'document-types-input', value: name[0] || '' } )}
+          {renderInput('name', 'dropdown-select', { className: 'document-types-dropdown' })}
           {renderInput(
             'dateOfIssue',
             'date',

@@ -8,14 +8,39 @@ import RenderChecklists  from '../../components/RequesterChecklist/RenderCheckli
 import './UserChecklist.scss';
 
 export class UserChecklist extends Component {
+  state = {
+    checklistWithResponse: [],
+  }
   componentDidMount() {
     const { getOneChecklist, location } = this.props;
     const requestId = location.pathname.split('/')[2];
     getOneChecklist(requestId);
   }
-  
+
+  static getDerivedStateFromProps(props, state) {
+    const { checklistWithResponse } = state;
+    const { checklist } = props;
+    if (!checklistWithResponse.length && checklist.length) {
+      return {
+        checklistWithResponse: checklist,
+      };
+    }
+    return null;
+  }
+
+  handleResponse = (response) => {
+    const { checklistWithResponse } = this.state;
+    const newChecklist = checklistWithResponse.map(item => {
+      const newConfig = item.config.map(checklistItem => checklistItem.id === response.id ? {
+        ...checklistItem, response } : checklistItem);
+      return { ...item, config: newConfig };
+    });
+    this.setState({ checklistWithResponse: newChecklist });
+  }
+
   render() {
-    const {checklist, isLoading, fullName} = this.props;
+    const {isLoading, fullName} = this.props;
+    const { checklistWithResponse } = this.state;
     return (
       <div className="smart-checklist">
         <div className="smart-checklist-header">
@@ -33,7 +58,7 @@ export class UserChecklist extends Component {
         </div>
         <div className="smart-checklist-body">
           {isLoading && <Preloader spinnerClass="loader" />}
-          {!isLoading && <RenderChecklists checklists={checklist} />}
+          {!isLoading && <RenderChecklists checklists={checklistWithResponse} handleResponse={this.handleResponse} />}
         </div>
       </div>
     );
@@ -43,15 +68,9 @@ export class UserChecklist extends Component {
 UserChecklist.propTypes = {
   getOneChecklist: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  checklist: PropTypes.arrayOf(Object),
   location: PropTypes.object.isRequired,
   fullName: PropTypes.string.isRequired
 };
-
-UserChecklist.defaultProps = {
-  checklist: [{}],
-};
-
 
 const mapStateToProps = ({user, checklistWizard}) => {
   return {

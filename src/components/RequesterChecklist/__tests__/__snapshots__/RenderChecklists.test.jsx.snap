@@ -1,40 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RenderChecklist Test Suite should not render when showFlightdetails is false 1`] = `
-<Fragment>
-  <div
-    className="checklist-tab-section"
-  >
-    <button
-      className="tab-header "
-      onClick={[Function]}
-      type="button"
-    >
-      <div
-        className="tab-header-text-wrapper"
-      >
-        <span
-          className="tab-header-text"
-        >
-          FLIGHT DETAILS
-        </span>
-      </div>
-      <p
-        className="tab-header-name"
-      >
-        pending...
-      </p>
-    </button>
-  </div>
-  <div
-    className="line"
-  />
-  <div
-    className="checklist-body-section"
-  />
-</Fragment>
-`;
-
 exports[`RenderChecklist Test Suite should render correctly 1`] = `
 <Fragment>
   <div

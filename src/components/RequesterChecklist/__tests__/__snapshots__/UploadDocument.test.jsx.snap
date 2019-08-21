@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Upload Document behaviour tests render <RequesterRadio /> 1`] = `
+Array [
+  "",
+  "",
+  "",
+  <div
+    className="upload-behaviour"
+>
+    <div
+        className="document-dropdown"
+    >
+        <div
+            className="dropdown-container"
+        >
+            <div
+                className="selected-area "
+            >
+                <p
+                    className="selected "
+                >
+                    image.png
+                </p>
+                <img
+                    alt="expand_more"
+                    className="drop-icon"
+                    src="baseline-expand_more-24px.svg"
+                />
+            </div>
+            <div
+                className="select-option-container unknown1"
+            />
+        </div>
+    </div>
+    <span
+        className="separator"
+    >
+        OR
+    </span>
+    <button
+        className="upload-btn"
+        onClick={[Function]}
+        type="button"
+    >
+        Upload a new passport
+    </button>
+</div>,
+  <a
+    href="https://res.cloudinary.com/upload/v156624142"
+    rel="noopener noreferrer"
+    target="_blank"
+>
+    <img
+        alt="document-preview"
+        src="https://res.cloudinary.com/upload/v156624142"
+        style={
+            Object {
+                "height": "200px",
+                "width": "300px",
+              }
+        }
+    />
+</a>,
+]
+`;

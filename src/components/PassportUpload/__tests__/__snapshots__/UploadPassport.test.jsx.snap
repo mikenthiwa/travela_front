@@ -131,12 +131,10 @@ exports[`Upload a passport should render correctly when passport is set to false
             Reason
           </p>
           <textarea
-            className="reason-textarea"
-            cols="62"
+            className="reason-textarea check"
             name="reason"
             onChange={[Function]}
             placeholder="Type Reason..."
-            rows="6"
             value=""
           />
         </div>
@@ -240,6 +238,7 @@ exports[`Upload a passport should render correctly when passport is set to true 
               closeModal={[Function]}
               createTravelReadinessDocument={[Function]}
               document={Object {}}
+              documentTypes={Array []}
               editTravelReadinessDocument={[Function]}
               errors={Object {}}
               fetchingDocument={false}

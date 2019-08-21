@@ -5,10 +5,12 @@ import PreviewVideo from '../CheckListWizard/ChecklistWizardPreview/PreviewVideo
 import RequesterViewCheckbox from '../CheckListWizard/ChecklistWizardRequester/PreviewCheckbox/index';
 import PreviewScale from '../CheckListWizard/ChecklistWizardPreview/PreviewScaleOption';
 import PreviewDropdown from '../CheckListWizard/ChecklistWizardPreview/PreviewDropdown';
+import RequesterRadio from './RequesterRadio';
 
 class ChecklistItems extends Component {
+  
   render () {
-    const { config, handleSkipToQuestion } = this.props;
+    const { config, handleSkipToQuestion, handleResponse } = this.props;
     switch (config.type) {
     case 'checkbox':
       return (
@@ -21,7 +23,7 @@ class ChecklistItems extends Component {
     case 'image':
       return (<PreviewImage item={config} />);
     case 'radio':
-      return (<div>This is a radio option</div>);
+      return (<RequesterRadio item={config} handleResponse={handleResponse} />);
     case 'dropdown':
       return (<PreviewDropdown item={config} />);
     case 'video':
@@ -36,7 +38,8 @@ class ChecklistItems extends Component {
 
 ChecklistItems.propTypes = {
   config: PropTypes.object.isRequired,
-  handleSkipToQuestion: PropTypes.func.isRequired
+  handleSkipToQuestion: PropTypes.func.isRequired,
+  handleResponse: PropTypes.func.isRequired,
 };
 
 export default ChecklistItems;

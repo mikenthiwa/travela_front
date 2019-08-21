@@ -1,29 +1,24 @@
 import React, { Component } from 'react';
-import toast from 'toastr';
 import PropTypes from 'prop-types';
 import ChecklistItems from './ChecklistItems';
 import './ChecklistDetails.scss';
 
 class ChecklistDetails extends Component {
 
-  constructor(props) {
-    super(props);
-    const { checklist: { config } } = this.props;
-    this.state = {
-      config,
-    };
+  state = {
+    disabledIndex: -1,
   }
-  
-  handleSkipToQuestion = (id, isDisabled) => {
-    const { config } = this.state;
+
+  handleSkipToQuestion = (id) => {
+    const { checklist: { config } } = this.props;
     const index = config.findIndex(item => item.id === id) + 1;
-    const newConfig = config.map((item, checklistIndex) => checklistIndex === index ? { ...item, isDisabled } : item);
-    this.setState({ config: newConfig });
+    this.setState({ disabledIndex: index });
   };
   
   render() {
-    const { config } = this.state;
-    const filteredConfig = config.length && config.filter(item => !item.isDisabled);
+    const { checklist: { config }, handleResponse } = this.props;
+    const { disabledIndex } = this.state;
+    const filteredConfig = config.filter((item, index) => index!== disabledIndex);
     return (
       <div className="checklist-details">
         <div className="tab-body">
@@ -37,6 +32,7 @@ class ChecklistDetails extends Component {
                 <ChecklistItems 
                   config={configuration}
                   handleSkipToQuestion={this.handleSkipToQuestion}
+                  handleResponse={handleResponse}
                 />
               </div>
             </div>
@@ -46,9 +42,9 @@ class ChecklistDetails extends Component {
     );
   }
 }
-
 ChecklistDetails.propTypes = {
   checklist: PropTypes.object.isRequired,
+  handleResponse: PropTypes.func.isRequired,
 };
 
 export default ChecklistDetails;

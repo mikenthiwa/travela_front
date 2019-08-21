@@ -31,9 +31,69 @@ exports[`UserChecklist Test Suite should render correctly 1`] = `
     <RenderChecklists
       checklists={
         Array [
-          Object {},
+          Object {
+            "config": Array [
+              Object {
+                "behaviour": Object {},
+                "configuration": Object {
+                  "endsAt": 6,
+                },
+                "id": "qawvzipM5",
+                "order": 1,
+                "prompt": "How well do you know burundi?",
+                "response": Object {
+                  "id": "qawvzipM5",
+                  "selectedValue": 5,
+                },
+                "type": "scale",
+              },
+            ],
+            "createdAt": "2019-08-15T12:43:39.411Z",
+            "createdBy": "2614",
+            "destinations": Array [
+              Object {
+                "checklistId": 4,
+                "country": Object {
+                  "country": "Liberia",
+                  "createdAt": "2019-08-15T12:43:39.466Z",
+                  "id": 5,
+                  "regionId": 9999,
+                  "updatedAt": "2019-08-15T12:43:39.466Z",
+                },
+                "countryId": 5,
+                "createdAt": "2019-08-15T12:43:39.550Z",
+                "id": 6,
+                "region": null,
+                "regionId": null,
+                "updatedAt": "2019-08-15T12:43:39.550Z",
+              },
+            ],
+            "id": 4,
+            "name": "Kenya-Liberia",
+            "origin": Array [
+              Object {
+                "checklistId": 4,
+                "country": Object {
+                  "country": "Kenya",
+                  "createdAt": "2019-10-05T08:36:11.170Z",
+                  "id": 100,
+                  "regionId": 1001,
+                  "updatedAt": "2019-10-05T08:36:11.170Z",
+                },
+                "countryId": 100,
+                "createdAt": "2019-08-15T12:43:39.454Z",
+                "id": 4,
+                "region": null,
+                "regionId": null,
+                "updatedAt": "2019-08-15T12:43:39.454Z",
+              },
+            ],
+            "tripId": "XCl0etYBdl",
+            "updatedAt": "2019-08-15T12:43:39.411Z",
+          },
         ]
       }
+      handleResponse={[Function]}
     />
   </div>
 </div>

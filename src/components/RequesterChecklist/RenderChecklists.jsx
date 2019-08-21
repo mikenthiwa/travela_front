@@ -21,9 +21,9 @@ class RenderChecklists extends Component {
   onFlightDetailsTabClick = () => {
     this.setState({showFlightDetails: true });
   }
-  
+
   render() {
-    const { checklists } = this.props;
+    const { checklists, handleResponse } = this.props;
     const { tabIndex, showFlightDetails } = this.state;
     const activeChecklist = checklists.find((value, index) => index === tabIndex);
     return (
@@ -57,6 +57,7 @@ class RenderChecklists extends Component {
           {activeChecklist && !showFlightDetails && (
             <ChecklistDetails
               checklist={activeChecklist}
+              handleResponse={handleResponse}
             />
           )}
           {showFlightDetails && (<div> Flight Details Here!!! </div>
@@ -69,6 +70,7 @@ class RenderChecklists extends Component {
 
 RenderChecklists.propTypes = {
   checklists: PropTypes.array.isRequired,
+  handleResponse: PropTypes.func.isRequired,
 };
 
 export default RenderChecklists;
