@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Modal from '../modal/Modal';
-import InputRenderer from '../Forms/FormsAPI';
 import FormContext from '../Forms/FormsAPI/FormContext/FormContext';
 import formMetadata from '../Forms/FormsMetadata/NewTravelReasonFormMetadata/TravelReasonDetails';
 import PreLoader from '../Preloader/Preloader';
@@ -10,27 +9,24 @@ import './travelReasons.scss';
 
 const RenderTravelReasonDetails = (props) => {
   const { closeModal, reasonDetails } = props;
-  const { renderInput } = new InputRenderer({ inputLabels: formMetadata });
   return (
     <Fragment>
-      <fieldset>
-        <div className="input-group reason-details">
-          {renderInput('title', 'text', {
-            className: 'title-input',
-            disabled: true,
-            value: _.capitalize(reasonDetails.title)
-          }
-          )}
-          {renderInput('description', 'textarea', {
-            className: 'description-input',
-            disabled: true,
-            value: reasonDetails.description
-          })}
-        </div>
-      </fieldset>
-      <hr />
+      <div>
+        <div className="veiw-titles">TITLE:</div>
+        <p className="show-reason"> 
+          {_.capitalize(reasonDetails.title)}
+        </p>
+      </div>
+        
+      <div>
+        <div className="veiw-titles">REASON:</div>
+        <p className="show-reason">
+          {_.capitalize(reasonDetails.description)}
+        </p>
+      </div>
+      
       <button
-        type="button" onClick={closeModal} id="cancel"
+        type="button" onClick={closeModal} id="cancel" style={{color:'red'}}
         className="bg-btn bg-btn--inactive bg-btn--reason">
           Cancel
       </button>
