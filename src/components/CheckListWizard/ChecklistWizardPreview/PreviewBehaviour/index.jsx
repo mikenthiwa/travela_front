@@ -14,7 +14,9 @@ const PreviewBehaviour = ({ behaviour }) => {
   case behaviourTypes.PREVIEW_DOCUMENT:
     return (
       <div className="behaviour-style">
-        <PreviewDocument behaviour={behaviour} />
+        <PreviewDocument 
+          behaviour={behaviour}
+        />
       </div>
     );
   case behaviourTypes.NOTIFY_EMAIL:
@@ -30,6 +32,7 @@ const PreviewBehaviour = ({ behaviour }) => {
 
 PreviewBehaviour.propTypes = {
   behaviour: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired
 };
 
 export default PreviewBehaviour;

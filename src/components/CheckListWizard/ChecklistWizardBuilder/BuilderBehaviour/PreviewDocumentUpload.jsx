@@ -34,7 +34,7 @@ class PreviewDocumentUpload extends Component {
   cancelResult = () => {
     const { handleBehaviour } = this.props;
     this.setState({ 
-      pdfFile: '',
+      fileName: '',
       result: null
     }, () => {
       const { pdfFile } = this.state;
@@ -46,12 +46,6 @@ class PreviewDocumentUpload extends Component {
     const { handleBehaviour } = this.props;
     const file = event.target.files[0];
     const fd = new FileReader();
-    fd.onload = () => {
-      this.setState({ pdfFile: file}, () => {
-        const { pdfFile } = this.state;
-        handleBehaviour('', pdfFile);
-      });
-    };
     fd.readAsDataURL(file);
     const { defaults: { headers: { common } } } = axios; 
     const token = common.Authorization;
@@ -69,9 +63,14 @@ class PreviewDocumentUpload extends Component {
           this.cancel = c;
         })
       });
-  
-      this.setState({result: pdfData.secure_url}, () => {
+
+      this.setState({
+        result: pdfData.secure_url,
+        fileName: file.name, 
+      }, () => {
+        const { result } = this.state;
         successMessage('PDF uploaded successfully');
+        handleBehaviour('', result);
       }); 
     } catch(err) {
       errorMessage('PDF Upload Cancelled');
@@ -97,10 +96,10 @@ class PreviewDocumentUpload extends Component {
   }
 
   renderResult = () => {
-    const { result, pdfFile } = this.state;
+    const { result, fileName } = this.state;
     return result ? (
       <div className="result-div">
-        <div className="file-name">{pdfFile.name}</div>
+        <div className="file-name">{fileName}</div>
         <div>
           <button type="submit" onClick={this.cancelResult} className="cancel-button">+</button>
         </div>

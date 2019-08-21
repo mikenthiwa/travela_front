@@ -4,6 +4,7 @@ import PreviewImage from '../CheckListWizard/ChecklistWizardPreview/PreviewImage
 import PreviewVideo from '../CheckListWizard/ChecklistWizardPreview/PreviewVideo';
 import RequesterViewCheckbox from '../CheckListWizard/ChecklistWizardRequester/PreviewCheckbox/index';
 import PreviewScale from '../CheckListWizard/ChecklistWizardPreview/PreviewScaleOption';
+import PreviewDropdown from '../CheckListWizard/ChecklistWizardPreview/PreviewDropdown';
 
 class ChecklistItems extends Component {
   render () {
@@ -22,7 +23,7 @@ class ChecklistItems extends Component {
     case 'radio':
       return (<div>This is a radio option</div>);
     case 'dropdown':
-      return <div>This is dropdown</div>;
+      return (<PreviewDropdown item={config} />);
     case 'video':
       return (<PreviewVideo item={config} />);
     case 'scale':

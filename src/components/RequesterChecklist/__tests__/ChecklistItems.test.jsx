@@ -4,6 +4,7 @@ import ChecklistItems from '../ChecklistItems';
 import PreviewImage from '../../CheckListWizard/ChecklistWizardPreview/PreviewImage';
 import PreviewVideo from '../../CheckListWizard/ChecklistWizardPreview/PreviewVideo';
 import PreviewScale from '../../CheckListWizard/ChecklistWizardPreview/PreviewScaleOption';
+import PreviewDropdown from '../../CheckListWizard/ChecklistWizardPreview/PreviewDropdown';
 
 describe ('ChecklistItems Test Suite', () => {
   const props = {
@@ -57,7 +58,7 @@ describe ('ChecklistItems Test Suite', () => {
   it('should render dropdown checklist type', () => {
     props.config.type = 'dropdown';
     const wrapper = shallow(<ChecklistItems {...props} />);
-    expect(wrapper.find('div'));
+    expect(wrapper.find(PreviewDropdown).length).toEqual(1);
   });
 
   it('should render checkbox checklist type', () => {

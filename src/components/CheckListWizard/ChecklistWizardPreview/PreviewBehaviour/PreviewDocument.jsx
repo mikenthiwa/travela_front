@@ -34,7 +34,7 @@ class PreviewDocument extends Component {
     let previousPageNumber;
     if (currentPageNumber - 1 < 1) {
       previousPageNumber = 1;
-    } else if(currentPageNumber < numPages) {
+    } else if(currentPageNumber <= numPages) {
       previousPageNumber = currentPageNumber - 1;
     }
     this.setState({
@@ -45,7 +45,6 @@ class PreviewDocument extends Component {
   render() {
     const { pageNumber, numPages } = this.state;
     const { behaviour: { payload } } = this.props;
-
     return (
       <div>
         {payload ? (
@@ -54,24 +53,26 @@ class PreviewDocument extends Component {
             <button type="button" onClick={this.nextPage}>Next</button>
           </div>
         ) : null}
-        
-        <div className="document">
-          <Document
-            file={payload}
-            onLoadSuccess={this.onDocumentLoadSuccess}
-            noData="You have not yet uploaded any PDF file."
-          >
-            <Page pageNumber={pageNumber} />
-          </Document>
-        </div>
+        <a href={payload} target="blank">
+          <div className="document">
+            <Document
+              file={payload}
+              onLoadSuccess={this.onDocumentLoadSuccess}
+              noData="You have not yet uploaded any PDF file."
+            >
+              <Page pageNumber={pageNumber} />
+            </Document>
+          </div>
+        </a>
         <div className="page-number">
           {payload ? (
             <p>
               Page
+              {' '}
               {pageNumber}
-              {''}
-              Of
-              {''}
+              {' '}
+              of
+              {' '}
               {numPages}
             </p>
           ) : null}
@@ -82,7 +83,7 @@ class PreviewDocument extends Component {
 }
 
 PreviewDocument.propTypes = {
-  behaviour: PropTypes.object.isRequired
+  behaviour: PropTypes.object.isRequired,
 };
 
 export default PreviewDocument;
