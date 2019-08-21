@@ -7,7 +7,6 @@ import { MemoryRouter } from 'react-router-dom';
 import MutationObserver from 'mutation-observer';
 import configureStore from 'redux-mock-store';
 import createSagaMiddleware from 'redux-saga';
-import { PropTypes } from 'prop-types';
 import NewRequestForm from '../NewRequestForm';
 import beds from '../../../../views/AvailableRooms/__mocks__/mockData/availableRooms';
 import profileMock from '../../ProfileForm/__mocks__/ProfileForm';
@@ -269,10 +268,9 @@ describe('<NewRequestForm />', () => {
       ]
     },
     trips: [{
-      trip:
-        {
-          destination: 'Lagos, Nigeria'
-        }
+      trip: {
+        destination: 'Lagos, Nigeria'
+      }
     }],
     tripDestinations: {
       destination: 'Lagos, Nigeria'
@@ -1042,7 +1040,15 @@ describe('<NewRequestForm />', () => {
   it('should display next step on personal information  ', () => {
     const shallowWrapper = mount(<NewRequestForm {...props} />);
     shallowWrapper.setState({
-      currentTab: 1
+      currentTab: 1,
+      values: {
+        department: "Fellows-TDD",
+        gender: "Male",
+        location: "Lagos",
+        manager: "David Ssali",
+        name: "Adebisi Oluwabukunmi",
+        role: "Software Developer"
+      }
     });
     const nextButton = shallowWrapper.find('#submit');
     const event = {
@@ -1051,9 +1057,9 @@ describe('<NewRequestForm />', () => {
         name: 'Next',
       }
     };
-    nextButton.simulate('click', event);
     sinon.spy(shallowWrapper.instance(), 'renderTravelCosts');
-    expect(event.preventDefault).toBeCalled();
+
+    nextButton.simulate('click', event);
     expect(shallowWrapper.state().currentTab).toEqual(2);
   });
 

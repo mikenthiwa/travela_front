@@ -180,13 +180,15 @@ class NewRequestForm extends PureComponent {
   };
 
   checkTab(prevState) {
-    const { currentTab } = this.state;
+    const { currentTab, trips, selection: tripType } = this.state;
     if (prevState.currentTab === 2 && currentTab === 3) {
-      const { trips, selection: tripType } = this.state;
       const { fetchTravelCostsByLocation, fetchAllTravelStipends } = this.props;
       let locations = tripType === 'One Way' ? [] : this.getStipendOriginAndDestination(trips);
       fetchTravelCostsByLocation(locations);
       fetchAllTravelStipends();
+    }
+    if (prevState.currentTab !== currentTab) {
+      this.setState({ collapse: false });
     }
   }
 

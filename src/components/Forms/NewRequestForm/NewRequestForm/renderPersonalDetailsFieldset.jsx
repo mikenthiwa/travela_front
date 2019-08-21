@@ -53,7 +53,8 @@ function renderPersonalDetailsFieldset (props, _this) {
   const { state, nextStep, collapsible } = _this;
   const { collapse, title, position, line, values, errors } = state;
   const { managers, occupations, creatingRequest } = props;
-  const onChangeAutoSuggestion = () => _onChangeAutoSuggestion.bind(this)();
+  const onChangeAutoSuggestion = (() => _onChangeAutoSuggestion.bind(_this))();
+
 
   return (
     <PersonalDetailsFieldset
@@ -69,7 +70,7 @@ function renderPersonalDetailsFieldset (props, _this) {
       occupations={occupations}
       value="100%"
       hasBlankFields={
-        !!errors.manager
+        !!errors.manager	
       }
       loading={creatingRequest}
       send="Next"
