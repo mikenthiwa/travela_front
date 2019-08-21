@@ -7,7 +7,7 @@ import './index.scss';
 
 class PreviewDocumentUpload extends Component {
   state = {
-    pdfFile: '',
+    fileName: '',
     progress: 0, 
     uploading: false,
     result: null
