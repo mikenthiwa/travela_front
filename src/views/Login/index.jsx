@@ -76,8 +76,12 @@ export class Login extends Component {
       history.push(url);
       localStorage.removeItem('url');
     } else {
-      const loginRedirect = firstLoginResponse ? '/welcome-page' : '/home';
-      window.location.replace(loginRedirect);
+      if(firstLoginResponse) {
+        window.location.replace('/welcome-page');
+      } else {
+        window.location.replace('/home');
+        localStorage.setItem('loggedInBefore', JSON.stringify('true'));
+      }
     }
   }
   

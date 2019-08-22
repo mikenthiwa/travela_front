@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import ConnectedNavBar from '../../components/nav-bar/NavBar';
 import ConnectedLeftSideBar from '../../components/LeftSideBar/LeftSideBar';
 import ConnectedNotificationPane from '../../components/notification-pane/NotificationPane';
 import ConnectedSideDrawer from '../../components/SideDrawer/SideDrawer';
 import upic from '../../images/upic.svg';
+import reminderIcon from '../../images/icons/globe.svg';
+import closeButton from '../../images/icons/close.svg';
 import './Layout.scss';
 import {getUserData} from '../../redux/actionCreator/userActions';
+import checkUploadedDocument from './helper';
 
 export class Layout extends Component {
 
@@ -18,7 +21,9 @@ export class Layout extends Component {
     openSearch: false,
     hideOverlay: true,
     delay: false,
-    clearNav: false
+    clearNav: false,
+    showReminder: false,
+    title: ''
   };
 
   componentDidMount = () => {
@@ -26,12 +31,27 @@ export class Layout extends Component {
     user && getUserData(user.UserInfo.id);
   };
 
-  componentWillReceiveProps({ location }) {
+  componentWillReceiveProps({ location, currentUser }) {
+    const getReminderStatus = JSON.parse(localStorage.getItem('showReminder'));
+    const loggedInBefore = JSON.parse(localStorage.getItem('loggedInBefore'));
+
+    const { travelDocuments } = Object.keys(currentUser).length && currentUser;
+    const docs = travelDocuments && travelDocuments.reduce((obj, item) => (obj[item.type] = item.type, obj) ,{});
+
     const searchParam = new URLSearchParams(location.search).get('search');
     const clearNav = searchParam ? false : true;
-    this.setState({
-      clearNav
-    });
+    this.setState({ clearNav });
+
+    if (loggedInBefore && docs) {
+      if (getReminderStatus) {
+        this.setState({ showReminder: false });
+      } else {
+        const title = checkUploadedDocument(docs);
+        setTimeout( () => {
+          this.setState({ showReminder: true, title });
+        }, 3000);
+      }
+    }
   }
 
   onNotificationToggle = () => {
@@ -56,6 +76,13 @@ export class Layout extends Component {
   handleShowDrawer = () => {
     this.setState({ hideOverlay: false });
   };
+
+  closeReminder = () => {
+    this.setState({ 
+      showReminder: false
+    });
+    localStorage.setItem('showReminder', JSON.stringify('false'));
+  }
 
   renderNavBar = (openSearch, clearNav) => {
     return (
@@ -152,6 +179,41 @@ export class Layout extends Component {
     );
   }
 
+  renderReminder = () => {
+    const { showReminder, title } = this.state;
+    const { user } =  this.props;
+    if (showReminder) {
+      return (
+        <div className="reminder-wrapper">
+          <div className="reminder">
+            <img src={reminderIcon} alt="icon" className="reminder__icon" />
+            <div className="reminder__body">
+              <span className="username">
+                Hi 
+                {' '}
+                {user.UserInfo && user.UserInfo.fullName}
+                ,
+              </span>
+              <span>
+                This is a gentle reminder that you are yet to upload 
+                {' '}
+                {title}
+              </span>
+              <Link to="/travel_readiness">
+                <button type="button" onClick={this.closeReminder} className="reminder-link">
+                  If it is ready, kindly click this link to upload it.
+                </button>
+              </Link>
+              <button type="button" className="close-reminder" onClick={this.closeReminder}>
+                <img src={closeButton} alt="close-button" />
+              </button>
+            </div> 
+          </div>
+        </div>
+      );
+    }
+  }
+
   render () {
     const { hideOverlay, openSearch, clearNav } = this.state;
     const overlayClass = hideOverlay ? 'none': 'block';
@@ -162,6 +224,7 @@ export class Layout extends Component {
           {this.renderSideDrawer(overlayClass)}
           {this.renderNavBar(openSearch, clearNav)}
           {this.renderContent()}
+          {this.renderReminder()}
         </div>
       </div>
     );
@@ -172,11 +235,12 @@ Layout.propTypes = {
   location: PropTypes.object.isRequired,
   children: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   isLoaded: PropTypes.bool.isRequired,
   getUserData: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({auth, user}) => ({...user,...auth});
+const mapStateToProps = ({auth, user, currentUser}) => ({...user,...auth, ...currentUser});
 
 export default withRouter(connect(mapStateToProps, { getUserData })(Layout));

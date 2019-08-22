@@ -8,6 +8,7 @@ import { Layout } from '..';
 import {REQUESTER} from '../../../helper/roles';
 import { NavBar } from '../../../components/nav-bar/NavBar';
 import notificatonsMockData from '../../../components/nav-bar/__mocks__/notificationMockData-navBar';
+import checkUploadedDocument from '../helper';
 
 const middleware = [createSagaMiddleware];
 const mockStore = configureStore(middleware);
@@ -47,7 +48,10 @@ const store = mockStore(initialState);
 
 const props = {
   children: {},
-  location: {},
+  location: {
+    search: 'search=gjg',
+    pathname: 'requests'
+  },
   notifications: [],
   user: {
     UserInfo: {
@@ -56,6 +60,7 @@ const props = {
       getCurrentUserRole: [REQUESTER]
     }
   },
+  currentUser: {},
   getUserData: jest.fn(),
   isLoaded: true,
   isAuthenticated: true,
@@ -83,7 +88,7 @@ describe('Layout component', () => {
       wrapper = mount(
         <Provider store={store}>
           <MemoryRouter>
-            <Layout {...mountProps} location={{}}>
+            <Layout {...mountProps}>
               <div>
                 Test Content
               </div>
@@ -136,6 +141,7 @@ describe('Layout component', () => {
             picture: 'http://picture.com/gif'
           }
         },
+        currentUser: { travelDocuments: [ { passport: 'passport'}, {other: 'other'} ] },
         location: {
           search: 'search=gjg',
           pathname: 'requests'
@@ -191,6 +197,84 @@ describe('Layout component', () => {
       shallowWrapper.instance().onNotificationToggle();
       expect(onNotificationToggleSpy).toHaveBeenCalled();
 
+      done();
+    });
+  });
+
+  describe('DOCUMENT REMINDER', () => {
+
+    let shallowWrapper;
+
+    beforeEach(() => {
+      shallowWrapper = shallow(<Layout {...props} />);
+      localStorage.setItem('loggedInBefore', JSON.stringify('true'));
+      localStorage.removeItem('showReminder');
+    });
+
+    it('should call closeReminder method', (done) => {
+      const closeReminderSpy= jest
+        .spyOn(shallowWrapper.instance(), 'closeReminder');
+      shallowWrapper.instance().closeReminder();
+      expect(closeReminderSpy).toHaveBeenCalled();
+      done();
+    });
+
+    it('should check if passport document is uploaded', (done) => {
+      const currentUser = { travelDocuments: [{}] }
+      const travelDocs = {};
+      const wrapper = shallow(<Layout {...props} {...currentUser}></Layout>);
+      jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
+      wrapper.instance().componentWillReceiveProps({location, currentUser});
+      expect(checkUploadedDocument(travelDocs)).toBe('your passport document');
+      done();
+    });
+
+    it('should check if visa document is uploaded', (done) => {
+      const currentUser = { travelDocuments: [{}] }
+      const travelDocs = {
+        passport: 'passport'
+      };
+      const wrapper = shallow(<Layout {...props} {...currentUser}></Layout>);
+      jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
+      wrapper.instance().componentWillReceiveProps({location, currentUser});
+      expect(checkUploadedDocument(travelDocs)).toBe('your visa document');
+      done();
+    });
+
+    it('should check if yellow fever card is uploaded', (done) => {
+      const currentUser = { travelDocuments: [{}] }
+      const travelDocs = {
+        passport: 'passport',
+        visa: 'visa'
+      };
+      const wrapper = shallow(<Layout {...props} {...currentUser}></Layout>);
+      jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
+      wrapper.instance().componentWillReceiveProps({location, currentUser});
+      expect(checkUploadedDocument(travelDocs)).toBe('your yellow fever card');
+      done();
+    });
+
+    it('should close the reminder modal', () => {
+      jest.useFakeTimers();
+      const currentUser = { travelDocuments: [{}] };
+      const wrapper = shallow(<Layout {...props} {...currentUser}></Layout>);
+      wrapper.setState({ showReminder: true });
+      jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
+      wrapper.instance().componentWillReceiveProps({location, currentUser});
+      setTimeout(() => {
+        wrapper.find('.close-reminder').simulate('click');
+        expect(wrapper.state('showReminder')).toEqual(false);
+      }, 4000);
+      jest.runAllTimers();
+    });
+
+    it('should setstate using data from localstorage', (done) => {
+      localStorage.setItem('showReminder', JSON.stringify('false'));
+      const currentUser = { travelDocuments: [{}] };
+      const wrapper = shallow(<Layout {...props} {...currentUser}></Layout>);
+      jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
+      wrapper.instance().componentWillReceiveProps({location, currentUser});
+      expect(wrapper.state('showReminder')).toEqual(false);
       done();
     });
   });

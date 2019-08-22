@@ -19,3 +19,42 @@
     display: none;
   }
 }
+
+@media (max-width: 1024px) {
+.reminder-wrapper {
+    padding-left: 118px;
+  }
+}
+
+@media (max-width: 769px) {
+  .reminder-wrapper {
+    padding-left: 100px;
+  }
+}
+
+@media (max-width: 425px) {
+  .reminder-wrapper {
+    width: 100%;
+    .reminder {
+      line-height: 1.2;
+      bottom: 13px;
+      width: 84%;
+      position: relative;
+      margin: auto;
+    }
+
+    .reminder__icon {
+      height: 50px;
+    }
+
+    .reminder__body {
+      height: fit-content;
+      justify-content: space-around;
+      text-align: justify;
+
+      span {
+        margin: 5px 0;
+      }
+    }
+  }
+}

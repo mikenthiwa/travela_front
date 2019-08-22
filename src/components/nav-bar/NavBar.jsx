@@ -108,6 +108,8 @@ export class NavBar extends PureComponent {
 
   logout = () => {
     const { history } = this.props;
+    localStorage.removeItem('showReminder');
+    localStorage.removeItem('loggedInBefore');
     logoutUser(history);
   };
 

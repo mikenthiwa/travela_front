@@ -19,7 +19,12 @@ exports[`Layout component Layout Shallow should render layout component correctl
     />
     <Connect(SideDrawer)
       handleShowDrawer={[Function]}
-      location={Object {}}
+      location={
+        Object {
+          "pathname": "requests",
+          "search": "search=gjg",
+        }
+      }
       showDrawer="none"
     />
     <withRouter(Connect(NavBar))
@@ -39,13 +44,18 @@ exports[`Layout component Layout Shallow should render layout component correctl
       >
         <div
           className="mdl-cell mdl-cell--2-col-desktop mdl-cell--hide-tablet
-                mdl-cell--hide-phone request-page__left-side-bar "
+                  mdl-cell--hide-phone request-page__left-side-bar "
         >
           <div
             className="sidebar "
           >
             <Connect(LeftSideBar)
-              location={Object {}}
+              location={
+                Object {
+                  "pathname": "requests",
+                  "search": "search=gjg",
+                }
+              }
             />
           </div>
         </div>
