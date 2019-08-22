@@ -64,7 +64,7 @@ export class NewRequestPage extends Component {
 
   showModal = () => {
     const { openModal } = this.props;
-    openModal(true);
+    openModal(true, 'Cost Breakdown');
   }
 
   getStipendOriginAndDestination = (trips) => {
@@ -75,15 +75,20 @@ export class NewRequestPage extends Component {
     return locations;
   }
 
-  renderStipendModal = (shouldOpen, closeModal) => {
-    const {travelCosts: { stipends, flightCosts, hotelEstimates, isLoading }, requestData: {trips}} = this.props;
+  renderStipendModal = () => {
+    const {
+      travelCosts: { stipends, flightCosts, hotelEstimates, isLoading }, 
+      requestData: {trips}, 
+      modalType, 
+      shouldOpen, 
+      closeModal, } = this.props;
     return (
       <Modal
         customModalStyles="travel-stipend-modal"
         closeDeleteModal={closeModal}
         width="100%"
         height="100%"
-        visibility={shouldOpen? 'visible':'invisible'}
+        visibility={shouldOpen && (modalType === 'Cost Breakdown') ? 'visible':'invisible'}
         title="Travel Stipend Breakdown"
       >
         <div className="modal-info-center-body">
@@ -314,7 +319,7 @@ export class NewRequestPage extends Component {
       status,
       trips
     },
-    fetchingRequest, history, errors, shouldOpen, closeModal
+    fetchingRequest, history, errors,
     } = this.props;
     if(typeof(errors) === 'string' && errors.includes('does not exist')) {
       return <NotFound redirectLink="/requests" errorMessage={errors} />;
@@ -346,7 +351,7 @@ export class NewRequestPage extends Component {
         </div>
         {this.renderModificationReasonConfirmationDialog()}
         {this.renderModificationReasonDialog()}
-        {this.renderStipendModal(shouldOpen, closeModal)}
+        {this.renderStipendModal()}
         {fetchingRequest ? <Preloader /> : this.renderRequestDetailsPage() }
       </Fragment>
     );
