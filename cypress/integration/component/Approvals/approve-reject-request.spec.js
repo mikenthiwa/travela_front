@@ -13,8 +13,8 @@ describe('Approval page(Approval or rejection of request by managers)', () => {
     });
   
     it('should approve a request and toast success message', () => {
-      cy.get('button.action-button--approve').click();
-      cy.get('button#approve').click();
+      cy.get('button.action-button--approve').click({ force: true });
+      cy.get('button#approve').click({ force: true });
       cy.get('.toast-message')
         .wait(3000)
         .should('be.visible')
@@ -22,7 +22,7 @@ describe('Approval page(Approval or rejection of request by managers)', () => {
     });
 
     it('should check existence of header', () => {
-      cy.get('.header')
+      cy.get('.approval > .header-container')
         .contains('REQUEST');
     });
 
@@ -55,13 +55,17 @@ describe('Approval page(Approval or rejection of request by managers)', () => {
     });
 
     it('should type in comment box', () => {
-      cy.get('.ql-editor').type('testing you');
-      cy.get('#post-submit').click();
+      cy.get('.ql-editor').type('testing you', { force: true });
+      cy.get('#post-submit').click({ force: true });
     });
 
     it('should certify that a comment has been posted', () => {
       cy.get(':nth-child(2) > .modal__mdl-icons > .modal__modal2 > .modal__status-update')
         .contains('testing you');
+    });
+
+    it('should go back', () => {
+      cy.get('.header__link').click({ force: true });
     });
   });
 
@@ -77,8 +81,8 @@ describe('Approval page(Approval or rejection of request by managers)', () => {
     });
     
     it('should reject a request and toast success message', () => {
-      cy.get('.action-button--reject').click();
-      cy.get('#reject').click();
+      cy.get('.action-button--reject').click({ force: true });
+      cy.get('#reject').click({ force: true });
       cy.get('.toast-message')
         .wait(3000)
         .should('be.visible')

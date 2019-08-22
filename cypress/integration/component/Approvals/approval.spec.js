@@ -19,7 +19,7 @@ describe('Approvals', () => {
         'fixture:approvals/OpenRequest');
       cy.authenticateUser();
       cy.visit('/requests/my-approvals/CVEgPxX1q').wait(3000);
-      cy.get('.header__link').click();
+      cy.get('.header__link').click({force: true});
       cy.get('.pagination__current-page').contains('2');
       cy.url().should('include', '/my-approvals?page=2');
     });
