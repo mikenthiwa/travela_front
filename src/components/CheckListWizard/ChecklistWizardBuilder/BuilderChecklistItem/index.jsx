@@ -84,10 +84,12 @@ class BuilderChecklistItem extends Component {
               </div>
               <div>
                 {this.renderSelectItemTypes()}
-                <BuilderOptionConfiguration
-                  item={item}
-                  handleItems={handleItems}
-                />
+                <div className="builder-option-configuration-wrapper">
+                  <BuilderOptionConfiguration
+                    item={item}
+                    handleItems={handleItems}
+                  />
+                </div>
               </div>
             </div>
           );

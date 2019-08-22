@@ -19,6 +19,7 @@
 
   .notify-email-behaviour.wrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 39px;
@@ -26,6 +27,14 @@
     border: 1px solid #DFE3E8;
     border-radius: 5px;
     box-shadow: 0 2px 3px 0 #0000001c;
+
+    .template {
+    height: 39px;
+    width: auto;
+    border: 1px solid #DFE3E8;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px 0 #0000001c;
+    }
 
     p {
       margin: 0;

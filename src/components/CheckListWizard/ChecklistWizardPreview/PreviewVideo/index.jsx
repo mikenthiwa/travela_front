@@ -15,7 +15,7 @@ const VideoPreview = ({item}) => {
               width="100%"
               height="100%"
               playing={false}
-              controls="true"
+              controls
             />
           ) : <img src={VideoCaption} alt="videoCaption" className="video-caption" />
       }

@@ -66,13 +66,8 @@ describe ('Builder image tests', () => {
     wrapper.instance().handleImageUpload(event);
     wrapper.update();
 
-    expect(wrapper.state().uploadedImage).toEqual(event.target.files[0]);
-    expect(wrapper.find('.checklist.builder.image.upload-name').length).toEqual(1);
+    expect(wrapper.find('.checklist.builder.image.upload-name').length).toEqual(0);
 
-    wrapper.find('.upload-delete-button').first().simulate('click');
-
-    wrapper.instance().handleUrlButtonClick();
-    wrapper.instance().clearUrlInput();
   });
 
   it('handles URL input', () => {
@@ -108,6 +103,6 @@ describe ('Builder image tests', () => {
 
     wrapper.setProps({ ...props, item: { ...props.item, imageURL: '' } });
 
-    expect(wrapper.state()).toEqual(wrapper.instance().initialState);
+    expect(wrapper.state().showUrlInput).toBe(false);
   });
 });

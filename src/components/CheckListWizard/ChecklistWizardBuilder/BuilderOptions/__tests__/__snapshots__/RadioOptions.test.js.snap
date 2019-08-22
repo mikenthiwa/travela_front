@@ -1,71 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RadioOption /> shoudl call deleteRadioOptionBehaviour when button is clicked 1`] = `
-<div>
-  <div>
-    <p>
-      Enter Option 1
-    </p>
-    <div
-      className="prompt-item"
-    >
-      <input
-        className="prompt-input"
-        id="option-name-input"
-        onChange={[Function]}
-        placeholder="Yes"
-        type="text"
-        value="yes"
-      />
-      <DeleteIcon
-        id="option-del-icon"
-        onClick={[Function]}
-      />
-    </div>
-    <div
-      className="behaviour-container"
-    >
-      <div
-        className="set-behaviour-btn-container"
-      />
-      <div>
-        <div>
-          <div
-            className="remove-set-behaviour"
-          >
-             
-            <span>
-              <ContextMenu
-                classNames="table__menu-container"
-              >
-                <MenuItem
-                  classNames="delete"
-                  onClick={[Function]}
-                >
-                  Delete behaviour
-                </MenuItem>
-              </ContextMenu>
-            </span>
-            Upon selecting Option 1, enable
-          </div>
-          <Behaviours
-            optionId=""
-            order={1}
-            type=""
-            updateBehaviour={[Function]}
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
 exports[`<RadioOption /> should render RenderCheckbox component properly 1`] = `
 <div>
   <div>
     <p>
-      Enter Option 1
+      Enter Option undefined
     </p>
     <div
       className="prompt-item"
@@ -74,9 +13,10 @@ exports[`<RadioOption /> should render RenderCheckbox component properly 1`] = `
         className="prompt-input"
         id="option-name-input"
         onChange={[Function]}
+        onKeyDown={[Function]}
         placeholder="Yes"
         type="text"
-        value="yes"
+        value="are you serious?"
       />
       <DeleteIcon
         id="option-del-icon"
@@ -97,7 +37,9 @@ exports[`<RadioOption /> should render RenderCheckbox component properly 1`] = `
           Set behaviour
         </button>
       </div>
-      <div />
+      <div>
+        <div />
+      </div>
     </div>
   </div>
 </div>
@@ -107,7 +49,7 @@ exports[`<RadioOption /> should render RenderCheckbox component properly 2`] = `
 <div>
   <div>
     <p>
-      Enter Option 1
+      Enter Option undefined
     </p>
     <div
       className="prompt-item"
@@ -116,9 +58,10 @@ exports[`<RadioOption /> should render RenderCheckbox component properly 2`] = `
         className="prompt-input"
         id="option-name-input"
         onChange={[Function]}
+        onKeyDown={[Function]}
         placeholder="Yes"
         type="text"
-        value="yes"
+        value="are you serious?"
       />
       <button
         className="builder-delete-icon"
@@ -146,7 +89,9 @@ exports[`<RadioOption /> should render RenderCheckbox component properly 2`] = `
           Set behaviour
         </button>
       </div>
-      <div />
+      <div>
+        <div />
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notify Email Behaviour Test Suite renders correctly 1`] = `
+<div
+  className="email-template-behaviour"
+>
+  <Modal
+    closeDeleteModal={null}
+    closeModal={[Function]}
+    customModalStyles="notification-email"
+    customOverlayStyle=""
+    modalBar={<div />}
+    modalContentId=""
+    modalId=""
+    requestId=""
+    showOverlay={true}
+    title="Create Template"
+    visibility="invisible"
+    width="500px"
+  >
+    <div
+      className="email-template-modal-wrapper"
+    >
+      <div
+        className="template-inputs-wrapper"
+      >
+        <input
+          className="email-template-input recipient"
+          id="emailToSend"
+          name="recipient"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          placeholder="ex. example@andela.com"
+          type="email"
+          value=""
+        />
+      </div>
+      <div
+        className="template-inputs-wrapper"
+      >
+        <textarea
+          className="email-template-input template"
+          name="template"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          placeholder="Your message here"
+          value=""
+        />
+      </div>
+      <div
+        className="email-template-button-wrapper"
+      >
+        <button
+          className="email-template-button"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        >
+          Create
+        </button>
+      </div>
+    </div>
+  </Modal>
+  <button
+    className="create-email-template-button"
+    onClick={[Function]}
+    type="button"
+  >
+    Create Template
+  </button>
+</div>
+`;

@@ -6,7 +6,7 @@ import NotifyEmail from '../NotifyEmail';
 const props = {
   behaviour: {
     type: 'NOTIFY_EMAIL',
-    payload: 'cancel',
+    payload: '',
   },
 };
 

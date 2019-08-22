@@ -7,11 +7,11 @@ const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[
 const checkEmail = string => regex.test(string);
 
 const NotifyEmail = ({ behaviour }) => {
-  const { payload } = behaviour;
+  const { payload: { recipient } } = behaviour;
   return(
     <div className="notify-email-behaviour wrapper">
       <p className="notify-email-behaviour text">
-        {`${payload}${checkEmail(payload) ? ' will be sent a notification' : ''}`}
+        {`${recipient || ''}${checkEmail(recipient) ? ' will be sent a notification' : ''}`}
       </p>
     </div>
   );

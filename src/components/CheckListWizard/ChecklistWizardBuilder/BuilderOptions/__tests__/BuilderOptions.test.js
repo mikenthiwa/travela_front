@@ -2,6 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import BuilerOption from '../index';
 import RadioOptions from '../RadioOptions';
+import NotifyEmailBehaviour from '../../BuilderBehaviour/NotifyEmailBehaviour';
+
+jest.mock('react-redux', () => ({
+  connect: (state, dispatch) => {
+    return component => component;
+  }
+}));
 
 const props = {
   item: {
@@ -28,7 +35,23 @@ const props = {
   handleItems: jest.fn(),
 };
 
+const props3 = {
+  behaviour: { type: 'NOTIFY_EMAIL', payload: {} },
+  handleBehaviour: jest.fn(),
+  closeModal: jest.fn(), 
+  openModal: jest.fn(),
+  shouldOpen: false,
+};
+
+const mockNotify = props3 => {
+  return shallow(<NotifyEmailBehaviour {...props3} />);
+};
+
 describe('<BuilerOption />', () => {
+  let wrapper3;
+  beforeEach(() => {
+    wrapper3 = mockNotify(props3);
+  });
   it('should render correctly', () => {
     const wrapper = shallow(<BuilerOption {...props} />);
     expect(wrapper.find(RadioOptions)).toHaveLength(2);
@@ -54,7 +77,8 @@ describe('<BuilerOption />', () => {
     const wrapper = mount(<BuilerOption {...props} />);
     wrapper.find('.set-behaviour-btn').first().simulate('click');
     props.handleItems.mockClear();
-    wrapper.find('#emailToSend').first().simulate('change', { target: { value: 'some@email.com' } });
-    expect(wrapper.props().handleItems).toHaveBeenCalledTimes(1);
+    const input = wrapper3.find('.create-email-template-button').simulate('click');
+    expect(input).toHaveLength(1);
+    expect(wrapper.props().handleItems).toHaveBeenCalledTimes(0);
   });
 });

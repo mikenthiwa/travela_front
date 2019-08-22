@@ -2,6 +2,13 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import RenderCheckbox from '..';
 import CheckboxOption from '../CheckboxOption';
+import NotifyEmailBehaviour from '../../BuilderBehaviour/NotifyEmailBehaviour';
+
+jest.mock('react-redux', () => ({
+  connect: (state, dispatch) => {
+    return component => component;
+  }
+}));
 
 const props = {
   item: {
@@ -43,6 +50,14 @@ const props2 = {
   deleteRadioOptionBehaviour: jest.fn(),
 };
 
+const props3 = {
+  behaviour: { type: 'NOTIFY_EMAIL', payload: {} },
+  handleBehaviour: jest.fn(),
+  closeModal: jest.fn(), 
+  openModal: jest.fn(),
+  shouldOpen: false,
+};
+
 const setup = props => {
   return mount(<RenderCheckbox {...props} />);
 };
@@ -51,12 +66,18 @@ const setup2 = props => {
   return mount(<CheckboxOption {...props} />);
 };
 
+const mockNotify = props3 => {
+  return shallow(<NotifyEmailBehaviour {...props3} />);
+};
+
 describe('<RenderCheckbox/>', () => {
   let wrapper;
   let wrapper2;
+  let wrapper3;
   beforeEach(() => {
     wrapper = setup(props);
     wrapper2 = setup2(props2);
+    wrapper3 = mockNotify(props3);
   });
 
   it('should render RenderCheckbox component properly', () => {
@@ -107,8 +128,9 @@ describe('<RenderCheckbox/>', () => {
   it('should handle update behaviour', () => {
     props.handleItems.mockClear();
     wrapper.find('.set-behaviour-btn').first().simulate('click');
-    const input = wrapper.find('#emailToSend').first();
-    input.simulate('change', { target: { value: 'something' } });
+    const input = wrapper3.find('.create-email-template-button');
+    input.simulate('click');
+    wrapper.instance().updateBehaviour(props.behaviour);
     expect(wrapper.instance().props.handleItems).toHaveBeenCalledTimes(1);
   });
 });

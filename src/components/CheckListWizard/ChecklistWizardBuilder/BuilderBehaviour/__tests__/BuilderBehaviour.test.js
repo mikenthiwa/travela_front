@@ -4,6 +4,7 @@ import BuilderBehaviour from '../index';
 import * as actions from '../behaviourActions';
 import getBehaviours from '../BehaviourPool';
 import DocumentUpload from '../DocumentUpload';
+import NotifyEmailBehaviour from '../NotifyEmailBehaviour';
 
 const props = {
   behaviour: {},
@@ -39,28 +40,11 @@ describe('<BuilderBehaviour />', () => {
   });
 
   it('should handle behaviour change: notify an email address', () => {
-    const wrapper = mount(<BuilderBehaviour {...props} />);
+    const wrapper = shallow(<BuilderBehaviour {...props} />);
     wrapper.instance().handleBehaviourDropdownChange(actions.NOTIFY_EMAIL);
-    expect(wrapper.props.updateBehaviour).toBeCalled;
-
-    wrapper.setProps({...props, behaviour: { type: actions.NOTIFY_EMAIL, payload: '' } });
-    const mockEvents2 = { target: { value: 'example@andela.com'} };
-    const input = wrapper.find('#emailToSend');
-    input.simulate('change', mockEvents2);
-    wrapper.setProps({...props, behaviour: { type: actions.SKIP_QUESTION, payload: '' } });
-    expect(wrapper.props.updateBehaviour).toBeCalled;
-  });
-  
-  it('should handle behaviour change errors: email', () => {
-    const wrapper = mount(<BuilderBehaviour {...props} />);
-    wrapper.instance().handleBehaviourDropdownChange(actions.NOTIFY_EMAIL);
-    expect(wrapper.props.updateBehaviour).toBeCalled;
-
-    wrapper.setProps({...props, behaviour: { type: actions.NOTIFY_EMAIL, payload: '' } });
-    const mockEvents2 = { target: { value: ''} };
-    const input = wrapper.find('#emailToSend');
-    input.simulate('change', mockEvents2);
-    expect(wrapper.props.updateBehaviour).toBeCalled;
+    expect(wrapper.onBehaviourChange).toBeCalled;
+    wrapper.setProps({...props, behaviour: { type: actions.NOTIFY_EMAIL, } });
+    expect(wrapper.find(NotifyEmailBehaviour)).toHaveLength(1);
   });
 
   it('should return an empty object for an invalid behaviour type', () => {

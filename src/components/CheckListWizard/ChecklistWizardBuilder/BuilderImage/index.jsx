@@ -1,17 +1,16 @@
 import React, { Component, Fragment } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import './index.scss';
 import DeleteIcon from '../../Shared/deleteIcon';
+import { errorMessage } from '../../../../helper/toast';
 
 class ImageOptions extends Component {
-  constructor (props) {
-    super(props);
-    this.initialState = {
-      showUrlInput: false,
-      uploadedImage: null,
-    };
-    this.state = { ...this.initialState };
-  }
+  
+  state = {
+    showUrlInput: false,
+    uploading: false,
+  };
 
   componentDidUpdate (prevState) {
     const { item: { imageURL } } = this.props;
@@ -20,7 +19,7 @@ class ImageOptions extends Component {
 
   resetState = () => {
     const { showUrlInput, uploadedImage } = this.state;
-    (showUrlInput || uploadedImage) && this.setState({ ...this.initialState });
+    (showUrlInput || uploadedImage) && this.setState({ showUrlInput: false, uploading: false });
   }
 
   handleUrlButtonClick = () => {
@@ -28,28 +27,37 @@ class ImageOptions extends Component {
       showUrlInput: true,
     });
   }
-  
-  handleImageUpload = e => {
-    e.preventDefault();
-    const reader = new FileReader();
-    const file = e.target.files[0];
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        this.setState({
-          uploadedImage: file,
-        }, () => this.handleItem(reader.result));
-      };
+
+
+  handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    const fd = new FileReader();
+    fd.readAsDataURL(file);
+    const token = axios.defaults.headers.common.Authorization;
+    delete axios.defaults.headers.common.Authorization;
+    try {
+      const formData = new FormData();
+      formData.set('file', file);
+      formData.set('upload_preset', process.env.REACT_APP_PRESET_NAME);
+      this.setState({ uploading: true });
+      const { data: { secure_url } } = await axios.post(process.env.REACT_APP_CLOUNDINARY_API, formData);
+      axios.defaults.headers.common.Authorization = token;
+      this.handleItem(secure_url);
+    } catch(err) {
+      errorMessage('Image upload failed');
+    } finally {
+      this.setState({ uploading: false });
     }
   }
   
-  handleItem = value => {
+  handleItem = (imageURL) => {
     const { handleItems, item } = this.props;
-    handleItems({ ...item, imageURL: value });
+    handleItems({ ...item, imageURL });
   }
 
   clearUrlInput = () => {
-    this.setState({ ...this.initialState }, this.handleItem(''));
+    this.setState({ showUrlInput: false, uploading: false }, this.handleItem(''));
   }
 
   renderUrlInput () {
@@ -72,27 +80,13 @@ class ImageOptions extends Component {
     );
   }
 
-  renderUploadName () {
-    const { uploadedImage } = this.state;
-    return uploadedImage && (
-      <div className="checklist builder image upload-name">
-        {uploadedImage.name}
-        <button className="upload-delete-button" type="button" onClick={this.clearUrlInput}>
-          <svg className="close-btn" style={{ width: '20px', height: '20px' }} viewBox="0 0 24 24">
-            <path fill="#939CA3" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
-          </svg>
-        </button>
-      </div>
-    );
-  }
-
   renderButtons () {
-    const { showUrlInput, uploadedImage } = this.state;
-    return !showUrlInput && !uploadedImage && (
+    const { showUrlInput, uploading } = this.state;
+    return !showUrlInput && (
       <div className="checklist builder image option">
         <button type="button" className="option-button upload">
           <label htmlFor="checklist-wizard-image-upload">
-            Upload
+            {uploading ? 'Uploading...' : 'Upload'}
             <input 
               type="file" 
               id="checklist-wizard-image-upload" 
@@ -115,7 +109,6 @@ class ImageOptions extends Component {
   render () {
     return (
       <div className="builder image wrapper">
-        {this.renderUploadName()}
         {this.renderUrlInput()}
         {this.renderButtons()}
       </div>

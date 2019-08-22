@@ -9,7 +9,7 @@ const getBehaviours = (type, payload)  => {
   case behaviourTypes.PREVIEW_DOCUMENT:
     return { type, payload: payload || '' };
   case behaviourTypes.NOTIFY_EMAIL:
-    return { type, payload: payload || '' };
+    return { type, payload: {} };
   default:
     return {};
   }

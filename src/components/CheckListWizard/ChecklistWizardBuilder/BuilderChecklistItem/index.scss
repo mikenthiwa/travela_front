@@ -121,6 +121,7 @@
           display: flex;
           width: calc(100% - 40px);
           justify-content: space-between;
+          margin-bottom: 15px;
       }
 
       .behaviour-dropdown-container{
@@ -146,16 +147,20 @@
           color: #3359DB;
       }
 
-      .behaviour-payload-input{
+      .input-behaviour{
+          display: flex;
+          flex-direction: column;
+
+       .behaviour-payload-input{
           height: 35px;
           padding: 5px;
-          width: 30%;
           font-size: 1rem;
           border: none;
           border-bottom: 1px solid #3359DB;
           outline: none;
           align-self: flex-end;
       }
+   }
 
 
   }

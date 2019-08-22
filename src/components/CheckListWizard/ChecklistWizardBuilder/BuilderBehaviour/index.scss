@@ -125,5 +125,74 @@
         text-transform: capitalize;
       }
     }
+  } 
+}  
+.email-template-modal-wrapper {
+  display: grid;
+  margin: 20px;
+  grid-gap: 20px;
+
+  .template-inputs-wrapper {
+    display: flex;
+    flex-flow: column;
+
+    .email-template-input.recipient {
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 3px;
+      border: 1px solid #dfdfdf;
+      outline: none;
+    }
+  
+    .email-template-input.template {
+      resize: none;
+      outline: none;
+      border-radius: 3px;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #dfdfdf;
+      height: 90px;
+    }
+
+    .input-error {
+      color: red;
+      font-size: 0.8em;
+    }
+  }
+
+  .email-template-button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+
+    .email-template-button {
+      min-width: 120px;
+      font-size: 1em;
+      border: 1px solid #3359db;
+      border-radius: 3px;
+      height: 30px;
+      cursor: pointer;
+      color: #3359db;
+
+      &:disabled {
+        cursor: not-allowed;
+        color: #dfdfdf;
+        border: 1px solid #dfdfdf;
+      }
+    }
+  }
+}
+
+.email-template-behaviour {
+  display: flex;
+  align-items: flex-end;
+  
+  .create-email-template-button {
+    height: 35px;
+    border: 1px solid #3359db;
+    color: #3359db;
+    font-size: 0.9em;
+    outline: none;
+    cursor: pointer;
+    min-width: 120px;
   }
 }

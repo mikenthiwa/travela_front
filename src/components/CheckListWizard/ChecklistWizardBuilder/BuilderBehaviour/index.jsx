@@ -9,6 +9,7 @@ import MenuItem from '../../../ContextMenu/MenuItem';
 import PreviewDocumentUpload from './PreviewDocumentUpload';
 import Helper from '../BuilderOptions/helper';
 import DocumentUpload from './DocumentUpload';
+import NotifyEmailBehaviour from './NotifyEmailBehaviour';
 
 class Behaviours extends PureComponent {
 
@@ -45,14 +46,9 @@ class Behaviours extends PureComponent {
       );
     case actions.NOTIFY_EMAIL:
       return (
-        <input
-          type="email"
-          id="emailToSend"
-          className="behaviour-payload-input"
-          placeholder="ex. example@andela.com"
-          value={payload}
-          onChange={this.handleBehaviour}
-          onKeyDown={Helper.disableInputUndoActions}
+        <NotifyEmailBehaviour
+          handleBehaviour={updateBehaviour}
+          behaviour={behaviour}
         />
       );
     case actions.PREVIEW_DOCUMENT:
