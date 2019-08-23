@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ChecklistItems from '../ChecklistItems';
+import ChecklistItems from '../checklistItems';
 import PreviewImage from '../../CheckListWizard/ChecklistWizardPreview/PreviewImage';
 import PreviewVideo from '../../CheckListWizard/ChecklistWizardPreview/PreviewVideo';
-import PreviewScale from '../../CheckListWizard/ChecklistWizardPreview/PreviewScaleOption';
-import PreviewDropdown from '../../CheckListWizard/ChecklistWizardPreview/PreviewDropdown';
+import PreviewScale from '../checklistItems/RequesterScale';
+import PreviewDropdown from '../checklistItems/RequesterDropdown';
 
 describe ('ChecklistItems Test Suite', () => {
   const props = {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from './Dropdown';
 import PreviewBehaviour from '../PreviewBehaviour';

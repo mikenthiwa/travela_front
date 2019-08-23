@@ -1,7 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import RequesterViewCheckbox from '..';
-import PreviewBehaviour from '../../../ChecklistWizardPreview/PreviewBehaviour';
 
 const props = {
   item: {
@@ -17,28 +16,38 @@ const props = {
         id: 'dkladjfa',
         name: 'yes'
       }]
+    },
+    response: {
+      id: 'lkakdfa',
+      selectedValue: ['dkladjfa'],
+      behaviour: {
+        document: {
+          data: {
+            imageName: 'image.png'
+          }
+        },
+        payload: 'passport',
+        type: 'UPLOAD_DOCUMENT'
+      }
     }
   },
   handleSkipToQuestion: jest.fn(),
+  handleResponse: jest.fn(),
 };
 
 describe('<PreviewCheckbox />', () => {
   it('render <PreviewCheckbox />', () => {
-    const wrapper = mount(<RequesterViewCheckbox {...props} />);
+    const wrapper = shallow(<RequesterViewCheckbox {...props} />);
     wrapper.find('.checkbox-preview-wrapper');
     expect(wrapper.find('.checkbox-preview-wrapper')).toHaveLength(1);
   });
 
   it('should handle handleCheckbox', () => {
-    const wrapper = mount(<RequesterViewCheckbox {...props} />);
+    const wrapper = shallow(<RequesterViewCheckbox {...props} />);
     const event = { target: { checked: true } };
-    const event2 = { target: { checked: false } };
-
     wrapper.find('.checkbox-input').first().simulate('change', event);
-    expect(wrapper.state('isChecked')).toBe(1);
-    expect(wrapper.find(PreviewBehaviour)).toHaveLength(1);
-
-    wrapper.find('.checkbox-input').first().simulate('change', event2);
-    expect(wrapper.state('isChecked')).toBe(0);
+    wrapper.instance().handleBehaviour(props.item.behaviour);
+    expect(props.handleResponse).toHaveBeenCalled();
+    wrapper.instance().renderPreviewBehavior();
   });
 });

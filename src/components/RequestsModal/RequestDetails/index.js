@@ -11,6 +11,7 @@ import tabIcons from '../../../images/icons/new-request-icons/requestProgress';
 import commentIcon from '../../../images/icons/new-request-icons/Chat.svg';
 import addCommentIcon from '../../../images/icons/new-request-icons/AddComment.svg';
 import TravelCheckList from '../../TravelCheckList';
+import ConnectedUserChecklist from '../../../views/UserChecklist';
 
 
 export class RequestDetails extends Component {
@@ -28,19 +29,37 @@ export class RequestDetails extends Component {
     const { submissionInfo: {percentageCompleted, submissions } } = this.props;
     this.setSteps(percentageCompleted, submissions);
   }
-
+  
+  
   componentWillReceiveProps(nextProp){
-    const { submissionInfo: {percentageCompleted: prevPercent} } = this.props;
-    const { submissionInfo: {percentageCompleted: nextPercent}, submissionInfo } = nextProp;
-
-    if( prevPercent !== nextPercent ){
+    const {
+      submissionInfo: {percentageCompleted: prevPercent},
+    } = this.props;
+    const {
+      submissionInfo: {percentageCompleted: nextPercent},
+      submissionInfo,
+    } = nextProp;
+    
+    if(prevPercent !== nextPercent){
       this.setSteps(nextPercent, submissionInfo.submissions);
+    }
+  }
+  
+  componentDidUpdate (prevProps) {
+    const {
+      smartSubmissions: { isSubmitted: prevIsSubmitted },
+    } = this.props;
+    const {
+      submissionInfo, smartSubmissions: { isSubmitted: nextIsSubmitted }
+    } = prevProps;
+
+    if(prevIsSubmitted !== nextIsSubmitted){
+      this.setSteps(null, submissionInfo.submissions);
     }
   }
 
   setSteps(percent, submission) {
-
-    const { requestData } = this.props;
+    const { requestData, smartSubmissions } = this.props;
     const { steps, currentTab } = this.state;
     const newSteps = steps;
     if (requestData.status === 'Verified') {
@@ -52,6 +71,13 @@ export class RequestDetails extends Component {
     }
     else if (percent === 100) {
       this.loadStatus(3, submission);
+      this.setState({
+        steps: newSteps,
+        currentTab: 4
+      });
+    }
+    else if(smartSubmissions.isSubmitted) {
+      this.loadStatus(3);
       this.setState({
         steps: newSteps,
         currentTab: 4
@@ -74,21 +100,25 @@ export class RequestDetails extends Component {
   }
 
   checklistCompletionDate = (submissions) => {
-    const datesArray = [];
-    submissions.map(submission =>
-      submission.checklist.map(checklist =>
-        checklist.submissions.map(updated =>
-          datesArray.push(updated.updatedAt))));
-    const latestDate = _.sortBy(datesArray, recent => recent).reverse()[0];
+    const { smartSubmissions } = this.props;
+    let latestDate;
+    if(submissions) {
+      const datesArray = [];
+      submissions.map(submission =>
+        submission.checklist.map(checklist =>
+          checklist.submissions.map(updated =>
+            datesArray.push(updated.updatedAt))));
+      latestDate = _.sortBy(datesArray, recent => recent).reverse()[0];
+    }
+    latestDate = smartSubmissions.updatedAt;
     return moment(latestDate).format('DD/MM/YY');
-
   }
 
   loadStatus(tab, submission) {
     const { requestData } = this.props;
     const { steps } = this.state;
     const completionTime = tab === 3 ? `Completed on ${this.checklistCompletionDate(submission)}` : '';
-    const newSteps = steps;
+    const newSteps = { ...steps };
     newSteps[0].status = `Approved by ${requestData.approver}`;
     newSteps[0].statusDate = `Completed on ${moment(requestData.timeApproved).format('DD/MM/YY')}`;
     newSteps[1].status = `Approved by ${requestData.budgetApprovedBy}`;
@@ -97,6 +127,7 @@ export class RequestDetails extends Component {
     newSteps[tab].statusDate = requestData.status === 'Verified' ?
       `Completed on ${moment(requestData.updatedAt).format('DD/MM/YY')}` :
       'You are currently here';
+    this.setState({ steps: newSteps });
   }
 
   handleDisplayCommentBox() {
@@ -255,26 +286,32 @@ export class RequestDetails extends Component {
   renderCheckListSubmission(hideButton) {
     const { requestData, travelChecklists, closeModal, openModal, showTravelChecklist, modalType,
       fileUploads, fetchSubmission, postSubmission, submissionInfo, uploadFile, shouldOpen,
-      userReadinessDocument, history, downloadAttachments } = this.props;
+      userReadinessDocument, history, downloadAttachments, showDynamicChecklist } = this.props;
     return (
       <Fragment>
         {
           requestData.id && (
-            <TravelCheckList
-              request={requestData} requestId={requestData.id}
-              travelChecklists={travelChecklists}
-              submissionInfo={submissionInfo}
-              uploadFile={uploadFile}
-              postSubmission={postSubmission}
-              fetchSubmission={fetchSubmission}
-              closeModal={closeModal}
-              openModal={openModal} modalType={modalType}
-              shouldOpen={shouldOpen} hideSubmit={hideButton}
-              showTravelChecklist={showTravelChecklist}
-              fileUploads={fileUploads} history={history}
-              userReadinessDocument={userReadinessDocument}
-              downloadAttachments={downloadAttachments} 
-            />
+            <Fragment>
+              {showDynamicChecklist ? (<ConnectedUserChecklist requestId={requestData.id} />)
+                : (
+                  <TravelCheckList
+                    request={requestData} requestId={requestData.id}
+                    travelChecklists={travelChecklists}
+                    submissionInfo={submissionInfo}
+                    uploadFile={uploadFile}
+                    postSubmission={postSubmission}
+                    fetchSubmission={fetchSubmission}
+                    closeModal={closeModal}
+                    openModal={openModal} modalType={modalType}
+                    shouldOpen={shouldOpen} hideSubmit={hideButton}
+                    showTravelChecklist={showTravelChecklist}
+                    fileUploads={fileUploads} history={history}
+                    userReadinessDocument={userReadinessDocument}
+                    downloadAttachments={downloadAttachments} 
+                  />
+                )
+              }
+            </Fragment>
           )}
       </Fragment>
 
@@ -348,8 +385,9 @@ RequestDetails.propTypes = {
   fileUploads: PropTypes.object.isRequired,
   uploadFile: PropTypes.func.isRequired,
   shouldOpen: PropTypes.bool,
-  downloadAttachments: PropTypes.func.isRequired
-
+  downloadAttachments: PropTypes.func.isRequired,
+  smartSubmissions: PropTypes.object.isRequired,
+  showDynamicChecklist: PropTypes.bool.isRequired,
 };
 
 RequestDetails.defaultProps = {

@@ -168,6 +168,10 @@ let props1 = {
     stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
     isLoading: false,
     trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  },
+  smartSubmissions: {
+    updatedAt: '2019-03-12T20:40:53.694Z',
+    isSubmitted: false,
   }
 };
 
@@ -326,6 +330,10 @@ let props2 = {
     stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
     isLoading: false,
     trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  },
+  smartSubmissions: {
+    updatedAt: '2019-03-12T20:40:53.694Z',
+    isSubmitted: false,
   }
 };
 
@@ -523,6 +531,10 @@ let props3 = {
     stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
     isLoading: false,
     trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  },
+  smartSubmissions: {
+    updatedAt: '2019-03-12T20:40:53.694Z',
+    isSubmitted: false,
   }
 };
 
@@ -706,6 +718,10 @@ let props4 = {
     stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
     isLoading: false,
     trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  },
+  smartSubmissions: {
+    updatedAt: '2019-03-12T20:40:53.694Z',
+    isSubmitted: false,
   }
 };
 
@@ -767,6 +783,10 @@ const initialState1 = {
     stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
     isLoading: false,
     trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  },
+  dynamicChecklistSubmission: {
+    updatedAt: '2019-03-12T20:40:53.694Z',
+    isSubmitted: false,
   }
 };
 
@@ -831,6 +851,10 @@ const initialState2 = {
     stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
     isLoading: false,
     trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  },
+  dynamicChecklistSubmission: {
+    updatedAt: '2019-03-12T20:40:53.694Z',
+    isSubmitted: false,
   }
 };
 
@@ -890,6 +914,10 @@ const initialState3 = {
     stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
     isLoading: false,
     trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  },
+  dynamicChecklistSubmission: {
+    updatedAt: '2019-03-12T20:40:53.694Z',
+    isSubmitted: false,
   }
 };
 
@@ -949,6 +977,10 @@ const initialState4 = {
     stipends: [{id: 1, amount: 500, country: 'Nigeria'}],
     isLoading: false,
     trips: [{origin: 'Lagos, Portugal', destination: 'Lagos, Nigeria', departureDate: '2019-06-01', returnDate: '2019-06-14', travelReasons: null,}]
+  },
+  dynamicChecklistSubmission: {
+    updatedAt: '2019-03-12T20:40:53.694Z',
+    isSubmitted: false,
   }
 };
 

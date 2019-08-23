@@ -69,7 +69,21 @@ describe ('ChecklistDetails Test Suite', () => {
         }, 
       ],
     },
-    handleSkipToQuestion: jest.fn()
+    response: {
+      id: 'bcbbcg67',
+      selectedValue: 'p0zGW1NWZ6',
+      behaviour: {
+        document: {
+          data: {
+            imageName: 'image.png'
+          }
+        },
+        payload: 'passport',
+        type: 'UPLOAD_DOCUMENT'
+      }
+    },
+    handleSkipToQuestion: jest.fn(),
+    handleResponse: jest.fn(),
   };
 
   const wrapper = shallow(<ChecklistDetails {...props} />);
@@ -78,10 +92,10 @@ describe ('ChecklistDetails Test Suite', () => {
     expect(wrapper.length).toBe(1);
   });
 
-  it('should handle remove selected checkbox', () => {
+  it('should handle checklist response', () => {
     const wrapper = shallow(<ChecklistDetails {...props2} />);
-    wrapper.instance().handleSkipToQuestion(1);
-    expect(wrapper.state('disabledIndex')).toEqual(1);
+    wrapper.instance().handleChecklistResponse(props2.response);
+    expect(props2.handleResponse).toBeCalled();
   });
 
 });

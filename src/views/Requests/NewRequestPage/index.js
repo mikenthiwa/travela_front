@@ -118,11 +118,11 @@ export class NewRequestPage extends Component {
   };
 
   renderRequestDetailsPage = () => {
-    const { match:{ params: { requestId } },
+    const { match:{ params: { requestId }, path },
       requestData, fetchingRequest, currentUser, user, shouldOpen, modalType,
       userReadinessDocument, fetchSubmission, postSubmission, travelChecklists,
       submissionInfo, fileUploads, uploadFile, openModal, closeModal, history, managers,
-      downloadAttachments
+      downloadAttachments, smartSubmissions
     } = this.props;
 
     const managerName = RequestUtils.getManagerNameOrId(managers, requestData.approver);
@@ -140,7 +140,8 @@ export class NewRequestPage extends Component {
         fileUploads={fileUploads} fetchSubmission={fetchSubmission}
         postSubmission={postSubmission} submissionInfo={submissionInfo}
         uploadFile={uploadFile} userReadinessDocument={userReadinessDocument}
-        downloadAttachments={downloadAttachments}
+        downloadAttachments={downloadAttachments} smartSubmissions={smartSubmissions}
+        showDynamicChecklist={path === '/new-requests/:requestId/checklists'}
       />
     );
   };
@@ -400,7 +401,7 @@ NewRequestPage.defaultProps = {
   errors: {},
 };
 
-const mapStateToProps = ({ requests, travelChecklist, role,
+const mapStateToProps = ({ requests, travelChecklist, role, dynamicChecklistSubmission,
   submissions, modal, fileUploads, travelReadinessDocuments, user, tripModifications, travelCosts}) => {
   return {
     ...requests,
@@ -414,6 +415,7 @@ const mapStateToProps = ({ requests, travelChecklist, role,
     managers: role.roleUsers,
     tripModifications,
     travelCosts,
+    smartSubmissions: dynamicChecklistSubmission,
   };
 };
 

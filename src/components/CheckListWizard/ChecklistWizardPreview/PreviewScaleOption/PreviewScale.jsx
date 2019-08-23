@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
 
-class ScalePreview extends Component {
+class PreviewScale extends Component {
   state = { clickedIndex: 0, clicked: false };
 
   handleOnclick = index => {
@@ -19,7 +19,7 @@ class ScalePreview extends Component {
         onClick={() => this.handleOnclick(i)}
         role="button"
         tabIndex={i}
-        onKeyPress={this.onClick}
+        onKeyPress={(event) => event.preventDefault}
       >
         {value}
       </div>
@@ -43,8 +43,8 @@ class ScalePreview extends Component {
   }
 }
 
-ScalePreview.propTypes = {
-  item: PropTypes.object.isRequired
+PreviewScale.propTypes = {
+  item: PropTypes.object.isRequired,
 };
 
-export default ScalePreview;
+export default PreviewScale;

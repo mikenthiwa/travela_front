@@ -77,7 +77,8 @@ export const initialState = {
   items: ChecklistStorage.current.items,
   disableUndo: ChecklistStorage.disableUndo,
   disableRedo: ChecklistStorage.disableRedo,
-  message: ''
+  message: '',
+  trip: [],
 };
 
 const reorder = (state, order) => {
@@ -196,7 +197,7 @@ const checklistWizard = (state = initialState, action) => {
   case GET_ONE_CHECKLIST:
     return { ...state, loading: true };
   case GET_ONE_CHECKLIST_SUCCESS:
-    return { ...state, checklist: action.payload, loading: false };
+    return { ...state, checklist: action.payload.checklists, trip: action.payload.trips, loading: false };
   case GET_ONE_CHECKLIST_FAILURE:
     return { ...state, error: action.error, loading: false };
   case DELETE_CHECKLIST:

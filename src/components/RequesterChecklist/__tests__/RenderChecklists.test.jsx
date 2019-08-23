@@ -49,7 +49,9 @@ describe ('RenderChecklist Test Suite', () => {
           }
         ]
       },
-    ]   
+    ],
+    onTabChange: jest.fn(),
+    handleSubmission: jest.fn(),   
   };
 
   const wrapper = shallow(<RenderChecklists {...props} />);
@@ -71,7 +73,8 @@ describe ('RenderChecklist Test Suite', () => {
   it('should handle tab changes when tab is hit', () => {
     const mockHandleTabClick = jest.fn();
     wrapper.setState({tabIndex: 1, showFlightDetails: false});
-    wrapper.instance().onTabClick = mockHandleTabClick;
+    wrapper.instance().handleResponse('checklists')([]);
+    expect(props.handleSubmission).toBeCalled();
     wrapper.find(ChecklistTabs).simulate('click');
     expect(mockHandleTabClick).toHaveBeenCalledTimes(0);
   });

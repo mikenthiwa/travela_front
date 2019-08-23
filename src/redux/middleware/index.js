@@ -184,6 +184,7 @@ import { watchAddResourcesSagaAsync, watchFetchLinkDataSagaAsync } from './helpR
 import { watchPostNoPassportNotification } from './noPassportSaga';
 import watchCrashReport from "./errorBoundarySaga";
 import watchDocumentTypesSaga from './DocumentTypesSaga';
+import watchDynamicChecklistSubmissions from './dynamicChecklistSubmissionSaga';
 
 
 function* rootSaga() {
@@ -329,7 +330,8 @@ function* rootSaga() {
     watchCrashReport(),
     watchGetOneChecklist(),
     watchDocumentTypesSaga(),
+    watchDynamicChecklistSubmissions(),
   ]);
 }
 
-export default rootSaga;
+export default rootSaga; 

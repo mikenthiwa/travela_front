@@ -86,7 +86,7 @@ const routes = {
   '/settings/travel-region': [ConnectedTravelRegion, TRAVEL_MANAGERS],
   '/settings/travel-region/:regionId': [ConnectedCountries, TRAVEL_MANAGERS],
   '/trip-planner/checklist-wizard-interface': [ConnectedChecklistWizardInterface, TRAVEL_MANAGERS],
-  '/new-requests/:requestId/checklists': [ConnectedUserChecklist],
+  '/new-requests/:requestId/checklists': [ConnectedRequestDetailsPage],
   '/settings/document-types': [ConnectedDocumentTypes, TRAVEL_MANAGERS],
 };
 

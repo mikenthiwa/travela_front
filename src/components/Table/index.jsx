@@ -188,10 +188,12 @@ export class Table extends Component {
     );
   }
 
-  renderTravelCompletion(type, travelCompletion) {
+  renderTravelCompletion(type, travelCompletion, dynamicChecklistSubmission) {
+    const percentage = dynamicChecklistSubmission
+      ? dynamicChecklistSubmission.completionCount : 0;
     return (type === 'requests' || type === 'verifications') && (
       <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer">
-        {travelCompletion || '0% complete'}
+        {`${percentage}% complete`}
       </td>
     );
   }
@@ -217,7 +219,7 @@ export class Table extends Component {
   }
 
   renderRequest(request, type, search) {
-    const { trips, travelCompletion } = request;
+    const { trips, travelCompletion, dynamicChecklistSubmission } = request;
     const tripTypeFormatted = formatTripType(request.tripType);
     const travelDuration =
       request.tripType !== 'oneWay' ? getTripDuration(trips) : 'Not applicable';
@@ -241,7 +243,7 @@ export class Table extends Component {
         <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer">
           {moment(request.updatedAt).format('DD MMM YYYY')}
         </td>
-        { this.renderTravelCompletion(type, travelCompletion)}
+        { this.renderTravelCompletion(type, travelCompletion, dynamicChecklistSubmission)}
         <td className="mdl-data-table__cell--non-numeric table__requests__status table__data table__data-pointer">
           {this.renderRequestStatus(request)}
         </td>

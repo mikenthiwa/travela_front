@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Trip Date Test Suite should render correctly 1`] = `
+<div
+  className="date-wrapper    "
+  id="_date"
+>
+  <DatePicker
+    allowSameDay={false}
+    autoComplete="off"
+    calendarClassName="calendar-body"
+    className=""
+    dateFormat=""
+    dateFormatCalendar="MMMM YYYY"
+    dayClassName={[Function]}
+    disabled={false}
+    disabledKeyboardNavigation={true}
+    dropdownMode="scroll"
+    fixedHeight={true}
+    maxDate={Object {}}
+    maxTime={Object {}}
+    minDate={Object {}}
+    minTime={Object {}}
+    monthsShown={1}
+    name=""
+    nextMonthButtonLabel="Next month"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onChangeRaw={[Function]}
+    onClickOutside={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onMonthChange={[Function]}
+    onSelect={[Function]}
+    onYearChange={[Function]}
+    openToDate={Object {}}
+    placeholderText="MM/DD/YYYY"
+    preventOpenOnFocus={false}
+    previousMonthButtonLabel="Previous Month"
+    readOnly={false}
+    selected={Object {}}
+    shouldCloseOnSelect={true}
+    showTimeSelect={false}
+    showYearDropdown={false}
+    timeCaption="Time"
+    timeFormat=""
+    timeIntervals={30}
+    value=""
+    withPortal={false}
+  />
+  <img
+    alt="cal"
+    className="calendar-icon"
+    src="calendar_icon.svg"
+  />
+</div>
+`;

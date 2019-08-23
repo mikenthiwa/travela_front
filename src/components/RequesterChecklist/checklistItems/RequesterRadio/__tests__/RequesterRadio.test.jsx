@@ -41,7 +41,6 @@ describe('Requester radio input type tests', () => {
         }
       }
     },
-    handleCheckName: jest.fn(),
     handleResponse: jest.fn(),
     handleBehaviour: jest.fn(),
   };
@@ -51,12 +50,13 @@ describe('Requester radio input type tests', () => {
     expect(wrapper.find('.radio-grid-wrapper')).toHaveLength(1);
   });
 
-  it.only('handle the requestors response when a radio option is selected', () => {
+  it('handle the requestors response when a radio option is selected', () => {
     const wrapper = shallow(<RequesterRadio {...props} />);
+    wrapper.find('.radio-option').first().simulate('click');
     wrapper.instance().handleCheckName(props.item.configuration.options[0].id);
-    expect(props.handleResponse).toBeCalled();
     expect(props.item.response.selectedValue).toEqual('p0zGW1NWZ6');
     wrapper.instance().handleBehaviour(props.item.response.behaviour);
     expect(props.item.response.behaviour.type).toEqual('UPLOAD_DOCUMENT');
+    expect(props.handleResponse).toBeCalled();
   });
 });

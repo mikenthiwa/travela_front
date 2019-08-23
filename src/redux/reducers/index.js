@@ -42,6 +42,7 @@ import listAllFlightEstimates from './flightEstimates';
 import checklistWizard from './checklistWizard';
 import noPassport from './noPassport';
 import documentTypes from './documentTypes';
+import dynamicChecklistSubmission from './dynamicChecklistSubmission';
 
 const rootReducer = combineReducers({
   auth,
@@ -87,6 +88,7 @@ const rootReducer = combineReducers({
   checklistWizard,
   noPassport,
   documentTypes,
+  dynamicChecklistSubmission,
 });
 
 export default rootReducer;

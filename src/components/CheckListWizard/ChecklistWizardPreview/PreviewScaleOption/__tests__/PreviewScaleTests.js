@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import ScalePreview from '..';
+import ScalePreview from '../PreviewScale';
 
 describe('Scale preview tests', () => {
   const state = {

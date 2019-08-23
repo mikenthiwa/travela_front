@@ -1,9 +1,9 @@
-import { call } from "redux-saga/effects";
-import { throwError } from "redux-saga-test-plan/providers";
-import * as matchers from "redux-saga-test-plan/matchers";
-import { expectSaga } from "redux-saga-test-plan";
-import toast from "toastr";
-import travelDynamiChecklistApi from "../../../services/travelDynamiChecklistApi";
+import { call } from 'redux-saga/effects';
+import { throwError } from 'redux-saga-test-plan/providers';
+import * as matchers from 'redux-saga-test-plan/matchers';
+import { expectSaga } from 'redux-saga-test-plan';
+import toast from 'toastr';
+import travelDynamiChecklistApi from '../../../services/travelDynamiChecklistApi';
 
 import {
   watchAddChecklistWizard,
@@ -24,7 +24,7 @@ import {
   watchUpdateDynamicChecklist,
   watchGetChecklistFromStorage,
   watchGetOneChecklist
-} from "../travelChecklistWizardSaga";
+} from '../travelChecklistWizardSaga';
 
 import {
   UPDATE_NATIONALITY,
@@ -68,52 +68,31 @@ import {
   GET_ONE_CHECKLIST,
   GET_ONE_CHECKLIST_SUCCESS,
   GET_ONE_CHECKLIST_FAILURE
-} from "../../constants/actionTypes";
+} from '../../constants/actionTypes';
 
 const response = {
   data: {
-    checklists: [
-      {
-        id: 1,
-        createdBy: "Jude Afam",
-        name: "poland-Uganda-dnZjGPGwo",
-        config: [
-          {
-            url: "",
-            type: "image",
-            order: 1,
-            prompt: "Do you have a passport",
-            configuration: {
-              url: "",
-              options: [],
-              behaviour: {
-                name: "preview image",
-                action: {
-                  type: "PREVIEW_IMAGE",
-                  payload: "http://url"
-                }
-              }
-            }
-          }
-        ],
-        ChecklistDestinations: 1,
-        user: {
-          fullName: "Jude Afam"
-        }
-      }
-    ]
+    checklists: [{
+      id: 'jjdd',
+      config: []
+    },{
+      id: 'jjjk',
+      config: []
+    }
+    ],
+    trips: [],
   }
 };
 
 const response2 = {
-  data: { message: "checklist created successfully" }
+  data: { message: 'checklist created successfully' }
 };
 
 const error = {
   response: {
     data: {
       status: 400,
-      error: "An error occurred"
+      error: 'An error occurred'
     }
   }
 };
@@ -123,18 +102,18 @@ const checklistPayload = {
   deletedChecklists: [],
   destinations: [
     {
-      name: "Andorra",
-      native: "Andorra",
-      phone: "376",
-      continent: "EU",
-      capital: "Andorra la Vella"
+      name: 'Andorra',
+      native: 'Andorra',
+      phone: '376',
+      continent: 'EU',
+      capital: 'Andorra la Vella'
     },
     {
-      name: "United Arab Emirates",
-      native: "دولة الإمارات العربية المتحدة",
-      phone: "971",
-      continent: "AS",
-      capital: "Abu Dhabi"
+      name: 'United Arab Emirates',
+      native: 'دولة الإمارات العربية المتحدة',
+      phone: '971',
+      continent: 'AS',
+      capital: 'Abu Dhabi'
     }
   ],
   disableRedo: true,
@@ -144,25 +123,25 @@ const checklistPayload = {
   isRestoring: false,
   items: [
     {
-      id: "wkTebrKO-",
+      id: 'wkTebrKO-',
       order: 1,
-      prompt: "Do you think this makes sense?",
-      type: "radio"
+      prompt: 'Do you think this makes sense?',
+      type: 'radio'
     }
   ],
   loading: false,
-  message: "",
+  message: '',
   nationality: {
-    emoji: "",
-    name: "Afghanistan"
+    emoji: '',
+    name: 'Afghanistan'
   }
 };
 
 toast.error = jest.fn();
 toast.success = jest.fn();
 
-describe("Checklist wizard sagas api requests", () => {
-  it("creates a new checklist", () => {
+describe('Checklist wizard sagas api requests', () => {
+  it('creates a new checklist', () => {
     return expectSaga(watchCreateDynamicChecklist, travelDynamiChecklistApi)
       .provide([
         [
@@ -184,7 +163,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("throws error if there is an error creating a checklist", () => {
+  it('throws error if there is an error creating a checklist', () => {
     return expectSaga(watchCreateDynamicChecklist, travelDynamiChecklistApi)
       .provide([
         [
@@ -192,7 +171,7 @@ describe("Checklist wizard sagas api requests", () => {
           throwError(error)
         ]
       ])
-      .call(toast.error, "An error occurred")
+      .call(toast.error, 'An error occurred')
       .dispatch({
         type: CREATE_DYNAMIC_CHECKLIST,
         payload: checklistPayload
@@ -200,7 +179,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("throws error if unable to fetch single checklist", () => {
+  it('throws error if unable to fetch single checklist', () => {
     return expectSaga(watchGetSingleChecklist, travelDynamiChecklistApi)
       .provide([
         [
@@ -215,7 +194,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("delete dynamic checklists", () => {
+  it('delete dynamic checklists', () => {
     return expectSaga(watchDeleteChecklistWizard, travelDynamiChecklistApi)
       .provide([
         [
@@ -236,7 +215,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("throws error if there is an error deleting a checklist", () => {
+  it('throws error if there is an error deleting a checklist', () => {
     return expectSaga(watchDeleteChecklistWizard, travelDynamiChecklistApi)
       .provide([
         [
@@ -253,7 +232,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("fetch deleted checklists successfully", () => {
+  it('fetch deleted checklists successfully', () => {
     return expectSaga(watchGetDeletedChecklists, travelDynamiChecklistApi)
       .provide([
         [matchers.call.fn(travelDynamiChecklistApi.deletedChecklists), response]
@@ -268,7 +247,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("throws error if there is an error fetching deleted checklists", () => {
+  it('throws error if there is an error fetching deleted checklists', () => {
     return expectSaga(watchGetDeletedChecklists, travelDynamiChecklistApi)
       .provide([
         [
@@ -286,7 +265,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("gets all dynamic checklists", () => {
+  it('gets all dynamic checklists', () => {
     return expectSaga(watchgetAllDynamicChecklists, travelDynamiChecklistApi)
       .provide([
         [
@@ -304,7 +283,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("throws error if unable to get all checklists", () => {
+  it('throws error if unable to get all checklists', () => {
     return expectSaga(watchgetAllDynamicChecklists, travelDynamiChecklistApi)
       .provide([
         [
@@ -322,7 +301,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("throws error if there is an error fetching deleted checklists", () => {
+  it('throws error if there is an error fetching deleted checklists', () => {
     return expectSaga(watchGetDeletedChecklists, travelDynamiChecklistApi)
       .provide([
         [
@@ -340,7 +319,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("restore a deleted checklist", () => {
+  it('restore a deleted checklist', () => {
     return expectSaga(watchRestoreAChecklist, travelDynamiChecklistApi)
       .provide([
         [
@@ -361,7 +340,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("throws error if unable to restore a deleted checklist", () => {
+  it('throws error if unable to restore a deleted checklist', () => {
     return expectSaga(watchRestoreAChecklist, travelDynamiChecklistApi)
       .provide([
         [
@@ -380,7 +359,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("restore all deleted checklist", () => {
+  it('restore all deleted checklist', () => {
     return expectSaga(watchRestoreAllChecklists, travelDynamiChecklistApi)
       .provide([
         [matchers.call.fn(travelDynamiChecklistApi.restoreAllChecklists)]
@@ -394,7 +373,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("throws error if unable to restore all deleted checklist", () => {
+  it('throws error if unable to restore all deleted checklist', () => {
     return expectSaga(watchRestoreAllChecklists, travelDynamiChecklistApi)
       .provide([
         [
@@ -411,7 +390,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("should update checklist", () => {
+  it('should update checklist', () => {
     return expectSaga(watchUpdateDynamicChecklist, travelDynamiChecklistApi)
       .provide([
         [
@@ -430,7 +409,7 @@ describe("Checklist wizard sagas api requests", () => {
       .silentRun();
   });
 
-  it("throws error if unable to update a checklist", () => {
+  it('throws error if unable to update a checklist', () => {
     return expectSaga(watchUpdateDynamicChecklist, travelDynamiChecklistApi)
       .provide([
         [
@@ -438,7 +417,7 @@ describe("Checklist wizard sagas api requests", () => {
           throwError(error)
         ]
       ])
-      .call(toast.error, "An error occurred")
+      .call(toast.error, 'An error occurred')
       .dispatch({
         type: UPDATE_CHECKLIST,
         checklist: checklistPayload,
@@ -448,8 +427,8 @@ describe("Checklist wizard sagas api requests", () => {
   });
 });
 
-describe("Travel Checklist Wizard Saga test", () => {
-  it("adds checklist item successfully", () => {
+describe('Travel Checklist Wizard Saga test', () => {
+  it('adds checklist item successfully', () => {
     return expectSaga(watchAddChecklistWizard)
       .put({
         type: ADD_NEW_CHECKLIST_ITEM_SUCCESS,
@@ -462,7 +441,7 @@ describe("Travel Checklist Wizard Saga test", () => {
       .silentRun();
   });
 
-  it("handles checklist item", () => {
+  it('handles checklist item', () => {
     return expectSaga(watchHandleChecklistItems)
       .put({
         type: HANDLE_ITEMS_SUCCESS,
@@ -475,7 +454,7 @@ describe("Travel Checklist Wizard Saga test", () => {
       .silentRun();
   });
 
-  it("adds question to the checklist item", () => {
+  it('adds question to the checklist item', () => {
     return expectSaga(watchAddQuestion)
       .put({
         type: ADD_QUESTION_SUCCESS,
@@ -488,7 +467,7 @@ describe("Travel Checklist Wizard Saga test", () => {
       .silentRun();
   });
 
-  it("removes an item from a checklist item", () => {
+  it('removes an item from a checklist item', () => {
     return expectSaga(watchDeleteItems)
       .put({
         type: DELETE_ITEM_SUCCESS,
@@ -501,7 +480,7 @@ describe("Travel Checklist Wizard Saga test", () => {
       .silentRun();
   });
 
-  it("removes question from a checklist item", () => {
+  it('removes question from a checklist item', () => {
     return expectSaga(watchDeleteQuestion)
       .put({
         type: DELETE_QUESTION_SUCCESS,
@@ -514,7 +493,7 @@ describe("Travel Checklist Wizard Saga test", () => {
       .silentRun();
   });
 
-  it("updates a checklist behaviour", () => {
+  it('updates a checklist behaviour', () => {
     return expectSaga(watchUpdateBehaviour)
       .put({
         type: UPDATE_BEHAVIOUR_SUCCESS,
@@ -527,7 +506,7 @@ describe("Travel Checklist Wizard Saga test", () => {
       .silentRun();
   });
 
-  it("updates a checklist origin/nationality", () => {
+  it('updates a checklist origin/nationality', () => {
     return expectSaga(watchUpdateNationality)
       .put({
         type: UPDATE_NATIONALITY_SUCCESS,
@@ -540,7 +519,7 @@ describe("Travel Checklist Wizard Saga test", () => {
       .silentRun();
   });
 
-  it("updates a checklist destination", () => {
+  it('updates a checklist destination', () => {
     return expectSaga(watchUpdateDestination)
       .put({
         type: UPDATE_DESTINATION_SUCCESS,
@@ -553,7 +532,7 @@ describe("Travel Checklist Wizard Saga test", () => {
       .silentRun();
   });
 
-  it("get storage from local storage", () => {
+  it('get storage from local storage', () => {
     return expectSaga(watchGetChecklistFromStorage)
       .put({
         type: GET_CHECKLIST_FROM_STORAGE_SUCCESS,
@@ -573,7 +552,7 @@ describe("Travel Checklist Wizard Saga test", () => {
       .provide([[matchers.call.fn(travelDynamiChecklistApi.getOneChecklist), response]])
       .put({
         type: GET_ONE_CHECKLIST_SUCCESS,
-        payload: response.data.checklists
+        payload: response.data
       })
       .dispatch({
         type: GET_ONE_CHECKLIST

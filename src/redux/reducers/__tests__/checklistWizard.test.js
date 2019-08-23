@@ -517,7 +517,8 @@ describe('Travel checklists wizard reducer', () => {
     expect(checklistWizard(initialState, action)).toEqual({
       ...initialState,
       loading: false,
-      checklist: action.payload
+      checklist: action.payload.checklists,
+      trip: action.payload.trips
     });
   });
 

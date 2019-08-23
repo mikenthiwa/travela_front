@@ -7,6 +7,7 @@
         padding: 18px 0 30px 50px;
 
         .prompt-wrapper {
+            position: relative;
             width: 100%;
             display: grid;
             grid-template-columns: 30px 1fr;
@@ -16,6 +17,16 @@
 
             &:last-child {
                 border: none;
+            }
+
+            .disabled-checklist-wrapper {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                left: -15px;
+                background: #ffffffb3;
+                z-index: 10;
+                cursor: not-allowed;
             }
         }
     

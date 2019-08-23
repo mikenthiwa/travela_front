@@ -68,7 +68,7 @@ const NavItemsMetadata = [
       },
       {
         link_to: '/new-requests',
-        text: 'Request Checklists',
+        text: 'My Requests(new)',
         exact: true
       },
     ],

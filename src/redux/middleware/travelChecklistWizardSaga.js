@@ -142,7 +142,10 @@ export function* watchGetOneChecklist() {
 export function* getOneChecklistSaga(action) {
   try {
     const { data } = yield call(travelDynamicChecklistApi.getOneChecklist, action.requestId);
-    yield put(getOneChecklistSuccess(data.checklists));
+    yield put(getOneChecklistSuccess({
+      checklists: data.checklists, 
+      trips: data.trips,
+    }));
   } catch (error) {
     const errorMessage = apiErrorHandler(error);
     yield put(getOneChecklistFailure(errorMessage));

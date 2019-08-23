@@ -4,43 +4,34 @@ import ChecklistTabs from './ChecklistTabs';
 import ChecklistDetails from './ChecklistDetails';
 import activeIcon from '../../images/icons/new-request-icons/icon.svg';
 import './RenderChecklist.scss';
+import TripDetails from './Trips/TripDetails';
 
 class RenderChecklists extends Component {
-  state = {
-    tabIndex: 0,
-    showFlightDetails: false,
-  }
 
-  onTabClick = tab => {
-    this.setState({
-      tabIndex: tab,
-      showFlightDetails: false,
-    });
-  }
-
-  onFlightDetailsTabClick = () => {
-    this.setState({showFlightDetails: true });
+  handleResponse = field => {
+    const { handleSubmission } = this.props;
+    return data => handleSubmission({ field, data, isFieldArray: true });
   }
 
   render() {
-    const { checklists, handleResponse } = this.props;
-    const { tabIndex, showFlightDetails } = this.state;
-    const activeChecklist = checklists.find((value, index) => index === tabIndex);
+    const { checklists, trips, tabIndex, onTabChange, isSubmitted } = this.props;
+    const activeChecklist = checklists.concat([trips]).find((value, index) => index === tabIndex);
+    const showFlightDetails = tabIndex === checklists.length;
     return (
       <Fragment>
         <div className="checklist-tab-section">
           {checklists.map((checklist, index) => (
             <ChecklistTabs
-              isActive={!showFlightDetails && index === tabIndex}
+              isActive={index === tabIndex}
               tripNum={index + 1}
               key={checklist.id}
               checklist={checklist}
-              onTabClick={() => this.onTabClick(index)}
+              onTabClick={() => onTabChange(index)}
             />
           ))}
           <button
             type="button"
-            onClick={this.onFlightDetailsTabClick}
+            onClick={() => onTabChange(checklists.length)}
             className={`tab-header ${showFlightDetails ? 'selected' : ''}`}
           >
             <div className="tab-header-text-wrapper">
@@ -49,7 +40,7 @@ class RenderChecklists extends Component {
               </span>
               {showFlightDetails && (<img className="active-icon" src={activeIcon} alt="active-icon" />)}
             </div>
-            <p className="tab-header-name">pending...</p>
+            <p className="tab-header-name">Ticket Details</p>
           </button> 
         </div>
         <div className="line" />
@@ -57,12 +48,12 @@ class RenderChecklists extends Component {
           {activeChecklist && !showFlightDetails && (
             <ChecklistDetails
               checklist={activeChecklist}
-              handleResponse={handleResponse}
+              handleResponse={this.handleResponse('checklists')}
             />
           )}
-          {showFlightDetails && (<div> Flight Details Here!!! </div>
-          )}
-        </div> 
+          {showFlightDetails && (<TripDetails trips={activeChecklist} handleTrips={this.handleResponse('trips')} />)}
+          {isSubmitted && (<div className="disabled-checklist-overlay" />)}
+        </div>
       </Fragment>
     );
   }
@@ -70,7 +61,11 @@ class RenderChecklists extends Component {
 
 RenderChecklists.propTypes = {
   checklists: PropTypes.array.isRequired,
-  handleResponse: PropTypes.func.isRequired,
+  handleSubmission: PropTypes.func.isRequired,
+  trips: PropTypes.array.isRequired,
+  tabIndex: PropTypes.number.isRequired,
+  onTabChange: PropTypes.array.isRequired,
+  isSubmitted: PropTypes.bool.isRequired,
 };
 
 export default RenderChecklists;

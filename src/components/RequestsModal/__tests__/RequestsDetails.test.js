@@ -114,7 +114,11 @@ const props = {
   travelChecklists: {isLoading: false, updatingChecklist: false, creatingChecklist: false, fetchingChecklists: false, checklistItems: [{}],},
   uploadFile: jest.fn(),
   user: {postUserData: [], getUserData: {}, currentUser: {}, errors: {}, getCurrentUserRole: []},
-  userReadinessDocument: {passport: [{}]}
+  userReadinessDocument: {passport: [{}]},
+  smartSubmissions: {
+    updatedAt: '2019-03-12T20:40:53.694Z',
+    isSubmitted: false,
+  }
 
 };
 
