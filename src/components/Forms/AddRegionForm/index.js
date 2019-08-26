@@ -21,28 +21,38 @@ class AddRegionForm extends PureComponent {
     this.state = { ...this.defaultState };
   }
 
-  handleSubmit = event => {
-    event.preventDefault();
-    const { values } = this.state;
-    event.preventDefault();
-    const { addRegion, myTitle, regionDetail } = this.props;
-    if (this.validate()) {
-      let data = values;
-      myTitle === addRegion(data);
-    }
-  };
+  componentDidMount() {
+    this.setEditValues(this.props);
+  }
+  componentDidUpdate(){
+    const{fetchRegions} = this.props;
+    fetchRegions();
+  }
+setEditValues = ({ editing, regionDetail }) => {
+  if (editing) {
+    const { region, description } = regionDetail;
+    const descriptionLength = description.length;
+    this.setState(
+      {
+        values: { region, description },
+        ofMinLength: descriptionLength < 10
+      });
+  }
+};
 
   handleCancel = () => {
     const { closeModal } = this.props;
     this.setState({ ...this.defaultState });
     closeModal();
   };
+
   validLengthHelper = (field, fieldLength) => {
     return fieldLength ? field.trim().length >= fieldLength :
       field.trim().length === fieldLength;
   }
   validate = field => {
     let { values} = this.state;
+    const { editing, regionDetail} = this.props;
     let tempErrorsObject = {
       region: '',
       description: ''
@@ -78,12 +88,44 @@ class AddRegionForm extends PureComponent {
     this.setState(prevState => {
       return { ...prevState, errors: { ...tempErrorsObject }, hasBlankFields };
     });
+
+    if (editing && !hasBlankFields && regionDetail.region && regionDetail.description) {
+      const region = values.region? values.region.toLowerCase() : '';
+      const description = values.description ? values.description.toLowerCase() : '';
+      hasBlankFields = region === regionDetail.region.toLowerCase() &&
+        description === regionDetail.description.toLowerCase();
+    }
+
     return !hasBlankFields;
   };
 
+  handleSubmit = event => {
+    event.preventDefault();
+    const {
+      values
+    } = this.state;
+    const {
+      addRegion,
+      myTitle,
+      regionDetail,
+      editing,
+      editRegion,
+    } = this.props;
+    if (editing) {
+      myTitle === editRegion({
+        id: regionDetail.id,
+        ...values
+      });
+    }
+    if (this.validate() && !editing) {
+      let data = values;
+      myTitle === addRegion(data);
+    }
+
+  };
   render() {
     const { values, errors, hasBlankFields } = this.state;
-    const { addingRegion, myTitle } = this.props;
+    const { addingRegion, myTitle, editRegion, editing, addRegion, fetchRegions } = this.props;
     return (
       <FormContext targetForm={this} values={values} errors={errors} validatorName="validate">
         <form onSubmit={this.handleSubmit} className="new-request" id="add-region-form">
@@ -93,6 +135,10 @@ class AddRegionForm extends PureComponent {
           <hr />
           <SubmitArea
             isCreating={addingRegion}
+            fetchRegions={fetchRegions}
+            editing={editing}
+            editRegion={editRegion}
+            addRegion={addRegion}
             onCancel={this.handleCancel}
             hasBlankFields={hasBlankFields}
             send={myTitle}
@@ -105,16 +151,21 @@ class AddRegionForm extends PureComponent {
 
 AddRegionForm.propTypes = {
   addRegion: PropTypes.func.isRequired,
+  fetchRegions: PropTypes.func.isRequired,
   addingRegion: PropTypes.bool,
   myTitle: PropTypes.string,
   regionDetail: PropTypes.object,
   closeModal: PropTypes.func.isRequired,
+  editing: PropTypes.bool,
+  editRegion: PropTypes.func,
 };
 
 AddRegionForm.defaultProps = {
   addingRegion: false,
   myTitle: '',
   regionDetail: {},
+  editing: false,
+  editRegion: null,
 };
 
 export default AddRegionForm;

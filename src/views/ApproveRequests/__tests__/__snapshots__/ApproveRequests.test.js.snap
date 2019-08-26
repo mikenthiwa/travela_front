@@ -105,16 +105,16 @@ Array [
                     <p
                         className="text--grey"
                     >
-                        Total Stipend
+                        Cost Breakdown
                         <button
                             className="info-button--false"
-                            disabled={false}
+                            id="stipend-next"
                             onClick={[Function]}
                             type="button"
                         >
                             i
                             <span>
-                                Click for Travel Stipend Breakdown
+                                Click for Cost breakdown
                             </span>
                         </button>
                     </p>
@@ -293,7 +293,7 @@ Array [
                 <span
                     className="modal__hours-status"
                 >
-                    3 months ago
+                    6 months ago
                 </span>
             </span>
             <span

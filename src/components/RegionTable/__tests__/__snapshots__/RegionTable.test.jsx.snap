@@ -1,0 +1,233 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="table__container user-roles"
+>
+  <div
+    className="search-container"
+  >
+    <span
+      className="icon"
+    >
+      Region
+    </span>
+    <input
+      className="input-field"
+      onChange={[Function]}
+      placeholder="Search"
+      type="text"
+      value=""
+    />
+    <button
+      type="button"
+    >
+      <span
+        className="fa fa-search search-icon"
+      />
+    </button>
+  </div>
+  <table
+    className="mdl-data-table mdl-js-data-table table__requests"
+  >
+    <thead>
+      <tr>
+        <th
+          className="mdl-data-table__cell--non-numeric bb-md-0 table__head freeze request_id"
+        >
+          Region Name
+        </th>
+        <th
+          className="mdl-data-table__cell--non-numeric table__head pl-sm-100d description-left"
+        >
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      className="table__body approvals_table_body"
+    >
+      <tr
+        className="table__row table__effects"
+        key="1002"
+      >
+        <td
+          className="mdl-data-table__cell--non-numeric table__data freeze table__data-pointer"
+        >
+          <a
+            className="table__data--link button-outline table__id-pointer"
+            href="/settings/travel-region/1002"
+            onClick={[Function]}
+          >
+            West Africa
+          </a>
+        </td>
+        <td
+          className="mdl-data-table__cell--non-numeric table__data pl-sm-120"
+        >
+          Nigeria
+        </td>
+        <td
+          className="table__data edit-region"
+        >
+          <span>
+            <i
+              className="fa fa-ellipsis-v on"
+              onClick={[Function]}
+              role="presentation"
+            />
+            <div
+              className="context-menu table__menu-container false"
+            >
+              <ul
+                className="table__menu-list"
+              >
+                <li
+                  className="edit"
+                  onClick={[Function]}
+                  role="presentation"
+                >
+                  <span>
+                    Edit
+                  </span>
+                </li>
+                <li
+                  className="delete"
+                  onClick={[Function]}
+                  role="presentation"
+                >
+                  <span>
+                    Delete
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </span>
+        </td>
+      </tr>
+      <tr
+        className="table__row table__effects"
+        key="1001"
+      >
+        <td
+          className="mdl-data-table__cell--non-numeric table__data freeze table__data-pointer"
+        >
+          <a
+            className="table__data--link button-outline table__id-pointer"
+            href="/settings/travel-region/1001"
+            onClick={[Function]}
+          >
+            East Africa
+          </a>
+        </td>
+        <td
+          className="mdl-data-table__cell--non-numeric table__data pl-sm-120"
+        >
+          Kenya, Uganda and Rwanda
+        </td>
+        <td
+          className="table__data edit-region"
+        >
+          <span>
+            <i
+              className="fa fa-ellipsis-v on"
+              onClick={[Function]}
+              role="presentation"
+            />
+            <div
+              className="context-menu table__menu-container false"
+            >
+              <ul
+                className="table__menu-list"
+              >
+                <li
+                  className="edit"
+                  onClick={[Function]}
+                  role="presentation"
+                >
+                  <span>
+                    Edit
+                  </span>
+                </li>
+                <li
+                  className="delete"
+                  onClick={[Function]}
+                  role="presentation"
+                >
+                  <span>
+                    Delete
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <div
+      className="pagination"
+    >
+      <button
+        className="pagination__button"
+        disabled={true}
+        id="previous-button"
+        onClick={[Function]}
+        type="button"
+      >
+        <span
+          className=""
+        >
+          Previous
+        </span>
+        <span
+          className=" mdl-cell--hide-desktop mdl-cell--hide-tablet"
+        >
+          Previous
+        </span>
+      </button>
+      <div
+        className="pagination__items"
+      >
+        <span
+          className="pagination__page"
+        >
+          Page
+        </span>
+        <div
+          className="pagination__current-page"
+          id="current-page"
+        >
+          1
+        </div>
+        of
+        <span
+          className="pagination__all-pages"
+          id="page-count"
+        >
+          1
+        </span>
+      </div>
+      <button
+        className="pagination__button"
+        disabled={true}
+        id="next-button"
+        onClick={[Function]}
+        type="button"
+      >
+        <span
+          className=""
+        >
+          Next
+        </span>
+        <span
+          className=" mdl-cell--hide-desktop mdl-cell--hide-tablet"
+        >
+          Next
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

@@ -48,6 +48,7 @@ import {
   updateChecklistSuccess,
   getChecklistFromStorageSuccess
 } from '../actionCreator/travelChecklistWizardActions';
+import apiValidationErrorHandler from '../../services/apiValidationErrorHandler';
 
 
 export function* addNewChecklistItem(newItems) {
@@ -285,8 +286,14 @@ export function* updateDynamicChecklist(payload) {
     yield put(updateChecklistSuccess());
     toast.success('Checklist updated successfully');
   } catch(error) {
-    const errorMessage = apiErrorHandler(error);
-    yield call(toast.error, errorMessage);
+    let errors;
+    if (error.response.status === 409) {
+      errors = apiValidationErrorHandler(error);
+    } else {
+      let errorMessage = apiErrorHandler(error);
+      toast.error(errorMessage);
+    }
+    yield call(toast.error, errors);
   }
 }
 

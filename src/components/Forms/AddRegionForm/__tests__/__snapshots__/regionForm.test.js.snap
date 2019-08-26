@@ -4,6 +4,7 @@ exports[`<AddRegionForm /> renders correctly 1`] = `
 <form
   className="new-request"
   id="add-region-form"
+  key=".0"
   onSubmit={[Function]}
 >
   <fieldset
@@ -68,19 +69,23 @@ exports[`<AddRegionForm /> renders correctly 1`] = `
                * 
             </span>
           </label>
-          <textarea
-            autoComplete="off"
-            className=" textarea-box "
-            data-gramm_editor="false"
-            id="add-region-description"
-            label="Description"
-            name="description"
-            onBlur={[Function]}
-            onChange={[Function]}
-            rows="10"
-            type="textarea"
-            value=""
-          />
+          <div
+            className="form-input__textarea "
+          >
+            <textarea
+              autoComplete="off"
+              className=" textarea-box "
+              data-gramm_editor="false"
+              id="add-region-description"
+              label="Description"
+              name="description"
+              onBlur={[Function]}
+              onChange={[Function]}
+              rows="10"
+              type="textarea"
+              value=""
+            />
+          </div>
           <span
             className="error"
           />

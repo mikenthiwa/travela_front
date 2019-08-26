@@ -5,12 +5,14 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import RegionAPI from '../../../services/RegionsAPI';
 import {
   watchAddRegionSagaAsync,
-  watchFetchRegionDataSagaAsync
+  watchFetchRegionDataSagaAsync,
+  watchEditRegionDataSagaAsync,
+  watchDeleteRegionDataSagaAsync,
 } from '../travelRegionSaga';
 
-const newRegion = {
-  region: 'New Region',
-  description: 'Should be a new Region'
+const body = {
+  region: 'North India',
+  description: 'Region for all indians'
 };
 
 const addRegionResponse = {
@@ -19,7 +21,7 @@ const addRegionResponse = {
     message: 'Region created successfully',
     fetchRegions: [
       {
-        newRegion
+        body
       }
     ]
   }
@@ -33,6 +35,25 @@ const fetchdata = {
     ]
   }
 };
+const response = {
+  data: {
+    success: true,
+    message: 'Travel Region Successfuly Updated',
+    newTravelRegion: [{}]
+  }
+};
+const otherError = {
+  response: {
+    status: 400,
+    message: 'Bad Request',
+    data: {
+      errors: [{
+        message: 'region has not been provided'
+      }]
+    }
+  }
+};
+
 const error = 'Possible network error, please reload the page';
 
 describe('REGION SAGA', () => {
@@ -41,7 +62,7 @@ describe('REGION SAGA', () => {
       const response = addRegionResponse;
       return expectSaga(watchAddRegionSagaAsync, RegionAPI)
         .provide([
-          [matchers.call.fn(RegionAPI.addRegion, newRegion), response]
+          [matchers.call.fn(RegionAPI.addRegion, body), response]
         ])
         .put({
           type: 'ADD_REGION_SUCCESS',
@@ -49,7 +70,42 @@ describe('REGION SAGA', () => {
         })
         .dispatch({
           type: 'ADD_REGION',
-          newRegion
+          body
+        })
+        .silentRun();
+    });
+    it('fetches response with editing travel region and dispatches action', () => {
+      const id = 1;
+      return expectSaga(watchEditRegionDataSagaAsync, RegionAPI)
+        .provide([
+          [matchers.call.fn(
+            RegionAPI.editRegion, id, body.region, body.description
+          ),
+          response
+          ]
+        ])
+        .put({
+          type: 'EDIT_REGION_SUCCESS',
+          response: response.data
+        })
+        .dispatch({
+          type: 'EDIT_REGION',
+          body
+        })
+        .silentRun();
+    });
+    it('throws error if there is an error editing a region', () => {
+      return expectSaga(watchEditRegionDataSagaAsync, RegionAPI)
+        .provide([
+          [matchers.call.fn(RegionAPI.editRegion, body), throwError(otherError)]
+        ])
+        .put({
+          type: 'EDIT_REGION_FAILURE',
+          error: undefined
+        })
+        .dispatch({
+          type: 'EDIT_REGION',
+          body
         })
         .silentRun();
     });
@@ -64,7 +120,7 @@ describe('REGION SAGA', () => {
         })
         .dispatch({
           type: 'ADD_REGION',
-          newRegion
+          body
         })
         .silentRun();
     });
@@ -92,6 +148,57 @@ describe('REGION SAGA', () => {
         })
         .dispatch({
           type: 'GET_REGION'
+        })
+        .silentRun();
+    });
+  });
+  describe('Delete Travel Region', () => {
+    const regionId = 1;
+    const response = {
+      data: {
+        deletedTravelRegion: {
+          id: 1,
+        }
+      }
+    };
+    it('deletes a region successfully', () => {
+      return expectSaga(watchDeleteRegionDataSagaAsync)
+        .provide([
+          [
+            call(RegionAPI.deleteRegion, regionId),
+            response
+          ]
+        ])
+        .put({
+          type: 'DELETE_REGION_SUCCESS',
+          regionId,
+          deletedTravelRegion: response.data.deletedTravelRegion
+        })
+        .dispatch({
+          type: 'DELETE_REGION',
+          regionId,
+        })
+        .silentRun();
+    });
+    it('handles failed region deletion', () => {
+      const error = new Error('Server error, try again');
+      error.response = {
+        status: 500
+      };
+      return expectSaga(watchDeleteRegionDataSagaAsync)
+        .provide([
+          [
+            call(RegionAPI.deleteRegion, regionId),
+            throwError(error)
+          ]
+        ])
+        .put({
+          type: 'DELETE_REGION_FAILURE',
+          error: error.message
+        })
+        .dispatch({
+          type: 'DELETE_REGION',
+          regionId,
         })
         .silentRun();
     });

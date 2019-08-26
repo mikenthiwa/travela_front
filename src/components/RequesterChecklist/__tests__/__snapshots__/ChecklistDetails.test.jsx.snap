@@ -47,7 +47,11 @@ exports[`ChecklistDetails Test Suite should render correctly 1`] = `
               "type": "radio",
             }
           }
+<<<<<<< HEAD
           handleResponse={[Function]}
+=======
+          handleSkipToQuestion={[Function]}
+>>>>>>> TRAV-178-story(travel-region): implement edit/delete travel region
         />
       </div>
     </div>

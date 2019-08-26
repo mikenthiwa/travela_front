@@ -169,25 +169,20 @@ exports[`<Requests> renders as expected 1`] = `
         }
       }
       closeModal={[Function]}
-      comments={Array []}
       creatingRequest={false}
       editing={false}
       errors={Array []}
       fetchAllTravelStipends={[Function]}
       fetchAvailableRooms={[Function]}
       fetchAvailableRoomsSuccess={[Function]}
-      fetchTravelChecklist={[Function]}
       fetchTravelCostsByLocation={[Function]}
       fetchUserRequests={[Function]}
       handleCreateRequest={[Function]}
       handleEditRequest={[Function]}
       history={Object {}}
-      isEditing={false}
-      listTravelReasons={Object {}}
       loading={false}
       managers={Array []}
       modalType={null}
-      occupations={Array []}
       requestOnEdit={
         Object {
           "createdAt": "2018-09-26T15:15:49.808Z",
@@ -217,15 +212,6 @@ exports[`<Requests> renders as expected 1`] = `
           "userId": "lorem-ipsum",
         }
       }
-      travelChecklists={Object {}}
-      travelCosts={
-        Object {
-          "flightCosts": Array [],
-          "hotelEstimates": Array [],
-          "isLoading": false,
-          "stipends": Array [],
-        }
-      }
       updateUserProfile={[Function]}
       user={
         Object {
@@ -250,7 +236,6 @@ exports[`<Requests> renders as expected 1`] = `
           "userId": "-LJNw1BsT0LP_E4l2peP",
         }
       }
-      userDataUpdate={Array []}
       validateTrips={[Function]}
     />
   </Modal>

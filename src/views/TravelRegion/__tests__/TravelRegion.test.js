@@ -7,7 +7,7 @@ import createSagaMiddleware from 'redux-saga';
 import TravelRegion from '../index';
 
 const props = {
-  travelRegion: [
+  regionDetail: [
     {
       id: 1002,
       region: 'West Africa',
@@ -32,6 +32,17 @@ const props = {
   openModal: jest.fn(),
   closeModal: jest.fn(),
   addRegion: jest.fn(),
+  editRegion: jest.fn(),
+  deleteRegion: jest.fn(),
+  modal: {
+    modal: {
+      modal: {
+        openModal: jest.fn(),
+        closeModal: jest.fn(),
+        shouldOpen: false
+      }
+    }
+  }
 };
 const initialState = {
   travelRegion: {
@@ -80,7 +91,7 @@ describe('<RegionPage>', () => {
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
-          <TravelRegion {...{ ...props, shouldOpen: true, modalType: 'new model' }} />
+          <TravelRegion {...{ ...props, shouldOpen: true, modalType: 'add travel regions' }} />
         </MemoryRouter>
       </Provider>
     );
@@ -88,8 +99,45 @@ describe('<RegionPage>', () => {
     expect(
       wrapper
         .find('Modal')
-        .at(0)
+        .first()
         .props().visibility
     ).toEqual('visible');
+  });
+  it('handles edit travel region', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <TravelRegion {...props} />
+        </MemoryRouter>
+      </Provider>
+    );
+    wrapper.find('.edit').first().simulate('click');
+    expect(props.openModal).toBeDefined();
+  });
+  it('handles delete travel region', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <TravelRegion {...props} />
+        </MemoryRouter>
+      </Provider>
+    );
+    wrapper.find('.delete').last().simulate('click');
+    expect(props.openModal).toBeDefined();
+  });
+
+  it('should simulate deletion of a travel region', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <TravelRegion {...props} />
+        </MemoryRouter>
+      </Provider>
+    );
+    const event = {
+      preventDefault: jest.fn()
+    };
+    wrapper.find('.delete-document-button');
+    wrapper.simulate('click', event);
   });
 });

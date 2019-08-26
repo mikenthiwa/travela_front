@@ -80,7 +80,18 @@ describe('Api Error Handler', () => {
     };
     expect(apiErrorHandler(error)).toEqual('Not found');
   });
-
+  it('should handle a case error 403 status code', () => {
+    error = {
+      ...error,
+      response: {
+        status: 403,
+        data: {
+          message: 'A travel region already exists'
+        }
+      }
+    };
+    expect(apiErrorHandler(error)).toEqual('A travel region already exists');
+  });
   it('should handle a case error with unhandled code', () => {
     error = {
       ...error,

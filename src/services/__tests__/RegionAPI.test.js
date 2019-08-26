@@ -9,24 +9,20 @@ const newRegion = {
 };
 
 const addRegionResponse = {
-  data:{
+  data: {
     success: true,
     message: 'Region created successfully',
-    fetchRegions: [
-      {
-        newRegion
-      }
-    ]
+    fetchRegions: [{
+      newRegion
+    }]
   }
 };
 
 const fetchdata = {
-  data:{
+  data: {
     success: true,
     message: 'Successfully retrieved regions',
-    fetchRegions: [
-      {}
-    ]
+    fetchRegions: [{}]
   }
 };
 
@@ -41,7 +37,9 @@ describe('RegionAPI', () => {
   it('should create new region', async () => {
     moxios.stubRequest(`${baseUrl}/regions`, {
       status: 201,
-      response: { ...addRegionResponse }
+      response: {
+        ...addRegionResponse
+      }
     });
     const response = await RegionAPI.addRegion(newRegion);
     const request = moxios.requests.mostRecent();
@@ -53,12 +51,44 @@ describe('RegionAPI', () => {
   it('should fetch all regions ', async () => {
     moxios.stubRequest(`${baseUrl}/regions`, {
       status: 200,
-      response: { ...fetchdata }
+      response: {
+        ...fetchdata
+      }
     });
     const response = await RegionAPI.fetchRegions();
     const region = moxios.requests.mostRecent();
     expect(region.url).toEqual(`${baseUrl}/regions`);
     expect(region.config.method).toEqual('get');
     expect(response.data).toEqual(fetchdata);
+  });
+  it('sends a request to edit a travel region', async () => {
+    const body = {
+      region: 'region',
+      description: 'description',
+      id: 1
+    };
+
+    moxios.stubRequest(`${baseUrl}/regions/travelregion/${body.id}`, {
+      response: {
+        body
+      }
+    });
+
+    const response = await RegionAPI.editRegion(body.id, body.region, body.description);
+    const request = moxios.requests.mostRecent();
+
+    expect(request.url).toEqual(`${baseUrl}/regions/travelregion/${body.id}`);
+    expect(response.data.body).toEqual(body);
+  });
+  it('should send a DELETE request to delete a trave region', async () => {
+    const regionId = 3;
+    moxios.stubRequest(`${baseUrl}/regions/${regionId}`, {
+      status: 200,
+      response: 'Travel region deleted successfully'
+    });
+
+    const response = await RegionAPI.deleteRegion(regionId);
+    expect(moxios.requests.mostRecent().url).toEqual(`${baseUrl}/regions/${regionId}`);
+    expect(response.data).toEqual('Travel region deleted successfully');
   });
 });

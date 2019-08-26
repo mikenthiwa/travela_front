@@ -3,6 +3,7 @@ import AddRegionForm from '..';
 
 const propsFactory = (overrides) => ({
   addRegion: jest.fn(),
+  fetchRegions: jest.fn(),
   closeModal: jest.fn(),
   addingRegion: false,
   regionDetail: {

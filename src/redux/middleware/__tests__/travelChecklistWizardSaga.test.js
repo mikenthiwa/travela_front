@@ -63,6 +63,7 @@ import {
   GET_SINGLE_CHECKLIST_SUCCESS,
   UPDATE_CHECKLIST,
   UPDATE_CHECKLIST_SUCCESS,
+  UPDATE_TRAVEL_CHECKLIST_FAILURE,
   GET_CHECKLIST_FROM_STORAGE,
   GET_CHECKLIST_FROM_STORAGE_SUCCESS,
   GET_ONE_CHECKLIST,
@@ -72,13 +73,35 @@ import {
 
 const response = {
   data: {
-    checklists: [{
-      id: 'jjdd',
-      config: []
-    },{
-      id: 'jjjk',
-      config: []
-    }
+    checklists: [
+      {
+        id: 1,
+        createdBy: 'Jude Afam',
+        name: 'poland-Uganda-dnZjGPGwo',
+        config: [
+          {
+            url: '',
+            type: 'image',
+            order: 1,
+            prompt: 'Do you have a passport',
+            configuration: {
+              url: '',
+              options: [],
+              behaviour: {
+                name: 'preview image',
+                action: {
+                  type: 'PREVIEW_IMAGE',
+                  payload: 'http://url'
+                }
+              }
+            }
+          }
+        ],
+        ChecklistDestinations: 1,
+        user: {
+          fullName: 'Jude Afam'
+        }
+      }
     ],
     trips: [],
   }
@@ -134,6 +157,18 @@ const checklistPayload = {
   nationality: {
     emoji: '',
     name: 'Afghanistan'
+  }
+};
+
+const otherError = {
+  response: {
+    status: 400,
+    message: 'Bad Request',
+    data: {
+      errors: [{
+        message: 'region has not been provided'
+      }]
+    }
   }
 };
 
@@ -414,10 +449,9 @@ describe('Checklist wizard sagas api requests', () => {
       .provide([
         [
           matchers.call.fn(travelDynamiChecklistApi.updateChecklist),
-          throwError(error)
+          throwError(otherError)
         ]
       ])
-      .call(toast.error, 'An error occurred')
       .dispatch({
         type: UPDATE_CHECKLIST,
         checklist: checklistPayload,

@@ -8,15 +8,18 @@ import AddRegionForm from '../../components/Forms/AddRegionForm';
 import { openModal, closeModal } from '../../redux/actionCreator/modalActions';
 import {
   addRegion,
-  fetchRegions
+  fetchRegions,
+  deleteRegion,
+  editRegion
 } from '../../redux/actionCreator/travelRegionActions';
 import './Region.scss';
 
 class TravelRegion extends Component{
   state = {
-    headTitle: 'Add Region',
-    regionDetail: null
+    regionDetail: null,
+    regionId: '',
   }
+
   componentDidMount() {
     const { fetchRegions } = this.props;
     fetchRegions();
@@ -24,36 +27,55 @@ class TravelRegion extends Component{
 
   handleAddRegion = () => {
     const {openModal} = this.props;
-    this.setState({headTitle: 'Add Region', regionDetail: null});
-    openModal(true, 'new model');
+    this.setState({regionDetail: null});
+    openModal(true, 'add travel regions');
   }
+
+  handleEditRegion = (id) => {
+    let {openModal, travelRegion } = this.props;
+    const regionDetail = travelRegion.find(item => id === item.id);
+    this.setState({ regionId: id, regionDetail });
+    openModal(true, 'edit travel regions');
+  }
+ 
   renderRegionForm() {
     const { regionErrors, closeModal, shouldOpen, modalType,
-      addRegion, isAddingRegion, isLoading } = this.props;
-    const { headTitle, regionDetail } = this.state;
+      addRegion, isAddingRegion, editRegion, travelRegion, fetchRegions} = this.props;
+    const {  regionDetail, regionId } = this.state;
+    const editing = /(edit) travel regions/.test(modalType);
     return (
       <Modal
+        customModalStyles="modal--add-user"
+        visibility={shouldOpen && /(edit|add) travel regions/.test(modalType) ? 'visible' : 'invisible'}
+        title={`${editing ? 'Edit' : 'Add'} Travel Region`}
         closeModal={closeModal}
-        customModalStyles="modal--add-user" width="480px"
-        visibility={shouldOpen && modalType === 'new model' ? 'visible' : 'invisible'}
-        title={headTitle}>
+      >
         <AddRegionForm
           addRegion={addRegion}
           errors={regionErrors}
           closeModal={closeModal}
           addingRegion={isAddingRegion}
+          regionId={regionId}
           regionDetail={regionDetail}
-          myTitle={headTitle}
+          myTitle={`${editing ? 'Edit' : 'Add'} Region`}
+          editing={editing}
+          editRegion={editRegion}
+          travelRegion={travelRegion}
+          fetchRegions={fetchRegions}
         />
       </Modal>
     );
   }
+
   renderRegions() {
-    const { isLoading, regionErrors,travelRegion } = this.props;
+    const { isLoading, regionErrors, travelRegion, deleteRegion, editRegion } = this.props;
     return (
       <div className="rp-table">
         <WithLoadingRegionTable
           isLoading={isLoading}
+          deleteRegion={deleteRegion}
+          handleEditRegion={this.handleEditRegion}
+          editRegion={editRegion}
           regions={travelRegion}
           fetchError={regionErrors}
         />
@@ -64,7 +86,9 @@ class TravelRegion extends Component{
   renderPanelHeader() {
     return(
       <div className="rp-region__header">
-        <RegionPanelHeader openModal={this.handleAddRegion} />
+        <RegionPanelHeader 
+          openModal={this.handleAddRegion} 
+        />
       </div>
     );
   }
@@ -89,9 +113,11 @@ class TravelRegion extends Component{
   
 }
 // export default TravelRegion;
-export const mapStateToProps = ({ modal, travelRegion:{regions}}) => ({
+export const mapStateToProps = ({ modal, travelRegion:{regions}, deleteRegion, editRegion}) => ({
   ...modal.modal,
-  travelRegion:regions
+  travelRegion:regions,
+  deleteRegion,
+  editRegion,
 });
 
 TravelRegion.propTypes = {
@@ -100,6 +126,8 @@ TravelRegion.propTypes = {
   fetchRegions: PropTypes.func.isRequired,
   regionErrors: PropTypes.string,
   addRegion: PropTypes.func.isRequired,
+  deleteRegion: PropTypes.func.isRequired,
+  editRegion: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   openModal: PropTypes.func.isRequired,
   shouldOpen: PropTypes.bool.isRequired,
@@ -120,6 +148,8 @@ const actionCreators = {
   openModal,
   closeModal,
   addRegion,
+  editRegion,
+  deleteRegion,
 };
 
 export default connect(

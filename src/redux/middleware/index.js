@@ -140,7 +140,12 @@ import {
   watchgetTravelCostsByLocation
 } from './travelCostsSaga';
 import {watchCreateTravelReason, watchEditTravelReason, watchDeleteTravelReason, watchViewTravelReasonDetails} from './travelReasonsSaga';
-import { watchAddRegionSagaAsync, watchFetchRegionDataSagaAsync } from './travelRegionSaga';
+import {
+  watchAddRegionSagaAsync,
+  watchFetchRegionDataSagaAsync,
+  watchEditRegionDataSagaAsync,
+  watchDeleteRegionDataSagaAsync
+} from './travelRegionSaga';
 import {
   watchFetchModificationForRequest,
   watchSubmitModificationRequest,
@@ -331,6 +336,8 @@ function* rootSaga() {
     watchGetOneChecklist(),
     watchDocumentTypesSaga(),
     watchDynamicChecklistSubmissions(),
+    watchEditRegionDataSagaAsync(),
+    watchDeleteRegionDataSagaAsync(),
   ]);
 }
 
