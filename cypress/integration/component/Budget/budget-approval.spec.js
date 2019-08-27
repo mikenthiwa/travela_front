@@ -16,13 +16,16 @@ describe('Budget check approvals', () => {
       cy.visit('/requests/budgets?page=2');
     });
 
-    it('should go back to page two when the back button is clicked', ()=>{
+    it('should go back to page two when the back button is clicked', () => {
       cy.server();
       cy.route('GET', `${baseAPI}/requests/*`,
         'fixture:approvals/OpenRequest');
       cy.authenticateUser();
-      cy.visit('/requests/my-verifications/AWQqIucjm').wait(3000);
-      cy.get('.header__link').click();
+      cy.visit('/requests/budgets/AWQqIucjm').wait(3000);
+      cy.get('.header__link').click({
+        multiple: true,
+        force: true
+      });
       cy.url().should('include', '/budgets?page=2');
     });
 
