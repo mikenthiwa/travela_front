@@ -7,7 +7,7 @@ describe('Requests', () => {
       cy.route('GET', `${baseAPI}/approvals?verified=true`,
         'fixture:requests/requests');
       cy.authenticateUser();
-      cy.visit('/requests/my-verifications?page=2');
+      cy.visit('/requests/my-verifications');
     });
 
     it('should go back to page two when the back button is clicked', ()=>{
@@ -16,8 +16,8 @@ describe('Requests', () => {
         'fixture:approvals/OpenRequest');
       cy.authenticateUser();
       cy.visit('/requests/my-verifications/AWQqIucjm').wait(3000);
-      cy.get('.header__link').click();
-      cy.url().should('include', '/my-verifications?page=2');
+      cy.get('.header__link').click({multiple: true, force: true});
+      cy.url().should('include', '/my-verifications');
     });
 
     it('displays the verifications header', () => {
@@ -25,7 +25,7 @@ describe('Requests', () => {
     });
 
     it('displays the All button', () => {
-      cy.get('#all-button').contains('All');
+      cy.get('button#all-button').contains('All');
     });
 
     it('displays the Pending Verifications button', () => {
@@ -47,7 +47,7 @@ describe('Requests', () => {
     it('displays a component that shows travel request for the admin verification', () => {
       cy.get(
         '.mdl-data-table .table__body > :nth-child(1) > :nth-child(3)'
-      ).contains('One-way');
+      ).contains('Return');
     });
 
     it('displays pagination Previous button', () => {
@@ -74,13 +74,16 @@ describe('Requests', () => {
     });
 
     it('displays the verifications header', () => {
-      cy.get('.header').contains('REQUEST #ysH3PCEg2');
+      cy.get('.progress-tags').contains('REQUEST #ysH3PCEg2');
     });
 
     it('displays Managers, Budget and Travel label', () => {
-      cy.get('.header > :nth-child(2)').contains('Manager\'s Approval');
-      cy.get('.header > :nth-child(3)').contains('Budget Check');
-      cy.get('.header > :nth-child(4)').contains('Travel Verification');
+      cy.get('.stage-container > :nth-child(1)').contains('Managers Approval');
+      cy.get('.stage-container> :nth-child(2)').contains('Budget Check');
+      cy.get('.stage-container> :nth-child(3)').contains('Travel Checklist Submission');
+      cy.get('.stage-container> :nth-child(4)').contains('Travel Verification');
+      
+
     });
   });
 });

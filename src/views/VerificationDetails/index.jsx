@@ -230,7 +230,7 @@ export const VerificationDetails = (type = 'verifications') => {
 
       const allowedRoles = TRAVEL_MANAGERS;
       const [{centers}] = roles.filter(role => allowedRoles.includes(role.roleName));
-      const locations = centers.length && centers.map(center => center.location);
+      const locations = (centers.length && centers.map(center => center.location)) || [];
       const origin = trips.length && trips[0].origin.split(', ').pop();
 
       const disabled = percentageCompleted !== 100 || status !== 'Approved' || !locations.includes(origin);
