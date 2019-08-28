@@ -9,13 +9,14 @@ checks:
       threshold: 35
   similar-code:
     config:
-      threshold: 70
+      threshold: 250
   identical-code:
     config:
-      threshold: 70
+      threshold: 200
 exclude_patterns:
   - "**/node_modules/"
   - "**/test/"
+  - "**/__test__/"
   - "**/__tests__/"
   - "**/tests/"
   - "/config/"
