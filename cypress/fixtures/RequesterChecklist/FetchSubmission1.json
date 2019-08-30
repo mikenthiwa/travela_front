@@ -1,0 +1,153 @@
+{
+  "success": true,
+  "message": "Successfully retrieved checklist",
+  "checklist": {
+      "id": "ko76Pshv3",
+      "isSubmitted": false,
+      "notifications": {},
+      "checklists": [
+          {
+              "tripId": "l3ri5zdrLY",
+              "id": 9,
+              "name": "Nigeria-Malaysia",
+              "config": [
+                  {
+                      "id": "WEFIRzMiC",
+                      "type": "image",
+                      "order": 1,
+                      "prompt": "This is what an e-passport looks like",
+                      "behaviour": {},
+                      "configuration": {
+                          "options": [
+                              {
+                                  "id": "LOdCObR0IH",
+                                  "name": "",
+                                  "behaviour": {}
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "id": "ZrFZ_IBKx",
+                      "type": "radio",
+                      "order": 2,
+                      "prompt": "Do you have a valid visa?",
+                      "behaviour": null,
+                      "configuration": {
+                          "options": [
+                              {
+                                  "id": "68AUQKhjXk",
+                                  "name": "Yes",
+                                  "behaviour": null
+                              },
+                              {
+                                  "id": "S0-Nn8WUs",
+                                  "name": "No",
+                                  "behaviour": {}
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "id": "nAX9s2GGA",
+                      "type": "dropdown",
+                      "order": 3,
+                      "prompt": "What is your relationship status?",
+                      "behaviour": null,
+                      "configuration": {
+                          "options": [
+                              {
+                                  "id": "M9r0wg44ah",
+                                  "name": "Single",
+                                  "behaviour": null
+                              },
+                              {
+                                  "id": "AdHLo5v4t",
+                                  "name": "Married",
+                                  "behaviour": {}
+                              },
+                              {
+                                  "id": "qFfE1r307",
+                                  "name": "Divorced",
+                                  "behaviour": {}
+                              },
+                              {
+                                  "id": "kDDPwhdQC",
+                                  "name": "Confused",
+                                  "behaviour": {}
+                              }
+                          ]
+                      }
+                  }
+              ],
+              "createdBy": "2410",
+              "createdAt": "2019-08-28T16:36:53.081Z",
+              "updatedAt": "2019-08-28T16:36:53.081Z",
+              "deletedAt": null,
+              "destinations": [
+                  {
+                      "id": 10,
+                      "checklistId": 9,
+                      "countryId": 9,
+                      "regionId": null,
+                      "createdAt": "2019-08-28T16:36:53.172Z",
+                      "updatedAt": "2019-08-28T16:36:53.172Z",
+                      "country": {
+                          "id": 9,
+                          "country": "Malaysia",
+                          "createdAt": "2019-08-28T16:36:53.121Z",
+                          "updatedAt": "2019-08-28T16:36:53.121Z",
+                          "regionId": 9999
+                      },
+                      "region": null
+                  }
+              ],
+              "origin": [
+                  {
+                      "id": 9,
+                      "checklistId": 9,
+                      "countryId": 101,
+                      "regionId": null,
+                      "createdAt": "2019-08-28T16:36:53.107Z",
+                      "updatedAt": "2019-08-28T16:36:53.107Z",
+                      "country": {
+                          "id": 101,
+                          "country": "Nigeria",
+                          "createdAt": "2019-10-05T09:37:11.170Z",
+                          "updatedAt": "2019-10-05T09:37:11.170Z",
+                          "regionId": 1002
+                      },
+                      "region": null
+                  }
+              ]
+          }
+      ],
+      "trips": [
+          {
+              "id": "l3ri5zdrLY",
+              "origin": "Lagos, Nigeria",
+              "destination": "Kuala Lumpur, Malaysia",
+              "departureDate": "2020-03-04",
+              "returnDate": "2020-03-07",
+              "checkStatus": "Not Checked In",
+              "checkInDate": null,
+              "checkOutDate": null,
+              "accommodationType": "Not Required",
+              "lastNotifyDate": null,
+              "notificationCount": 0,
+              "travelCompletion": "false",
+              "otherTravelReasons": null,
+              "createdAt": "2019-08-28T16:37:45.596Z",
+              "updatedAt": "2019-08-28T16:37:45.596Z",
+              "deletedAt": null,
+              "travelReasons": 12,
+              "bedId": null,
+              "requestId": "O1rrnVkmr",
+              "request": {
+                  "tripType": "return"
+              }
+          }
+      ],
+      "updatedAt": "2019-08-28T16:38:41.024Z"
+  }
+}

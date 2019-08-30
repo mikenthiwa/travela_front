@@ -1,0 +1,188 @@
+{
+  "success": true,
+  "message": "Successfully retrieved checklist",
+  "checklist": {
+      "id": "0yyrW10Xd",
+      "isSubmitted": false,
+      "notifications": {},
+      "checklists": [
+          {
+              "tripId": "7e0rBYxBu9",
+              "id": 7,
+              "name": "Nigeria-Egypt",
+              "config": [
+                  {
+                      "id": "vSB_sTLuV",
+                      "type": "image",
+                      "order": 1,
+                      "prompt": "This is what an e-passport looks like",
+                      "behaviour": {},
+                      "configuration": {
+                          "options": [
+                              {
+                                  "id": "jC2XfcePrQ",
+                                  "name": "",
+                                  "behaviour": {}
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "id": "nIsgU3fhg",
+                      "type": "radio",
+                      "order": 2,
+                      "prompt": "Do you have a valid passport?",
+                      "behaviour": null,
+                      "configuration": {
+                          "options": [
+                              {
+                                  "id": "d_yrnM634Z",
+                                  "name": "Yes",
+                                  "behaviour": {
+                                      "type": "UPLOAD_DOCUMENT",
+                                      "payload": "passport"
+                                  }
+                              },
+                              {
+                                  "id": "9gQLwSAB5",
+                                  "name": "No",
+                                  "behaviour": {
+                                      "type": "NOTIFY_EMAIL",
+                                      "payload": {
+                                          "template": "<name> from <location> center does not have a passport.",
+                                          "recipient": "jude.afam@andela.com"
+                                      }
+                                  }
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "id": "Jl876oc9W",
+                      "type": "checkbox",
+                      "order": 3,
+                      "prompt": "Select all that applies to you",
+                      "behaviour": null,
+                      "configuration": {
+                          "options": [
+                              {
+                                  "id": "o4MSl_Rkyp",
+                                  "name": "Good",
+                                  "behaviour": null
+                              },
+                              {
+                                  "id": "UkPH8c61C",
+                                  "name": "Bad",
+                                  "behaviour": {}
+                              },
+                              {
+                                  "id": "sc0A8WQcX",
+                                  "name": "Average",
+                                  "behaviour": {}
+                              },
+                              {
+                                  "id": "GHlWK3uF0",
+                                  "name": "Innocent",
+                                  "behaviour": {}
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "id": "iNzmJ6YES",
+                      "type": "dropdown",
+                      "order": 4,
+                      "prompt": "What is your marital status?",
+                      "behaviour": null,
+                      "configuration": {
+                          "options": [
+                              {
+                                  "id": "NHewyIq7HA",
+                                  "name": "Single",
+                                  "behaviour": null
+                              },
+                              {
+                                  "id": "HZ6t4CxOF",
+                                  "name": "Married",
+                                  "behaviour": {}
+                              },
+                              {
+                                  "id": "uFMaFXNX1",
+                                  "name": "Divorced",
+                                  "behaviour": {}
+                              }
+                          ]
+                      }
+                  }
+              ],
+              "createdBy": "2410",
+              "createdAt": "2019-08-27T12:47:43.044Z",
+              "updatedAt": "2019-08-27T12:47:43.044Z",
+              "deletedAt": null,
+              "destinations": [
+                  {
+                      "id": 8,
+                      "checklistId": 7,
+                      "countryId": 7,
+                      "regionId": null,
+                      "createdAt": "2019-08-27T12:47:43.167Z",
+                      "updatedAt": "2019-08-27T12:47:43.167Z",
+                      "country": {
+                          "id": 7,
+                          "country": "Egypt",
+                          "createdAt": "2019-08-27T12:47:43.111Z",
+                          "updatedAt": "2019-08-27T12:47:43.111Z",
+                          "regionId": 9999
+                      },
+                      "region": null
+                  }
+              ],
+              "origin": [
+                  {
+                      "id": 7,
+                      "checklistId": 7,
+                      "countryId": 101,
+                      "regionId": null,
+                      "createdAt": "2019-08-27T12:47:43.098Z",
+                      "updatedAt": "2019-08-27T12:47:43.098Z",
+                      "country": {
+                          "id": 101,
+                          "country": "Nigeria",
+                          "createdAt": "2019-10-05T09:37:11.170Z",
+                          "updatedAt": "2019-10-05T09:37:11.170Z",
+                          "regionId": 1002
+                      },
+                      "region": null
+                  }
+              ]
+          }
+      ],
+      "trips": [
+          {
+              "id": "7e0rBYxBu9",
+              "origin": "Lagos, Nigeria",
+              "destination": "Cairo, Egypt",
+              "departureDate": "2020-01-01",
+              "returnDate": "2020-01-05",
+              "checkStatus": "Not Checked In",
+              "checkInDate": null,
+              "checkOutDate": null,
+              "accommodationType": "Hotel Booking",
+              "lastNotifyDate": null,
+              "notificationCount": 0,
+              "travelCompletion": "false",
+              "otherTravelReasons": null,
+              "createdAt": "2019-08-27T12:48:54.716Z",
+              "updatedAt": "2019-08-27T12:48:54.716Z",
+              "deletedAt": null,
+              "travelReasons": 8,
+              "bedId": null,
+              "requestId": "5j8HPriWJ",
+              "request": {
+                  "tripType": "return"
+              }
+          }
+      ],
+      "updatedAt": "2019-08-27T12:49:52.141Z"
+  }
+}
