@@ -1,0 +1,733 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListDepartments /> renders appropriately 1`] = `
+<div
+  className="list-reasons"
+>
+  <div
+    className="table__container"
+  >
+    <table
+      className="mdl-data-table mdl-js-data-table readiness-table"
+    >
+      <thead>
+        <tr>
+          <th
+            className="mdl-data-table__cell--non-numeric table__head"
+          >
+            Departments
+          </th>
+          <th
+            className="mdl-data-table__cell--non-numeric table__head"
+          >
+            <span />
+          </th>
+          <th
+            className="mdl-data-table__cell--non-numeric table__head"
+          >
+            Parent Department
+          </th>
+          <th
+            className="mdl-data-table__cell--non-numeric table__head"
+          >
+            <span />
+          </th>
+          <th
+            className="mdl-data-table__cell--non-numeric table__head"
+          >
+            Created By
+          </th>
+          <th
+            className="mdl-data-table__cell--non-numeric table__head"
+          >
+            <span />
+          </th>
+          <th
+            className="mdl-data-table__cell--non-numeric table__head"
+          >
+            Created On
+          </th>
+          <th
+            className="mdl-data-table__cell--non-numeric table__head"
+          />
+        </tr>
+      </thead>
+      <tbody
+        className="table__body"
+      >
+        <tr
+          className="table__rows"
+        >
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            Operations
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            None
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            BambooHR
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            Invalid date
+          </td>
+          <td
+            className="table__data"
+          >
+            <span>
+              <i
+                className="fa fa-ellipsis-v on"
+                onClick={[Function]}
+                role="presentation"
+              />
+              <div
+                className="context-menu table__menu-container false"
+              >
+                <ul
+                  className="table__menu-list"
+                >
+                  <li
+                    className="edit"
+                    onClick={[Function]}
+                    role="presentation"
+                  >
+                    <span>
+                      Edit
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
+        </tr>
+        <tr
+          className="table__rows"
+        >
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            Technology
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            None
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            BambooHR
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            Invalid date
+          </td>
+          <td
+            className="table__data"
+          >
+            <span>
+              <i
+                className="fa fa-ellipsis-v on"
+                onClick={[Function]}
+                role="presentation"
+              />
+              <div
+                className="context-menu table__menu-container false"
+              >
+                <ul
+                  className="table__menu-list"
+                >
+                  <li
+                    className="edit"
+                    onClick={[Function]}
+                    role="presentation"
+                  >
+                    <span>
+                      Edit
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
+        </tr>
+        <tr
+          className="table__rows"
+        >
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            Success
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            None
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            BambooHR
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            Invalid date
+          </td>
+          <td
+            className="table__data"
+          >
+            <span>
+              <i
+                className="fa fa-ellipsis-v on"
+                onClick={[Function]}
+                role="presentation"
+              />
+              <div
+                className="context-menu table__menu-container false"
+              >
+                <ul
+                  className="table__menu-list"
+                >
+                  <li
+                    className="edit"
+                    onClick={[Function]}
+                    role="presentation"
+                  >
+                    <span>
+                      Edit
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
+        </tr>
+        <tr
+          className="table__rows"
+        >
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            Facilities
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            None
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            BambooHR
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            Invalid date
+          </td>
+          <td
+            className="table__data"
+          >
+            <span>
+              <i
+                className="fa fa-ellipsis-v on"
+                onClick={[Function]}
+                role="presentation"
+              />
+              <div
+                className="context-menu table__menu-container false"
+              >
+                <ul
+                  className="table__menu-list"
+                >
+                  <li
+                    className="edit"
+                    onClick={[Function]}
+                    role="presentation"
+                  >
+                    <span>
+                      Edit
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
+        </tr>
+        <tr
+          className="table__rows"
+        >
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            Partner engineering
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            None
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            BambooHR
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            Invalid date
+          </td>
+          <td
+            className="table__data"
+          >
+            <span>
+              <i
+                className="fa fa-ellipsis-v on"
+                onClick={[Function]}
+                role="presentation"
+              />
+              <div
+                className="context-menu table__menu-container false"
+              >
+                <ul
+                  className="table__menu-list"
+                >
+                  <li
+                    className="edit"
+                    onClick={[Function]}
+                    role="presentation"
+                  >
+                    <span>
+                      Edit
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
+        </tr>
+        <tr
+          className="table__rows"
+        >
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            Tdd
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            None
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            BambooHR
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            Invalid date
+          </td>
+          <td
+            className="table__data"
+          >
+            <span>
+              <i
+                className="fa fa-ellipsis-v on"
+                onClick={[Function]}
+                role="presentation"
+              />
+              <div
+                className="context-menu table__menu-container false"
+              >
+                <ul
+                  className="table__menu-list"
+                >
+                  <li
+                    className="edit"
+                    onClick={[Function]}
+                    role="presentation"
+                  >
+                    <span>
+                      Edit
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
+        </tr>
+        <tr
+          className="table__rows"
+        >
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            Apprenticeship
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            None
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            BambooHR
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            Invalid date
+          </td>
+          <td
+            className="table__data"
+          >
+            <span>
+              <i
+                className="fa fa-ellipsis-v on"
+                onClick={[Function]}
+                role="presentation"
+              />
+              <div
+                className="context-menu table__menu-container false"
+              >
+                <ul
+                  className="table__menu-list"
+                >
+                  <li
+                    className="edit"
+                    onClick={[Function]}
+                    role="presentation"
+                  >
+                    <span>
+                      Edit
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
+        </tr>
+        <tr
+          className="table__rows"
+        >
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            Finance
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            None
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            BambooHR
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            Invalid date
+          </td>
+          <td
+            className="table__data"
+          >
+            <span>
+              <i
+                className="fa fa-ellipsis-v on"
+                onClick={[Function]}
+                role="presentation"
+              />
+              <div
+                className="context-menu table__menu-container false"
+              >
+                <ul
+                  className="table__menu-list"
+                >
+                  <li
+                    className="edit"
+                    onClick={[Function]}
+                    role="presentation"
+                  >
+                    <span>
+                      Edit
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
+        </tr>
+        <tr
+          className="table__rows"
+        >
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            Travel
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            None
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            BambooHR
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            Invalid date
+          </td>
+          <td
+            className="table__data"
+          >
+            <span>
+              <i
+                className="fa fa-ellipsis-v on"
+                onClick={[Function]}
+                role="presentation"
+              />
+              <div
+                className="context-menu table__menu-container false"
+              >
+                <ul
+                  className="table__menu-list"
+                >
+                  <li
+                    className="edit"
+                    onClick={[Function]}
+                    role="presentation"
+                  >
+                    <span>
+                      Edit
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
+        </tr>
+        <tr
+          className="table__rows"
+        >
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            Marketing
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            None
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            BambooHR
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            Invalid date
+          </td>
+          <td
+            className="table__data"
+          >
+            <span>
+              <i
+                className="fa fa-ellipsis-v on"
+                onClick={[Function]}
+                role="presentation"
+              />
+              <div
+                className="context-menu table__menu-container false"
+              >
+                <ul
+                  className="table__menu-list"
+                >
+                  <li
+                    className="edit"
+                    onClick={[Function]}
+                    role="presentation"
+                  >
+                    <span>
+                      Edit
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
+        </tr>
+        <tr
+          className="table__rows"
+        >
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            Communications
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data readiness__cell-name"
+          >
+            None
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            BambooHR
+          </td>
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          />
+          <td
+            className="mdl-data-table__cell--non-numeric table__data"
+          >
+            Invalid date
+          </td>
+          <td
+            className="table__data"
+          >
+            <span>
+              <i
+                className="fa fa-ellipsis-v on"
+                onClick={[Function]}
+                role="presentation"
+              />
+              <div
+                className="context-menu table__menu-container false"
+              >
+                <ul
+                  className="table__menu-list"
+                >
+                  <li
+                    className="edit"
+                    onClick={[Function]}
+                    role="presentation"
+                  >
+                    <span>
+                      Edit
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

@@ -35,6 +35,7 @@ import ConnectedFlightEstimate from '../views/FlightEstimates';
 import ConnectedChecklistWizardInterface from '../views/ChecklistWizardInterface';
 import ConnectedUserChecklist from '../views/UserChecklist';
 import ConnectedDocumentTypes from '../views/DocumentTypes';
+import ConnectedDepartments from '../views/Departments';
 
 
 import {
@@ -82,6 +83,7 @@ const routes = {
   '/settings/reminders/edit/:conditionId': [ConnectedCreateReminder, TRAVEL_MANAGERS],
   '/settings/reminders': [ConnectedReminders,TRAVEL_MANAGERS],
   '/settings/travel-reason': [ConnectedTravelReasons, TRAVEL_MANAGERS],
+  '/settings/departments': [ConnectedDepartments, TRAVEL_MANAGERS],
   '/help': [ConnectedHelpers],
   '/settings/travel-region': [ConnectedTravelRegion, TRAVEL_MANAGERS],
   '/settings/travel-region/:regionId': [ConnectedCountries, TRAVEL_MANAGERS],

@@ -95,18 +95,18 @@ export default class MultipleChoiceDropdown extends Component {
         className={`multichoice-dropdown ${open ? 'open': 'closed'}`}
       >
         <div className="style-dropdown">
-          <input 
-            type="text" value={value} 
+          <input
+            type="text" value={value}
             ref={this.input}
             id="flight-input"
-            onChange={onChange} 
+            onChange={onChange}
             onClick={this.handleClick}
             autoComplete="off"
           />
-          <img 
-            src={selectDropdownIcon} alt="icn" 
-            onClick={this.handleClick} 
-            role="presentation" 
+          <img
+            src={selectDropdownIcon} alt="icn"
+            onClick={this.handleClick}
+            role="presentation"
           />
         </div>
         {this.renderDropdown()}

@@ -190,6 +190,13 @@ import { watchPostNoPassportNotification } from './noPassportSaga';
 import watchCrashReport from "./errorBoundarySaga";
 import watchDocumentTypesSaga from './DocumentTypesSaga';
 import watchDynamicChecklistSubmissions from './dynamicChecklistSubmissionSaga';
+import {
+  watchAddDepartments,
+  watchDeleteDepartment,
+  watchEditDepartment,
+  watchGetAllDepartments,
+  watchRetrieveDepartment
+} from './departmentSaga';
 
 
 function* rootSaga() {
@@ -334,6 +341,11 @@ function* rootSaga() {
     watchPostNoPassportNotification(),
     watchCrashReport(),
     watchGetOneChecklist(),
+    watchAddDepartments(),
+    watchGetAllDepartments(),
+    watchEditDepartment(),
+    watchDeleteDepartment(),
+    watchRetrieveDepartment(),
     watchDocumentTypesSaga(),
     watchDynamicChecklistSubmissions(),
     watchEditRegionDataSagaAsync(),
@@ -341,4 +353,4 @@ function* rootSaga() {
   ]);
 }
 
-export default rootSaga; 
+export default rootSaga;

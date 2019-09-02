@@ -67,6 +67,7 @@ let props = {
   createNewRequest: jest.fn(),
   getOccupation: jest.fn(),
   getUserData: jest.fn(),
+  getAllDepartment: jest.fn(),
   loading: false,
   errors: [],
   page: 'welcome-page',

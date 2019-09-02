@@ -51,6 +51,7 @@ let props = {
   fetchUserRequests: sinon.spy(() => Promise.resolve()),
   fetchRoleUsers: sinon.spy(() => Promise.resolve()),
   updateUserProfile: sinon.spy(() => Promise.resolve()),
+  getAllDepartment: sinon.spy(() => Promise.resolve()),
   isLoading: false,
   history: {
     push: jest.fn()
@@ -74,7 +75,7 @@ let props = {
     params: { requestId: 'xDh20btGx' }
   },
   fetchEditRequest: jest.fn(),
- 
+
 };
 
 const initialState = {
@@ -118,7 +119,7 @@ describe('<Requests>', () => {
     wrapper.unmount();
   });
 
-  
+
 
   it('calls the componentDidMount method', () => {
     const spy = sinon.spy(UserOnboardingRequestPage.prototype, 'componentDidMount');
@@ -143,7 +144,7 @@ describe('<Requests>', () => {
           <UserOnboardingRequestPage {...props} />
         </MemoryRouter>
       </Provider>);
-    
+
     expect(wrapper.length).toBe(1);
     wrapper.unmount();
   });

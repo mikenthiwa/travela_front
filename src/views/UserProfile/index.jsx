@@ -7,7 +7,7 @@ import updateUserProfile from '../../redux/actionCreator/userProfileActions';
 import ProfileForm from '../../components/Forms/ProfileForm';
 import Base from '../Base';
 import { fetchRoleUsers } from '../../redux/actionCreator/roleActions';
-import { getUserData } from '../../redux/actionCreator/userActions';
+import { getUserData, getAllDepartment } from '../../redux/actionCreator/userActions';
 import { fetchCenters } from '../../redux/actionCreator/centersActions';
 import { getOccupation } from '../../redux/actionCreator/occupationActions';
 
@@ -19,16 +19,18 @@ class UserProfile extends Base {
       fetchRoleUsers,
       getOccupation,
       fetchCenters,
+      getAllDepartment
     } = this.props;
 
     fetchRoleUsers(53019);
     fetchCenters();
     getOccupation();
+    getAllDepartment();
   }
 
 
   render() {
-    const { roleUsers, updateUserProfile, user, occupations,
+    const { roleUsers, updateUserProfile, user, occupations, departments,
       fetchUserData, centers, fetchPostUserData, isUpdating } = this.props;
     return (
       <Fragment>
@@ -36,6 +38,7 @@ class UserProfile extends Base {
         <div className="main">
           <div className="main--user_profile">
             <ProfileForm
+              departments={departments}
               managers={roleUsers}
               occupations={occupations}
               updateUserProfile={updateUserProfile}
@@ -63,7 +66,7 @@ export const mapStateToProps = ({ user, role, centers, occupations}) => ({
   centers,
   fetchUserData: user.getUserData,
   fetchPostUserData: user.postUserData,
-  isUpdating: user.isUpdating
+  isUpdating: user.isUpdating,
 });
 
 const actionCreators = {
@@ -71,7 +74,8 @@ const actionCreators = {
   fetchRoleUsers,
   getUserData,
   fetchCenters,
-  getOccupation
+  getOccupation,
+  getAllDepartment
 };
 
 export default connect(

@@ -6,6 +6,7 @@ describe('<ConfirmPersonalDetailsFieldset/>',()=> {
   const props = {
     managers:['Mananger1'],
     occupations:['Software Developer'],
+    departments: [{id:'dept', text:'finance', parentId: null}],
     collapsible: jest.fn(),
     collapse: false,
     userDetails: jest.fn(),
@@ -32,29 +33,29 @@ describe('<ConfirmPersonalDetailsFieldset/>',()=> {
     const wrapper = shallow(<ConfirmPersonalDetailsFieldset {...props} />);
     wrapper.find('Input#your-role').simulate('change', event);
     expect(wrapper.instance().props.onChangeAutoSuggestion).toHaveBeenCalledTimes(1);
-   
+
   });
   it('tests onChangeAutoSuggestion inputField for manager', () => {
     const event = { target: { value: 'yes' } };
     const wrapper = shallow(<ConfirmPersonalDetailsFieldset {...props} />);
     wrapper.find('Input#your-manager').simulate('change', event);
     expect(wrapper.instance().props.onChangeAutoSuggestion).toHaveBeenCalledTimes(2);
-   
+
   });
-  
+
   it('tests onChangeAutoSuggestion inputField for Location', () => {
     const event = { target: { value: 'yes' } };
     const wrapper = shallow(<ConfirmPersonalDetailsFieldset {...props} />);
     wrapper.find('Input#user-location').simulate('change', event);
     expect(wrapper.instance().props.onChangeAutoSuggestion).toHaveBeenCalledTimes(3);
-   
+
   });
   it('tests onChangeAutoSuggestion inputField for department', () => {
     const event = { target: { value: 'yes' } };
     const wrapper = shallow(<ConfirmPersonalDetailsFieldset {...props} />);
     wrapper.find('Input#your-department').simulate('change', event);
-    expect(wrapper.instance().props.onChangeAutoSuggestion).toHaveBeenCalledTimes(4);
-   
+    expect(wrapper.instance().props.onChangeAutoSuggestion).toHaveBeenCalledTimes(3);
+
   });
   it('invalidates wrong input', () => {
     const invalidProps = {

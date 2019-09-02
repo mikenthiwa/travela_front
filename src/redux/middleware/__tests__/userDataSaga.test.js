@@ -29,7 +29,7 @@ const thirdResponse = {
   data: {
     result: [
       {fullName:'', email: 'travela@andela.com'}]
-    
+
   }
 };
 
@@ -37,7 +37,7 @@ const departmentResponse = {
   data: {
     result: [
       { id: 1, name:'Fellow'} ]
-    
+
   }
 };
 
@@ -114,7 +114,7 @@ describe('User Saga', () => {
 
   describe('Fetch user emails saga', () => {
     it('successfully runs saga to fetch user emails', () => {
-      
+
       return expectSaga(watchFetchUsersEmail)
         .provide([[call(UserAPI.getAllUsersEmail), thirdResponse]])
         .put({
@@ -127,8 +127,8 @@ describe('User Saga', () => {
         .silentRun();
     });
 
-  
-    
+
+
     it('fails to get user emails', () => {
       return expectSaga(watchFetchUsersEmail, UserAPI)
         .provide([[call(UserAPI.getAllUsersEmail), throwError(error)]])
@@ -149,15 +149,15 @@ describe('User Saga', () => {
         .provide([[call(UserAPI.getAllDepartment), departmentResponse]])
         .put({
           type: 'GET_ALL_DEPARTMENT_SUCCESS',
-          response: [ { id: 'Fellow', text: 'Fellow' } ]
+          response: [ { id: 'Fellow', text: 'Fellow', parentId: undefined, parentName: null } ]
         })
         .dispatch({
           type: 'GET_ALL_DEPARTMENT',
         })
         .silentRun();
     });
-  
-    
+
+
     it('fails to get user emails', () => {
       return expectSaga(fetchDepartmentDataSaga, UserAPI)
         .provide([[call(UserAPI.getAllDepartment), throwError(error)]])

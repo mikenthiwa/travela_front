@@ -43,6 +43,7 @@ import checklistWizard from './checklistWizard';
 import noPassport from './noPassport';
 import documentTypes from './documentTypes';
 import dynamicChecklistSubmission from './dynamicChecklistSubmission';
+import department from './departments';
 
 const rootReducer = combineReducers({
   auth,
@@ -89,6 +90,7 @@ const rootReducer = combineReducers({
   noPassport,
   documentTypes,
   dynamicChecklistSubmission,
+  department
 });
 
 export default rootReducer;

@@ -91,7 +91,7 @@ class ProfileForm extends PureComponent {
     }
     errorMessage = {role: ' No role with the name exists'};
     if (type === 'role'){
-      this.changeState(occupationInputState, occupationErrorMessageState, errorMessage, value); 
+      this.changeState(occupationInputState, occupationErrorMessageState, errorMessage, value);
     }
   };
 
@@ -153,11 +153,12 @@ class ProfileForm extends PureComponent {
 
   render() {
     const { values, errors, hasBlankFields } = this.state;
-    const { managers, centers, isUpdating } = this.props;
+    const { managers, centers, isUpdating, departments, } = this.props;
     return (
       <FormContext targetForm={this} validatorName="validate" values={values} errors={errors}>
         <form onSubmit={this.submitProfileForm} className="new-profile">
           <ProfileDetails
+            departments={departments}
             values={values}
             onChangeAutoSuggestion={this.onChangeAutoSuggestion}
             managers={managers}
@@ -185,6 +186,7 @@ ProfileForm.propTypes = {
   updateUserProfile: PropTypes.func.isRequired,
   managers: PropTypes.array,
   occupations: PropTypes.array,
+  departments: PropTypes.array,
   user: PropTypes.object.isRequired,
   userData: PropTypes.object.isRequired,
   centers: PropTypes.array,
@@ -198,6 +200,7 @@ ProfileForm.defaultProps = {
   userDataUpdate: [],
   managers: [],
   occupations: [],
+  departments: [],
   centers: [],
   isUpdating: false
 };

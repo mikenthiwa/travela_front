@@ -72,7 +72,11 @@ export function* fetchDepartmentDataSaga() {
   try {
     const data = yield call(UserAPI.getAllDepartment);
     const allDepartments = data.data.result.map((dept, _) => ({
-      id: dept.name, text: dept.name}));
+      id: dept.name,
+      text: dept.name,
+      parentId: dept.parentDepartment,
+      parentName: dept.parentDepartment? dept.parentDepartments.name : null
+    }));
     yield put(getAllDepartmentSuccess(allDepartments));
   } catch (error) {
     const errorMessage = apiErrorHandler(error);

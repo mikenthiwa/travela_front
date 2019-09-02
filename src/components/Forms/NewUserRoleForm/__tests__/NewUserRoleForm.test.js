@@ -26,6 +26,7 @@ describe('<NewUserRoleForm />', () => {
       items: [],
       item: 'lol',
     },
+    departments: [{name: 'Technology', id: 2, parentId: null}],
     userDetail: {
       email: 'tomato@andela.com',
       id: 1
@@ -190,7 +191,7 @@ describe('<NewUserRoleForm />', () => {
       addItem: jest.fn(() => {}),
       hasBlankFields: false,
       removeItem: jest.fn(() => {}),
-      departments: [{id:'dept', text:'finance'}],
+      departments: [{id:'dept', text:'finance', parentId: null}],
       allMails: [{id:'travela', text:'travela@travela.com'}],
     };
 
@@ -201,7 +202,7 @@ describe('<NewUserRoleForm />', () => {
     it('renders correctly', () => {
       expect(wrapper).toMatchSnapshot();
     });
-    
+
     it('should render all centers when role is super admin', () => {
       const wrapper = shallow(
       <PersonalDetails {...{...props, roleName: 'Super Administrator', myTitle: 'Add User',}} />);

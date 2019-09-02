@@ -28,7 +28,7 @@ class UserOnboarding extends Component {
     const managerChoices = managers.map(manager => manager.fullName);
     values.manager !== ''
       && managerChoices === [];
-    
+
   }
 
   setUp = () => {
@@ -109,7 +109,7 @@ class UserOnboarding extends Component {
     }
 
   }
-  
+
   changeState = (InputState, ErrorMessageState, errorMessage, value) => {
     const { occupations, managers } = this.props;
     const getUser = this.getPersonalDetails();
@@ -174,7 +174,7 @@ class UserOnboarding extends Component {
       return { ...prevState, errors: { ...newError } };
     });
   };
-  
+
 
   nextStep = (e) => {
     e.preventDefault();
@@ -190,7 +190,7 @@ class UserOnboarding extends Component {
           currentTab: currentTab + 1,
           currentPage: currentPage + 1
         });
-      } 
+      }
     }
   };
 
@@ -203,11 +203,13 @@ class UserOnboarding extends Component {
 
   renderPersonalDetailsFieldset = () => {
     const { collapse, title, position, line, values, errors } = this.state;
-    const { managers, occupations, creatingRequest } = this.props;
+    const { managers, occupations, creatingRequest, departments } = this.props;
+
     const getUserDetails = this.getPersonalDetails();
     return (
       <div>
         <ConfirmPersonalDetailsFieldset
+          departments={departments}
           values={values}
           savePersonalDetails={this.savePersonalDetails}
           onChangeAutoSuggestion={this.onChangeAutoSuggestion}
@@ -225,7 +227,7 @@ class UserOnboarding extends Component {
           nextStep={this.nextStep}
         />
       </div>
-      
+
     );
   };
 
@@ -255,9 +257,9 @@ class UserOnboarding extends Component {
   renderUploadPassportPage = () => {
     const { history } = this.props;
     return (
-      <div> 
+      <div>
         <UploadPassportPage history={history} />
-        
+
         <button
           type="button"
           className="back-btn-travel-document back-btn--active"
@@ -265,14 +267,14 @@ class UserOnboarding extends Component {
         >
        Back
         </button>
-        
+
       </div>
     );
   }
 
   renderForm = () => {
     const {
-      errors, values, 
+      errors, values,
       steps, currentPage, currentTab,
     } = this.state;
     const {
@@ -301,9 +303,9 @@ class UserOnboarding extends Component {
           </form>
         </FormContext>
       </div>
-  
+
     );
-    
+
   };
   render() {
     return <div>{this.renderForm()}</div>;
@@ -315,6 +317,7 @@ UserOnboarding.propTypes = {
   updateUserProfile: PropTypes.func.isRequired,
   userData: PropTypes.object,
   managers: PropTypes.array,
+  departments: PropTypes.array,
   occupations: PropTypes.array,
   creatingRequest: PropTypes.bool,
   editing: PropTypes.bool,
@@ -329,6 +332,7 @@ UserOnboarding.defaultProps = {
   creatingRequest: false,
   editing: false,
   managers: [],
+  departments: [],
   occupations: [],
   userData: {},
   userDataUpdate: [],

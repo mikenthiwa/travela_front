@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddDepartmentForm /> renders appropriately 1`] = `
+<form
+  className="new-request"
+  key=".0"
+  onSubmit={[Function]}
+>
+  <fieldset
+    className="add-checklist"
+  >
+    <div
+      className="input-group"
+    >
+      <div
+        className="form-input  "
+      >
+        <label
+          htmlFor="name"
+        >
+          Name
+          <span
+            style={
+              Object {
+                "color": "red",
+              }
+            }
+          >
+             * 
+          </span>
+        </label>
+        <input
+          autoComplete="off"
+          className=" "
+          label="Name"
+          name="name"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="text"
+          value="Operations"
+        />
+        <span
+          className="error"
+        />
+      </div>
+      <div
+        className="form-input profile_dropdown no-disable manager "
+      >
+        <label
+          htmlFor="parentDepartment"
+        >
+          Parent Department
+        </label>
+        <div
+          style={
+            Object {
+              "position": "relative",
+            }
+          }
+        >
+          <div
+            className="value"
+            style={
+              Object {
+                "width": "",
+              }
+            }
+          >
+            <input
+              autoComplete="off"
+              choices={
+                Array [
+                  "Operations",
+                ]
+              }
+              className="occupationInput"
+              disabled={false}
+              label="Parent Department"
+              name="role"
+              onChange={[Function]}
+              required={false}
+              size=""
+              type="text"
+              value="Andela"
+            />
+          </div>
+        </div>
+        <span
+          className="error"
+        />
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <div
+      className="submit-area delete-checklist-item__right"
+    >
+      <button
+        className="bg-btn bg-btn--inactive"
+        id="cancel"
+        onClick={[Function]}
+        type="button"
+      >
+        Cancel
+      </button>
+      <button
+        className="bg-btn bg-btn--active"
+        disabled={true}
+        type="submit"
+      >
+        <undefined />
+      </button>
+    </div>
+  </fieldset>
+</form>
+`;

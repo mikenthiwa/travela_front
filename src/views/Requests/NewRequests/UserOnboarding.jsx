@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Base from '../../Base';
 import { UserOnboarding } from '../../../components/Forms';
 import updateUserProfile from '../../../redux/actionCreator/userProfileActions';
+import { getAllDepartment } from '../../../redux/actionCreator/userActions';
 import { fetchRoleUsers } from '../../../redux/actionCreator/roleActions';
 import { getOccupation } from '../../../redux/actionCreator/occupationActions';
 import Preloader from '../../../components/Preloader/Preloader';
@@ -22,18 +23,19 @@ export const UserOnboardingRequestPage = (editing = false) => {
 
     componentDidMount() {
       const {
-        fetchRoleUsers,
+        fetchRoleUsers, getAllDepartment,
         match, getOccupation
       } = this.props;
       const {params: {request_id}} = match;
       getOccupation();
+      getAllDepartment();
       fetchRoleUsers(53019);
     }
 
     render() {
       const { updateUserProfile, userData, user,
         loading, errors, roleUsers, requestOnEdit, occupations,
-        creatingRequest, history,
+        creatingRequest, history, departments,
         fetchingRequest, editingRequest,
       } = this.props;
       const { url } = this.state;
@@ -50,7 +52,7 @@ export const UserOnboardingRequestPage = (editing = false) => {
             <UserOnboarding
               updateUserProfile={updateUserProfile} user={user} errors={errors}
               userData={userData && userData.result} occupations={occupations}
-              loading={loading} managers={roleUsers}
+              loading={loading} managers={roleUsers} departments={departments}
               creatingRequest={creatingRequest}
               requestOnEdit={requestOnEdit}
               history={history}
@@ -78,6 +80,7 @@ const actions = () => ({
   updateUserProfile,
   fetchRoleUsers,
   getOccupation,
+  getAllDepartment
 });
 
 export default (editing = true) => {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InputRenderer from '../../FormsAPI/Input/confirmDetails';
 import * as formMetadata from '../../FormsMetadata/NewRequestFormMetadata';
+import DepartmentHelper from '../../../../helper/departmentsHelper';
 import ButtonLoadingIcon from '../../ButtonLoadingIcon';
 
 class ConfirmPersonalDetailsFieldset extends Component {
@@ -25,12 +26,14 @@ class ConfirmPersonalDetailsFieldset extends Component {
   renderfields = collapse => {
     const { disableInputs } = this.state;
     const { value, managers, occupations, onChangeAutoSuggestion,
-      hasBlankFields, loading, send, getUserDetails, nextStep } = this.props;
+      hasBlankFields, loading, send, getUserDetails, nextStep, departments } = this.props;
     const userDetails = Object.keys(getUserDetails).map((key) => {
       return [(key), getUserDetails[key]];
     });
+
     const manageDepartment = userDetails.filter(userDetail => userDetail.includes('department'));
     const manageLocation = userDetails.filter(userDetail => userDetail.includes('location'));
+    const departmentOptions = DepartmentHelper.setDepartmentDropdownOptions(departments);
     const departmentChoices = manageDepartment.map(department => department[1]);
     const locationChoices = manageLocation.map(location => location[1]);
     const managerChoices = managers.map(manager => manager.fullName);
@@ -53,12 +56,11 @@ class ConfirmPersonalDetailsFieldset extends Component {
             </div>
             <div className="input-group-details mdl-grid">
               <div className="spaces-right">
-                {renderInput('department', 'filter-dropdown-select', {
-                  choices: departmentChoices,
+                {renderInput('department', 'select-choice-dropdown', {
+                  options: departmentOptions,
                   disabled: false, size: value,
                   className: 'request_dropdown your-department', required: false,
                   id: 'your-department',
-                  onChange: (e) => onChangeAutoSuggestion('department', e)
                 })}
               </div>
               <div className="spaces-right">
@@ -131,13 +133,14 @@ const managers = PropTypes.array;
 const getUserDetails = PropTypes.object;
 const collapse = PropTypes.bool;
 const values = PropTypes.object;
-const onChangeAutoSuggestion = PropTypes.func; 
+const onChangeAutoSuggestion = PropTypes.func;
 const occupations = PropTypes.array;
 
 ConfirmPersonalDetailsFieldset.propTypes = {
   nextStep: PropTypes.func,
   occupations: occupations.isRequired,
   managers: managers.isRequired,
+  departments: managers.isRequired,
   getUserDetails: getUserDetails.isRequired,
   collapse: collapse.isRequired,
   onChangeAutoSuggestion: onChangeAutoSuggestion.isRequired,

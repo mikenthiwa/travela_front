@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Departments /> renders appropriately 1`] = `
+Array [
+  <div
+    className="reasons-header"
+>
+    <div
+        className="PageHeader"
+    >
+        <div>
+            <span
+                className="title"
+            >
+                DEPARTMENTS
+            </span>
+        </div>
+        <div>
+            <button
+                className="action-btn btn-new-request"
+                id="actionButton"
+                onClick={[Function]}
+                type="button"
+            >
+                Add Department
+            </button>
+        </div>
+    </div>
+</div>,
+  "",
+  Array [
+    <div
+      className="no-templates list-templates "
+>
+      <div
+            className="content"
+      >
+            <img
+                  alt=""
+                  src="no-document.svg"
+            />
+            <p>
+                  No Departments have been created
+            </p>
+      </div>
+</div>,
+    <div
+      className="reminder-email-templates"
+>
+      <div
+            className="pagination"
+      >
+            <button
+                  className="pagination__button"
+                  disabled={true}
+                  id="previous-button"
+                  onClick={[Function]}
+                  type="button"
+            >
+                  <span
+                        className=""
+                  >
+                        Previous
+                  </span>
+                  <span
+                        className=" mdl-cell--hide-desktop mdl-cell--hide-tablet"
+                  >
+                        Previous
+                  </span>
+            </button>
+            <div
+                  className="pagination__items"
+            >
+                  <span
+                        className="pagination__page"
+                  >
+                        Page
+                  </span>
+                  <div
+                        className="pagination__current-page"
+                        id="current-page"
+                  >
+                        1
+                  </div>
+                  of
+                  <span
+                        className="pagination__all-pages"
+                        id="page-count"
+                  >
+                        1
+                  </span>
+            </div>
+            <button
+                  className="pagination__button"
+                  disabled={true}
+                  id="next-button"
+                  onClick={[Function]}
+                  type="button"
+            >
+                  <span
+                        className=""
+                  >
+                        Next
+                  </span>
+                  <span
+                        className=" mdl-cell--hide-desktop mdl-cell--hide-tablet"
+                  >
+                        Next
+                  </span>
+            </button>
+      </div>
+</div>,
+  ],
+]
+`;

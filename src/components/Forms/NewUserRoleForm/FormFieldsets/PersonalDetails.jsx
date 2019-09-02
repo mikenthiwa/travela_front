@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import InputRenderer from '../../FormsAPI';
 import * as formMetadata from '../../FormsMetadata/NewUserRoleForm';
+import DepartmentHelper from '../../../../helper/departmentsHelper';
 import './PersonalDetails.scss';
 
 class PersonalDetailsFiedset extends Component {
@@ -9,8 +10,9 @@ class PersonalDetailsFiedset extends Component {
     const { roleName, values, allMails, addItem, removeItem, myTitle, departments, centers } = this.props;
     const emails = allMails.map(email => email.text);
     const allDepartments = departments.map(dept => dept.text);
+    const departmentOptions = DepartmentHelper.setDepartmentDropdownOptions(departments);
     const allCenters = centers.map(center => center.location);
-    const dropDown = roleName === 'Budget Checker' ? allDepartments : allCenters;
+    const dropDown = roleName === 'Budget Checker' ? departmentOptions : allCenters;
     const disabled = myTitle.split(' ')[0] === 'Edit';
     formMetadata.dropdownSelectOptions.email = emails;
     formMetadata.dropdownSelectOptions.item = dropDown;
@@ -19,11 +21,12 @@ class PersonalDetailsFiedset extends Component {
     const displayInput =  (label) => (
       <div className="size_in">
         <div className="add_dept">
-          {renderInput('item', 'filter-dropdown-select',
+          {renderInput('item', label === 'Departments' ? 'select-choice-dropdown' : 'filter-dropdown-select',
             {
               className: 'department_dropdown',
               size: '',
-              label: label
+              label: label,
+              options: label === 'Departments' ? departmentOptions : null
             })
           }
         </div>
@@ -42,7 +45,7 @@ class PersonalDetailsFiedset extends Component {
         Centers
         <div className="btn-group center-button-group">
           {allCenters.map(center => (
-            <button 
+            <button
               key={Math.floor((Math.random() * 5000) + 1)}
               type="button"
               className="center_buttons">
@@ -66,7 +69,7 @@ class PersonalDetailsFiedset extends Component {
 
           <div>
             {roleName === 'Budget Checker' ?
-              displayInput('Departments') : 
+              displayInput('Departments') :
               roleName === 'Super Administrator' && myTitle === 'Add User' ?
                 displayDefaultCenters() :
                 !(/Manager|Requester/.test(roleName)) && displayInput('Country')

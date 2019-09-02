@@ -8,9 +8,10 @@ import {
   NumberInput,
   filterDropdownSelect,
   CheckBox,
-  TextArea, 
+  TextArea,
   TagsInput,
   MultipleChoiceDropdown,
+  SelectChoiceDropdown,
   OnboardingButtonToggler,
 } from './InputFields';
 import createEventHandlersFor from '../formEventHandlers';
@@ -82,6 +83,13 @@ class Input extends PureComponent {
           onBlur: eventHandlers.handleInputBlur
         };
         return MultipleChoiceDropdown;
+      case 'select-choice-dropdown':
+        this.newProps = {
+          ...this.props,
+          onChange: onChange || eventHandlers.handleInputChange,
+          onBlur: eventHandlers.handleInputBlur
+        };
+        return SelectChoiceDropdown;
       default:
         this.newProps = {
           ...this.props,
