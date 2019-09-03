@@ -35,10 +35,9 @@
       opacity: 1;
       min-height: 100px;
       max-height: 300px;
-
+      overflow: scroll;
       .selectChoice-dropdown__dropdown {
         &__menu, &__list {
-          margin-top: 10px;
           opacity: 1;
         }
       }
@@ -67,6 +66,7 @@
         cursor: pointer;
         margin-bottom: 0.5em;
         transition: 0.5s all;
+        width: 85%;
         &.active {
           background: rgba(108, 108, 108, 0.2);
           border-top-right-radius: 10px;
