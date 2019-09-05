@@ -1,5 +1,4 @@
 import { put, takeLatest, call, throttle } from 'redux-saga/effects';
-import toast from 'toastr';
 import {
   POST_CHECKLIST_SUBMISSION,
   FETCH_CHECKLIST_SUBMISSION,
@@ -33,7 +32,6 @@ export function* postChecklistSubmissionSaga({ payload: { requestId, checklist }
   } catch(error) {
     const errorMessage = apiErrorHandler(error);
     yield put(postChecklistSubmissionFailure(errorMessage));
-    toast.error('checklist submission failed');
   }
 }
 

@@ -105,7 +105,19 @@ export class UserChecklist extends Component {
   
   render() {
 
-    const { isLoading, fullName, checklists, trips, isSaving, modal, closeModal, isSubmitted, completionCount, preview } = this.props;
+    const {
+      isLoading,
+      fullName,
+      checklists,
+      trips,
+      isSaving,
+      modal,
+      closeModal,
+      isSubmitted,
+      completionCount,
+      preview,
+      request,
+    } = this.props;
     const { tabIndex } = this.state;
 
     return (
@@ -119,7 +131,7 @@ export class UserChecklist extends Component {
           <div className="smart-checklist">
             <div className="smart-checklist-header">
               <div className="details">
-                <p>{`${preview ? `${fullName}'s` : 'Your'} Travel Checklist`}</p>
+                <p>{`${preview ? `${request.name}'s` : 'Your'} Travel Checklist`}</p>
                 {!preview && `Hi ${fullName.split(' ')[0]} kindly fill in your details to complete your travel checklist`}
               </div>
               {isSaving && <span>saving</span>}
@@ -157,6 +169,7 @@ UserChecklist.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   fullName: PropTypes.string.isRequired,
   preview: PropTypes.bool,
+  request: PropTypes.object.isRequired,
 };
 
 UserChecklist.defaultProps = {

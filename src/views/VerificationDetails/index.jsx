@@ -131,7 +131,7 @@ export const VerificationDetails = (type = 'verifications') => {
       return (
         <div className="rectangle checklist">
           <div className="attachments">
-            {isDynamic ? (<ConnectedUserChecklist requestId={requestId} preview />) : (
+            {isDynamic ? (<ConnectedUserChecklist requestId={requestId} request={request} preview />) : (
               <div className="travelCheck-list">
                 <div className="travelCheck-list--card__head">
                   <div className="details">
