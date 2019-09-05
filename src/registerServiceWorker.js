@@ -8,6 +8,11 @@
 
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import { resolveBaseUrl } from './services';
+
+const baseUrl = resolveBaseUrl();
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -19,8 +24,23 @@ const isLocalhost = Boolean(
     )
 );
 
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/-/g, '+')
+    .replace(/_/g, '/');
+ 
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+ 
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
 export default function register() {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     if (publicUrl.origin !== window.location.origin) {
@@ -31,7 +51,7 @@ export default function register() {
     }
 
     window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+      const swUrl = `${process.env.PUBLIC_URL}/custom-service-worker.js`;
 
       if (isLocalhost) {
         // This is running on localhost. Lets check if a service worker still exists or not.
@@ -53,33 +73,24 @@ export default function register() {
   }
 }
 
-function registerValidSW(swUrl) {
-  navigator.serviceWorker
-    .register(swUrl)
-    .then(registration => {
-      registration.onupdatefound = () => {
-        const installingWorker = registration.installing;
-        installingWorker.onstatechange = () => {
-          if (installingWorker.state === 'installed') {
-            if (navigator.serviceWorker.controller) {
-              // At this point, the old content will have been purged and
-              // the fresh content will have been added to the cache.
-              // It's the perfect time to display a "New content is
-              // available; please refresh." message in your web app.
-              console.log('New content is available; please refresh.');
-            } else {
-              // At this point, everything has been precached.
-              // It's the perfect time to display a
-              // "Content is cached for offline use." message.
-              console.log('Content is cached for offline use.');
-            }
-          }
-        };
-      };
-    })
-    .catch(error => {
-      console.error('Error during service worker registration:', error);
+async function registerValidSW(swUrl) {
+  try {
+    const registration = await navigator.serviceWorker.register(swUrl, {
+      scope: '/home'
     });
+    const subscription = await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(process.env.REACT_APP_VAPID_PUBLIC_KEY)
+    });
+    const token = localStorage.getItem('jwt-token');
+    const { UserInfo: { id: userId } } = jwtDecode(token);
+    const response = await axios.post(`${baseUrl}/pushNotification`, {
+      subscription,
+      userId
+    });
+  } catch (error) {
+    console.error('Error during service worker registration:', error);
+  } 
 }
 
 function checkValidServiceWorker(swUrl) {
