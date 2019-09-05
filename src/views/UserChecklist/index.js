@@ -17,8 +17,7 @@ export class UserChecklist extends Component {
   }
 
   componentDidMount() {
-    const { fetchChecklistSubmission, location, requestId: reqId } = this.props;
-    const requestId = reqId || location.pathname.split('/')[2];
+    const { fetchChecklistSubmission, requestId } = this.props;
     fetchChecklistSubmission(requestId);
   }
 
@@ -47,9 +46,9 @@ export class UserChecklist extends Component {
       trips,
       checklists,
       id,
+      requestId,
     } = this.props;
     const { hasChanged } = this.state;
-    const requestId = location.pathname.split('/')[2];
 
     if(hasChanged || isSubmitted) {
       postChecklistSubmission({
@@ -106,8 +105,9 @@ export class UserChecklist extends Component {
   
   render() {
 
-    const { isLoading, fullName, checklists, trips, isSaving, modal, closeModal, isSubmitted, completionCount } = this.props;
+    const { isLoading, fullName, checklists, trips, isSaving, modal, closeModal, isSubmitted, completionCount, preview } = this.props;
     const { tabIndex } = this.state;
+
     return (
       <Fragment>
         <ConfirmSubmitModal
@@ -119,8 +119,8 @@ export class UserChecklist extends Component {
           <div className="smart-checklist">
             <div className="smart-checklist-header">
               <div className="details">
-                <p>Your Travel Checklist</p>
-                {`Hi ${fullName.split(' ')[0]} kindly fill in your details to complete your travel checklist`}
+                <p>{`${preview ? `${fullName}'s` : 'Your'} Travel Checklist`}</p>
+                {!preview && `Hi ${fullName.split(' ')[0]} kindly fill in your details to complete your travel checklist`}
               </div>
               {isSaving && <span>saving</span>}
               <div className="circular-calculator">
@@ -141,11 +141,12 @@ export class UserChecklist extends Component {
                   onTabChange={this.onTabChange}
                   tabIndex={tabIndex}
                   isSubmitted={isSubmitted}
+                  preview={!!preview}
                 />
               )}
             </div>
           </div>
-          {this.renderTabButtons()}
+          {!preview && this.renderTabButtons()}
         </div>
       </Fragment>
     );
@@ -154,8 +155,12 @@ export class UserChecklist extends Component {
 
 UserChecklist.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  location: PropTypes.object.isRequired,
-  fullName: PropTypes.string.isRequired
+  fullName: PropTypes.string.isRequired,
+  preview: PropTypes.bool,
+};
+
+UserChecklist.defaultProps = {
+  preview: false,
 };
 
 const mapStateToProps = ({user, dynamicChecklistSubmission, modal }) => {

@@ -89,9 +89,7 @@ export class Table extends Component {
       history,
       location: { pathname }
     } = this.props;
-    (!pathname.includes('/new-requests')) ? history.push(`${pathname}${/\/$/.test(pathname) ? '' : '/'}${requestId}`) :
-      history.push(`${pathname}${/\/$/.test(pathname) ? '' : '/'}${requestId}/checklists`);
-    
+    history.push(`${pathname}${/\/$/.test(pathname) ? '' : '/'}${requestId}`);
   };
 
   getApprovalStatus = (status, budgetStatus) => {
@@ -189,11 +187,14 @@ export class Table extends Component {
   }
 
   renderTravelCompletion(type, travelCompletion, dynamicChecklistSubmission) {
-    const percentage = dynamicChecklistSubmission
-      ? dynamicChecklistSubmission.completionCount : 0;
+    const { isDynamicChecklist } = this.props;
+    const percentage = isDynamicChecklist ?
+      dynamicChecklistSubmission ? dynamicChecklistSubmission.completionCount : 0
+      : travelCompletion;
+
     return (type === 'requests' || type === 'verifications') && (
       <td className="mdl-data-table__cell--non-numeric table__data table__data-pointer">
-        {`${percentage}% complete`}
+        {isDynamicChecklist ? `${percentage}% complete` : percentage}
       </td>
     );
   }
@@ -377,6 +378,7 @@ Table.propTypes = {
   approvalsType: PropTypes.string,
   openModal: PropTypes.func.isRequired,
   setOpenChecklist: PropTypes.func,
+  isDynamicChecklist: PropTypes.bool.isRequired,
 };
 
 Table.defaultProps = {

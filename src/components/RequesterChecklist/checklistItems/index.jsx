@@ -16,7 +16,7 @@ const CheckListMap = new Map([
   ['dropdown', RequestDropdown],
 ]);
 
-const ChecklistItems = ({ config, handleResponse }) => {
+const ChecklistItems = ({ config, handleResponse, preview }) => {
 
   const Component = CheckListMap.get(config.type);
 
@@ -24,6 +24,7 @@ const ChecklistItems = ({ config, handleResponse }) => {
     <Component
       item={config}
       handleResponse={handleResponse}
+      preview={preview}
     />
   );
 };
@@ -31,6 +32,7 @@ const ChecklistItems = ({ config, handleResponse }) => {
 ChecklistItems.propTypes = {
   config: PropTypes.object.isRequired,
   handleResponse: PropTypes.func.isRequired,
+  preview: PropTypes.bool.isRequired,
 };
 
 export default ChecklistItems;

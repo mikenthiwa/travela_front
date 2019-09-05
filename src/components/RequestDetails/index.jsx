@@ -40,7 +40,7 @@ class RequestDetails extends Component {
   render() {
     const {
       request, requestId,
-      isLoading, pathname, history, submissionInfo,
+      isLoading, pathname, history, submissionInfo, isDynamicChecklist
     } = this.props;
     const body = isLoading
       ? this.renderLoader() : (isEmpty(request)
@@ -60,6 +60,7 @@ class RequestDetails extends Component {
             <HeaderTags
               request={request}
               submissionInfo={submissionInfo}
+              isDynamicChecklist={isDynamicChecklist}
             />
           </div>
         </div>
@@ -81,7 +82,8 @@ RequestDetails.propTypes = {
   shouldOpen: PropTypes.bool.isRequired,
   openModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  travelCosts: PropTypes.object
+  travelCosts: PropTypes.object,
+  isDynamicChecklist: PropTypes.bool.isRequired,
 };
 
 RequestDetails.defaultProps = {

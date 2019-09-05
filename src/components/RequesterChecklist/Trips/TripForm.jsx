@@ -67,6 +67,7 @@ class TripForm extends Component {
 
   renderDateTimeInput = (label, name, value, min, max) => {
     const { errors, touched } = this.state;
+    const { preview } = this.props;
     const handleChange = date => this.handleInputChange({ target: { name, value: date.toDate().toISOString() } });
     const handleBlur = () => this.handleBlur({ target: { name } });
     return (
@@ -82,6 +83,7 @@ class TripForm extends Component {
           maximumDate={max !== 'Invalid date' ? moment(max) : null}
           dateFormat="MMMM DD, YYYY hh:mm A"
           timeFormat="hh:mm A"
+          disabled={preview}
         />
         {touched.includes(name) && (<div className="error-div"><span className="error">{errors[name]}</span></div>)}
       </div>
@@ -90,6 +92,7 @@ class TripForm extends Component {
 
   renderTicketInput = (type, name, label, value) => {
     const { errors, touched } = this.state;
+    const { preview } = this.props;
     return (
       <div className="ticketInput form-input">
         <label htmlFor={name}>{label}</label>
@@ -102,6 +105,7 @@ class TripForm extends Component {
           onChange={this.handleInputChange}
           onBlur={this.handleBlur}
           required
+          disabled={preview}
         />
         {touched.includes(name) && (<div className="error-div"><span className="error">{errors[name]}</span></div>)}
       </div>
@@ -142,7 +146,7 @@ class TripForm extends Component {
   }
 
   renderTicketForm = () => {
-    const { trip } = this.props;
+    const { trip, preview } = this.props;
     if (!trip.flightDetails) return null;
     const {
       departureTime,
@@ -173,7 +177,12 @@ class TripForm extends Component {
             {this.renderTicketInput('text','flightNumber','Flight Number', flightNumber)}
             {this.renderTicketInput('text', 'airline', 'Airline', airline)}
             {trip.request.tripType === 'return' && this.renderReturnDetailsFields()}
-            <TicketUpload id={trip.id} ticket={ticket} handleTicketUpload={this.handleTicketUpload} />
+            <TicketUpload 
+              id={trip.id}
+              ticket={ticket}
+              handleTicketUpload={this.handleTicketUpload}
+              preview={preview}
+            />
           </form>
         </div>
       </div>
@@ -192,6 +201,7 @@ class TripForm extends Component {
 TripForm.propTypes = {
   handleTrips: PropTypes.func.isRequired,
   trip: PropTypes.object.isRequired,
+  preview: PropTypes.bool.isRequired,
 };
 
 export default TripForm;

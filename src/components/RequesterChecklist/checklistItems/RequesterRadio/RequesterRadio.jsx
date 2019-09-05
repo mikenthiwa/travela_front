@@ -19,7 +19,7 @@ class RequesterRadio extends Component {
   }
 
   render() {
-    const { item } = this.props;
+    const { item, preview } = this.props;
     const selectedOption = item.response && item.response.selectedValue;
     return (
       <React.Fragment>
@@ -40,6 +40,7 @@ class RequesterRadio extends Component {
           <ChecklistBehaviour
             behaviour={item.response.behaviour}
             handleBehaviour={this.handleBehaviour}
+            preview={preview}
           />)
         }
       </React.Fragment>
@@ -50,6 +51,7 @@ class RequesterRadio extends Component {
 RequesterRadio.propTypes = {
   item: PropTypes.object.isRequired,
   handleResponse: PropTypes.func.isRequired,
+  preview: PropTypes.bool.isRequired,
 };
 
 export default RequesterRadio;

@@ -33,7 +33,6 @@ import ConnectedHotelEstimate from '../views/HotelEstimate';
 import ConnectedHelpers from '../views/HelpLinks';
 import ConnectedFlightEstimate from '../views/FlightEstimates';
 import ConnectedChecklistWizardInterface from '../views/ChecklistWizardInterface';
-import ConnectedUserChecklist from '../views/UserChecklist';
 import ConnectedDocumentTypes from '../views/DocumentTypes';
 import ConnectedDepartments from '../views/Departments';
 
@@ -52,7 +51,9 @@ const routes = {
   '/requests/budgets/:requestId': [ConnectedApproveRequests('budget'),[SUPER_ADMINISTRATOR, BUDGET_CHECKER, FINANCE_TEAM_MEMBER]],
   '/requests/budgets/': [ConnectedApprovals('budget'), [SUPER_ADMINISTRATOR, BUDGET_CHECKER]],
   '/requests/my-verifications': [ConnectedVerifications, TRAVEL_MANAGERS],
+  '/new-requests/my-verifications': [ConnectedVerifications, TRAVEL_MANAGERS],
   '/requests/my-verifications/:requestId': [ConnectedVerificationDetails(), [FINANCE_TEAM_MEMBER, ...TRAVEL_MANAGERS ]],
+  '/new-requests/my-verifications/:requestId': [ConnectedVerificationDetails(), [FINANCE_TEAM_MEMBER, ...TRAVEL_MANAGERS ]],
   '/requests': [ConnectedRequests],
   '/new-requests': [ConnectedRequests],
   '/requests/new-request': [ConnectedNewRequests()],
@@ -88,7 +89,6 @@ const routes = {
   '/settings/travel-region': [ConnectedTravelRegion, TRAVEL_MANAGERS],
   '/settings/travel-region/:regionId': [ConnectedCountries, TRAVEL_MANAGERS],
   '/trip-planner/checklist-wizard-interface': [ConnectedChecklistWizardInterface, TRAVEL_MANAGERS],
-  '/new-requests/:requestId/checklists': [ConnectedRequestDetailsPage],
   '/settings/document-types': [ConnectedDocumentTypes, TRAVEL_MANAGERS],
 };
 

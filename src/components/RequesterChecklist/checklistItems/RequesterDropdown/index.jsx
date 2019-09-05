@@ -19,7 +19,7 @@ class PreviewDropdown extends Component {
   }
 
   render() {
-    const { item } = this.props;
+    const { item, preview } = this.props;
     const selectedValue = item.response && item.response.selectedValue;
     
     return (
@@ -33,6 +33,7 @@ class PreviewDropdown extends Component {
           <ChecklistBehaviour
             behaviour={item.response.behaviour}
             handleBehaviour={this.handleBehaviour}
+            preview={preview}
           />)
         }
       </Fragment>  
@@ -43,6 +44,7 @@ class PreviewDropdown extends Component {
 PreviewDropdown.propTypes = {
   item: PropTypes.object.isRequired,
   handleResponse: PropTypes.func.isRequired,
+  preview: PropTypes.bool.isRequired,
 };
 
 export default PreviewDropdown;

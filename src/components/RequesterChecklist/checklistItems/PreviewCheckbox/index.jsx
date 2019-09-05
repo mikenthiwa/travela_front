@@ -22,13 +22,14 @@ class RequesterViewCheckbox extends Component {
   }
 
   renderPreviewBehavior = () => {
-    const { item: { response: { selectedValue, behaviour } } } = this.props;
+    const { item: { response: { selectedValue, behaviour } }, preview } = this.props;
     return (
       <div className="display-preview-behaviour">
         {!!selectedValue.length && (
           <PreviewBehaviour
             behaviour={behaviour}
             handleBehaviour={this.handleBehaviour}
+            preview={preview}
           />)}
       </div>
     );
@@ -76,6 +77,7 @@ class RequesterViewCheckbox extends Component {
 RequesterViewCheckbox.propTypes = {
   item: PropTypes.object.isRequired,
   handleResponse: PropTypes.func.isRequired,
+  preview: PropTypes.bool.isRequired,
 };
 
 export default RequesterViewCheckbox;

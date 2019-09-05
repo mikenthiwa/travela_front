@@ -38,7 +38,7 @@ export class Verifications extends Base {
 
   renderApprovalsTable(){
     const { approvals, history, location, openModal, closeModal,
-      shouldOpen, modalType, submissionInfo } = this.props;
+      shouldOpen, modalType, submissionInfo, match: { path } } = this.props;
     const {requestId, requestData } = this.state;
     return(
       <WithLoadingTable
@@ -57,6 +57,7 @@ export class Verifications extends Base {
         submissionInfo={submissionInfo}
         page="Verifications"
         requestData={requestData}
+        isDynamicChecklist={/\/new-requests\//.test(path)}
       />
     );
   }

@@ -183,7 +183,8 @@ export class Requests extends Base {
     const {
       history, location, openModal, closeModal, shouldOpen, modalType ,
       travelChecklists, fetchSubmission, postSubmission, submissionInfo,
-      isFetching, requestData, uploadFile, fileUploads, fetchUserRequests
+      isFetching, requestData, uploadFile, fileUploads, fetchUserRequests,
+      match: { path }
     } = this.props;
     const { url, requestId, openChecklist } = this.state;
     return (
@@ -207,6 +208,7 @@ export class Requests extends Base {
           handleCloseSubmissionModal={this.handleCloseSubmissionModal}
           handleCloseChecklistModal={this.handleCloseChecklistsModal}
           openChecklist={openChecklist} setOpenChecklist={this.setOpenChecklist}
+          isDynamicChecklist={/\/new-requests/.test(path)}
         />
       </div>);
   }

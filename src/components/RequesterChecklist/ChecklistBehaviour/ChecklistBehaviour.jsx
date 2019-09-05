@@ -13,7 +13,7 @@ const BehaviourComponents = new Map([
 ]);
 
 
-const ChecklistBehaviour = ({ behaviour, handleBehaviour }) => {
+const ChecklistBehaviour = ({ behaviour, handleBehaviour, preview }) => {
 
   if(!behaviour) return null;
 
@@ -23,7 +23,11 @@ const ChecklistBehaviour = ({ behaviour, handleBehaviour }) => {
 
   return (
     <div className="checklist-behaviour">
-      <Component behaviour={behaviour} handleBehaviour={handleBehaviour} />
+      <Component
+        behaviour={behaviour}
+        handleBehaviour={handleBehaviour}
+        preview={preview}
+      />
     </div>
   );
 };
@@ -31,6 +35,7 @@ const ChecklistBehaviour = ({ behaviour, handleBehaviour }) => {
 ChecklistBehaviour.propTypes = {
   behaviour: PropTypes.object.isRequired,
   handleBehaviour: PropTypes.func.isRequired,
+  preview: PropTypes.bool.isRequired,
 };
 
 export default ChecklistBehaviour;

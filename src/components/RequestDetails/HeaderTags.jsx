@@ -5,8 +5,17 @@ import greenTick from '../../images/Tick/green_tick.svg';
 class HeaderTag extends Component {
   render() {
     const {
-      submissionInfo: { percentageCompleted }, request: { status, budgetStatus }
+      submissionInfo: { percentageCompleted }, 
+      request: {
+        status,
+        budgetStatus,
+        dynamicChecklistSubmission,
+      },
+      isDynamicChecklist,
     } = this.props;
+    const isSubmitted = dynamicChecklistSubmission && dynamicChecklistSubmission.isSubmitted;
+    const isChecklistSubmitted = isDynamicChecklist ? isSubmitted : percentageCompleted === 100;
+
     return (
       <div className="stage-container">
         <div
@@ -39,15 +48,15 @@ class HeaderTag extends Component {
         </div>
         <div
           className={`stage ${
-            status === 'Approved' && budgetStatus === 'Approved' && percentageCompleted !== 100
+            status === 'Approved' && budgetStatus === 'Approved' && !isChecklistSubmitted
               ? 'is-current'
-              : percentageCompleted === 100
+              : isChecklistSubmitted
                 ? ''
                 : 'incomplete'
           }`}
         >
           Travel Checklist Submission
-          {percentageCompleted === 100 ? (
+          {isChecklistSubmitted ? (
             <img className="green-tick" src={greenTick} alt="green-tick" />
           ) : (
             ''
@@ -55,7 +64,7 @@ class HeaderTag extends Component {
         </div>
         <div
           className={`stage ${
-            status === 'Approved' && budgetStatus === 'Approved' && percentageCompleted === 100
+            status === 'Approved' && budgetStatus === 'Approved' && isChecklistSubmitted
               ? 'is-current'
               : status === 'Verified'
                 ? ''
@@ -77,6 +86,7 @@ class HeaderTag extends Component {
 HeaderTag.propTypes = {
   request: PropTypes.shape({}).isRequired,
   submissionInfo: PropTypes.object.isRequired,
+  isDynamicChecklist: PropTypes.bool.isRequired,
 };
 
 export default HeaderTag;

@@ -152,7 +152,7 @@ export class UploadDocument extends Component {
   }
   
   render() {
-    const { behaviour, userReadiness } = this.props;
+    const { behaviour, userReadiness, preview } = this.props;
     const foundDocument = userReadiness.travelDocuments[`${behaviour.payload}`];
     const selectedDocument = behaviour.document ? behaviour.document.data.imageName : '';
     const selectedDocumentUrl = behaviour.document && behaviour.document.data.cloudinaryUrl;
@@ -161,25 +161,26 @@ export class UploadDocument extends Component {
         {this.renderPassportModal()}
         {this.renderOtherDocumentsForm()}
         {this.renderVisaModal()}
-        <div className="upload-behaviour">
-          {foundDocument && (
-            <Fragment>
-              <div className="document-dropdown">
-                <DropDown
-                  dropdownOptions={this.dropDownOptions()}
-                  value={selectedDocument} 
-                  changeFunc={this.handleDropDownOnChange}
-                />
-              </div>
-              <span className="separator">OR</span>
-            </Fragment>
-          )}
-          <UploadButton
-            behaviour={behaviour}
-            onClick={this.handleClick}
-          />
-        </div>
-
+        {!preview ? (
+          <div className="upload-behaviour">
+            {foundDocument && (
+              <Fragment>
+                <div className="document-dropdown">
+                  <DropDown
+                    dropdownOptions={this.dropDownOptions()}
+                    value={selectedDocument} 
+                    changeFunc={this.handleDropDownOnChange}
+                  />
+                </div>
+                <span className="separator">OR</span>
+              </Fragment>
+            )}
+            <UploadButton
+              behaviour={behaviour}
+              onClick={this.handleClick}
+            />
+          </div>) : (<p>Travel document required</p>)
+        }
         {selectedDocument && 
           ( 
             <div className="image-preview">
@@ -238,6 +239,7 @@ UploadDocument.propTypes = {
   scanPassport: PropTypes.func.isRequired,
   passportInfo: PropTypes.object.isRequired,
   retrieving: PropTypes.bool.isRequired,
+  preview: PropTypes.bool.isRequired,
 };
 
 UploadDocument.defaultProps = {

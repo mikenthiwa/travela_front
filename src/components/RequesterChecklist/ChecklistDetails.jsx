@@ -12,7 +12,7 @@ class ChecklistDetails extends Component {
   }
   
   render() {
-    const { checklist: { config } } = this.props;
+    const { checklist: { config }, preview } = this.props;
     return (
       <div className="checklist-details">
         <div className="tab-body">
@@ -26,19 +26,23 @@ class ChecklistDetails extends Component {
                 <ChecklistItems 
                   config={configuration}
                   handleResponse={this.handleChecklistResponse}
+                  preview={preview}
                 />
               </div>
               {configuration.notApplicable && (<div className="disabled-checklist-wrapper" />)}
             </div>
-          )) : <div>No checklist for this trip</div>} 
+          )) : <div>No checklist for this trip</div>}
+
         </div>
       </div>
     );
   }
 }
+
 ChecklistDetails.propTypes = {
   checklist: PropTypes.object.isRequired,
   handleResponse: PropTypes.func.isRequired,
+  preview: PropTypes.bool.isRequired,
 };
 
 export default ChecklistDetails;

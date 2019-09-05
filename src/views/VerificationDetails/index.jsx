@@ -18,6 +18,7 @@ import {fetchTravelCostsByLocation} from '../../redux/actionCreator/travelCostsA
 import { TRAVEL_MANAGERS } from '../../helper/roles';
 import TabView from '../../components/TripTabView/TabView';
 import CircularProgressBar from '../../components/TravelCheckList/CircularLoader';
+import ConnectedUserChecklist   from '../UserChecklist';
 
 
 export const VerificationDetails = (type = 'verifications') => {
@@ -109,7 +110,9 @@ export const VerificationDetails = (type = 'verifications') => {
     renderTravelCheckList = () => {
 
       const {submissionInfo: { submissions, percentageCompleted},  
-        request} = this.props;
+        request, match: {params: { requestId }, path } } = this.props;
+      const isDynamic = path === '/new-requests/my-verifications/:requestId';
+
       const name = request.name && request.name.split(' ')[0];
       const gender = request.gender && request.gender;
       const genderPronoun = request.gender && 
@@ -128,44 +131,46 @@ export const VerificationDetails = (type = 'verifications') => {
       return (
         <div className="rectangle checklist">
           <div className="attachments">
-            <div className="travelCheck-list">
-              <div className="travelCheck-list--card__head">
-                <div className="details">
-                  <p>{`${name}'s Travel Checklist`}</p>
-                  {`${request.name} ${statusMessage} `}
+            {isDynamic ? (<ConnectedUserChecklist requestId={requestId} preview />) : (
+              <div className="travelCheck-list">
+                <div className="travelCheck-list--card__head">
+                  <div className="details">
+                    <p>{`${name}'s Travel Checklist`}</p>
+                    {`${request.name} ${statusMessage} `}
+                  </div>
+                  <div className="circular-calculator">
+                    <CircularProgressBar
+                      percentage={percentageCompleted}
+                      strokeWidth={5}
+                      sqSize={50}
+                    />
+                  </div>
                 </div>
-                <div className="circular-calculator">
-                  <CircularProgressBar
-                    percentage={percentageCompleted}
-                    strokeWidth={5}
-                    sqSize={50}
-                  />
+                <div>         
+                  <div className="travelCheck-list--card__body">
+                    <TabView tabs={tabsData} currentTab={0}>
+                      {
+                        newSubmissions.map((submission, index) => (
+                          (index !== newSubmissions.length-1) ? (
+                            <ChecklistItems
+                              key={submission.tripId}
+                              handleDownloadAttachments={this.handleDownloadAttachments} 
+                              checklistItems={submission.checklist} 
+                              destination={submission.destinationName} />
+                          ) : (
+                            <TicketDetails
+                              key="ticket-tab"
+                              submissions={submissions} 
+                              handleDownloadAttachments={this.handleDownloadAttachments}
+                            />
+                          )
+                        ))
+                      }
+                    </TabView>
+                  </div>
                 </div>
               </div>
-              <div>         
-                <div className="travelCheck-list--card__body">
-                  <TabView tabs={tabsData} currentTab={0}>
-                    {
-                      newSubmissions.map((submission, index) => (
-                        (index !== newSubmissions.length-1) ? (
-                          <ChecklistItems
-                            key={submission.tripId}
-                            handleDownloadAttachments={this.handleDownloadAttachments} 
-                            checklistItems={submission.checklist} 
-                            destination={submission.destinationName} />
-                        ) : (
-                          <TicketDetails
-                            key="ticket-tab"
-                            submissions={submissions} 
-                            handleDownloadAttachments={this.handleDownloadAttachments}
-                          />
-                        )
-                      ))
-                    }
-                  </TabView>
-                </div>
-              </div>
-            </div> 
+            )}
           </div>
           <div className="desktop-comment">
             {this.renderComments()}
@@ -225,17 +230,19 @@ export const VerificationDetails = (type = 'verifications') => {
     renderButtons = (request) => {
       const {modalInvisible, buttonSelected} = this.state;
       const {status, trips} = request;
-      const {currentUser: {roles}, isConfirmDialogLoading, 
+      const {currentUser: {roles}, isConfirmDialogLoading, match: { path },
         submissionInfo: { percentageCompleted } } = this.props;
 
       const allowedRoles = TRAVEL_MANAGERS;
       const [{centers}] = roles.filter(role => allowedRoles.includes(role.roleName));
       const locations = (centers.length && centers.map(center => center.location)) || [];
       const origin = trips.length && trips[0].origin.split(', ').pop();
+      const isSubmitted = request.dynamicChecklistSubmission && request.dynamicChecklistSubmission.isSubmitted;
+      const isChecklistSubmitted = /\/new-requests/.test(path) ? isSubmitted : percentageCompleted === 100;
 
-      const disabled = percentageCompleted !== 100 || status !== 'Approved' || !locations.includes(origin);
+      const disabled = !isChecklistSubmitted || status !== 'Approved' || !locations.includes(origin);
       const verifiedStatus = !locations.includes(origin) ? 'disabled' : (status === 'Verified'
-        ? 'verified' : ((status === 'Approved' &&  percentageCompleted === 100) ? 'verify' : 'disabled'));
+        ? 'verified' : ((status === 'Approved' && isChecklistSubmitted) ? 'verify' : 'disabled'));
 
       return (
         <div className="btn-group">
@@ -262,7 +269,7 @@ export const VerificationDetails = (type = 'verifications') => {
     render() {
       const {
         request, isLoading, submissionInfo,
-        match: {params: {requestId}}, location: {pathname},
+        match: {params: { requestId }, path }, location: { pathname },
         history, shouldOpen, openModal, closeModal, travelCosts
       } = this.props;
       const headerTags = ['Manager\'s Approval', 'Budget Check', 'Travel Verification'];
@@ -284,6 +291,7 @@ export const VerificationDetails = (type = 'verifications') => {
                   openModal={openModal}
                   closeModal={closeModal}
                   travelCosts={travelCosts}
+                  isDynamicChecklist={/\/new-requests/.test(path)}
                 />
                 {this.renderBottomPane()}
               </div>

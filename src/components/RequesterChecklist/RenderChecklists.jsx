@@ -9,14 +9,14 @@ import TripDetails from './Trips/TripDetails';
 class RenderChecklists extends Component {
 
   handleResponse = field => {
-    const { handleSubmission } = this.props;
-    return data => handleSubmission({ field, data, isFieldArray: true });
+    const { handleSubmission, preview } = this.props;
+    return data => !preview && handleSubmission({ field, data, isFieldArray: true });
   }
 
   render() {
-    const { checklists, trips, tabIndex, onTabChange, isSubmitted } = this.props;
-    const activeChecklist = checklists.concat([trips]).find((value, index) => index === tabIndex);
-    const showFlightDetails = tabIndex === checklists.length;
+    const { checklists, trips, tabIndex, onTabChange, isSubmitted, preview } = this.props;
+    const activeChecklist = checklists.find((value, index) => index === tabIndex);
+
     return (
       <Fragment>
         <div className="checklist-tab-section">
@@ -32,27 +32,34 @@ class RenderChecklists extends Component {
           <button
             type="button"
             onClick={() => onTabChange(checklists.length)}
-            className={`tab-header ${showFlightDetails ? 'selected' : ''}`}
+            className={`tab-header ${!activeChecklist ? 'selected' : ''}`}
           >
             <div className="tab-header-text-wrapper">
               <span className="tab-header-text">
                 FLIGHT DETAILS
               </span>
-              {showFlightDetails && (<img className="active-icon" src={activeIcon} alt="active-icon" />)}
+              {!activeChecklist && (<img className="active-icon" src={activeIcon} alt="active-icon" />)}
             </div>
             <p className="tab-header-name">Ticket Details</p>
           </button> 
         </div>
         <div className="line" />
         <div className="checklist-body-section">
-          {activeChecklist && !showFlightDetails && (
+          {activeChecklist && (
             <ChecklistDetails
               checklist={activeChecklist}
               handleResponse={this.handleResponse('checklists')}
+              preview={preview}
             />
           )}
-          {showFlightDetails && (<TripDetails trips={activeChecklist} handleTrips={this.handleResponse('trips')} />)}
-          {isSubmitted && (<div className="disabled-checklist-overlay" />)}
+          {!activeChecklist && (
+            <TripDetails
+              trips={trips}
+              handleTrips={this.handleResponse('trips')}
+              preview={preview}
+            />
+          )}
+          {isSubmitted && !preview && (<div className="disabled-checklist-overlay" />)}
         </div>
       </Fragment>
     );
@@ -64,8 +71,9 @@ RenderChecklists.propTypes = {
   handleSubmission: PropTypes.func.isRequired,
   trips: PropTypes.array.isRequired,
   tabIndex: PropTypes.number.isRequired,
-  onTabChange: PropTypes.array.isRequired,
+  onTabChange: PropTypes.func.isRequired,
   isSubmitted: PropTypes.bool.isRequired,
+  preview: PropTypes.bool.isRequired,
 };
 
 export default RenderChecklists;

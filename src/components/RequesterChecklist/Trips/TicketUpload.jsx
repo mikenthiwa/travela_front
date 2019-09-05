@@ -90,23 +90,29 @@ class TicketUpload extends Component {
   }
 
   renderDownloadButton() {
-    const { ticket } = this.props;
-    return ticket && (
+    const { ticket, preview } = this.props;
+    const buttonText = preview ? 
+      ticket ?  'DOWNLOAD TICKET' : 'NO TICKET UPLOADED'
+      : 'DOWNLOAD';
+
+    return (ticket || preview) && (
       <button 
         type="button"
         className="ticket-upload-button"
         onClick={this.handleDownload}
+        disabled={preview && !ticket}
       >
-        DOWNLOAD
+        {buttonText}
       </button>
     );
   }
 
   render() {
+    const { preview } = this.props;
     return (
       <div className="ticket-upload-buttons-container">
-        {this.renderUploadButton()}
-        {this.renderDeleteButton()}
+        {!preview && this.renderUploadButton()}
+        {!preview && this.renderDeleteButton()}
         {this.renderDownloadButton()}
       </div>
     );
@@ -117,6 +123,7 @@ TicketUpload.propTypes = {
   id: PropTypes.string.isRequired,
   ticket: PropTypes.string.isRequired,
   handleTicketUpload: PropTypes.func.isRequired,
+  preview: PropTypes.bool.isRequired,
 };
 
 export default TicketUpload;

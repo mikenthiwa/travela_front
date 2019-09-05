@@ -141,7 +141,7 @@ export class NewRequestPage extends Component {
         postSubmission={postSubmission} submissionInfo={submissionInfo}
         uploadFile={uploadFile} userReadinessDocument={userReadinessDocument}
         downloadAttachments={downloadAttachments} smartSubmissions={smartSubmissions}
-        showDynamicChecklist={path === '/new-requests/:requestId/checklists'}
+        showDynamicChecklist={path === '/new-requests/:requestId'}
       />
     );
   };
