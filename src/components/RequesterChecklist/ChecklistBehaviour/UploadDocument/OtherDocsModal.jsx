@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../../modal/Modal';
-import OtherDocumentForm from '../../Forms/TravelReadinessForm/OtherDocumentForm';
+import Modal from '../../../modal/Modal';
+import OtherDocumentForm from '../../../Forms/TravelReadinessForm/OtherDocumentForm';
 
 const OtherDocsModal = ({
   user,

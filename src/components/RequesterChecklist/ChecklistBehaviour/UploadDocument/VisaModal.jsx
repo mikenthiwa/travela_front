@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../../modal/Modal';
-import AddVisaForm from '../../Forms/TravelReadinessForm/AddVisaForm';
+import Modal from '../../../modal/Modal';
+import AddVisaForm from '../../../Forms/TravelReadinessForm/AddVisaForm';
 
 const VisaModal = ({
   closeModal, shouldOpen, modalType,

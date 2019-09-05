@@ -1,6 +1,6 @@
 import React from 'react';
-import Modal from '../../modal/Modal';
-import PassportForm from '../../Forms/TravelReadinessForm/PassportForm';
+import Modal from '../../../modal/Modal';
+import PassportForm from '../../../Forms/TravelReadinessForm/PassportForm';
 
 const PassportModal = ({
   closeModal, shouldOpen,

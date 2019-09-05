@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import ConnectedUploadDocument from '../UploadDocument/UploadDocument';
+import ConnectedUploadDocument from '../ChecklistBehaviour/UploadDocument/UploadDocument';
 import ChecklistBehaviour from '../ChecklistBehaviour/ChecklistBehaviour';
 
 describe('Tests for requester checklist behaviours', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { UploadDocument } from '../UploadDocument/UploadDocument';
+import { UploadDocument } from '../ChecklistBehaviour/UploadDocument/UploadDocument';
 
 describe('Upload Document behaviour tests', () => {
   const propsWithUploadPassport  = {
@@ -129,6 +129,7 @@ describe('Upload Document behaviour tests', () => {
     wrapper.setProps({ shouldOpen: true,
       modalType: 'add passport', title: 'Add Passport Details' });
     expect(propsWithUploadPassport.openModal).toHaveBeenCalledWith(true, 'add passport');
+    wrapper.instance().closeModal();
   });
 
   it('should open the add visa modal', () => {

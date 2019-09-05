@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { closeModal, openModal } from '../../../redux/actionCreator/modalActions';
-import { createTravelReadinessDocument, scanPassport } from '../../../redux/actionCreator/travelReadinessActions';
+import { closeModal, openModal } from '../../../../redux/actionCreator/modalActions';
+import { createTravelReadinessDocument, scanPassport } from '../../../../redux/actionCreator/travelReadinessActions';
 import {
   fetchUserReadinessDocuments, editTravelReadinessDocument, deleteTravelReadinessDocument, fetchTravelReadinessDocument
-} from '../../../redux/actionCreator/travelReadinessDocumentsActions';
-import { fetchDocumentTypes } from '../../../redux/actionCreator/documentTypesActions';
-import DropDown from '../../CheckListWizard/Shared/Dropdown';
+} from '../../../../redux/actionCreator/travelReadinessDocumentsActions';
+import { fetchDocumentTypes } from '../../../../redux/actionCreator/documentTypesActions';
+import DropDown from '../../../CheckListWizard/Shared/Dropdown';
 import './UploadDocument.scss';
 import PassportModal from './PassportModal';
 import VisaModal from './VisaModal';
@@ -15,22 +15,34 @@ import OtherDocsModal from './OtherDocsModal';
 import UploadButton from './UploadButton';
 
 export class UploadDocument extends Component {
+
+  state = {
+    shouldOpen: false
+  }
   
   componentDidMount() {
     const { fetchDocumentTypes, user, fetchUserData, behaviour } = this.props;
     fetchDocumentTypes();
     fetchUserData(user.currentUser.userId);
-    
   }
 
   componentDidUpdate(prevProps) {
-    const { behaviour, handleBehaviour, userReadiness: { travelDocuments } } = this.props;
+    const { shouldOpen } = this.state;
+    if (!shouldOpen) return;
+    this.handleBehaviour(prevProps);
+  }
+
+
+  handleBehaviour = (prevProps) => {
+    const { behaviour, modalType, handleBehaviour, userReadiness: { travelDocuments } } = this.props;
     const documents = travelDocuments[behaviour.payload] || [];
     const prevDocuments = prevProps.userReadiness.travelDocuments[behaviour.payload] || [];
-    const check = documents.length === prevDocuments.length; 
+    const check = documents.length === prevDocuments.length;
+
     if (!check) {
       const document = documents[documents.length - 1];
       handleBehaviour({ ...behaviour, document});
+      this.setState({ shouldOpen: false });
     }
   }
 
@@ -40,21 +52,23 @@ export class UploadDocument extends Component {
       .find(({ data }) => data.imageName === value);
     handleBehaviour({ ...behaviour, document});
   }
-  handleClick = () => {
-    const { openModal, behaviour } = this.props;
-    switch (behaviour.payload) {
-    case'passport':
-      openModal(true, 'add passport');
-      break;
-    case 'visa':
-      openModal(true, 'add visa');
-      break;
-    default:
-      openModal(true, 'add other');
-      return;
-    }
-  }
 
+  handleClick = () => {
+    const { openModal, behaviour: { payload} } = this.props;  
+    const type = payload === 'passport' ? 'add passport'
+      : payload === 'visa' ? 'add visa' : 'add other';
+
+    openModal(true, type);
+    this.setState({shouldOpen: true});
+  }
+  
+
+  closeModal = () => {
+    const { closeModal } = this.props;
+    closeModal();
+    this.setState({ shouldOpen: false });
+  }
+        
   dropDownOptions = () => {
     const { behaviour, userReadiness } = this.props;
     const foundDocument = userReadiness.travelDocuments[`${behaviour.payload}`];
@@ -70,14 +84,15 @@ export class UploadDocument extends Component {
 
   renderVisaModal = () => {
     const {
-      closeModal, shouldOpen, modalType,
+      closeModal, modalType,
       createTravelReadinessDocument,
       editTravelReadinessDocument, travelReadinessDocuments,
       fetchUserData, user, document, fetchingDocument
     } = this.props;
+    const {shouldOpen} = this.state;
     return (
       <VisaModal
-        closeModal={closeModal} shouldOpen={shouldOpen}
+        closeModal={this.closeModal} shouldOpen={shouldOpen}
         createTravelReadinessDocument={createTravelReadinessDocument}
         editTravelReadinessDocument={editTravelReadinessDocument}
         documentType="visa" 
@@ -90,14 +105,14 @@ export class UploadDocument extends Component {
   
   renderPassportModal = () => {
     const {
-      closeModal, shouldOpen,
       modalType, travelReadinessDocuments, showPassportForm,
       createTravelReadinessDocument, editTravelReadinessDocument,
       fetchUserData, user, document, fetchingDocument, scanPassport, passportInfo, retrieving
     } = this.props;
+    const {shouldOpen} = this.state;
     return (
       <PassportModal 
-        closeModal={closeModal} shouldOpen={shouldOpen} modalType={modalType}
+        closeModal={this.closeModal} shouldOpen={shouldOpen} modalType={modalType}
         travelReadinessDocuments={travelReadinessDocuments} 
         createTravelReadinessDocument={createTravelReadinessDocument}
         editTravelReadinessDocument={editTravelReadinessDocument}
@@ -109,18 +124,19 @@ export class UploadDocument extends Component {
     );
   };
 
+
   renderOtherDocumentsForm () {
     const {
-      user, openModal, closeModal, createTravelReadinessDocument,travelReadinessDocuments,
-      fetchUserData, editTravelReadinessDocument, modalType, documentTypes, document,
-      shouldOpen, behaviour,
+      user, openModal, createTravelReadinessDocument,travelReadinessDocuments,
+      fetchUserData, editTravelReadinessDocument, modalType, document,
+      behaviour,
     } = this.props;
-
+    const {shouldOpen} = this.state;
     return (
       <OtherDocsModal 
-        openModal={openModal}
+        openModal={openModal} 
         shouldOpen={shouldOpen}
-        closeModal={closeModal}
+        closeModal={this.closeModal}
         createTravelReadinessDocument={createTravelReadinessDocument}
         travelReadinessDocuments={travelReadinessDocuments}
         documentType="other"
@@ -141,13 +157,13 @@ export class UploadDocument extends Component {
     const selectedDocument = behaviour.document ? behaviour.document.data.imageName : '';
     const selectedDocumentUrl = behaviour.document && behaviour.document.data.cloudinaryUrl;
     return (
-      <Fragment>
+      <div className="upload-behaviour-wrapper">
         {this.renderPassportModal()}
         {this.renderOtherDocumentsForm()}
         {this.renderVisaModal()}
-        {foundDocument ? 
-          (
-            <div className="upload-behaviour">
+        <div className="upload-behaviour">
+          {foundDocument && (
+            <Fragment>
               <div className="document-dropdown">
                 <DropDown
                   dropdownOptions={this.dropDownOptions()}
@@ -156,32 +172,28 @@ export class UploadDocument extends Component {
                 />
               </div>
               <span className="separator">OR</span>
-              <UploadButton
-                behaviour={behaviour}
-                onClick={this.handleClick}
-              />
-            </div>
-          )
-          : (
-            <div className="upload-behaviour">
-              <UploadButton
-                behaviour={behaviour}
-                onClick={this.handleClick}
-              />
-            </div>)}
+            </Fragment>
+          )}
+          <UploadButton
+            behaviour={behaviour}
+            onClick={this.handleClick}
+          />
+        </div>
 
         {selectedDocument && 
-          (
-            <a href={selectedDocumentUrl} rel="noopener noreferrer" target="_blank">
-              <img
-                src={selectedDocumentUrl}
-                alt="document-preview"
-                style={{width: '300px', height: '200px'}}
-              />
-            </a>
+          ( 
+            <div className="image-preview">
+              <a href={selectedDocumentUrl} rel="noopener noreferrer" target="_blank">
+                <img
+                  src={selectedDocumentUrl}
+                  alt="document-preview"
+                />
+                <p>Click to view</p>
+              </a>
+            </div>
           )
         }    
-      </Fragment>
+      </div>
     );
   }
 }
@@ -216,7 +228,6 @@ UploadDocument.propTypes = {
   userReadiness: PropTypes.object.isRequired,
   openModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  shouldOpen: PropTypes.bool.isRequired,
   modalType: PropTypes.string,
   createTravelReadinessDocument: PropTypes.func.isRequired,
   editTravelReadinessDocument: PropTypes.func.isRequired,
@@ -227,7 +238,6 @@ UploadDocument.propTypes = {
   scanPassport: PropTypes.func.isRequired,
   passportInfo: PropTypes.object.isRequired,
   retrieving: PropTypes.bool.isRequired,
-  documentTypes: PropTypes.array.isRequired
 };
 
 UploadDocument.defaultProps = {

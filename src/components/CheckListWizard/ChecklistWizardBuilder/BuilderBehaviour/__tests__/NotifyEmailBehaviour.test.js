@@ -1,22 +1,10 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { expectSaga } from 'redux-saga-test-plan';
 import NotifyEmailBehaviour from '../NotifyEmailBehaviour';
-import { openModal } from '../../../../../redux/actionCreator/modalActions';
-
-jest.mock('react-redux', () => ({
-  connect: (state, dispatch) => {
-    state({ modal: {}, });
-    return component => component;
-  }
-}));
 
 const props = {
   behaviour: { type: 'NOTIFY_EMAIL', payload: {} },
   handleBehaviour: jest.fn(),
-  closeModal: jest.fn(), 
-  openModal: jest.fn(),
-  shouldOpen: false,
 };
 
 describe('Notify Email Behaviour Test Suite', () => {
@@ -27,9 +15,9 @@ describe('Notify Email Behaviour Test Suite', () => {
   
   it('handles open modal', () => {
     const wrapper = shallow(<NotifyEmailBehaviour {...props} />);
+    expect(wrapper.state('shouldOpen')).toBe(false);
     wrapper.find('button.create-email-template-button').simulate('click');
-    wrapper.instance().handleModal();
-    expect(props.openModal).toHaveBeenCalled();
+    expect(wrapper.state('shouldOpen')).toBe(true);
   });
 
   it('calls handleBehaviour', () => {

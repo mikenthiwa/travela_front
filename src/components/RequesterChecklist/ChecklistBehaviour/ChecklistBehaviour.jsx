@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as behaviourTypes from '../../CheckListWizard/ChecklistWizardBuilder/BuilderBehaviour/behaviourActions';
-import ConnectedUploadDocument from '../UploadDocument/UploadDocument';
+import ConnectedUploadDocument from './UploadDocument/UploadDocument';
 import PreviewDocument from '../../CheckListWizard/ChecklistWizardPreview/PreviewBehaviour/PreviewDocument';
 import NotifyEmail from '../../CheckListWizard/ChecklistWizardPreview/PreviewBehaviour/NotifyEmail';
 import './ChecklistBehaviour.scss';
