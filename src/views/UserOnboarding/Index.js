@@ -203,13 +203,16 @@ class UserOnboarding extends Component {
 
   renderPersonalDetailsFieldset = () => {
     const { collapse, title, position, line, values, errors } = this.state;
-    const { managers, occupations, creatingRequest, departments } = this.props;
+    const { managers, occupations, creatingRequest, departments, userData: { department } } = this.props;
+
+    const existingDepartment = department;
 
     const getUserDetails = this.getPersonalDetails();
     return (
       <div>
         <ConfirmPersonalDetailsFieldset
           departments={departments}
+          existingDepartment={existingDepartment}
           values={values}
           savePersonalDetails={this.savePersonalDetails}
           onChangeAutoSuggestion={this.onChangeAutoSuggestion}

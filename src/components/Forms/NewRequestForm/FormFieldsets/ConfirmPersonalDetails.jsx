@@ -26,7 +26,7 @@ class ConfirmPersonalDetailsFieldset extends Component {
   renderfields = collapse => {
     const { disableInputs } = this.state;
     const { value, managers, occupations, onChangeAutoSuggestion,
-      hasBlankFields, loading, send, getUserDetails, nextStep, departments } = this.props;
+      hasBlankFields, loading, send, getUserDetails, nextStep, departments, existingDepartment } = this.props;
     const userDetails = Object.keys(getUserDetails).map((key) => {
       return [(key), getUserDetails[key]];
     });
@@ -61,6 +61,7 @@ class ConfirmPersonalDetailsFieldset extends Component {
                   disabled: false, size: value,
                   className: 'request_dropdown your-department', required: false,
                   id: 'your-department',
+                  existingDepartment
                 })}
               </div>
               <div className="spaces-right">
@@ -145,6 +146,7 @@ ConfirmPersonalDetailsFieldset.propTypes = {
   collapse: collapse.isRequired,
   onChangeAutoSuggestion: onChangeAutoSuggestion.isRequired,
   values: values,
+  existingDepartment: PropTypes.string,
   value: PropTypes.string,
   hasBlankFields: PropTypes.bool.isRequired,
   loading: PropTypes.bool,
@@ -155,6 +157,7 @@ ConfirmPersonalDetailsFieldset.defaultProps = {
   values: {},
   value: '',
   loading: false,
+  existingDepartment: '',
   send: '',
   nextStep: () => {}
 };
