@@ -6,7 +6,7 @@ import DepartmentHelper from '../../../../helper/departmentsHelper';
 
 class ProfileDetailsFieldSets extends Component {
 
-  renderFieldSet = (renderInput, onChangeAutoSuggestion, options) =>  (
+  renderFieldSet = (renderInput, onChangeAutoSuggestion, options, existingDepartment) =>  (
     <fieldset className="personal-details">
       <div className="legend">
         <span className="personal-details-text">
@@ -28,7 +28,8 @@ class ProfileDetailsFieldSets extends Component {
           {renderInput('department', 'select-choice-dropdown', {
             size: '',
             options: options,
-            className: 'no-disable'
+            className: 'no-disable',
+            existingDepartment
           })}
         </div>
         {renderInput('manager', 'filter-dropdown-select', {
@@ -43,7 +44,7 @@ class ProfileDetailsFieldSets extends Component {
   );
 
   render() {
-    const { managers, centers, onChangeAutoSuggestion, departments} = this.props;
+    const { managers, centers, onChangeAutoSuggestion, departments, existingDepartment} = this.props;
 
     const managerNames = managers.map(manager => manager.fullName);
     const centerNames = centers.map(center => center.location.split(',')[0]);
@@ -56,13 +57,14 @@ class ProfileDetailsFieldSets extends Component {
     this.inputRenderer = new InputRenderer(formMetadata);
     const { renderInput } = this.inputRenderer;
 
-    return (this.renderFieldSet(renderInput, onChangeAutoSuggestion, options) );
+    return (this.renderFieldSet(renderInput, onChangeAutoSuggestion, options, existingDepartment) );
   }
 }
 ProfileDetailsFieldSets.propTypes = {
   managers: PropTypes.array,
   centers: PropTypes.array,
   departments: PropTypes.array,
+  existingDepartment: PropTypes.string,
   onChangeAutoSuggestion: PropTypes.func
 };
 
@@ -70,6 +72,7 @@ ProfileDetailsFieldSets.defaultProps = {
   managers: [],
   centers: [],
   departments: [],
+  existingDepartment: '',
   onChangeAutoSuggestion: () => {}
 };
 export default ProfileDetailsFieldSets;

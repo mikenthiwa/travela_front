@@ -14,6 +14,10 @@ export default class SelectChoiceDropdown extends Component {
   input = React.createRef();
 
   componentDidMount = () => {
+    const { existingDepartment } = this.props;
+    this.setState({
+      value: existingDepartment
+    });
     document.addEventListener('click', this.hideDropdownOnClickOutside);
   };
 
@@ -138,8 +142,10 @@ export default class SelectChoiceDropdown extends Component {
 }
 SelectChoiceDropdown.propTypes = {
   onChange: PropTypes.func,
+  existingDepartment: PropTypes.string,
   options: PropTypes.array.isRequired
 };
 SelectChoiceDropdown.defaultProps = {
-  onChange: () => {}
+  onChange: () => {},
+  existingDepartment: '',
 };
