@@ -197,6 +197,7 @@ import {
   watchGetAllDepartments,
   watchRetrieveDepartment
 } from './departmentSaga';
+import {watchEmailApproval} from "./emailApprovalSaga";
 
 
 function* rootSaga() {
@@ -350,6 +351,7 @@ function* rootSaga() {
     watchDynamicChecklistSubmissions(),
     watchEditRegionDataSagaAsync(),
     watchDeleteRegionDataSagaAsync(),
+    watchEmailApproval()
   ]);
 }
 

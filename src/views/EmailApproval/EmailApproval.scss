@@ -1,0 +1,70 @@
+.email-approval-page {
+  display: grid;
+  justify-items: center;
+  height: 100vh;
+
+  &__content {
+    display: grid;
+    justify-items: center;
+    align-content: space-around;
+    background: white;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 0 8px 4px rgba(0,0,0,.05);
+    grid-gap: 2em;
+
+    .email-approval-page__card {
+      background: white;
+      min-width: 200px;
+      min-height: 100px;
+      padding: 2em 4em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: grid;
+      transition: 0.5s all;
+
+      .card-content {
+        display: grid;
+        align-items: center;
+        align-content: center;
+
+        .approval-container {
+          display: grid;
+          grid-gap: 4em;
+          align-self: stretch;
+          align-content: space-between;
+          justify-content: stretch;
+
+          .approval-status {
+            display: grid;
+            grid-template-columns: 30px 1fr;
+            align-items: center;
+            justify-content: space-between;
+            grid-gap: 2em;
+          }
+
+          button {
+            justify-self: center;
+            box-shadow: 0 0 8px 4px rgba(0,0,0,.1);
+          }
+        }
+
+        .loading-container {
+          display: grid;
+          justify-content: center;
+          justify-items: center;
+
+          .spinner {
+            margin: 0 !important;
+            padding: 0 !important;
+            position: static !important;
+          }
+        }
+      }
+    }
+
+    a {
+      color: #3934ec;
+    }
+  }
+}

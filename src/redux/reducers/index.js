@@ -44,6 +44,7 @@ import noPassport from './noPassport';
 import documentTypes from './documentTypes';
 import dynamicChecklistSubmission from './dynamicChecklistSubmission';
 import department from './departments';
+import emailApproval from './emailApproval';
 
 const rootReducer = combineReducers({
   auth,
@@ -90,7 +91,8 @@ const rootReducer = combineReducers({
   noPassport,
   documentTypes,
   dynamicChecklistSubmission,
-  department
+  department,
+  emailApproval
 });
 
 export default rootReducer;
