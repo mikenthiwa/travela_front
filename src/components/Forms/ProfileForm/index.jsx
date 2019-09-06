@@ -153,7 +153,7 @@ class ProfileForm extends PureComponent {
 
   render() {
     const { values, errors, hasBlankFields } = this.state;
-    const { managers, centers, isUpdating, departments, } = this.props;
+    const { managers, centers, isUpdating, departments, userData: { department } } = this.props;
     return (
       <FormContext targetForm={this} validatorName="validate" values={values} errors={errors}>
         <form onSubmit={this.submitProfileForm} className="new-profile">
@@ -162,6 +162,7 @@ class ProfileForm extends PureComponent {
             values={values}
             onChangeAutoSuggestion={this.onChangeAutoSuggestion}
             managers={managers}
+            existingDepartment={department}
             centers={centers} />
           {hasBlankFields || errors.manager || errors.role || isUpdating ? (
             <div className="submit-area">
