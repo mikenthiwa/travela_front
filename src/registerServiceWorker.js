@@ -40,7 +40,7 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 export default function register() {
-  if ('serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator && 'PushManager' in window) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     if (publicUrl.origin !== window.location.origin) {
@@ -74,22 +74,27 @@ export default function register() {
 }
 
 async function registerValidSW(swUrl) {
+  const token = localStorage.getItem('jwt-token');
+  const { UserInfo: { id: userId } } = jwtDecode(token);
   try {
     const registration = await navigator.serviceWorker.register(swUrl, {
       scope: '/home'
     });
-    const subscription = await registration.pushManager.subscribe({
+    // Use the PushManager to get the user's subscription to the push service.
+    let subscription = await registration.pushManager.getSubscription();
+    if(subscription && subscription.unsubscribe){
+      await subscription.unsubscribe();
+    }
+    subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(process.env.REACT_APP_VAPID_PUBLIC_KEY)
-    });
-    const token = localStorage.getItem('jwt-token');
-    const { UserInfo: { id: userId } } = jwtDecode(token);
-    const response = await axios.post(`${baseUrl}/pushNotification`, {
+      applicationServerKey: urlBase64ToUint8Array(process.env.REACT_APP_VAPID_PUBLIC_KEY
+      )});
+    await axios.post(`${baseUrl}/pushNotification`, {
       subscription,
       userId
     });
   } catch (error) {
-    console.error('Error during service worker registration:', error);
+    return error;
   }
 }
 
@@ -113,8 +118,7 @@ function checkValidServiceWorker(swUrl) {
         registerValidSW(swUrl);
       }
     })
-    .catch(() => {
-    });
+    .catch(err => (err));
 }
 
 export function unregister() {
