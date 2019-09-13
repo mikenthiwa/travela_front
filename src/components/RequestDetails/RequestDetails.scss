@@ -172,6 +172,37 @@
               }
             }
           }
+          .accommodation-summary{
+            cursor: default;
+            .accommodation-text{
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+            span{
+              margin-top: 1em;
+              top: 100%;
+              background-color: #f8f8f8;
+              -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+              box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+              color: #4f4f4f;
+              display: none;
+              padding: 0.5em 1em;
+              z-index: 2;
+
+              p{
+                display: flex;
+                justify-content: center;
+              }
+            }
+            
+            &:hover {
+              span{
+                display: block;
+              }
+            }
+          }
+          
 
           .with-image {
             margin: 0 0 0 3em;

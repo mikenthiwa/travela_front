@@ -26,9 +26,12 @@ export default ({ trips }) => trips.map((trip) => {
       </div>
       <div className="partition">
         <p className="text--grey">Accommodation</p>
-        <p className="text--black">
-          {accommodation}
-        </p>
+        <div className="accommodation-summary">
+          <p className="text--black accommodation-text">
+            {`${accommodation}`}
+          </p>
+          <span><p>{accommodation}</p></span>
+        </div>
       </div>
       <div className="partition mobile">
         <p className="text--grey">Travel Reason</p>
