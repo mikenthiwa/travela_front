@@ -49,12 +49,10 @@
     background-color: #F8F8F8;
 
     .modal-close {
-      display: flex;
+      display: grid;
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      height: 17px;
-      width: 17px;
       outline: none;
       border-style: none;
       background: none;

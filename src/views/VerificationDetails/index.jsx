@@ -27,7 +27,7 @@ export const VerificationDetails = (type = 'verifications') => {
       modalInvisible: true,
       buttonSelected: '',
       displayComments: true,
-      isTravelCostLoaded: true
+      isTravelCostLoaded: false
     };
 
     componentDidMount() {

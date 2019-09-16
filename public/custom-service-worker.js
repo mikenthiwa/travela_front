@@ -1,8 +1,7 @@
-const hostUrl = self.location.host;
 self.addEventListener('notificationclick', e => {
   e.notification.close();
   const url = e.notification.tag || '/home';
-  e.waitUntil(self.clients.openWindow(`${hostUrl}${url}`));
+  e.waitUntil(self.clients.openWindow(`${url}`));
 });
 
 self.addEventListener('push', e => {
